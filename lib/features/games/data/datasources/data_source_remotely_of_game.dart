@@ -8,18 +8,20 @@ abstract class DataSourceRemotelyOfGame {
   Future<BasedGameModel> getGameDataRemotely({required String index});
 }
 
-class DataSourceRemotelyOfGameImpl extends MainApiConnection {
+class DataSourceRemotelyOfGameImpl implements DataSourceRemotelyOfGame {
+  final MainApiConnection dio;
+
+  DataSourceRemotelyOfGameImpl({required this.dio});
+
   @override
   Future<BasedGameModel> getGameDataRemotely({required String index}) async {
-    final response = await MainApiConnection.dio.get(
-      '${Connection.baseURL}${MainApiConnection.getGameInfoDataEndPoint}/$index',
-      options: Options(
-        headers: {
+    final response = await dio.get(
+      url:'${Connection.baseURL}${dio.getGameInfoDataEndPoint}/$index',
+      queryParameters: {
           ...MainApiConnection.apiHeaders,
         },
-      ),
     );
-    if (MainApiConnection.validResponse(response.statusCode!)) {
+    if (dio.validResponse(response.statusCode!)) {
       return BasedGameModel.fromJson(response.data);
     } else {
       throw response.data['msg'];

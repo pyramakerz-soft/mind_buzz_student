@@ -33,11 +33,11 @@ dependencies:
 
   cupertino_icons: ^1.0.6
   rive: ^0.12.4
-  provider: ^6.1.1
+  provider: ^6.1.2
   json_annotation: ^4.8.1
   audioplayers: ^5.2.1
   confetti: ^0.7.0
-  flutter_svg: ^2.0.9
+  flutter_svg: ^2.0.10+1
   vector_math: ^2.1.4
   # dio
   dio: ^5.4.1
@@ -49,6 +49,8 @@ dependencies:
   equatable: ^2.0.5
   dartz: ^0.10.1
   internet_connection_checker: ^1.0.0+1
+  get_it: ^7.6.7
+  flutter_bloc: ^8.1.4
 
 dev_dependencies:
   flutter_test:

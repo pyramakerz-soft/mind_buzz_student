@@ -1,12 +1,8 @@
 import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
-
-import 'package:mind_buzz_refactor/core/error/failures.dart';
-
-import 'package:mind_buzz_refactor/features/intro_page/domain/entities/based_game_model.dart';
-
+import '../../../../core/error/failures.dart';
 import '../../../../core/network/network_info.dart';
+import '../../domain/entities/based_game_model.dart';
 import '../../domain/repositories/repositories_game.dart';
 import '../datasources/data_source_local_of_game.dart';
 import '../datasources/data_source_remotely_of_game.dart';
@@ -17,7 +13,7 @@ class GameRepositoryImpl implements GameRepository {
   final NetworkInfo networkInfo;
 
   GameRepositoryImpl(
-      this.remoteDataSource, this.localDataSource, this.networkInfo);
+      {required this.remoteDataSource, required this.localDataSource, required this.networkInfo});
   @override
   Future<Either<Failure, BasedGameModel>> getGameDataRepository(
       {required int index, bool? showLocal}) async {
