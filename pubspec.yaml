@@ -37,7 +37,7 @@ dependencies:
   json_annotation: ^4.8.1
   audioplayers: ^5.2.1
   confetti: ^0.7.0
-  flutter_svg: ^2.0.10+1
+  flutter_svg: ^2.0.9
   vector_math: ^2.1.4
   # dio
   dio: ^5.4.1
