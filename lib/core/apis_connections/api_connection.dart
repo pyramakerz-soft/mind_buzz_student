@@ -10,13 +10,13 @@ abstract class MainApiConnection {
   //Singleton
   MainApiConnection() {
     // Attach Interceptors.
-    if (kDebugMode) _dio.interceptors.add(_logger);
+    if (kDebugMode) dio.interceptors.add(_logger);
   }
 
   // static final ApiProvider instance = ApiProvider._();
 
   // Http Client
-  final Dio _dio = Dio();
+  static final Dio dio = Dio();
 
   // Logger
   final PrettyDioLogger _logger = PrettyDioLogger(
@@ -29,19 +29,17 @@ abstract class MainApiConnection {
   // Performance Interceptor
 
   // Headers
-  final Map<String, dynamic> _apiHeaders = <String, dynamic>{
+  static const Map<String, dynamic> apiHeaders = <String, dynamic>{
     'Accept': 'application/json'
-    // 'Content-Type': 'multipart/form-data',
-    // 'Host': 'https://pyra.qaseralnjoom.com'
   };
 
   ////////////////////////////// END POINTS ///////////////////////////////////
-  static const String _getGameInfoDataEndPoint = "game/game_info";
+  static const String getGameInfoDataEndPoint = "game/game_info";
 
 ////////////////////////////////////////////////////////////////////////////
 
   // Validating Request.
-  bool _validResponse(int statusCode) => statusCode >= 200 && statusCode < 300;
+  static bool validResponse(int statusCode) => statusCode >= 200 && statusCode < 300;
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -52,20 +50,20 @@ abstract class MainApiConnection {
   }
 }
 
-class GameDataApis extends MainApiConnection {
-  Future<BasedGameModel> getGameData(GamesTypes gameIndex) async {
-    final response = await _dio.get(
-      '${Connection.baseURL}${MainApiConnection._getGameInfoDataEndPoint}/${gameIndex.index}',
-      options: Options(
-        headers: {
-          ..._apiHeaders,
-        },
-      ),
-    );
-    if (_validResponse(response.statusCode!)) {
-      return BasedGameModel.fromJson(response.data);
-    } else {
-      throw response.data['msg'];
-    }
-  }
-}
+// class GameDataApis extends MainApiConnection {
+//   Future<BasedGameModel> getGameData(GamesTypes gameIndex) async {
+//     final response = await _dio.get(
+//       '${Connection.baseURL}${MainApiConnection._getGameInfoDataEndPoint}/${gameIndex.index}',
+//       options: Options(
+//         headers: {
+//           ..._apiHeaders,
+//         },
+//       ),
+//     );
+//     if (_validResponse(response.statusCode!)) {
+//       return BasedGameModel.fromJson(response.data);
+//     } else {
+//       throw response.data['msg'];
+//     }
+//   }
+// }
