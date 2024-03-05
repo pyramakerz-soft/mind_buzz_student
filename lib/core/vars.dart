@@ -17,3 +17,6 @@ abstract class PaperImages {
     AppImages.iconLevel5OfPaper,
   ];
 }
+
+enum StateOfAvatar { thinking, talking, stop, success, wrong }
+enum TtsState { playing, stopped, forceStop }

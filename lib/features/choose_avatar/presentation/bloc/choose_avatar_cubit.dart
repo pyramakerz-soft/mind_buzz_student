@@ -1,40 +1,51 @@
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rive/rive.dart';
 
 import '../../../../core/assets_animation.dart';
+import '../../../../core/utils.dart';
+import '../../../games/presentation/bloc/general_game/game_cubit.dart';
+import '../../../games/presentation/page/general_game.dart';
 
 part 'choose_avatar_state.dart';
 
 class ChooseAvatarCubit extends Cubit<ChooseAvatarInitial> {
-  ChooseAvatarCubit() : super(const ChooseAvatarInitial());
-  submitSelectedAvatar({required String newSelectedAvatar,
-    required BuildContext context}) async {
-    emit(state.copyWith(selectedAvatar:newSelectedAvatar));
+  ChooseAvatarCubit() : super(ChooseAvatarInitial());
+  submitSelectedAvatar(
+      {required String newSelectedAvatar,
+      required BuildContext context}) async {
+    emit(state.copyWith(selectedAvatar: newSelectedAvatar));
     await Future.delayed(const Duration(seconds: 1));
+    emit(state.clearSelectedAvatar());
 
-    // Utils.navigateTo(
-    //     ChangeNotifierProvider<StartGameProvider>(
-    //         create: (context) =>
-    //             StartGameProvider(pathOfCurrentAvatar: newSelectedAvatar),
-    //         child: ChangeNotifierProvider<ChooseAvatarProvider>.value(
-    //             value: p, child: const QuestionsScreen())),
-    //     context);
+    Utils.navigateTo(
+        BlocProvider(
+            create: (_) => GameCubit(avatarGame: newSelectedAvatar),
+            child: Builder(builder: (context) {
+              context.read<GameCubit>().startRiveAnimation();
+              return BlocBuilder<GameCubit,
+                  GameState>(builder: (context, state) {
+                return const GeneralGame();
+              });
+            })
+
+
+        ),
+        context);
+
   }
+
   Artboard? riveArtboardAvatar;
 
-  getTheDogAvatar(){
-
+  getTheDogAvatar() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       rootBundle.load(AppAnimation.avatarDogRiv).then(
-            (data) async {
+        (data) async {
           try {
-
             riveArtboardAvatar = null;
             // isDance = null;
             final file = RiveFile.import(data);
@@ -44,14 +55,13 @@ class ChooseAvatarCubit extends Cubit<ChooseAvatarInitial> {
                 artboard, 'State Machine 1');
             controller?.inputs.forEach((element) {
               log('element:${element.name}');
-
             });
             if (controller != null) {
               artboard.addController(controller);
               // isDance = controller.findSMI('success');
             }
             riveArtboardAvatar = artboard;
-            emit(state.copyWith(riveArtboardAvatar:riveArtboardAvatar));
+            emit(state.copyWith(riveArtboardAvatar: riveArtboardAvatar));
           } catch (e) {
             log(e.toString());
           }
@@ -59,5 +69,4 @@ class ChooseAvatarCubit extends Cubit<ChooseAvatarInitial> {
       );
     });
   }
-
 }

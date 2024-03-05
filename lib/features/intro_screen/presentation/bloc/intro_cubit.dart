@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:mind_buzz_refactor/core/talk_tts.dart';
 import 'package:rive/rive.dart';
 
@@ -96,7 +95,7 @@ class IntroCubit extends Cubit<IntroState> {
     });
   }
 
-  updateThePositionOfButton({required double newPosition}){
-    emit(state.copyWith(position:newPosition));
+  updateThePositionOfButton({required double newPosition}) {
+    emit(state.copyWith(position: newPosition));
   }
 }

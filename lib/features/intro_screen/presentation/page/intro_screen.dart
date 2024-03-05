@@ -121,7 +121,7 @@ class _IntroScreen extends State<IntroScreen>
                                             state.riveArtboardBeeCharacter!,
                                         fit: BoxFit.fitWidth,
                                         clipRect: Rect.fromCenter(
-                                            center: Offset(0, 0),
+                                            center: const Offset(0, 0),
                                             width: 450,
                                             height: 450),
                                         // enablePointerEvents: true                                          // .none,

@@ -40,11 +40,10 @@ class _ButtonStartGame extends State<ButtonStartGame>
   }
 
   static const double _shadowHeight = 4;
-  // double _position = 4;
 
   @override
   Widget build(BuildContext context) {
-    const double _height = 64 - _shadowHeight;
+    const double height = 64 - _shadowHeight;
 
     final showTheButton =
         context.select((IntroCubit value) => value.showTheButton);
@@ -85,14 +84,14 @@ class _ButtonStartGame extends State<ButtonStartGame>
                 context);
           },
           child: SizedBox(
-            height: _height + _shadowHeight,
+            height: height + _shadowHeight,
             child: Stack(
               alignment: Alignment.center,
               children: [
                 Positioned(
                   bottom: 0,
                   child: Container(
-                    height: _height,
+                    height: height,
                     width: 200,
                     padding: const EdgeInsets.symmetric(
                         vertical: 16, horizontal: 20),
@@ -111,7 +110,7 @@ class _ButtonStartGame extends State<ButtonStartGame>
                     width: 200,
                     duration: const Duration(milliseconds: 70),
                     child: Container(
-                      height: _height,
+                      height: height,
                       width: 200,
                       // padding: EdgeInsets.all(0),
                       decoration: const BoxDecoration(
