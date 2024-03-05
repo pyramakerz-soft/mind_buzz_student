@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/assets_images.dart';
+import '../../../../core/utils.dart';
+import '../../../choose_avatar/presentation/bloc/choose_avatar_cubit.dart';
+import '../../../choose_avatar/presentation/page/choose_avatar.dart';
 import '../bloc/intro_cubit.dart';
+import '../bloc/intro_state.dart';
 
 class ButtonStartGame extends StatefulWidget {
   const ButtonStartGame({Key? key}) : super(key: key);
@@ -36,7 +40,7 @@ class _ButtonStartGame extends State<ButtonStartGame>
   }
 
   static const double _shadowHeight = 4;
-  double _position = 4;
+  // double _position = 4;
 
   @override
   Widget build(BuildContext context) {
@@ -47,36 +51,38 @@ class _ButtonStartGame extends State<ButtonStartGame>
     return Visibility(
       visible: showTheButton,
       child: SizedBox(
-        width: MediaQuery.of(context).size.width-100,
-
+        width: MediaQuery.of(context).size.width - 100,
         child: GestureDetector(
           onTapUp: (_) {
-            setState(() {
-              _position = 4;
-            });
+            context
+                .read<IntroCubit>()
+                .updateThePositionOfButton(newPosition: 4);
           },
           onTapDown: (_) {
-            setState(() {
-              _position = 0;
-            });
+            context
+                .read<IntroCubit>()
+                .updateThePositionOfButton(newPosition: 0);
           },
           onTapCancel: () {
-            setState(() {
-              _position = 4;
-            });
+            context
+                .read<IntroCubit>()
+                .updateThePositionOfButton(newPosition: 4);
           },
           onTap: () async {
             _controller.forward();
             await Future.delayed(const Duration(milliseconds: 500));
-            // Utils.navigateAndRemoveUntilTo(
-            //     ChangeNotifierProvider<ChooseAvatarProvider>(
-            //         create:(_)=> ChooseAvatarProvider(),
-            //         builder: (context, child){
-            //           context.read<ChooseAvatarProvider>().getTheBackGround();
-            //           return child!;
-            //         },
-            //         child: const ChooseAvatarScreen()),
-            //     context);
+            Utils.navigateAndRemoveUntilTo(
+                BlocProvider(
+                    create: (_) => ChooseAvatarCubit(),
+                    child: Builder(builder: (context) {
+                      context.read<ChooseAvatarCubit>().getTheDogAvatar();
+                      return BlocBuilder<ChooseAvatarCubit,
+                          ChooseAvatarInitial>(builder: (context, state) {
+                        return const ChooseAvatarScreen();
+                      });
+                    })
+                ),
+                context);
           },
           child: SizedBox(
             height: _height + _shadowHeight,
@@ -88,8 +94,8 @@ class _ButtonStartGame extends State<ButtonStartGame>
                   child: Container(
                     height: _height,
                     width: 200,
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16, horizontal: 20),
                     decoration: const BoxDecoration(
                       color: Colors.black,
                       borderRadius: BorderRadius.only(
@@ -98,33 +104,36 @@ class _ButtonStartGame extends State<ButtonStartGame>
                     ),
                   ),
                 ),
-                AnimatedPositioned(
-                  curve: Curves.easeIn,
-                  bottom: _position,
-                  width: 200,
-                  duration: const Duration(milliseconds: 70),
-                  child: Container(
-                    height: _height,
+                BlocBuilder<IntroCubit, IntroState>(builder: (context, state) {
+                  return AnimatedPositioned(
+                    curve: Curves.easeIn,
+                    bottom: state.position,
                     width: 200,
-                    // padding: EdgeInsets.all(0),
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage(AppImages.buttonImage),
-                          fit: BoxFit.fitWidth),
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(100),
-                          bottomRight: Radius.circular(100)),
+                    duration: const Duration(milliseconds: 70),
+                    child: Container(
+                      height: _height,
+                      width: 200,
+                      // padding: EdgeInsets.all(0),
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(AppImages.buttonImage),
+                            fit: BoxFit.fitWidth),
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(100),
+                            bottomRight: Radius.circular(100)),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        "Let's Start",
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontSize: 24, fontWeight: FontWeight.w600),
+                      ),
                     ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Let's Start",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium
-                          ?.copyWith(fontSize: 24, fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                ),
+                  );
+                })
               ],
             ),
           ),

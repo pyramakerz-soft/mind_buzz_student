@@ -33,19 +33,6 @@ class _IntroScreen extends State<IntroScreen>
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
     BlocProvider.of<IntroCubit>(context).saveAnimationController(
         controller: _controller, animation: _animation);
-
-    // _controller.forward(from: 0);
-
-    // _controller.addStatusListener((status) {
-    //   if (status == AnimationStatus.completed) {
-    //     print('Animation completed');
-    //     context.read<ChooseAvatarProvider>().beeTalk();
-    //   }
-    // });
-    // setState(() {
-    //   _isVisible = !_isVisible;
-    // });
-
     super.initState();
   }
 

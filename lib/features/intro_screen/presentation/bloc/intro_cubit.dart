@@ -95,4 +95,8 @@ class IntroCubit extends Cubit<IntroState> {
       }
     });
   }
+
+  updateThePositionOfButton({required double newPosition}){
+    emit(state.copyWith(position:newPosition));
+  }
 }

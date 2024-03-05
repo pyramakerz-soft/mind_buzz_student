@@ -7,12 +7,14 @@ class IntroState extends Equatable {
   final Artboard? riveArtboardBeeCharacter;
   final Animation<double>? animation;
   bool? showTheButton = false;
+  double? position = 4;
   final AnimationController? controller;
 
   IntroState(
       {this.riveArtboardBees,
       this.riveArtboardBeeCharacter,
       this.animation,
+       this.position,
       this.showTheButton,
       this.controller});
 
@@ -21,6 +23,7 @@ class IntroState extends Equatable {
     Artboard? riveArtboardBeeCharacter,
     Animation<double>? animation,
     bool? showTheButton,
+    double? position,
     AnimationController? controller,
   }) {
     return IntroState(
@@ -28,6 +31,7 @@ class IntroState extends Equatable {
         riveArtboardBeeCharacter:
             riveArtboardBeeCharacter ?? this.riveArtboardBeeCharacter,
         animation: animation ?? this.animation,
+        position: position ?? this.position,
         showTheButton: showTheButton ?? this.showTheButton,
         controller: controller ?? this.controller);
   }
@@ -38,6 +42,7 @@ class IntroState extends Equatable {
         riveArtboardBees,
         animation,
         showTheButton,
+        position,
         controller,
         riveArtboardBeeCharacter
       ];
