@@ -66,29 +66,4 @@ class Utils {
     return MediaQuery.of(context).size.shortestSide > 700;
   }
 
-  List ofSoundsOfCorrect = [
-    AppSound.youFoundItSound,
-    AppSound.youFoundItSound1,
-  ];
-
-  getRandomSoundOfCorrect() {
-    Random random = Random();
-    int randomIndex = random.nextInt(ofSoundsOfCorrect.length);
-    log('${ofSoundsOfCorrect[randomIndex]}');
-    return ofSoundsOfCorrect[randomIndex];
-  }
-
-  List ofSoundsOfWrong = [
-    AppSound.notThatOneSound,
-    AppSound.notThatOneSound1,
-    AppSound.notThatOneSound2,
-  ];
-
-  getRandomSoundOfWrong() {
-    Random random = Random();
-    int randomIndex = random.nextInt(ofSoundsOfWrong.length);
-    log('${ofSoundsOfWrong[randomIndex]}');
-
-    return ofSoundsOfWrong[randomIndex];
-  }
 }

@@ -9,17 +9,22 @@ class GameState extends Equatable {
   final Map<int, Offset> touchPositions;
   final TtsState ttsState;
   final DateTime screenOpenTime;
-
+  final int currentIndex;
+  final List<int> dataQuestions;
   GameState(
       {this.riveSuccessDogBoard,
       this.riveThinkingDogBoard,
       this.riveTalkingBoard,
       this.ttsState = TtsState.stopped,
       DateTime? screenOpenTime,
+      int? currentIndex,
+      List<int>? dataQuestions,
       Map<int, Offset>? touchPositions,
       this.stateOfAvatar = StateOfAvatar.stop,
       this.riveWrongDogBoard})
       : touchPositions = touchPositions ?? {},
+        dataQuestions = [0],
+        currentIndex = 0,
         screenOpenTime = DateTime.now();
 
   GameState copyWith(
@@ -29,12 +34,16 @@ class GameState extends Equatable {
       StateOfAvatar? stateOfAvatar,
       TtsState? ttsState,
       DateTime? screenOpenTime,
+      List<int>? dataQuestions,
+      int? currentIndex,
       Artboard? riveWrongDogBoard,
       Map<int, Offset>? touchPositions}) {
     return GameState(
         riveSuccessDogBoard: riveSuccessDogBoard ?? this.riveSuccessDogBoard,
         stateOfAvatar: stateOfAvatar ?? this.stateOfAvatar,
         ttsState: ttsState ?? this.ttsState,
+        currentIndex: currentIndex ?? this.currentIndex,
+        dataQuestions: dataQuestions ?? this.dataQuestions,
         riveThinkingDogBoard: riveThinkingDogBoard ?? this.riveThinkingDogBoard,
         riveWrongDogBoard: riveWrongDogBoard ?? this.riveWrongDogBoard,
         screenOpenTime: screenOpenTime ?? this.screenOpenTime,
@@ -50,6 +59,8 @@ class GameState extends Equatable {
         riveThinkingDogBoard,
         screenOpenTime,
         riveWrongDogBoard,
+        dataQuestions,
+        currentIndex,
         riveTalkingBoard
       ];
 }

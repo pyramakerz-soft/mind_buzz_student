@@ -10,6 +10,6 @@ class GameUseCases {
   GameUseCases(this.repository);
 
   Future<Either<Failure, BasedGameModel>> call(bool stayLogin) async {
-    return await repository.getGameDataRepository(index:1, showLocal: true);
+    return await repository.getGameDataRepository(index:1, showLocal: stayLogin);
   }
 }

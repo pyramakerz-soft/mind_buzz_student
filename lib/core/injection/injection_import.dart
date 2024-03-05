@@ -3,6 +3,9 @@ part of 'injection_container.dart';
 var sl = GetIt.instance;
 
 Future<void> init() async {
+  // bloc
+  sl.registerFactory(() => GameOneBloc(getConcreteGameTrivia: sl()));
+
   //UseCase
   sl.registerLazySingleton(() => GameUseCases(sl()));
 

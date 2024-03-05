@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rive/rive.dart';
-
+import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/app_color.dart';
 import '../../../../core/assets_images.dart';
 import '../../../../core/vars.dart';
+import '../bloc/game1/game_one_bloc.dart';
 import '../bloc/general_game/game_cubit.dart';
+import 'game1_sound_and_add_to_box.dart';
 
 class GeneralGame extends StatefulWidget {
   const GeneralGame({Key? key}) : super(key: key);
@@ -121,6 +123,11 @@ class _QuestionsScreen extends State<GeneralGame>
                                 fit: BoxFit.fill)),
                         child: BlocBuilder<GameCubit, GameState>(
                             builder: (context, state) => Stack(children: [
+                              state.dataQuestions[state.currentIndex] == 0
+                                  ? BlocProvider(
+                                  create: (context) =>  di.sl<GameOneBloc>(),
+                                  child: const Game1SoundAndAddToBox())
+                                  : const SizedBox(),
                                   Positioned(
                                       bottom: 15,
                                       left: 25,

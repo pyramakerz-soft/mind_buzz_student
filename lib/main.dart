@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/theme_text.dart';
+import 'features/games/presentation/bloc/game1/game_one_bloc.dart';
 import 'features/loading_intro/presentation/bloc/loading_cubit.dart';
 import 'features/loading_intro/presentation/page/loading_screen.dart';
+import 'core/injection/injection_container.dart' as di;
 
 Future<void> setPreferredOrientation() async {
   await SystemChrome.setPreferredOrientations([
@@ -16,6 +18,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setPreferredOrientation();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  await di.init();
+
   runApp(const MyApp());
 }
 
@@ -24,13 +28,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (_) => LoadingCubit(),
-        child: MaterialApp(
-          title: 'Mind buzz2',
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme().lightTheme,
-          home: const LoadingScreen(),
-        ));
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<GameOneBloc>(create: (_) => di.sl<GameOneBloc>()),
+        ],
+        child: BlocProvider(
+            create: (_) => LoadingCubit(),
+            child: MaterialApp(
+              title: 'Mind buzz2',
+              debugShowCheckedModeBanner: false,
+              theme: AppTheme().lightTheme,
+              home: const LoadingScreen(),
+            )));
   }
 }

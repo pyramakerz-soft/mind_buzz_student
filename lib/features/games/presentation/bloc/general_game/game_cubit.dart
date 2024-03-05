@@ -165,7 +165,19 @@ class GameCubit extends Cubit<GameState> {
   }
 
   beeTalkOfCongratulation() async {
-    TalkTts.startTalk(text: 'Congratulation');
+    TalkTts.startTalk(text: 'Congratulation', actionOfStart: (){
+      emit(state.copyWith(ttsState: TtsState.playing));
+
+    }, actionComplete: (){
+      emit(state.copyWith(ttsState: TtsState.stopped));
+
+    }, actionPause: (){
+      emit(state.copyWith(ttsState: TtsState.stopped));
+
+    }, actionCancel: (){
+      emit(state.copyWith(ttsState: TtsState.stopped));
+
+    });
   }
 
   Map<int, Offset> touchPositions = <int, Offset>{};

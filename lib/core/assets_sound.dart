@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:math' hide log;
+
 class AppSound {
   static const String mainPathOfSound = 'sound/';
   static const String mainPathOfSoundBase = 'sound/base/';
@@ -14,4 +17,30 @@ class AppSound {
   static const String youFoundItSound = "${mainPathOfSoundBase}you_found_it.ogg";
   static const String youFoundItSound1 = "${mainPathOfSoundBase}good_job.ogg";
   static const String completeStarSound = "${mainPathOfSoundBase}yahoo.ogg";
+
+  List ofSoundsOfCorrect = [
+    youFoundItSound,
+    youFoundItSound1,
+  ];
+
+  getRandomSoundOfCorrect() {
+    Random random = Random();
+    int randomIndex = random.nextInt(ofSoundsOfCorrect.length);
+    log('${ofSoundsOfCorrect[randomIndex]}');
+    return ofSoundsOfCorrect[randomIndex];
+  }
+
+  List ofSoundsOfWrong = [
+    notThatOneSound,
+    notThatOneSound1,
+    notThatOneSound2,
+  ];
+
+  getRandomSoundOfWrong() {
+    Random random = Random();
+    int randomIndex = random.nextInt(ofSoundsOfWrong.length);
+    log('${ofSoundsOfWrong[randomIndex]}');
+
+    return ofSoundsOfWrong[randomIndex];
+  }
 }
