@@ -123,11 +123,14 @@ class _QuestionsScreen extends State<GeneralGame>
                                 fit: BoxFit.fill)),
                         child: BlocBuilder<GameCubit, GameState>(
                             builder: (context, state) => Stack(children: [
-                              state.dataQuestions[state.currentIndex] == 0
-                                  ? BlocProvider(
-                                  create: (context) =>  di.sl<GameOneBloc>(),
-                                  child: const Game1SoundAndAddToBox())
-                                  : const SizedBox(),
+                                  state.dataQuestions[state.currentIndex] == 0
+                                      ? BlocProvider(
+                                          create: (context) => di
+                                              .sl<GameOneBloc>()
+                                            ..add(
+                                                GetGameData(showOffline: true)),
+                                          child: const Game1SoundAndAddToBox())
+                                      : const SizedBox(),
                                   Positioned(
                                       bottom: 15,
                                       left: 25,

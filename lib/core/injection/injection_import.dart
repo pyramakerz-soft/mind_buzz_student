@@ -10,18 +10,18 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GameUseCases(sl()));
 
   //Repository
-  sl.registerLazySingleton<GameRepository>(
-          () => GameRepositoryImpl(remoteDataSource:sl(), localDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<GameRepository>(() => GameRepositoryImpl(
+      remoteDataSource: sl(), localDataSource: sl(), networkInfo: sl()));
 
   //Datasources
   sl.registerLazySingleton<DataSourceLocalOfGame>(
-          () => DataSourceLocalOfGameImpl());
+      () => DataSourceLocalOfGameImpl());
   sl.registerLazySingleton<DataSourceRemotelyOfGame>(
-          () => DataSourceRemotelyOfGameImpl(dio: sl()));
+      () => DataSourceRemotelyOfGameImpl(dio: sl()));
 
   //! Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
+  sl.registerLazySingleton(() => InternetConnectionChecker());
 
-  sl.registerLazySingleton(() => MainApiConnection );
-
+  sl.registerLazySingleton(() => MainApiConnection());
 }

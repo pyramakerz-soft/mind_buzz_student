@@ -13,7 +13,9 @@ class GameRepositoryImpl implements GameRepository {
   final NetworkInfo networkInfo;
 
   GameRepositoryImpl(
-      {required this.remoteDataSource, required this.localDataSource, required this.networkInfo});
+      {required this.remoteDataSource,
+      required this.localDataSource,
+      required this.networkInfo});
   @override
   Future<Either<Failure, BasedGameModel>> getGameDataRepository(
       {required int index, bool? showLocal}) async {

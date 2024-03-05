@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-abstract class MainApiConnection {
+class MainApiConnection {
   //Singleton
   MainApiConnection() {
     // Attach Interceptors.
@@ -50,10 +50,10 @@ abstract class MainApiConnection {
     return 'ar';
   }
 
-  Future<Response<dynamic>> get(
-       {required String url,
-        Map<String, dynamic>? queryParameters,
-      }) async {
+  Future<Response<dynamic>> get({
+    required String url,
+    Map<String, dynamic>? queryParameters,
+  }) async {
     String language = await _getAppLanguage();
 
     Response response = await dio.get(
@@ -68,8 +68,8 @@ abstract class MainApiConnection {
       throw response;
     }
   }
-  Options dioOptions(String language,
-      [Map<String, String?>? headers]) {
+
+  Options dioOptions(String language, [Map<String, String?>? headers]) {
     return Options(
       // contentType: 'application/json',
       headers: {

@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../../features/games/data/datasources/data_source_local_of_game.dart';
 import '../../features/games/data/datasources/data_source_remotely_of_game.dart';
