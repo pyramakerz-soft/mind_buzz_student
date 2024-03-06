@@ -15,3 +15,21 @@ class GetGameData extends GameOneEvent {
   List<Object> get props => [showOffline];
 }
 
+class CompleteGameData extends GameOneEvent {
+
+
+  @override
+  List<Object> get props => [];
+}
+
+
+class RestartGameData extends GameOneEvent {
+  final bool showOffline;
+
+  RestartGameData({required this.showOffline});
+
+
+  @override
+  List<Object> get props => [showOffline];
+}
+

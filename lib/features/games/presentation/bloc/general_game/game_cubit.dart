@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rive/rive.dart';
 
 import '../../../../../core/assets_animation.dart';
+import '../../../../../core/assets_sound.dart';
 import '../../../../../core/audio_player.dart';
 import '../../../../../core/connection.dart';
 import '../../../../../core/game_structure.dart';
@@ -202,9 +203,7 @@ class GameCubit extends Cubit<GameState> {
 
   List<ResultModel> dataOfResult = [];
   addTheStateOfCurrentAnswer(
-      {required BuildContext context,
-      required String userAnswer,
-      required String correctAnswer}) {
+      {required String userAnswer, required String correctAnswer}) {
     ResultModel lastResultModel = dataOfResult.last;
     lastResultModel.detailsOfAnswers?.add(DetailsOfAnswerModel(
         correctAnswer: correctAnswer,
@@ -232,14 +231,65 @@ class GameCubit extends Cubit<GameState> {
   }
 
   saveCurrentGameData({required BasedGameModel gameData}) async {
+    log("saveCurrentGameData:${(gameData.data?.game?.message ?? '')}");
     GameLettersModel? randomVisibleLetter =
         await GameStructure.getRandomValueOfGame2(
             cardsLetters: (gameData.data?.game?.gameLetters ?? []));
     String newLetterOfSound = GetCurrent.superGetSoundBasedOnLetter(
         superLetter: randomVisibleLetter?.letter?.toLowerCase() ?? '');
-    state.copyWith(
+    emit(state.copyWith(
         newMessageQuestion: (gameData.data?.game?.message ?? ''),
         newLetterOfSound: newLetterOfSound,
-        randomVisibleLetter: randomVisibleLetter);
+        randomVisibleLetter: randomVisibleLetter));
+    createTheDefaultOfDataOfStartGame(gameData: gameData);
+    await talkTheMainInstruction();
+  }
+
+  talkTheMainInstruction() async {
+    await TalkTts.startTalk(text: state.newMessageQuestion ?? '');
+    await AudioPlayerClass.startPlaySound(
+        soundPath: state.newLetterOfSound ?? '');
+  }
+
+  createTheDefaultOfDataOfStartGame({required BasedGameModel gameData}) {
+    dataOfResult.add(ResultModel(
+        id: gameData.data?.game?.id ?? 0,
+        countWrongAnswer: 0,
+        detailsOfAnswers: [],
+        countCorrectAnswer: GameStructure.getCountOfCompleteQuestions(
+            cardsLetters: gameData.data?.game?.gameLetters ?? []),
+        timeToAnswer: 0.toString()));
+  }
+
+  soundCompleteOfStar() async {
+    await AudioPlayerClass.startPlaySound(
+        soundPath: AppSound.completeStarSound);
+    await Future.delayed(const Duration(seconds: 1));
+  }
+
+  soundOfWrong() async {
+    log('soundOfWrong');
+    await AudioPlayerClass.startPlaySound(
+        soundPath: AppSound.getRandomSoundOfWrong());
+
+    await Future.delayed(const Duration(seconds: 1));
+
+    await AudioPlayerClass.startPlaySound(
+        soundPath: state.newLetterOfSound ?? '');
+  }
+  startAnimation() {
+    repeatCount = 0;
+    // controllerAnimation.repeat(reverse: true);
+
+    // notifyListeners();
+    updateResultData();
+    // return countOfRepeatQuestion;
+  }
+  updateResultData() {
+    ResultModel lastResultModel = dataOfResult.last;
+
+    lastResultModel.countWrongAnswer =
+    ((lastResultModel.countWrongAnswer ?? 0) + 1);
+    dataOfResult[dataOfResult.length - 1] = lastResultModel;
   }
 }

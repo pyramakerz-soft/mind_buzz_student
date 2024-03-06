@@ -18,25 +18,25 @@ class AppSound {
   static const String youFoundItSound1 = "${mainPathOfSoundBase}good_job.ogg";
   static const String completeStarSound = "${mainPathOfSoundBase}yahoo.ogg";
 
-  List ofSoundsOfCorrect = [
+  static List ofSoundsOfCorrect = [
     youFoundItSound,
     youFoundItSound1,
   ];
 
-  getRandomSoundOfCorrect() {
+  static getRandomSoundOfCorrect() {
     Random random = Random();
     int randomIndex = random.nextInt(ofSoundsOfCorrect.length);
     log('${ofSoundsOfCorrect[randomIndex]}');
     return ofSoundsOfCorrect[randomIndex];
   }
 
-  List ofSoundsOfWrong = [
+  static List ofSoundsOfWrong = [
     notThatOneSound,
     notThatOneSound1,
     notThatOneSound2,
   ];
 
-  getRandomSoundOfWrong() {
+  static getRandomSoundOfWrong() {
     Random random = Random();
     int randomIndex = random.nextInt(ofSoundsOfWrong.length);
     log('${ofSoundsOfWrong[randomIndex]}');

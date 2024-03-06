@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rive/rive.dart';
 
+import '../../../../core/assets_images.dart';
 import '../../../../core/utils.dart';
+import '../../../games/presentation/bloc/general_game/game_cubit.dart';
+import '../../../games/presentation/page/general_game.dart';
 import '../../../intro_screen/presentation/bloc/intro_cubit.dart';
 import '../../../intro_screen/presentation/page/intro_screen.dart';
 import '../bloc/loading_cubit.dart';
@@ -32,10 +35,25 @@ class _LoadingScreen extends State<LoadingScreen> with WidgetsBindingObserver {
   }
 
   waitAndGoToChooseAvatar() async {
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 1));
     Utils.navigateTo(
         BlocProvider(create: (_) => IntroCubit(), child: const IntroScreen()),
         context);
+
+    // Utils.navigateTo(
+    //     BlocProvider(
+    //         create: (_) => GameCubit(avatarGame: AppImages.imageAvatar2),
+    //         child: Builder(builder: (context) {
+    //           context.read<GameCubit>().startRiveAnimation();
+    //           return BlocBuilder<GameCubit,
+    //               GameState>(builder: (context, state) {
+    //             return const GeneralGame();
+    //           });
+    //         })
+    //
+    //
+    //     ),
+    //     context);
   }
 
   @override

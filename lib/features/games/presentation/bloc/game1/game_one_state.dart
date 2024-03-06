@@ -10,15 +10,20 @@ class GameOneInitial extends GameOneState {}
 
 class LoadingGame extends GameOneState {}
 
+class CompleteGame extends GameOneState {
+  Artboard? riveArtboardBeeCharacter;
+  CompleteGame({this.riveArtboardBeeCharacter});
+}
+
 class LoadedGame extends GameOneState {
-  final BasedGameModel gameData;
-  final List<GameLettersModel>? cardsLetters;
-  final int? newCountOfRepeatQuestion;
+  late final BasedGameModel gameData;
+  final List<GameLettersModel> cardsLetters;
+  final int newCountOfRepeatQuestion;
 
   LoadedGame(
-      {this.cardsLetters,
+      {required this.cardsLetters,
       required this.gameData,
-      this.newCountOfRepeatQuestion});
+      required this.newCountOfRepeatQuestion});
 
   LoadedGame copyWith(
       {BasedGameModel? gameData,
@@ -31,8 +36,15 @@ class LoadedGame extends GameOneState {
         cardsLetters: cardsLetters ?? this.cardsLetters);
   }
 
+  handlingDataGame(
+      {required BasedGameModel gameData, required LoadedGame state}) {
+    state.copyWith(
+        cardsLetters: gameData.data?.game?.gameLetters ?? [],
+        newCountOfRepeatQuestion: (gameData.data?.game?.numOfTrials ?? 0));
+  }
+
   @override
-  List<Object> get props => [gameData];
+  List<Object> get props => [gameData, newCountOfRepeatQuestion, cardsLetters];
 }
 
 class ErrorGame extends GameOneState {

@@ -11,6 +11,7 @@ abstract class TalkTts {
       Function? actionPause,
       Function? actionCancel,
       Function? actionComplete}) async {
+    log('start talk:$text');
     flutterTts.setPitch(1.0);
     flutterTts.setSpeechRate(0.4);
     flutterTts.setStartHandler(() {

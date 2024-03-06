@@ -135,10 +135,9 @@ class _QuestionsScreen extends State<GeneralGame>
                                                 3,
                                         child: GestureDetector(
                                           onTap: () async {
-                                            // await context
-                                            //     .read<StartGameProvider>()
-                                            //     .sayTheFullTalk(
-                                            //         context: context);
+                                            await context
+                                                .read<GameCubit>()
+                                                .talkTheMainInstruction();
                                           },
                                           child: state.stateOfAvatar ==
                                                       StateOfAvatar.talking &&
