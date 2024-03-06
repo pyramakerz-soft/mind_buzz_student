@@ -8,6 +8,7 @@ import 'package:meta/meta.dart';
 
 import '../../../../../core/error/failures.dart';
 import '../../../domain/entities/based_game_model.dart';
+import '../../../domain/entities/game_letters_model.dart';
 import '../../../domain/usecases/game_use_cases.dart';
 
 part 'game_one_event.dart';
@@ -54,4 +55,11 @@ class GameOneBloc extends Bloc<GameOneEvent, GameOneState> {
 
   late AnimationController controller;
   late Animation<double> animation;
+
+  handlingDataGame(
+      {required BasedGameModel gameData, required LoadedGame state}) {
+    state.copyWith(
+        cardsLetters: gameData.data?.game?.gameLetters ?? [],
+        newCountOfRepeatQuestion: (gameData.data?.game?.numOfTrials ?? 0));
+  }
 }

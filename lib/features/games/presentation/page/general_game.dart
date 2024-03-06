@@ -124,12 +124,7 @@ class _QuestionsScreen extends State<GeneralGame>
                         child: BlocBuilder<GameCubit, GameState>(
                             builder: (context, state) => Stack(children: [
                                   state.dataQuestions[state.currentIndex] == 0
-                                      ? BlocProvider(
-                                          create: (context) => di
-                                              .sl<GameOneBloc>()
-                                            ..add(
-                                                GetGameData(showOffline: true)),
-                                          child: const Game1SoundAndAddToBox())
+                                      ? const Game1SoundAndAddToBox()
                                       : const SizedBox(),
                                   Positioned(
                                       bottom: 15,

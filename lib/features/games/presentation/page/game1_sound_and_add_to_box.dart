@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -22,6 +23,9 @@ class _Game1SoundAndAddToBox extends State<Game1SoundAndAddToBox>
     with TickerProviderStateMixin {
   @override
   void initState() {
+    context
+        .read<GameCubit>()
+        .saveStateGameTime(newScreenOpenTime: DateTime.now());
     context.read<GameOneBloc>().controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
@@ -55,7 +59,37 @@ class _Game1SoundAndAddToBox extends State<Game1SoundAndAddToBox>
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return SizedBox();
+    final countOfFingers =
+        context.watch<GameCubit>().state.touchPositions.length;
+    return BlocProvider(
+        create: (context) =>
+            di.sl<GameOneBloc>()..add(GetGameData(showOffline: true)),
+        child:
+            BlocConsumer<GameOneBloc, GameOneState>(listener: (context, state) {
+          if (state is LoadedGame) {
+            context
+                .read<GameOneBloc>()
+                .handlingDataGame(gameData: state.gameData, state: state);
+            context
+                .read<GameCubit>()
+                .saveCurrentGameData(gameData: state.gameData);
+          }
+        }, builder: (context, state) {
+          if (state is LoadedGame) {
+            final countOfRepeatQuestion = state.newCountOfRepeatQuestion;
+            final cardsLetters = state.cardsLetters;
+            final currentDataGame = state.gameData.data;
+            final numOfLetterRepeat =
+                state.gameData.data?.game?.numOfLetterRepeat ?? 0;
+
+            return SizedBox();
+          } else if (state is LoadingGame) {
+            return const CupertinoActivityIndicator();
+          } else if (state is ErrorGame) {
+            return Text(state.message);
+          } else {
+            return SizedBox();
+          }
+        }));
   }
 }

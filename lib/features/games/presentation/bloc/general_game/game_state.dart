@@ -11,10 +11,16 @@ class GameState extends Equatable {
   final DateTime screenOpenTime;
   final int currentIndex;
   final List<int> dataQuestions;
+  final String? newMessageQuestion;
+  final String? newLetterOfSound;
+  final GameLettersModel? randomVisibleLetter;
   GameState(
       {this.riveSuccessDogBoard,
       this.riveThinkingDogBoard,
       this.riveTalkingBoard,
+      this.newMessageQuestion,
+      this.randomVisibleLetter,
+      this.newLetterOfSound,
       this.ttsState = TtsState.stopped,
       DateTime? screenOpenTime,
       int? currentIndex,
@@ -32,7 +38,10 @@ class GameState extends Equatable {
       Artboard? riveTalkingBoard,
       Artboard? riveThinkingDogBoard,
       StateOfAvatar? stateOfAvatar,
+      String? newMessageQuestion,
+      String? newLetterOfSound,
       TtsState? ttsState,
+      GameLettersModel? randomVisibleLetter,
       DateTime? screenOpenTime,
       List<int>? dataQuestions,
       int? currentIndex,
@@ -42,6 +51,9 @@ class GameState extends Equatable {
         riveSuccessDogBoard: riveSuccessDogBoard ?? this.riveSuccessDogBoard,
         stateOfAvatar: stateOfAvatar ?? this.stateOfAvatar,
         ttsState: ttsState ?? this.ttsState,
+        randomVisibleLetter: randomVisibleLetter ?? this.randomVisibleLetter,
+        newLetterOfSound: newLetterOfSound ?? this.newLetterOfSound,
+        newMessageQuestion: newMessageQuestion ?? this.newMessageQuestion,
         currentIndex: currentIndex ?? this.currentIndex,
         dataQuestions: dataQuestions ?? this.dataQuestions,
         riveThinkingDogBoard: riveThinkingDogBoard ?? this.riveThinkingDogBoard,

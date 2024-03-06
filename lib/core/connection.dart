@@ -35,6 +35,8 @@ abstract class GetCurrent {
         return AppSound.letterM;
       case ('s'):
         return AppSound.letterS;
+      // default:
+      //   return null;
     }
   }
 }

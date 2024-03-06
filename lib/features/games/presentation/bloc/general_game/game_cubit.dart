@@ -8,10 +8,13 @@ import 'package:rive/rive.dart';
 
 import '../../../../../core/assets_animation.dart';
 import '../../../../../core/audio_player.dart';
+import '../../../../../core/connection.dart';
 import '../../../../../core/game_structure.dart';
 import '../../../../../core/talk_tts.dart';
 import '../../../../../core/vars.dart';
+import '../../../domain/entities/based_game_model.dart';
 import '../../../domain/entities/details_of_answer_model.dart';
+import '../../../domain/entities/game_letters_model.dart';
 import '../../../domain/entities/result_model.dart';
 
 part 'game_state.dart';
@@ -165,19 +168,20 @@ class GameCubit extends Cubit<GameState> {
   }
 
   beeTalkOfCongratulation() async {
-    TalkTts.startTalk(text: 'Congratulation', actionOfStart: (){
-      emit(state.copyWith(ttsState: TtsState.playing));
-
-    }, actionComplete: (){
-      emit(state.copyWith(ttsState: TtsState.stopped));
-
-    }, actionPause: (){
-      emit(state.copyWith(ttsState: TtsState.stopped));
-
-    }, actionCancel: (){
-      emit(state.copyWith(ttsState: TtsState.stopped));
-
-    });
+    TalkTts.startTalk(
+        text: 'Congratulation',
+        actionOfStart: () {
+          emit(state.copyWith(ttsState: TtsState.playing));
+        },
+        actionComplete: () {
+          emit(state.copyWith(ttsState: TtsState.stopped));
+        },
+        actionPause: () {
+          emit(state.copyWith(ttsState: TtsState.stopped));
+        },
+        actionCancel: () {
+          emit(state.copyWith(ttsState: TtsState.stopped));
+        });
   }
 
   Map<int, Offset> touchPositions = <int, Offset>{};
@@ -225,5 +229,17 @@ class GameCubit extends Cubit<GameState> {
   stopPlayMusic() async {
     await TalkTts.stopTalk();
     await AudioPlayerClass.forceStopSound();
+  }
+
+  saveCurrentGameData({required BasedGameModel gameData}) async {
+    GameLettersModel? randomVisibleLetter =
+        await GameStructure.getRandomValueOfGame2(
+            cardsLetters: (gameData.data?.game?.gameLetters ?? []));
+    String newLetterOfSound = GetCurrent.superGetSoundBasedOnLetter(
+        superLetter: randomVisibleLetter?.letter?.toLowerCase() ?? '');
+    state.copyWith(
+        newMessageQuestion: (gameData.data?.game?.message ?? ''),
+        newLetterOfSound: newLetterOfSound,
+        randomVisibleLetter: randomVisibleLetter);
   }
 }
