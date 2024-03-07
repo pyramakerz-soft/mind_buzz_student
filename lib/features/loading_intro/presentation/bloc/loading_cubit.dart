@@ -26,9 +26,7 @@ class LoadingCubit extends Cubit<Artboard?> {
 
             var controller = StateMachineController.fromArtboard(
                 artboard, 'State Machine 1');
-            controller?.inputs.forEach((element) {
-              log('element:${element.name}');
-            });
+
             if (controller != null) {
               artboard.addController(controller);
               // isDance = controller.findSMI('success');

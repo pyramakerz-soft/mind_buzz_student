@@ -20,3 +20,5 @@ abstract class PaperImages {
 
 enum StateOfAvatar { thinking, talking, stop, success, wrong }
 enum TtsState { playing, stopped, forceStop }
+
+bool stateOfAppIsOffline = true;

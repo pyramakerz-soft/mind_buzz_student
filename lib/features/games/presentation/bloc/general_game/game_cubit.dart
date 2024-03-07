@@ -74,9 +74,7 @@ class GameCubit extends Cubit<GameState> {
 
             var controller = StateMachineController.fromArtboard(
                 artboard, 'State Machine 1');
-            controller?.inputs.forEach((element) {
-              log('element:${element.name}');
-            });
+
             if (controller != null) {
               artboard.addController(controller);
               // isDance = controller.findSMI('success');
@@ -231,7 +229,6 @@ class GameCubit extends Cubit<GameState> {
   }
 
   saveCurrentGameData({required BasedGameModel gameData}) async {
-    log("saveCurrentGameData:${(gameData.data?.game?.message ?? '')}");
     GameLettersModel? randomVisibleLetter =
         await GameStructure.getRandomValueOfGame2(
             cardsLetters: (gameData.data?.game?.gameLetters ?? []));
@@ -240,6 +237,7 @@ class GameCubit extends Cubit<GameState> {
     emit(state.copyWith(
         newMessageQuestion: (gameData.data?.game?.message ?? ''),
         newLetterOfSound: newLetterOfSound,
+        countOfRepeatQuestion: (gameData.data?.game?.numOfTrials ?? 0),
         randomVisibleLetter: randomVisibleLetter));
     createTheDefaultOfDataOfStartGame(gameData: gameData);
     await talkTheMainInstruction();
@@ -268,7 +266,6 @@ class GameCubit extends Cubit<GameState> {
   }
 
   soundOfWrong() async {
-    log('soundOfWrong');
     await AudioPlayerClass.startPlaySound(
         soundPath: AppSound.getRandomSoundOfWrong());
 
@@ -282,7 +279,7 @@ class GameCubit extends Cubit<GameState> {
     // controllerAnimation.repeat(reverse: true);
 
     // notifyListeners();
-    updateResultData();
+    // updateResultData();
     // return countOfRepeatQuestion;
   }
   updateResultData() {
@@ -291,5 +288,25 @@ class GameCubit extends Cubit<GameState> {
     lastResultModel.countWrongAnswer =
     ((lastResultModel.countWrongAnswer ?? 0) + 1);
     dataOfResult[dataOfResult.length - 1] = lastResultModel;
+  }
+
+  closeResultData({required DateTime countOfSeconds,required BasedGameModel gameData}) {
+    ResultModel lastResultModel = dataOfResult.last;
+    lastResultModel.countCorrectAnswer =
+        GameStructure.getCountOfCompleteQuestions(cardsLetters: gameData.data?.game?.gameLetters ?? []);
+    lastResultModel.timeToAnswer = countOfSeconds.toString();
+    dataOfResult.last = lastResultModel;
+  }
+
+  makeRandomVisibleLetterNull(){
+    emit(state.copyWith(randomVisibleLetter:null));
+  }
+
+  soundOfStar() async {
+    await AudioPlayerClass.startPlaySound(
+        soundPath: AppSound.starSound);
+  }
+  downGradeCountOfRepeatQuestion(){
+    emit(state.copyWith(countOfRepeatQuestion:((state.countOfRepeatQuestion??0)-1)));
   }
 }

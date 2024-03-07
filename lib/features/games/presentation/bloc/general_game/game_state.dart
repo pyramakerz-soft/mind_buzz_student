@@ -12,6 +12,7 @@ class GameState extends Equatable {
   final int currentIndex;
   final List<int> dataQuestions;
   final String? newMessageQuestion;
+  final int? countOfRepeatQuestion;
   final String? newLetterOfSound;
   final GameLettersModel? randomVisibleLetter;
   GameState(
@@ -24,6 +25,7 @@ class GameState extends Equatable {
       this.ttsState = TtsState.stopped,
       DateTime? screenOpenTime,
       int? currentIndex,
+      this.countOfRepeatQuestion,
       List<int>? dataQuestions,
       Map<int, Offset>? touchPositions,
       this.stateOfAvatar = StateOfAvatar.stop,
@@ -45,6 +47,7 @@ class GameState extends Equatable {
       DateTime? screenOpenTime,
       List<int>? dataQuestions,
       int? currentIndex,
+      int? countOfRepeatQuestion,
       Artboard? riveWrongDogBoard,
       Map<int, Offset>? touchPositions}) {
     return GameState(
@@ -59,6 +62,7 @@ class GameState extends Equatable {
         riveThinkingDogBoard: riveThinkingDogBoard ?? this.riveThinkingDogBoard,
         riveWrongDogBoard: riveWrongDogBoard ?? this.riveWrongDogBoard,
         screenOpenTime: screenOpenTime ?? this.screenOpenTime,
+        countOfRepeatQuestion: countOfRepeatQuestion ?? this.countOfRepeatQuestion,
         touchPositions: touchPositions ?? this.touchPositions,
         riveTalkingBoard: riveTalkingBoard ?? this.riveTalkingBoard);
   }
@@ -71,6 +75,7 @@ class GameState extends Equatable {
         riveThinkingDogBoard,
         screenOpenTime,
         riveWrongDogBoard,
+    countOfRepeatQuestion,
         dataQuestions,
         currentIndex,
         riveTalkingBoard

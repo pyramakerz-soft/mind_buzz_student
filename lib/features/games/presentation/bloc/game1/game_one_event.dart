@@ -33,3 +33,25 @@ class RestartGameData extends GameOneEvent {
   List<Object> get props => [showOffline];
 }
 
+class RequestToRestartGameData extends GameOneEvent {
+
+  RequestToRestartGameData();
+
+
+  @override
+  List<Object> get props => [];
+}
+
+
+class SubmitNewAnswerData extends GameOneEvent {
+  final int index;
+  final List<GameLettersModel> cardsLetters;
+  final BasedGameModel gameData;
+  SubmitNewAnswerData({required this.gameData, required this.index, required this.cardsLetters});
+
+
+  @override
+  List<Object> get props => [index, cardsLetters, gameData];
+}
+
+

@@ -26,7 +26,6 @@ class AppSound {
   static getRandomSoundOfCorrect() {
     Random random = Random();
     int randomIndex = random.nextInt(ofSoundsOfCorrect.length);
-    log('${ofSoundsOfCorrect[randomIndex]}');
     return ofSoundsOfCorrect[randomIndex];
   }
 
@@ -39,8 +38,6 @@ class AppSound {
   static getRandomSoundOfWrong() {
     Random random = Random();
     int randomIndex = random.nextInt(ofSoundsOfWrong.length);
-    log('${ofSoundsOfWrong[randomIndex]}');
-
     return ofSoundsOfWrong[randomIndex];
   }
 }

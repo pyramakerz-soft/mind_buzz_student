@@ -9,6 +9,9 @@ abstract class GameOneState extends Equatable {
 class GameOneInitial extends GameOneState {}
 
 class LoadingGame extends GameOneState {}
+class RequestToRestartGame extends GameOneState {
+
+}
 
 class CompleteGame extends GameOneState {
   Artboard? riveArtboardBeeCharacter;
@@ -18,12 +21,10 @@ class CompleteGame extends GameOneState {
 class LoadedGame extends GameOneState {
   late final BasedGameModel gameData;
   final List<GameLettersModel> cardsLetters;
-  final int newCountOfRepeatQuestion;
 
   LoadedGame(
       {required this.cardsLetters,
-      required this.gameData,
-      required this.newCountOfRepeatQuestion});
+      required this.gameData});
 
   LoadedGame copyWith(
       {BasedGameModel? gameData,
@@ -31,8 +32,6 @@ class LoadedGame extends GameOneState {
       int? newCountOfRepeatQuestion}) {
     return LoadedGame(
         gameData: gameData ?? this.gameData,
-        newCountOfRepeatQuestion:
-            newCountOfRepeatQuestion ?? this.newCountOfRepeatQuestion,
         cardsLetters: cardsLetters ?? this.cardsLetters);
   }
 
@@ -44,7 +43,7 @@ class LoadedGame extends GameOneState {
   }
 
   @override
-  List<Object> get props => [gameData, newCountOfRepeatQuestion, cardsLetters];
+  List<Object> get props => [gameData,  cardsLetters];
 }
 
 class ErrorGame extends GameOneState {

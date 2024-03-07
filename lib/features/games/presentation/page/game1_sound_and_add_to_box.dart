@@ -1,4 +1,5 @@
-import 'dart:math';
+import 'dart:developer';
+import 'dart:math' hide log;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:rive/rive.dart';
+import '../../../../core/assets_sound.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 
 import '../../../../core/assets_images.dart';
@@ -53,7 +55,7 @@ class _Game1SoundAndAddToBox extends State<Game1SoundAndAddToBox>
       }
     });
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      di.sl<GameOneBloc>()..add(GetGameData(showOffline: true));
+      di.sl<GameOneBloc>()..add(GetGameData(showOffline: stateOfAppIsOffline));
     });
     super.initState();
   }
@@ -75,22 +77,25 @@ class _Game1SoundAndAddToBox extends State<Game1SoundAndAddToBox>
     final countOfFingers =
         context.watch<GameCubit>().state.touchPositions.length;
     return BlocProvider(
-        create: (context) =>
-            di.sl<GameOneBloc>()..add(GetGameData(showOffline: true)),
+        create: (context) => di.sl<GameOneBloc>()
+          ..add(GetGameData(showOffline: stateOfAppIsOffline)),
         child:
             BlocConsumer<GameOneBloc, GameOneState>(listener: (context, state) {
-              if (state is LoadedGame) {
+          if (state is LoadedGame) {
             context
                 .read<GameCubit>()
                 .saveCurrentGameData(gameData: state.gameData);
-          }}, builder: (context, state) {
+          }
+        }, builder: (context, state) {
           if (state is LoadedGame) {
-            final countOfRepeatQuestion = state.newCountOfRepeatQuestion;
             final cardsLetters = state.cardsLetters;
             final currentDataGame = state.gameData.data;
             final numOfLetterRepeat =
                 state.gameData.data?.game?.numOfLetterRepeat ?? 0;
             final stateOfGameState = context.read<GameCubit>().state;
+            final countOfRepeatQuestion =
+                stateOfGameState.countOfRepeatQuestion;
+
             return Stack(
               alignment: Alignment.center,
               children: [
@@ -122,12 +127,12 @@ class _Game1SoundAndAddToBox extends State<Game1SoundAndAddToBox>
                                     children: [
                                       BarOfSweets(
                                         countOfRepeatQuestion: int.parse(
-                                            "${countOfRepeatQuestion ?? 0}"),
+                                            "${stateOfGameState.countOfRepeatQuestion ?? 0}"),
                                         currentDataGame: currentDataGame,
                                       ),
                                       BarOfStars(
                                         cartKey: cartKey,
-                                        cardsLetters: cardsLetters ?? [],
+                                        cardsLetters: cardsLetters,
                                         currentDataGame: currentDataGame,
                                       ),
                                     ],
@@ -288,8 +293,6 @@ class _Game1SoundAndAddToBox extends State<Game1SoundAndAddToBox>
                               return DragTarget<List>(
                                 builder:
                                     (context, candidateItems, rejectedItems) {
-                                  // log('candidateItems:${candidateItems}');
-                                  // log('rejectedItems:${context.}');
                                   return CupWidget(
                                       key: widgetKey,
                                       image: currentDataGame
@@ -311,6 +314,7 @@ class _Game1SoundAndAddToBox extends State<Game1SoundAndAddToBox>
                                                   .randomVisibleLetter?.letter
                                                   .toString() ??
                                               '');
+
                                   if (item.first.toString() ==
                                           currentDataGame
                                               ?.gameLetters?[index].letter
@@ -333,46 +337,63 @@ class _Game1SoundAndAddToBox extends State<Game1SoundAndAddToBox>
                                         (numOfLetterRepeat - 1)) {
                                       await listClick(widgetKey, body);
                                     }
-                                    // await context
-                                    //     .read<GameOneBloc>()
-                                    //     .correctAnswer(item.last, context,
-                                    //     screenCloseTime, winAction: () {
-                                    //       context.read<GameOneBloc>().controller.forward(from: 0);
-                                    //     },
-                                    //     dontPlayTheSound:(cardsLetters
-                                    //         .where((element) =>
-                                    //     element.hide == true &&
-                                    //         (element.letter ?? '') ==
-                                    //             item.first.toString())
-                                    //         .toList()
-                                    //         .length ==
-                                    //         (numOfLetterRepeat - 1)));
+                                    context.read<GameCubit>().updateToSuccess();
+                                    final saveCurrentGameData = await context
+                                        .read<GameCubit>()
+                                        .saveCurrentGameData(
+                                            gameData: state.gameData);
+                                    final closeResultData = context
+                                        .read<GameCubit>()
+                                        .closeResultData(
+                                            gameData: state.gameData,
+                                            countOfSeconds: screenCloseTime);
+                                    final hideCard = di.sl<GameOneBloc>()
+                                      ..add(SubmitNewAnswerData(
+                                          gameData: state.gameData,
+                                          index: item.last,
+                                          cardsLetters: cardsLetters));
+
+                                    await context
+                                        .read<GameOneBloc>()
+                                        .correctAnswer(
+                                          soundOfSuccess:
+                                              AppSound.getRandomSoundOfCorrect,
+                                          dontPlayTheSound: (cardsLetters
+                                                  .where((element) =>
+                                                      element.hide == true &&
+                                                      (element.letter ?? '') ==
+                                                          item.first.toString())
+                                                  .toList()
+                                                  .length ==
+                                              (numOfLetterRepeat - 1)),
+                                          makeRandomVisibleLetterNull: context
+                                              .read<GameCubit>()
+                                              .makeRandomVisibleLetterNull,
+                                          soundOfStar: context
+                                              .read<GameCubit>()
+                                              .soundOfStar,
+                                          getNewRandomVisibleLetter: () =>
+                                              saveCurrentGameData,
+                                          saveResultOfClose: () =>
+                                              closeResultData,
+                                          hideCard: () => hideCard,
+                                          cardsLetters: cardsLetters,
+                                        );
+                                    context.read<GameCubit>().updateToStop();
                                   } else {
                                     context.read<GameCubit>().soundOfWrong();
                                     context.read<GameCubit>().updateToWrong();
                                     context
                                         .read<GameCubit>()
+                                        .downGradeCountOfRepeatQuestion();
+                                    context
+                                        .read<GameCubit>()
                                         .updateResultData();
-                                    if (countOfRepeatQuestion == 0) {
+                                    if (countOfRepeatQuestion == 1) {
                                       context.read<GameCubit>().updateToWrong();
-                                      showDialog(
-                                        barrierDismissible: false,
-                                        context: context,
-                                        barrierColor: Colors.transparent,
-                                        builder: (BuildContext context0) =>
-                                            RepeatQuestionPopUp(
-                                          onTap: () {
-                                            Navigator.of(context).pop();
-                                            context
-                                                .read<GameCubit>()
-                                                .updateToStop(
-                                                    dontWaitDelayed: true);
-                                            di.sl<GameOneBloc>()
-                                              ..add(RestartGameData(
-                                                  showOffline: true));
-                                          },
-                                        ),
-                                      );
+                                      context
+                                          .read<GameOneBloc>()
+                                          .add(RequestToRestartGameData());
                                     } else {
                                       context.read<GameCubit>().updateToStop();
                                     }
@@ -423,8 +444,19 @@ class _Game1SoundAndAddToBox extends State<Game1SoundAndAddToBox>
                                     )
                                   : const SizedBox()));
                     }));
+          } else if (state is RequestToRestartGame) {
+            context.read<GameCubit>().updateToWrong();
+
+            return RepeatQuestionPopUp(
+              onTap: () {
+                context.read<GameCubit>().updateToStop(dontWaitDelayed: true);
+                context
+                    .read<GameOneBloc>()
+                    .add(RestartGameData(showOffline: stateOfAppIsOffline));
+              },
+            );
           } else {
-            return SizedBox();
+            return const SizedBox();
           }
         }));
   }

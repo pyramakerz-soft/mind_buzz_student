@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rive/rive.dart';
 import '../../../../../core/assets_animation.dart';
 import '../../../../../core/error/failures.dart';
+import '../../../../../core/game_structure.dart';
 import '../../../domain/entities/based_game_model.dart';
 import '../../../domain/entities/game_letters_model.dart';
 import '../../../domain/usecases/game_use_cases.dart';
@@ -30,14 +31,23 @@ class GameOneBloc extends Bloc<GameOneEvent, GameOneState> {
         final failureOrDoneMessage =
             await getConcreteGameTrivia(event.showOffline);
         emit(_eitherLoadedOrErrorState(failureOrDoneMessage));
-      }else if (event is CompleteGameData) {
+      } else if (event is CompleteGameData) {
         emit(
             CompleteGame(riveArtboardBeeCharacter: getTheBeeCharacterAvatar()));
-      }else if (event is RestartGameData) {
+      } else if (event is RestartGameData) {
         emit(LoadingGame());
         final failureOrDoneMessage =
-        await getConcreteGameTrivia(event.showOffline);
+            await getConcreteGameTrivia(event.showOffline);
         emit(_eitherLoadedOrErrorState(failureOrDoneMessage));
+      } else if (event is SubmitNewAnswerData) {
+        emit(LoadingGame());
+        emit(LoadedGame(
+            gameData: event.gameData,
+            cardsLetters:
+                hideCard(cardsLetters: event.cardsLetters, index: event.index)));
+      } else if (event is RequestToRestartGameData) {
+        emit(RequestToRestartGame());
+
       }
     });
   }
@@ -74,8 +84,7 @@ class GameOneBloc extends Bloc<GameOneEvent, GameOneState> {
       (newGameData) => LoadedGame(
           gameData: newGameData,
           cardsLetters: handlingDataGame(
-              gameData: newGameData.data?.game?.gameLetters ?? []),
-          newCountOfRepeatQuestion: (newGameData.data?.game?.numOfTrials ?? 0)),
+              gameData: newGameData.data?.game?.gameLetters ?? [])),
     );
   }
 
@@ -100,48 +109,34 @@ class GameOneBloc extends Bloc<GameOneEvent, GameOneState> {
     return cardsLetters;
   }
 
-  ///convert to pipline function
-  // correctAnswer(
-  //     {required int index,
-  //     required DateTime countOfSeconds,
-  //     required GestureTapCallback winAction,
-  //     required Function() soundOfSuccess,
-  //     required GestureTapCallback updateToSuccess,
-  //     bool? dontPlayTheSound}) async {
-  //   updateToSuccess();
-  //   if (dontPlayTheSound != true) {
-  //     await soundOfSuccess();
-  //   }
-  //   randomVisibleLetter = null;
-  //   cardsLetters[index] = tempCard!;
-  //   await context.read<StartGameProvider>().updateToStop();
-  //   await player.stop();
-  //   if (dontPlayTheSound != true) {
-  //     await soundOfStar();
-  //     await player1.stop();
-  //   }
-  //   notifyListeners();
-  //
-  //   randomVisibleLetter =
-  //       await getRandomValueOfGame2(cardsLetters: cardsLetters);
-  //   if (randomVisibleLetter != null) {
-  //     await updateRandomLetter(
-  //         newLetterOfSound: GetCurrent.superGetSoundBasedOnLetter(
-  //             superLetter: randomVisibleLetter?.letter?.toLowerCase() ?? ''));
-  //   }
-  //   notifyListeners();
-  //   updateResultList(
-  //       context,
-  //       closeScreen(
-  //           screenCloseTime: countOfSeconds, screenOpenTime: screenOpenTime));
-  //
-  //   if (checkCompleted(cardsLetters: cardsLetters) == true) {
-  //     winAction();
-  //     await startAnimationOfCelebration();
-  //     await Future.delayed(const Duration(seconds: 3));
-  //     increaseCurrentIndex(context);
-  //   }
-  //   tempCard = null;
-  //   notifyListeners();
-  // }
+  correctAnswer(
+      {required Function soundOfSuccess,
+      required Function makeRandomVisibleLetterNull,
+      required Function soundOfStar,
+      required Function getNewRandomVisibleLetter,
+      required Function saveResultOfClose,
+      required Function hideCard,
+      required List<GameLettersModel> cardsLetters,
+      bool? dontPlayTheSound}) async {
+    hideCard();
+
+    if (dontPlayTheSound != true) {
+      await soundOfSuccess();
+    }
+    makeRandomVisibleLetterNull();
+    if (dontPlayTheSound != true) {
+      soundOfStar();
+    }
+    getNewRandomVisibleLetter();
+    saveResultOfClose();
+    if (GameStructure.checkCompleted(cardsLetters: cardsLetters) == true) {}
+  }
+
+  List<GameLettersModel> hideCard(
+      {required List<GameLettersModel> cardsLetters, required int index}) {
+    GameLettersModel? tempCard = cardsLetters[index];
+    tempCard.hide = true;
+    cardsLetters[index] = tempCard;
+    return cardsLetters;
+  }
 }
