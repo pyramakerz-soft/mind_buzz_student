@@ -1,5 +1,3 @@
-import 'dart:developer';
-import 'dart:math' hide log;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -21,7 +19,6 @@ import '../widget/cup_widget.dart';
 import '../widget/item_card_widget.dart';
 import '../widget/repeat_question_pop_up.dart';
 import '../widget/star_animation/add_to_cart_animation.dart';
-import '../widget/star_animation/add_to_cart_icon.dart';
 
 class Game1SoundAndAddToBox extends StatefulWidget {
   const Game1SoundAndAddToBox({Key? key}) : super(key: key);

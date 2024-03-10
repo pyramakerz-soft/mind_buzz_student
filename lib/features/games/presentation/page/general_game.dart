@@ -1,12 +1,12 @@
+import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:rive/rive.dart';
-import '../../../../core/injection/injection_container.dart' as di;
+import '../../../../core/assets_animation.dart';
 import '../../../../core/app_color.dart';
 import '../../../../core/assets_images.dart';
 import '../../../../core/vars.dart';
-import '../bloc/game1/game_one_bloc.dart';
+import '../../../../core/widgets/main_hive_riv.dart';
 import '../bloc/general_game/game_cubit.dart';
 import 'game1_sound_and_add_to_box.dart';
 
@@ -133,6 +133,7 @@ class _QuestionsScreen extends State<GeneralGame>
                                         height:
                                             MediaQuery.of(context).size.height /
                                                 3,
+                                        width: 140,
                                         child: GestureDetector(
                                           onTap: () async {
                                             await context
@@ -142,56 +143,30 @@ class _QuestionsScreen extends State<GeneralGame>
                                           child: state.stateOfAvatar ==
                                                       StateOfAvatar.talking &&
                                                   state.riveTalkingBoard != null
-                                              ? Rive(
-                                                  useArtboardSize: true,
-                                                  artboard:
-                                                      state.riveTalkingBoard!,
-                                                  fit: BoxFit.fill,
-                                                )
-                                              : state.stateOfAvatar ==
-                                                          StateOfAvatar
-                                                              .thinking &&
+                                              ? GameWidget(
+                                                  game: RiveGame(
+                                                      rive: AppAnimation
+                                                          .talkingDogRiv))
+                                              : state.stateOfAvatar == StateOfAvatar.thinking &&
                                                       state.riveThinkingDogBoard !=
                                                           null
-                                                  ? Rive(
-                                                      useArtboardSize: true,
-                                                      artboard: state
-                                                          .riveThinkingDogBoard!,
-                                                      fit: BoxFit.fill,
-                                                    )
-                                                  : state.stateOfAvatar ==
-                                                              StateOfAvatar
-                                                                  .success &&
+                                                  ? GameWidget(
+                                                      game: RiveGame(
+                                                          rive: AppAnimation
+                                                              .thinkingDogRiv))
+                                                  : state.stateOfAvatar == StateOfAvatar.success &&
                                                           state.riveSuccessDogBoard !=
                                                               null
-                                                      ? Rive(
-                                                          useArtboardSize: true,
-                                                          artboard: state
-                                                              .riveSuccessDogBoard!,
-                                                        )
-                                                      : state.stateOfAvatar ==
-                                                                  StateOfAvatar
-                                                                      .wrong &&
-                                                              state.riveWrongDogBoard !=
-                                                                  null
-                                                          ? Rive(
-                                                              useArtboardSize:
-                                                                  true,
-                                                              artboard: state
-                                                                  .riveWrongDogBoard!,
-                                                            )
-                                                          : state.riveThinkingDogBoard !=
-                                                                  null
-                                                              ? Rive(
-                                                                  useArtboardSize:
-                                                                      true,
-                                                                  artboard: state
-                                                                      .riveThinkingDogBoard!,
-                                                                  fit: BoxFit
-                                                                      .fill,
-                                                                )
-                                                              : SvgPicture
-                                                                  .asset(
+                                                      ? GameWidget(
+                                                          game: RiveGame(
+                                                              rive: AppAnimation
+                                                                  .successDogRiv))
+                                                      : state.stateOfAvatar == StateOfAvatar.wrong &&
+                                                              state.riveWrongDogBoard != null
+                                                          ? GameWidget(game: RiveGame(rive: AppAnimation.failureDogGif))
+                                                          : state.riveThinkingDogBoard != null
+                                                              ? GameWidget(game: RiveGame(rive: AppAnimation.thinkingDogRiv))
+                                                              : SvgPicture.asset(
                                                                   AppImages
                                                                       .iconAvatarDog,
                                                                   height: MediaQuery.of(

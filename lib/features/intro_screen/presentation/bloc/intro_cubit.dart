@@ -10,10 +10,11 @@ import '../../../../core/assets_animation.dart';
 import 'intro_state.dart';
 
 class IntroCubit extends Cubit<IntroState> {
-  Artboard? riveArtboardBees;
 
   IntroCubit() : super(IntroState());
   getTheBeesAvatar() {
+    Artboard? riveArtboardBees;
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       rootBundle.load(AppAnimation.beeHiveRiv).then(
         (data) async {
@@ -39,9 +40,10 @@ class IntroCubit extends Cubit<IntroState> {
     });
   }
 
-  Artboard? riveArtboardBeeCharacter;
 
   getTheBeeCharacterAvatar() {
+    Artboard? riveArtboardBeeCharacter;
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       rootBundle.load(AppAnimation.beeCharacterRiv1).then(
         (data) async {

@@ -1,12 +1,13 @@
+import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
-import 'package:rive/rive.dart';
-
 import '../../../../core/app_color.dart';
+import '../../../../core/assets_animation.dart';
 import '../../../../core/assets_images.dart';
 import '../../../../core/utils.dart';
+import '../../../../core/widgets/main_hive_riv.dart';
 import '../../../intro_screen/presentation/bloc/intro_cubit.dart';
 import '../../../intro_screen/presentation/page/intro_screen.dart';
 import '../bloc/choose_avatar_cubit.dart';
@@ -90,10 +91,7 @@ class ChooseAvatarScreen extends StatelessWidget {
                                   height: double.infinity,
                                   child: state.selectedAvatar ==
                                           AppImages.imageAvatar2
-                                      ? Rive(
-                                          artboard: state.riveArtboardAvatar!,
-                                          fit: BoxFit.fitHeight,
-                                        )
+                                      ? GameWidget(game: RiveGame(rive: AppAnimation.avatarDogRiv))
                                       : Padding(
                                           padding: const EdgeInsets.only(
                                               top: 25.0, left: 10),

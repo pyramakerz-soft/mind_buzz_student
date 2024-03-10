@@ -1,3 +1,4 @@
+import 'package:flame/game.dart' show GameWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -5,9 +6,11 @@ import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:rive/rive.dart';
 
 import '../../../../core/app_color.dart';
+import '../../../../core/assets_animation.dart';
 import '../../../../core/assets_images.dart';
 import '../bloc/intro_cubit.dart';
 import '../bloc/intro_state.dart';
+import '../../../../core/widgets/main_hive_riv.dart' show  RiveGame;
 import '../widget/button_start_game.dart';
 
 class IntroScreen extends StatefulWidget {
@@ -28,7 +31,7 @@ class _IntroScreen extends State<IntroScreen>
     BlocProvider.of<IntroCubit>(context).startRiveAnimation();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 5),
     );
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
     BlocProvider.of<IntroCubit>(context).saveAnimationController(
@@ -49,14 +52,7 @@ class _IntroScreen extends State<IntroScreen>
                 children: [
                   Expanded(
                     flex: 3,
-                    child: BlocBuilder<IntroCubit, IntroState>(
-                        builder: (context, state) =>
-                            state.riveArtboardBees != null
-                                ? Rive(
-                                    artboard: state.riveArtboardBees!,
-                                    fit: BoxFit.fitWidth,
-                                  )
-                                : const SizedBox()),
+                    child:GameWidget(game: RiveGame(rive: AppAnimation.beeHiveRiv))
                   ),
                   Expanded(
                       flex: 4,
