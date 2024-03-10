@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rive/rive.dart';
-
-import '../../../../core/assets_images.dart';
 import '../../../../core/utils.dart';
-import '../../../games/presentation/bloc/general_game/game_cubit.dart';
-import '../../../games/presentation/page/general_game.dart';
 import '../../../intro_screen/presentation/bloc/intro_cubit.dart';
 import '../../../intro_screen/presentation/page/intro_screen.dart';
 import '../bloc/loading_cubit.dart';
@@ -35,7 +31,7 @@ class _LoadingScreen extends State<LoadingScreen> with WidgetsBindingObserver {
   }
 
   waitAndGoToChooseAvatar() async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 5));
     Utils.navigateTo(
         BlocProvider(create: (_) => IntroCubit(), child: const IntroScreen()),
         context);
@@ -61,22 +57,16 @@ class _LoadingScreen extends State<LoadingScreen> with WidgetsBindingObserver {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: Stack(
-          alignment: AlignmentDirectional.bottomCenter,
-          children: <Widget>[
-            SizedBox(
-              height: MediaQuery.of(context).size.height,
-              child: BlocBuilder<LoadingCubit, Artboard?>(
-                  builder: (context, state) => state != null
-                      ? Rive(
-                          artboard: state,
-                          fit: BoxFit.fill,
-                        )
-                      : const SizedBox()),
-            )
-          ],
-        ),
-      ),
+          child: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        child: BlocBuilder<LoadingCubit, Artboard?>(
+            builder: (context, state) => state != null
+                ? Rive(
+                    artboard: state,
+                    fit: BoxFit.fill,
+                  )
+                : const SizedBox()),
+      )),
     );
   }
 }
