@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+import '../../features/login/domain/entities/user_data_model.dart';
+
 class MainApiConnection {
   //Singleton
   MainApiConnection() {
@@ -31,6 +33,7 @@ class MainApiConnection {
 
   ////////////////////////////// END POINTS ///////////////////////////////////
   String getGameInfoDataEndPoint = "game/game_info";
+  String postLoginEndPoint = "auth/login";
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -63,6 +66,27 @@ class MainApiConnection {
     );
 
     if (validResponse(response.statusCode)) {
+      return response;
+    } else {
+      throw response;
+    }
+  }
+  Future<Response<dynamic>> post(
+       {required String url,
+        Map<String, dynamic>? queryParameters,
+        data,
+        Map<String, String?>? headers,
+      }) async {
+    String language = await _getAppLanguage();
+
+    final response = await dio.post(
+      url,
+      queryParameters: queryParameters,
+      data: data,
+      options: dioOptions(language),
+    );
+    if (validResponse(response.statusCode)) {
+
       return response;
     } else {
       throw response;

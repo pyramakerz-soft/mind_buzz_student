@@ -18,8 +18,8 @@ class AppTheme {
             fontFamily: getFontFamily(),
           ),
           headlineSmall: TextStyle(
-            color: AppColor.brownColor,
-            fontFamily: getFontFamily2(),
+            color: AppColor.greyColor,
+            fontFamily: getFontFamily(),
           ),
         bodyMedium: TextStyle(
           color: AppColor.brownColor4,
@@ -33,7 +33,11 @@ class AppTheme {
           bodySmall: TextStyle(
             color: Colors.white,
             fontFamily: getFontFamily(),
-          )
+          ),
+        titleSmall: TextStyle(
+          color: AppColor.darkBlueColor2,
+          fontFamily: getFontFamily(),
+        )
       ));
 
   static String getFontFamily() {
