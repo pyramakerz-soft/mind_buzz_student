@@ -1,23 +1,25 @@
+import 'dart:developer';
+
 import '../../../../core/apis_connections/api_connection.dart';
 import '../../../../core/connection.dart';
-import '../../domain/entities/based_login_model.dart';
+import '../../domain/entities/user_data_model.dart';
 
 abstract class DataSourceRemotelyOfLogin {
-  Future<BasedLoginModel> getLoginDataRemotely({required String email, required String password});
+  Future<UserData> getLoginDataRemotely({required String email, required String password});
 }
 
 
-class DataSourceRemotelyOfGameImpl implements DataSourceRemotelyOfLogin {
+class DataSourceRemotelyOfLoginImpl implements DataSourceRemotelyOfLogin {
   final MainApiConnection dio;
 
-  DataSourceRemotelyOfGameImpl({required this.dio});
+  DataSourceRemotelyOfLoginImpl({required this.dio});
 
   @override
-  Future<BasedLoginModel> getLoginDataRemotely({required String email, required String password}) async {
+  Future<UserData> getLoginDataRemotely({required String email, required String password}) async {
 
     final response = await dio.post(
       url: '${Connection.baseURL}${dio.postLoginEndPoint}',
-      queryParameters: {
+      headers: {
         ...MainApiConnection.apiHeaders,
       },
       data: {
@@ -25,8 +27,8 @@ class DataSourceRemotelyOfGameImpl implements DataSourceRemotelyOfLogin {
         'password':password
       }
     );
-    if (dio.validResponse(response.statusCode!)) {
-      return BasedLoginModel.fromJson(response.data);
+    if (dio.validResponse(response)) {
+      return UserData.fromJson(response.data['user']);
     } else {
       throw response.data['msg'];
     }

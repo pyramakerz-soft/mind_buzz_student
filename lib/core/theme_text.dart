@@ -25,11 +25,6 @@ class AppTheme {
           color: AppColor.brownColor4,
           fontFamily: getFontFamily2(),
         ),
-        bodyLarge: TextStyle(
-          color: Colors.white,
-          fontFamily: getFontFamily2(),
-        ),
-
           bodySmall: TextStyle(
             color: Colors.white,
             fontFamily: getFontFamily(),

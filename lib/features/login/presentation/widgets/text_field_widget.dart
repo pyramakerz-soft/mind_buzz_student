@@ -23,9 +23,7 @@ class TextFieldWidget extends StatelessWidget {
         this.validatorTextField});
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+    return
         TextFormField(
             controller: controler,
             keyboardType: keyboardType,
@@ -46,8 +44,6 @@ class TextFieldWidget extends StatelessWidget {
                 fillColor: Colors.white,
                 hintText: hintText,
                 hintStyle: const TextStyle(color: Colors.grey, fontSize: 15)),
-            obscureText: obscureText ?? false),
-      ],
-    );
+            obscureText: obscureText ?? false);
   }
 }

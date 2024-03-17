@@ -31,7 +31,7 @@ class GameRepositoryImpl implements GameRepository {
         return Left(CacheFailure());
       }
     } else {
-      return Left(ServerFailure());
+      return Left(ServerFailure(message: ''));
     }
   }
 }

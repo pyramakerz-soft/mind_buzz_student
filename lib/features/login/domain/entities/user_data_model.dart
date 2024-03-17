@@ -1,9 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-import 'game_letters_model.dart';
-import 'game_model.dart';
-
 part 'user_data_model.g.dart';
 
 @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
@@ -27,10 +23,10 @@ class UserData  extends Equatable{
         this.role,
         this.schoolId});
   factory UserData.fromJson(Map<String, dynamic> json) {
-    return _$UserDataModelFromJson(json);
+    return _$UserDataFromJson(json);
   }
 
-  Map<String, dynamic> toJson() => _$UserDataModelToJson(this);
+  Map<String, dynamic> toJson() => _$UserDataToJson(this);
 
   @override
   // TODO: implement props

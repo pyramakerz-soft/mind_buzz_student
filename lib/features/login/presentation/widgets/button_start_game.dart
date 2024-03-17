@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
-
-import '../../../../core/assets_images.dart';
-import '../../../../core/utils.dart';
-import '../../../choose_avatar/presentation/bloc/choose_avatar_cubit.dart';
-import '../../../choose_avatar/presentation/page/choose_avatar.dart';
-import '../bloc/login_cubit.dart';
+import '../../../../core/injection/injection_container.dart' as di;
+import '../cubit/login_cubit.dart';
 
 class ButtonLogin extends StatefulWidget {
-  const ButtonLogin({Key? key}) : super(key: key);
+  final void Function() dataFunction;
+  const ButtonLogin({Key? key, required this.dataFunction}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -46,91 +43,80 @@ class _ButtonLogin extends State<ButtonLogin>
     const double height = 64 - _shadowHeight;
 
     return SizedBox(
-      width: MediaQuery.of(context).size.width - 100,
-      child: GestureDetector(
-        onTapUp: (_) {
-          context
-              .read<LoginCubit>()
-              .updateThePositionOfButton(newPosition: 4);
-        },
-        onTapDown: (_) {
-          context
-              .read<LoginCubit>()
-              .updateThePositionOfButton(newPosition: 0);
-        },
-        onTapCancel: () {
-          context
-              .read<LoginCubit>()
-              .updateThePositionOfButton(newPosition: 4);
-        },
-        onTap: () async {
-          _controller.forward();
-          // await Future.delayed(const Duration(milliseconds: 500));
-          // Utils.navigateAndRemoveUntilTo(
-          //     BlocProvider(
-          //         create: (_) => ChooseAvatarCubit(),
-          //         child: Builder(builder: (context) {
-          //           context.read<ChooseAvatarCubit>().getTheDogAvatar();
-          //           return BlocBuilder<ChooseAvatarCubit,
-          //               ChooseAvatarInitial>(builder: (context, state) {
-          //             return const ChooseAvatarScreen();
-          //           });
-          //         })
-          //     ),
-          //     context);
-        },
-        child: SizedBox(
-          height: height + _shadowHeight,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Positioned(
-                bottom: 0,
-                child: Container(
-                  height: height,
-                  width: 200,
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 16, horizontal: 20),
-                  decoration:  BoxDecoration(
-                    color:  AppColor.darkBlueColor.withOpacity(.5),
-                    borderRadius: BorderRadius.circular(20),
+        width: MediaQuery.of(context).size.width - 100,
+        child:  GestureDetector(
+            onTapUp: (_) {
+              context
+                  .read<LoginCubit>()
+                  .updateThePositionOfButton(newPosition: 4);
+            },
+            onTapDown: (_) {
+              context
+                  .read<LoginCubit>()
+                  .updateThePositionOfButton(newPosition: 0);
+            },
+            onTapCancel: () {
+              context
+                  .read<LoginCubit>()
+                  .updateThePositionOfButton(newPosition: 4);
+            },
+            onTap: () async {
+              _controller.forward();
+              widget.dataFunction();
+            },
+            child: SizedBox(
+              height: height + _shadowHeight,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Positioned(
+                    bottom: 0,
+                    child: Container(
+                      height: height,
+                      width: 200,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16, horizontal: 20),
+                      decoration: BoxDecoration(
+                        color: AppColor.darkBlueColor.withOpacity(.5),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
                   ),
-                ),
+                  BlocBuilder<LoginCubit, int>(builder: (context, state) {
+                    return AnimatedPositioned(
+                      curve: Curves.easeIn,
+                      bottom: double.parse("$state"),
+                      width: 200,
+                      duration: const Duration(milliseconds: 70),
+                      child: Container(
+                        height: height,
+                        width: 200,
+                        // padding: EdgeInsets.all(0),
+                        decoration: BoxDecoration(
+                          // image: DecorationImage(
+                          //     image: AssetImage(AppImages.buttonImage),
+                          //     fit: BoxFit.fitWidth),
+                          color: AppColor.darkBlueColor,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Log In",
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w600,
+                                    height: 0,
+                                    letterSpacing: 0.50,
+                                  ),
+                        ),
+                      ),
+                    );
+                  })
+                ],
               ),
-              BlocBuilder<LoginCubit, int>(builder: (context, state) {
-                return AnimatedPositioned(
-                  curve: Curves.easeIn,
-                  bottom: double.parse("${state??0}"),
-                  width: 200,
-                  duration: const Duration(milliseconds: 70),
-                  child: Container(
-                    height: height,
-                    width: 200,
-                    // padding: EdgeInsets.all(0),
-                    decoration:  BoxDecoration(
-                      // image: DecorationImage(
-                      //     image: AssetImage(AppImages.buttonImage),
-                      //     fit: BoxFit.fitWidth),
-                      color: AppColor.darkBlueColor,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Log In",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodySmall
-                          ?.copyWith(
-                          fontSize: 24, fontWeight: FontWeight.w600,height: 0,
-                        letterSpacing: 0.50,),
-                    ),
-                  ),
-                );
-              })
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+
+        ));
   }
 }

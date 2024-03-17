@@ -34,12 +34,15 @@ class MainApiConnection {
   ////////////////////////////// END POINTS ///////////////////////////////////
   String getGameInfoDataEndPoint = "game/game_info";
   String postLoginEndPoint = "auth/login";
+  String getStudentProgramsEndPoint = "student_programs";
 
 ////////////////////////////////////////////////////////////////////////////
 
   // Validating Request.
-  bool validResponse(int? statusCode) {
-    if (statusCode == null) {
+  bool validResponse(Response response) {
+    int? statusCode = response.statusCode;
+    bool? result = response.data['result'];
+    if (statusCode == null || result == false) {
       return false;
     } else {
       return (statusCode >= 200 && statusCode < 300);
@@ -65,7 +68,7 @@ class MainApiConnection {
       options: dioOptions(language),
     );
 
-    if (validResponse(response.statusCode)) {
+    if (validResponse(response)) {
       return response;
     } else {
       throw response;
@@ -85,7 +88,7 @@ class MainApiConnection {
       data: data,
       options: dioOptions(language),
     );
-    if (validResponse(response.statusCode)) {
+    if (validResponse(response)) {
 
       return response;
     } else {

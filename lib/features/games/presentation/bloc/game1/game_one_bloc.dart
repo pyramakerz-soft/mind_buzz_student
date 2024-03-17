@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rive/rive.dart';
 import '../../../../../core/assets_animation.dart';
 import '../../../../../core/error/failures.dart';
+import '../../../../../core/error/failures_messages.dart';
 import '../../../../../core/game_structure.dart';
 import '../../../domain/entities/based_game_model.dart';
 import '../../../domain/entities/game_letters_model.dart';
@@ -16,10 +17,6 @@ import '../../../domain/usecases/game_use_cases.dart';
 part 'game_one_event.dart';
 part 'game_one_state.dart';
 
-const String SERVER_FAILURE_MESSAGE = 'Server Failure';
-const String CACHE_FAILURE_MESSAGE = 'Cache Failure';
-const String INVALID_INPUT_FAILURE_MESSAGE =
-    'Invalid Input - The number must be a positive integer or zero.';
 
 class GameOneBloc extends Bloc<GameOneEvent, GameOneState> {
   final GameUseCases getConcreteGameTrivia;

@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../core/injection/injection_container.dart';
+import '../../../../core/utils.dart';
+import '../../../login/presentation/bloc/login_data_bloc.dart';
+import '../../../login/presentation/cubit/login_cubit.dart';
+import '../bloc/get_programs_home_bloc.dart';
 import '../widgets/card_of_program.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,6 +18,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userData = context.read<LoginCubit>().userData;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
@@ -33,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                     Column(
                       children: [
                         Text(
-                          'Hi Ahmed !',
+                          'Hi ${userData?.name ?? ''} !',
                           style: Theme.of(context)
                               .textTheme
                               .headlineLarge
@@ -63,20 +71,37 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             25.ph,
-            const Expanded(
-                child: Column(
-              children: [
-                CardOfProgram(
-                  colors: [
-                    AppColor.yellowColor1,
-                    AppColor.yellowColor2,
-                    AppColor.yellowColor3
-                  ],
-                  mainImage: AppImages.imagePhonics,
-                  title: 'Phonics',
-                )
-              ],
-            ))
+            Expanded(
+                child:Provider<GetProgramsHomeBloc>(
+                    create: (_) => GetProgramsHomeBloc(programUserUseCases: sl()),child: BlocConsumer<GetProgramsHomeBloc, GetProgramsHomeState>(
+                    listener: (context, state) {
+              if (state is GetProgramsErrorInitial) {
+                final snackBar = SnackBar(
+                  content: Text(state.message),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              }
+            }, builder: (context, state) {
+                      if(state is GetProgramsLoadingInitial){
+                        return const CircularProgressIndicator();
+                      }else if (state is GetProgramsCompleteInitial) {
+                        return Column(
+                          children: [
+                            CardOfProgram(
+                              colors: [
+                                AppColor.yellowColor1,
+                                AppColor.yellowColor2,
+                                AppColor.yellowColor3
+                              ],
+                              mainImage: AppImages.imagePhonics,
+                              title: 'Phonics',
+                            )
+                          ],
+                        );
+                      }else{
+                        return SizedBox();
+                      }
+            })))
           ],
         ),
       ),

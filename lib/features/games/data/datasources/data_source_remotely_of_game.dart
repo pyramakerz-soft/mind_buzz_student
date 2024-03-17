@@ -20,7 +20,7 @@ class DataSourceRemotelyOfGameImpl implements DataSourceRemotelyOfGame {
         ...MainApiConnection.apiHeaders,
       },
     );
-    if (dio.validResponse(response.statusCode!)) {
+    if (dio.validResponse(response)) {
       return BasedGameModel.fromJson(response.data);
     } else {
       throw response.data['msg'];
