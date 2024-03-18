@@ -6,7 +6,7 @@ import 'package:mind_buzz_refactor/core/assets_images.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/injection/injection_container.dart';
+import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/utils.dart';
 import '../../../login/presentation/bloc/login_data_bloc.dart';
 import '../../../login/presentation/cubit/login_cubit.dart';
@@ -58,50 +58,70 @@ class HomeScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: Colors.black),
-                  child: SvgPicture.asset(
-                    AppImages.iconLogout,
-                    width: 15,
-                  ),
-                )
+                GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                        padding: const EdgeInsets.all(10),
+                        alignment: Alignment.center,
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColor.darkBlueColor3
+                        ),
+                        child: SvgPicture.asset(AppImages.iconLogout, fit: BoxFit.fill,color: Colors.white,)))
+
+                // Container(
+                //   padding: const EdgeInsets.all(10),
+                //   decoration: BoxDecoration(
+                //       borderRadius: BorderRadius.circular(100),
+                //       color: Colors.black),
+                //   child: SvgPicture.asset(
+                //     AppImages.iconLogout,
+                //     width: 15,
+                //   ),
+                // )
               ],
             ),
             25.ph,
             Expanded(
-                child:Provider<GetProgramsHomeBloc>(
-                    create: (_) => GetProgramsHomeBloc(programUserUseCases: sl()),child: BlocConsumer<GetProgramsHomeBloc, GetProgramsHomeState>(
-                    listener: (context, state) {
-              if (state is GetProgramsErrorInitial) {
-                final snackBar = SnackBar(
-                  content: Text(state.message),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              }
-            }, builder: (context, state) {
-                      if(state is GetProgramsLoadingInitial){
-                        return const CircularProgressIndicator();
-                      }else if (state is GetProgramsCompleteInitial) {
-                        return Column(
-                          children: [
-                            CardOfProgram(
-                              colors: [
-                                AppColor.yellowColor1,
-                                AppColor.yellowColor2,
-                                AppColor.yellowColor3
-                              ],
-                              mainImage: AppImages.imagePhonics,
-                              title: 'Phonics',
-                            )
-                          ],
+                child: Provider<GetProgramsHomeBloc>(
+                    create: (_) =>di.sl<GetProgramsHomeBloc>()..add(GetProgramsRequest()),
+                    child:
+                        BlocConsumer<GetProgramsHomeBloc, GetProgramsHomeState>(
+                            listener: (context, state) {
+                      if (state is GetProgramsErrorInitial) {
+                        final snackBar = SnackBar(
+                          content: Text(state.message),
                         );
-                      }else{
-                        return SizedBox();
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
-            })))
+                    }, builder: (context, state) {
+                      if (state is GetProgramsLoadingInitial) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (state is GetProgramsCompleteInitial) {
+                        return Column(
+                          children: List.generate(state.data.length, (index) =>  Column(
+                            children: [
+                              CardOfProgram(
+                                programId:"${state.data[index].programId??''}",
+                                colors: const [
+                                  AppColor.yellowColor1,
+                                  AppColor.yellowColor2,
+                                  AppColor.yellowColor3
+                                ],
+                                mainImage:  state.data[index].program?.image,
+                                title: state.data[index].program?.course?.name??'',
+                              )
+                            ],
+                          )),
+                        );
+                      } else {
+                        return const SizedBox();
+                      }
+                    })))
           ],
         ),
       ),

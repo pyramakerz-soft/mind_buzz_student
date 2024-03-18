@@ -23,8 +23,11 @@ class AppImages {
   static const String imagePhonics = "${mainPathOfImages}phonics.png";
   static const String imagePracticalLife = "${mainPathOfImages}practical_life.png";
   static const String imageCulture = "${mainPathOfImages}culture.png";
+  static const String imageAppBarOfUnits = "${mainPathOfImages}app_bar_of_units.png";
 
   static const String iconAvatarDog = "${mainPathOfSvg}avatar_dog.svg";
+  static const String iconHome = "${mainPathOfSvg}home_Icon.svg";
+  static const String iconAnalysis = "${mainPathOfSvg}analysis_icon.svg";
   static const String iconBoarderOfChar = "${mainPathOfSvg}boarder_of_char.svg";
   static const String iconChooseYourCharacter = "${mainPathOfSvg}choose_your_character.svg";
   static const String iconCup = "${mainPathOfSvg}cup.svg";

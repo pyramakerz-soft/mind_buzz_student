@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failures.dart';
-import '../entities/program_model.dart';
+import '../entities/units_model.dart';
+import '../entities/user_courses.dart';
 
 abstract class ProgramRepository {
-  Future<Either<Failure, List<ProgramModel>>> programDataRepository();
+  Future<Either<Failure, List<UserCourseModel>>> programDataRepository();
+  Future<Either<Failure, List<UnitsModel>>> lessonsDataRepository({required int programId});
 }

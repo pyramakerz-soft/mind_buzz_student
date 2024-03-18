@@ -27,6 +27,7 @@ class Assets {
   static const String fontsPassionOneRegular = 'assets/fonts/PassionOne-Regular.ttf';
   static const String fontsPoppinsSemiBold = 'assets/fonts/Poppins-SemiBold.ttf';
   static const String imagesAlphaBg = 'assets/images/alpha_bg.png';
+  static const String imagesAppBarOfUnits = 'assets/images/app_bar_of_units.png';
   static const String imagesAvatar1 = 'assets/images/avatar_1.png';
   static const String imagesAvatar2 = 'assets/images/avatar_2.png';
   static const String imagesAvatar3 = 'assets/images/avatar_3.png';
@@ -52,12 +53,14 @@ class Assets {
   static const String soundM = 'assets/sound/m.mp3';
   static const String soundS = 'assets/sound/s.mp3';
   static const String soundT = 'assets/sound/t.mp3';
+  static const String svgAnalysisIcon = 'assets/svg/analysis_icon.svg';
   static const String svgAvatarDog = 'assets/svg/avatar_dog.svg';
   static const String svgBoarderOfChar = 'assets/svg/boarder_of_char.svg';
   static const String svgChooseYourCharacter = 'assets/svg/choose_your_character.svg';
   static const String svgCoverOfLogin = 'assets/svg/cover_of_login.svg';
   static const String svgCup = 'assets/svg/cup.svg';
   static const String svgEmptyStar = 'assets/svg/empty_star.svg';
+  static const String svgHomeIcon = 'assets/svg/home_Icon.svg';
   static const String svgLevel1OfPaper = 'assets/svg/level_1_of_paper.svg';
   static const String svgLevel2OfPaper = 'assets/svg/level_2_of_paper.svg';
   static const String svgLevel3OfPaper = 'assets/svg/level_3_of_paper.svg';

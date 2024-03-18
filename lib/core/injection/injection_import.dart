@@ -18,10 +18,14 @@ Future<void> init() async {
       remoteDataSource: sl(), localDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<LoginRepository>(() => LoginRepositoryImpl(
       remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<ProgramRepository>(() => HomeRepositoryImpl(
+      remoteDataSource: sl(), networkInfo: sl()));
 
   //Datasources
   sl.registerLazySingleton<DataSourceLocalOfGame>(
           () => DataSourceLocalOfGameImpl());
+  sl.registerLazySingleton<DataSourceRemotelyOfProgram>(
+          () => DataSourceRemotelyOfProgramImpl(dio: sl()));
   sl.registerLazySingleton<DataSourceRemotelyOfLogin>(
           () => DataSourceRemotelyOfLoginImpl(dio: sl()));
   sl.registerLazySingleton<DataSourceRemotelyOfGame>(

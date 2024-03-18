@@ -22,3 +22,9 @@ enum StateOfAvatar { thinking, talking, stop, success, wrong }
 enum TtsState { playing, stopped, forceStop }
 
 bool stateOfAppIsOffline = true;
+
+
+abstract class DefaultData {
+  static const image = 'https://www.renaissance.com/wp-content/uploads/2023/04/star-phonics-header-2.webp';
+
+}

@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failures.dart';
-import '../entities/program_model.dart';
+import '../entities/user_courses.dart';
 import '../repositories/repositories_user.dart';
 
 class ProgramUserUseCases {
@@ -9,7 +9,7 @@ class ProgramUserUseCases {
 
   ProgramUserUseCases(this.repository);
 
-  Future<Either<Failure, List<ProgramModel>>> call() async {
+  Future<Either<Failure, List<UserCourseModel>>> call() async {
     return await repository.programDataRepository();
   }
 }

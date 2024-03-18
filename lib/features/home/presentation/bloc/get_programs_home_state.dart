@@ -8,7 +8,7 @@ abstract class GetProgramsHomeState extends Equatable {
 
 class GetProgramsHomeInitial extends GetProgramsHomeState {}
 class GetProgramsCompleteInitial extends GetProgramsHomeState {
-  final List<ProgramModel> data;
+  final List<UserCourseModel> data;
 
   GetProgramsCompleteInitial({required this.data});
 }

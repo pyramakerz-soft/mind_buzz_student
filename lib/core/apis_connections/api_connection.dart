@@ -35,6 +35,7 @@ class MainApiConnection {
   String getGameInfoDataEndPoint = "game/game_info";
   String postLoginEndPoint = "auth/login";
   String getStudentProgramsEndPoint = "student_programs";
+  String getUnitsOfProgramsEndPoint = "units";
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -56,16 +57,19 @@ class MainApiConnection {
     return 'ar';
   }
 
+  Future<String?> _getUserToken() async => await UserData.getToken;
+
   Future<Response<dynamic>> get({
     required String url,
     Map<String, dynamic>? queryParameters,
   }) async {
     String language = await _getAppLanguage();
+    String? token = await _getUserToken();
 
     Response response = await dio.get(
       url,
       queryParameters: queryParameters,
-      options: dioOptions(language),
+      options: dioOptions(language, token),
     );
 
     if (validResponse(response)) {
@@ -81,12 +85,13 @@ class MainApiConnection {
         Map<String, String?>? headers,
       }) async {
     String language = await _getAppLanguage();
+    String? token = await _getUserToken();
 
     final response = await dio.post(
       url,
       queryParameters: queryParameters,
       data: data,
-      options: dioOptions(language),
+      options: dioOptions(language, token),
     );
     if (validResponse(response)) {
 
@@ -96,11 +101,13 @@ class MainApiConnection {
     }
   }
 
-  Options dioOptions(String language, [Map<String, String?>? headers]) {
+  Options dioOptions(String language, String? token, [Map<String, String?>? headers]) {
     return Options(
       // contentType: 'application/json',
       headers: {
         ...headers ?? apiHeaders,
+        'Authorization': 'Bearer $token',
+
       },
     );
   }

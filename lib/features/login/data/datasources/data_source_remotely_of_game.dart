@@ -28,7 +28,7 @@ class DataSourceRemotelyOfLoginImpl implements DataSourceRemotelyOfLogin {
       }
     );
     if (dio.validResponse(response)) {
-      return UserData.fromJson(response.data['user']);
+      return UserData.fromJson(response.data);
     } else {
       throw response.data['msg'];
     }
