@@ -22,14 +22,11 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
   LoginDataBloc({required this.requestLoginData}) : super(LoginDataInitial()) {
     on<LoginDataEvent>((event, emit) async {
       if (event is LoginRequest){
-        log('inside state:$state');
         emit(LoadingLoginState());
         await Future.delayed(Duration(milliseconds: 500));
-        log('inside state:$state');
         final failureOrDoneMessage =
             await requestLoginData(email: event.email, password: event.password);
         emit(_eitherLoadedOrErrorState(failureOrDoneMessage));
-        log('inside state:$state');
       }
     });
   }
@@ -46,10 +43,12 @@ LoginDataState _eitherLoadedOrErrorState(
 }
 
 String _mapFailureToMessage(Failure failure) {
-  log('failure:$failure');
 
   switch (failure.runtimeType) {
     case ServerFailure:
+      if(failure is ServerFailure) {
+        return failure.message;
+      }
       return SERVER_FAILURE_MESSAGE;
     case LoginFailure:
       return Login_FAILURE_MESSAGE;

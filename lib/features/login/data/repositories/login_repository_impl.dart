@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import '../../../../core/error/failures.dart';
@@ -23,10 +24,7 @@ class LoginRepositoryImpl implements LoginRepository {
         log('res:$res');
         return Right(res);
       } catch (e, s) {
-
-        log('error:${e.toString()}');
-        log('error:${e.runtimeType}');
-        return Left(LoginFailure());
+        return Left(ServerFailure(message: "${jsonDecode(e.toString())['message']}"));
       }
     } else {
       return Left(CacheFailure());

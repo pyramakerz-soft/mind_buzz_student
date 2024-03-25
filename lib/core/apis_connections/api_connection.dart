@@ -42,7 +42,7 @@ class MainApiConnection {
   // Validating Request.
   bool validResponse(Response response) {
     int? statusCode = response.statusCode;
-    bool? result = response.data['result'];
+    bool? result = response.data['status'];
     if (statusCode == null || result == false) {
       return false;
     } else {
