@@ -13,6 +13,7 @@ class GetProgramsCompleteInitial extends GetProgramsHomeState {
   GetProgramsCompleteInitial({required this.data});
 }
 class GetProgramsLoadingInitial extends GetProgramsHomeState {}
+class LogOutLoadingState extends GetProgramsHomeState {}
 class GetProgramsErrorInitial extends GetProgramsHomeState {
   final String message;
 

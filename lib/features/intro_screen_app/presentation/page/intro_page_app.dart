@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 
@@ -24,6 +26,10 @@ class _IntroScreenApp extends State<IntroScreenApp>
     );
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
     _animation.addListener(() {
+      log('---${_controller.status}');
+      if(_controller.status == AnimationStatus.completed){
+
+      }
       setState(() {});
     });
     _controller.forward(from: 0);
@@ -83,28 +89,6 @@ class _IntroScreenApp extends State<IntroScreenApp>
           ),
         ],
       ),
-      // child: Stack(
-      //   children: [
-      //     Image.asset(
-      //       AppImages.imageScreen1,
-      //       width: MediaQuery.of(context).size.width,
-      //       height: MediaQuery.of(context).size.height,
-      //       fit: BoxFit.fill,
-      //     ),
-      //     Center(
-      //       child: AnimatedBuilder(
-      //           animation: _animation,
-      //           builder: (context, child) {
-      //             return Transform.translate(
-      //               offset: Offset(-(200 * (1 - _animation.value)),0 ),
-      //               child: Opacity(
-      //                   opacity: _animation.value,
-      //                   child: Image.asset(AppImages.introBee)),
-      //             );
-      //           }),
-      //     )
-      //   ],
-      // ),
     );
   }
 }

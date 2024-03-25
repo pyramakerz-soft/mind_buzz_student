@@ -6,10 +6,11 @@ Future<void> init() async {
   // bloc
   sl.registerFactory(() => GameOneBloc(getConcreteGameTrivia: sl()));
   sl.registerFactory(() => LoginDataBloc(requestLoginData: sl()));
-  sl.registerFactory(() => GetProgramsHomeBloc(programUserUseCases: sl()));
+  sl.registerFactory(() => GetProgramsHomeBloc(programUserUseCases: sl(), logOutUserUseCases: sl()));
 
   //UseCase
   sl.registerLazySingleton(() => GameUseCases(sl()));
+  sl.registerLazySingleton(() => LogOutUserUseCases(sl()));
   sl.registerLazySingleton(() => UserUseCases(sl()));
   sl.registerLazySingleton(() => ProgramUserUseCases(sl()));
 

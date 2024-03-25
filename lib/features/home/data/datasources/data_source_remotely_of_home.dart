@@ -1,4 +1,6 @@
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../../../core/apis_connections/api_connection.dart';
 import '../../../../core/connection.dart';
 import '../../domain/entities/units_model.dart';
@@ -6,6 +8,7 @@ import '../../domain/entities/user_courses.dart';
 
 abstract class DataSourceRemotelyOfProgram {
   Future<List<UserCourseModel>> getProgramDataRemotely();
+  Future logOutDataRemotely();
   Future<List<UnitsModel>> getLessonsDataRemotely({required int programId});
 }
 
@@ -45,5 +48,11 @@ class DataSourceRemotelyOfProgramImpl implements DataSourceRemotelyOfProgram {
     } else {
       throw response.data['msg'];
     }
+  }
+
+  @override
+  Future logOutDataRemotely() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
   }
 }

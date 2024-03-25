@@ -49,4 +49,10 @@ class HomeRepositoryImpl implements ProgramRepository {
       return Left(CacheFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, Unit>> logOutDataRepository() async {
+    await remoteDataSource.logOutDataRemotely();
+    return const Right(unit);
+  }
 }

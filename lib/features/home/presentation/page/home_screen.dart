@@ -61,6 +61,7 @@ class HomeScreen extends StatelessWidget {
                 GestureDetector(
                     onTap: () {
                       Navigator.of(context).pop();
+                      di.sl<GetProgramsHomeBloc>().add(LogOutRequest());
                     },
                     child: Container(
                         padding: const EdgeInsets.all(10),
@@ -98,7 +99,11 @@ class HomeScreen extends StatelessWidget {
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
-                    }, builder: (context, state) {
+                      if(state is LogOutLoadingState){
+                        Navigator.of(context).pop();
+                      }
+                    },
+                            builder: (context, state) {
                       if (state is GetProgramsLoadingInitial) {
                         return const Center(child: CircularProgressIndicator());
                       } else if (state is GetProgramsCompleteInitial) {

@@ -15,3 +15,11 @@ class GetProgramsRequest extends GetProgramsHomeEvent {
   @override
   List<Object> get props => [];
 }
+
+class LogOutRequest extends GetProgramsHomeEvent {
+
+  LogOutRequest();
+
+  @override
+  List<Object> get props => [];
+}
