@@ -25,6 +25,8 @@ class AppImages {
   static const String imagePracticalLife = "${mainPathOfImages}practical_life.png";
   static const String imageCulture = "${mainPathOfImages}culture.png";
   static const String imageAppBarOfUnits = "${mainPathOfImages}app_bar_of_units.png";
+  static const String bgChapters = "${mainPathOfImages}bg_chapters.png";
+  static const String halfBee = "${mainPathOfImages}half_bee.png";
 
   static const String iconAvatarDog = "${mainPathOfSvg}avatar_dog.svg";
   static const String iconHome = "${mainPathOfSvg}home_Icon.svg";

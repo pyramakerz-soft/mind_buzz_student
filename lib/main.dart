@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_buzz_refactor/features/login/presentation/cubit/login_cubit.dart';
 import 'core/theme_text.dart';
+import 'features/chapters/presentation/pages/chapters_screens.dart';
 import 'features/games/presentation/bloc/game1/game_one_bloc.dart';
 import 'features/loading_intro/presentation/bloc/loading_cubit.dart';
 import 'core/injection/injection_container.dart' as di;
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
               title: 'Mind buzz2',
               debugShowCheckedModeBanner: false,
               theme: AppTheme().lightTheme,
-              home:  LoginScreen(),
+              home:  ChaptersScreen(),
             )));
   }
 }
