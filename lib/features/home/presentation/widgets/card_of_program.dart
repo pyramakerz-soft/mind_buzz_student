@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 
 import '../../../../core/utils.dart';
-import '../page/unit_screen.dart';
+import '../../../unit/presentation/manager/get_unit_bloc.dart';
+import '../../../unit/presentation/pages/unit_screen.dart';
+import '../bloc/get_programs_home_bloc.dart';
+import '../../../../core/injection/injection_container.dart' as di;
 
 class CardOfProgram extends StatelessWidget {
   final List<Color> colors;
@@ -22,8 +26,13 @@ class CardOfProgram extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Utils.navigateTo(UnitScreen(programId:programId), context);
+      onTap: () {
+        Utils.navigateTo(
+             UnitScreen(
+                  programId: programId,
+                  programName: title,
+                ),
+            context);
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -80,7 +89,7 @@ class CardOfProgram extends StatelessWidget {
                   bottomRight: Radius.circular(20),
                   topRight: Radius.circular(20)),
               child: Image.network(
-                mainImage??DefaultData.image,
+                mainImage ?? DefaultHomeData.image,
                 height: MediaQuery.of(context).size.height / 5,
               ),
             )

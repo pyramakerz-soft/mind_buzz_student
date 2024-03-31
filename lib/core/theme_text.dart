@@ -32,7 +32,11 @@ class AppTheme {
         titleSmall: TextStyle(
           color: AppColor.darkBlueColor2,
           fontFamily: getFontFamily(),
-        )
+        ),
+        titleMedium: TextStyle(
+          color: AppColor.darkBlueColor3,
+          fontFamily: getFontFamily(),
+        ),
       ));
 
   static String getFontFamily() {

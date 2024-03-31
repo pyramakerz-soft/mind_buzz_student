@@ -49,6 +49,7 @@ class Assets {
   static const String imagesPracticalLife = 'assets/images/practical_life.png';
   static const String imagesSkyIntroApp = 'assets/images/sky_intro_app.png';
   static const String imagesSolidHeart = 'assets/images/solid_heart.png';
+  static const String numbersLessonsOne = 'assets/numbers_lessons/one.svg';
   static const String soundA = 'assets/sound/a.mp3';
   static const String soundM = 'assets/sound/m.mp3';
   static const String soundS = 'assets/sound/s.mp3';
@@ -67,6 +68,8 @@ class Assets {
   static const String svgLevel4OfPaper = 'assets/svg/level_4_of_paper.svg';
   static const String svgLevel5OfPaper = 'assets/svg/level_5_of_paper.svg';
   static const String svgLogout = 'assets/svg/logout.svg';
+  static const String svgPartLesson1 = 'assets/svg/part_lesson1.svg';
+  static const String svgPartLesson2 = 'assets/svg/part_lesson2.svg';
   static const String svgSkyLogin = 'assets/svg/sky_login.svg';
   static const String svgStar = 'assets/svg/star.svg';
   static const String svgStarLayer1 = 'assets/svg/star_layer_1.svg';

@@ -6,10 +6,14 @@ Future<void> init() async {
   // bloc
   sl.registerFactory(() => GameOneBloc(getConcreteGameTrivia: sl()));
   sl.registerFactory(() => LoginDataBloc(requestLoginData: sl()));
+  sl.registerFactory(() => GetUnitBloc(programUserUseCases: sl()));
+  sl.registerFactory(() => LessonBloc(programUserUseCases: sl()));
   sl.registerFactory(() => GetProgramsHomeBloc(programUserUseCases: sl(), logOutUserUseCases: sl()));
 
   //UseCase
   sl.registerLazySingleton(() => GameUseCases(sl()));
+  sl.registerLazySingleton(() => UnitUseCases(sl()));
+  sl.registerLazySingleton(() => LessonUseCases(sl()));
   sl.registerLazySingleton(() => LogOutUserUseCases(sl()));
   sl.registerLazySingleton(() => UserUseCases(sl()));
   sl.registerLazySingleton(() => ProgramUserUseCases(sl()));
@@ -21,6 +25,10 @@ Future<void> init() async {
       remoteDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<ProgramRepository>(() => HomeRepositoryImpl(
       remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<ProgramUnitRepository>(() => UnitRepositoryImpl(
+      remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<ProgramLessonRepository>(() => LessonRepositoryImpl(
+      remoteDataSource: sl(), networkInfo: sl()));
 
   //Datasources
   sl.registerLazySingleton<DataSourceLocalOfGame>(
@@ -31,6 +39,10 @@ Future<void> init() async {
           () => DataSourceRemotelyOfLoginImpl(dio: sl()));
   sl.registerLazySingleton<DataSourceRemotelyOfGame>(
       () => DataSourceRemotelyOfGameImpl(dio: sl()));
+  sl.registerLazySingleton<DataSourceRemotelyOfUnit>(
+          () => DataSourceRemotelyOfUnitImpl(dio: sl()));
+  sl.registerLazySingleton<DataSourceRemotelyOfLesson>(
+          () => DataSourceRemotelyOfLessonImpl(dio: sl()));
 
   //! Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));

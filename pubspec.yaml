@@ -83,6 +83,7 @@ flutter:
     - assets/sound/base/
     - assets/animation/
     - assets/fonts/
+    - assets/numbers_lessons/
 
   fonts:
     - family: poppinsSemiBold

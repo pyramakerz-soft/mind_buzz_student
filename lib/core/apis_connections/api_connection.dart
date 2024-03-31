@@ -36,6 +36,7 @@ class MainApiConnection {
   String postLoginEndPoint = "auth/login";
   String getStudentProgramsEndPoint = "student_programs";
   String getUnitsOfProgramsEndPoint = "units";
+  String getLessonsOfProgramsEndPoint = "lessons";
 
 ////////////////////////////////////////////////////////////////////////////
 

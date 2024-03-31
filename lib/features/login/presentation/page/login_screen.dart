@@ -20,7 +20,7 @@ import '../widgets/text_field_widget.dart';
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
   final TextEditingController _emailController =
-      TextEditingController(text: kDebugMode ? 'sherif2@test.com' : '');
+      TextEditingController(text: kDebugMode ? 'sherif5@test.com' : '');
   final TextEditingController _passwordController =
       TextEditingController(text: kDebugMode ? '123456' : '');
 
