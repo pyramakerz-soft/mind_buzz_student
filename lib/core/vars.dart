@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'app_color.dart';
+import 'app_images_of_numbers.dart';
 import 'assets_images.dart';
 
 extension EmptySpace on num {
@@ -54,3 +55,42 @@ abstract class DefaultUnitData {
   static List<Color> fullDataOfCardColor = [AppColor.yellowColor1, AppColor.darkBlueColor4, AppColor.darkGreenColor2, AppColor.redColor];
 }
 
+
+abstract class DefaultChapterData {
+  static String convertTheNumber({required String number}){
+    switch(number){
+      case '1':
+        return AppImagesOfNumbers.numberOne;
+      case '2':
+        return AppImagesOfNumbers.numberTwo;
+      case '3':
+        return AppImagesOfNumbers.numberThree;
+      case '4':
+        return AppImagesOfNumbers.numberFour;
+      case '5':
+        return AppImagesOfNumbers.numberFive;
+      case '6':///need to edit image
+        return AppImagesOfNumbers.numberFive;
+      case '7':
+        return AppImagesOfNumbers.numberSeven;
+      case '8':
+        return AppImagesOfNumbers.numberEight;
+      case '9':
+        return AppImagesOfNumbers.numberNine;
+      case '0':///need to edit image
+        return AppImagesOfNumbers.numberFive;
+      default:
+        return '';
+    }
+  }
+
+  static List<String> getTheNumberOfChapter({required int number}){
+    List<String> convertNumber = number.toString().split('');
+    List<String> result = [];
+    convertNumber.forEach((element) {
+      result.add(convertTheNumber(number:element));
+    });
+    return result;
+  }
+
+}

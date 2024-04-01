@@ -86,7 +86,7 @@ class LessonScreen extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height-(140+120),
+              height: MediaQuery.of(context).size.height - (140 + 120),
               child: BlocProvider<LessonBloc>(
                   create: (_) => di.sl<LessonBloc>()
                     ..add(GetUnitRequest(programId: int.parse(programId))),
@@ -102,43 +102,49 @@ class LessonScreen extends StatelessWidget {
                           20.ph,
                           ...List.generate(state.data.length, (index) {
                             return SizedBox(
-                                  height: (WIDTH * 0.2622107969151671),
-                                  width: WIDTH-50,
-                                  child: CustomPaint(
-                                      size: Size(
-                                          WIDTH-50,
-                                          (WIDTH )
-                                              .toDouble()),
-                                      //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
-                                      painter: LessonItemPainter(
-                                          currentColor: DefaultUnitData
-                                              .fullDataOfCardColor
-                                              .random()),
-                                      child: Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          SvgPicture.asset(AppImages.numberOne),
-                                          SizedBox(
-                                            width: (WIDTH/2)+50,
-                                            child: Center(
-                                                child:
-                                                    Text(
-                                                      state.data[index].name ?? '',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .bodySmall
-                                                          ?.copyWith(
-                                                              fontSize: 22,
-                                                              fontWeight: FontWeight.w700),
-                                                      textAlign: TextAlign.center,
-                                                    ),
-
-                                            ),
+                              height: (WIDTH * 0.2622107969151671),
+                              width: WIDTH - 50,
+                              child: CustomPaint(
+                                  size: Size(WIDTH - 50, (WIDTH).toDouble()),
+                                  //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
+                                  painter: LessonItemPainter(
+                                      currentColor: DefaultUnitData
+                                          .fullDataOfCardColor
+                                          .random()),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      ...List.generate(
+                                          DefaultChapterData
+                                                  .getTheNumberOfChapter(
+                                                      number: index + 1)
+                                              .length,
+                                          (index2) => SvgPicture.asset(
+                                              DefaultChapterData
+                                                  .getTheNumberOfChapter(
+                                                      number:
+                                                          index + 1)[index2])),
+                                      SizedBox(
+                                        width: (WIDTH / 2) + 50,
+                                        child: Center(
+                                          child: Text(
+                                            state.data[index].name ?? '',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall
+                                                ?.copyWith(
+                                                    fontSize: 22,
+                                                    fontWeight:
+                                                        FontWeight.w700),
+                                            textAlign: TextAlign.center,
                                           ),
-                                        ],
-                                      )),
-                                );
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                            );
                           }),
                         ],
                       );
@@ -160,7 +166,6 @@ class LessonScreen extends StatelessWidget {
                 ],
               ),
             )
-            
           ],
         ));
   }

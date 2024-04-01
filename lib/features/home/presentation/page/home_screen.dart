@@ -75,6 +75,26 @@ class HomeScreen extends StatelessWidget {
 
               ],
             ),
+            10.ph,
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: AppColor.redColor
+              ),
+              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                Text('Your assignment is ready', style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 16, fontWeight: FontWeight.w700),),
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.white
+                  ),
+                  child: Text('Start Now?', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 16, fontWeight: FontWeight.w700),),)
+              ],),
+            ),
             25.ph,
             Expanded(
                 child: Provider<GetProgramsHomeBloc>(

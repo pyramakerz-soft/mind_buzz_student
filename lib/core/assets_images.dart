@@ -1,7 +1,6 @@
-class AppImages {
+abstract class AppImages {
   static const String mainPathOfImages = 'assets/images/';
   static const String mainPathOfSvg = 'assets/svg/';
-  static const String mainPathOfNumbersLessons = 'assets/numbers_lessons/';
   static const String bgAlphaBg = "${mainPathOfImages}alpha_bg.png";
   static const String imageAvatar1 = "${mainPathOfImages}avatar_1.png";
   static const String imageAvatar2 = "${mainPathOfImages}avatar_2.png";
@@ -52,5 +51,6 @@ class AppImages {
   static const String iconPartLesson1 = "${mainPathOfSvg}part_lesson1.svg";
   static const String iconPartLesson2 = "${mainPathOfSvg}part_lesson2.svg";
 
-  static const String numberOne = "${mainPathOfNumbersLessons}one.svg";
+  static const String iconCurrentChapter2 = '${mainPathOfSvg}current_chapter2.svg';
+  static const String iconCurrentChapter1 = '${mainPathOfSvg}current_chapter1.svg';
 }

@@ -37,6 +37,10 @@ class AppTheme {
           color: AppColor.darkBlueColor3,
           fontFamily: getFontFamily(),
         ),
+        titleLarge: TextStyle(
+          color: AppColor.redColor,
+          fontFamily: getFontFamily(),
+        ),
       ));
 
   static String getFontFamily() {
