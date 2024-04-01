@@ -26,6 +26,8 @@ abstract class AppImages {
   static const String imageAppBarOfUnits = "${mainPathOfImages}app_bar_of_units.png";
   static const String bgChapters = "${mainPathOfImages}bg_chapters.png";
   static const String halfBee = "${mainPathOfImages}half_bee.png";
+  static const String imageChild = "${mainPathOfImages}child.png";
+  static const String imageParent = "${mainPathOfImages}parent.png";
 
   static const String iconAvatarDog = "${mainPathOfSvg}avatar_dog.svg";
   static const String iconHome = "${mainPathOfSvg}home_Icon.svg";
@@ -53,4 +55,5 @@ abstract class AppImages {
 
   static const String iconCurrentChapter2 = '${mainPathOfSvg}current_chapter2.svg';
   static const String iconCurrentChapter1 = '${mainPathOfSvg}current_chapter1.svg';
+  static const String bgChooseWhoAmI = '${mainPathOfSvg}bg_choose_who_am_i.svg';
 }

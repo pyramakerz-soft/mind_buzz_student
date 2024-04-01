@@ -12,6 +12,8 @@ import '../../../../core/assets_images.dart';
 import '../../../../core/utils.dart';
 import '../../../../core/validation_text_field.dart';
 import '../../../home/presentation/page/home_screen.dart';
+import '../../../who_am_i/presentation/manager/who_am_i_cubit.dart';
+import '../../../who_am_i/presentation/pages/who_am_i_screen.dart';
 import '../bloc/login_data_bloc.dart';
 import '../cubit/login_cubit.dart';
 import '../widgets/button_start_game.dart';
@@ -101,7 +103,8 @@ class LoginScreen extends StatelessWidget {
                                   } else if (state is CompleteLogin) {
                                     context.read<LoginCubit>().saveUserData(userData: state.userData);
                                     Utils.navigateAndRemoveUntilTo(
-                                        const HomeScreen(), context);
+                                        BlocProvider(
+                                            create: (_) => WhoAmICubit(), child: WhoAmIScreen()), context);
                                   }
                                 },
                                     builder: (context, state) {
@@ -120,7 +123,7 @@ class LoginScreen extends StatelessWidget {
                                                     password:
                                                         _passwordController
                                                             .text));
-                                          },
+                                          }, title: "Log In", width: 200,
                                         ));
                                   }
                                 })

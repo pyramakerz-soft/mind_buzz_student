@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AppColor {
   static const Color lightBlueColor = Color(0xFFB9E3EB);
   static const Color lightBlueColor2 = Color(0xFFC8EFF6);
+  static const Color lightBlueColor3 = Color(0xFFF5F7FF);
   static const Color brownColor = Color(0xFF6F431A);
   static const Color brownColor4 = Color(0xFFA8592C);
   static const Color lightBlueColor5 = Color(0xFF95CED9);
@@ -19,7 +20,11 @@ class AppColor {
   static const Color darkBlueColor = Color(0xFF004279);
   static const Color darkBlueColor3 = Color(0xFF003348);
   static const Color darkBlueColor2 = Color(0xFF5FA1D5);
+
   static const Color darkBlueColor4 = Color(0xFF3B5FAE);
+  static const Color darkBlueColor5 = Color(0xFF4C73C7);
+  static const Color darkBlueColor6 = Color(0xFF7BB0DB);
+
   static const Color darkGreenColor = Color(0xFF076F45);
   static const Color darkGreenColor2 = Color(0xFF3A9C74);
   static const Color lightGreenColor = Color(0xFF88C979);

@@ -8,6 +8,8 @@ import 'features/loading_intro/presentation/bloc/loading_cubit.dart';
 import 'core/injection/injection_container.dart' as di;
 import 'features/login/presentation/bloc/login_data_bloc.dart';
 import 'features/login/presentation/page/login_screen.dart';
+import 'features/who_am_i/presentation/manager/who_am_i_cubit.dart';
+import 'features/who_am_i/presentation/pages/who_am_i_screen.dart';
 
 Future<void> setPreferredOrientationLandscape() async {
   await SystemChrome.setPreferredOrientations([

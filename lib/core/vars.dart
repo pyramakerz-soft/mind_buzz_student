@@ -69,16 +69,16 @@ abstract class DefaultChapterData {
         return AppImagesOfNumbers.numberFour;
       case '5':
         return AppImagesOfNumbers.numberFive;
-      case '6':///need to edit image
-        return AppImagesOfNumbers.numberFive;
+      case '6':
+        return AppImagesOfNumbers.numberSix;
       case '7':
         return AppImagesOfNumbers.numberSeven;
       case '8':
         return AppImagesOfNumbers.numberEight;
       case '9':
         return AppImagesOfNumbers.numberNine;
-      case '0':///need to edit image
-        return AppImagesOfNumbers.numberFive;
+      case '0':
+        return AppImagesOfNumbers.numberZero;
       default:
         return '';
     }

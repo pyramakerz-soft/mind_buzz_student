@@ -6,7 +6,9 @@ import '../cubit/login_cubit.dart';
 
 class ButtonLogin extends StatefulWidget {
   final void Function() dataFunction;
-  const ButtonLogin({Key? key, required this.dataFunction}) : super(key: key);
+  final String title;
+  final double width;
+  const ButtonLogin({Key? key, required this.dataFunction, required this.title, required this.width}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -43,7 +45,7 @@ class _ButtonLogin extends State<ButtonLogin>
     const double height = 64 - _shadowHeight;
 
     return SizedBox(
-        width: MediaQuery.of(context).size.width - 100,
+        // width: MediaQuery.of(context).size.width - 100,
         child:  GestureDetector(
             onTapUp: (_) {
               context
@@ -73,7 +75,7 @@ class _ButtonLogin extends State<ButtonLogin>
                     bottom: 0,
                     child: Container(
                       height: height,
-                      width: 200,
+                      width: widget.width,
                       padding: const EdgeInsets.symmetric(
                           vertical: 16, horizontal: 20),
                       decoration: BoxDecoration(
@@ -86,11 +88,11 @@ class _ButtonLogin extends State<ButtonLogin>
                     return AnimatedPositioned(
                       curve: Curves.easeIn,
                       bottom: double.parse("$state"),
-                      width: 200,
+                      width: widget.width,
                       duration: const Duration(milliseconds: 70),
                       child: Container(
                         height: height,
-                        width: 200,
+                        width: widget.width,
                         // padding: EdgeInsets.all(0),
                         decoration: BoxDecoration(
                           // image: DecorationImage(
@@ -101,7 +103,7 @@ class _ButtonLogin extends State<ButtonLogin>
                         ),
                         alignment: Alignment.center,
                         child: Text(
-                          "Log In",
+                          widget.title,
                           style:
                               Theme.of(context).textTheme.bodySmall?.copyWith(
                                     fontSize: 24,
