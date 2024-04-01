@@ -11,6 +11,7 @@ import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/vars.dart';
 import '../manager/lesson_bloc.dart';
 import '../widgets/lesson_item.dart';
+import '../widgets/lock_lesson_item.dart';
 
 class LessonScreen extends StatelessWidget {
   final String programId;
@@ -106,11 +107,7 @@ class LessonScreen extends StatelessWidget {
                               width: WIDTH - 50,
                               child: CustomPaint(
                                   size: Size(WIDTH - 50, (WIDTH).toDouble()),
-                                  //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
-                                  painter: LessonItemPainter(
-                                      currentColor: DefaultUnitData
-                                          .fullDataOfCardColor
-                                          .random()),
+                                  painter: LockLessonItemPainter(),
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
@@ -127,7 +124,7 @@ class LessonScreen extends StatelessWidget {
                                                       number:
                                                           index + 1)[index2])),
                                       SizedBox(
-                                        width: (WIDTH / 2) + 50,
+                                        width: (WIDTH / 2)+30 ,
                                         child: Center(
                                           child: Text(
                                             state.data[index].name ?? '',
@@ -142,6 +139,7 @@ class LessonScreen extends StatelessWidget {
                                           ),
                                         ),
                                       ),
+                                      40.pw
                                     ],
                                   )),
                             );

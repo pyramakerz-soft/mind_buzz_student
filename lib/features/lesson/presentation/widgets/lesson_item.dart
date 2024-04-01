@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mind_buzz_refactor/core/app_color.dart';
 
 class LessonItemPainter extends CustomPainter {
-  final Color currentColor;
-
-  LessonItemPainter({required this.currentColor});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -23,7 +21,7 @@ class LessonItemPainter extends CustomPainter {
     path_0.close();
 
     Paint paint_0_fill = Paint()..style=PaintingStyle.fill;
-    paint_0_fill.color = currentColor.withOpacity(1.0);
+    paint_0_fill.color = AppColor.darkBlueColor4.withOpacity(1.0);
     canvas.drawPath(path_0,paint_0_fill);
 
   }

@@ -28,6 +28,7 @@ abstract class AppImages {
   static const String halfBee = "${mainPathOfImages}half_bee.png";
   static const String imageChild = "${mainPathOfImages}child.png";
   static const String imageParent = "${mainPathOfImages}parent.png";
+  static const String imageStar = "${mainPathOfImages}star.png";
 
   static const String iconAvatarDog = "${mainPathOfSvg}avatar_dog.svg";
   static const String iconHome = "${mainPathOfSvg}home_Icon.svg";
