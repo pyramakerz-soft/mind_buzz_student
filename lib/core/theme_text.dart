@@ -41,6 +41,11 @@ class AppTheme {
           color: AppColor.redColor,
           fontFamily: getFontFamily(),
         ),
+        displaySmall: TextStyle(
+          color: AppColor.orangeColor,
+          fontFamily: getFontFamily(),
+        ),
+
       ));
 
   static String getFontFamily() {

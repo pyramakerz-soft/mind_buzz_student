@@ -33,16 +33,10 @@ class WhoAmIScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Stack(
-                      //   alignment: Alignment.center,
-                      //   children: [
                       SvgPicture.asset(
                         AppImages.bgChooseWhoAmI,
                         width: MediaQuery.of(context).size.width - 70,
                       ),
-                      //     Text('Tell us more about you!', style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 22, fontWeight: FontWeight.w700),)
-                      //   ],
-                      // ),
                       GestureDetector(
                           onTap: () {
                             Navigator.of(context).pop();

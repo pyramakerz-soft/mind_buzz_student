@@ -11,14 +11,14 @@ class ChaptersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final subHeight = (MediaQuery.of(context).size.height-140) / 8;
+    final subHeight = (MediaQuery.of(context).size.height - 140) / 7;
     final subWidth = MediaQuery.of(context).size.width / 5;
     final List<Offset> positions = [
       const Offset(10, 10),
-      Offset(subWidth, subHeight),
-      Offset(subWidth, subHeight * 2),
-      Offset(subWidth * 3, subHeight * 3),
-      Offset(subWidth * 3, subHeight * 4),
+      Offset(subWidth, subHeight+20),
+      Offset(subWidth+10, (subHeight * 2)+40),
+      Offset(subWidth * 3-10, subHeight * 3-20),
+      Offset(subWidth * 3-10, subHeight * 4+10),
     ];
 
     return Scaffold(
@@ -45,7 +45,7 @@ class ChaptersScreen extends StatelessWidget {
                               height: 50,
                               width: 50,
                               alignment: Alignment.center,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: AppColor.darkBlueColor3),
                               child: SvgPicture.asset(
@@ -58,7 +58,8 @@ class ChaptersScreen extends StatelessWidget {
                         style: Theme.of(context)
                             .textTheme
                             .titleMedium
-                            ?.copyWith(fontSize: 20, fontWeight: FontWeight.w700),
+                            ?.copyWith(
+                                fontSize: 20, fontWeight: FontWeight.w700),
                       ),
                       GestureDetector(
                           onTap: () {
@@ -69,7 +70,7 @@ class ChaptersScreen extends StatelessWidget {
                               alignment: Alignment.center,
                               height: 50,
                               width: 50,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: AppColor.darkBlueColor3),
                               child: SvgPicture.asset(
@@ -99,32 +100,74 @@ class ChaptersScreen extends StatelessWidget {
                           left: positions[i].dx,
                           child: SizedBox(
                             width: 70,
-                            height: 70,
-                            child: Stack(
-                              alignment: Alignment.center,
+                            height: 120,
+                            child: Column(
                               children: [
-                                  SvgPicture.asset(
-                                    i==0||i%2==0?AppImages.iconCurrentChapter1:AppImages.iconCurrentChapter2,
-                                  ),
-                                  Text(
-                                    "${i+1}",
-                                    style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 25, fontWeight: FontWeight.w700),
-                                  ),
+                                Row(
+                                  children: [
+                            Container(
+                            // height: 50,
+                            margin: const EdgeInsets.only(top: 20),
+                            child:Transform.rotate(
+                                        angle: (-10) *
+                                            3.141592653589793 /
+                                            180, // Rotate 45 degrees in radians
+                                        child: Image.asset(
+                                          AppImages.imageStar,
+                                          height: 20,
+                                        ))),
+                                    Image.asset(
+                                      AppImages.imageStar,
+                                      height: 20,
+                                    ),
+        Container(
+          // height: 50,
+          margin: const EdgeInsets.only(top: 20),
+          child:Transform.rotate(
+                                        angle: (10) *
+                                            3.141592653589793 /
+                                            180, // Rotate 45 degrees in radians
+                                        child: Image.asset(
+                                          AppImages.imageStar,
+                                          height: 20,
+                                        ))),
+                                  ],
+                                ),
+                                Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                      i == 0 || i % 2 == 0
+                                          ? AppImages.iconCurrentChapter1
+                                          : AppImages.iconCurrentChapter2,
+                                    ),
+                                    Text(
+                                      "${i + 1}",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.copyWith(
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.w700),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           )),
                   ],
                 ),
               ),
-
-
             ]),
             Align(
                 alignment: Alignment.centerLeft,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(AppImages.halfBee, width: 150,),
+                    Image.asset(
+                      AppImages.halfBee,
+                      width: 150,
+                    ),
                     100.ph
                   ],
                 )),

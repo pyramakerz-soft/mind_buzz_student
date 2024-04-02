@@ -80,6 +80,7 @@ flutter:
     - assets/sound/base/
     - assets/animation/
     - assets/fonts/
+    - assets/math_ball/
     - assets/numbers_lessons/
 
   fonts:
