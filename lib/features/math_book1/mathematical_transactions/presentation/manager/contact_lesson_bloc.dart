@@ -17,7 +17,8 @@ part 'contact_lesson_state.dart';
 class ContactLessonBloc extends Bloc<ContactLessonEvent, ContactLessonState> {
   final ContactLessonUseCases programContactUserUseCases;
 
-  ContactLessonBloc({required this.programContactUserUseCases}) : super(ContactLessonInitial()) {
+  ContactLessonBloc({required this.programContactUserUseCases})
+      : super(ContactLessonInitial()) {
     on<ContactLessonEvent>((event, emit) async {
       log('event##:$event');
       if (event is GetContactLessonRequest) {
@@ -25,30 +26,27 @@ class ContactLessonBloc extends Bloc<ContactLessonEvent, ContactLessonState> {
         final failureOrDoneMessage =
             await programContactUserUseCases(programId: event.programId);
         emit(await _eitherLoadedOrErrorState(failureOrDoneMessage));
-
-      }else if(event is CompleteLessonRequest){
+      } else if (event is CompleteLessonRequest) {
         emit(CompleteGameState());
-
       }
     });
   }
 }
+
 Future<ContactLessonState> _eitherLoadedOrErrorState(
-    Either<Failure, List<ContactOfLessonModel>> failureOrTrivia,
-    ) async {
-  ContactLessonState tempState =  failureOrTrivia.fold(
-        (failure) => GetContactErrorInitial(message: _mapFailureToMessage(failure)),
-        (data) => GetContactInitial(
-        data: data),
+  Either<Failure, List<ContactOfLessonModel>> failureOrTrivia,
+) async {
+  ContactLessonState tempState = failureOrTrivia.fold(
+    (failure) => GetContactErrorInitial(message: _mapFailureToMessage(failure)),
+    (data) => GetContactInitial(data: data),
   );
-  if(tempState is GetContactInitial){
-    await TalkTts.startTalk(text: tempState.data[0].message);
+  if (tempState is GetContactInitial) {
+    TalkTts.startTalk(text: tempState.data[0].message);
   }
   return tempState;
 }
 
 String _mapFailureToMessage(Failure failure) {
-
   switch (failure.runtimeType) {
     case ServerFailure:
       return SERVER_FAILURE_MESSAGE;

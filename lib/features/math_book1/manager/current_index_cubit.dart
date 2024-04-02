@@ -12,21 +12,34 @@ import '../mathematical_transactions/domain/entities/contact_of_lesson.dart';
 import '../mathematical_transactions/presentation/manager/contact_lesson_bloc.dart';
 
 class CurrentIndexCubit extends Cubit<int> {
-  CurrentIndexCubit() : super(0);
+  CurrentIndexCubit({this.dataOfLesson, this.index}) : super(index ?? 0);
+  final List<ContactOfLessonModel>? dataOfLesson;
+  final int? index;
 
-  increaseIndex(){
-    int i = state+1;
+  sayInstruction({required String message}) async {
+    log('sayInstruction');
+    await TalkTts.startTalk(text: message);
+  }
+
+  increaseIndex() {
+    int i = state + 1;
     emit(i);
   }
-  restartIndex(){
+
+  restartIndex() {
     emit(0);
   }
-  checkCorrect({required int correctAnswer, required int currentAnswer, required BuildContext context, required int totalCountOfQuestions}){
-    if((totalCountOfQuestions-1) == state){
+
+  checkCorrect(
+      {required int correctAnswer,
+      required int currentAnswer,
+      required BuildContext context,
+      required int totalCountOfQuestions}) {
+    if ((totalCountOfQuestions - 1) == state) {
       Utils.navigateAndRemoveUntilTo(
-          BlocProvider(
-              create: (_) => WhoAmICubit(), child: WhoAmIScreen()), context);
-    }else {
+          BlocProvider(create: (_) => WhoAmICubit(), child: WhoAmIScreen()),
+          context);
+    } else {
       log('checkCorrect:$correctAnswer:$currentAnswer');
       if (correctAnswer == currentAnswer) {
         increaseIndex();

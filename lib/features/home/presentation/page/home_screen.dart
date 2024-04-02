@@ -69,36 +69,51 @@ class HomeScreen extends StatelessWidget {
                         width: 50,
                         decoration: const BoxDecoration(
                             shape: BoxShape.circle,
-                            color: AppColor.darkBlueColor3
-                        ),
-                        child: SvgPicture.asset(AppImages.iconLogout, fit: BoxFit.fill,color: Colors.white,)))
-
+                            color: AppColor.darkBlueColor3),
+                        child: SvgPicture.asset(
+                          AppImages.iconLogout,
+                          fit: BoxFit.fill,
+                          color: Colors.white,
+                        )))
               ],
             ),
             10.ph,
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: AppColor.redColor
-              ),
+                  borderRadius: BorderRadius.circular(12),
+                  color: AppColor.redColor),
               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                Text('Your assignment is ready', style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 16, fontWeight: FontWeight.w700),),
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: Colors.white
+                  Text(
+                    'Your assignment is ready',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall
+                        ?.copyWith(fontSize: 16, fontWeight: FontWeight.w700),
                   ),
-                  child: Text('Start Now?', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 16, fontWeight: FontWeight.w700),),)
-              ],),
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: Colors.white),
+                    child: Text(
+                      'Start Now?',
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.copyWith(fontSize: 16, fontWeight: FontWeight.w700),
+                    ),
+                  )
+                ],
+              ),
             ),
             25.ph,
             Expanded(
-                child: Provider<GetProgramsHomeBloc>(
-                    create: (_) =>di.sl<GetProgramsHomeBloc>()..add(GetProgramsRequest()),
+                child: BlocProvider<GetProgramsHomeBloc>(
+                    create: (_) =>
+                        di.sl<GetProgramsHomeBloc>()..add(GetProgramsRequest()),
                     child:
                         BlocConsumer<GetProgramsHomeBloc, GetProgramsHomeState>(
                             listener: (context, state) {
@@ -108,31 +123,36 @@ class HomeScreen extends StatelessWidget {
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
-                      if(state is LogOutLoadingState){
+                      if (state is LogOutLoadingState) {
                         Navigator.of(context).pop();
                       }
-                    },
-                            builder: (context, state) {
+                    }, builder: (context, state) {
                       if (state is GetProgramsLoadingInitial) {
                         return const Center(child: CircularProgressIndicator());
                       } else if (state is GetProgramsCompleteInitial) {
                         return Column(
-                          children: List.generate(state.data.length, (index) =>  Column(
-                            children: [
-                              CardOfProgram(
-                                programId:"${state.data[index].programId??''}",
-                                colors: DefaultHomeData.fullDataOfCardColor.first,
-                                mainImage:  state.data[index].program?.image,
-                                title: state.data[index].program?.course?.name??'',
-                              )
-                            ],
-                          )),
+                          children: List.generate(
+                              state.data.length,
+                              (index) => Column(
+                                    children: [
+                                      CardOfProgram(
+                                        programId:
+                                            "${state.data[index].programId ?? ''}",
+                                        colors: DefaultHomeData
+                                            .fullDataOfCardColor.first,
+                                        mainImage:
+                                            state.data[index].program?.image,
+                                        title: state.data[index].program?.course
+                                                ?.name ??
+                                            '',
+                                      )
+                                    ],
+                                  )),
                         );
                       } else {
                         return const SizedBox();
                       }
-                    })
-                ))
+                    })))
           ],
         ),
       ),

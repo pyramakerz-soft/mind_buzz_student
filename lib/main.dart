@@ -9,8 +9,9 @@ import 'features/loading_intro/presentation/bloc/loading_cubit.dart';
 import 'core/injection/injection_container.dart' as di;
 import 'features/login/presentation/bloc/login_data_bloc.dart';
 import 'features/login/presentation/page/login_screen.dart';
+import 'features/math_book1/manager/inherited_widget_game.dart';
 import 'features/math_book1/manager/current_index_cubit.dart';
-import 'features/math_book1/my_home_page_book1.dart';
+import 'features/math_book1/screen/my_home_page_book1.dart';
 import 'features/math_book1/mathematical_transactions/presentation/pages/mathematical_transactions_screen.dart';
 import 'features/who_am_i/presentation/manager/who_am_i_cubit.dart';
 import 'features/who_am_i/presentation/pages/who_am_i_screen.dart';
@@ -38,8 +39,25 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() {
+    return _MyApp();
+  }
+}
+
+class _MyApp extends State<MyApp> {
+  String sharedData = '';
+
+  void updateData(String newData) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      setState(() {
+        sharedData = newData;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +77,10 @@ class MyApp extends StatelessWidget {
               theme: AppTheme().lightTheme,
               home: BlocProvider(
                   create: (_) => CurrentIndexCubit(),
-                  child: const MyHomePageBook1(
-                    question: MathematicalTransactionsScreen(),
-                  )),
+                  child: DataContainer(
+                      data: sharedData,
+                      updateData: updateData,
+                      child: MyHomePageBook1())),
             )));
   }
 }
