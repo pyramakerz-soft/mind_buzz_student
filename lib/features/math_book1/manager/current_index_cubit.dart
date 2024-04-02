@@ -35,15 +35,25 @@ class CurrentIndexCubit extends Cubit<int> {
       required int currentAnswer,
       required BuildContext context,
       required int totalCountOfQuestions}) {
-    if ((totalCountOfQuestions - 1) == state) {
-      Utils.navigateAndRemoveUntilTo(
-          BlocProvider(create: (_) => WhoAmICubit(), child: WhoAmIScreen()),
-          context);
-    } else {
-      log('checkCorrect:$correctAnswer:$currentAnswer');
-      if (correctAnswer == currentAnswer) {
-        increaseIndex();
-      }
+    log('checkCorrect:$correctAnswer:$currentAnswer');
+    if (correctAnswer == currentAnswer) {
+      rocketAnimationController.forward(); // Start the animation
+      rocketAnimationController.addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          if ((totalCountOfQuestions - 1) == state) {
+            Utils.navigateAndRemoveUntilTo(
+                BlocProvider(
+                    create: (_) => WhoAmICubit(), child: WhoAmIScreen()),
+                context);
+          } else {
+            increaseIndex();
+            rocketAnimationController.reset();
+          }
+        }
+      });
     }
   }
+
+  late AnimationController rocketAnimationController;
+  late Animation<Offset> rocketAnimationOffsetAnimation;
 }

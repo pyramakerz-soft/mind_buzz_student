@@ -80,7 +80,9 @@ class _MyApp extends State<MyApp> {
                   child: DataContainer(
                       data: sharedData,
                       updateData: updateData,
-                      child: MyHomePageBook1())),
+                      child: const MyHomePageBook1(
+                        question: MathematicalTransactionsScreen(),
+                      ))),
             )));
   }
 }
