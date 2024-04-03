@@ -10,7 +10,7 @@ import 'core/injection/injection_container.dart' as di;
 import 'features/login/presentation/bloc/login_data_bloc.dart';
 import 'features/login/presentation/page/login_screen.dart';
 import 'features/math_book1/manager/inherited_widget_game.dart';
-import 'features/math_book1/manager/current_index_cubit.dart';
+import 'features/math_book1/manager/current_game_cubit.dart';
 import 'features/math_book1/screen/my_home_page_book1.dart';
 import 'features/math_book1/mathematical_transactions/presentation/pages/mathematical_transactions_screen.dart';
 import 'features/who_am_i/presentation/manager/who_am_i_cubit.dart';
@@ -76,7 +76,7 @@ class _MyApp extends State<MyApp> {
               debugShowCheckedModeBanner: false,
               theme: AppTheme().lightTheme,
               home: BlocProvider(
-                  create: (_) => CurrentIndexCubit(),
+                  create: (_) => CurrentGameCubit(),
                   child: DataContainer(
                       data: sharedData,
                       updateData: updateData,

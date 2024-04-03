@@ -77,4 +77,5 @@ abstract class AppImages {
   static const String imageArrowToNext = '${mainPathOfImages}arrow_to_next.png';
   static const String iconBlimp = '${mainPathOfSvg}blimp.svg';
   static const String iconGiftBox = '${mainPathOfSvg}gift_box.svg';
+  static const String iconCandy = '${mainPathOfSvg}candy.svg';
 }
