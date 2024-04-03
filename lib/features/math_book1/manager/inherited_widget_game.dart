@@ -1,16 +1,18 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import '../entities/passed_data.dart';
 
 class DataContainer extends InheritedWidget {
-  final PassedDataModel data;
-  final Function(PassedDataModel) updateData;
+  final String data;
+  final Function(String) updateData;
 
-  DataContainer({
+  const DataContainer({Key? key,
     required this.data,
     required this.updateData,
     required Widget child,
-  }) : super(child: child);
+  }) : super(key: key, child: child);
 
   static DataContainer? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<DataContainer>();

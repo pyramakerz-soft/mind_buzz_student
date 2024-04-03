@@ -10,6 +10,7 @@ import '../../../../core/injection/injection_container.dart' as di;
 
 import '../../../../core/utils.dart';
 import '../../../../core/vars.dart';
+import '../../../chapters/presentation/pages/chapters_screens.dart';
 import '../../../lesson/presentation/pages/lesson_screen.dart';
 import '../manager/get_unit_bloc.dart';
 import '../widgets/item_of_unit.dart';
@@ -47,8 +48,8 @@ class UnitScreen extends StatelessWidget {
                         },
                         child: Container(
                             padding: const EdgeInsets.all(10),
-                            height: 50,
-                            width: 50,
+                            height: 45,
+                            width: 45,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
@@ -72,8 +73,8 @@ class UnitScreen extends StatelessWidget {
                         child: Container(
                             padding: const EdgeInsets.all(10),
                             alignment: Alignment.center,
-                            height: 50,
-                            width: 50,
+                            height: 45,
+                            width: 45,
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: AppColor.darkBlueColor3),
@@ -188,7 +189,7 @@ class UnitScreen extends StatelessWidget {
                           return GestureDetector(
                             onTap: (){
                               Utils.navigateTo(
-                                  LessonScreen(
+                                  ChaptersScreen(
                                     programId: state.data[index].id.toString(),
                                     programName: state.data[index].name??'',
                                   ),

@@ -8,6 +8,7 @@ import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/injection/injection_container.dart' as di;
+import '../../../../core/talk_tts.dart';
 import '../../../login/presentation/cubit/login_cubit.dart';
 import '../bloc/get_programs_home_bloc.dart';
 import '../widgets/card_of_program.dart';
@@ -18,12 +19,14 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userData = context.read<LoginCubit>().userData;
+    TalkTts.startTalk(text: 'You have assignment');
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
           children: [
+            20.ph,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -77,7 +80,7 @@ class HomeScreen extends StatelessWidget {
                         )))
               ],
             ),
-            10.ph,
+            20.ph,
             Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
@@ -87,7 +90,7 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Your assignment is ready',
+                    'You have assignment',
                     style: Theme.of(context)
                         .textTheme
                         .bodySmall

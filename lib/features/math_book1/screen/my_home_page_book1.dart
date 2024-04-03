@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flame/game.dart' show GameWidget;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +31,7 @@ class _MyHomePageBook1 extends State<MyHomePageBook1>
     with TickerProviderStateMixin {
   final GlobalKey _specificWidgetKey = GlobalKey();
   final GlobalKey _specificWidgetKey2 = GlobalKey();
-  Offset position = Offset(1.0, 0.4);
+  Offset position = const Offset(1.0, 0.4);
   @override
   void initState() {
     super.initState();
@@ -51,20 +52,8 @@ class _MyHomePageBook1 extends State<MyHomePageBook1>
     context.read<CurrentGameCubit>().candyAnimationController =
         AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 4), // Adjust the duration as needed
+      duration: const Duration(seconds: 2), // Adjust the duration as needed
     );
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   final RenderBox renderBox2 =
-    //       _specificWidgetKey2.currentContext!.findRenderObject() as RenderBox;
-    //   final Offset offset2 = renderBox2.localToGlobal(Offset.zero);
-    //   setState(() {
-    //     position = offset2;
-    //   });
-    //   // Offset _widgetOffset = _specificWidgetKey2.currentContext
-    //   //         ?.findRenderObject()
-    //   //         ?.localToGlobal(Offset.zero) ??
-    //   //     Offset.zero;
-    // });
     context.read<CurrentGameCubit>().candyAnimationOffsetAnimation =
         Tween<Offset>(
       begin: const Offset(1.0, -0.4),
@@ -89,15 +78,11 @@ class _MyHomePageBook1 extends State<MyHomePageBook1>
     super.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
-    String? data = DataContainer.of(context)?.data.message;
-    bool? activeButton = DataContainer.of(context)?.data.activeButton;
-    // getData(context: context);
     final candyAnimationController =
         context.watch<CurrentGameCubit>().state.candyAnimationController;
-    final giftBoxArtboard =
-        context.watch<CurrentGameCubit>().state.giftBoxArtboard;
     return Scaffold(
       body: Stack(
         children: [
@@ -107,97 +92,91 @@ class _MyHomePageBook1 extends State<MyHomePageBook1>
                     image: AssetImage(AppImages.bgOfMath), fit: BoxFit.fill)),
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Stack(
                   children: [
-                    const SizedBox(),
-                    Row(
-                      children: [
-                        // 60.pw,
-                        SizedBox(
-                          height: 100,
-                          child: Stack(
-                            alignment: Alignment.bottomCenter,
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.only(
-                                    top: 10, left: 35, right: 35),
-                                // width: MediaQuery.of(context).size.width/2,
-                                height: 54,
-                                padding: const EdgeInsets.all(10),
-                                decoration: ShapeDecoration(
-                                  color: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(6)),
-                                  shadows: const [
-                                    BoxShadow(
-                                      color: Colors.black38,
-                                      blurRadius: 4,
-                                      offset: Offset(0, 4),
-                                      spreadRadius: 0,
-                                    )
-                                  ],
+                    Center(child: SizedBox(
+                      height: 100,
+                      child: Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(
+                                top: 10, left: 35, right: 35),
+                            // width: MediaQuery.of(context).size.width/2,
+                            height: 54,
+                            padding: const EdgeInsets.all(10),
+                            decoration: ShapeDecoration(
+                              color: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(6)),
+                              shadows: const [
+                                BoxShadow(
+                                  color: Colors.black38,
+                                  blurRadius: 4,
+                                  offset: Offset(0, 4),
+                                  spreadRadius: 0,
+                                )
+                              ],
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Add Then choose',
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .displaySmall
+                                      ?.copyWith(
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.w700,
+                                  ),
                                 ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Add Then choose',
-                                      textAlign: TextAlign.center,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displaySmall
-                                          ?.copyWith(
-                                            fontSize: 28,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Positioned(
-                                  bottom: -5,
-                                  left: 0,
-                                  child: SvgPicture.asset(AppImages.iconBlimp)),
-                              Positioned(
-                                bottom: -5,
-                                right: 0,
-                                child: SvgPicture.asset(AppImages.iconBlimp),
-                              )
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () async {
-                            log('##activeButton:$activeButton');
-                            if (activeButton == false) {
-                              return;
-                            }
-                            context
-                                .read<CurrentGameCubit>()
-                                .sayInstruction(message: data ?? '');
-                          },
-                          child: Image.asset(
-                            AppImages.iconGetInstruction,
-                            height: 70,
+                          Positioned(
+                              bottom: -5,
+                              left: 0,
+                              child: SvgPicture.asset(AppImages.iconBlimp)),
+                          Positioned(
+                            bottom: -5,
+                            right: 0,
+                            child: SvgPicture.asset(AppImages.iconBlimp),
+                          )
+                        ],
+                      ),
+                    ),),
+                    Positioned(
+                      top: 20,
+                      right: 0,
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () async {
+                              log('##activeButton:${DataContainer.of(context)?.data}');
+                              context
+                                  .read<CurrentGameCubit>()
+                                  .sayInstruction(message: 'Add Then choose');
+                            },
+                            child: Image.asset(
+                              AppImages.iconGetInstruction,
+                              height: 70,
+                            ),
                           ),
-                        ),
-                        30.pw
-                      ],
+                          30.pw
+                        ],
+                      ),
                     ),
                   ],
                 ),
                 Expanded(child: widget.question),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const SizedBox(
+                    SizedBox(
                       height: 70,
                     ),
                     // const SizedBox(),
@@ -246,20 +225,28 @@ class _MyHomePageBook1 extends State<MyHomePageBook1>
             child: Row(
               children: [
                 // 10.pw,
-                GestureDetector(
-                    key: _specificWidgetKey,
-                    onTap: () {},
-                    child: BlocBuilder<CurrentGameCubit, CurrentGameInitial>(
+                 BlocBuilder<CurrentGameCubit, CurrentGameInitial>(
                         builder: (context, state) =>
                             state.giftBoxArtboard != null
-                                ? Rive(
+                                ?
+                            Rive(
                                     artboard: state.giftBoxArtboard!,
                                     // fit: BoxFit.fill,
                                     useArtboardSize: true)
-                                : Row(
+                                : GestureDetector(
+                                key: _specificWidgetKey,
+                                onTap: () {
+                                  context.read<CurrentGameCubit>().getTheBackGround();
+                                },
+                                child:Row(
                                     children: [
-                                      10.pw,
-                                      SvgPicture.asset(AppImages.iconGiftBox),
+                                      16.pw,
+                                      Column(
+                                        children: [
+                                          SvgPicture.asset(AppImages.iconGiftBox),
+                                          8.ph
+                                        ],
+                                      ),
                                     ],
                                   ))) //:SizedBox()
 

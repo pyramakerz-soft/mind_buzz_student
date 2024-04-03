@@ -57,14 +57,17 @@ class CurrentGameCubit extends Cubit<CurrentGameInitial> {
           emit(state.clearGiftBoxArtboard());
         }
       });
-      rocketAnimationController.addStatusListener((status) {
+      rocketAnimationController.addStatusListener((status) async {
         if (status == AnimationStatus.completed) {
+          log("###:${(totalCountOfQuestions - 1) == state.index}:${(totalCountOfQuestions - 1)}:${state.index}");
           if ((totalCountOfQuestions - 1) == state.index) {
             Utils.navigateAndRemoveUntilTo(
                 BlocProvider(
                     create: (_) => WhoAmICubit(), child: const WhoAmIScreen()),
                 context);
           } else {
+            await AudioPlayerClass.startPlaySound(
+                soundPath: AppSound.getRandomSoundOfCorrect());
             // emit(state.copyWith(giftBoxArtboard: null));
             increaseIndex();
             rocketAnimationController.reset();
@@ -73,6 +76,14 @@ class CurrentGameCubit extends Cubit<CurrentGameInitial> {
         }
       });
     }
+    else{
+
+      increaseIndex();
+
+      await AudioPlayerClass.startPlaySound(
+          soundPath: AppSound.getRandomSoundOfWrong());
+    }
+
 
     emit(state.copyWith(
       activeButton: true,

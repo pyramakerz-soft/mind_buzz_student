@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -83,14 +84,17 @@ class LoginScreen extends StatelessWidget {
                                   hintText: 'Password',
                                 ),
                                 16.ph,
-                                GestureDetector(
-                                  child: Text(
-                                    'Forgot password?',
-                                    style:
-                                        Theme.of(context).textTheme.titleSmall,
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: GestureDetector(
+                                    child: Text(
+                                      'Forgot password?',
+                                      style:
+                                          Theme.of(context).textTheme.titleSmall,
+                                    ),
                                   ),
                                 ),
-                                20.ph,
+                                40.ph,
                                 BlocConsumer<LoginDataBloc, LoginDataState>(
                                     listener: (context, state) {
                                   log('##state:$state');
@@ -123,7 +127,7 @@ class LoginScreen extends StatelessWidget {
                                                     password:
                                                         _passwordController
                                                             .text));
-                                          }, title: "Log In", width: 200,
+                                          }, title: "Log In", width: MediaQuery.of(context).size.width-50,
                                         ));
                                   }
                                 })

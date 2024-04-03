@@ -1,29 +1,59 @@
 import 'dart:developer';
 
-import 'package:flame/extensions.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
+import 'package:mind_buzz_refactor/core/utils.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 
 import '../../../../core/vars.dart';
+import '../../../chapters/domain/entities/chapter_model.dart';
+import '../../../math_book1/entities/passed_data.dart';
+import '../../../math_book1/manager/current_game_cubit.dart';
+import '../../../math_book1/manager/inherited_widget_game.dart';
+import '../../../math_book1/mathematical_transactions/presentation/pages/mathematical_transactions_screen.dart';
+import '../../../math_book1/screen/my_home_page_book1.dart';
 import '../manager/lesson_bloc.dart';
 import '../widgets/lesson_item.dart';
 import '../widgets/lock_lesson_item.dart';
 
-class LessonScreen extends StatelessWidget {
+class LessonScreen extends StatefulWidget {
+
   final String programId;
   final String programName;
-
   const LessonScreen(
       {Key? key, required this.programId, required this.programName})
       : super(key: key);
+  @override
+  State<StatefulWidget> createState() {
+    return _LessonScreen();
+  }
+}
 
+class _LessonScreen extends State<LessonScreen>{
+
+  String sharedData = '';
+
+  void updateData(String newData) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      setState(() {
+        sharedData = newData;
+      });
+    });
+  }
+  List<ChapterModel> chapters = [
+    ChapterModel(isOpen: true),
+    ChapterModel(isOpen: false),
+    ChapterModel(isOpen: false),
+    ChapterModel(isOpen: false),
+    ChapterModel(isOpen: false),
+  ];
   @override
   Widget build(BuildContext context) {
-    final WIDTH = (MediaQuery.of(context).size.width);
+    final width = (MediaQuery.of(context).size.width);
     return Scaffold(
         backgroundColor: Colors.white,
         body: Column(
@@ -32,7 +62,7 @@ class LessonScreen extends StatelessWidget {
             Container(
               height: 140,
               width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage(AppImages.imageAppBarOfUnits),
                       fit: BoxFit.fill)),
@@ -47,10 +77,10 @@ class LessonScreen extends StatelessWidget {
                         },
                         child: Container(
                             padding: const EdgeInsets.all(10),
-                            height: 50,
-                            width: 50,
+                            height: 45,
+                            width: 45,
                             alignment: Alignment.center,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: AppColor.darkBlueColor3),
                             child: SvgPicture.asset(
@@ -72,9 +102,9 @@ class LessonScreen extends StatelessWidget {
                         child: Container(
                             padding: const EdgeInsets.all(10),
                             alignment: Alignment.center,
-                            height: 50,
-                            width: 50,
-                            decoration: BoxDecoration(
+                            height: 45,
+                            width: 45,
+                            decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: AppColor.darkBlueColor3),
                             child: SvgPicture.asset(
@@ -90,66 +120,140 @@ class LessonScreen extends StatelessWidget {
               height: MediaQuery.of(context).size.height - (140 + 120),
               child: BlocProvider<LessonBloc>(
                   create: (_) => di.sl<LessonBloc>()
-                    ..add(GetUnitRequest(programId: int.parse(programId))),
+                    ..add(GetUnitRequest(programId: int.parse(widget.programId))),
                   child: BlocConsumer<LessonBloc, LessonState>(
                       listener: (context, state) {
                     log('state:$state');
                   }, builder: (context, state) {
                     if (state is GetProgramsCompleteInitial) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          20.ph,
-                          ...List.generate(state.data.length, (index) {
-                            return SizedBox(
-                              height: (WIDTH * 0.2622107969151671),
-                              width: WIDTH - 50,
-                              child: CustomPaint(
-                                  size: Size(WIDTH - 50, (WIDTH).toDouble()),
-                                  painter: LockLessonItemPainter(),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                      return Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            20.ph,
+                            ...List.generate(state.data.length, (index) {
+                              return SizedBox(
+                                height: (width * 0.2622107969151671),
+                                width: width - 50,
+                                child: GestureDetector(
+                                  onTap: (){
+                                    if(chapters[index].isOpen==true){
+                                      Utils.navigateTo(BlocProvider(
+                                          create: (_) => CurrentGameCubit(),
+                                          child:  DataContainer(
+                                                    data: sharedData,
+                                                    updateData: updateData,
+                                                    child:const MyHomePageBook1(
+                                                question: MathematicalTransactionsScreen(),)
+                                              )), context);
+                                    }
+                                  },
+                                  child: Stack(
+                                    clipBehavior : Clip.none,
                                     children: [
-                                      ...List.generate(
-                                          DefaultChapterData
-                                                  .getTheNumberOfChapter(
-                                                      number: index + 1)
-                                              .length,
-                                          (index2) => SvgPicture.asset(
-                                              DefaultChapterData
-                                                  .getTheNumberOfChapter(
-                                                      number:
-                                                          index + 1)[index2])),
-                                      SizedBox(
-                                        width: (WIDTH / 2)+30 ,
-                                        child: Center(
-                                          child: Text(
-                                            state.data[index].name ?? '',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodySmall
-                                                ?.copyWith(
-                                                    fontSize: 22,
-                                                    fontWeight:
-                                                        FontWeight.w700),
-                                            textAlign: TextAlign.center,
-                                          ),
+
+                                      Column(
+                                        children: [
+
+                                          CustomPaint(
+                                              size: Size(width - 50, 100),
+                                              painter:chapters[index].isOpen==true? LessonItemPainter():LockLessonItemPainter(),
+                                              child: SizedBox(
+                                                height: 90,
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+
+
+                                                        ...List.generate(
+                                                            DefaultChapterData
+                                                                .getTheNumberOfChapter(
+                                                                number: index + 1)
+                                                                .length,
+                                                                (index2) => SvgPicture.asset(
+                                                                DefaultChapterData
+                                                                    .getTheNumberOfChapter(
+                                                                    number:
+                                                                    index + 1)[index2],
+                                                                  height: 45,
+                                                                )),
+                                                    10.pw,
+                                                    SizedBox(
+                                                      width: (width / 2)+30 ,
+                                                      child: Center(
+                                                        child: Text(
+                                                          state.data[index].name ?? '',
+                                                          style: Theme.of(context)
+                                                              .textTheme
+                                                              .bodySmall
+                                                              ?.copyWith(
+                                                                  fontSize: 22,
+                                                                  fontWeight:
+                                                                      FontWeight.w700),
+                                                          textAlign: TextAlign.center,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    40.pw
+                                                  ],
+                                                ),
+                                              )),
+                                        ],
+                                      ),
+                                      Positioned(
+                                        top:-25,
+
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                              // height: 50,
+                                                margin: const EdgeInsets.only(
+                                                    top: 20),
+                                                child: Transform.rotate(
+                                                    angle: (-10) *
+                                                        3.141592653589793 /
+                                                        180,
+                                                    // Rotate 45 degrees in radians
+                                                    child: Image.asset(
+                                                      chapters[index].isOpen==true?AppImages.imageStar:AppImages.imageEmptyStar,
+                                                      height: 20,
+                                                    ))),
+                                            Image.asset(
+                                              chapters[index].isOpen==true?AppImages.imageStar:AppImages.imageEmptyStar,
+                                              height: 20,
+                                            ),
+                                            Container(
+                                              // height: 50,
+                                                margin: const EdgeInsets.only(
+                                                    top: 20),
+                                                child: Transform.rotate(
+                                                    angle: (10) *
+                                                        3.141592653589793 /
+                                                        180,
+                                                    // Rotate 45 degrees in radians
+                                                    child: Image.asset(
+                                                      chapters[index].isOpen==true?AppImages.imageStar:AppImages.imageEmptyStar,
+                                                      height: 20,
+                                                    ))),
+                                          ],
                                         ),
                                       ),
-                                      40.pw
+
                                     ],
-                                  )),
-                            );
-                          }),
-                        ],
+                                  ),
+                                ),
+                              );
+                            }),
+                          ],
+                        ),
                       );
                     } else if (state is GetProgramsLoadingInitial) {
                       return const Center(child: CircularProgressIndicator());
                     } else {
-                      return SizedBox();
+                      return const SizedBox();
                     }
                   })),
             ),

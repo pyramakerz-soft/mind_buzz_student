@@ -9,6 +9,8 @@ import '../../../../core/app_color.dart';
 import '../../../../core/utils.dart';
 import '../../../home/presentation/bloc/get_programs_home_bloc.dart';
 import '../../../home/presentation/page/home_screen.dart';
+import '../../../loading_intro/presentation/bloc/loading_cubit.dart';
+import '../../../login/presentation/page/login_screen.dart';
 import '../../../login/presentation/widgets/button_start_game.dart';
 import '../manager/who_am_i_cubit.dart';
 import '../widgets/item_in_choose.dart';
@@ -39,8 +41,13 @@ class WhoAmIScreen extends StatelessWidget {
                       ),
                       GestureDetector(
                           onTap: () {
-                            Navigator.of(context).pop();
-                            di.sl<GetProgramsHomeBloc>().add(LogOutRequest());
+                            // Navigator.of(context).pop();
+                            // di.sl<GetProgramsHomeBloc>().add(LogOutRequest());
+                            Utils.navigateAndRemoveUntilTo(
+                                BlocProvider(
+                                    create: (_) => LoadingCubit(),
+                                    child: LoginScreen()),
+                                context);
                           },
                           child: Container(
                               padding: const EdgeInsets.all(10),
@@ -97,15 +104,13 @@ class WhoAmIScreen extends StatelessWidget {
             const Spacer(),
             ButtonLogin(
               dataFunction: () {
-                if(currentIndex==1) {
-                  Utils.navigateAndRemoveUntilTo(
-                      const HomeScreen(), context);
-                }else{
+                if (currentIndex == 1) {
+                  Utils.navigateAndRemoveUntilTo(const HomeScreen(), context);
+                } else {
                   const snackBar = SnackBar(
                     content: Text('select who you are'),
                   );
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(snackBar);
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 }
               },
               title: "Next",

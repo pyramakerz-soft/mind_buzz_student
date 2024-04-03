@@ -4,10 +4,24 @@ import 'package:mind_buzz_refactor/core/assets_images.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 
 import '../../../../core/app_color.dart';
+import '../../../../core/utils.dart';
+import '../../../lesson/presentation/pages/lesson_screen.dart';
+import '../../domain/entities/chapter_model.dart';
 import '../widgets/dotted_line_painter.dart';
 
 class ChaptersScreen extends StatelessWidget {
-  const ChaptersScreen({Key? key}) : super(key: key);
+  final String programId;
+  final String programName;
+  ChaptersScreen(
+      {Key? key, required this.programId, required this.programName});
+  List<ChapterModel> chapters = [
+    ChapterModel(isOpen: true),
+    ChapterModel(isOpen: false),
+    ChapterModel(isOpen: false),
+    ChapterModel(isOpen: false),
+    ChapterModel(isOpen: false),
+  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +29,10 @@ class ChaptersScreen extends StatelessWidget {
     final subWidth = MediaQuery.of(context).size.width / 5;
     final List<Offset> positions = [
       const Offset(10, 10),
-      Offset(subWidth, subHeight+20),
-      Offset(subWidth+10, (subHeight * 2)+40),
-      Offset(subWidth * 3-10, subHeight * 3-20),
-      Offset(subWidth * 3-10, subHeight * 4+10),
+      Offset(subWidth, subHeight + 20),
+      Offset(subWidth + 10, (subHeight * 2) + 40),
+      Offset(subWidth * 3 - 10, subHeight * 3 - 20),
+      Offset(subWidth * 3 - 10, subHeight * 4 + 10),
     ];
 
     return Scaffold(
@@ -36,14 +50,15 @@ class ChaptersScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      ///todo: make the icon general
                       GestureDetector(
                           onTap: () {
                             Navigator.of(context).pop();
                           },
                           child: Container(
                               padding: const EdgeInsets.all(10),
-                              height: 50,
-                              width: 50,
+                              height: 45,
+                              width: 45,
                               alignment: Alignment.center,
                               decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
@@ -68,8 +83,8 @@ class ChaptersScreen extends StatelessWidget {
                           child: Container(
                               padding: const EdgeInsets.all(10),
                               alignment: Alignment.center,
-                              height: 50,
-                              width: 50,
+                              height: 45,
+                              width: 45,
                               decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: AppColor.darkBlueColor3),
@@ -103,54 +118,115 @@ class ChaptersScreen extends StatelessWidget {
                             height: 120,
                             child: Column(
                               children: [
-                                Row(
-                                  children: [
-                            Container(
-                            // height: 50,
-                            margin: const EdgeInsets.only(top: 20),
-                            child:Transform.rotate(
-                                        angle: (-10) *
-                                            3.141592653589793 /
-                                            180, // Rotate 45 degrees in radians
-                                        child: Image.asset(
-                                          AppImages.imageStar,
-                                          height: 20,
-                                        ))),
-                                    Image.asset(
-                                      AppImages.imageStar,
-                                      height: 20,
-                                    ),
-        Container(
-          // height: 50,
-          margin: const EdgeInsets.only(top: 20),
-          child:Transform.rotate(
-                                        angle: (10) *
-                                            3.141592653589793 /
-                                            180, // Rotate 45 degrees in radians
-                                        child: Image.asset(
-                                          AppImages.imageStar,
-                                          height: 20,
-                                        ))),
-                                  ],
-                                ),
-                                Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    SvgPicture.asset(
-                                      i == 0 || i % 2 == 0
-                                          ? AppImages.iconCurrentChapter1
-                                          : AppImages.iconCurrentChapter2,
-                                    ),
-                                    Text(
-                                      "${i + 1}",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall
-                                          ?.copyWith(
+                                if (chapters[i].isOpen == true)...{
+
+                                  Row(
+                                    children: [
+                                      Container(
+                                        // height: 50,
+                                          margin: const EdgeInsets.only(
+                                              top: 20),
+                                          child: Transform.rotate(
+                                              angle: (-10) *
+                                                  3.141592653589793 /
+                                                  180,
+                                              // Rotate 45 degrees in radians
+                                              child: Image.asset(
+                                                AppImages.imageStar,
+                                                height: 20,
+                                              ))),
+                                      Image.asset(
+                                        AppImages.imageStar,
+                                        height: 20,
+                                      ),
+                                      Container(
+                                        // height: 50,
+                                          margin: const EdgeInsets.only(
+                                              top: 20),
+                                          child: Transform.rotate(
+                                              angle: (10) *
+                                                  3.141592653589793 /
+                                                  180,
+                                              // Rotate 45 degrees in radians
+                                              child: Image.asset(
+                                                AppImages.imageStar,
+                                                height: 20,
+                                              ))),
+                                    ],
+                                  ),
+                                }else...{
+                                  Row(
+                                    children: [
+                                      Container(
+                                        // height: 50,
+                                          margin: const EdgeInsets.only(
+                                              top: 20),
+                                          child: Transform.rotate(
+                                              angle: (-10) *
+                                                  3.141592653589793 /
+                                                  180,
+                                              // Rotate 45 degrees in radians
+                                              child: Image.asset(
+                                                AppImages.imageEmptyStar,
+                                                height: 20,
+                                              ))),
+                                      Image.asset(
+                                        AppImages.imageEmptyStar,
+                                        height: 20,
+                                      ),
+                                      Container(
+                                        // height: 50,
+                                          margin: const EdgeInsets.only(
+                                              top: 20),
+                                          child: Transform.rotate(
+                                              angle: (10) *
+                                                  3.141592653589793 /
+                                                  180,
+                                              // Rotate 45 degrees in radians
+                                              child: Image.asset(
+                                                AppImages.imageEmptyStar,
+                                                height: 20,
+                                              ))),
+                                    ],
+                                  ),
+                                },
+                                GestureDetector(
+                                  onTap: () {
+                                    Utils.navigateTo(
+                                        LessonScreen(
+                                          programId: programId,
+                                          programName: programName,
+                                        ),
+                                        context);
+                                  },
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      if (chapters[i].isOpen == false)...{
+                                        SvgPicture.asset(
+                                          AppImages.iconLockChapter,
+                                          // width: 50,
+                                          // height: 50,
+                                        ),
+                                      }else...{
+                                        SvgPicture.asset(
+                                          i == 0 || i % 2 == 0
+                                              ? AppImages.iconCurrentChapter1
+                                              : AppImages.iconCurrentChapter2,
+                                        ),
+                                        Text(
+                                          "${i + 1}",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall
+                                              ?.copyWith(
                                               fontSize: 25,
                                               fontWeight: FontWeight.w700),
-                                    ),
-                                  ],
+                                        ),
+                                      },
+
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),

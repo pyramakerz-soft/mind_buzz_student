@@ -5,6 +5,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 abstract class TalkTts {
   static FlutterTts flutterTts = FlutterTts();
 
+  static String data = '';
   static startTalk(
       {required String text,
       Function? actionOfStart,
@@ -12,10 +13,11 @@ abstract class TalkTts {
       Function? actionCancel,
       Function? actionComplete}) async {
     log('start talk:$text');
+    data = text;
     flutterTts.setPitch(1.0);
     flutterTts.setSpeechRate(0.4);
     flutterTts.setStartHandler(() {
-      log('tts start');
+      log('tts start:$data');
       if(actionOfStart != null) {
         actionOfStart();
       }

@@ -8,6 +8,9 @@ abstract class AppImages {
   static const String imageAvatar4 = "${mainPathOfImages}avatar_4.png";
   static const String buttonImage = "${mainPathOfImages}button.png";
   static const String iconCoverOfStar = "${mainPathOfImages}cover_of_star.png";
+  static const String introBee = "${mainPathOfImages}intro_bee.png";
+  static const String imageScreen1 = "${mainPathOfImages}screen1.png";
+
   static const String iconCoverOfSweet =
       "${mainPathOfImages}cover_of_sweet.png";
   static const String iconDog = "${mainPathOfImages}dog.png";
@@ -34,6 +37,7 @@ abstract class AppImages {
   static const String imageChild = "${mainPathOfImages}child.png";
   static const String imageParent = "${mainPathOfImages}parent.png";
   static const String imageStar = "${mainPathOfImages}star.png";
+  static const String imageEmptyStar = "${mainPathOfImages}empty_star.png";
   static const String bgOfMath = "${mainPathOfImages}bg_of_math.png";
   static const String iconGetInstruction =
       '${mainPathOfImages}get_instruction.png';
@@ -78,4 +82,6 @@ abstract class AppImages {
   static const String iconBlimp = '${mainPathOfSvg}blimp.svg';
   static const String iconGiftBox = '${mainPathOfSvg}gift_box.svg';
   static const String iconCandy = '${mainPathOfSvg}candy.svg';
+  static const String iconLandOfGiftBox = '${mainPathOfSvg}land_of_gift_box.svg';
+  static const String iconLockChapter = '${mainPathOfSvg}lock_chapter.svg';
 }
