@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rive/rive.dart';
 
 import '../../../core/assets_animation.dart';
+import '../../../core/assets_sound.dart';
+import '../../../core/audio_player.dart';
 import '../../../core/talk_tts.dart';
 import '../../../core/utils.dart';
 import '../../who_am_i/presentation/manager/who_am_i_cubit.dart';
@@ -41,6 +43,7 @@ class CurrentGameCubit extends Cubit<CurrentGameInitial> {
     emit(state.copyWith(activeButton: false));
     log('checkCorrect:${state.giftBoxArtboard}');
     if (correctAnswer == currentAnswer) {
+      AudioPlayerClass.startPlaySound(soundPath: AppSound.rocketSound);
       rocketAnimationController.forward(); // Start the animation
       Future.delayed(const Duration(milliseconds: 1400)).then((value) {
         getTheBackGround();

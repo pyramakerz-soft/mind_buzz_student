@@ -9,6 +9,7 @@ import 'features/loading_intro/presentation/bloc/loading_cubit.dart';
 import 'core/injection/injection_container.dart' as di;
 import 'features/login/presentation/bloc/login_data_bloc.dart';
 import 'features/login/presentation/page/login_screen.dart';
+import 'features/math_book1/entities/passed_data.dart';
 import 'features/math_book1/manager/inherited_widget_game.dart';
 import 'features/math_book1/manager/current_game_cubit.dart';
 import 'features/math_book1/screen/my_home_page_book1.dart';
@@ -49,9 +50,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyApp extends State<MyApp> {
-  String sharedData = '';
+  PassedDataModel sharedData = PassedDataModel();
 
-  void updateData(String newData) {
+  void updateData(PassedDataModel newData) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       setState(() {
         sharedData = newData;

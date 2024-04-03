@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flame/game.dart' show GameWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -89,7 +91,8 @@ class _MyHomePageBook1 extends State<MyHomePageBook1>
 
   @override
   Widget build(BuildContext context) {
-    String? data = DataContainer.of(context)?.data;
+    String? data = DataContainer.of(context)?.data.message;
+    bool? activeButton = DataContainer.of(context)?.data.activeButton;
     // getData(context: context);
     final candyAnimationController =
         context.watch<CurrentGameCubit>().state.candyAnimationController;
@@ -172,6 +175,10 @@ class _MyHomePageBook1 extends State<MyHomePageBook1>
                       children: [
                         GestureDetector(
                           onTap: () async {
+                            log('##activeButton:$activeButton');
+                            if (activeButton == false) {
+                              return;
+                            }
                             context
                                 .read<CurrentGameCubit>()
                                 .sayInstruction(message: data ?? '');

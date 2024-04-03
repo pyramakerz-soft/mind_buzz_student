@@ -10,12 +10,15 @@ class AppSound {
   // static const String successSound = "${mainPathOfSoundBase}success.mp3";
   static const String starSound = "${mainPathOfSoundBase}star_sound.wav";
   // static const String wrongAnswerSound = "${mainPathOfSoundBase}wrong_answer.ogg";
-  static const String notThatOneSound = "${mainPathOfSoundBase}not_that_one.ogg";
+  static const String notThatOneSound =
+      "${mainPathOfSoundBase}not_that_one.ogg";
   static const String notThatOneSound1 = "${mainPathOfSoundBase}nope.ogg";
   static const String notThatOneSound2 = "${mainPathOfSoundBase}oops.ogg";
-  static const String youFoundItSound = "${mainPathOfSoundBase}you_found_it.ogg";
+  static const String youFoundItSound =
+      "${mainPathOfSoundBase}you_found_it.ogg";
   static const String youFoundItSound1 = "${mainPathOfSoundBase}good_job.ogg";
   static const String completeStarSound = "${mainPathOfSoundBase}yahoo.ogg";
+  static const String rocketSound = "${mainPathOfSoundBase}rocket.wav";
 
   static List ofSoundsOfCorrect = [
     youFoundItSound,

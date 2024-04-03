@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../entities/passed_data.dart';
+
 class DataContainer extends InheritedWidget {
-  final String data;
-  final Function(String) updateData;
+  final PassedDataModel data;
+  final Function(PassedDataModel) updateData;
 
   DataContainer({
     required this.data,

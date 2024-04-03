@@ -7,6 +7,7 @@ import '../../../../../core/main_math.dart';
 import '../../../../../core/utils.dart';
 import '../../../../who_am_i/presentation/manager/who_am_i_cubit.dart';
 import '../../../../who_am_i/presentation/pages/who_am_i_screen.dart';
+import '../../../entities/passed_data.dart';
 import '../../../manager/inherited_widget_game.dart';
 import '../../../manager/current_game_cubit.dart';
 import '../manager/contact_lesson_bloc.dart';
@@ -18,8 +19,8 @@ class MathematicalTransactionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentIndex = context.watch<CurrentGameCubit>().state.index ?? 0;
-    // final activeButton =
-    //     context.watch<CurrentGameCubit>().state.activeButton ?? true;
+    final activeButton =
+        context.watch<CurrentGameCubit>().state.activeButton ?? true;
     return BlocProvider<ContactLessonBloc>(
         create: (_) => di.sl<ContactLessonBloc>()
           ..add(GetContactLessonRequest(programId: int.parse('0'))),
@@ -34,8 +35,8 @@ class MathematicalTransactionsScreen extends StatelessWidget {
           log('state:$state');
         }, builder: (context, state) {
           if (state is GetContactInitial) {
-            DataContainer.of(context)
-                ?.updateData(state.data[currentIndex].message);
+            DataContainer.of(context)?.updateData(
+                PassedDataModel(message: state.data[currentIndex].message));
 
             return BlocProvider(
               create: (_) => CurrentGameCubit(
@@ -124,22 +125,33 @@ class MathematicalTransactionsScreen extends StatelessWidget {
                             height: MediaQuery.of(context).size.height / 6,
                             child: GestureDetector(
                               onTap: () async {
-                                // log("context.watch<CurrentGameCubit>().state.activeButton:${context.read<CurrentGameCubit>().state.activeButton}");
-                                // if (context
-                                //         .read<CurrentGameCubit>()
-                                //         .state
-                                //         .activeButton ==
-                                //     true) {
-                                context.read<CurrentGameCubit>().checkCorrect(
-                                    correctAnswer: state
-                                            .data[currentIndex].correctAnswer ??
-                                        0,
-                                    currentAnswer: (state.data[currentIndex]
-                                            .numbersOfAnswers?[index] ??
-                                        0),
-                                    context: context,
-                                    totalCountOfQuestions: state.data.length);
-                                // }
+                                if (activeButton == true) {
+                                  DataContainer.of(context)?.updateData(
+                                      PassedDataModel(
+                                          message:
+                                              state.data[currentIndex].message,
+                                          activeButton: false));
+                                  await context
+                                      .read<CurrentGameCubit>()
+                                      .checkCorrect(
+                                          correctAnswer: state
+                                                  .data[currentIndex]
+                                                  .correctAnswer ??
+                                              0,
+                                          currentAnswer: (state
+                                                  .data[currentIndex]
+                                                  .numbersOfAnswers?[index] ??
+                                              0),
+                                          context: context,
+                                          totalCountOfQuestions:
+                                              state.data.length);
+                                }
+
+                                DataContainer.of(context)?.updateData(
+                                    PassedDataModel(
+                                        message:
+                                            state.data[currentIndex].message,
+                                        activeButton: true));
                               },
                               child: CardOfAnswer(
                                   number: state.data[currentIndex]
