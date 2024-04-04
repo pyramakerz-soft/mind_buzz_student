@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 import '../../../../../../../core/injection/injection_container.dart' as di;
-import '../../../../../core/main_math.dart';
+import '../../../../../core/math/main_math.dart';
 import '../../../../../core/utils.dart';
 import '../../../../who_am_i/presentation/manager/who_am_i_cubit.dart';
 import '../../../../who_am_i/presentation/pages/who_am_i_screen.dart';

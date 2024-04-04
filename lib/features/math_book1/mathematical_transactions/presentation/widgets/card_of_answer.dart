@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/main_math.dart';
+import '../../../../../core/math/main_math.dart';
 
 class CardOfAnswer extends StatelessWidget {
   final int number;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'app_color.dart';
-import 'app_images_of_numbers.dart';
+import 'math/app_images_of_numbers.dart';
 import 'assets_images.dart';
 
 extension EmptySpace on num {
@@ -10,20 +10,9 @@ extension EmptySpace on num {
   SizedBox get pw => SizedBox(width: toDouble());
 }
 
-abstract class PaperImages {
-  static List paper = [
-    AppImages.iconLevel1OfPaper,
-    AppImages.iconLevel2OfPaper,
-    AppImages.iconLevel3OfPaper,
-    AppImages.iconLevel4OfPaper,
-    AppImages.iconLevel5OfPaper,
-  ];
-}
-
 enum StateOfAvatar { thinking, talking, stop, success, wrong }
 enum TtsState { playing, stopped, forceStop }
 
-bool stateOfAppIsOffline = true;
 
 
 abstract class DefaultHomeData {

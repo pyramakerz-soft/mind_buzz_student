@@ -1,24 +1,13 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_buzz_refactor/features/login/presentation/cubit/login_cubit.dart';
 import 'core/theme_text.dart';
-import 'features/chapters/presentation/pages/chapters_screens.dart';
-import 'features/games/presentation/bloc/game1/game_one_bloc.dart';
 import 'features/loading_intro/presentation/bloc/loading_cubit.dart';
 import 'core/injection/injection_container.dart' as di;
 import 'features/loading_intro/presentation/page/screen1.dart';
 import 'features/login/presentation/bloc/login_data_bloc.dart';
-import 'features/login/presentation/page/login_screen.dart';
-import 'features/math_book1/entities/passed_data.dart';
-import 'features/math_book1/manager/inherited_widget_game.dart';
-import 'features/math_book1/manager/current_game_cubit.dart';
-import 'features/math_book1/screen/my_home_page_book1.dart';
-import 'features/math_book1/mathematical_transactions/presentation/pages/mathematical_transactions_screen.dart';
-import 'features/who_am_i/presentation/manager/who_am_i_cubit.dart';
-import 'features/who_am_i/presentation/pages/who_am_i_screen.dart';
 
 Future<void> setPreferredOrientationLandscape() async {
   await SystemChrome.setPreferredOrientations([
@@ -59,7 +48,6 @@ class _MyApp extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
-          BlocProvider<GameOneBloc>(create: (_) => di.sl<GameOneBloc>()),
           BlocProvider<LoginDataBloc>(create: (_) => di.sl<LoginDataBloc>()),
           BlocProvider(
             create: (_) => LoginCubit(),

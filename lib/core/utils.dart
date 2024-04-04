@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'assets_images.dart';
 
 class Utils {
   static void navigateTo(Widget screen, BuildContext context) {
@@ -39,26 +38,5 @@ class Utils {
           child: child,
         ),
       );
-
-  static stateOfCurrentStar({required int count}) {
-    switch (count) {
-      case 0:
-        return AppImages.iconEmptyStar;
-      case 1:
-        return AppImages.iconStarLayer1;
-      case 2:
-        return AppImages.iconStarLayer2;
-      case 3:
-        return AppImages.iconStarLayer3;
-      case 4:
-        return AppImages.iconStarLayer4;
-      case 5:
-        return AppImages.iconStar;
-    }
-  }
-
-  static isLargeScreen({required BuildContext context}) {
-    return MediaQuery.of(context).size.shortestSide > 700;
-  }
 
 }
