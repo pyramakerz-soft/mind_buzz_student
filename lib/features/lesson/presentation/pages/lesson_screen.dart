@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
 import 'package:mind_buzz_refactor/core/utils.dart';
+import '../../../../core/assets_svg_images.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 
 import '../../../../core/vars.dart';
@@ -84,7 +85,7 @@ class _LessonScreen extends State<LessonScreen>{
                                 shape: BoxShape.circle,
                                 color: AppColor.darkBlueColor3),
                             child: SvgPicture.asset(
-                              AppImages.iconHome,
+                              AppSvgImages.iconHome,
                               fit: BoxFit.fill,
                               color: Colors.white,
                             ))),
@@ -108,7 +109,7 @@ class _LessonScreen extends State<LessonScreen>{
                                 shape: BoxShape.circle,
                                 color: AppColor.darkBlueColor3),
                             child: SvgPicture.asset(
-                              AppImages.iconAnalysis,
+                              AppSvgImages.iconAnalysis,
                               fit: BoxFit.fill,
                               color: Colors.white,
                             )))
@@ -263,8 +264,8 @@ class _LessonScreen extends State<LessonScreen>{
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SvgPicture.asset(AppImages.iconPartLesson1),
-                  SvgPicture.asset(AppImages.iconPartLesson2),
+                  SvgPicture.asset(AppSvgImages.iconPartLesson1),
+                  SvgPicture.asset(AppSvgImages.iconPartLesson2),
                 ],
               ),
             )

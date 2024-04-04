@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
+import '../../../../core/assets_svg_images.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 
 import '../../../../core/utils.dart';
@@ -55,7 +56,7 @@ class UnitScreen extends StatelessWidget {
                                 shape: BoxShape.circle,
                                 color: AppColor.darkBlueColor3),
                             child: SvgPicture.asset(
-                              AppImages.iconHome,
+                              AppSvgImages.iconHome,
                               fit: BoxFit.fill,
                               color: Colors.white,
                             ))),
@@ -79,7 +80,7 @@ class UnitScreen extends StatelessWidget {
                                 shape: BoxShape.circle,
                                 color: AppColor.darkBlueColor3),
                             child: SvgPicture.asset(
-                              AppImages.iconAnalysis,
+                              AppSvgImages.iconAnalysis,
                               fit: BoxFit.fill,
                               color: Colors.white,
                             )))

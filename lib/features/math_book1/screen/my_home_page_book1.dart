@@ -1,7 +1,5 @@
 import 'dart:developer';
 
-import 'package:flame/game.dart' show GameWidget;
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,12 +8,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:mind_buzz_refactor/features/math_book1/manager/current_game_cubit.dart';
 import 'package:rive/rive.dart';
-import '../../../core/assets_animation.dart';
 import '../../../core/assets_images.dart';
-import '../../../core/widgets/main_hive_riv.dart';
+import '../../../core/assets_svg_images.dart';
 import '../manager/current_game_state.dart';
 import '../manager/inherited_widget_game.dart';
-import '../mathematical_transactions/presentation/pages/mathematical_transactions_screen.dart';
 
 class MyHomePageBook1 extends StatefulWidget {
   final Widget question;
@@ -140,11 +136,11 @@ class _MyHomePageBook1 extends State<MyHomePageBook1>
                           Positioned(
                               bottom: -5,
                               left: 0,
-                              child: SvgPicture.asset(AppImages.iconBlimp)),
+                              child: SvgPicture.asset(AppSvgImages.iconBlimp)),
                           Positioned(
                             bottom: -5,
                             right: 0,
-                            child: SvgPicture.asset(AppImages.iconBlimp),
+                            child: SvgPicture.asset(AppSvgImages.iconBlimp),
                           )
                         ],
                       ),
@@ -194,7 +190,7 @@ class _MyHomePageBook1 extends State<MyHomePageBook1>
                     .read<CurrentGameCubit>()
                     .candyAnimationOffsetAnimation,
                 child: SvgPicture.asset(
-                  AppImages.iconCandy,
+                  AppSvgImages.iconCandy,
                   // key: _specificWidgetKey2,
 
                   // fit: BoxFit.fill,
@@ -243,7 +239,7 @@ class _MyHomePageBook1 extends State<MyHomePageBook1>
                                       16.pw,
                                       Column(
                                         children: [
-                                          SvgPicture.asset(AppImages.iconGiftBox),
+                                          SvgPicture.asset(AppSvgImages.iconGiftBox),
                                           8.ph
                                         ],
                                       ),

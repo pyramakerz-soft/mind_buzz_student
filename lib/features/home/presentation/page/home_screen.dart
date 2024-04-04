@@ -7,6 +7,7 @@ import 'package:mind_buzz_refactor/core/assets_images.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/assets_svg_images.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/talk_tts.dart';
 import '../../../login/presentation/cubit/login_cubit.dart';
@@ -74,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                             shape: BoxShape.circle,
                             color: AppColor.darkBlueColor3),
                         child: SvgPicture.asset(
-                          AppImages.iconLogout,
+                          AppSvgImages.iconLogout,
                           fit: BoxFit.fill,
                           color: Colors.white,
                         )))

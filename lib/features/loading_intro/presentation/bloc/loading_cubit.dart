@@ -9,35 +9,6 @@ import '../../../../core/assets_animation.dart';
 
 class LoadingCubit extends Cubit<Artboard?> {
   Artboard? riveArtboard;
-  LoadingCubit() : super(null) {
-    getTheBackGround();
-  }
+  LoadingCubit() : super(null);
 
-  getTheBackGround() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      rootBundle.load(AppAnimation.loadingRiv).then(
-        // rootBundle.load(AppAnimations.pandaAnimation).then(
-            (data) async {
-          try {
-            riveArtboard = null;
-            // isDance = null;
-            final file = RiveFile.import(data);
-            final artboard = file.mainArtboard;
-
-            var controller = StateMachineController.fromArtboard(
-                artboard, 'State Machine 1');
-
-            if (controller != null) {
-              artboard.addController(controller);
-              // isDance = controller.findSMI('success');
-            }
-            riveArtboard = artboard;
-            emit(riveArtboard);
-          } catch (e) {
-            log(e.toString());
-          }
-        },
-      );
-    });
-  }
 }

@@ -4,6 +4,7 @@ import 'package:mind_buzz_refactor/core/assets_images.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 
 import '../../../../core/app_color.dart';
+import '../../../../core/assets_svg_images.dart';
 import '../../../../core/utils.dart';
 import '../../../lesson/presentation/pages/lesson_screen.dart';
 import '../../domain/entities/chapter_model.dart';
@@ -64,7 +65,7 @@ class ChaptersScreen extends StatelessWidget {
                                   shape: BoxShape.circle,
                                   color: AppColor.darkBlueColor3),
                               child: SvgPicture.asset(
-                                AppImages.iconHome,
+                                AppSvgImages.iconHome,
                                 fit: BoxFit.fill,
                                 color: Colors.white,
                               ))),
@@ -89,7 +90,7 @@ class ChaptersScreen extends StatelessWidget {
                                   shape: BoxShape.circle,
                                   color: AppColor.darkBlueColor3),
                               child: SvgPicture.asset(
-                                AppImages.iconAnalysis,
+                                AppSvgImages.iconAnalysis,
                                 fit: BoxFit.fill,
                                 color: Colors.white,
                               )))
@@ -204,15 +205,15 @@ class ChaptersScreen extends StatelessWidget {
                                     children: [
                                       if (chapters[i].isOpen == false)...{
                                         SvgPicture.asset(
-                                          AppImages.iconLockChapter,
+                                          AppSvgImages.iconLockChapter,
                                           // width: 50,
                                           // height: 50,
                                         ),
                                       }else...{
                                         SvgPicture.asset(
                                           i == 0 || i % 2 == 0
-                                              ? AppImages.iconCurrentChapter1
-                                              : AppImages.iconCurrentChapter2,
+                                              ? AppSvgImages.iconCurrentChapter1
+                                              : AppSvgImages.iconCurrentChapter2,
                                         ),
                                         Text(
                                           "${i + 1}",

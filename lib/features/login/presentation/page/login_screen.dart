@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import '../../../../core/assets_svg_images.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 
 import '../../../../core/assets_images.dart';
@@ -39,7 +40,7 @@ class LoginScreen extends StatelessWidget {
                   child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  SvgPicture.asset(AppImages.iconSkyLogin),
+                  SvgPicture.asset(AppSvgImages.iconSkyLogin),
                   Image.asset(AppImages.imageBeeLogin),
                 ],
               )),
@@ -48,7 +49,7 @@ class LoginScreen extends StatelessWidget {
                 child: Stack(
                   children: [
                     SvgPicture.asset(
-                      AppImages.iconCoverOfLogin,
+                      AppSvgImages.iconCoverOfLogin,
                       width: MediaQuery.of(context).size.width,
                       fit: BoxFit.fill,
                     ),
