@@ -10,9 +10,11 @@ import '../../../../../core/assets_animation.dart';
 part 'animation_unit_state.dart';
 
 class AnimationUnitCubit extends Cubit<AnimationUnitInitial> {
-  AnimationUnitCubit() : super(AnimationUnitInitial());
+  AnimationUnitCubit() : super(AnimationUnitInitial()){
+    animationBeeTitleAvatar();
+  }
 
-  animationBee1Avatar() {
+  animationBee1Avatar({bool? isTwo}) {
 
     rootBundle.load(AppAnimation.unitsBee).then(
             (data) async {
@@ -30,15 +32,22 @@ class AnimationUnitCubit extends Cubit<AnimationUnitInitial> {
               artboard.addController(controller);
               // isDance = controller.findSMI('success');
             }
-            emit(state.copyWith(beeArtboard1: artboard));
+            if(isTwo==true){
+              emit(state.copyWith(beeArtboard2: artboard));
+            }else {
+              emit(state.copyWith(beeArtboard1: artboard));
+            }
           } catch (e) {
             log(e.toString());
           }
         },
       );
     Future.delayed(Duration(seconds: 5)).then((value){
-      emit(state.clearBee1());
-
+        if(isTwo==true){
+          emit(state.clearBee2());
+        }else {
+          emit(state.clearBee1());
+        }
     });
   }
 
@@ -74,7 +83,7 @@ class AnimationUnitCubit extends Cubit<AnimationUnitInitial> {
 
   animationBeeWithWaterAvatar() {
 
-    rootBundle.load(AppAnimation.unitsTree).then(
+    rootBundle.load(AppAnimation.wateringUnitsBee).then(
           (data) async {
         try {
           // isDance = null;
@@ -132,5 +141,29 @@ log('animationTreeAvatar');
     });
   }
 
+  animationBeeTitleAvatar() {
+    rootBundle.load(AppAnimation.beeTitleUnit).then(
+          (data) async {
+        try {
+          // isDance = null;
+          final file = RiveFile.import(data);
+          final artboard = file.mainArtboard;
+
+          var controller = StateMachineController.fromArtboard(
+              artboard, 'State Machine 1');
+          controller?.inputs.forEach((element) {
+            log('element:${element.name}');
+          });
+          if (controller != null) {
+            artboard.addController(controller);
+            // isDance = controller.findSMI('success');
+          }
+          emit(state.copyWith(beeArtboard3: artboard));
+        } catch (e) {
+          log(e.toString());
+        }
+      },
+    );
+  }
 
 }

@@ -8,7 +8,8 @@ Future<void> init() async {
   sl.registerFactory(() => GetUnitBloc(programUserUseCases: sl()));
   sl.registerFactory(() => LessonBloc(programUserUseCases: sl()));
   sl.registerFactory(() => ContactLessonBloc(programContactUserUseCases: sl()));
-  sl.registerFactory(() => GetProgramsHomeBloc(programUserUseCases: sl(), logOutUserUseCases: sl()));
+  sl.registerFactory(() =>
+      GetProgramsHomeBloc(programUserUseCases: sl(), logOutUserUseCases: sl()));
 
   //UseCase
   sl.registerLazySingleton(() => UnitUseCases(sl()));
@@ -19,28 +20,33 @@ Future<void> init() async {
   sl.registerLazySingleton(() => ContactLessonUseCases(sl()));
 
   //Repository
-  sl.registerLazySingleton<LoginRepository>(() => LoginRepositoryImpl(
-      remoteDataSource: sl(), networkInfo: sl()));
-  sl.registerLazySingleton<ProgramRepository>(() => HomeRepositoryImpl(
-      remoteDataSource: sl(), networkInfo: sl()));
-  sl.registerLazySingleton<ProgramUnitRepository>(() => UnitRepositoryImpl(
-      remoteDataSource: sl(), networkInfo: sl()));
-  sl.registerLazySingleton<ProgramLessonRepository>(() => LessonRepositoryImpl(
-      remoteDataSource: sl(), networkInfo: sl()));
-  sl.registerLazySingleton<ProgramContactLessonRepository>(() => ContactLessonRepositoryImpl(
-      remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<LoginRepository>(
+      () => LoginRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<ProgramRepository>(
+      () => HomeRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<ProgramUnitRepository>(
+      () => UnitRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<ProgramLessonRepository>(
+      () => LessonRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<ProgramContactLessonRepository>(() =>
+      ContactLessonRepositoryImpl(
+          localRemoteDataSource: sl(),
+          remoteDataSource: sl(),
+          networkInfo: sl()));
 
   //Datasources
   sl.registerLazySingleton<DataSourceRemotelyOfProgram>(
-          () => DataSourceRemotelyOfProgramImpl(dio: sl()));
+      () => DataSourceRemotelyOfProgramImpl(dio: sl()));
   sl.registerLazySingleton<DataSourceRemotelyOfLogin>(
-          () => DataSourceRemotelyOfLoginImpl(dio: sl()));
+      () => DataSourceRemotelyOfLoginImpl(dio: sl()));
   sl.registerLazySingleton<DataSourceRemotelyOfUnit>(
-          () => DataSourceRemotelyOfUnitImpl(dio: sl()));
+      () => DataSourceRemotelyOfUnitImpl(dio: sl()));
   sl.registerLazySingleton<DataSourceRemotelyOfLesson>(
-          () => DataSourceRemotelyOfLessonImpl(dio: sl()));
+      () => DataSourceRemotelyOfLessonImpl(dio: sl()));
   sl.registerLazySingleton<DataSourceRemotelyOfContactLesson>(
-          () => DataSourceRemotelyOfContactLessonImpl(dio: sl()));
+      () => DataSourceRemotelyOfContactLessonImpl(dio: sl()));
+  sl.registerLazySingleton<LocalDataSourceRemotelyOfContactLesson>(
+      () => LocalDataSourceRemotelyOfContactLessonImpl(dio: sl()));
 
   //! Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));

@@ -1,9 +1,7 @@
 import 'dart:developer';
 
 import 'package:flame/extensions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
@@ -15,7 +13,6 @@ import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/utils.dart';
 import '../../../../core/vars.dart';
 import '../../../chapters/presentation/pages/chapters_screens.dart';
-import '../../../lesson/presentation/pages/lesson_screen.dart';
 import '../manager/bloc/get_unit_bloc.dart';
 import '../manager/cubit/animation_unit_cubit.dart';
 import '../widgets/item_of_unit.dart';
@@ -30,7 +27,7 @@ class UnitScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final WIDTH = (MediaQuery.of(context).size.width / 2) + 50;
+    final width = (MediaQuery.of(context).size.width / 2) + 50;
     return Scaffold(
         backgroundColor: Colors.white,
         body: Stack(
@@ -40,7 +37,7 @@ class UnitScreen extends StatelessWidget {
                 Container(
                   height: 140,
                   width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(AppImages.imageAppBarOfUnits),
                           fit: BoxFit.fill)),
@@ -58,7 +55,7 @@ class UnitScreen extends StatelessWidget {
                                 height: 45,
                                 width: 45,
                                 alignment: Alignment.center,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: AppColor.darkBlueColor3),
                                 child: SvgPicture.asset(
@@ -83,7 +80,7 @@ class UnitScreen extends StatelessWidget {
                                 alignment: Alignment.center,
                                 height: 45,
                                 width: 45,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: AppColor.darkBlueColor3),
                                 child: SvgPicture.asset(
@@ -106,11 +103,12 @@ class UnitScreen extends StatelessWidget {
                         return Column(
                           children: [
                             Stack(
+                              clipBehavior: Clip.none,
                               children: [
                                 SizedBox(
                                   // alignment: Alignment.center,
                                   width: MediaQuery.of(context).size.width,
-                                  height: 58,
+                                  height: 100,
                                   child: Stack(
                                     alignment: Alignment.center,
                                     children: [
@@ -118,12 +116,13 @@ class UnitScreen extends StatelessWidget {
                                         left:
                                             MediaQuery.of(context).size.width -
                                                 60,
-                                        top: 0,
+                                        top: 21,
                                         child: Container(
                                           width: 6.39,
-                                          height: 58,
+                                          height: 100,
+
                                           clipBehavior: Clip.antiAlias,
-                                          decoration: BoxDecoration(),
+                                          decoration: const BoxDecoration(),
                                           child: Stack(
                                             children: [
                                               Positioned(
@@ -132,8 +131,10 @@ class UnitScreen extends StatelessWidget {
                                                 child: Container(
                                                   width: 15,
                                                   height: 58,
-                                                  decoration: BoxDecoration(
-                                                      color: AppColor.redColor),
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                          color: AppColor
+                                                              .redColor),
                                                 ),
                                               ),
                                               Positioned(
@@ -146,8 +147,10 @@ class UnitScreen extends StatelessWidget {
                                                   child: Container(
                                                     width: 19.65,
                                                     height: 19.65,
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.white),
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                            color:
+                                                                Colors.white),
                                                   ),
                                                 ),
                                               ),
@@ -166,9 +169,9 @@ class UnitScreen extends StatelessWidget {
                                           right: 14,
                                           bottom: 11,
                                         ),
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                             color: Color(0xFFD1232A)),
-                                        child: Row(
+                                        child: const Row(
                                           mainAxisSize: MainAxisSize.min,
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -189,6 +192,18 @@ class UnitScreen extends StatelessWidget {
                                           ],
                                         ),
                                       ),
+                                      Positioned(
+                                        left: 0,
+                                        child: BlocBuilder<AnimationUnitCubit,
+                                                AnimationUnitInitial>(
+                                            builder: (context, state) {
+                                          return state.beeArtboard3==null?SizedBox():Rive(
+                                            artboard: state.beeArtboard3!,
+                                            // fit: BoxFit.fitHeight,
+                                            useArtboardSize: true,
+                                          );
+                                        }),
+                                      )
                                     ],
                                   ),
                                 )
@@ -216,12 +231,12 @@ class UnitScreen extends StatelessWidget {
                                         ? false
                                         : true,
                                     child: SizedBox(
-                                      height: (WIDTH * 0.2692307692307692),
-                                      width: WIDTH,
+                                      height: (width * 0.2692307692307692),
+                                      width: width,
                                       child: CustomPaint(
                                           size: Size(
-                                              WIDTH,
-                                              (WIDTH * 0.2692307692307692)
+                                              width,
+                                              (width * 0.2692307692307692)
                                                   .toDouble()),
                                           //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
                                           painter: RPSCustomPainter(
@@ -257,7 +272,7 @@ class UnitScreen extends StatelessWidget {
                       } else if (state is GetProgramsLoadingInitial) {
                         return const Center(child: CircularProgressIndicator());
                       } else {
-                        return SizedBox();
+                        return const SizedBox();
                       }
                     })),
               ],
@@ -289,14 +304,17 @@ class UnitScreen extends StatelessWidget {
                             builder: (context, state) {
                               return state.beeArtboard1 == null
                                   ? SvgPicture.asset(AppSvgImages.iconUnitBee)
-                                  : Transform.flip(
-                                flipX: true,
-                                child: Rive(
-                                  artboard: state.beeArtboard1!,
-                                  // fit: BoxFit.fitHeight,
-                                  useArtboardSize: true,
-                                ),
-                              );
+                                  : Container(
+                                      margin: const EdgeInsets.only(
+                                          left: 5, bottom: 3),
+                                      child: Transform.flip(
+                                        flipX: true,
+                                        child: Rive(
+                                          artboard: state.beeArtboard1!,
+                                          // fit: BoxFit.fitHeight,
+                                          useArtboardSize: true,
+                                        ),
+                                      ));
                             },
                           )))),
                   Positioned(
@@ -346,65 +364,70 @@ class UnitScreen extends StatelessWidget {
                     child: SizedBox(
                         height: 300,
                         width: 100,
-                        child:  Stack(
-                              clipBehavior: Clip.none,
-                                children: [
-                              Positioned(
-                                  bottom: 50,
-                                  left: 0,
-                                  child: BlocBuilder<AnimationUnitCubit,
-                                      AnimationUnitInitial>(
-                                    builder: (context, state) {
-                                      return state.treeArtboard == null
-                                          ? GestureDetector(
-                                        onTap: () {
-                                          context
-                                              .read<AnimationUnitCubit>()
-                                              .animationTreeAvatar();
-                                        },
-                                        child:Container(
-                                          margin: EdgeInsets.only(bottom: 130, left: 20),
-                                          child: SvgPicture.asset(
-                                                AppSvgImages.iconTree,
-                                                height: 150,
-                                              ),
-                                        ))
-                                          : Container(
-                                        height: 300,
-                                            width: 300,
-                                            child: Rive(
-                                                artboard: state.treeArtboard!,
-                                                fit: BoxFit.fill,
-                                                useArtboardSize: true,
-
-                                              ),
-                                          );
-                                    },
-                                  )),
-                                  // Positioned(
-                                  //     bottom: -82,
-                                  //     left: 0,
-                                  //     child:  Container(
-                                  //       margin: EdgeInsets.only(bottom: 125, left: 20),
-                                  //       child: SvgPicture.asset(
-                                  //             AppSvgImages.iconTree,
-                                  //             height: 150,
-                                  //         width: 200,
-                                  //           ),
-                                  //     )
-                                  //       )
-                              // Positioned(
-                              //     bottom: 0,
-                              //     left: 0,
-                              //     child:
-                              //     SvgPicture.asset(
-                              //       AppSvgImages.iconTree1,
-                              //       height: 50,
-                              //       width: 70,
-                              //     )
-                              // )
-                            ])),
+                        child: Stack(clipBehavior: Clip.none, children: [
+                          Positioned(
+                              bottom: 50,
+                              left: 0,
+                              child: BlocBuilder<AnimationUnitCubit,
+                                  AnimationUnitInitial>(
+                                builder: (context, state) {
+                                  return state.treeArtboard == null
+                                      ? GestureDetector(
+                                          onTap: () {
+                                            context
+                                                .read<AnimationUnitCubit>()
+                                                .animationTreeAvatar();
+                                          },
+                                          child: Container(
+                                            margin: const EdgeInsets.only(
+                                                bottom: 125, left: 19),
+                                            child: SvgPicture.asset(
+                                              AppSvgImages.iconTree,
+                                              height: 160,
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ))
+                                      : SizedBox(
+                                          height: 300,
+                                          width: 300,
+                                          child: Rive(
+                                            artboard: state.treeArtboard!,
+                                            fit: BoxFit.fill,
+                                            useArtboardSize: true,
+                                          ),
+                                        );
+                                },
+                              )),
+                        ])),
                   ),
+                  Positioned(
+                      left: 20,
+                      bottom: 0,
+                      // left: 40,
+                      child: SizedBox(
+                          height: 50,
+                          child: GestureDetector(onTap: () {
+                            context
+                                .read<AnimationUnitCubit>()
+                                .animationBee1Avatar(isTwo: true);
+                          }, child: BlocBuilder<AnimationUnitCubit,
+                              AnimationUnitInitial>(
+                            builder: (context, state) {
+                              return state.beeArtboard2 == null
+                                  ? SvgPicture.asset(AppSvgImages.iconUnitBee)
+                                  : Container(
+                                      margin: const EdgeInsets.only(
+                                          left: 0, bottom: 3),
+                                      child: Transform.flip(
+                                        flipX: true,
+                                        child: Rive(
+                                          artboard: state.beeArtboard2!,
+                                          // fit: BoxFit.fitHeight,
+                                          useArtboardSize: true,
+                                        ),
+                                      ));
+                            },
+                          )))),
                 ],
               ),
             )
