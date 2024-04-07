@@ -16,8 +16,7 @@ import '../../domain/entities/lesson_questions.dart';
 import 'current_game_state.dart';
 
 class CurrentGameCubit extends Cubit<CurrentGameInitial> {
-  CurrentGameCubit({this.index})
-      : super(CurrentGameInitial());
+  CurrentGameCubit({this.index}) : super(CurrentGameInitial());
   final int? index;
 
   sayInstruction({required String message}) async {
@@ -35,7 +34,7 @@ class CurrentGameCubit extends Cubit<CurrentGameInitial> {
     emit(state.copyWith(index: 0));
   }
 
-  defaultActionOfSuccessAnswer(){
+  defaultActionOfSuccessAnswer() {
     emit(state.copyWith(activeButton: false));
 
     AudioPlayerClass.startPlaySound(soundPath: AppSound.rocketSound);
@@ -112,5 +111,9 @@ class CurrentGameCubit extends Cubit<CurrentGameInitial> {
       },
     );
     // });
+  }
+
+  submitMessageAndTitle({required String? message, required String? title}) {
+    emit(state.copyWith(message: message, title: title));
   }
 }

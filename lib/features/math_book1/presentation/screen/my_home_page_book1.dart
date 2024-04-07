@@ -75,11 +75,12 @@ class _MyHomePageBook1 extends State<MyHomePageBook1>
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     final candyAnimationController =
         context.watch<CurrentGameCubit>().state.candyAnimationController;
+
+    final stateOfCurrentGameCubit = context.watch<CurrentGameCubit>().state;
     return Scaffold(
       body: Stack(
         children: [
@@ -91,61 +92,64 @@ class _MyHomePageBook1 extends State<MyHomePageBook1>
               children: [
                 Stack(
                   children: [
-                    Center(child: SizedBox(
-                      height: 100,
-                      child: Stack(
-                        alignment: Alignment.bottomCenter,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(
-                                top: 10, left: 35, right: 35),
-                            // width: MediaQuery.of(context).size.width/2,
-                            height: 54,
-                            padding: const EdgeInsets.all(10),
-                            decoration: ShapeDecoration(
-                              color: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(6)),
-                              shadows: const [
-                                BoxShadow(
-                                  color: Colors.black38,
-                                  blurRadius: 4,
-                                  offset: Offset(0, 4),
-                                  spreadRadius: 0,
-                                )
-                              ],
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Add Then choose',
-                                  textAlign: TextAlign.center,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .displaySmall
-                                      ?.copyWith(
-                                    fontSize: 28,
-                                    fontWeight: FontWeight.w700,
+                    Center(
+                      child: SizedBox(
+                        height: 100,
+                        child: Stack(
+                          alignment: Alignment.bottomCenter,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(
+                                  top: 10, left: 35, right: 35),
+                              // width: MediaQuery.of(context).size.width/2,
+                              height: 54,
+                              padding: const EdgeInsets.all(10),
+                              decoration: ShapeDecoration(
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(6)),
+                                shadows: const [
+                                  BoxShadow(
+                                    color: Colors.black38,
+                                    blurRadius: 4,
+                                    offset: Offset(0, 4),
+                                    spreadRadius: 0,
+                                  )
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    stateOfCurrentGameCubit.title ?? '',
+                                    textAlign: TextAlign.center,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall
+                                        ?.copyWith(
+                                          fontSize: 28,
+                                          fontWeight: FontWeight.w700,
+                                        ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                          Positioned(
+                            Positioned(
+                                bottom: -5,
+                                left: 0,
+                                child:
+                                    SvgPicture.asset(AppSvgImages.iconBlimp)),
+                            Positioned(
                               bottom: -5,
-                              left: 0,
-                              child: SvgPicture.asset(AppSvgImages.iconBlimp)),
-                          Positioned(
-                            bottom: -5,
-                            right: 0,
-                            child: SvgPicture.asset(AppSvgImages.iconBlimp),
-                          )
-                        ],
+                              right: 0,
+                              child: SvgPicture.asset(AppSvgImages.iconBlimp),
+                            )
+                          ],
+                        ),
                       ),
-                    ),),
+                    ),
                     Positioned(
                       top: 20,
                       right: 0,
@@ -153,9 +157,9 @@ class _MyHomePageBook1 extends State<MyHomePageBook1>
                         children: [
                           GestureDetector(
                             onTap: () async {
-                              context
-                                  .read<CurrentGameCubit>()
-                                  .sayInstruction(message: 'Add Then choose');
+                              context.read<CurrentGameCubit>().sayInstruction(
+                                  message:
+                                      stateOfCurrentGameCubit.message ?? '');
                             },
                             child: Image.asset(
                               AppImages.iconGetInstruction,
@@ -168,7 +172,10 @@ class _MyHomePageBook1 extends State<MyHomePageBook1>
                     ),
                   ],
                 ),
-                Expanded(child: CurrentGame(lessonId: widget.lessonId,)),
+                Expanded(
+                    child: CurrentGame(
+                  lessonId: widget.lessonId,
+                )),
               ],
             ),
           ),
@@ -211,30 +218,30 @@ class _MyHomePageBook1 extends State<MyHomePageBook1>
             child: Row(
               children: [
                 // 10.pw,
-                 BlocBuilder<CurrentGameCubit, CurrentGameInitial>(
-                        builder: (context, state) =>
-                            state.giftBoxArtboard != null
-                                ?
-                            Rive(
-                                    artboard: state.giftBoxArtboard!,
-                                    // fit: BoxFit.fill,
-                                    useArtboardSize: true)
-                                : GestureDetector(
-                                key: _specificWidgetKey,
-                                onTap: () {
-                                  context.read<CurrentGameCubit>().getTheBackGround();
-                                },
-                                child:Row(
-                                    children: [
-                                      16.pw,
-                                      Column(
-                                        children: [
-                                          SvgPicture.asset(AppSvgImages.iconGiftBox),
-                                          8.ph
-                                        ],
-                                      ),
-                                    ],
-                                  ))) //:SizedBox()
+                BlocBuilder<CurrentGameCubit, CurrentGameInitial>(
+                    builder: (context, state) => state.giftBoxArtboard != null
+                        ? Rive(
+                            artboard: state.giftBoxArtboard!,
+                            // fit: BoxFit.fill,
+                            useArtboardSize: true)
+                        : GestureDetector(
+                            key: _specificWidgetKey,
+                            onTap: () {
+                              context
+                                  .read<CurrentGameCubit>()
+                                  .getTheBackGround();
+                            },
+                            child: Row(
+                              children: [
+                                16.pw,
+                                Column(
+                                  children: [
+                                    SvgPicture.asset(AppSvgImages.iconGiftBox),
+                                    8.ph
+                                  ],
+                                ),
+                              ],
+                            ))) //:SizedBox()
 
                 // SvgPicture.asset(AppImages.iconGiftBox),
               ],

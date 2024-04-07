@@ -37,30 +37,28 @@ class CurrentGame extends StatelessWidget {
           }
         }, builder: (context, state) {
           if (state is GetContactInitial) {
-
             return BlocConsumer<CurrentGameCubit, CurrentGameInitial>(
-              listener: (context, stateOfTheGeneral) {},
-              builder: (context, stateOfTheGeneral) {
-                  log('currentIndex:${stateOfTheGeneral.index}');
-                  int index = stateOfTheGeneral.index??1;
-                  if(state.data[index].secType == SecType.beads){
-                    if(state.data[index].secType ==Type.mCQ) {
+                listener: (context, stateOfTheGeneral) {},
+                builder: (context, stateOfTheGeneral) {
+                  int index = stateOfTheGeneral.index ?? 0;
+                  context.read<CurrentGameCubit>().submitMessageAndTitle(
+                      message: state.data[index].question,
+                      title: state.data[index].question);
+                  if (state.data[index].secType == SecType.beads) {
+                    if (state.data[index].type == Type.mCQ) {
                       return BlocProvider(
                           create: (_) =>
-                              BeadsSumMcqCubit(
-                                  questionData: state.data[index]),
+                              BeadsSumMcqCubit(questionData: state.data[index]),
                           child: MathematicalTransactionsScreen(
-                            defaultActionOfSuccessAnswer: () =>
-                                context
-                                    .read<CurrentGameCubit>()
-                                    .defaultActionOfSuccessAnswer(),
-                            defaultActionOfWrongAnswer: () =>
-                                context
-                                    .read<CurrentGameCubit>()
-                                    .defaultActionOfWrongAnswer(),
+                            defaultActionOfSuccessAnswer: () => context
+                                .read<CurrentGameCubit>()
+                                .defaultActionOfSuccessAnswer(),
+                            defaultActionOfWrongAnswer: () => context
+                                .read<CurrentGameCubit>()
+                                .defaultActionOfWrongAnswer(),
                           ));
-                    }else {
-                     return BlocProvider(
+                    } else {
+                      return BlocProvider(
                           create: (_) => BeadsMatchingCubit(
                               questionData: state.data[index]),
                           child: MatchingScreen(
@@ -72,11 +70,10 @@ class CurrentGame extends StatelessWidget {
                                 .defaultActionOfWrongAnswer(),
                           ));
                     }
-                  }else{
+                  } else {
                     return const SizedBox();
                   }
-
-              });
+                });
           } else if (state is GetContactLoadingInitial) {
             return const Center(child: CircularProgressIndicator());
           } else {
