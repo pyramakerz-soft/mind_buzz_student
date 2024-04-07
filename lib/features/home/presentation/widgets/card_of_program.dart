@@ -4,7 +4,8 @@ import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 
 import '../../../../core/utils.dart';
-import '../../../unit/presentation/manager/get_unit_bloc.dart';
+import '../../../unit/presentation/manager/bloc/get_unit_bloc.dart';
+import '../../../unit/presentation/manager/cubit/animation_unit_cubit.dart';
 import '../../../unit/presentation/pages/unit_screen.dart';
 import '../bloc/get_programs_home_bloc.dart';
 import '../../../../core/injection/injection_container.dart' as di;
@@ -28,10 +29,12 @@ class CardOfProgram extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Utils.navigateTo(
-             UnitScreen(
+            BlocProvider(
+                create: (_) => AnimationUnitCubit(),
+                child:UnitScreen(
                   programId: programId,
                   programName: title,
-                ),
+                )),
             context);
       },
       child: Container(

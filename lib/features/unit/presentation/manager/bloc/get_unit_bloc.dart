@@ -5,10 +5,10 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../core/error/failures.dart';
-import '../../../../core/error/failures_messages.dart';
-import '../../domain/entities/unit_model.dart';
-import '../../domain/use_cases/unit_use_cases.dart';
+import '../../../../../core/error/failures.dart';
+import '../../../../../core/error/failures_messages.dart';
+import '../../../domain/entities/unit_model.dart';
+import '../../../domain/use_cases/unit_use_cases.dart';
 
 part 'get_unit_event.dart';
 part 'get_unit_state.dart';

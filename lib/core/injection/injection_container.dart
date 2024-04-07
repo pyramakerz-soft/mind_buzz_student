@@ -26,7 +26,7 @@ import '../../features/unit/data/data_sources/data_source_remotely_of_unit.dart'
 import '../../features/unit/data/repositories/unit_repository_impl.dart';
 import '../../features/unit/domain/repositories/repositories_unit.dart';
 import '../../features/unit/domain/use_cases/unit_use_cases.dart';
-import '../../features/unit/presentation/manager/get_unit_bloc.dart';
+import '../../features/unit/presentation/manager/bloc/get_unit_bloc.dart';
 import '../apis_connections/api_connection.dart';
 import '../network/network_info.dart';
 part 'injection_import.dart';

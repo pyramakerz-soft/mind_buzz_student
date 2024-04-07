@@ -17,4 +17,11 @@ abstract class AppSvgImages {
   static const String iconGiftBox = '${mainPathOfSvg}gift_box.svg';
   static const String iconCandy = '${mainPathOfSvg}candy.svg';
   static const String iconLockChapter = '${mainPathOfSvg}lock_chapter.svg';
+  static const String iconUnitBee = '${mainPathOfSvg}unit_bee.svg';
+  static const String iconUnitBee2 = '${mainPathOfSvg}unit_bee2.svg';
+  static const String iconFlowers = '${mainPathOfSvg}flowers.svg';
+  static const String iconWaterBee = '${mainPathOfSvg}water_bee.svg';
+  static const String iconTree = '${mainPathOfSvg}tree.svg';
+  static const String iconTree1 = '${mainPathOfSvg}tree2.svg';
+
 }

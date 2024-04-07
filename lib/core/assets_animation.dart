@@ -7,4 +7,8 @@ class AppAnimation {
   static const String beeCharacterRiv1 =
       "${mainPathOfAnimation}bee_character1.riv";
   static const String giftBox = "${mainPathOfAnimation}gift_box.riv";
+  static const String unitsBee = "${mainPathOfAnimation}units_bee.riv";
+  static const String unitsBee2 = "${mainPathOfAnimation}units_bee2.riv";
+  static const String unitsTree = "${mainPathOfAnimation}units_tree.riv";
+  static const String wateringUnitsBee = "${mainPathOfAnimation}watering_units_bee.riv";
 }
