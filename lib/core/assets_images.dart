@@ -18,5 +18,7 @@ abstract class AppImages {
       '${mainPathOfImages}get_instruction.png';
   static const String imageRocket = '${mainPathOfImages}rocket.png';
   static const String imageLandOfUnit = '${mainPathOfImages}land_of_unit.png';
+  static const String imageBluePen = '${mainPathOfImages}blue_pen.png';
+  static const String imageRedPen = '${mainPathOfImages}red_pen.png';
 
 }

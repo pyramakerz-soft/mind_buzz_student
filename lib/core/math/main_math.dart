@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../widgets/box_painter.dart';
+
 abstract class MainMath{
   static const String _mainPathOfMathBall = 'assets/math_ball/';
   static const String _ball1 = "${_mainPathOfMathBall}ball1.svg";
@@ -14,7 +16,7 @@ abstract class MainMath{
   static const String _ball9 = "${_mainPathOfMathBall}ball9.svg";
   static const String _circle = "${_mainPathOfMathBall}circle.svg";
 
-  static Widget getTheBox({required int countOfBalls}) {
+  static Widget getTheBalls({required int countOfBalls}) {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -85,4 +87,50 @@ abstract class MainMath{
 
   }
 
+  static List<ColorModel> colors = [
+    ColorModel(colorMain: const Color(0xffEE1D23), colorBoarder: const Color(0xff930B0F)),
+    ColorModel(colorMain: const Color(0xff406AB4), colorBoarder: const Color(0xff1C398D)),
+  ];
+
+  static Widget getTheBox(
+      {required int countOfBoxes,
+        required bool isSolid,
+        required Size sizeOfOne}) {
+    return SizedBox(
+      height: sizeOfOne.height,
+      width: countOfBoxes * (sizeOfOne.width - 14) + sizeOfOne.width/4, // Add size of one box to accommodate the last box
+      child: Stack(
+        children: [
+          ...List.generate(countOfBoxes, (index) {
+            if (index == 0 || index % 2 == 0) {
+              return Positioned(
+                left: index == 0 ? 0 : (sizeOfOne.width * index) - (14 * index),
+                child: CustomPaint(
+                    size: sizeOfOne,
+                    painter: BoxCustomPainter(
+                        color: colors.first.colorMain,
+                        boarderColor: colors.first.colorBoarder)),
+              );
+            } else {
+              return Positioned(
+                left: (sizeOfOne.width * index) - (14 * index),
+                child: CustomPaint(
+                    size: sizeOfOne,
+                    painter: BoxCustomPainter(
+                        color: colors.last.colorMain,
+                        boarderColor: colors.last.colorBoarder)),
+              );
+            }
+          }).reversed
+        ],
+      ),
+    );
+  }
+}
+
+class ColorModel {
+  final Color colorMain;
+  final Color colorBoarder;
+
+  ColorModel({required this.colorMain, required this.colorBoarder});
 }
