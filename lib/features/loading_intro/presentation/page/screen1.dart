@@ -38,7 +38,7 @@ class _Screens1 extends State<Screens1> with SingleTickerProviderStateMixin {
 
   waitTheDataLoading() async {
     log('waitTheDataLoading');
-    await Future.delayed(const Duration(seconds: 10)).then((value) {
+    await Future.delayed(const Duration(seconds: 3)).then((value) {
       log('value:$value');
       Utils.navigateTo(LoginScreen(), context);
     });
@@ -47,41 +47,36 @@ class _Screens1 extends State<Screens1> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GestureDetector(
-        onTap: () {
-          Utils.navigateTo(LoginScreen(), context);
-        },
-        child: Stack(
-          children: [
-            Image.asset(
-              AppImages.imageScreen1,
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              fit: BoxFit.fill,
-            ),
-            Center(
-              child: AnimatedBuilder(
-                  animation: _animation,
-                  builder: (context, child) {
-                    return Transform.translate(
-                      offset: Offset(-(200 * (1 - _animation.value)), 0),
-                      child: Opacity(
-                          opacity: _animation.value,
-                          child: BlocBuilder<LoadingCubit, Artboard?>(
-                              builder: (context, state) {
-                            return state == null
-                                ? Image.asset(AppImages.introBee)
-                                : Rive(
-                                    artboard: state,
-                                    // fit: BoxFit.fitHeight,
-                                    useArtboardSize: true,
-                                  );
-                          })),
-                    );
-                  }),
-            )
-          ],
-        ),
+      body: Stack(
+        children: [
+          Image.asset(
+            AppImages.imageScreen1,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            fit: BoxFit.fill,
+          ),
+          Center(
+            child: AnimatedBuilder(
+                animation: _animation,
+                builder: (context, child) {
+                  return Transform.translate(
+                    offset: Offset(-(200 * (1 - _animation.value)), 0),
+                    child: Opacity(
+                        opacity: _animation.value,
+                        child: BlocBuilder<LoadingCubit, Artboard?>(
+                            builder: (context, state) {
+                          return state == null
+                              ? Image.asset(AppImages.introBee)
+                              : Rive(
+                                  artboard: state,
+                                  // fit: BoxFit.fitHeight,
+                                  useArtboardSize: true,
+                                );
+                        })),
+                  );
+                }),
+          )
+        ],
       ),
     );
   }

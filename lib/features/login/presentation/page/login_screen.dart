@@ -90,8 +90,9 @@ class LoginScreen extends StatelessWidget {
                                   child: GestureDetector(
                                     child: Text(
                                       'Forgot password?',
-                                      style:
-                                          Theme.of(context).textTheme.titleSmall,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall,
                                     ),
                                   ),
                                 ),
@@ -106,13 +107,16 @@ class LoginScreen extends StatelessWidget {
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(snackBar);
                                   } else if (state is CompleteLogin) {
-                                    context.read<LoginCubit>().saveUserData(userData: state.userData);
+                                    context
+                                        .read<LoginCubit>()
+                                        .saveUserData(userData: state.userData);
                                     Utils.navigateAndRemoveUntilTo(
                                         BlocProvider(
-                                            create: (_) => WhoAmICubit(), child: WhoAmIScreen()), context);
+                                            create: (_) => WhoAmICubit(),
+                                            child: WhoAmIScreen()),
+                                        context);
                                   }
-                                },
-                                    builder: (context, state) {
+                                }, builder: (context, state) {
                                   log('--state:$state');
                                   if (state is LoadingLoginState) {
                                     return const CircularProgressIndicator();
@@ -120,6 +124,7 @@ class LoginScreen extends StatelessWidget {
                                     return BlocProvider(
                                         create: (_) => LoginCubit(),
                                         child: ButtonLogin(
+                                          disableAnimation: true,
                                           dataFunction: () {
                                             context.read<LoginDataBloc>().add(
                                                 LoginRequest(
@@ -128,7 +133,12 @@ class LoginScreen extends StatelessWidget {
                                                     password:
                                                         _passwordController
                                                             .text));
-                                          }, title: "Log In", width: MediaQuery.of(context).size.width-50,
+                                          },
+                                          title: "Log In",
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              50,
                                         ));
                                   }
                                 })

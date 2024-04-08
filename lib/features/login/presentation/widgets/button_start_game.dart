@@ -8,7 +8,14 @@ class ButtonLogin extends StatefulWidget {
   final void Function() dataFunction;
   final String title;
   final double width;
-  const ButtonLogin({Key? key, required this.dataFunction, required this.title, required this.width}) : super(key: key);
+  final bool? disableAnimation;
+  const ButtonLogin(
+      {Key? key,
+      this.disableAnimation,
+      required this.dataFunction,
+      required this.title,
+      required this.width})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -46,79 +53,79 @@ class _ButtonLogin extends State<ButtonLogin>
 
     return SizedBox(
         // width: MediaQuery.of(context).size.width - 100,
-        child:  GestureDetector(
-            onTapUp: (_) {
-              context
-                  .read<LoginCubit>()
-                  .updateThePositionOfButton(newPosition: 4);
-            },
-            onTapDown: (_) {
-              context
-                  .read<LoginCubit>()
-                  .updateThePositionOfButton(newPosition: 0);
-            },
-            onTapCancel: () {
-              context
-                  .read<LoginCubit>()
-                  .updateThePositionOfButton(newPosition: 4);
-            },
-            onTap: () async {
-              _controller.forward();
-              widget.dataFunction();
-            },
-            child: SizedBox(
-              height: height + _shadowHeight,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Positioned(
-                    bottom: 0,
-                    child: Container(
-                      height: height,
-                      width: widget.width,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 16, horizontal: 20),
-                      decoration: BoxDecoration(
-                        color: AppColor.darkBlueColor.withOpacity(.5),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                  ),
-                  BlocBuilder<LoginCubit, int>(builder: (context, state) {
-                    return AnimatedPositioned(
-                      curve: Curves.easeIn,
-                      bottom: double.parse("$state"),
-                      width: widget.width,
-                      duration: const Duration(milliseconds: 70),
-                      child: Container(
-                        height: height,
-                        width: widget.width,
-                        // padding: EdgeInsets.all(0),
-                        decoration: BoxDecoration(
-                          // image: DecorationImage(
-                          //     image: AssetImage(AppImages.buttonImage),
-                          //     fit: BoxFit.fitWidth),
-                          color: AppColor.darkBlueColor,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          widget.title,
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w600,
-                                    height: 0,
-                                    letterSpacing: 0.50,
-                                  ),
-                        ),
-                      ),
-                    );
-                  })
-                ],
+        child: GestureDetector(
+      onTapUp: (_) {
+        if (widget.disableAnimation != true) {
+          context.read<LoginCubit>().updateThePositionOfButton(newPosition: 4);
+        }
+      },
+      onTapDown: (_) {
+        if (widget.disableAnimation != true) {
+          context.read<LoginCubit>().updateThePositionOfButton(newPosition: 0);
+        }
+      },
+      onTapCancel: () {
+        if (widget.disableAnimation != true) {
+          context.read<LoginCubit>().updateThePositionOfButton(newPosition: 4);
+        }
+      },
+      onTap: () async {
+        if (widget.disableAnimation != true) {
+          _controller.forward();
+        }
+        widget.dataFunction();
+      },
+      child: SizedBox(
+        height: height + _shadowHeight,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Positioned(
+              bottom: 0,
+              child: Container(
+                height: height,
+                width: widget.width,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                decoration: BoxDecoration(
+                  color: AppColor.darkBlueColor.withOpacity(.5),
+                  borderRadius: BorderRadius.circular(20),
+                ),
               ),
             ),
-
-        ));
+            BlocBuilder<LoginCubit, int>(builder: (context, state) {
+              return AnimatedPositioned(
+                curve: Curves.easeIn,
+                bottom: double.parse("$state"),
+                width: widget.width,
+                duration: const Duration(milliseconds: 70),
+                child: Container(
+                  height: height,
+                  width: widget.width,
+                  // padding: EdgeInsets.all(0),
+                  decoration: BoxDecoration(
+                    // image: DecorationImage(
+                    //     image: AssetImage(AppImages.buttonImage),
+                    //     fit: BoxFit.fitWidth),
+                    color: AppColor.darkBlueColor,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(
+                    widget.title,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                          height: 0,
+                          letterSpacing: 0.50,
+                        ),
+                  ),
+                ),
+              );
+            })
+          ],
+        ),
+      ),
+    ));
   }
 }
