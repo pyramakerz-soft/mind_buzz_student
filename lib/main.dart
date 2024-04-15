@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_buzz_refactor/features/login/presentation/cubit/login_cubit.dart';
 import 'core/theme_text.dart';
+import 'features/chapters/presentation/pages/chapters_screens.dart';
 import 'features/loading_intro/presentation/bloc/loading_cubit.dart';
 import 'core/injection/injection_container.dart' as di;
 import 'features/loading_intro/presentation/page/screen1.dart';
@@ -59,7 +60,7 @@ class _MyApp extends State<MyApp> {
               title: 'Mind buzz2',
               debugShowCheckedModeBanner: false,
               theme: AppTheme().lightTheme,
-              home:const Screens1(),
+              home:ChaptersScreen(programId: '1', programName: '',),
             )));
   }
 }

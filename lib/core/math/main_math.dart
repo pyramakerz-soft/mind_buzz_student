@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../app_color.dart';
 import '../widgets/box_painter.dart';
 
 abstract class MainMath{
@@ -95,6 +96,7 @@ abstract class MainMath{
   static Widget getTheBox(
       {required int countOfBoxes,
         required bool isSolid,
+        List<Color?>? colorOfBox,
         required Size sizeOfOne}) {
     return SizedBox(
       height: sizeOfOne.height,
@@ -105,11 +107,13 @@ abstract class MainMath{
             if (index == 0 || index % 2 == 0) {
               return Positioned(
                 left: index == 0 ? 0 : (sizeOfOne.width * index) - (14 * index),
-                child: CustomPaint(
-                    size: sizeOfOne,
-                    painter: BoxCustomPainter(
-                        color: colors.first.colorMain,
-                        boarderColor: colors.first.colorBoarder)),
+                child: GestureDetector(
+                  child: CustomPaint(
+                      size: sizeOfOne,
+                      painter: BoxCustomPainter(
+                          color: colorOfBox?[index]??(isSolid==true?AppColor.bgMatheColor:colors.first.colorMain),
+                          boarderColor: Colors.grey)),
+                ),
               );
             } else {
               return Positioned(
@@ -117,8 +121,8 @@ abstract class MainMath{
                 child: CustomPaint(
                     size: sizeOfOne,
                     painter: BoxCustomPainter(
-                        color: colors.last.colorMain,
-                        boarderColor: colors.last.colorBoarder)),
+                        color: colorOfBox?[index]??(isSolid==true?AppColor.bgMatheColor:colors.last.colorMain),
+                        boarderColor: Colors.grey)),
               );
             }
           }).reversed

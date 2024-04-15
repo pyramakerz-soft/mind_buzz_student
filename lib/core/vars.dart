@@ -38,6 +38,7 @@ abstract class DefaultHomeData {
     AppColor.yellowColor3
   ];
   static List<List<Color>> fullDataOfCardColor = [firstCardColor, firstCardColor, thirdCardColor, fourCardColor];
+  static String haveAnAssignment = 'You have an assignment';
 }
 
 abstract class DefaultUnitData {
