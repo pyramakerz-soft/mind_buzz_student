@@ -51,6 +51,7 @@ dependencies:
   flame_rive: ^1.9.11
   flame: ^1.15.0
   shared_preferences: ^2.2.2
+  graphview: ^1.2.0
 
 dev_dependencies:
   flutter_test:
