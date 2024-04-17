@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,8 +42,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyApp extends State<MyApp> {
-
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -60,7 +57,8 @@ class _MyApp extends State<MyApp> {
               title: 'Mind buzz2',
               debugShowCheckedModeBanner: false,
               theme: AppTheme().lightTheme,
-              home:ChaptersScreen(programId: '1', programName: '',),
+              home: const Screens1(),
+              // home:ChaptersScreen(programId: '1', programName: '',),
             )));
   }
 }

@@ -16,8 +16,8 @@ class DottedLinePainter extends CustomPainter {
       positions.add(element);
     }
     for (var i = 0; i < positions.length - 1; i++) {
-      drawDottedLine(canvas, Offset(positions[i].dx + 50, positions[i].dy + 50),
-          Offset(positions[i + 1].dx + 50, positions[i + 1].dy + 50), paint);
+      drawDottedLine(canvas, Offset(positions[i].dx, positions[i].dy),
+          Offset(positions[i + 1].dx, positions[i + 1].dy), paint);
     }
   }
 

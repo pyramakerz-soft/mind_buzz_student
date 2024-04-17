@@ -35,8 +35,8 @@ class LineBetweenOffsets extends StatelessWidget {
     ChapterModel(isOpen: false, isChapter: true),
     ChapterModel(isOpen: false, isLesson: true),
     ChapterModel(isOpen: false, isChapter: true),
-    // ChapterModel(isOpen: false, isAssessment: true),
-    // ChapterModel(isOpen: false, isLesson: true),
+    ChapterModel(isOpen: false, isAssessment: true),
+    ChapterModel(isOpen: false, isLesson: true),
   ];
 
   @override
@@ -64,6 +64,7 @@ class LineBetweenOffsets extends StatelessWidget {
     positions.addAll(secondPositions);
 
     return SingleChildScrollView(
+      reverse: true,
       scrollDirection: Axis.vertical,
       child: Container(
         height: MediaQuery.of(context).size.height,

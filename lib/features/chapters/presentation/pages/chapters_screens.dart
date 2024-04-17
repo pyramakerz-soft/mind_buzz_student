@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
@@ -27,287 +28,251 @@ class ChaptersScreen extends StatefulWidget {
 
 class _ChaptersScreen extends State<ChaptersScreen> {
   List<ChapterModel> chapters = [
-    ChapterModel(isOpen: true, isChapter: true),
-    ChapterModel(isOpen: true, isLesson: true),
-    ChapterModel(isOpen: false, isLesson: true),
-    ChapterModel(isOpen: false, isChapter: true),
-    ChapterModel(isOpen: false, isLesson: true),
-    ChapterModel(isOpen: false, isCheckPoint: true),
-    ChapterModel(isOpen: false, isChapter: true),
-    ChapterModel(isOpen: false, isLesson: true),
-    ChapterModel(isOpen: false, isChapter: true),
-    // ChapterModel(isOpen: false, isAssessment: true),
-    // ChapterModel(isOpen: false, isLesson: true),
+    ChapterModel(isOpen: true, isChapter: true, id: 1),
+    ChapterModel(isOpen: true, isLesson: true, id: 2),
+    ChapterModel(isOpen: false, isLesson: true, id: 3),
+    ChapterModel(isOpen: false, isChapter: true, id: 4),
+    ChapterModel(isOpen: false, isLesson: true, id: 5),
+    ChapterModel(isOpen: false, isCheckPoint: true, id: 6),
+    ChapterModel(isOpen: false, isChapter: true, id: 7),
+    ChapterModel(isOpen: false, isLesson: true, id: 8),
+    ChapterModel(isOpen: false, isChapter: true, id: 9),
+    ChapterModel(isOpen: false, isAssessment: true, id: 10),
+    ChapterModel(isOpen: false, isLesson: true, id: 11),
   ];
-  int secondListIndex = 0;
-
-  List<Offset> mainPositions = [];
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  List<Widget> createData(
-      {required double subHeight,
-      required double subWidth,
-      required List<Offset> positions}) {
-    List<Widget> widgetData = [];
-    for (var i = 0; i < chapters.length; i++) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        setState(() {
-          widgetData.add(Positioned(
-              bottom: positions[secondListIndex].dy,
-              left: positions[secondListIndex].dx,
-              child: SizedBox(
-                width: 90,
-                height: 120,
-                child: Column(
-                  children: [
-                    if (chapters[i].isLesson == true) ...{
-                      if (chapters[i].isOpen == true) ...{
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                                // height: 50,
-                                margin: const EdgeInsets.only(top: 20),
-                                child: Transform.rotate(
-                                    angle: (-10) * 3.141592653589793 / 180,
-                                    // Rotate 45 degrees in radians
-                                    child: Image.asset(
-                                      AppImages.imageStar,
-                                      height: 20,
-                                    ))),
-                            Image.asset(
-                              AppImages.imageStar,
-                              height: 20,
-                            ),
-                            Container(
-                                // height: 50,
-                                margin: const EdgeInsets.only(top: 20),
-                                child: Transform.rotate(
-                                    angle: (10) * 3.141592653589793 / 180,
-                                    // Rotate 45 degrees in radians
-                                    child: Image.asset(
-                                      AppImages.imageStar,
-                                      height: 20,
-                                    ))),
-                          ],
+  final subHeight = 101;
+  final subWidth = 78.0;
+  Widget createData({required ChapterModel chapterData}) {
+    return Container(
+      // margin: EdgeInsets.only(bottom: 30),
+      // width: 90,
+      // height: 120,
+      child: Column(
+        children: [
+          // if (chapterData.isLesson == true) ...{
+          //   if (chapterData.isOpen == true) ...{
+          //     Row(
+          //       mainAxisAlignment: MainAxisAlignment.center,
+          //       children: [
+          //         Container(
+          //             // height: 50,
+          //             margin: const EdgeInsets.only(top: 20),
+          //             child: Transform.rotate(
+          //                 angle: (-10) * 3.141592653589793 / 180,
+          //                 // Rotate 45 degrees in radians
+          //                 child: Image.asset(
+          //                   AppImages.imageStar,
+          //                   height: 20,
+          //                 ))),
+          //         Image.asset(
+          //           AppImages.imageStar,
+          //           height: 20,
+          //         ),
+          //         Container(
+          //             // height: 50,
+          //             margin: const EdgeInsets.only(top: 20),
+          //             child: Transform.rotate(
+          //                 angle: (10) * 3.141592653589793 / 180,
+          //                 // Rotate 45 degrees in radians
+          //                 child: Image.asset(
+          //                   AppImages.imageStar,
+          //                   height: 20,
+          //                 ))),
+          //       ],
+          //     ),
+          //   }
+          //   else ...{
+          //     Row(
+          //       mainAxisAlignment: MainAxisAlignment.center,
+          //       children: [
+          //         Container(
+          //             // height: 50,
+          //             margin: const EdgeInsets.only(top: 20),
+          //             child: Transform.rotate(
+          //                 angle: (-10) * 3.141592653589793 / 180,
+          //                 // Rotate 45 degrees in radians
+          //                 child: Image.asset(
+          //                   AppImages.imageEmptyStar,
+          //                   height: 20,
+          //                 ))),
+          //         Image.asset(
+          //           AppImages.imageEmptyStar,
+          //           height: 20,
+          //         ),
+          //         Container(
+          //             // height: 50,
+          //             margin: const EdgeInsets.only(top: 20),
+          //             child: Transform.rotate(
+          //                 angle: (10) * 3.141592653589793 / 180,
+          //                 // Rotate 45 degrees in radians
+          //                 child: Image.asset(
+          //                   AppImages.imageEmptyStar,
+          //                   height: 20,
+          //                 ))),
+          //       ],
+          //     ),
+          //   }
+          // },
+          GestureDetector(
+            onTap: () {
+              Utils.navigateTo(
+                  LessonScreen(
+                    programId: widget.programId,
+                    programName: widget.programName,
+                  ),
+                  context);
+            },
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                if (chapterData.isChapter == true) ...{
+                  SvgPicture.asset(AppSvgImages.iconCurrentChapter1),
+                  Text(
+                    "${chapterData.id}",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall
+                        ?.copyWith(fontSize: 25, fontWeight: FontWeight.w700),
+                  ),
+                  // },
+                } else if (chapterData.isLesson == true) ...{
+                  if (chapterData.isOpen == false) ...{
+                    Image.asset(
+                      AppImages.imageCloseLessonPart,
+                      width: 80,
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          "Lesson",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge
+                              ?.copyWith(
+                                  fontSize: 16, fontWeight: FontWeight.w500),
                         ),
-                      } else ...{
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                                // height: 50,
-                                margin: const EdgeInsets.only(top: 20),
-                                child: Transform.rotate(
-                                    angle: (-10) * 3.141592653589793 / 180,
-                                    // Rotate 45 degrees in radians
-                                    child: Image.asset(
-                                      AppImages.imageEmptyStar,
-                                      height: 20,
-                                    ))),
-                            Image.asset(
-                              AppImages.imageEmptyStar,
-                              height: 20,
-                            ),
-                            Container(
-                                // height: 50,
-                                margin: const EdgeInsets.only(top: 20),
-                                child: Transform.rotate(
-                                    angle: (10) * 3.141592653589793 / 180,
-                                    // Rotate 45 degrees in radians
-                                    child: Image.asset(
-                                      AppImages.imageEmptyStar,
-                                      height: 20,
-                                    ))),
-                          ],
+                        ...List.generate(
+                            1,
+                            (index) => SvgPicture.asset(
+                                  DefaultChapterData.getTheNumberOfChapter(
+                                    number: 1,
+                                  ).first,
+                                  height: 20,
+                                ))
+                      ],
+                    )
+                  } else ...{
+                    Image.asset(
+                      AppImages.imageLessonPart,
+                      width: 80,
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          "Lesson",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge
+                              ?.copyWith(
+                                  fontSize: 16, fontWeight: FontWeight.w500),
                         ),
-                      }
-                    },
-                    GestureDetector(
-                      onTap: () {
-                        Utils.navigateTo(
-                            LessonScreen(
-                              programId: widget.programId,
-                              programName: widget.programName,
-                            ),
-                            context);
-                      },
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          if (chapters[i].isChapter == true) ...{
-                            SvgPicture.asset(
-                              i == 0 || i % 2 == 0
-                                  ? AppSvgImages.iconCurrentChapter1
-                                  : AppSvgImages.iconCurrentChapter2,
-                            ),
+                        ...List.generate(
+                            1,
+                            (index) => SvgPicture.asset(
+                                  DefaultChapterData.getTheNumberOfChapter(
+                                    number: 1,
+                                  ).first,
+                                  height: 20,
+                                ))
+                      ],
+                    )
+                  },
+                } else if (chapterData.isCheckPoint == true) ...{
+                  Row(
+                    children: [
+                      20.pw,
+                      Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
                             Text(
-                              "${i + 1}",
+                              "Checkpoint",
                               style: Theme.of(context)
                                   .textTheme
-                                  .bodySmall
+                                  .headlineLarge
                                   ?.copyWith(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w700),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500),
                             ),
-                            // },
-                          } else if (chapters[i].isLesson == true) ...{
-                            if (chapters[i].isOpen == false) ...{
-                              Image.asset(
-                                AppImages.imageCloseLessonPart,
-                              ),
-                              Column(
-                                children: [
-                                  Text(
-                                    "Lesson",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineLarge
-                                        ?.copyWith(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500),
-                                  ),
-                                  ...List.generate(
-                                      1,
-                                      (index) => SvgPicture.asset(
-                                            DefaultChapterData
-                                                .getTheNumberOfChapter(
-                                              number: 1,
-                                            ).first,
-                                            height: 20,
-                                          ))
-                                ],
-                              )
-                            } else ...{
-                              Image.asset(
-                                AppImages.imageLessonPart,
-                              ),
-                              Column(
-                                children: [
-                                  Text(
-                                    "Lesson",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineLarge
-                                        ?.copyWith(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500),
-                                  ),
-                                  ...List.generate(
-                                      1,
-                                      (index) => SvgPicture.asset(
-                                            DefaultChapterData
-                                                .getTheNumberOfChapter(
-                                              number: 1,
-                                            ).first,
-                                            height: 20,
-                                          ))
-                                ],
-                              )
-                            },
-                          } else if (chapters[i].isCheckPoint == true) ...{
-                            Column(children: [
-                              Text(
-                                "Checkpoint",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineLarge
-                                    ?.copyWith(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
-                              ),
-                              Image.asset(
-                                AppImages.imageCheckpointPart,
-                                width: 70,
-                              ),
-                            ])
-                          } else if (chapters[i].isAssessment == true) ...{
-                            Column(children: [
-                              Text(
-                                "Assessment",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineLarge
-                                    ?.copyWith(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
-                              ),
-                              Image.asset(
-                                AppImages.imageAssessmentPart,
-                                width: 70,
-                              ),
-                            ])
-                          }
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              )));
-          secondListIndex++;
-          if (secondListIndex >= positions.length) {
-            secondListIndex =
-                0; // Reset index to start from the beginning of second list
-          }
-        });
-      });
-    }
-    return widgetData;
+                            Image.asset(
+                              AppImages.imageCheckpointPart,
+                              width: 60,
+                            ),
+                          ])
+                    ],
+                  )
+                } else if (chapterData.isAssessment == true) ...{
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Assessment",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge
+                              ?.copyWith(
+                                  fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
+                        Image.asset(
+                          AppImages.imageAssessmentPart,
+                          width: 70,
+                        ),
+                      ])
+                }
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Future<List<Offset>> listOfPositions() async {
-    final subHeight = 101; //(MediaQuery.of(context).size.height - 140) / 7;
-    final subWidth = 78.0; //MediaQuery.of(context).size.width / 5;
-    // log('subHeight:$subHeight, subWidth:$subWidth');
     List<Offset> positions = [
       const Offset(10, 10),
       Offset(subWidth, subHeight + 20),
       Offset(subWidth + 10, (subHeight * 2) + 40),
       Offset(subWidth * 3 - 10, subHeight * 3 - 20),
       Offset(subWidth * 3 - 10, subHeight * 4),
-      // Offset(subWidth * 2, ((subHeight * 4)+subHeight) ),
     ];
-    int secondListIndex0 = 0; // To keep track of the index of the second list
-    bool reverseSecondList0 = false;
-    List<Offset> subPositions = [];
-    for (int i = 0; i < chapters.length; i++) {
-      if (reverseSecondList0 == false) {
-        // log('--:${positions[reverseSecondList0 ? positions.length - 1 - secondListIndex0 : secondListIndex0]}');
-        // subPositions.add(Offset((positions[i].dx), (positions[i].dy)));
-        // }
-        subPositions.add(Offset((positions[secondListIndex0].dx),
-            (positions[secondListIndex0].dy)));
-      } else {
-        log('#####################');
 
-        subPositions.add(Offset(((positions[secondListIndex0].dx)),
-            (positions.last.dy) + (subHeight * 3)));
-      }
-      secondListIndex0++;
-      if (secondListIndex0 >= positions.length) {
-        secondListIndex0 = 0;
-        reverseSecondList0 = !reverseSecondList0;
-      }
+    List<Offset> newPositions = [];
+    int countOfRepeat = (chapters.length / positions.length).round();
+    for (int i = 0; i < (countOfRepeat); i++) {
+      List<Offset> secondPositions = List.from(positions.where((element) {
+        return positions.indexOf(element) + positions.length <= chapters.length;
+      }).map((offset) =>
+          Offset(offset.dx, offset.dy + ((subHeight * 4) * (i + 1)))));
+      newPositions.addAll(secondPositions);
     }
-    log('subPositions:$subPositions');
-    return subPositions;
+    for (int i = 0; i < (chapters.length - newPositions.length); i++) {
+      newPositions.add(Offset(positions[i].dx,
+          positions[i].dy + ((subHeight * 4) * (countOfRepeat + 1))));
+    }
+
+    return newPositions;
   }
 
   @override
   Widget build(BuildContext context) {
-    final subHeight = (MediaQuery.of(context).size.height - 140) / 7;
-    final subWidth = MediaQuery.of(context).size.width / 5;
-
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(image: AssetImage(AppImages.bgChapters))),
         child: Stack(
           children: [
-            Column(children: [
+            Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
               SizedBox(
                 height: 140,
                 width: MediaQuery.of(context).size.width,
@@ -364,41 +329,61 @@ class _ChaptersScreen extends State<ChaptersScreen> {
                 ),
               ),
 
-              FutureBuilder<List<Offset>>(
-                  future: listOfPositions(),
-                  builder: (context, state) {
-                    if (state.connectionState == ConnectionState.done &&
-                        state.hasData == true) {
-                      log("--${state.data}");
-                      return Center(
-                          child: Stack(alignment: Alignment.center, children: [
-                        Transform.flip(
-                          flipY: true,
-                          child: SingleChildScrollView(
-                            child: Container(
-                              // height: subHeight,
-                              child: CustomPaint(
-                                // size: Size(mainWidth, mainHeight),
-                                size: Size(subWidth * 4, subHeight * 6),
-                                painter: DottedLinePainter(
-                                    listOfPoints: state.data ?? []),
-                              ),
-                            ),
-                          ),
-                        ),
-                        // if(widgetData.length ==chapters.length)...{
-                        // ...List.generate(
-                        //     chapters.length,
-                        //     (index) => createData(
-                        //         subHeight: subHeight,
-                        //         subWidth: subWidth,
-                        //         positions: state.data ?? [])[index])
-                        // }
-                      ]));
-                    } else {
-                      return SizedBox();
-                    }
-                  })
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.only(left: 20),
+                  child: FutureBuilder<List<Offset>>(
+                      future: listOfPositions(),
+                      builder: (context, state) {
+                        if (state.connectionState == ConnectionState.done &&
+                            state.hasData == true) {
+                          return SingleChildScrollView(
+                              reverse: true,
+                              scrollDirection: Axis.vertical,
+                              child: Stack(
+                                  clipBehavior: Clip.none,
+                                  fit: StackFit.passthrough,
+                                  alignment: Alignment.centerRight,
+                                  children: [
+                                    CustomPaint(
+                                      size: Size(
+                                          300,
+                                          (state.data?.isEmpty ?? true)
+                                              ? 600
+                                              : (state.data?.last.dy ?? 0) +
+                                                  subHeight * 2),
+                                      painter: DottedLinePainter(
+                                          listOfPoints: state.data ?? []),
+                                    ),
+                                    ...List.generate(
+                                        state.data?.length ?? 0,
+                                        (i) => Positioned(
+                                            top: (state.data?[i].dy ?? 0) - 30,
+                                            left: chapters.reversed
+                                                        .toList()[i]
+                                                        .isCheckPoint ==
+                                                    true
+                                                ? (state.data?[i].dx ?? 0) - 30
+                                                : (state.data?[i].dx ?? 0) - 12,
+                                            child: createData(
+                                                chapterData: chapters.reversed
+                                                    .toList()[i])))
+                                  ]));
+                          // ); //,
+                          // if(widgetData.length ==chapters.length)...{
+                          // Positioned(
+                          //     bottom: state.data?.first.dy,
+                          //     left: state.data?.first.dx,
+                          //     child:
+                          //     createData(chapterData: chapters.first))
+                          // }
+                          // ]);
+                        } else {
+                          return SizedBox();
+                        }
+                      }),
+                ),
+              )
 
               //     ],
               //   ),
@@ -411,9 +396,9 @@ class _ChaptersScreen extends State<ChaptersScreen> {
                   children: [
                     Image.asset(
                       AppImages.halfBee,
-                      width: 150,
+                      width: 110,
                     ),
-                    100.ph
+                    // 100.ph
                   ],
                 )),
           ],
