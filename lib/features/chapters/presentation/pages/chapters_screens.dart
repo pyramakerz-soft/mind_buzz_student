@@ -284,7 +284,7 @@ class _ChaptersScreen extends State<ChaptersScreen> {
         log('#####################');
 
         subPositions.add(Offset(((positions[secondListIndex0].dx)),
-            (positions.last.dy) + (subHeight)));
+            (positions.last.dy) + (subHeight * 3)));
       }
       secondListIndex0++;
       if (secondListIndex0 >= positions.length) {
@@ -375,11 +375,14 @@ class _ChaptersScreen extends State<ChaptersScreen> {
                         Transform.flip(
                           flipY: true,
                           child: SingleChildScrollView(
-                            child: CustomPaint(
-                              // size: Size(mainWidth, mainHeight),
-                              size: Size(subWidth * 4, subHeight * 6),
-                              painter: DottedLinePainter(
-                                  listOfPoints: state.data ?? []),
+                            child: Container(
+                              // height: subHeight,
+                              child: CustomPaint(
+                                // size: Size(mainWidth, mainHeight),
+                                size: Size(subWidth * 4, subHeight * 6),
+                                painter: DottedLinePainter(
+                                    listOfPoints: state.data ?? []),
+                              ),
                             ),
                           ),
                         ),

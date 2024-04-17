@@ -35,8 +35,8 @@ class LineBetweenOffsets extends StatelessWidget {
     ChapterModel(isOpen: false, isChapter: true),
     ChapterModel(isOpen: false, isLesson: true),
     ChapterModel(isOpen: false, isChapter: true),
-    ChapterModel(isOpen: false, isAssessment: true),
-    ChapterModel(isOpen: false, isLesson: true),
+    // ChapterModel(isOpen: false, isAssessment: true),
+    // ChapterModel(isOpen: false, isLesson: true),
   ];
 
   @override
@@ -53,35 +53,23 @@ class LineBetweenOffsets extends StatelessWidget {
       Offset(subWidth + 10, (subHeight * 2) + 40),
       Offset(subWidth * 3 - 10, subHeight * 3 - 20),
       Offset(subWidth * 3 - 10, subHeight * 4),
+      // Offset(subWidth * 2, ((subHeight * 4)+subHeight) ),
     ];
 
-    List<Offset> newPositions = [];
-    newPositions.addAll(positions);
-    List<Offset> secondPositions = List.from(positions.where((element) {
-      log('##${positions.indexOf(element) + positions.length}');
-      log('##${chapters.length}');
+    // Create the second set of positions by shifting vertically from the initial set
+    List<Offset> secondPositions = List.from(positions
+        .map((offset) => Offset(offset.dx, offset.dy + subHeight * 4)));
 
-      return positions.indexOf(element) + positions.length <= chapters.length;
-    }).map((offset) => Offset(offset.dx, offset.dy + subHeight * 4)));
-    newPositions.addAll(secondPositions);
+    // Combine the initial and second sets of positions
+    positions.addAll(secondPositions);
 
-    // for (int i = 0; i < chapters.length; i++) {
-    //   if ((i + 1) <= positions.length) {
-    //     newPositions.add(positions[i]);
-    //   } else {
-    //     log("${i - positions.length}:${positions.length}:$i");
-    //     log("${positions[i - positions.length].dy}:${positions[i - positions.length].dy + (subHeight * 4)}:$i");
-    //     newPositions.add(Offset(positions[i - positions.length].dx,
-    //         positions[i - positions.length].dy + (subHeight * 4)));
-    //   }
-    // }
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Container(
         height: MediaQuery.of(context).size.height,
         child: CustomPaint(
           size: Size(300, 300),
-          painter: LinePainter(newPositions),
+          painter: LinePainter(positions),
         ),
       ),
     );
