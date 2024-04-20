@@ -173,15 +173,16 @@ class LineBetweenOffsets extends StatelessWidget {
         builder: (context, state) {
           if (state.connectionState == ConnectionState.done &&
               state.hasData == true) {
-            return CustomPaint(
-              size: Size(
-                  300,
-                  (state.data?.isEmpty ?? true)
-                      ? 600
-                      : (state.data?.last.dy ?? 0) + subHeight * 2),
-              painter: DottedLinePainter(listOfPoints: state.data ?? []),
-              // ),
-            );
+            return Container();
+            //   CustomPaint(
+            //   size: Size(
+            //       300,
+            //       (state.data?.isEmpty ?? true)
+            //           ? 600
+            //           : (state.data?.last.dy ?? 0) + subHeight * 2),
+            //   painter: DottedLinePainter(listOfPoints: state.data ?? []),
+            //   // ),
+            // );
           } else {
             return SizedBox();
           }

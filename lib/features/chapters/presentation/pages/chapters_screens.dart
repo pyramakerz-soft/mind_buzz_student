@@ -352,19 +352,21 @@ class _ChaptersScreen extends State<ChaptersScreen> {
                                               ? 600
                                               : (state.data?.last.dy ?? 0) +
                                                   subHeight * 2),
-                                      painter: DottedLinePainter(
-                                          listOfPoints: state.data ?? []),
+                                      painter: ZigzagPainter(
+                                           listOfPoints: state.data ?? [],
+                                        // numberOfWaves: (chapters.reversed.toList().length / 2).ceil()
+                                      ),
                                     ),
                                     ...List.generate(
                                         state.data?.length ?? 0,
                                         (i) => Positioned(
-                                            top: (state.data?[i].dy ?? 0) - 30,
+                                            top: (state.data?[i].dy ?? 0) ,
                                             left: chapters.reversed
                                                         .toList()[i]
                                                         .isCheckPoint ==
                                                     true
-                                                ? (state.data?[i].dx ?? 0) - 30
-                                                : (state.data?[i].dx ?? 0) - 12,
+                                                ? (state.data?[i].dx ?? 0) * 15
+                                                : (state.data?[i].dx ?? 0)/1.5 ,
                                             child: createData(
                                                 chapterData: chapters.reversed
                                                     .toList()[i])))
