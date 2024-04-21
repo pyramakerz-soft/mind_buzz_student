@@ -35,7 +35,7 @@ dependencies:
   rive: ^0.12.4
   json_annotation: ^4.8.1
   audioplayers: ^5.2.1
-  flutter_svg: ^2.0.9
+  flutter_svg:
   vector_math: ^2.1.4
   # dio
   dio: ^5.4.1
@@ -53,6 +53,7 @@ dependencies:
   shared_preferences: ^2.2.2
   graphview: ^1.2.0
   path_drawing: ^1.0.1
+  game_levels_scrolling_map: ^0.0.7
 
 dev_dependencies:
   flutter_test:

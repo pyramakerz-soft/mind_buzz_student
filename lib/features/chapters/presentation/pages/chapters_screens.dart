@@ -239,6 +239,7 @@ class _ChaptersScreen extends State<ChaptersScreen> {
   }
 
   Future<List<Offset>> listOfPositions() async {
+
     List<Offset> positions = [
       const Offset(10, 10),
       Offset(subWidth, subHeight + 20),
@@ -261,11 +262,13 @@ class _ChaptersScreen extends State<ChaptersScreen> {
           positions[i].dy + ((subHeight * 4) * (countOfRepeat + 1))));
     }
 
+
     return newPositions;
   }
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -345,22 +348,30 @@ class _ChaptersScreen extends State<ChaptersScreen> {
                                   fit: StackFit.passthrough,
                                   alignment: Alignment.centerRight,
                                   children: [
-                                    CustomPaint(
-                                      size: Size(
-                                          300,
-                                          (state.data?.isEmpty ?? true)
-                                              ? 600
-                                              : (state.data?.last.dy ?? 0) +
-                                                  subHeight * 2),
-                                      painter: ZigzagPainter(
-                                           listOfPoints: state.data ?? [],
-                                        // numberOfWaves: (chapters.reversed.toList().length / 2).ceil()
+                                    InkWell(
+                                      onTap:(){
+
+                                        print(size.width);
+                                        print(size.height);
+                                        print(state.data?.last.dy);
+                          },
+                                      child: CustomPaint(
+                                        size: Size(
+                                            300,
+                                            (state.data?.isEmpty ?? true)
+                                                ? 600
+                                                : (state.data?.last.dy ?? 0) +
+                                                    subHeight * 2),
+                                        painter: ZigzagPainter(
+                                             listOfPoints: state.data ?? [],
+                                          // numberOfWaves: (chapters.reversed.toList().length / 2).ceil()
+                                        ),
                                       ),
                                     ),
                                     ...List.generate(
                                         state.data?.length ?? 0,
                                         (i) => Positioned(
-                                            top: (state.data?[i].dy ?? 0) ,
+                                            top: ((state.data?[i].dy?? 0) - 10 ) ,
                                             left: chapters.reversed
                                                         .toList()[i]
                                                         .isCheckPoint ==
@@ -371,6 +382,11 @@ class _ChaptersScreen extends State<ChaptersScreen> {
                                                 chapterData: chapters.reversed
                                                     .toList()[i])))
                                   ]));
+
+
+
+
+
                           // ); //,
                           // if(widgetData.length ==chapters.length)...{
                           // Positioned(

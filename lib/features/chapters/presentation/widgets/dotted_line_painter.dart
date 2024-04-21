@@ -1,4 +1,10 @@
+import 'dart:ui';
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/rendering.dart';
+
+
 import 'package:path_drawing/path_drawing.dart';
 // class DottedLinePainter extends CustomPainter {
 //   final List<Offset> listOfPoints;
@@ -38,36 +44,7 @@ import 'package:path_drawing/path_drawing.dart';
 //     }
 //   }
 // }
-// class ZigzagScroll extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Curved Zigzag Scroll'),
-//       ),
-//       body: CustomScrollView(
-//         slivers: <Widget>[
-//           SliverToBoxAdapter(
-//             child: ZigzagLine(),
-//           ),
-//           // Add more slivers or widgets here if needed
-//         ],
-//       ),
-//     );
-//   }
-// }
-//
-// class ZigzagLine extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       height: 1000, // Adjust height as needed
-//       child: CustomPaint(
-//         painter: ZigzagPainter(),
-//       ),
-//     );
-//   }
-// }
+
 
 class ZigzagPainter extends CustomPainter {
   final List<Offset> listOfPoints;
@@ -83,26 +60,44 @@ class ZigzagPainter extends CustomPainter {
 
     final double width = size.width;
     final double height = size.height;
-    final double curveHeight = listOfPoints.last.dy * 0.3;
+    final double curveHeight = listOfPoints.last.dy * 0.33;
 
     Path path = Path();
 
     // Starting point
     path.moveTo(width * 0.4, 0);
 
+    // // First curve
+    // path.quadraticBezierTo(width * 1.1, width * 0.8, width * 0.65, curveHeight);
+    //
+    // // Second curve
+    // path.quadraticBezierTo(
+    //     0, curveHeight * 1.6, width * 0.72, curveHeight * 2.47);
+    //
+    // // Third curve
+    // path.quadraticBezierTo(
+    //     width * 0.86, height / 1.4 , width / 2.6, curveHeight * 3.1 );
+    //
+    // // Fourth curve
+    // path.quadraticBezierTo(-50 , height / 1.1, width / 2, curveHeight * 4 );
+
+
     // First curve
-    path.quadraticBezierTo(width * 1.1, width * 0.8, width * 0.65, curveHeight);
+    path.quadraticBezierTo(
+        width / 1.1, curveHeight / 1.7, width * 0.4, curveHeight);
 
     // Second curve
     path.quadraticBezierTo(
-        0, curveHeight * 1.6, width * 0.72, curveHeight * 2.47);
+        -width / 4.4, curveHeight / 0.7, width * 0.4, curveHeight * 2);
 
     // Third curve
     path.quadraticBezierTo(
-        width * 0.86, height / 1.4 , width / 2.6, curveHeight * 3.1 );
+        width / 1.1, curveHeight / 0.4, width * 0.4, curveHeight * 3);
 
     // Fourth curve
-    path.quadraticBezierTo(-100, height / 1.1, width / 2, curveHeight * 4 + 3);
+    path.quadraticBezierTo(
+        -width / 4.4, curveHeight / 0.2, width * 0.4, curveHeight * 4);
+
 
     canvas.drawPath(
       dashPath(
@@ -112,7 +107,6 @@ class ZigzagPainter extends CustomPainter {
       paint,
     );
   }
-
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return false;
