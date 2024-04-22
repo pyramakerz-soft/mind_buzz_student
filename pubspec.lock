@@ -400,14 +400,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.0.0"
-  game_levels_scrolling_map:
-    dependency: "direct main"
-    description:
-      name: game_levels_scrolling_map
-      sha256: "1509c0b5ad4a6e87dd121d182485a753ce8e19dab737ae82e7e57b807970c19f"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.0.7"
   get_it:
     dependency: "direct main"
     description:
@@ -528,6 +520,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.1"
+  level_map:
+    dependency: "direct main"
+    description:
+      name: level_map
+      sha256: a2d1066026e8b31c6bd254cfd2894067d3f41a7ec0b8a0996dd6d15fd22f291d
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.2.0"
   lints:
     dependency: transitive
     description:

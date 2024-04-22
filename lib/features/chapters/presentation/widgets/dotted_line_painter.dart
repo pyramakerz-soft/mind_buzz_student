@@ -46,72 +46,123 @@ import 'package:path_drawing/path_drawing.dart';
 // }
 
 
-class ZigzagPainter extends CustomPainter {
-  final List<Offset> listOfPoints;
-  ZigzagPainter({required this.listOfPoints});
+// class ZigzagPainter extends CustomPainter {
+//   final List<Offset> listOfPoints;
+//   ZigzagPainter({required this.listOfPoints});
+//
+//   @override
+//   void paint(Canvas canvas, Size size) {
+//     Paint paint = Paint()
+//       ..color = Colors.black
+//       ..strokeWidth = 4
+//       ..style = PaintingStyle.stroke
+//       ..strokeCap = StrokeCap.round;
+//
+//     final double width = size.width;
+//     final double height = size.height;
+//     final double curveHeight = 1222 * 0.33;
+//
+//     Path path = Path();
+//
+//     // Starting point
+//     path.moveTo(width * 0.4, 0);
+//
+//     // // First curve
+//     // path.quadraticBezierTo(width * 1.1, width * 0.8, width * 0.65, curveHeight);
+//     //
+//     // // Second curve
+//     // path.quadraticBezierTo(
+//     //     0, curveHeight * 1.6, width * 0.72, curveHeight * 2.47);
+//     //
+//     // // Third curve
+//     // path.quadraticBezierTo(
+//     //     width * 0.86, height / 1.4 , width / 2.6, curveHeight * 3.1 );
+//     //
+//     // // Fourth curve
+//     // path.quadraticBezierTo(-50 , height / 1.1, width / 2, curveHeight * 4 );
+//
+//
+//     // First curve
+//     path.quadraticBezierTo(
+//         width / 1.1, 250 , width * 0.4, curveHeight);
+//
+//     // Second curve
+//     path.quadraticBezierTo(
+//         -width / 4.4, 600 , width * 0.4, curveHeight * 2);
+//
+//     // Third curve
+//     path.quadraticBezierTo(
+//         width / 1.1, 1000, width * 0.4, curveHeight * 3);
+//
+//     // Fourth curve
+//     path.quadraticBezierTo(
+//         -width / 4.4, 1450, width * 0.4, curveHeight * 4.2);
+//
+//     path.quadraticBezierTo(
+//         width / 1.1, 1950, width * 0.4, curveHeight * 5);
+//
+//
+//     canvas.drawPath(
+//       dashPath(
+//         path,
+//         dashArray: CircularIntervalList<double>(<double>[15.0, 10.5]),
+//       ),
+//       paint,
+//     );
+//   }
+//   @override
+//   bool shouldRepaint(covariant CustomPainter oldDelegate) {
+//     return false;
+//   }
+// }
 
+class ZigzagPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
       ..color = Colors.black
-      ..strokeWidth = 4
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round;
+      ..strokeWidth = 4 // Width of the stroke
+      ..style = PaintingStyle.stroke; // Stroke style
 
-    final double width = size.width;
-    final double height = size.height;
-    final double curveHeight = listOfPoints.last.dy * 0.33;
+    double waveWidth = size.width / 3; // Width of each wave
+    double halfWaveWidth = waveWidth / 2;
 
     Path path = Path();
 
-    // Starting point
-    path.moveTo(width * 0.4, 0);
+    path.moveTo(0, size.height);
 
-    // // First curve
-    // path.quadraticBezierTo(width * 1.1, width * 0.8, width * 0.65, curveHeight);
-    //
-    // // Second curve
-    // path.quadraticBezierTo(
-    //     0, curveHeight * 1.6, width * 0.72, curveHeight * 2.47);
-    //
-    // // Third curve
-    // path.quadraticBezierTo(
-    //     width * 0.86, height / 1.4 , width / 2.6, curveHeight * 3.1 );
-    //
-    // // Fourth curve
-    // path.quadraticBezierTo(-50 , height / 1.1, width / 2, curveHeight * 4 );
+    // Create wider and curved top and bottom waves using cubic Bézier curves
+    for (double y = size.height; y >= 0; y -= 100) {
+      path.cubicTo(
+        waveWidth / 8, y - 3 * halfWaveWidth, // Control point 1 for top curve
+        waveWidth / 4, y - 2 * halfWaveWidth, // Control point 2 for top curve
+        waveWidth / 2, y - halfWaveWidth, // End point for top curve
+      );
 
+      path.cubicTo(
+        waveWidth, y - halfWaveWidth, // Control point 1 for bottom curve
+        3 * waveWidth / 2, y - 2 * halfWaveWidth, // Control point 2 for bottom curve
+        2 * waveWidth, y - 3 * halfWaveWidth, // End point for bottom curve
+      );
 
-    // First curve
-    path.quadraticBezierTo(
-        width / 1.1, curveHeight / 1.7, width * 0.4, curveHeight);
+      path.cubicTo(
+        5 * waveWidth / 2, y - 2 * halfWaveWidth, // Control point 1 for top curve
+        3 * waveWidth, y - halfWaveWidth, // Control point 2 for top curve
+        7 * waveWidth / 2, y, // End point for top curve
+      );
 
-    // Second curve
-    path.quadraticBezierTo(
-        -width / 4.4, curveHeight / 0.7, width * 0.4, curveHeight * 2);
+      path.cubicTo(
+        4 * waveWidth, y + halfWaveWidth, // Control point 1 for bottom curve
+        9 * waveWidth / 4, y + halfWaveWidth, // Control point 2 for bottom curve
+        5 * waveWidth / 2, y + 2 * halfWaveWidth, // End point for bottom curve
+      );
+    }
 
-    // Third curve
-    path.quadraticBezierTo(
-        width / 1.1, curveHeight / 0.4, width * 0.4, curveHeight * 3);
-
-    // Fourth curve
-    path.quadraticBezierTo(
-        -width / 4.4, curveHeight / 0.2, width * 0.4, curveHeight * 4);
-
-
-    canvas.drawPath(
-      dashPath(
-        path,
-        dashArray: CircularIntervalList<double>(<double>[15.0, 10.5]),
-      ),
-      paint,
-    );
+    canvas.drawPath(path, paint);
   }
+
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return false;
   }
 }
-
-
-

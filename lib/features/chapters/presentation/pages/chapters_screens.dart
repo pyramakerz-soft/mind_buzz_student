@@ -2,7 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:level_map/level_map.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 
@@ -135,7 +137,8 @@ class _ChaptersScreen extends State<ChaptersScreen> {
                         ?.copyWith(fontSize: 25, fontWeight: FontWeight.w700),
                   ),
                   // },
-                } else if (chapterData.isLesson == true) ...{
+                }
+                else if (chapterData.isLesson == true) ...{
                   if (chapterData.isOpen == false) ...{
                     Image.asset(
                       AppImages.imageCloseLessonPart,
@@ -187,7 +190,8 @@ class _ChaptersScreen extends State<ChaptersScreen> {
                       ],
                     )
                   },
-                } else if (chapterData.isCheckPoint == true) ...{
+                }
+                else if (chapterData.isCheckPoint == true) ...{
                   Row(
                     children: [
                       20.pw,
@@ -211,7 +215,8 @@ class _ChaptersScreen extends State<ChaptersScreen> {
                           ])
                     ],
                   )
-                } else if (chapterData.isAssessment == true) ...{
+                }
+                else if (chapterData.isAssessment == true) ...{
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -265,6 +270,8 @@ class _ChaptersScreen extends State<ChaptersScreen> {
 
     return newPositions;
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -333,75 +340,95 @@ class _ChaptersScreen extends State<ChaptersScreen> {
               ),
 
               Expanded(
-                child: Container(
-                  padding: EdgeInsets.only(left: 20),
-                  child: FutureBuilder<List<Offset>>(
-                      future: listOfPositions(),
-                      builder: (context, state) {
-                        if (state.connectionState == ConnectionState.done &&
-                            state.hasData == true) {
-                          return SingleChildScrollView(
-                              reverse: true,
-                              scrollDirection: Axis.vertical,
-                              child: Stack(
-                                  clipBehavior: Clip.none,
-                                  fit: StackFit.passthrough,
-                                  alignment: Alignment.centerRight,
-                                  children: [
-                                    InkWell(
-                                      onTap:(){
-
-                                        print(size.width);
-                                        print(size.height);
-                                        print(state.data?.last.dy);
-                          },
-                                      child: CustomPaint(
-                                        size: Size(
-                                            300,
-                                            (state.data?.isEmpty ?? true)
-                                                ? 600
-                                                : (state.data?.last.dy ?? 0) +
-                                                    subHeight * 2),
-                                        painter: ZigzagPainter(
-                                             listOfPoints: state.data ?? [],
-                                          // numberOfWaves: (chapters.reversed.toList().length / 2).ceil()
-                                        ),
-                                      ),
-                                    ),
-                                    ...List.generate(
-                                        state.data?.length ?? 0,
-                                        (i) => Positioned(
-                                            top: ((state.data?[i].dy?? 0) - 10 ) ,
-                                            left: chapters.reversed
-                                                        .toList()[i]
-                                                        .isCheckPoint ==
-                                                    true
-                                                ? (state.data?[i].dx ?? 0) * 15
-                                                : (state.data?[i].dx ?? 0)/1.5 ,
-                                            child: createData(
-                                                chapterData: chapters.reversed
-                                                    .toList()[i])))
-                                  ]));
+                child: LevelMap(
+                  backgroundColor: Colors.transparent,
+                  levelMapParams: LevelMapParams(
+                    levelCount: 4,
+                    currentLevel: 3,
+                    pathColor: Colors.black,
+                    currentLevelImage: ImageParams(
+                      path: 'assets/images/close_lesson_part.png',
+                      size: Size(100, 100),
+                    ),
+                    lockedLevelImage: ImageParams(
+                      path: "assets/images/lesson_part.png",
+                      size: Size(100, 100),
+                    ),
+                    completedLevelImage: ImageParams(
+                      path: "assets/images/lesson_part.png",
+                      size: Size(100, 100),
+                    ),
 
 
 
-
-
-                          // ); //,
-                          // if(widgetData.length ==chapters.length)...{
-                          // Positioned(
-                          //     bottom: state.data?.first.dy,
-                          //     left: state.data?.first.dx,
-                          //     child:
-                          //     createData(chapterData: chapters.first))
-                          // }
-                          // ]);
-                        } else {
-                          return SizedBox();
-                        }
-                      }),
-                ),
+                  ),
+                )
               )
+              // Expanded(
+              //   child: Container(
+              //     padding: EdgeInsets.only(left: 20),
+              //     child: FutureBuilder<List<Offset>>(
+              //         future: listOfPositions(),
+              //         builder: (context, state) {
+              //           if (state.connectionState == ConnectionState.done &&
+              //               state.hasData == true) {
+              //             return SingleChildScrollView(
+              //                 reverse: true,
+              //                 scrollDirection: Axis.vertical,
+              //                 child: Stack(
+              //                     clipBehavior: Clip.none,
+              //                     fit: StackFit.passthrough,
+              //                     alignment: Alignment.centerRight,
+              //                     children: [
+              //                       InkWell(
+              //                         onTap:(){
+              //
+              //                           print(size.width);
+              //                           print(size.height);
+              //                           print(state.data?.last.dy);
+              //             },
+              //                         child: CustomPaint(
+              //                           size: Size(300,2000),
+              //                           painter: ZigzagPainter(
+              //                                // listOfPoints: state.data ?? [],
+              //                             // numberOfWaves: (chapters.reversed.toList().length / 2).ceil()
+              //                           ),
+              //                         ),
+              //                       ),
+              //                       ...List.generate(
+              //                           state.data?.length ?? 0,
+              //                           (i) => Positioned(
+              //                               top: ((state.data?[i].dy?? 0) - 10 ) ,
+              //                               left: chapters.reversed
+              //                                           .toList()[i]
+              //                                           .isCheckPoint ==
+              //                                       true
+              //                                   ? (state.data?[i].dx ?? 0) * 15
+              //                                   : (state.data?[i].dx ?? 0)/1.5 ,
+              //                               child: createData(
+              //                                   chapterData: chapters.reversed
+              //                                       .toList()[i])))
+              //                     ]));
+              //
+              //
+              //
+              //
+              //
+              //             // ); //,
+              //             // if(widgetData.length ==chapters.length)...{
+              //             // Positioned(
+              //             //     bottom: state.data?.first.dy,
+              //             //     left: state.data?.first.dx,
+              //             //     child:
+              //             //     createData(chapterData: chapters.first))
+              //             // }
+              //             // ]);
+              //           } else {
+              //             return SizedBox();
+              //           }
+              //         }),
+              //   ),
+              // )
 
               //     ],
               //   ),
