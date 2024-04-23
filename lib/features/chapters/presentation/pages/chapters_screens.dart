@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:level_map/level_map.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 
@@ -13,7 +12,10 @@ import '../../../../core/assets_svg_images.dart';
 import '../../../../core/utils.dart';
 import '../../../lesson/presentation/pages/lesson_screen.dart';
 import '../../domain/entities/chapter_model.dart';
+import '../../domain/entities/image_details.dart';
 import '../widgets/dotted_line_painter.dart';
+import '../widgets/level_map.dart';
+import '../widgets/level_map_parameters.dart';
 
 class ChaptersScreen extends StatefulWidget {
   final String programId;
