@@ -5,6 +5,8 @@ class ChapterModel {
   final bool? isCheckPoint;
   final bool? isAssessment;
   final bool? isChapter;
+  final String? levelImg;
+
 
   ChapterModel(
       {this.id,
@@ -12,5 +14,6 @@ class ChapterModel {
       this.isAssessment,
       this.isCheckPoint,
       this.isLesson,
-      this.isChapter});
+      this.isChapter,
+      this.levelImg});
 }

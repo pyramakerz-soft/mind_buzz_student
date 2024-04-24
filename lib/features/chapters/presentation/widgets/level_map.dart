@@ -56,7 +56,8 @@ class LevelMap extends StatelessWidget {
                   size: Size(constraints.maxWidth,
                       levelMapParams.levelCount * levelMapParams.levelHeight),
                   painter: LevelMapPainter(
-                      params: levelMapParams, imagesToPaint: snapshot.data),
+                      params: levelMapParams,
+                      imagesToPaint: snapshot.data),
                 );
               },
             ),
@@ -71,56 +72,50 @@ class LevelMap extends StatelessWidget {
 
   Future<ImagesToPaint?> loadImagesToPaint(LevelMapParams levelMapParams,
       int levelCount, double levelHeight, double screenWidth) async {
-    final ImageDetails completedLevelImageDetails = ImageDetails(
-        imageInfo: await _getUiImage(levelMapParams.completedLevelImage as ImageParams),
-        size: levelMapParams.completedLevelImage.size);
-    final ImageDetails currentLevelImageDetails = ImageDetails(
-        imageInfo: await _getUiImage(levelMapParams.currentLevelImage as ImageParams),
-        size: levelMapParams.currentLevelImage.size);
-    final ImageDetails lockedLevelImageDetails = ImageDetails(
-        imageInfo: await _getUiImage(levelMapParams.lockedLevelImage as ImageParams),
-        size: levelMapParams.lockedLevelImage.size);
-    final ImageDetails? startLevelImageDetails =
-    levelMapParams.startLevelImage != null
-        ? ImageDetails(
-        imageInfo: await _getUiImage(levelMapParams.startLevelImage! as ImageParams),
-        size: levelMapParams.startLevelImage!.size)
-        : null;
-    final ImageDetails? pathEndImageDetails = levelMapParams.pathEndImage != null
-        ? ImageDetails(
-        imageInfo: await _getUiImage(levelMapParams.pathEndImage! as ImageParams),
-        size: levelMapParams.pathEndImage!.size)
-        : null;
-    final List<BGImage>? bgImageDetailsList =
-    levelMapParams.bgImagesToBePaintedRandomly != null
-        ? await _getBGImages(levelMapParams.bgImagesToBePaintedRandomly!.cast<ImageParams>(),
-        levelCount, levelHeight, screenWidth)
-        : null;
+    // final ImageDetails completedLevelImageDetails = ImageDetails(
+    //     imageInfo: await _getUiImage(levelMapParams.completedLevelImage),
+    //     size: levelMapParams.completedLevelImage.size);
+    // final ImageDetails currentLevelImageDetails = ImageDetails(
+    //     imageInfo: await _getUiImage(levelMapParams.currentLevelImage),
+    //     size: levelMapParams.currentLevelImage.size);
+    // final ImageDetails lockedLevelImageDetails = ImageDetails(
+    //     imageInfo: await _getUiImage(levelMapParams.lockedLevelImage ),
+    //     size: levelMapParams.lockedLevelImage.size);
+    // final ImageDetails? startLevelImageDetails =
+    // levelMapParams.startLevelImage != null
+    //     ? ImageDetails(
+    //     imageInfo: await _getUiImage(levelMapParams.startLevelImage!),
+    //     size: levelMapParams.startLevelImage!.size)
+    //     : null;
+    // final ImageDetails? pathEndImageDetails = levelMapParams.pathEndImage != null
+    //     ? ImageDetails(
+    //     imageInfo: await _getUiImage(levelMapParams.pathEndImage!),
+    //     size: levelMapParams.pathEndImage!.size)
+    //     : null;
+    final List<ImageDetails>? bgImageDetailsList = await _getBGImages(levelMapParams.levelsImages.cast<ImageParams>(),
+        levelCount, levelHeight, screenWidth);
     return ImagesToPaint(
-      bgImages: bgImageDetailsList,
-      startLevelImage: startLevelImageDetails,
-      completedLevelImage: completedLevelImageDetails,
-      currentLevelImage: currentLevelImageDetails,
-      lockedLevelImage: lockedLevelImageDetails,
-      pathEndImage: pathEndImageDetails,
+      bgImages: bgImageDetailsList!,
+      // startLevelImage: startLevelImageDetails,
+      // completedLevelImage: completedLevelImageDetails,
+      // currentLevelImage: currentLevelImageDetails,
+      // lockedLevelImage: lockedLevelImageDetails,
+      // pathEndImage: pathEndImageDetails,
     );
   }
 
-  Future<List<BGImage>?> _getBGImages(List<ImageParams> bgImagesParams,
+  Future<List<ImageDetails>?> _getBGImages(List<ImageParams> bgImagesParams,
       int levelCount, double levelHeight, double screenWidth) async {
     if (bgImagesParams.isNotEmpty) {
-      final List<BGImage> _bgImagesToPaint = [];
+      final List<ImageDetails> _bgImagesToPaint = [];
       await Future.forEach<ImageParams>(bgImagesParams, (bgImageParam) async {
         final ImageInfo? imageInfo = await _getUiImage(bgImageParam);
         if (imageInfo == null || bgImageParam.repeatCountPerLevel == 0) {
           return;
         }
-        final List<ui.Offset> offsetList =
-        _getImageOffsets(bgImageParam, levelCount, levelHeight, screenWidth);
-        _bgImagesToPaint.add(BGImage(
-            imageDetails:
-            ImageDetails(imageInfo: imageInfo, size: bgImageParam.size),
-            offsetsToBePainted: offsetList));
+        // final List<ui.Offset> offsetList =
+        // _getImageOffsets(bgImageParam, levelCount, levelHeight, screenWidth);
+        _bgImagesToPaint.add(ImageDetails(imageInfo: imageInfo, size: bgImageParam.size));
       });
       return _bgImagesToPaint;
     }

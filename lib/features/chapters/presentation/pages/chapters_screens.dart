@@ -32,20 +32,34 @@ class ChaptersScreen extends StatefulWidget {
 
 class _ChaptersScreen extends State<ChaptersScreen> {
   List<ChapterModel> chapters = [
-    ChapterModel(isOpen: true, isChapter: true, id: 1),
-    ChapterModel(isOpen: true, isLesson: true, id: 2),
-    ChapterModel(isOpen: false, isLesson: true, id: 3),
-    ChapterModel(isOpen: false, isChapter: true, id: 4),
-    ChapterModel(isOpen: false, isLesson: true, id: 5),
-    ChapterModel(isOpen: false, isCheckPoint: true, id: 6),
-    ChapterModel(isOpen: false, isChapter: true, id: 7),
-    ChapterModel(isOpen: false, isLesson: true, id: 8),
-    ChapterModel(isOpen: false, isChapter: true, id: 9),
-    ChapterModel(isOpen: false, isAssessment: true, id: 10),
-    ChapterModel(isOpen: false, isLesson: true, id: 11),
+    ChapterModel(isOpen: true, isChapter: true, id: 1,
+    levelImg: 'assets/images/lesson_part.png'),
+    ChapterModel(isOpen: true, isLesson: true, id: 2,
+        levelImg: 'assets/images/lesson_part.png'),
+    ChapterModel(isOpen: false, isLesson: true, id: 3,
+        levelImg: 'assets/images/lesson_part.png'),
+    ChapterModel(isOpen: false, isChapter: true, id: 4,
+        levelImg: 'assets/images/lesson_part.png'),
+    ChapterModel(isOpen: false, isLesson: true, id: 5,
+        levelImg: 'assets/images/lesson_part.png'),
+    ChapterModel(isOpen: false, isCheckPoint: true, id: 6,
+        levelImg: 'assets/images/lesson_part.png'),
+    ChapterModel(isOpen: false, isChapter: true, id: 7,
+        levelImg: 'assets/images/lesson_part.png'),
+    ChapterModel(isOpen: false, isLesson: true, id: 8,
+        levelImg: 'assets/images/lesson_part.png'),
+    ChapterModel(isOpen: false, isChapter: true, id: 9,
+        levelImg: 'assets/images/lesson_part.png'),
+    ChapterModel(isOpen: false, isAssessment: true, id: 10,
+        levelImg: 'assets/images/lesson_part.png'),
+    ChapterModel(isOpen: false, isLesson: true, id: 11,
+        levelImg: 'assets/images/lesson_part.png'),
   ];
   final subHeight = 101;
   final subWidth = 78.0;
+
+
+
   Widget createData({required ChapterModel chapterData}) {
     return Container(
       // margin: EdgeInsets.only(bottom: 30),
@@ -166,7 +180,8 @@ class _ChaptersScreen extends State<ChaptersScreen> {
                                 ))
                       ],
                     )
-                  } else ...{
+                  }
+                  else ...{
                     Image.asset(
                       AppImages.imageLessonPart,
                       width: 80,
@@ -348,18 +363,22 @@ class _ChaptersScreen extends State<ChaptersScreen> {
                     levelCount: 4,
                     currentLevel: 3,
                     pathColor: Colors.black,
-                    currentLevelImage: ImageParams(
-                      path: 'assets/images/close_lesson_part.png',
-                      size: Size(100, 100),
-                    ),
-                    lockedLevelImage: ImageParams(
-                      path: "assets/images/lesson_part.png",
-                      size: Size(100, 100),
-                    ),
-                    completedLevelImage: ImageParams(
-                      path: "assets/images/lesson_part.png",
-                      size: Size(100, 100),
-                    ),
+                    levelsImages: chapters.map((e) => ImageParams(
+                      path: e.levelImg!,
+                      size: Size(100, 100),)).toList()
+
+                    // currentLevelImage: ImageParams(
+                    //   path: 'assets/images/close_lesson_part.png',
+                    //   size: Size(100, 100),
+                    // ),
+                    // lockedLevelImage: ImageParams(
+                    //   path: "assets/images/lesson_part.png",
+                    //   size: Size(100, 100),
+                    // ),
+                    // completedLevelImage: ImageParams(
+                    //   path: "assets/images/lesson_part.png",
+                    //   size: Size(100, 100),
+                    // ),
 
 
 
