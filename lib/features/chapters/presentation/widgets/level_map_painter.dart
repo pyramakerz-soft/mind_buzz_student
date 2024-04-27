@@ -1,13 +1,11 @@
 import 'dart:ui' as ui;
 
+import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:mind_buzz_refactor/features/chapters/domain/entities/image_details.dart';
 import 'package:mind_buzz_refactor/features/chapters/presentation/widgets/level_map_parameters.dart';
 
 import '../../domain/entities/images_to_paint.dart';
-
-
-
 
 class LevelMapPainter extends CustomPainter {
   final LevelMapParams params;
@@ -21,15 +19,15 @@ class LevelMapPainter extends CustomPainter {
 
   LevelMapPainter({required this.params, this.imagesToPaint})
       : _pathPaint = Paint()
-    ..strokeWidth = params.pathStrokeWidth
-    ..color = params.pathColor
-    ..strokeCap = StrokeCap.round,
+          ..strokeWidth = params.pathStrokeWidth
+          ..color = params.pathColor
+          ..strokeCap = StrokeCap.round,
         _shadowPaint = Paint()
           ..strokeWidth = params.pathStrokeWidth
           ..color = params.pathColor.withOpacity(0.2)
           ..strokeCap = StrokeCap.round,
         _nextLevelFraction =
-        params.currentLevel.remainder(params.currentLevel.floor());
+            params.currentLevel.remainder(params.currentLevel.floor());
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -48,13 +46,25 @@ class LevelMapPainter extends CustomPainter {
     double _p2_dy_VariationFactor =
         params.firstCurveReferencePointOffsetFactor!.dy;
     for (int thisLevel = 0; thisLevel < params.levelCount; thisLevel++) {
+      List<ImageDetails> imageDetails = imagesToPaint!.bgImages;
       final Offset p1 = Offset(_centerWidth, -(thisLevel * params.levelHeight));
       final Offset p2 = getP2OffsetBasedOnCurveSide(thisLevel,
           _p2_dx_VariationFactor, _p2_dy_VariationFactor, _centerWidth);
       final Offset p3 = Offset(_centerWidth,
           -((thisLevel * params.levelHeight) + params.levelHeight));
-
-      _drawBezierCurve(canvas, p1, p2, p3, thisLevel + 1);
+      _drawBezierCurve(
+          canvas,
+          ui.Offset(p1.dx, thisLevel == 0 ? p1.dy - 30 : p1.dy),
+          p2,
+          ui.Offset(
+              p3.dx, thisLevel == imageDetails.length - 1 ? p3.dy + 45 : p3.dy),
+          thisLevel + 1);
+      _paintImage(
+          canvas,
+          imageDetails[thisLevel],
+          Offset(thisLevel % 2 != 0 ? p1.dx * 1.3 : p1.dx / 1.3,
+              thisLevel == imageDetails.length - 1 ? p1.dy - 110 : p1.dy)
+              .toBottomCenter(imageDetails[thisLevel].size));
 
       if (params.enableVariationBetweenCurves) {
         _p2_dx_VariationFactor = _p2_dx_VariationFactor +
@@ -126,6 +136,7 @@ class LevelMapPainter extends CustomPainter {
           _compute(t, p1.dx, p2.dx, p3.dx), _compute(t, p1.dy, p2.dy, p3.dy));
       Offset offset2 = Offset(_compute(t + _dashFactor, p1.dx, p2.dx, p3.dx),
           _compute(t + _dashFactor, p1.dy, p2.dy, p3.dy));
+
       canvas.drawLine(offset1, offset2, _pathPaint);
       if (params.showPathShadow) {
         canvas.drawLine(
@@ -140,14 +151,14 @@ class LevelMapPainter extends CustomPainter {
       final Offset _offsetToPaintImage = Offset(
           _compute(0.5, p1.dx, p2.dx, p3.dx),
           _compute(0.5, p1.dy, p2.dy, p3.dy));
-      List<ImageDetails> imageDetails = imagesToPaint!.bgImages;
+      // List<ImageDetails> imageDetails = imagesToPaint!.bgImages;
+
       // if (params.currentLevel >= thisLevel) {
       //   imageDetails = imagesToPaint!.completedLevelImage;
       // }
       // else {
       //   imageDetails = imagesToPaint!.lockedLevelImage;
       // }
-
 
       final double _curveFraction;
       final int _flooredCurrentLevel = params.currentLevel.floor();
@@ -164,17 +175,15 @@ class LevelMapPainter extends CustomPainter {
       final Offset _offsetToPaintCurrentLevelImage = Offset(
           _compute(_curveFraction, p1.dx, p2.dx, p3.dx),
           _compute(_curveFraction, p1.dy, p2.dy, p3.dy));
-      for(ImageDetails img in imageDetails){
-        _paintImage(canvas, img,
-            _offsetToPaintImage.toBottomCenter(img.size));
-      }
+      // for(ImageDetails img in imageDetails){
+      //   _paintImage(canvas, img, _offsetToPaintImage.toBottomCenter(img.size));
+      // }
       // _paintImage(canvas, imagesToPaint!.currentLevelImage,
       //     _offsetToPaintCurrentLevelImage.toBottomCenter(imageDetails.size));
     }
   }
 
   void _paintImage(Canvas canvas, ImageDetails imageDetails, Offset offset) {
-
     paintImage(
         canvas: canvas,
         rect: Rect.fromLTWH(offset.dx, offset.dy, imageDetails.size.width,

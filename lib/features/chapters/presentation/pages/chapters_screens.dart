@@ -33,19 +33,19 @@ class ChaptersScreen extends StatefulWidget {
 class _ChaptersScreen extends State<ChaptersScreen> {
   List<ChapterModel> chapters = [
     ChapterModel(isOpen: true, isChapter: true, id: 1,
-    levelImg: 'assets/images/lesson_part.png'),
+    levelImg: 'assets/images/intro_bee.png'),
     ChapterModel(isOpen: true, isLesson: true, id: 2,
         levelImg: 'assets/images/lesson_part.png'),
     ChapterModel(isOpen: false, isLesson: true, id: 3,
         levelImg: 'assets/images/lesson_part.png'),
     ChapterModel(isOpen: false, isChapter: true, id: 4,
-        levelImg: 'assets/images/lesson_part.png'),
+        levelImg: 'assets/images/child.png'),
     ChapterModel(isOpen: false, isLesson: true, id: 5,
         levelImg: 'assets/images/lesson_part.png'),
     ChapterModel(isOpen: false, isCheckPoint: true, id: 6,
         levelImg: 'assets/images/lesson_part.png'),
     ChapterModel(isOpen: false, isChapter: true, id: 7,
-        levelImg: 'assets/images/lesson_part.png'),
+        levelImg: 'assets/images/checkpoint_part.png'),
     ChapterModel(isOpen: false, isLesson: true, id: 8,
         levelImg: 'assets/images/lesson_part.png'),
     ChapterModel(isOpen: false, isChapter: true, id: 9,
@@ -360,8 +360,8 @@ class _ChaptersScreen extends State<ChaptersScreen> {
                 child: LevelMap(
                   backgroundColor: Colors.transparent,
                   levelMapParams: LevelMapParams(
-                    levelCount: 4,
-                    currentLevel: 3,
+                    levelCount: chapters.length,
+                    currentLevel: chapters.length.toDouble(),
                     pathColor: Colors.black,
                     levelsImages: chapters.map((e) => ImageParams(
                       path: e.levelImg!,
