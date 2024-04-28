@@ -38,295 +38,60 @@ class _ChaptersScreen extends State<ChaptersScreen> {
         isOpen: true,
         isChapter: true,
         id: 1,
-        levelImg: 'assets/images/intro_bee.png'),
+        levelImg: 'assets/images/chapter.png'),
     ChapterModel(
         isOpen: true,
         isLesson: true,
         id: 2,
-        levelImg: 'assets/images/lesson_part.png'),
+        levelImg: 'assets/images/close_lesson_part.png'),
     ChapterModel(
         isOpen: false,
         isLesson: true,
         id: 3,
-        levelImg: 'assets/images/lesson_part.png'),
+        levelImg: 'assets/images/close_lesson_part.png'),
     ChapterModel(
         isOpen: false,
         isChapter: true,
         id: 4,
-        levelImg: 'assets/images/child.png'),
+        levelImg: 'assets/images/chapter.png'),
     ChapterModel(
         isOpen: false,
         isLesson: true,
         id: 5,
-        levelImg: 'assets/images/lesson_part.png'),
+        levelImg: 'assets/images/close_lesson_part.png'),
     ChapterModel(
         isOpen: false,
         isCheckPoint: true,
         id: 6,
-        levelImg: 'assets/images/lesson_part.png'),
+        levelImg: 'assets/images/checkpoint_part.png'),
     ChapterModel(
         isOpen: false,
         isChapter: true,
         id: 7,
-        levelImg: 'assets/images/checkpoint_part.png'),
+        levelImg: 'assets/images/chapter.png'),
     ChapterModel(
         isOpen: false,
         isLesson: true,
         id: 8,
-        levelImg: 'assets/images/lesson_part.png'),
+        levelImg: 'assets/images/close_lesson_part.png'),
     ChapterModel(
         isOpen: false,
         isChapter: true,
         id: 9,
-        levelImg: 'assets/images/lesson_part.png'),
+        levelImg: 'assets/images/chapter.png'),
     ChapterModel(
         isOpen: false,
         isAssessment: true,
         id: 10,
-        levelImg: 'assets/images/lesson_part.png'),
+        levelImg: 'assets/images/assessment_part.png'),
     ChapterModel(
         isOpen: false,
         isLesson: true,
         id: 11,
-        levelImg: 'assets/images/lesson_part.png'),
+        levelImg: 'assets/images/close_lesson_part.png'),
   ];
   final subHeight = 101;
   final subWidth = 78.0;
-
-
-
- //  Widget createData({required ChapterModel chapterData}) {
- //    return Container(
- //      // margin: EdgeInsets.only(bottom: 30),
- //      // width: 90,
- //      // height: 120,
- //      child: Column(
- //        children: [
- //          // if (chapterData.isLesson == true) ...{
- //          //   if (chapterData.isOpen == true) ...{
- //          //     Row(
- //          //       mainAxisAlignment: MainAxisAlignment.center,
- //          //       children: [
- //          //         Container(
- //          //             // height: 50,
- //          //             margin: const EdgeInsets.only(top: 20),
- //          //             child: Transform.rotate(
- //          //                 angle: (-10) * 3.141592653589793 / 180,
- //          //                 // Rotate 45 degrees in radians
- //          //                 child: Image.asset(
- //          //                   AppImages.imageStar,
- //          //                   height: 20,
- //          //                 ))),
- //          //         Image.asset(
- //          //           AppImages.imageStar,
- //          //           height: 20,
- //          //         ),
- //          //         Container(
- //          //             // height: 50,
- //          //             margin: const EdgeInsets.only(top: 20),
- //          //             child: Transform.rotate(
- //          //                 angle: (10) * 3.141592653589793 / 180,
- //          //                 // Rotate 45 degrees in radians
- //          //                 child: Image.asset(
- //          //                   AppImages.imageStar,
- //          //                   height: 20,
- //          //                 ))),
- //          //       ],
- //          //     ),
- //          //   }
- //          //   else ...{
- //          //     Row(
- //          //       mainAxisAlignment: MainAxisAlignment.center,
- //          //       children: [
- //          //         Container(
- //          //             // height: 50,
- //          //             margin: const EdgeInsets.only(top: 20),
- //          //             child: Transform.rotate(
- //          //                 angle: (-10) * 3.141592653589793 / 180,
- //          //                 // Rotate 45 degrees in radians
- //          //                 child: Image.asset(
- //          //                   AppImages.imageEmptyStar,
- //          //                   height: 20,
- //          //                 ))),
- //          //         Image.asset(
- //          //           AppImages.imageEmptyStar,
- //          //           height: 20,
- //          //         ),
- //          //         Container(
- //          //             // height: 50,
- //          //             margin: const EdgeInsets.only(top: 20),
- //          //             child: Transform.rotate(
- //          //                 angle: (10) * 3.141592653589793 / 180,
- //          //                 // Rotate 45 degrees in radians
- //          //                 child: Image.asset(
- //          //                   AppImages.imageEmptyStar,
- //          //                   height: 20,
- //          //                 ))),
- //          //       ],
- //          //     ),
- //          //   }
- //          // },
- //          GestureDetector(
- //            onTap: () {
- //              Utils.navigateTo(
- //                  LessonScreen(
- //                    programId: widget.programId,
- //                    programName: widget.programName,
- //                  ),
- //                  context);
- //            },
- //            child: Stack(
- //              alignment: Alignment.center,
- //              children: [
- //                if (chapterData.isChapter == true) ...{
- //                  SvgPicture.asset(AppSvgImages.iconCurrentChapter1),
- //                  Text(
- //                    "${chapterData.id}",
- //                    style: Theme.of(context)
- //                        .textTheme
- //                        .bodySmall
- //                        ?.copyWith(fontSize: 25, fontWeight: FontWeight.w700),
- //                  ),
- //                  // },
- //                } else if (chapterData.isLesson == true) ...{
- //                  if (chapterData.isOpen == false) ...{
- //                    Image.asset(
- //                      AppImages.imageCloseLessonPart,
- //                      width: 80,
- //                    ),
- //                    Column(
- //                      children: [
- //                        Text(
- //                          "Lesson",
- //                          style: Theme.of(context)
- //                              .textTheme
- //                              .headlineLarge
- //                              ?.copyWith(
- //                                  fontSize: 16, fontWeight: FontWeight.w500),
- //                        ),
- //                        ...List.generate(
- //                            1,
- //                            (index) => SvgPicture.asset(
- //                                  DefaultChapterData.getTheNumberOfChapter(
- //                                    number: 1,
- //                                  ).first,
- //                                  height: 20,
- //                                ))
- //                      ],
- //                    )
- //                  } else ...{
- //                    Image.asset(
- //                      AppImages.imageLessonPart,
- //                      width: 80,
- //                    ),
- //                    Column(
- //                      children: [
- //                        Text(
- //                          "Lesson",
- //                          style: Theme.of(context)
- //                              .textTheme
- //                              .headlineLarge
- //                              ?.copyWith(
- //                                  fontSize: 16, fontWeight: FontWeight.w500),
- //                        ),
- //                        ...List.generate(
- //                            1,
- //                            (index) => SvgPicture.asset(
- //                                  DefaultChapterData.getTheNumberOfChapter(
- //                                    number: 1,
- //                                  ).first,
- //                                  height: 20,
- //                                ))
- //                      ],
- //                    )
- //                  },
- //                } else if (chapterData.isCheckPoint == true) ...{
- //                  Row(
- //                    children: [
- //                      20.pw,
- //                      Column(
- //                          crossAxisAlignment: CrossAxisAlignment.start,
- //                          mainAxisAlignment: MainAxisAlignment.start,
- //                          children: [
- //                            Text(
- //                              "Checkpoint",
- //                              style: Theme.of(context)
- //                                  .textTheme
- //                                  .headlineLarge
- //                                  ?.copyWith(
- //                                      fontSize: 16,
- //                                      fontWeight: FontWeight.w500),
- //                            ),
- //                            Image.asset(
- //                              AppImages.imageCheckpointPart,
- //                              width: 60,
- //                            ),
- //                          ])
- //                    ],
- //                  )
- //                } else if (chapterData.isAssessment == true) ...{
- //                  Column(
- //                      crossAxisAlignment: CrossAxisAlignment.start,
- //                      mainAxisAlignment: MainAxisAlignment.start,
- //                      children: [
- //                        Text(
- //                          "Assessment",
- //                          style: Theme.of(context)
- //                              .textTheme
- //                              .headlineLarge
- //                              ?.copyWith(
- //                                  fontSize: 16, fontWeight: FontWeight.w500),
- //                        ),
- //                        Image.asset(
- //                          AppImages.imageAssessmentPart,
- //                          width: 70,
- //                        ),
- //                      ])
- //                }
- //              ],
- //            ),
- //          ),
- //        ],
- //      ),
- //    );
- //  }
- //
- //  List<Offset> offsets = [];
- //  Future<List<Offset>> listOfPositions() async {
- //    List<Offset> positions = [
- //      const Offset(10, 10),
- //      Offset(subWidth, subHeight + 20),
- //      Offset(subWidth + 10, (subHeight * 2) + 40),
- //      Offset(subWidth * 3 - 10, subHeight * 3 - 20),
- //      Offset(subWidth * 3 - 10, subHeight * 4),
- //    ];
- //
- //    List<Offset> newPositions = [];
- //    int countOfRepeat = (chapters.length / positions.length).round();
- //    for (int i = 0; i < (countOfRepeat); i++) {
- //      List<Offset> secondPositions = List.from(positions.where((element) {
- //        return positions.indexOf(element) + positions.length <= chapters.length;
- //      }).map((offset) =>
- //          Offset(offset.dx, offset.dy + ((subHeight * 4) * (i + 1)))));
- //      newPositions.addAll(secondPositions);
- //    }
- //    for (int i = 0; i < (chapters.length - newPositions.length); i++) {
- //      newPositions.add(Offset(positions[i].dx,
- //          positions[i].dy + ((subHeight * 4) * (countOfRepeat + 1))));
- //    }
- //
- //    return newPositions;
- //  }
- //   initializeLevels(BuildContext context){
- //    Size size = MediaQuery.of(context).size;
- //    final double _centerWidth = size.width / 2;
- //    for(int thisLevel = 0; thisLevel < chapters.length ; thisLevel++){
- //      final Offset p1 = Offset(_centerWidth, -(thisLevel * 100).toDouble());
- //      offsets.add(p1);
- //    }
- // }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -337,8 +102,6 @@ class _ChaptersScreen extends State<ChaptersScreen> {
             image: DecorationImage(image: AssetImage(AppImages.bgChapters))),
         child: Stack(
           children: [
-
-
             Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
               SizedBox(
                 height: 140,
@@ -372,7 +135,7 @@ class _ChaptersScreen extends State<ChaptersScreen> {
                             .textTheme
                             .titleMedium
                             ?.copyWith(
-                            fontSize: 20, fontWeight: FontWeight.w700),
+                                fontSize: 20, fontWeight: FontWeight.w700),
                       ),
                       GestureDetector(
                           onTap: () {
@@ -395,11 +158,10 @@ class _ChaptersScreen extends State<ChaptersScreen> {
                   ),
                 ),
               ),
-
               Expanded(
                 child: LevelMap(
                   backgroundColor: Colors.transparent,
-                  onTapLevel: (index){
+                  onTapLevel: (index) {
                     print(index);
                   },
                   levelMapParams: LevelMapParams(
@@ -409,11 +171,60 @@ class _ChaptersScreen extends State<ChaptersScreen> {
 
                     levelsImages: chapters
                         .map((e) => ImageParams(
-                      path: e.levelImg!,
-                      size: Size(100, 100),
-                    ))
+                            path: e.levelImg!,
+                            size: Size(100, 100),
+                            bodyWidget: e.isChapter == true
+                                ? e.isOpen == true
+                                    ? Text(
+                                        "1",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            ?.copyWith(
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.w700),
+                                      )
+                                    : SvgPicture.asset(AppSvgImages.iconLock)
+                                : e.isCheckPoint == true
+                                    ? e.isOpen == true
+                                        ? SizedBox()
+                                        : SvgPicture.asset(
+                                            AppSvgImages.iconLock)
+                                    : e.isAssessment == true
+                                        ? e.isOpen == true
+                                            ? SizedBox()
+                                            : SvgPicture.asset(
+                                                AppSvgImages.iconLock)
+                                        : e.isLesson == true
+                                            ? e.isOpen == true
+                                                ? Column(
+                                                    children: [
+                                                      Text(
+                                                        "Lesson",
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .headlineLarge
+                                                            ?.copyWith(
+                                                                fontSize: 16,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500),
+                                                      ),
+                                                      ...List.generate(
+                                                          1,
+                                                          (index) =>
+                                                              SvgPicture.asset(
+                                                                DefaultChapterData
+                                                                    .getTheNumberOfChapter(
+                                                                  number: 1,
+                                                                ).first,
+                                                                height: 20,
+                                                              ))
+                                                    ],
+                                                  )
+                                                : SizedBox()
+                                            : SizedBox()))
                         .toList(),
-
 
                     // currentLevelImage: ImageParams(
                     //   path: 'assets/images/close_lesson_part.png',
@@ -427,82 +238,10 @@ class _ChaptersScreen extends State<ChaptersScreen> {
                     //   path: "assets/images/lesson_part.png",
                     //   size: Size(100, 100),
                     // ),
-
                   ),
                 ),
               ),
-
-              // Expanded(
-              //   child: Container(
-              //     padding: EdgeInsets.only(left: 20),
-              //     child: FutureBuilder<List<Offset>>(
-              //         future: listOfPositions(),
-              //         builder: (context, state) {
-              //           if (state.connectionState == ConnectionState.done &&
-              //               state.hasData == true) {
-              //             return SingleChildScrollView(
-              //                 reverse: true,
-              //                 scrollDirection: Axis.vertical,
-              //                 child: Stack(
-              //                     clipBehavior: Clip.none,
-              //                     fit: StackFit.passthrough,
-              //                     alignment: Alignment.centerRight,
-              //                     children: [
-              //                       InkWell(
-              //                         onTap:(){
-              //
-              //                           print(size.width);
-              //                           print(size.height);
-              //                           print(state.data?.last.dy);
-              //             },
-              //                         child: CustomPaint(
-              //                           size: Size(300,2000),
-              //                           painter: ZigzagPainter(
-              //                                // listOfPoints: state.data ?? [],
-              //                             // numberOfWaves: (chapters.reversed.toList().length / 2).ceil()
-              //                           ),
-              //                         ),
-              //                       ),
-              //                       ...List.generate(
-              //                           state.data?.length ?? 0,
-              //                           (i) => Positioned(
-              //                               top: ((state.data?[i].dy?? 0) - 10 ) ,
-              //                               left: chapters.reversed
-              //                                           .toList()[i]
-              //                                           .isCheckPoint ==
-              //                                       true
-              //                                   ? (state.data?[i].dx ?? 0) * 15
-              //                                   : (state.data?[i].dx ?? 0)/1.5 ,
-              //                               child: createData(
-              //                                   chapterData: chapters.reversed
-              //                                       .toList()[i])))
-              //                     ]));
-              //
-              //
-              //
-              //
-              //
-              //             // ); //,
-              //             // if(widgetData.length ==chapters.length)...{
-              //             // Positioned(
-              //             //     bottom: state.data?.first.dy,
-              //             //     left: state.data?.first.dx,
-              //             //     child:
-              //             //     createData(chapterData: chapters.first))
-              //             // }
-              //             // ]);
-              //           } else {
-              //             return SizedBox();
-              //           }
-              //         }),
-              //   ),
-              // )
-
-              //     ],
-              //   ),
-              // ),
             ]),
-
             Align(
                 alignment: Alignment.centerLeft,
                 child: Column(
@@ -515,8 +254,6 @@ class _ChaptersScreen extends State<ChaptersScreen> {
                     // 100.ph
                   ],
                 )),
-
-
           ],
         ),
       ),

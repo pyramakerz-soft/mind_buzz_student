@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../presentation/widgets/level_map.dart';
 
-
 class ImageDetails {
   final ImageInfo imageInfo;
   final Size size;
@@ -14,6 +13,7 @@ class ImageParams {
   final String path;
   final Size size;
   final Offset? offset;
+  final Widget? bodyWidget;
 
   /// It determines how close the image could get to the center of the page.
   /// Affects only for BG images.
@@ -35,15 +35,16 @@ class ImageParams {
   /// If an image need to be painted only on left or right to the path, set this parameter.
   final Side side;
 
-  ImageParams({
-    required this.path,
-    required this.size,
-    this.imagePositionFactor = 0.4,
-    this.repeatCountPerLevel = 0.5,
-    this.side = Side.BOTH,
-    this.offset
-  })  : assert(imagePositionFactor >= 0 && imagePositionFactor <= 1,
-  "Image Position factor should be between 0 and 1"),
+  ImageParams(
+      {required this.path,
+      required this.size,
+      this.imagePositionFactor = 0.4,
+      this.repeatCountPerLevel = 0.5,
+      this.side = Side.BOTH,
+      this.offset,
+      this.bodyWidget})
+      : assert(imagePositionFactor >= 0 && imagePositionFactor <= 1,
+            "Image Position factor should be between 0 and 1"),
         assert(repeatCountPerLevel >= 0,
-        "repeatPerLevel parameter should be positive");
+            "repeatPerLevel parameter should be positive");
 }

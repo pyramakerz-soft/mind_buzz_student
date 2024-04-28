@@ -20,8 +20,12 @@ abstract class AppImages {
   static const String imageLandOfUnit = '${mainPathOfImages}land_of_unit.png';
   static const String imageBluePen = '${mainPathOfImages}blue_pen.png';
   static const String imageRedPen = '${mainPathOfImages}red_pen.png';
-  static const String imageAssessmentPart = '${mainPathOfImages}assessment_part.png';
-  static const String imageCheckpointPart = '${mainPathOfImages}checkpoint_part.png';
+  static const String imageAssessmentPart =
+      '${mainPathOfImages}assessment_part.png';
+  static const String imageCheckpointPart =
+      '${mainPathOfImages}checkpoint_part.png';
   static const String imageLessonPart = '${mainPathOfImages}lesson_part.png';
-  static const String imageCloseLessonPart = '${mainPathOfImages}close_lesson_part.png';
+  static const String imageCloseLessonPart =
+      '${mainPathOfImages}close_lesson_part.png';
+  static const String imageChapter = '${mainPathOfImages}chapter.png';
 }

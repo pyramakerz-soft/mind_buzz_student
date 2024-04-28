@@ -77,9 +77,18 @@ class LevelMap extends StatelessWidget {
                                 onTap: () {
                                   onTapLevel.call(index);
                                 },
-                                child: Image.asset(
-                                  levelMapParams.levelsImages[index].path ?? '',
-                                  height: 70,
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    Image.asset(
+                                      levelMapParams.levelsImages[index].path ??
+                                          '',
+                                      height: 70,
+                                    ),
+                                    levelMapParams
+                                            .levelsImages[index].bodyWidget ??
+                                        SizedBox()
+                                  ],
                                 )))),
                   ],
                 );

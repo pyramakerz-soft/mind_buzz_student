@@ -23,5 +23,5 @@ abstract class AppSvgImages {
   static const String iconWaterBee = '${mainPathOfSvg}water_bee.svg';
   static const String iconTree = '${mainPathOfSvg}tree.svg';
   static const String iconTree1 = '${mainPathOfSvg}tree2.svg';
-
+  static const String iconLock = '${mainPathOfSvg}lock.svg';
 }
