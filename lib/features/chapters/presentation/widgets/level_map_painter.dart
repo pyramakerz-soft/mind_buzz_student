@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
 
 import 'package:flame/extensions.dart';
+import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:mind_buzz_refactor/features/chapters/domain/entities/image_details.dart';
 import 'package:mind_buzz_refactor/features/chapters/presentation/widgets/level_map_parameters.dart';
@@ -12,6 +13,7 @@ class LevelMapPainter extends CustomPainter {
   final ImagesToPaint? imagesToPaint;
   final Paint _pathPaint;
   final Paint _shadowPaint;
+
 
   /// Describes the fraction to reach next level.
   /// If the [LevelMapParams.currentLevel] is 6.5, [_nextLevelFraction] is 0.5.
@@ -31,7 +33,9 @@ class LevelMapPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+
     canvas.save();
+
     canvas.translate(0, size.height);
 
     // if (imagesToPaint != null) {
@@ -45,6 +49,7 @@ class LevelMapPainter extends CustomPainter {
         params.firstCurveReferencePointOffsetFactor!.dx;
     double _p2_dy_VariationFactor =
         params.firstCurveReferencePointOffsetFactor!.dy;
+    List<Offset> offsets = [];
     for (int thisLevel = 0; thisLevel < params.levelCount; thisLevel++) {
       List<ImageDetails> imageDetails = imagesToPaint!.bgImages;
       final Offset p1 = Offset(_centerWidth, -(thisLevel * params.levelHeight));
@@ -52,6 +57,10 @@ class LevelMapPainter extends CustomPainter {
           _p2_dx_VariationFactor, _p2_dy_VariationFactor, _centerWidth);
       final Offset p3 = Offset(_centerWidth,
           -((thisLevel * params.levelHeight) + params.levelHeight));
+      Offset currentLevelOffset = Offset(thisLevel % 2 != 0 ? p1.dx * 1.3 : p1.dx / 1.3,
+          thisLevel == imageDetails.length - 1 ? p1.dy - 110 : p1.dy)
+          .toBottomCenter(imageDetails[thisLevel].size);
+
       _drawBezierCurve(
           canvas,
           ui.Offset(p1.dx, thisLevel == 0 ? p1.dy - 30 : p1.dy),
@@ -59,12 +68,12 @@ class LevelMapPainter extends CustomPainter {
           ui.Offset(
               p3.dx, thisLevel == imageDetails.length - 1 ? p3.dy + 45 : p3.dy),
           thisLevel + 1);
-      _paintImage(
-          canvas,
-          imageDetails[thisLevel],
-          Offset(thisLevel % 2 != 0 ? p1.dx * 1.3 : p1.dx / 1.3,
-              thisLevel == imageDetails.length - 1 ? p1.dy - 110 : p1.dy)
-              .toBottomCenter(imageDetails[thisLevel].size));
+
+
+      ////////////////// paint image //////////////////////////
+
+      // _paintImage(canvas, imageDetails[thisLevel],currentLevelOffset);
+      // offsets.add(currentLevelOffset);
 
       if (params.enableVariationBetweenCurves) {
         _p2_dx_VariationFactor = _p2_dx_VariationFactor +
@@ -74,7 +83,9 @@ class LevelMapPainter extends CustomPainter {
       }
     }
 
+
     canvas.restore();
+
   }
   //
   // void _drawBGImages(Canvas canvas) {
@@ -128,7 +139,8 @@ class LevelMapPainter extends CustomPainter {
   }
 
   void _drawBezierCurve(
-      Canvas canvas, Offset p1, Offset p2, Offset p3, int thisLevel) {
+      Canvas canvas, Offset p1, Offset p2, Offset p3, int thisLevel ) {
+
     final double _dashFactor = params.dashLengthFactor;
     //TODO: Customise the empty dash length with this multiplication factor 2.
     for (double t = _dashFactor; t <= 1; t += _dashFactor * 2) {

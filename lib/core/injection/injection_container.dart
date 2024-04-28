@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
+import '../../features/chapters/presentation/bloc/chapters_bloc.dart';
 import '../../features/home/data/datasources/data_source_remotely_of_home.dart';
 import '../../features/home/data/repositories/program_repository_impl.dart';
 import '../../features/home/domain/repositories/repositories_user.dart';

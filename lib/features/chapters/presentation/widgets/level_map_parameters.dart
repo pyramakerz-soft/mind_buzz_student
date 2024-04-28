@@ -23,6 +23,8 @@ class LevelMapParams {
   final Offset minReferencePositionOffsetFactor;
   final Offset maxReferencePositionOffsetFactor;
   final List<ImageParams> levelsImages;
+
+
   // final ImageParams? startLevelImage;
   // final ImageParams completedLevelImage;
   // final ImageParams currentLevelImage;

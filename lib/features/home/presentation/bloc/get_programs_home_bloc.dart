@@ -29,7 +29,8 @@ class GetProgramsHomeBloc extends Bloc<GetProgramsHomeEvent, GetProgramsHomeStat
         final failureOrDoneMessage =
             await programUserUseCases();
         emit(_eitherLoadedOrErrorState(failureOrDoneMessage));
-      }else if (event is LogOutRequest){
+      }
+      else if (event is LogOutRequest){
         await logOutUserUseCases();
         emit(LogOutLoadingState());
 
