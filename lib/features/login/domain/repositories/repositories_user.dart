@@ -5,4 +5,5 @@ import '../entities/user_data_model.dart';
 
 abstract class LoginRepository {
   Future<Either<Failure, UserData>> getLoginDataRepository({required String email,required String password});
+  Future<Either<Failure, UserData>> getAutoLogin();
 }

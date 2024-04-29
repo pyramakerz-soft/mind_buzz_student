@@ -57,11 +57,11 @@ class _MyApp extends State<MyApp> {
               title: 'Mind buzz2',
               debugShowCheckedModeBanner: false,
               theme: AppTheme().lightTheme,
-              // home: const Screens1(),
-              home: ChaptersScreen(
-                programId: '1',
-                programName: '',
-              ),
+              home: const Screens1(),
+              // home: ChaptersScreen(
+              //   programId: '1',
+              //   programName: '',
+              // ),
             )));
   }
 }

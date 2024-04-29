@@ -106,7 +106,8 @@ class LoginScreen extends StatelessWidget {
                                     );
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(snackBar);
-                                  } else if (state is CompleteLogin) {
+                                  }
+                                  else if (state is CompleteLogin) {
                                     context
                                         .read<LoginCubit>()
                                         .saveUserData(userData: state.userData);
@@ -120,7 +121,8 @@ class LoginScreen extends StatelessWidget {
                                   log('--state:$state');
                                   if (state is LoadingLoginState) {
                                     return const CircularProgressIndicator();
-                                  } else {
+                                  }
+                                  else {
                                     return BlocProvider(
                                         create: (_) => LoginCubit(),
                                         child: ButtonLogin(

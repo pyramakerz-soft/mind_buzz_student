@@ -34,6 +34,7 @@ class MainApiConnection {
   ////////////////////////////// END POINTS ///////////////////////////////////
   String getGameInfoDataEndPoint = "game/game_info";
   String postLoginEndPoint = "auth/login";
+  String getUserEndPoint = "getuserdata";
   String getStudentProgramsEndPoint = "student_programs";
   String getUnitsOfProgramsEndPoint = "units";
   String getLessonsOfProgramsEndPoint = "lessons";

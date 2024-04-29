@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/error/failures_messages.dart';
 import '../../domain/entities/user_data_model.dart';
+import '../../domain/usecases/auto_user_use_cases.dart';
 import '../../domain/usecases/user_use_cases.dart';
 
 part 'login_data_event.dart';
@@ -18,14 +19,21 @@ part 'login_data_state.dart';
 
 class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
   final UserUseCases requestLoginData;
+  final AutoUserUseCases requestAutoUserUseCases;
 
-  LoginDataBloc({required this.requestLoginData}) : super(LoginDataInitial()) {
+  LoginDataBloc({required this.requestLoginData, required this.requestAutoUserUseCases}) : super(LoginDataInitial()) {
     on<LoginDataEvent>((event, emit) async {
       if (event is LoginRequest){
         emit(LoadingLoginState());
         await Future.delayed(Duration(milliseconds: 500));
         final failureOrDoneMessage =
             await requestLoginData(email: event.email, password: event.password);
+        emit(_eitherLoadedOrErrorState(failureOrDoneMessage));
+      }else if (event is AutoLoginRequest){
+        emit(LoadingLoginState());
+        await Future.delayed(Duration(milliseconds: 500));
+        final failureOrDoneMessage =
+        await requestAutoUserUseCases();
         emit(_eitherLoadedOrErrorState(failureOrDoneMessage));
       }
     });

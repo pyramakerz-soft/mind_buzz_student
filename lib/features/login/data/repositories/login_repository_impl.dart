@@ -30,4 +30,25 @@ class LoginRepositoryImpl implements LoginRepository {
       return Left(CacheFailure());
     }
   }
+  @override
+  Future<Either<Failure, UserData>> getAutoLogin() async {
+    if (await networkInfo.isConnected) {
+      try {
+        final res = await remoteDataSource.getAutoLogin();
+        log('res:$res');
+        return Right(res);
+      } catch (e, s) {
+        try {
+          return Left(
+              ServerFailure(message: "${jsonDecode(e.toString())['message']}"));
+        }catch(e){
+          log('error:$e');
+          return Left(
+              CacheFailure());
+        }
+      }
+    } else {
+      return Left(CacheFailure());
+    }
+  }
 }

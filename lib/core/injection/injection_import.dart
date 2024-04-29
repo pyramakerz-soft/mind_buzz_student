@@ -4,7 +4,7 @@ var sl = GetIt.instance;
 
 Future<void> init() async {
   // bloc
-  sl.registerFactory(() => LoginDataBloc(requestLoginData: sl()));
+  sl.registerFactory(() => LoginDataBloc(requestLoginData: sl(), requestAutoUserUseCases: sl()));
   sl.registerFactory(() => GetUnitBloc(programUserUseCases: sl()));
   sl.registerFactory(() => ChapterBloc(programUserUseCases: sl()));
   sl.registerFactory(() => ContactLessonBloc(programContactUserUseCases: sl()));
@@ -15,6 +15,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => LessonUseCases(sl()));
   sl.registerLazySingleton(() => LogOutUserUseCases(sl()));
   sl.registerLazySingleton(() => UserUseCases(sl()));
+  sl.registerLazySingleton(() => AutoUserUseCases(sl()));
   sl.registerLazySingleton(() => ProgramUserUseCases(sl()));
   sl.registerLazySingleton(() => ContactLessonUseCases(sl()));
 

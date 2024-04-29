@@ -16,3 +16,12 @@ class LoginRequest extends LoginDataEvent {
   @override
   List<Object> get props => [email, password];
 }
+
+
+
+class AutoLoginRequest extends LoginDataEvent {
+  AutoLoginRequest();
+
+  @override
+  List<Object> get props => [];
+}
