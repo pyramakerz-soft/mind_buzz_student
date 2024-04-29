@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import '../../../../core/error/failures.dart';
 import '../entities/lesson_model.dart';
-import '../repositories/repositories_lesson.dart';
+import '../repositories/repositories_chapter.dart';
 
 class LessonUseCases {
   final ProgramLessonRepository repository;

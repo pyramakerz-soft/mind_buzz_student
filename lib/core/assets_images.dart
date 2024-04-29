@@ -28,4 +28,6 @@ abstract class AppImages {
   static const String imageCloseLessonPart =
       '${mainPathOfImages}close_lesson_part.png';
   static const String imageChapter = '${mainPathOfImages}chapter.png';
+  static const String imageCloseLesson = '${mainPathOfImages}close_lesson.png';
+  static const String imageOpenLesson = '${mainPathOfImages}open_lesson.png';
 }

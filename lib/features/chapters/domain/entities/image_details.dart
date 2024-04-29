@@ -14,6 +14,7 @@ class ImageParams {
   final Size size;
   final Offset? offset;
   final Widget? bodyWidget;
+  final Widget? title;
 
   /// It determines how close the image could get to the center of the page.
   /// Affects only for BG images.
@@ -42,6 +43,7 @@ class ImageParams {
       this.repeatCountPerLevel = 0.5,
       this.side = Side.BOTH,
       this.offset,
+      this.title,
       this.bodyWidget})
       : assert(imagePositionFactor >= 0 && imagePositionFactor <= 1,
             "Image Position factor should be between 0 and 1"),

@@ -2,6 +2,9 @@ import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mind_buzz_refactor/core/vars.dart';
 
 import 'package:mind_buzz_refactor/features/chapters/presentation/widgets/level_map_painter.dart';
 import 'package:mind_buzz_refactor/features/chapters/presentation/widgets/level_map_parameters.dart';
@@ -77,19 +80,35 @@ class LevelMap extends StatelessWidget {
                                 onTap: () {
                                   onTapLevel.call(index);
                                 },
-                                child: Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    Image.asset(
-                                      levelMapParams.levelsImages[index].path ??
-                                          '',
-                                      height: 70,
+                                child:
+                                    Column(
+                                      children: [
+                                        levelMapParams.levelsImages[index].title??const SizedBox(height: 20,),
+                                        Stack(
+                                          alignment: Alignment.topCenter,
+
+                                          children: [
+                                            Image.asset(
+                                              levelMapParams.levelsImages[index].path ??
+                                                  '',
+                                              height: 70,
+                                            ),
+
+                                            if(levelMapParams
+                                                .levelsImages[index].bodyWidget != null)...{
+                                              Column(
+                                                children: [
+                                                  10.ph,
+                                                  levelMapParams
+                                                      .levelsImages[index].bodyWidget??const SizedBox()
+                                                ],
+                                              )
+                                            }
+                                          ],
+                                        ),
+                                      ],
                                     ),
-                                    levelMapParams
-                                            .levelsImages[index].bodyWidget ??
-                                        SizedBox()
-                                  ],
-                                )))),
+                                    ))),
                   ],
                 );
               },
@@ -194,7 +213,7 @@ class LevelMap extends StatelessWidget {
     //TODO: Add network image functionality also.
     final AssetImage image = new AssetImage(imageParams.path);
     image
-        .resolve(ImageConfiguration())
+        .resolve(const ImageConfiguration())
         .addListener(ImageStreamListener((ImageInfo info, bool _) {
       completer.complete(info);
     }));

@@ -6,10 +6,9 @@ Future<void> init() async {
   // bloc
   sl.registerFactory(() => LoginDataBloc(requestLoginData: sl()));
   sl.registerFactory(() => GetUnitBloc(programUserUseCases: sl()));
-  sl.registerFactory(() => LessonBloc(programUserUseCases: sl()));
+  sl.registerFactory(() => ChapterBloc(programUserUseCases: sl()));
   sl.registerFactory(() => ContactLessonBloc(programContactUserUseCases: sl()));
   sl.registerFactory(() => GetProgramsHomeBloc(programUserUseCases: sl(), logOutUserUseCases: sl()));
-  sl.registerFactory(() => ChaptersBloc());
 
   //UseCase
   sl.registerLazySingleton(() => UnitUseCases(sl()));

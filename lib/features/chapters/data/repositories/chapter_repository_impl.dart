@@ -1,10 +1,10 @@
 import 'dart:developer';
 import 'package:dartz/dartz.dart';
-import 'package:mind_buzz_refactor/features/lesson/domain/entities/lesson_model.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/network/network_info.dart';
-import '../../domain/repositories/repositories_lesson.dart';
-import '../data_sources/data_source_remotely_of_lesson.dart';
+import '../../domain/entities/lesson_model.dart';
+import '../../domain/repositories/repositories_chapter.dart';
+import '../data_sources/data_source_remotely_of_chapter.dart';
 
 class LessonRepositoryImpl implements ProgramLessonRepository {
   final DataSourceRemotelyOfLesson remoteDataSource;

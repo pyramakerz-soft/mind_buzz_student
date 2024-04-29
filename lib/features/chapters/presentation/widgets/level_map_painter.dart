@@ -51,7 +51,9 @@ class LevelMapPainter extends CustomPainter {
         params.firstCurveReferencePointOffsetFactor!.dy;
     List<Offset> offsets = [];
     for (int thisLevel = 0; thisLevel < params.levelCount; thisLevel++) {
-      List<ImageDetails> imageDetails = imagesToPaint!.bgImages;
+      List<ImageDetails> imageDetails = imagesToPaint
+
+      !.bgImages;
       final Offset p1 = Offset(_centerWidth, -(thisLevel * params.levelHeight));
       final Offset p2 = getP2OffsetBasedOnCurveSide(thisLevel,
           _p2_dx_VariationFactor, _p2_dy_VariationFactor, _centerWidth);

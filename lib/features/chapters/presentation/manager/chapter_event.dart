@@ -1,14 +1,14 @@
-part of 'lesson_bloc.dart';
+part of 'chapter_bloc.dart';
 
 @immutable
-abstract class LessonEvent extends Equatable {
+abstract class ChapterEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
 
 
 
-class GetUnitRequest extends LessonEvent {
+class GetUnitRequest extends ChapterEvent {
   final int programId;
 
   GetUnitRequest({required this.programId});

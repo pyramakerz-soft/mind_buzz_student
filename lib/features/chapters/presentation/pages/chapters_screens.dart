@@ -11,15 +11,18 @@ import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/app_color.dart';
 import '../../../../core/assets_svg_images.dart';
 import '../../../../core/utils.dart';
-import '../../../lesson/presentation/pages/lesson_screen.dart';
+import '../../../math_book1/presentation/manager/current_game_cubit.dart';
+import '../../../math_book1/presentation/screen/my_home_page_book1.dart';
 import '../../domain/entities/chapter_model.dart';
 import '../../domain/entities/image_details.dart';
-import '../bloc/chapters_bloc.dart';
+import '../manager/chapter_bloc.dart';
 import '../widgets/dotted_line_painter.dart';
+import '../widgets/item_of_sub_body.dart';
+import '../widgets/item_of_title.dart';
 import '../widgets/level_map.dart';
 import '../widgets/level_map_parameters.dart';
 
-class ChaptersScreen extends StatefulWidget {
+class ChaptersScreen extends StatelessWidget {
   final String programId;
   final String programName;
 
@@ -27,75 +30,7 @@ class ChaptersScreen extends StatefulWidget {
       {Key? key, required this.programId, required this.programName});
 
   @override
-  State<StatefulWidget> createState() {
-    return _ChaptersScreen();
-  }
-}
-
-class _ChaptersScreen extends State<ChaptersScreen> {
-  List<ChapterModel> chapters = [
-    ChapterModel(
-        isOpen: true,
-        isChapter: true,
-        id: 1,
-        levelImg: 'assets/images/chapter.png'),
-    ChapterModel(
-        isOpen: true,
-        isLesson: true,
-        id: 2,
-        levelImg: 'assets/images/close_lesson_part.png'),
-    ChapterModel(
-        isOpen: false,
-        isLesson: true,
-        id: 3,
-        levelImg: 'assets/images/close_lesson_part.png'),
-    ChapterModel(
-        isOpen: false,
-        isChapter: true,
-        id: 4,
-        levelImg: 'assets/images/chapter.png'),
-    ChapterModel(
-        isOpen: false,
-        isLesson: true,
-        id: 5,
-        levelImg: 'assets/images/close_lesson_part.png'),
-    ChapterModel(
-        isOpen: false,
-        isCheckPoint: true,
-        id: 6,
-        levelImg: 'assets/images/checkpoint_part.png'),
-    ChapterModel(
-        isOpen: false,
-        isChapter: true,
-        id: 7,
-        levelImg: 'assets/images/chapter.png'),
-    ChapterModel(
-        isOpen: false,
-        isLesson: true,
-        id: 8,
-        levelImg: 'assets/images/close_lesson_part.png'),
-    ChapterModel(
-        isOpen: false,
-        isChapter: true,
-        id: 9,
-        levelImg: 'assets/images/chapter.png'),
-    ChapterModel(
-        isOpen: false,
-        isAssessment: true,
-        id: 10,
-        levelImg: 'assets/images/assessment_part.png'),
-    ChapterModel(
-        isOpen: false,
-        isLesson: true,
-        id: 11,
-        levelImg: 'assets/images/close_lesson_part.png'),
-  ];
-  final subHeight = 101;
-  final subWidth = 78.0;
-
-  @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -111,7 +46,6 @@ class _ChaptersScreen extends State<ChaptersScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ///todo: make the icon general
                       GestureDetector(
                           onTap: () {
                             Navigator.of(context).pop();
@@ -158,89 +92,58 @@ class _ChaptersScreen extends State<ChaptersScreen> {
                   ),
                 ),
               ),
-              Expanded(
-                child: LevelMap(
-                  backgroundColor: Colors.transparent,
-                  onTapLevel: (index) {
-                    print(index);
-                  },
-                  levelMapParams: LevelMapParams(
-                    levelCount: chapters.length,
-                    currentLevel: chapters.length.toDouble(),
-                    pathColor: Colors.black,
-
-                    levelsImages: chapters
-                        .map((e) => ImageParams(
-                            path: e.levelImg!,
-                            size: Size(100, 100),
-                            bodyWidget: e.isChapter == true
-                                ? e.isOpen == true
-                                    ? Text(
-                                        "1",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall
-                                            ?.copyWith(
-                                                fontSize: 25,
-                                                fontWeight: FontWeight.w700),
-                                      )
-                                    : SvgPicture.asset(AppSvgImages.iconLock)
-                                : e.isCheckPoint == true
-                                    ? e.isOpen == true
-                                        ? SizedBox()
-                                        : SvgPicture.asset(
-                                            AppSvgImages.iconLock)
-                                    : e.isAssessment == true
-                                        ? e.isOpen == true
-                                            ? SizedBox()
-                                            : SvgPicture.asset(
-                                                AppSvgImages.iconLock)
-                                        : e.isLesson == true
-                                            ? e.isOpen == true
-                                                ? Column(
-                                                    children: [
-                                                      Text(
-                                                        "Lesson",
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .headlineLarge
-                                                            ?.copyWith(
-                                                                fontSize: 16,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500),
-                                                      ),
-                                                      ...List.generate(
-                                                          1,
-                                                          (index) =>
-                                                              SvgPicture.asset(
-                                                                DefaultChapterData
-                                                                    .getTheNumberOfChapter(
-                                                                  number: 1,
-                                                                ).first,
-                                                                height: 20,
-                                                              ))
-                                                    ],
-                                                  )
-                                                : SizedBox()
-                                            : SizedBox()))
-                        .toList(),
-
-                    // currentLevelImage: ImageParams(
-                    //   path: 'assets/images/close_lesson_part.png',
-                    //   size: Size(100, 100),
-                    // ),
-                    // lockedLevelImage: ImageParams(
-                    //   path: "assets/images/lesson_part.png",
-                    //   size: Size(100, 100),
-                    // ),
-                    // completedLevelImage: ImageParams(
-                    //   path: "assets/images/lesson_part.png",
-                    //   size: Size(100, 100),
-                    // ),
-                  ),
-                ),
-              ),
+              BlocProvider<ChapterBloc>(
+                  create: (_) => di.sl<ChapterBloc>()
+                    ..add(
+                        GetUnitRequest(programId: int.parse(programId))),
+                  child: BlocConsumer<ChapterBloc, ChapterState>(
+                      listener: (context, state) {
+                    log('state:$state');
+                  }, builder: (context, state) {
+                    if (state is GetProgramsCompleteInitial) {
+                      return Expanded(
+                        child: LevelMap(
+                          backgroundColor: Colors.transparent,
+                          onTapLevel: (index) {
+                            if (state.data[index].isOpen == true) {
+                              Utils.navigateTo(
+                                  BlocProvider(
+                                      create: (_) => CurrentGameCubit(),
+                                      child: MyHomePageBook1(
+                                        lessonId: "${state.data[index].id}",
+                                      )),
+                                  context);
+                            }
+                          },
+                          levelMapParams: LevelMapParams(
+                            levelCount: state.data.length,
+                            currentLevel: state.data
+                                    .where((element) => element.isOpen == true)
+                                    .toList()
+                                    .isEmpty
+                                ? 1
+                                : state.data
+                                    .where((element) => element.isOpen == true)
+                                    .toList()
+                                    .length
+                                    .toDouble(),
+                            pathColor: Colors.black,
+                            levelsImages: state.data.reversed
+                                .map((e) => ImageParams(
+                                    path: e.levelImg!,
+                                    size: Size(100, 100),
+                                    bodyWidget: ItemOfSubBody(chapterData: e),
+                                    title: ItemOfTitle(chapterData: e)))
+                                .toList(),
+                          ),
+                        ),
+                      );
+                    } else if (state is GetProgramsLoadingInitial) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else {
+                      return const SizedBox();
+                    }
+                  })),
             ]),
             Align(
                 alignment: Alignment.centerLeft,

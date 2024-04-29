@@ -1,18 +1,17 @@
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-import '../../features/chapters/presentation/bloc/chapters_bloc.dart';
+import '../../features/chapters/data/data_sources/data_source_remotely_of_chapter.dart';
+import '../../features/chapters/data/repositories/chapter_repository_impl.dart';
+import '../../features/chapters/domain/repositories/repositories_chapter.dart';
+import '../../features/chapters/domain/use_cases/chapter_use_cases.dart';
+import '../../features/chapters/presentation/manager/chapter_bloc.dart';
 import '../../features/home/data/datasources/data_source_remotely_of_home.dart';
 import '../../features/home/data/repositories/program_repository_impl.dart';
 import '../../features/home/domain/repositories/repositories_user.dart';
 import '../../features/home/domain/usecases/logout_use_cases.dart';
 import '../../features/home/domain/usecases/program_use_cases.dart';
 import '../../features/home/presentation/bloc/get_programs_home_bloc.dart';
-import '../../features/lesson/data/data_sources/data_source_remotely_of_lesson.dart';
-import '../../features/lesson/data/repositories/lesson_repository_impl.dart';
-import '../../features/lesson/domain/repositories/repositories_lesson.dart';
-import '../../features/lesson/domain/use_cases/lesson_use_cases.dart';
-import '../../features/lesson/presentation/manager/lesson_bloc.dart';
 import '../../features/login/data/datasources/data_source_remotely_of_game.dart';
 import '../../features/login/data/repositories/login_repository_impl.dart';
 import '../../features/login/domain/repositories/repositories_user.dart';

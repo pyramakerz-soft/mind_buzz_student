@@ -9,20 +9,28 @@ part of 'lesson_model.dart';
 LessonModel _$LessonModelFromJson(Map<String, dynamic> json) => LessonModel(
       id: json['id'] as int?,
       name: json['name'] as String?,
+      stars: json['stars'] as String?,
       number: json['number'] as int?,
       unitId: json['unit_id'] as int?,
       warmupId: json['warmup_id'] as int?,
       createdAt: json['created_at'] as String?,
+      type: json['type'] as String?,
       updatedAt: json['updated_at'] as String?,
+      chapter: json['chapter'] == null
+          ? null
+          : SubChapterModel.fromJson(json['chapter'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$LessonModelToJson(LessonModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'number': instance.number,
+      'type': instance.type,
       'warmup_id': instance.warmupId,
+      'stars': instance.stars,
       'unit_id': instance.unitId,
       'name': instance.name,
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
+      'chapter': instance.chapter?.toJson(),
     };

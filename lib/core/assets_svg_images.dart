@@ -10,8 +10,6 @@ abstract class AppSvgImages {
 
   static const String iconCurrentChapter2 =
       '${mainPathOfSvg}current_chapter2.svg';
-  static const String iconCurrentChapter1 =
-      '${mainPathOfSvg}current_chapter1.svg';
   static const String bgChooseWhoAmI = '${mainPathOfSvg}bg_choose_who_am_i.svg';
   static const String iconBlimp = '${mainPathOfSvg}blimp.svg';
   static const String iconGiftBox = '${mainPathOfSvg}gift_box.svg';
@@ -24,4 +22,11 @@ abstract class AppSvgImages {
   static const String iconTree = '${mainPathOfSvg}tree.svg';
   static const String iconTree1 = '${mainPathOfSvg}tree2.svg';
   static const String iconLock = '${mainPathOfSvg}lock.svg';
+  static const String iconOpenLesson = '${mainPathOfSvg}open_lesson.svg';
+  static const String iconCloseLesson = '${mainPathOfSvg}close_lesson.svg';
+  static const String iconEmptyStar = '${mainPathOfSvg}empty_star.svg';
+  static const String iconCompleteStar = '${mainPathOfSvg}complete_star.svg';
+
+  static const String iconCurrentChapter1 =
+      '${mainPathOfSvg}current_chapter1.svg';
 }
