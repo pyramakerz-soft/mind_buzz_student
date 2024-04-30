@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
+import 'package:mind_buzz_refactor/core/extensions.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 import '../../../../core/assets_svg_images.dart';
 import '../../../../core/error/failures_messages.dart';
@@ -73,7 +74,7 @@ class _HomeScreen extends State<HomeScreen>{
                 ),
                 GestureDetector(
                     onTap: () {
-                      Navigator.of(context).pop();
+                      Utils.navigateAndRemoveUntilTo(LoginScreen(), context);
                       di.sl<GetProgramsHomeBloc>().add(LogOutRequest());
                     },
                     child: Container(
@@ -93,7 +94,6 @@ class _HomeScreen extends State<HomeScreen>{
             ),
             20.ph,
 
-            /// todo: handling the widget to support all sizes
             Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
@@ -107,10 +107,10 @@ class _HomeScreen extends State<HomeScreen>{
                     style: Theme.of(context)
                         .textTheme
                         .bodySmall
-                        ?.copyWith(fontSize: 16, fontWeight: FontWeight.w700),
+                        ?.copyWith(fontSize: MediaQuery.of(context).size.reDeginSize(16, context), fontWeight: FontWeight.w700),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         color: Colors.white),
@@ -119,7 +119,7 @@ class _HomeScreen extends State<HomeScreen>{
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge
-                          ?.copyWith(fontSize: 16, fontWeight: FontWeight.w700),
+                          ?.copyWith(fontSize: MediaQuery.of(context).size.reDeginSize(16, context), fontWeight: FontWeight.w700),
                     ),
                   )
                 ],

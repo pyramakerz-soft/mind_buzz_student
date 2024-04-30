@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
+import 'package:mind_buzz_refactor/core/extensions.dart';
 import 'package:rive/rive.dart';
 import '../../../../core/assets_svg_images.dart';
 import '../../../../core/error/failures_messages.dart';
@@ -172,7 +173,7 @@ class UnitScreen extends StatelessWidget {
                                         ),
                                         decoration: const BoxDecoration(
                                             color: Color(0xFFD1232A)),
-                                        child: const Row(
+                                        child:  Row(
                                           mainAxisSize: MainAxisSize.min,
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -183,7 +184,7 @@ class UnitScreen extends StatelessWidget {
                                               'Continue from previous',
                                               style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 18,
+                                                fontSize:  MediaQuery.of(context).size.reDeginSize(18, context),
                                                 fontFamily: 'Poppins',
                                                 fontWeight: FontWeight.w700,
                                                 height: 0,
