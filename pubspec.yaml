@@ -54,6 +54,7 @@ dependencies:
   graphview: ^1.2.0
   path_drawing: ^1.0.1
   collection: ^1.18.0
+  geekyants_flutter_gauges: ^1.0.3
 #  level_map: ^0.2.0
 
 dev_dependencies:

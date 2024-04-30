@@ -6,7 +6,7 @@ import 'package:flutter/animation.dart';
 
 class CurrentGameInitial extends Equatable {
   int? index = 0;
-  Artboard? giftBoxArtboard;
+  Artboard? beeWinningArtboard;
   AnimationStatus? candyAnimationController;
   AnimationStatus? rocketAnimationController;
   String? message;
@@ -15,14 +15,14 @@ class CurrentGameInitial extends Equatable {
   CurrentGameInitial(
       {this.index,
       this.candyAnimationController,
-      this.giftBoxArtboard,
+      this.beeWinningArtboard,
       this.message,
       this.title,
       this.rocketAnimationController});
   CurrentGameInitial copyWith({
     int? index,
     AnimationStatus? candyAnimationController,
-    Artboard? giftBoxArtboard,
+    Artboard? beeWinningArtboard,
     String? message,
     String? title,
     bool? activeButton,
@@ -32,7 +32,7 @@ class CurrentGameInitial extends Equatable {
         index: index ?? this.index,
         message: message ?? this.message,
         title: title ?? this.title,
-        giftBoxArtboard: giftBoxArtboard ?? this.giftBoxArtboard,
+        beeWinningArtboard: beeWinningArtboard ?? this.beeWinningArtboard,
         candyAnimationController:
             candyAnimationController ?? this.candyAnimationController,
         rocketAnimationController:
@@ -44,7 +44,7 @@ class CurrentGameInitial extends Equatable {
         index: index ?? index,
         message: message ?? message,
         title: title ?? title,
-        giftBoxArtboard: null,
+        beeWinningArtboard: null,
         candyAnimationController:
             candyAnimationController ?? candyAnimationController,
         rocketAnimationController:
@@ -58,6 +58,6 @@ class CurrentGameInitial extends Equatable {
         title,
         rocketAnimationController,
         candyAnimationController,
-        giftBoxArtboard
+    beeWinningArtboard
       ];
 }

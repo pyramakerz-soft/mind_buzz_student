@@ -5,9 +5,12 @@ import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 import '../../../../core/assets_svg_images.dart';
+import '../../../../core/error/failures_messages.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/talk_tts.dart';
+import '../../../../core/utils.dart';
 import '../../../login/presentation/cubit/login_cubit.dart';
+import '../../../login/presentation/page/login_screen.dart';
 import '../bloc/get_programs_home_bloc.dart';
 import '../widgets/card_of_program.dart';
 
@@ -129,18 +132,23 @@ class _HomeScreen extends State<HomeScreen>{
                         BlocConsumer<GetProgramsHomeBloc, GetProgramsHomeState>(
                             listener: (context, state) {
                       if (state is GetProgramsErrorInitial) {
-                        final snackBar = SnackBar(
-                          content: Text(state.message),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      }
-                      if (state is LogOutLoadingState) {
+                        if(state.message == RELOGIN_FAILURE_MESSAGE){
+                          Utils.navigateAndRemoveUntilTo(LoginScreen(), context);
+
+                        }else {
+                          final snackBar = SnackBar(
+                            content: Text(state.message),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+                      }else if (state is LogOutLoadingState) {
                         Navigator.of(context).pop();
                       }
                     }, builder: (context, state) {
                       if (state is GetProgramsLoadingInitial) {
                         return const Center(child: CircularProgressIndicator());
-                      } else if (state is GetProgramsCompleteInitial) {
+                      }
+                      else if (state is GetProgramsCompleteInitial) {
                         return Column(
                           children: List.generate(
                               state.data.length,
@@ -160,7 +168,8 @@ class _HomeScreen extends State<HomeScreen>{
                                     ],
                                   )),
                         );
-                      } else {
+                      }
+                      else {
                         return const SizedBox();
                       }
                     })))

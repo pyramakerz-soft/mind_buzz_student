@@ -85,7 +85,7 @@ class LevelMap extends StatelessWidget {
                                       children: [
                                         levelMapParams.levelsImages[index].title??const SizedBox(height: 20,),
                                         Stack(
-                                          alignment: Alignment.topCenter,
+                                          alignment: Alignment.center,
 
                                           children: [
                                             Image.asset(
@@ -100,7 +100,8 @@ class LevelMap extends StatelessWidget {
                                                 children: [
                                                   10.ph,
                                                   levelMapParams
-                                                      .levelsImages[index].bodyWidget??const SizedBox()
+                                                      .levelsImages[index].bodyWidget??const SizedBox(),
+                                                  10.ph
                                                 ],
                                               )
                                             }

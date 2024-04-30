@@ -56,7 +56,8 @@ class CurrentGame extends StatelessWidget {
                                 .defaultActionOfWrongAnswer(),
                             questionData: state.data[index],
                           );
-                    } else if(state.data[index].type == Type.matching){
+                    }
+                    else if(state.data[index].type == Type.matching){
                       return  MatchingScreen(
                             defaultActionOfSuccessAnswer: () => context
                                 .read<CurrentGameCubit>()
@@ -66,14 +67,16 @@ class CurrentGame extends StatelessWidget {
                                 .defaultActionOfWrongAnswer(),
                             questionData: state.data[index],
                           );
-                    }else{
+                    }
+                    else{
                       return const SizedBox();
                     }
                   }
                   else if(state.data[index].secType == SecType.rods){
                     if (state.data[index].type == Type.mCQ) {
                       return const SizedBox();
-                    }else if (state.data[index].type == Type.color) {
+                    }
+                    else if (state.data[index].type == Type.color) {
                       return  ColorRods(
                         defaultActionOfSuccessAnswer: () => context
                             .read<CurrentGameCubit>()
@@ -83,12 +86,11 @@ class CurrentGame extends StatelessWidget {
                             .defaultActionOfWrongAnswer(),
                         questionData: state.data[index],
                       );
-                    } else {
+                    }
+                    else {
                       return  const SizedBox();
                     }
-
                   }
-
                   else {
                     return const SizedBox();
                   }

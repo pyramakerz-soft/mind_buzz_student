@@ -1,21 +1,30 @@
 import 'dart:developer';
+import 'dart:math';
 
+import 'package:flame/components.dart';
+import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:geekyants_flutter_gauges/geekyants_flutter_gauges.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import '../../../../core/error/failures_messages.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/app_color.dart';
 import '../../../../core/assets_svg_images.dart';
 import '../../../../core/utils.dart';
+import '../../../login/presentation/page/login_screen.dart';
 import '../../../math_book1/presentation/manager/current_game_cubit.dart';
 import '../../../math_book1/presentation/screen/my_home_page_book1.dart';
 import '../../domain/entities/chapter_model.dart';
 import '../../domain/entities/image_details.dart';
 import '../manager/chapter_bloc.dart';
+import '../manager/journey_bar_cubit.dart';
+import '../manager/journey_bar_state.dart';
 import '../widgets/dotted_line_painter.dart';
 import '../widgets/item_of_sub_body.dart';
 import '../widgets/item_of_title.dart';
@@ -26,16 +35,19 @@ class ChaptersScreen extends StatelessWidget {
   final String programId;
   final String programName;
 
-  ChaptersScreen(
-      {Key? key, required this.programId, required this.programName});
+  const ChaptersScreen(
+      {Key? key, required this.programId, required this.programName})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final numberOfBar = context.select((JourneyBarCubit value) => value.state.totalOfBar);
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(image: AssetImage(AppImages.bgChapters))),
         child: Stack(
+          alignment: Alignment.center,
           children: [
             Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
               SizedBox(
@@ -43,69 +55,110 @@ class ChaptersScreen extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 22),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Container(
-                              padding: const EdgeInsets.all(10),
-                              height: 45,
-                              width: 45,
-                              alignment: Alignment.center,
-                              decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColor.darkBlueColor3),
-                              child: SvgPicture.asset(
-                                AppSvgImages.iconHome,
-                                fit: BoxFit.fill,
-                                color: Colors.white,
-                              ))),
-                      Text(
-                        'Chapters',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
-                            ?.copyWith(
-                                fontSize: 20, fontWeight: FontWeight.w700),
+                      SizedBox(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Container(
+                                  padding: const EdgeInsets.all(10),
+                                  height: 45,
+                                  width: 45,
+                                  alignment: Alignment.center,
+                                  decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: AppColor.darkBlueColor3),
+                                  child: SvgPicture.asset(
+                                    AppSvgImages.iconHome,
+                                    fit: BoxFit.fill,
+                                    color: Colors.white,
+                                  ))),
+                          Text(
+                            'Journey',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(
+                                    fontSize: 20, fontWeight: FontWeight.w700),
+                          ),
+                          const SizedBox(
+                            width: 45,
+                          ),
+                        ],
                       ),
-                      GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Container(
-                              padding: const EdgeInsets.all(10),
-                              alignment: Alignment.center,
-                              height: 45,
-                              width: 45,
-                              decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColor.darkBlueColor3),
-                              child: SvgPicture.asset(
-                                AppSvgImages.iconAnalysis,
-                                fit: BoxFit.fill,
-                                color: Colors.white,
-                              )))
+                      Stack(
+                        alignment: Alignment.centerLeft,
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width / 2,
+                            decoration: BoxDecoration(
+                                color: AppColor.darkBlueColor7,
+                                borderRadius: BorderRadius.circular(15),
+                                border:
+                                    Border.all(color: Colors.white, width: 2)),
+                            padding: EdgeInsets.zero,
+                            height: 20,
+                          ),
+                          if(numberOfBar!=0|| numberOfBar!=null)...{
+                          Container(
+                            width: numberOfBar,
+                            margin: const EdgeInsets.only(left: 2),
+                            decoration: BoxDecoration(
+                              color: AppColor.yellowColor,
+                              borderRadius: BorderRadius.circular(15),
+                              // border: Border.all(color: Colors.white, width: 2)
+                            ),
+                            padding: EdgeInsets.zero,
+                            height: 16,
+                          ),}
+                        ],
+                      )
                     ],
                   ),
                 ),
               ),
               BlocProvider<ChapterBloc>(
                   create: (_) => di.sl<ChapterBloc>()
-                    ..add(
-                        GetUnitRequest(programId: int.parse(programId))),
+                    ..add(GetUnitRequest(programId: int.parse(programId))),
                   child: BlocConsumer<ChapterBloc, ChapterState>(
                       listener: (context, state) {
-                    log('state:$state');
+                    if (state is GetProgramsErrorInitial) {
+                      if (state.message == RELOGIN_FAILURE_MESSAGE) {
+                        Utils.navigateAndRemoveUntilTo(LoginScreen(), context);
+                      } else {
+                        final snackBar = SnackBar(
+                          content: Text(state.message),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                    } else if (state is GetProgramsCompleteInitial) {
+                      context.read<JourneyBarCubit>().updateTheBar(
+                          width: MediaQuery.of(context).size.width,
+                          completed: state.data
+                              .where((element) =>
+                                  element.isChapter != true &&
+                                  element.star !=null)
+                              .length,
+                          countOfLessons: state.data
+                              .where((element) =>
+                          element.isChapter != true )
+                              .length);
+                    }
+
                   }, builder: (context, state) {
                     if (state is GetProgramsCompleteInitial) {
                       return Expanded(
                         child: LevelMap(
                           backgroundColor: Colors.transparent,
                           onTapLevel: (index) {
-                            if (state.data[index].isOpen == true) {
+                            if (state.data[index].isLesson == true &&
+                                state.data[index].isOpen == true) {
                               Utils.navigateTo(
                                   BlocProvider(
                                       create: (_) => CurrentGameCubit(),
@@ -116,7 +169,9 @@ class ChaptersScreen extends StatelessWidget {
                             }
                           },
                           levelMapParams: LevelMapParams(
+                            showPathShadow: false,
                             levelCount: state.data.length,
+                            pathStrokeWidth: 1,
                             currentLevel: state.data
                                     .where((element) => element.isOpen == true)
                                     .toList()
@@ -127,7 +182,7 @@ class ChaptersScreen extends StatelessWidget {
                                     .toList()
                                     .length
                                     .toDouble(),
-                            pathColor: Colors.black,
+                            pathColor: Colors.grey,
                             levelsImages: state.data.reversed
                                 .map((e) => ImageParams(
                                     path: e.levelImg!,
@@ -145,18 +200,28 @@ class ChaptersScreen extends StatelessWidget {
                     }
                   })),
             ]),
-            Align(
-                alignment: Alignment.centerLeft,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      AppImages.halfBee,
-                      width: 110,
-                    ),
-                    // 100.ph
-                  ],
-                )),
+            Positioned(
+              left: -50,
+              child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      BlocBuilder<JourneyBarCubit, JourneyBarInitial>(
+                          builder: (context, state) =>
+                          state.beeWinningArtboard != null
+                              ? Transform.rotate(
+                              angle:pi/8 ,
+                              child: SizedBox(
+                                width: 140,
+                                child: Rive(
+                                    artboard: state.beeWinningArtboard!,
+                                    useArtboardSize: true),
+                              ))
+                              : const SizedBox())
+                    ],
+                  )),
+            ),
           ],
         ),
       ),

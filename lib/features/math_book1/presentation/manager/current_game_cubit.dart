@@ -38,36 +38,6 @@ class CurrentGameCubit extends Cubit<CurrentGameInitial> {
     emit(state.copyWith(activeButton: false));
 
     AudioPlayerClass.startPlaySound(soundPath: AppSound.rocketSound);
-    rocketAnimationController.forward(); // Start the animation
-    Future.delayed(const Duration(milliseconds: 1400)).then((value) {
-      getTheBackGround();
-
-      candyAnimationController.forward();
-    });
-    candyAnimationController.addStatusListener((status) {
-      emit(state.copyWith(candyAnimationController: status));
-      if (status == AnimationStatus.completed ||
-          status == AnimationStatus.dismissed) {
-        emit(state.clearGiftBoxArtboard());
-      }
-    });
-    rocketAnimationController.addStatusListener((status) async {
-      if (status == AnimationStatus.completed) {
-        // if ((totalCountOfQuestions - 1) == state.index) {
-        //   Utils.navigateAndRemoveUntilTo(
-        //       BlocProvider(
-        //           create: (_) => WhoAmICubit(), child: const WhoAmIScreen()),
-        //       context);
-        // } else {
-        await AudioPlayerClass.startPlaySound(
-            soundPath: AppSound.getRandomSoundOfCorrect());
-        // emit(state.copyWith(giftBoxArtboard: null));
-        increaseIndex();
-        rocketAnimationController.reset();
-        candyAnimationController.reset();
-        // }
-      }
-    });
     emit(state.copyWith(
       activeButton: true,
     ));
@@ -85,14 +55,8 @@ class CurrentGameCubit extends Cubit<CurrentGameInitial> {
     ));
   }
 
-  late AnimationController rocketAnimationController;
-  late Animation<Offset> rocketAnimationOffsetAnimation;
-
-  late AnimationController candyAnimationController;
-  late Animation<Offset> candyAnimationOffsetAnimation;
-
   getTheBackGround() {
-    rootBundle.load(AppAnimation.giftBox).then(
+    rootBundle.load(AppAnimation.beeRive).then(
       (data) async {
         try {
           final file = RiveFile.import(data);
@@ -103,7 +67,7 @@ class CurrentGameCubit extends Cubit<CurrentGameInitial> {
           if (controller != null) {
             artboard.addController(controller);
           }
-          emit(state.copyWith(giftBoxArtboard: artboard));
+          emit(state.copyWith(beeWinningArtboard: artboard));
         } catch (e) {
           log('###');
           log(e.toString());

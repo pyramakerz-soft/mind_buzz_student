@@ -13,4 +13,5 @@ class AppAnimation {
   static const String wateringUnitsBee = "${mainPathOfAnimation}watering_units_bee.riv";
   static const String beeLoadingBee = "${mainPathOfAnimation}splash_screen.riv";
   static const String beeTitleUnit = "${mainPathOfAnimation}bee_title.riv";
+  static const String beeRive = "${mainPathOfAnimation}bee_rive0.riv";
 }
