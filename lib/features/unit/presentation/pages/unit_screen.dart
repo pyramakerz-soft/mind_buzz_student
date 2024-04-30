@@ -7,7 +7,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
 import 'package:mind_buzz_refactor/core/extensions.dart';
-import 'package:rive/rive.dart';
 import '../../../../core/assets_svg_images.dart';
 import '../../../../core/error/failures_messages.dart';
 import '../../../../core/injection/injection_container.dart' as di;
@@ -18,7 +17,11 @@ import '../../../chapters/presentation/manager/journey_bar_cubit.dart';
 import '../../../chapters/presentation/pages/chapters_screens.dart';
 import '../../../login/presentation/page/login_screen.dart';
 import '../manager/bloc/get_unit_bloc.dart';
-import '../manager/cubit/animation_unit_cubit.dart';
+import '../widgets/animation_of_bee.dart';
+import '../widgets/animation_of_bee2.dart';
+import '../widgets/animation_of_bee3.dart';
+import '../widgets/animation_of_bee4.dart';
+import '../widgets/animation_of_tree.dart';
 import '../widgets/item_of_unit.dart';
 
 ///todo:handling the performance of the screen
@@ -103,7 +106,6 @@ class UnitScreen extends StatelessWidget {
                       if (state is GetProgramsCompleteInitial) {
                         return Column(
                           children: [
-                            /// todo: handling the widget to support all sizes
                             Stack(
                               clipBehavior: Clip.none,
                               children: [
@@ -194,17 +196,9 @@ class UnitScreen extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      Positioned(
+                                      const Positioned(
                                         left: 0,
-                                        child: BlocBuilder<AnimationUnitCubit,
-                                                AnimationUnitInitial>(
-                                            builder: (context, state) {
-                                          return state.beeArtboard3==null?SizedBox():Rive(
-                                            artboard: state.beeArtboard3!,
-                                            // fit: BoxFit.fitHeight,
-                                            useArtboardSize: true,
-                                          );
-                                        }),
+                                        child: AnimationOfBee4(),
                                       )
                                     ],
                                   ),
@@ -294,144 +288,26 @@ class UnitScreen extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     fit: BoxFit.fitWidth,
                   ),
-                  Positioned(
+                  const Positioned(
                       bottom: 40,
                       // left: 40,
-                      child: SizedBox(
-                          height: 50,
-                          child: GestureDetector(onTap: () {
-                            context
-                                .read<AnimationUnitCubit>()
-                                .animationBee1Avatar();
-                          }, child: BlocBuilder<AnimationUnitCubit,
-                              AnimationUnitInitial>(
-                            builder: (context, state) {
-                              return state.beeArtboard1 == null
-                                  ? SvgPicture.asset(AppSvgImages.iconUnitBee)
-                                  : Container(
-                                      margin: const EdgeInsets.only(
-                                          left: 5, bottom: 3),
-                                      child: Transform.flip(
-                                        flipX: true,
-                                        child: Rive(
-                                          artboard: state.beeArtboard1!,
-                                          // fit: BoxFit.fitHeight,
-                                          useArtboardSize: true,
-                                        ),
-                                      ));
-                            },
-                          )))),
-                  Positioned(
+                      child: AnimationOfTree()
+                  ),
+                  const Positioned(
                     right: 10,
                     top: 10,
-                    child: SizedBox(
-                        height: 90,
-                        width: 75,
-                        child: GestureDetector(
-                            onTap: () {
-                              log('animationBeeWithWaterAvatar');
-                              context
-                                  .read<AnimationUnitCubit>()
-                                  .animationBeeWithWaterAvatar();
-                            },
-                            child: Stack(children: [
-                              Positioned(
-                                  top: 0,
-                                  right: 0,
-                                  child: BlocBuilder<AnimationUnitCubit,
-                                      AnimationUnitInitial>(
-                                    builder: (context, state) {
-                                      return state.beeWaterArtboard == null
-                                          ? SvgPicture.asset(
-                                              AppSvgImages.iconWaterBee,
-                                              // height: 50,
-                                            )
-                                          : Rive(
-                                              artboard: state.beeWaterArtboard!,
-                                              // fit: BoxFit.fitHeight,
-                                              useArtboardSize: true,
-                                            );
-                                    },
-                                  )),
-                              Positioned(
-                                  bottom: 0,
-                                  left: 0,
-                                  child: SvgPicture.asset(
-                                    AppSvgImages.iconFlowers,
-                                    height: 50,
-                                  ))
-                            ]))),
+                    child: AnimationOfBee3(),
                   ),
-                  Positioned(
+                  const Positioned(
                     left: 0,
                     top: 10,
-                    child: SizedBox(
-                        height: 300,
-                        width: 100,
-                        child: Stack(clipBehavior: Clip.none, children: [
-                          Positioned(
-                              bottom: 50,
-                              left: 0,
-                              child: BlocBuilder<AnimationUnitCubit,
-                                  AnimationUnitInitial>(
-                                builder: (context, state) {
-                                  return state.treeArtboard == null
-                                      ? GestureDetector(
-                                          onTap: () {
-                                            context
-                                                .read<AnimationUnitCubit>()
-                                                .animationTreeAvatar();
-                                          },
-                                          child: Container(
-                                            margin: const EdgeInsets.only(
-                                                bottom: 125, left: 19),
-                                            child: SvgPicture.asset(
-                                              AppSvgImages.iconTree,
-                                              height: 160,
-                                              fit: BoxFit.fill,
-                                            ),
-                                          ))
-                                      : SizedBox(
-                                          height: 300,
-                                          width: 300,
-                                          child: Rive(
-                                            artboard: state.treeArtboard!,
-                                            fit: BoxFit.fill,
-                                            useArtboardSize: true,
-                                          ),
-                                        );
-                                },
-                              )),
-                        ])),
+                    child: AnimationOfBee2(),
                   ),
-                  Positioned(
+                  const Positioned(
                       left: 20,
                       bottom: 0,
                       // left: 40,
-                      child: SizedBox(
-                          height: 50,
-                          child: GestureDetector(onTap: () {
-                            context
-                                .read<AnimationUnitCubit>()
-                                .animationBee1Avatar(isTwo: true);
-                          }, child: BlocBuilder<AnimationUnitCubit,
-                              AnimationUnitInitial>(
-                            builder: (context, state) {
-                              return state.beeArtboard2 == null
-                                  ? SvgPicture.asset(AppSvgImages.iconUnitBee)
-                                  : Container(
-                                      margin: const EdgeInsets.only(
-                                          left: 0, bottom: 3),
-                                      child: Transform.flip(
-                                        flipX: true,
-                                        child: Rive(
-                                          artboard: state.beeArtboard2!,
-                                          // fit: BoxFit.fitHeight,
-                                          useArtboardSize: true,
-                                        ),
-                                      ));
-                            },
-                          )))),
+                      child: AnimationOfBee()),
                 ],
               ),
             )
