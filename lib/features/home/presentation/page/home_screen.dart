@@ -92,6 +92,8 @@ class _HomeScreen extends State<HomeScreen>{
               ],
             ),
             20.ph,
+
+            /// todo: handling the widget to support all sizes
             Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),

@@ -36,6 +36,7 @@ class CurrentGameCubit extends Cubit<CurrentGameInitial> {
 
   defaultActionOfSuccessAnswer() {
     emit(state.copyWith(activeButton: false));
+    increaseIndex();
 
     AudioPlayerClass.startPlaySound(soundPath: AppSound.rocketSound);
     emit(state.copyWith(

@@ -16,6 +16,8 @@ abstract class AppImagesMainOfGame {
   static const String bgOfMath = "${mainPathOfImages}bg_of_math.png";
   static const String iconGetInstruction =
       '${mainPathOfImages}get_instruction.png';
+  static const String imageCompleteBar = '${mainPathOfImages}complete_bar.png';
+
   static const String imageRocket = '${mainPathOfImages}rocket.png';
   static const String imageLandOfUnit = '${mainPathOfImages}land_of_unit.png';
   static const String imageBluePen = '${mainPathOfImages}blue_pen.png';

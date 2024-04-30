@@ -7,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'core/app_color.dart';
 import 'core/assets_images.dart';
 import 'core/assets_svg_images.dart';
+import 'core/math/main_math.dart';
 import 'features/chapters/domain/entities/chapter_model.dart';
 import 'features/chapters/presentation/widgets/dotted_line_painter.dart';
 
@@ -19,79 +20,177 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
     return MaterialApp(
-      home: Scaffold(
-        body: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            decoration: const BoxDecoration(
-                image:
-                    DecorationImage(image: AssetImage(AppImages.bgChapters))),
-            child: Column(children: [
-              SizedBox(
-                height: 140,
-                width: MediaQuery.of(context).size.width,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 22),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ///todo: make the icon general
-                      GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Container(
-                              padding: const EdgeInsets.all(10),
-                              height: 45,
-                              width: 45,
-                              alignment: Alignment.center,
-                              decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColor.darkBlueColor3),
-                              child: SvgPicture.asset(
-                                AppSvgImages.iconHome,
-                                fit: BoxFit.fill,
-                                color: Colors.white,
-                              ))),
-                      Text(
-                        'Chapters',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
-                            ?.copyWith(
-                                fontSize: 20, fontWeight: FontWeight.w700),
-                      ),
-                      GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Container(
-                              padding: const EdgeInsets.all(10),
-                              alignment: Alignment.center,
-                              height: 45,
-                              width: 45,
-                              decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColor.darkBlueColor3),
-                              child: SvgPicture.asset(
-                                AppSvgImages.iconAnalysis,
-                                fit: BoxFit.fill,
-                                color: Colors.white,
-                              )))
-                    ],
-                  ),
-                ),
+      home: SafeArea(
+        child: Scaffold(
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                  children: [
+                    Row(
+                      children: [
+                        Text('d'),
+                        Container(
+                          alignment: Alignment.center,
+                          child: MainMath.getTheBox(
+                              countOfBoxes: 1,
+                              isSolid: false,
+                              sizeOfOne:Size(width / 20,(width / 32).toDouble())),
+                        ),
+                        Text('d')
+                      ],
+                    ),
+          Row(
+            children: [
+              Text('d'),
+              Container(
+                alignment: Alignment.center,
+                child: MainMath.getTheBox(
+                    countOfBoxes: 10,
+                    isSolid: false,
+                    sizeOfOne:Size(width / 20,(width / 32).toDouble())),
               ),
-              Expanded(
-                child: SingleChildScrollView(
-                    reverse: true,
-                    scrollDirection: Axis.vertical,
-                    child: Center(
-                      child: LineBetweenOffsets(),
-                    )),
-              )
-            ])),
+              Text('d'),
+            ],
+          )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                  children: [
+                    Row(
+                      children: [
+                        Text('d'),
+                        Container(
+                          alignment: Alignment.center,
+                          child: MainMath.getTheBox(
+                              countOfBoxes: 2,
+                              isSolid: false,
+                              sizeOfOne:Size(width / 20,(width / 32).toDouble())),
+                        ),
+                        Text('d'),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text('d'),
+                        Container(
+                          alignment: Alignment.center,
+                          child: MainMath.getTheBox(
+                              countOfBoxes: 9,
+                              isSolid: false,
+                              sizeOfOne:Size(width / 20,(width / 32).toDouble())),
+                        ),
+                        Text('d'),
+                      ],
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                  children: [
+                    Row(
+                      children: [
+                        Text('d'),
+                        Container(
+                          alignment: Alignment.center,
+                          child: MainMath.getTheBox(
+                              countOfBoxes: 3,
+                              isSolid: false,
+                              sizeOfOne:Size(width / 20,(width / 32).toDouble())),
+                        ),
+                        Text('d'),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text('d'),
+                        Container(
+                          alignment: Alignment.center,
+                          child: MainMath.getTheBox(
+                              countOfBoxes: 8,
+                              isSolid: false,
+                              sizeOfOne:Size(width / 20,(width / 32).toDouble())),
+                        ),
+                        Text('d'),
+                      ],
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text('d'),
+                    Container(
+                      alignment: Alignment.center,
+                      child: MainMath.getTheBox(
+                          countOfBoxes: 4,
+                          isSolid: false,
+                          sizeOfOne:Size(width / 20,(width / 32).toDouble())),
+                    ),
+                    Text('d'),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text('d'),
+                    Container(
+                      alignment: Alignment.center,
+                      child: MainMath.getTheBox(
+                          countOfBoxes: 5,
+                          isSolid: false,
+                          sizeOfOne:Size(width / 20,(width / 32).toDouble())),
+                    ),
+                    Text('d'),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                  children: [
+                    Row(
+                      children: [
+                        Text('d'),
+                        Container(
+                          alignment: Alignment.center,
+                          child: MainMath.getTheBox(
+                              countOfBoxes: 6,
+                              isSolid: false,
+                              sizeOfOne:Size(width / 20,(width / 32).toDouble())),
+                        ),
+                        Text('d'),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text('d'),
+                        Container(
+                          alignment: Alignment.center,
+                          child: MainMath.getTheBox(
+                              countOfBoxes: 7,
+                              isSolid: false,
+                              sizeOfOne:Size(width / 20,(width / 32).toDouble())),
+                        ),
+                        Text('d'),
+                      ],
+                    ),
+                  ],
+                ),
+
+
+
+                
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

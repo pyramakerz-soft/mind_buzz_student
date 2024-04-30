@@ -11,7 +11,9 @@ part 'beads_sum_mcq_state.dart';
 
 class BeadsSumMcqCubit extends Cubit<BeadsSumMcqInitial> {
   final LessonQuestionsModel questionData;
-  BeadsSumMcqCubit({required this.questionData}) : super(BeadsSumMcqInitial());
+  BeadsSumMcqCubit({required this.questionData}) : super(BeadsSumMcqInitial()){
+    emit(state.copyWith(questionData:questionData ));
+  }
 
   checkCorrect(
       {

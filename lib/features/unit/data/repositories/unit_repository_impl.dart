@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/network/network_info.dart';
 import '../../domain/entities/unit_model.dart';
@@ -21,6 +22,12 @@ class UnitRepositoryImpl implements ProgramUnitRepository {
         final res = await remoteDataSource.getUnitDataRemotely(programId: programId);
         log('res:$res');
         return Right(res);
+      }on DioException catch (e, s) {
+        log('e.response:${e.response?.statusMessage}');
+        if (e.response?.statusMessage == 'Unauthorized') {
+          return Left(ReLoginFailure());
+        }
+        return Left(LoginFailure());
       } catch (e, s) {
 
         log('error:${e.toString()}');

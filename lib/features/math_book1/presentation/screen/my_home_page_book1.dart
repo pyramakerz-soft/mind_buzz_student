@@ -199,7 +199,7 @@ class _MyHomePageBook1 extends State<MyHomePageBook1>
                 children: [
                   Container(
                     width: 20,
-margin:const EdgeInsets.only(bottom: 20),
+                    margin:const EdgeInsets.only(bottom: 20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
                       color: Colors.white,
@@ -207,7 +207,19 @@ margin:const EdgeInsets.only(bottom: 20),
                     height:
                     MediaQuery.of(context).size.height-70,
                   ),
+                  Container(
+                    width: 20,
+                    margin:const EdgeInsets.only(bottom: 20),
 
+                    decoration: BoxDecoration(
+                        borderRadius:
+                        BorderRadius.circular(6),
+                        image: const DecorationImage(
+                            image: AssetImage(
+                                AppImagesMainOfGame.imageCompleteBar),
+                            fit: BoxFit.cover)),
+                    height:0,
+                  ),
                   BlocBuilder<CurrentGameCubit, CurrentGameInitial>(
                             builder: (context, state) =>
                             state.beeWinningArtboard != null

@@ -18,26 +18,18 @@ import '../widgets/card_of_answer.dart';
 class MathematicalTransactionsScreen extends StatelessWidget {
   final Function() defaultActionOfSuccessAnswer;
   final Function() defaultActionOfWrongAnswer;
-  final LessonQuestionsModel questionData;
 
   const MathematicalTransactionsScreen(
       {Key? key,
-      required this.questionData,
       required this.defaultActionOfSuccessAnswer,
       required this.defaultActionOfWrongAnswer})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // final questionData = context.watch<BeadsSumMcqCubit>().questionData;
+    final questionData = context.watch<BeadsSumMcqCubit>().state.questionData;
 
-    return BlocProvider(
-        create: (_) => BeadsSumMcqCubit(questionData: questionData),
-        child:BlocConsumer<BeadsSumMcqCubit, BeadsSumMcqInitial>(
-        listener: (context, state) {
-      log('state:$state');
-    }, builder: (context, state) {
-    return Row(
+    return  Row(
           children: [
             const Expanded(child: SizedBox()),
             Expanded(
@@ -61,12 +53,12 @@ class MathematicalTransactionsScreen extends StatelessWidget {
                                   top: -10,
                                   child: SizedBox(
                                       width: int.parse(
-                                              "${(questionData.control?.control ?? 1)}") *
+                                              "${(questionData?.control?.control ?? 1)}") *
                                           50,
                                       // height: MediaQuery.of(context).size.height / 2,
                                       child: MainMath.getTheBalls(
                                           countOfBalls: int.parse(
-                                              "${questionData.control?.control ?? 0}"))),
+                                              "${questionData?.control?.control ?? 0}"))),
                                 ),
                                 Positioned(
                                   // bottom: 0,
@@ -84,7 +76,7 @@ class MathematicalTransactionsScreen extends StatelessWidget {
                                               6,
                                           child: CardOfAnswer(
                                               number: int.parse(
-                                                  "${questionData.control?.control ?? 0}"))),
+                                                  "${questionData?.control?.control ?? 0}"))),
                                     ],
                                   ),
                                 ),
@@ -118,12 +110,12 @@ class MathematicalTransactionsScreen extends StatelessWidget {
                                   top: -10,
                                   child: SizedBox(
                                       width: int.parse(
-                                              "${(questionData.control?.action ?? 1)}") *
+                                              "${(questionData?.control?.action ?? 1)}") *
                                           50,
                                       // height: MediaQuery.of(context).size.height / 2,
                                       child: MainMath.getTheBalls(
                                           countOfBalls: int.parse(
-                                              "${questionData.control?.action ?? 0}"))),
+                                              "${questionData?.control?.action ?? 0}"))),
                                 ),
                                 Positioned(
                                   // bottom: 0,
@@ -141,7 +133,7 @@ class MathematicalTransactionsScreen extends StatelessWidget {
                                               6,
                                           child: CardOfAnswer(
                                               number: int.parse(
-                                                  "${questionData.control?.action ?? 0}"))),
+                                                  "${questionData?.control?.action ?? 0}"))),
                                     ],
                                   ),
                                 ),
@@ -174,7 +166,7 @@ class MathematicalTransactionsScreen extends StatelessWidget {
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
-                  questionData.choices?.length ?? 0,
+                  questionData?.choices?.length ?? 0,
                   (index) => Container(
                       margin: const EdgeInsets.only(bottom: 15),
                       width: MediaQuery.of(context).size.width / 15,
@@ -183,20 +175,19 @@ class MathematicalTransactionsScreen extends StatelessWidget {
                         onTap: () async {
                           await context.read<BeadsSumMcqCubit>().checkCorrect(
                                 actionOfSuccess: () =>
-                                    defaultActionOfSuccessAnswer(),
+                                    defaultActionOfSuccessAnswer.call(),
                                 actionOfWrong: () =>
                                     defaultActionOfWrongAnswer(),
                                 currentAnswer: int.parse(
-                                    "${questionData.choices?[index] ?? 0}"),
+                                    "${questionData?.choices?[index] ?? 0}"),
                               );
                         },
                         child: CardOfAnswer(
                             number: int.parse(
-                                "${questionData.choices?[index] ?? 0}")),
+                                "${questionData?.choices?[index] ?? 0}")),
                       ))),
             )),
           ],
-        );}
-    ));
+        );
   }
 }

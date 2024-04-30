@@ -14,11 +14,9 @@ import '../widget/dot_lines.dart';
 class MatchingScreen extends StatelessWidget {
   final Function() defaultActionOfSuccessAnswer;
   final Function() defaultActionOfWrongAnswer;
-  final LessonQuestionsModel questionData;
   MatchingScreen(
       {Key? key,
       required this.defaultActionOfSuccessAnswer,
-      required this.questionData,
       required this.defaultActionOfWrongAnswer})
       : super(key: key);
   Offset? firstPosition;
@@ -38,17 +36,13 @@ class MatchingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final questionData = context.watch<BeadsMatchingCubit>().questionData;
+    final questionData = context.watch<BeadsMatchingCubit>().state.questionData;
+    final position1 = context.watch<BeadsMatchingCubit>().state.position1;
+    final position2 = context.watch<BeadsMatchingCubit>().state.position2;
 
-    return BlocProvider(
-        create: (_) => BeadsMatchingCubit(questionData: questionData),
-        child: BlocConsumer<BeadsMatchingCubit, BeadsMatchingInitial>(
-            listener: (context, state) {
-          log('state:$state');
-        }, builder: (context, state) {
-          return CustomPaint(
+    return  CustomPaint(
               painter:
-                  DottedLinePainterOfMatch(state.position1, state.position2),
+                  DottedLinePainterOfMatch(position1, position2),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -60,19 +54,19 @@ class MatchingScreen extends StatelessWidget {
                       children: [
                         SizedBox(
                             width: int.parse(
-                                    "${(questionData.control?.control ?? 1)}") *
+                                    "${(questionData?.control?.control ?? 1)}") *
                                 50,
                             child: MainMath.getTheBalls(
                                 countOfBalls: int.parse(
-                                    "${questionData.control?.control ?? 0}"))),
+                                    "${questionData?.control?.control ?? 0}"))),
                         SizedBox(
                             key: _key,
                             width: int.parse(
-                                    "${(questionData.control?.action ?? 1)}") *
+                                    "${(questionData?.control?.action ?? 1)}") *
                                 50,
                             child: MainMath.getTheBalls(
                                 countOfBalls: int.parse(
-                                    "${questionData.control?.action ?? 0}"))),
+                                    "${questionData?.control?.action ?? 0}"))),
                       ],
                     ),
                   ),
@@ -100,7 +94,7 @@ class MatchingScreen extends StatelessWidget {
                                           position1: Offset(
                                               localPosition.dx +
                                                   (int.parse(
-                                                          "${(questionData.control?.action ?? 1)}") *
+                                                          "${(questionData?.control?.action ?? 1)}") *
                                                       50),
                                               localPosition.dy - 100),
                                           position2: Offset(localPosition2.dx,
@@ -117,7 +111,7 @@ class MatchingScreen extends StatelessWidget {
                                             defaultActionOfWrongAnswer(),
                                         currentAnswer:
                                             int.parse("${index + 1}"),
-                                    correctAnswer: int.parse(questionData.control?.answer??'0'),
+                                    correctAnswer: int.parse(questionData?.control?.answer??'0'),
                                       );
                                   await context
                                       .read<BeadsMatchingCubit>().clearPositions();
@@ -133,6 +127,6 @@ class MatchingScreen extends StatelessWidget {
                   )
                 ],
               ));
-        }));
+        // }));
   }
 }

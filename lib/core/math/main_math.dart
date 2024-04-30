@@ -100,32 +100,36 @@ abstract class MainMath{
         required Size sizeOfOne}) {
     return SizedBox(
       height: sizeOfOne.height,
-      width: countOfBoxes * (sizeOfOne.width - 14) + sizeOfOne.width/4, // Add size of one box to accommodate the last box
+      width: (sizeOfOne.width * countOfBoxes)-((countOfBoxes-1)*7),
       child: Stack(
+        // fit: StackFit.expand,
+        // clipBehavior: Clip.antiAliasWithSaveLayer,
+        // clipBehavior: Clip.none,
         children: [
           ...List.generate(countOfBoxes, (index) {
             if (index == 0 || index % 2 == 0) {
               return Positioned(
-                left: index == 0 ? 0 : (sizeOfOne.width * index) - (14 * index),
-                child: GestureDetector(
-                  child: CustomPaint(
-                      size: sizeOfOne,
-                      painter: BoxCustomPainter(
-                          color: colorOfBox?[index]??(isSolid==true?AppColor.bgMatheColor:colors.first.colorMain),
-                          boarderColor: Colors.grey)),
-                ),
+                left: index == 0 ? 0 : (sizeOfOne.width * index) - (7 * index),
+                child: CustomPaint(
+                    size: sizeOfOne,
+                    painter: RPSCustomPainter00(
+                        color: isSolid ? Colors.white : colors.first.colorMain,
+                        boarderColor: isSolid
+                            ? Colors.white
+                            : colors.first.colorBoarder)),
               );
             } else {
               return Positioned(
-                left: (sizeOfOne.width * index) - (14 * index),
+                left: (sizeOfOne.width * index) - (7 * index),
                 child: CustomPaint(
                     size: sizeOfOne,
-                    painter: BoxCustomPainter(
-                        color: colorOfBox?[index]??(isSolid==true?AppColor.bgMatheColor:colors.last.colorMain),
-                        boarderColor: Colors.grey)),
+                    painter: RPSCustomPainter00(
+                        color: isSolid ? Colors.white : colors.last.colorMain,
+                        boarderColor:
+                        isSolid ? Colors.white : colors.last.colorBoarder)),
               );
             }
-          }).reversed
+          })
         ],
       ),
     );

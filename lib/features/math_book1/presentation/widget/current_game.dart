@@ -15,6 +15,7 @@ import '../manager/current_game_state.dart';
 import '../manager/get_contact/contact_lesson_bloc.dart';
 import '../beads/sum/pages/mathematical_transactions_screen.dart';
 import '../manager/current_game_cubit.dart';
+import '../rods/color/manager/color_rods_cubit.dart';
 import '../rods/color/page/color_rods.dart';
 
 class CurrentGame extends StatelessWidget {
@@ -41,60 +42,82 @@ class CurrentGame extends StatelessWidget {
             return BlocBuilder<CurrentGameCubit, CurrentGameInitial>(
                 // listener: (context, stateOfTheGeneral) {},
                 builder: (context, stateOfTheGeneral) {
-                  int index = stateOfTheGeneral.index ?? 0;
-                  context.read<CurrentGameCubit>().submitMessageAndTitle(
-                      message: state.data[index].question,
-                      title: state.data[index].question);
-                  if (state.data[index].secType == SecType.beads) {
-                    if (state.data[index].type == Type.mCQ) {
-                      return  MathematicalTransactionsScreen(
-                            defaultActionOfSuccessAnswer: () => context
-                                .read<CurrentGameCubit>()
-                                .defaultActionOfSuccessAnswer(),
-                            defaultActionOfWrongAnswer: () => context
-                                .read<CurrentGameCubit>()
-                                .defaultActionOfWrongAnswer(),
-                            questionData: state.data[index],
-                          );
-                    }
-                    else if(state.data[index].type == Type.matching){
-                      return  MatchingScreen(
-                            defaultActionOfSuccessAnswer: () => context
-                                .read<CurrentGameCubit>()
-                                .defaultActionOfSuccessAnswer(),
-                            defaultActionOfWrongAnswer: () => context
-                                .read<CurrentGameCubit>()
-                                .defaultActionOfWrongAnswer(),
-                            questionData: state.data[index],
-                          );
-                    }
-                    else{
-                      return const SizedBox();
-                    }
-                  }
-                  else if(state.data[index].secType == SecType.rods){
-                    if (state.data[index].type == Type.mCQ) {
-                      return const SizedBox();
-                    }
-                    else if (state.data[index].type == Type.color) {
-                      return  ColorRods(
-                        defaultActionOfSuccessAnswer: () => context
-                            .read<CurrentGameCubit>()
-                            .defaultActionOfSuccessAnswer(),
-                        defaultActionOfWrongAnswer: () => context
-                            .read<CurrentGameCubit>()
-                            .defaultActionOfWrongAnswer(),
-                        questionData: state.data[index],
-                      );
-                    }
-                    else {
-                      return  const SizedBox();
-                    }
-                  }
-                  else {
-                    return const SizedBox();
-                  }
-                });
+              int index = stateOfTheGeneral.index ?? 0;
+              context.read<CurrentGameCubit>().submitMessageAndTitle(
+                  message: state.data[index].question,
+                  title: state.data[index].question);
+              if (state.data[index].secType == SecType.beads) {
+                if (state.data[index].type == Type.mCQ) {
+                  return BlocProvider(
+                      create: (_) =>
+                          BeadsSumMcqCubit(questionData: state.data[index]),
+                      child: BlocConsumer<BeadsSumMcqCubit, BeadsSumMcqInitial>(
+                          listener: (context, state) {
+                        log('state:$state');
+                      }, builder: (context, state) {
+                        return MathematicalTransactionsScreen(
+                          defaultActionOfSuccessAnswer: () => context
+                              .read<CurrentGameCubit>()
+                              .defaultActionOfSuccessAnswer(),
+                          defaultActionOfWrongAnswer: () => context
+                              .read<CurrentGameCubit>()
+                              .defaultActionOfWrongAnswer(),
+                          // questionData: state.data[index],
+                        );
+                      }));
+                }
+                else if (state.data[index].type == Type.matching) {
+                  return BlocProvider(
+                      create: (_) =>
+                          BeadsMatchingCubit(questionData: state.data[index]),
+                      child: BlocConsumer<BeadsMatchingCubit,
+                          BeadsMatchingInitial>(listener: (context, state) {
+                        log('state:$state');
+                      }, builder: (context, state) {
+                        return MatchingScreen(
+                          defaultActionOfSuccessAnswer: () => context
+                              .read<CurrentGameCubit>()
+                              .defaultActionOfSuccessAnswer(),
+                          defaultActionOfWrongAnswer: () => context
+                              .read<CurrentGameCubit>()
+                              .defaultActionOfWrongAnswer(),
+                          // questionData: state.data[index],
+                        );
+                      }));
+                }
+                else {
+                  return const SizedBox();
+                }
+              }
+              else if (state.data[index].secType == SecType.rods) {
+                if (state.data[index].type == Type.mCQ) {
+                  return const SizedBox();
+                }
+                else if (state.data[index].type == Type.color) {
+                  return BlocProvider(
+                      create: (_) =>
+                          ColorRodsCubit(questionData: state.data[index]),
+                      child: BlocBuilder<ColorRodsCubit, ColorRodsInitial>(
+                          builder: (context, state) {
+                        return ColorRods(
+                          defaultActionOfSuccessAnswer: () => context
+                              .read<CurrentGameCubit>()
+                              .defaultActionOfSuccessAnswer(),
+                          defaultActionOfWrongAnswer: () => context
+                              .read<CurrentGameCubit>()
+                              .defaultActionOfWrongAnswer(),
+                          // questionData: state.data[index],
+                        );
+                      }));
+                }
+                else {
+                  return const SizedBox();
+                }
+              }
+              else {
+                return const SizedBox();
+              }
+            });
           } else if (state is GetContactLoadingInitial) {
             return const Center(child: CircularProgressIndicator());
           } else {

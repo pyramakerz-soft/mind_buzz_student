@@ -13,11 +13,11 @@ import '../manager/color_rods_cubit.dart';
 class ColorRods extends StatelessWidget {
   final Function() defaultActionOfSuccessAnswer;
   final Function() defaultActionOfWrongAnswer;
-  final LessonQuestionsModel questionData;
+  // final LessonQuestionsModel questionData;
 
   const ColorRods(
       {Key? key,
-      required this.questionData,
+      // required this.questionData,
       required this.defaultActionOfSuccessAnswer,
       required this.defaultActionOfWrongAnswer})
       : super(key: key);
@@ -25,12 +25,9 @@ class ColorRods extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    final questionData = context.watch<ColorRodsCubit>().state.questionData;
 
-    return BlocProvider(
-        create: (_) => ColorRodsCubit(questionData: questionData),
-        child: BlocBuilder<ColorRodsCubit, ColorRodsInitial>(
-            builder: (context, state) {
-          return SizedBox(
+    return  SizedBox(
             width: width,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -40,7 +37,7 @@ class ColorRods extends StatelessWidget {
                 Container(
                   child: MainMath.getTheBox(
                       countOfBoxes:
-                          int.parse("${questionData.control?.control ?? 0}"),
+                          int.parse("${questionData?.control?.control ?? 0}"),
                       isSolid: false,
                       sizeOfOne: Size(width / 12, (width / 19).toDouble())),
                 ),
@@ -52,7 +49,7 @@ class ColorRods extends StatelessWidget {
                         Container(
                           child: MainMath.getTheBox(
                               countOfBoxes:
-                              int.parse("${questionData.control?.action ?? 0}"),
+                              int.parse("${questionData?.control?.action ?? 0}"),
                               isSolid: false,
                               sizeOfOne: Size(width / 12, (width / 19).toDouble())),
                         ),
@@ -61,10 +58,10 @@ class ColorRods extends StatelessWidget {
                               return Container(
                           child: SizedBox(
                             height: Size(width / 12, (width / 19).toDouble()).height,
-                            width: int.parse("${questionData.control?.answer ?? 0}") * (Size(width / 12, (width / 19).toDouble()).width - 14) + Size(width / 12, (width / 19).toDouble()).width/4, // Add size of one box to accommodate the last box
+                            width: int.parse("${questionData?.control?.answer ?? 0}") * (Size(width / 12, (width / 19).toDouble()).width - 14) + Size(width / 12, (width / 19).toDouble()).width/4, // Add size of one box to accommodate the last box
                             child: Stack(
                               children: [
-                                ...List.generate(int.parse("${questionData.control?.answer ?? 0}"), (index) {
+                                ...List.generate(int.parse("${questionData?.control?.answer ?? 0}"), (index) {
                                   if (index == 0 || index % 2 == 0) {
                                     return Positioned(
                                       left: index == 0 ? 0 : (Size(width / 12, (width / 19).toDouble()).width * index) - (14 * index),
@@ -72,11 +69,11 @@ class ColorRods extends StatelessWidget {
                                         onTap: (){
                                           context.read<ColorRodsCubit>().submitTheColor(index: index, newColor: Colors.blue, );
                                         },
-                                        child: CustomPaint(
-                                            size: Size(width / 12, (width / 19).toDouble()),
-                                            painter: BoxCustomPainter(
-                                                color: state.selectedColorsOfBox?[index]??(true==true?AppColor.bgMatheColor:MainMath.colors.first.colorMain),
-                                                boarderColor: Colors.grey)),
+                                        // child: CustomPaint(
+                                        //     size: Size(width / 12, (width / 19).toDouble()),
+                                        //     painter: BoxCustomPainter(
+                                        //         color: state.selectedColorsOfBox?[index]??(true==true?AppColor.bgMatheColor:MainMath.colors.first.colorMain),
+                                        //         boarderColor: Colors.grey)),
                                       ),
                                     );
                                   } else {
@@ -88,9 +85,10 @@ class ColorRods extends StatelessWidget {
                                         },
                                         child: CustomPaint(
                                             size: Size(width / 12, (width / 19).toDouble()),
-                                            painter: BoxCustomPainter(
-                                                color: state.selectedColorsOfBox?[index]??(true==true?AppColor.bgMatheColor:MainMath.colors.last.colorMain),
-                                                boarderColor: Colors.grey)),
+                                            // painter: BoxCustomPainter(
+                                            //     color: state.selectedColorsOfBox?[index]??(true==true?AppColor.bgMatheColor:MainMath.colors.last.colorMain),
+                                            //     boarderColor: Colors.grey)
+                                        ),
                                       ),
                                     );
                                   }
@@ -162,6 +160,5 @@ class ColorRods extends StatelessWidget {
               ],
             ),
           );
-        }));
   }
 }

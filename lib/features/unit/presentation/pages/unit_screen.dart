@@ -8,15 +8,19 @@ import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
 import 'package:rive/rive.dart';
 import '../../../../core/assets_svg_images.dart';
+import '../../../../core/error/failures_messages.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 
 import '../../../../core/utils.dart';
 import '../../../../core/vars.dart';
+import '../../../chapters/presentation/manager/journey_bar_cubit.dart';
 import '../../../chapters/presentation/pages/chapters_screens.dart';
+import '../../../login/presentation/page/login_screen.dart';
 import '../manager/bloc/get_unit_bloc.dart';
 import '../manager/cubit/animation_unit_cubit.dart';
 import '../widgets/item_of_unit.dart';
 
+///todo:handling the performance of the screen
 class UnitScreen extends StatelessWidget {
   final String programId;
   final String programName;
@@ -71,23 +75,8 @@ class UnitScreen extends StatelessWidget {
                               ?.copyWith(
                                   fontSize: 20, fontWeight: FontWeight.w700),
                         ),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Container(
-                                padding: const EdgeInsets.all(10),
-                                alignment: Alignment.center,
-                                height: 45,
-                                width: 45,
-                                decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: AppColor.darkBlueColor3),
-                                child: SvgPicture.asset(
-                                  AppSvgImages.iconAnalysis,
-                                  fit: BoxFit.fill,
-                                  color: Colors.white,
-                                )))
+                        const SizedBox(                                width: 45,
+                        ),
                       ],
                     ),
                   ),
@@ -97,11 +86,23 @@ class UnitScreen extends StatelessWidget {
                       ..add(GetUnitRequest(programId: int.parse(programId))),
                     child: BlocConsumer<GetUnitBloc, GetUnitState>(
                         listener: (context, state) {
+                          if (state is GetProgramsErrorInitial) {
+                            if(state.message == RELOGIN_FAILURE_MESSAGE){
+                              Utils.navigateAndRemoveUntilTo(LoginScreen(), context);
+
+                            }else {
+                              final snackBar = SnackBar(
+                                content: Text(state.message),
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            }
+                          }
                       log('state:$state');
                     }, builder: (context, state) {
                       if (state is GetProgramsCompleteInitial) {
                         return Column(
                           children: [
+                            /// todo: handling the widget to support all sizes
                             Stack(
                               clipBehavior: Clip.none,
                               children: [
@@ -214,12 +215,14 @@ class UnitScreen extends StatelessWidget {
                               return GestureDetector(
                                 onTap: () {
                                   Utils.navigateTo(
-                                      ChaptersScreen(
+                                      BlocProvider(
+                                          create: (_) => JourneyBarCubit(),
+                                          child:ChaptersScreen(
                                         programId:
                                             state.data[index].id.toString(),
                                         programName:
                                             state.data[index].name ?? '',
-                                      ),
+                                      )),
                                       context);
                                 },
                                 child: Align(
