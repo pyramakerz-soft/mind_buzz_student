@@ -31,7 +31,6 @@ import '../widgets/item_of_title.dart';
 import '../widgets/level_map.dart';
 import '../widgets/level_map_parameters.dart';
 
-/// todo:fix bug in the screen
 class ChaptersScreen extends StatelessWidget {
   final String programId;
   final String programName;

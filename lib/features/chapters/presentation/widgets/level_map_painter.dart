@@ -51,17 +51,15 @@ class LevelMapPainter extends CustomPainter {
         params.firstCurveReferencePointOffsetFactor!.dy;
     List<Offset> offsets = [];
     for (int thisLevel = 0; thisLevel < params.levelCount; thisLevel++) {
-      List<ImageDetails> imageDetails = imagesToPaint
-
-      !.bgImages;
+      List<ImageDetails> imageDetails = imagesToPaint?.bgImages??[];
       final Offset p1 = Offset(_centerWidth, -(thisLevel * params.levelHeight));
       final Offset p2 = getP2OffsetBasedOnCurveSide(thisLevel,
           _p2_dx_VariationFactor, _p2_dy_VariationFactor, _centerWidth);
       final Offset p3 = Offset(_centerWidth,
           -((thisLevel * params.levelHeight) + params.levelHeight));
-      Offset currentLevelOffset = Offset(thisLevel % 2 != 0 ? p1.dx * 1.3 : p1.dx / 1.3,
-          thisLevel == imageDetails.length - 1 ? p1.dy - 110 : p1.dy)
-          .toBottomCenter(imageDetails[thisLevel].size);
+      // Offset currentLevelOffset = Offset(thisLevel % 2 != 0 ? p1.dx * 1.3 : p1.dx / 1.3,
+      //     thisLevel == imageDetails.length - 1 ? p1.dy - 110 : p1.dy)
+      //     .toBottomCenter(imageDetails[thisLevel].size);
 
       _drawBezierCurve(
           canvas,
