@@ -9,6 +9,7 @@ import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/app_color.dart';
 import '../../../../core/utils.dart';
 import '../../../home/presentation/bloc/get_programs_home_bloc.dart';
+import '../../../home/presentation/page/home_parent_screen.dart';
 import '../../../home/presentation/page/home_screen.dart';
 import '../../../loading_intro/presentation/bloc/loading_cubit.dart';
 import '../../../login/presentation/page/login_screen.dart';
@@ -107,6 +108,8 @@ class WhoAmIScreen extends StatelessWidget {
               dataFunction: () {
                 if (currentIndex == 1) {
                   Utils.navigateAndRemoveUntilTo(const HomeScreen(), context);
+                }if (currentIndex == 0) {
+                  Utils.navigateAndRemoveUntilTo(const HomeParentScreen(), context);
                 } else {
                   const snackBar = SnackBar(
                     content: Text('select who you are'),

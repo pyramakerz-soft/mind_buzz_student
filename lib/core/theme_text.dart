@@ -49,6 +49,9 @@ displayMedium: TextStyle(
   color: AppColor.titleColor,
   fontFamily: getFontFamily(),
 ),
+        displayLarge: TextStyle(
+          color: AppColor.darkBlueColor, fontFamily: getFontFamily(),
+        )
       ));
 
   static String getFontFamily() {

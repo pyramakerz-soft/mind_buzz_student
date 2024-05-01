@@ -11,6 +11,9 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       name: json['name'] as String?,
       email: json['email'] as String?,
       emailVerifiedAt: json['email_verified_at'] as String?,
+      school: json['school'] == null
+          ? null
+          : SchoolModel.fromJson(json['school'] as Map<String, dynamic>),
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
       role: json['role'] as String?,
@@ -26,4 +29,5 @@ Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'updated_at': instance.updatedAt,
       'role': instance.role,
       'school_id': instance.schoolId,
+      'school': instance.school?.toJson(),
     };

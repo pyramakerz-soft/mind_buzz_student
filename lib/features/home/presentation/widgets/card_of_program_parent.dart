@@ -11,13 +11,13 @@ import '../../../unit/presentation/pages/unit_screen.dart';
 import '../bloc/get_programs_home_bloc.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 
-class CardOfProgram extends StatelessWidget {
+class CardOfProgramParent extends StatelessWidget {
   final List<Color> colors;
   final String title;
   final String programId;
   final String? mainImage;
 
-  const CardOfProgram(
+  const CardOfProgramParent(
       {Key? key,
       required this.colors,
       required this.title,
@@ -32,19 +32,17 @@ class CardOfProgram extends StatelessWidget {
         Utils.navigateTo(
             BlocProvider(
                 create: (_) => AnimationUnitCubit(),
-                child:UnitScreen(
+                child: UnitScreen(
                   programId: programId,
                   programName: title,
                 )),
             context);
       },
       child: Container(
-        width: MediaQuery.of(context).size.width,
+        width: MediaQuery.of(context).size.width / 2 - (16 * 2),
         height: MediaQuery.of(context).size.height / 5,
         decoration: ShapeDecoration(
-            gradient: LinearGradient(
-              colors: colors,
-            ),
+            color: AppColor.lightGreyColor2,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
@@ -56,54 +54,32 @@ class CardOfProgram extends StatelessWidget {
                 offset: const Offset(0, 5),
               )
             ]),
-        child: Row(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              margin: const EdgeInsets.only(left: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          color: Colors.white,
-                        )),
-                    child: const Icon(
-                      Icons.play_arrow,
-                      color: Colors.white,
-                    ),
-                  ),
-                  10.ph,
-                  Text(title,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            fontSize: 25,
-                            fontWeight: FontWeight.w700,
-                            height: 0,
-                            letterSpacing: 0.50,
-                          )),
-                ],
-              ),
-            ),
+            Text(title,
+                style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w700,
+                      height: 0,
+                      letterSpacing: 0.50,
+                    )),
             ClipRRect(
               borderRadius: const BorderRadius.only(
                   bottomRight: Radius.circular(20),
                   topRight: Radius.circular(20)),
               child: CachedNetworkImage(
-                imageUrl:mainImage ?? DefaultHomeData.image,
-                height: MediaQuery.of(context).size.height / 5,
-                  errorWidget:(context, url, error){
-                  return Image.network( DefaultHomeData.image,
-                    width: MediaQuery.of(context).size.width / 2,
-                    height: MediaQuery.of(context).size.height / 5,
-
-                  );
-                  }
-              ),
+                  imageUrl: mainImage ?? DefaultHomeData.image,
+                  height: MediaQuery.of(context).size.height / 8,
+                  errorWidget: (context, url, error) {
+                    return Image.network(
+                      DefaultHomeData.image,
+                      width: MediaQuery.of(context).size.width / 3,
+                      height: MediaQuery.of(context).size.height / 8,
+                    );
+                  }),
             ),
+
           ],
         ),
       ),

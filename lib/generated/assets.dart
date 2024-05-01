@@ -3,6 +3,8 @@ class Assets {
   Assets._();
 
   static const String animationBeeCharacter1 = 'assets/animation/bee_character1.riv';
+  static const String animationBeeRive = 'assets/animation/bee_rive.riv';
+  static const String animationBeeRive0 = 'assets/animation/bee_rive0.riv';
   static const String animationBeeTitle = 'assets/animation/bee_title.riv';
   static const String animationGiftBox = 'assets/animation/gift_box.riv';
   static const String animationRESCALEDBeeLeft = 'assets/animation/RESCALED_Bee_left.riv';
@@ -32,11 +34,13 @@ class Assets {
   static const String imagesBgChapters = 'assets/images/bg_chapters.png';
   static const String imagesBgOfMath = 'assets/images/bg_of_math.png';
   static const String imagesBluePen = 'assets/images/blue_pen.png';
+  static const String imagesBoarderTitle = 'assets/images/boarder_title.png';
   static const String imagesChapter = 'assets/images/chapter.png';
   static const String imagesCheckpointPart = 'assets/images/checkpoint_part.png';
   static const String imagesChild = 'assets/images/child.png';
   static const String imagesCloseLesson = 'assets/images/close_lesson.png';
   static const String imagesCloseLessonPart = 'assets/images/close_lesson_part.png';
+  static const String imagesCompleteBar = 'assets/images/complete_bar.png';
   static const String imagesCurrentBlack = 'assets/images/current_black.png';
   static const String imagesEmptyStar = 'assets/images/empty_star.png';
   static const String imagesGetInstruction = 'assets/images/get_instruction.png';
@@ -51,6 +55,12 @@ class Assets {
   static const String imagesRocket = 'assets/images/rocket.png';
   static const String imagesScreen1 = 'assets/images/screen1.png';
   static const String imagesStar = 'assets/images/star.png';
+  static const String imagesTitleBox1 = 'assets/images/titleBox1.png';
+  static const String imagesTitleBox2 = 'assets/images/titleBox2.png';
+  static const String imagesTitleBox3 = 'assets/images/titleBox3.png';
+  static const String imagesTitleBox4 = 'assets/images/titleBox4.png';
+  static const String imagesTitleBox5 = 'assets/images/titleBox5.png';
+  static const String imagesTitleBox6 = 'assets/images/titleBox6.png';
   static const String mathBallBall1 = 'assets/math_ball/ball1.svg';
   static const String mathBallBall2 = 'assets/math_ball/ball2.svg';
   static const String mathBallBall3 = 'assets/math_ball/ball3.svg';
@@ -75,6 +85,7 @@ class Assets {
   static const String soundT = 'assets/sound/t.mp3';
   static const String svgAnalysisIcon = 'assets/svg/analysis_icon.svg';
   static const String svgArrowToNext = 'assets/svg/arrow_to_next.svg';
+  static const String svgAssign = 'assets/svg/assign.svg';
   static const String svgBgChooseWhoAmI = 'assets/svg/bg_choose_who_am_i.svg';
   static const String svgBlimp = 'assets/svg/blimp.svg';
   static const String svgCandy = 'assets/svg/candy.svg';
@@ -94,9 +105,14 @@ class Assets {
   static const String svgOpenLesson = 'assets/svg/open_lesson.svg';
   static const String svgPartLesson1 = 'assets/svg/part_lesson1.svg';
   static const String svgPartLesson2 = 'assets/svg/part_lesson2.svg';
+  static const String svgReport = 'assets/svg/report.svg';
+  static const String svgSelectedParent = 'assets/svg/selected_parent.svg';
+  static const String svgSelectedStudent = 'assets/svg/selected_student.svg';
   static const String svgSkyLogin = 'assets/svg/sky_login.svg';
   static const String svgTree = 'assets/svg/tree.svg';
   static const String svgTree2 = 'assets/svg/tree2.svg';
+  static const String svgUnSelectedParent = 'assets/svg/unSelected_parent.svg';
+  static const String svgUnSelectedStudent = 'assets/svg/unSelected_student.svg';
   static const String svgUnitBee = 'assets/svg/unit_bee.svg';
   static const String svgUnitBee2 = 'assets/svg/unit_bee2.svg';
   static const String svgWaterBee = 'assets/svg/water_bee.svg';

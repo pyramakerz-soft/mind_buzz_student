@@ -26,6 +26,12 @@ abstract class AppSvgImages {
   static const String iconCloseLesson = '${mainPathOfSvg}close_lesson.svg';
   static const String iconEmptyStar = '${mainPathOfSvg}empty_star.svg';
   static const String iconCompleteStar = '${mainPathOfSvg}complete_star.svg';
+  static const String iconSelectedParent = '${mainPathOfSvg}selected_parent.svg';
+  static const String iconSelectedStudent = '${mainPathOfSvg}selected_student.svg';
+  static const String iconUnSelectedParent = '${mainPathOfSvg}unSelected_parent.svg';
+  static const String iconUnSelectedStudent = '${mainPathOfSvg}unSelected_student.svg';
+  static const String iconReport = '${mainPathOfSvg}report.svg';
+  static const String iconAssign = '${mainPathOfSvg}assign.svg';
 
   static const String iconCurrentChapter1 =
       '${mainPathOfSvg}current_chapter1.svg';

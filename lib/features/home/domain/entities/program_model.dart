@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'course_model.dart';
+import 'test_model.dart';
 part 'program_model.g.dart';
 
 @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
@@ -15,6 +16,7 @@ class ProgramModel  extends Equatable{
   String? createdAt;
   String? updatedAt;
   CourseModel? course;
+  List<TestModel>? tests;
 
   ProgramModel({this.id,
     this.name,
@@ -24,6 +26,7 @@ class ProgramModel  extends Equatable{
     this.createdAt,
     this.updatedAt,
     this.image,
+    this.tests,
     this.course});
   factory ProgramModel.fromJson(Map<String, dynamic> json) {
     return _$ProgramModelFromJson(json);
@@ -33,5 +36,5 @@ class ProgramModel  extends Equatable{
 
   @override
   // TODO: implement props
-  List<Object?> get props => [id, name,schoolId, courseId,stageId ,updatedAt,image ];
+  List<Object?> get props => [id, name,schoolId, courseId,stageId ,updatedAt,image, tests ];
 }

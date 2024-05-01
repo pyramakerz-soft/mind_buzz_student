@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'school_model.dart';
 part 'user_data_model.g.dart';
 
 @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
@@ -13,12 +15,14 @@ class UserData extends Equatable {
   String? updatedAt;
   String? role;
   int? schoolId;
+  SchoolModel? school;
 
   UserData(
       {this.id,
       this.name,
       this.email,
       this.emailVerifiedAt,
+      this.school,
       this.createdAt,
       this.updatedAt,
       this.role,
@@ -36,7 +40,7 @@ class UserData extends Equatable {
   @override
   // TODO: implement props
   List<Object?> get props =>
-      [id, name, email, emailVerifiedAt, createdAt, updatedAt, role, schoolId];
+      [id, name, email, emailVerifiedAt, createdAt, updatedAt, role, schoolId, school];
 
   static Future<void> saveToken({required String token}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

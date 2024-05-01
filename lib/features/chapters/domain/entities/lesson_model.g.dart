@@ -14,20 +14,20 @@ LessonModel _$LessonModelFromJson(Map<String, dynamic> json) => LessonModel(
       unitId: json['unit_id'] as int?,
       warmupId: json['warmup_id'] as int?,
       createdAt: json['created_at'] as String?,
-      type: json['type'] as String?,
       updatedAt: json['updated_at'] as String?,
       chapter: json['chapter'] == null
           ? null
           : SubChapterModel.fromJson(json['chapter'] as Map<String, dynamic>),
+      type: json['type'] as String?,
     );
 
 Map<String, dynamic> _$LessonModelToJson(LessonModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'number': instance.number,
-      'type': instance.type,
       'warmup_id': instance.warmupId,
       'stars': instance.stars,
+      'type': instance.type,
       'unit_id': instance.unitId,
       'name': instance.name,
       'created_at': instance.createdAt,
