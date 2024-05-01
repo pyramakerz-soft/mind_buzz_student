@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -148,7 +149,7 @@ class _HomeScreen extends State<HomeScreen>{
                       }
                     }, builder: (context, state) {
                       if (state is GetProgramsLoadingInitial) {
-                        return const Center(child: CircularProgressIndicator());
+                        return const Center(child: CupertinoActivityIndicator());
                       }
                       else if (state is GetProgramsCompleteInitial) {
                         return Column(

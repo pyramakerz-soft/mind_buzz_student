@@ -194,7 +194,7 @@ class ChaptersScreen extends StatelessWidget {
                         ),
                       );
                     } else if (state is GetProgramsLoadingInitial) {
-                      return const Center(child: CircularProgressIndicator());
+                      return const Center(child: CupertinoActivityIndicator());
                     } else {
                       return const SizedBox();
                     }

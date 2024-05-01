@@ -120,7 +120,7 @@ class LoginScreen extends StatelessWidget {
                                 }, builder: (context, state) {
                                   log('--state:$state');
                                   if (state is LoadingLoginState) {
-                                    return const CircularProgressIndicator();
+                                    return const CupertinoActivityIndicator();
                                   }
                                   else {
                                     return BlocProvider(

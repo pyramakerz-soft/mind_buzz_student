@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flame/extensions.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -268,7 +269,7 @@ class UnitScreen extends StatelessWidget {
                           ],
                         );
                       } else if (state is GetProgramsLoadingInitial) {
-                        return const Center(child: CircularProgressIndicator());
+                        return const Center(child: CupertinoActivityIndicator());
                       } else {
                         return const SizedBox();
                       }
