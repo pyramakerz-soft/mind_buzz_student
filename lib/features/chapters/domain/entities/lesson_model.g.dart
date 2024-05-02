@@ -9,7 +9,7 @@ part of 'lesson_model.dart';
 LessonModel _$LessonModelFromJson(Map<String, dynamic> json) => LessonModel(
       id: json['id'] as int?,
       name: json['name'] as String?,
-      stars: json['stars'] as String?,
+      stars: json['stars'] as int?,
       number: json['number'] as int?,
       unitId: json['unit_id'] as int?,
       warmupId: json['warmup_id'] as int?,

@@ -9,7 +9,7 @@ class LessonModel extends Equatable{
   int? id;
   int? number;
   int? warmupId;
-  String? stars;
+  int? stars;
   String? type;
   int? unitId;
   String? name;
