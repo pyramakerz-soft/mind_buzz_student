@@ -36,7 +36,7 @@ class CardOfProgramParent extends StatelessWidget {
       },
       child: Container(
         width: MediaQuery.of(context).size.width / 2 - (16 * 2),
-        height: 170,
+        // height: 170,
         decoration: ShapeDecoration(
             color: AppColor.lightGreyColor2,
             shape: RoundedRectangleBorder(
@@ -53,7 +53,7 @@ class CardOfProgramParent extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(dataOfProgram.program?.course?.name??'',
+            Text(dataOfProgram.program?.course?.name ?? '',
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
                       fontSize: 25,
                       fontWeight: FontWeight.w700,
@@ -63,7 +63,8 @@ class CardOfProgramParent extends StatelessWidget {
             ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(20)),
               child: CachedNetworkImage(
-                  imageUrl: dataOfProgram.program?.image ?? DefaultHomeData.image,
+                  imageUrl:
+                      dataOfProgram.program?.image ?? DefaultHomeData.image,
                   height: MediaQuery.of(context).size.height / 8,
                   errorWidget: (context, url, error) {
                     return Image.network(
@@ -73,55 +74,60 @@ class CardOfProgramParent extends StatelessWidget {
                     );
                   }),
             ),
-
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Row(
-                      children: [
-                        SvgPicture.asset(AppSvgImages.iconAssign),
-                        2.5.pw,
-                        Text('Assign', style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          fontSize: 12, fontWeight: FontWeight.w400
-                        ),),
-                        // 5.pw,
-                        if((dataOfProgram.program?.tests?.length??0)>0)...{
-                          2.pw,
-                          Container(
-                            width: 20,
-                            height: 20,
-                            decoration: ShapeDecoration(
-                              color: AppColor.darkBlueColor10,
-                              shape: OvalBorder(),
-                            ),
-                            alignment: Alignment.center,
-                            // padding: E/dgeInsets.all(5),
-                            child: Text(
-                              "${dataOfProgram.program?.tests?.length ?? 0}",
-                              style: Theme
-                                  .of(context)
-                                  .textTheme
-                                  .displayLarge
-                                  ?.copyWith(
-                                  fontSize: 8, fontWeight: FontWeight.w400),),
-                          )
-                        }
-
-                      ],
+                    SvgPicture.asset(AppSvgImages.iconAssign),
+                    2.5.pw,
+                    Text(
+                      'Assign',
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelLarge
+                          ?.copyWith(fontSize: 12, fontWeight: FontWeight.w400),
                     ),
-                    Row(
-                      children: [
-                        SvgPicture.asset(AppSvgImages.iconReport),
-                        5.pw,
-                        Text('Report', style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            fontSize: 12, fontWeight: FontWeight.w400
-                        ),),
-                      ],
-                    )
+                    // 5.pw,
+                    if ((dataOfProgram.program?.tests?.length ?? 0) > 0) ...{
+                      2.pw,
+                      Container(
+                        width: 20,
+                        height: 20,
+                        decoration: ShapeDecoration(
+                          color: AppColor.darkBlueColor10,
+                          shape: OvalBorder(),
+                        ),
+                        alignment: Alignment.center,
+                        // padding: E/dgeInsets.all(5),
+                        child: Text(
+                          "${dataOfProgram.program?.tests?.length ?? 0}",
+                          style: Theme.of(context)
+                              .textTheme
+                              .displayLarge
+                              ?.copyWith(
+                                  fontSize: 8, fontWeight: FontWeight.w400),
+                        ),
+                      )
+                    }
                   ],
                 ),
+                Row(
+                  children: [
+                    SvgPicture.asset(AppSvgImages.iconReport),
+                    5.pw,
+                    Text(
+                      'Report',
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelLarge
+                          ?.copyWith(fontSize: 12, fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                )
+              ],
+            ),
             10.ph
-
           ],
         ),
       ),
