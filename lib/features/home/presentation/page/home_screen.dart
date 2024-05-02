@@ -11,6 +11,7 @@ import '../../../../core/error/failures_messages.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/talk_tts.dart';
 import '../../../../core/utils.dart';
+import '../../../../core/widgets/card_of_my_info.dart';
 import '../../../login/presentation/cubit/login_cubit.dart';
 import '../../../login/presentation/page/login_screen.dart';
 import '../../../student_assignment/presentation/manager/check_assignment_cubit.dart';
@@ -40,44 +41,7 @@ class _HomeScreen extends State<HomeScreen> {
     return Column(
       children: [
         10.ph,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: Image.asset(
-                    AppImages.imagePersonAvatar,
-                    width: 50,
-                  ),
-                ),
-                10.pw,
-                Column(
-                  children: [
-                    Text(
-                      'Hi ${userData?.name ?? ''} !',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineLarge
-                          ?.copyWith(fontSize: 18, fontWeight: FontWeight.w700),
-                    ),
-                    Text(userData?.school?.name ?? '',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall
-                            ?.copyWith(
-                                fontSize: 14, fontWeight: FontWeight.w400)),
-                  ],
-                )
-              ],
-
-            ),
-            const SizedBox(
-              width: 50,
-            )
-          ],
-        ),
+        const CardOfMyInfo(),
         20.ph,
         Expanded(
             child: BlocProvider<GetProgramsHomeBloc>(
@@ -162,8 +126,8 @@ class _HomeScreen extends State<HomeScreen> {
                                     CardOfProgram(
                                       programId:
                                           "${state.data[index].programId ?? ''}",
-                                      colors: DefaultHomeData
-                                          .fullDataOfCardColor.first,
+                                      colors: DefaultHomeData.getColor(
+                                          index: (index + 1)),
                                       mainImage:
                                           state.data[index].program?.image,
                                       title: state.data[index].program?.course

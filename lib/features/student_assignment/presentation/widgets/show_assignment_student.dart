@@ -5,14 +5,15 @@ import 'package:mind_buzz_refactor/core/vars.dart';
 import '../../../../core/app_color.dart';
 import '../../../home/domain/entities/user_courses.dart';
 
-class ShowAssignmentStudent extends StatelessWidget{
+class ShowAssignmentStudent extends StatelessWidget {
   final UserCourseModel courseData;
 
-  const ShowAssignmentStudent({Key? key, required this.courseData}) : super(key: key);
+  const ShowAssignmentStudent({Key? key, required this.courseData})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height/2,
+      height: MediaQuery.of(context).size.height / 2,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -40,13 +41,16 @@ class ShowAssignmentStudent extends StatelessWidget{
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(courseData.program?.course?.name??'', style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
-                  height: 0.06,
-                ),),
+                Text(
+                  courseData.program?.course?.name ?? '',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                        height: 0.06,
+                      ),
+                ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Navigator.of(context).pop();
                   },
                   child: Container(
@@ -59,7 +63,10 @@ class ShowAssignmentStudent extends StatelessWidget{
                         borderRadius: BorderRadius.circular(8.42),
                       ),
                     ),
-                    child: const Icon(Icons.close, size: 15,),
+                    child: const Icon(
+                      Icons.close,
+                      size: 15,
+                    ),
                   ),
                 )
               ],
@@ -70,59 +77,92 @@ class ShowAssignmentStudent extends StatelessWidget{
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
-                children: List.generate(courseData.program?.tests?.length??0, (index) => Card(
-                  surfaceTintColor: Colors.white,
-                  color: Colors.white,
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
+                children: List.generate(
+                    courseData.program?.tests?.length ?? 0,
+                    (index) => Column(
                           children: [
-                           Column(
-                             crossAxisAlignment: CrossAxisAlignment.start,
-                             children: [
-                               Text(
-                                 "Assignment  ${index+1}",
-                                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                                   fontSize: 22,
-                                   fontWeight: FontWeight.w700,
-                                   height: 0,
-                                   letterSpacing: 0.44,
-                                 ),
-                               ),
-                               Text(
-                                 courseData.program?.tests?[index].name ?? '',
-                                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                   fontSize: 14,
-                                   fontWeight: FontWeight.w400,
-                                   // height: 0,
-                                   // letterSpacing: 0.44,
-                                 ),
-                               ),
-                             ],
-                           ),
-                            const Icon(Icons.play_circle_outline_rounded, color: AppColor.darkBlueColor, size: 35,)
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(16),
+                                border: Border(
+                                  left: BorderSide(
+                                      width: 6, color: Color(0xFFCCCCCC)),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color(0x14000000),
+                                    blurRadius: 8,
+                                    offset: Offset(0, 1),
+                                    spreadRadius: 0,
+                                  )
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Assignment  ${index + 1}",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .displayLarge
+                                                ?.copyWith(
+                                                  fontSize: 22,
+                                                  fontWeight: FontWeight.w700,
+                                                  height: 0,
+                                                  letterSpacing: 0.44,
+                                                ),
+                                          ),
+                                          Text(
+                                            courseData.program?.tests?[index]
+                                                    .name ??
+                                                '',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headlineMedium
+                                                ?.copyWith(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w400,
+                                                  // height: 0,
+                                                  // letterSpacing: 0.44,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                      const Icon(
+                                        Icons.play_circle_outline_rounded,
+                                        color: AppColor.darkBlueColor,
+                                        size: 35,
+                                      )
+                                    ],
+                                  ),
+                                  ClipRRect(
+                                    child: CachedNetworkImage(
+                                      imageUrl: courseData.program?.image ?? '',
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              6,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            10.ph
                           ],
-                        ),
-                        ClipRRect(
-                          child: CachedNetworkImage(
-                            imageUrl: courseData.program?.image ?? '',
-                            height: MediaQuery.of(context).size.height / 6,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                )),
+                        )),
               ),
             ),
           )
-
         ],
       ),
     );
   }
-
 }

@@ -6,6 +6,7 @@ import 'package:mind_buzz_refactor/core/vars.dart';
 import '../../../../core/error/failures_messages.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/utils.dart';
+import '../../../../core/widgets/card_of_my_info.dart';
 import '../../../login/presentation/cubit/login_cubit.dart';
 import '../../../login/presentation/page/login_screen.dart';
 import '../bloc/get_programs_home_bloc.dart';
@@ -27,74 +28,37 @@ class _HomeParentScreen extends State<HomeParentScreen> {
     return Column(
       children: [
         10.ph,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: Image.asset(
-                    AppImages.imagePersonAvatar,
-                    width: 50,
-                  ),
-                ),
-                10.pw,
-                Column(
-                  children: [
-                    Text(
-                      'Hi ${userData?.name ?? ''} !',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineLarge
-                          ?.copyWith(
-                          fontSize: 18, fontWeight: FontWeight.w700),
-                    ),
-                    Text(userData?.school?.name ?? '',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall
-                            ?.copyWith(
-                            fontSize: 14, fontWeight: FontWeight.w400)),
-                  ],
-                )
-              ],
-            ),
-          ],
-        ),
+        const CardOfMyInfo(),
         20.ph,
         Expanded(
             child: BlocProvider<GetProgramsHomeBloc>(
                 create: (_) =>
-                di.sl<GetProgramsHomeBloc>()..add(GetProgramsRequest()),
-                child:
-                BlocConsumer<GetProgramsHomeBloc, GetProgramsHomeState>(
+                    di.sl<GetProgramsHomeBloc>()..add(GetProgramsRequest()),
+                child: BlocConsumer<GetProgramsHomeBloc, GetProgramsHomeState>(
                     listener: (context, state) {
-                      if (state is GetProgramsErrorInitial) {
-                        if (state.message == RELOGIN_FAILURE_MESSAGE) {
-                          Utils.navigateAndRemoveUntilTo(
-                              LoginScreen(), context);
-                        } else {
-                          final snackBar = SnackBar(
-                            content: Text(state.message),
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        }
-                      } else if (state is LogOutLoadingState) {
-                        Navigator.of(context).pop();
-                      }
-                    }, builder: (context, state) {
+                  if (state is GetProgramsErrorInitial) {
+                    if (state.message == RELOGIN_FAILURE_MESSAGE) {
+                      Utils.navigateAndRemoveUntilTo(LoginScreen(), context);
+                    } else {
+                      final snackBar = SnackBar(
+                        content: Text(state.message),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
+                  } else if (state is LogOutLoadingState) {
+                    Navigator.of(context).pop();
+                  }
+                }, builder: (context, state) {
                   if (state is GetProgramsLoadingInitial) {
-                    return const Center(
-                        child: CupertinoActivityIndicator());
+                    return const Center(child: CupertinoActivityIndicator());
                   } else if (state is GetProgramsCompleteInitial) {
                     return Wrap(
                       spacing: 16,
                       runSpacing: 20,
                       children: List.generate(
                         state.data.length,
-                            (index) => CardOfProgramParent(
-                          dataOfProgram:  state.data[index],
+                        (index) => CardOfProgramParent(
+                          dataOfProgram: state.data[index],
                         ),
                       ),
                     );

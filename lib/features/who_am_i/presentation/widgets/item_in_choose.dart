@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 
+import '../../../../core/theme_text.dart';
 import '../manager/who_am_i_cubit.dart';
 
 class ItemInChoose extends StatelessWidget {
@@ -42,14 +43,16 @@ class ItemInChoose extends StatelessWidget {
             Text(
               text,
               style: currentIndex == id
-                  ? Theme.of(context)
-                      .textTheme
-                      .bodySmall
-                      ?.copyWith(fontSize: 22, fontWeight: FontWeight.w700)
-                  : Theme.of(context)
-                      .textTheme
-                      .titleMedium
-                      ?.copyWith(fontSize: 22, fontWeight: FontWeight.w700),
+                  ? Theme.of(context).textTheme.bodySmall?.copyWith(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: AppTheme.getFontFamily3(),
+                      )
+                  : Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: AppTheme.getFontFamily3(),
+                      ),
             ),
             Image.asset(
               image,

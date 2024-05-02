@@ -18,8 +18,7 @@ import '../../../../core/injection/injection_container.dart' as di;
 class CardOfProgramParent extends StatelessWidget {
   final UserCourseModel dataOfProgram;
 
-  const CardOfProgramParent(
-      {Key? key, required this.dataOfProgram})
+  const CardOfProgramParent({Key? key, required this.dataOfProgram})
       : super(key: key);
 
   @override

@@ -9,6 +9,7 @@ import '../../../../core/assets_svg_images.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 
 import '../../../../core/app_color.dart';
+import '../../../../core/theme_text.dart';
 import '../../../../core/utils.dart';
 import '../../../home/presentation/bloc/get_programs_home_bloc.dart';
 import '../../../home/presentation/page/based_home_screen.dart';
@@ -40,14 +41,31 @@ class WhoAmIScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SvgPicture.asset(
-                        AppSvgImages.bgChooseWhoAmI,
+                      Container(
                         width: MediaQuery.of(context).size.width - 70,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            SvgPicture.asset(
+                              AppSvgImages.bgChooseWhoAmI,
+                              width: MediaQuery.of(context).size.width - 70,
+                            ),
+                            Text(
+                              'Tell us more \n about you!',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: AppTheme.getFontFamily3(),
+                                  ),
+                            )
+                          ],
+                        ),
                       ),
                       GestureDetector(
                           onTap: () {
-                            // Navigator.of(context).pop();
-                            // di.sl<GetProgramsHomeBloc>().add(LogOutRequest());
                             Utils.navigateAndRemoveUntilTo(
                                 BlocProvider(
                                     create: (_) => LoadingCubit(),
@@ -109,11 +127,15 @@ class WhoAmIScreen extends StatelessWidget {
             const Spacer(),
             ButtonLogin(
               dataFunction: () {
-
                 if (currentIndex != null) {
                   log('currentIndex:$currentIndex');
-                  Utils.navigateAndRemoveUntilTo( const BasedHomeScreen(), context);
-                }else {
+                  if (currentIndex == 1) {
+                    Utils.navigateTo(const BasedHomeScreen(), context);
+                  } else if (currentIndex == 0) {
+                    Utils.navigateAndRemoveUntilTo(
+                        const BasedHomeScreen(), context);
+                  }
+                } else {
                   const snackBar = SnackBar(
                     content: Text('select who you are'),
                   );

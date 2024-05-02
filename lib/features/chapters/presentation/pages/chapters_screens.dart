@@ -41,7 +41,8 @@ class ChaptersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final numberOfBar = context.select((JourneyBarCubit value) => value.state.totalOfBar);
+    final numberOfBar =
+        context.select((JourneyBarCubit value) => value.state.totalOfBar);
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -51,13 +52,14 @@ class ChaptersScreen extends StatelessWidget {
           children: [
             Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
               SizedBox(
-                height: 140,
+                height: 150,
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 22),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
+                      SizedBox(),
                       SizedBox(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -105,18 +107,19 @@ class ChaptersScreen extends StatelessWidget {
                             padding: EdgeInsets.zero,
                             height: 20,
                           ),
-                          if(numberOfBar!=0&& numberOfBar!=null)...{
-                          Container(
-                            width: numberOfBar,
-                            margin: const EdgeInsets.only(left: 2),
-                            decoration: BoxDecoration(
-                              color: AppColor.yellowColor,
-                              borderRadius: BorderRadius.circular(15),
-                              // border: Border.all(color: Colors.white, width: 2)
+                          if (numberOfBar != 0 && numberOfBar != null) ...{
+                            Container(
+                              width: numberOfBar,
+                              margin: const EdgeInsets.only(left: 2),
+                              decoration: BoxDecoration(
+                                color: AppColor.yellowColor,
+                                borderRadius: BorderRadius.circular(15),
+                                // border: Border.all(color: Colors.white, width: 2)
+                              ),
+                              padding: EdgeInsets.zero,
+                              height: 16,
                             ),
-                            padding: EdgeInsets.zero,
-                            height: 16,
-                          ),}
+                          }
                         ],
                       )
                     ],
@@ -143,14 +146,12 @@ class ChaptersScreen extends StatelessWidget {
                           completed: state.data
                               .where((element) =>
                                   element.isChapter != true &&
-                                  element.star !=null)
+                                  element.star != null)
                               .length,
                           countOfLessons: state.data
-                              .where((element) =>
-                          element.isChapter != true )
+                              .where((element) => element.isChapter != true)
                               .length);
                     }
-
                   }, builder: (context, state) {
                     if (state is GetProgramsCompleteInitial) {
                       return Expanded(
@@ -209,16 +210,16 @@ class ChaptersScreen extends StatelessWidget {
                     children: [
                       BlocBuilder<JourneyBarCubit, JourneyBarInitial>(
                           builder: (context, state) =>
-                          state.beeWinningArtboard != null
-                              ? Transform.rotate(
-                              angle:pi/8 ,
-                              child: SizedBox(
-                                width: 140,
-                                child: Rive(
-                                    artboard: state.beeWinningArtboard!,
-                                    useArtboardSize: true),
-                              ))
-                              : const SizedBox())
+                              state.beeWinningArtboard != null
+                                  ? Transform.rotate(
+                                      angle: pi / 8,
+                                      child: SizedBox(
+                                        width: 140,
+                                        child: Rive(
+                                            artboard: state.beeWinningArtboard!,
+                                            useArtboardSize: true),
+                                      ))
+                                  : const SizedBox())
                     ],
                   )),
             ),

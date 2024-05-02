@@ -7,57 +7,56 @@ class AppTheme {
       scaffoldBackgroundColor: Colors.transparent,
       brightness: Brightness.light,
       primaryColor: AppColor.lightBlueColor,
-      fontFamily: getFontFamily(),
+      fontFamily: getFontFamily3(),
       textTheme: TextTheme(
-        headlineLarge: TextStyle(
-          color: Colors.black,
-          fontFamily: getFontFamily(),
-        ),
-        headlineMedium: TextStyle(
-          color: AppColor.lightGreyColor4,
-          fontFamily: getFontFamily3(),
-        ),
-        headlineSmall: TextStyle(
-          color: AppColor.greyColor,
-          fontFamily: getFontFamily(),
-        ),
-        bodyMedium: TextStyle(
-          color: Colors.black,
-          fontFamily: getFontFamily3(),
-        ),
-        bodySmall: TextStyle(
-          color: Colors.white,
-          fontFamily: getFontFamily(),
-        ),
-        titleSmall: TextStyle(
-          color: AppColor.darkBlueColor2,
-          fontFamily: getFontFamily(),
-        ),
-        titleMedium: TextStyle(
-          color: AppColor.darkBlueColor3,
-          fontFamily: getFontFamily(),
-        ),
-        titleLarge: TextStyle(
-          color: AppColor.redColor,
-          fontFamily: getFontFamily(),
-        ),
-        displaySmall: TextStyle(
-          color: AppColor.orangeColor,
-          fontFamily: getFontFamily(),
-        ),
-        displayMedium: TextStyle(
-          color: AppColor.titleColor,
-          fontFamily: getFontFamily(),
-        ),
-        displayLarge: TextStyle(
-          color: AppColor.darkBlueColor,
-          fontFamily: getFontFamily(),
-        ),
-        labelLarge: TextStyle(
-          color: AppColor.lightGreyColor3,
-          fontFamily: getFontFamily3(),
-        )
-      ));
+          headlineLarge: TextStyle(
+            color: Colors.black,
+            fontFamily: getFontFamily(),
+          ),
+          headlineMedium: TextStyle(
+            color: AppColor.lightGreyColor4,
+            fontFamily: getFontFamily3(),
+          ),
+          headlineSmall: TextStyle(
+            color: AppColor.greyColor,
+            fontFamily: getFontFamily(),
+          ),
+          bodyMedium: TextStyle(
+            color: Colors.black,
+            fontFamily: getFontFamily3(),
+          ),
+          bodySmall: TextStyle(
+            color: Colors.white,
+            fontFamily: getFontFamily3(),
+          ),
+          titleSmall: TextStyle(
+            color: AppColor.darkBlueColor2,
+            fontFamily: getFontFamily(),
+          ),
+          titleMedium: TextStyle(
+            color: AppColor.blackRedColor,
+            fontFamily: getFontFamily(),
+          ),
+          titleLarge: TextStyle(
+            color: AppColor.redColor,
+            fontFamily: getFontFamily3(),
+          ),
+          displaySmall: TextStyle(
+            color: AppColor.orangeColor,
+            fontFamily: getFontFamily(),
+          ),
+          displayMedium: TextStyle(
+            color: AppColor.titleColor,
+            fontFamily: getFontFamily(),
+          ),
+          displayLarge: TextStyle(
+            color: AppColor.darkBlueColor,
+            fontFamily: getFontFamily(),
+          ),
+          labelLarge: TextStyle(
+            color: AppColor.lightGreyColor3,
+            fontFamily: getFontFamily3(),
+          )));
 
   static String getFontFamily() {
     return 'poppinsSemiBold';
@@ -66,6 +65,7 @@ class AppTheme {
   static String getFontFamily2() {
     return 'passionOneRegular';
   }
+
   static String getFontFamily3() {
     return 'Poppins-Regular';
   }

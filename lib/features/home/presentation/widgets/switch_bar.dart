@@ -25,13 +25,32 @@ PreferredSizeWidget switchBar(
         )
       ]),
       child: AppBar(
+        leadingWidth: 52,
         backgroundColor: Colors.white,
+        automaticallyImplyLeading: Navigator.canPop(context),
+        leading: Container(
+          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: Container(
+              width: 10,
+              height: 10,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.42),
+                  color: AppColor.whiteRed),
+              child: const Icon(Icons.arrow_back),
+            ),
+          ),
+        ),
         title: Text(
           isStudent == 1 ? 'Student Account' : 'Parent Account',
           style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                height: 0.09,
+                fontWeight: FontWeight.w600,
+                // height: 0,
+                // letterSpacing: 0.44,
+                fontSize: 22,
               ),
         ),
         actions: [
@@ -49,8 +68,7 @@ PreferredSizeWidget switchBar(
               totalSwitches: 2,
               radiusStyle: true,
               onToggle: (index) {
-                context.read<WhoAmICubit>().addToSelected(newIndex: index??0);
-
+                context.read<WhoAmICubit>().addToSelected(newIndex: index ?? 0);
               },
               customWidgets: [
                 SvgPicture.asset(isStudent == 0
