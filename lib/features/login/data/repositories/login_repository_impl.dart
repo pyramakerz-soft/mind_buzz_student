@@ -48,7 +48,7 @@ class LoginRepositoryImpl implements LoginRepository {
         }
       }
     } else {
-      return Left(CacheFailure());
+      return Left(CheckYourNetwork());
     }
   }
 }

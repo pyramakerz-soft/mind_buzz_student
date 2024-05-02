@@ -13,7 +13,7 @@ class ServerFailure extends Failure {
   @override
   List<Object> get props => [message];
 }
-
+class CheckYourNetwork extends Failure{}
 class CacheFailure extends Failure {}
 class LoginFailure extends Failure {}
 class ReLoginFailure extends Failure {}

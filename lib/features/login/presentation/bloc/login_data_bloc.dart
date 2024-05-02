@@ -62,6 +62,8 @@ String _mapFailureToMessage(Failure failure) {
       return Login_FAILURE_MESSAGE;
     case CacheFailure:
       return CACHE_FAILURE_MESSAGE;
+    case CheckYourNetwork:
+      return CACHE_FAILURE_MESSAGE;
     default:
       return 'Unexpected error';
   }
