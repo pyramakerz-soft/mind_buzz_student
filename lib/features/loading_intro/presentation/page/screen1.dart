@@ -57,7 +57,7 @@ class _Screens1 extends State<Screens1> with SingleTickerProviderStateMixin {
               listener: (context, state) {
             log('##state:$state');
             if (state is ErrorLogin) {
-              Utils.navigateTo(LoginScreen(), context);
+              Utils.navigateAndRemoveUntilTo(LoginScreen(), context);
             } else if (state is CompleteLogin) {
               context.read<LoginCubit>().saveUserData(userData: state.userData);
               Utils.navigateAndRemoveUntilTo(
