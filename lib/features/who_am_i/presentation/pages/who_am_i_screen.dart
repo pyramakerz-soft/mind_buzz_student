@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,6 +11,7 @@ import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/app_color.dart';
 import '../../../../core/utils.dart';
 import '../../../home/presentation/bloc/get_programs_home_bloc.dart';
+import '../../../home/presentation/page/based_home_screen.dart';
 import '../../../home/presentation/page/home_parent_screen.dart';
 import '../../../home/presentation/page/home_screen.dart';
 import '../../../loading_intro/presentation/bloc/loading_cubit.dart';
@@ -106,11 +109,11 @@ class WhoAmIScreen extends StatelessWidget {
             const Spacer(),
             ButtonLogin(
               dataFunction: () {
-                if (currentIndex == 1) {
-                  Utils.navigateAndRemoveUntilTo(const HomeScreen(), context);
-                }if (currentIndex == 0) {
-                  Utils.navigateAndRemoveUntilTo(const HomeParentScreen(), context);
-                } else {
+
+                if (currentIndex != null) {
+                  log('currentIndex:$currentIndex');
+                  Utils.navigateAndRemoveUntilTo( const BasedHomeScreen(), context);
+                }else {
                   const snackBar = SnackBar(
                     content: Text('select who you are'),
                   );

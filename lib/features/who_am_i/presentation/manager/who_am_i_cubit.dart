@@ -2,7 +2,8 @@ import 'package:bloc/bloc.dart';
 
 
 class WhoAmICubit extends Cubit<int?> {
-  WhoAmICubit() : super(null);
+  final int? currentIndex;
+  WhoAmICubit({this.currentIndex}) : super(currentIndex);
   addToSelected({required int newIndex}){
     emit(newIndex);
   }

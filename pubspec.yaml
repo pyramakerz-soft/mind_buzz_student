@@ -55,6 +55,7 @@ dependencies:
   path_drawing: ^1.0.1
   collection: ^1.18.0
   geekyants_flutter_gauges: ^1.0.3
+  toggle_switch: ^2.3.0
 #  level_map: ^0.2.0
 
 dev_dependencies:
@@ -98,3 +99,7 @@ flutter:
       fonts:
         - asset: assets/fonts/PassionOne-Regular.ttf
           weight: 600
+    - family: Poppins-Regular
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+          weight: 400

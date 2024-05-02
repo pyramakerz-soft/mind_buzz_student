@@ -34,8 +34,7 @@ class CurrentGame extends StatelessWidget {
             listener: (context, state) {
           if (state is CompleteGameState) {
             Utils.navigateAndRemoveUntilTo(
-                BlocProvider(
-                    create: (_) => WhoAmICubit(), child: const WhoAmIScreen()),
+                 const WhoAmIScreen(),
                 context);
           }
         }, builder: (context, state) {

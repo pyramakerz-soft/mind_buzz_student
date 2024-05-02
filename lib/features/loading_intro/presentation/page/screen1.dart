@@ -61,8 +61,7 @@ class _Screens1 extends State<Screens1> with SingleTickerProviderStateMixin {
             } else if (state is CompleteLogin) {
               context.read<LoginCubit>().saveUserData(userData: state.userData);
               Utils.navigateAndRemoveUntilTo(
-                  BlocProvider(
-                      create: (_) => WhoAmICubit(), child: WhoAmIScreen()),
+                  WhoAmIScreen(),
                   context);
             }
           }, builder: (context, state) {

@@ -8,13 +8,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 import '../../../../core/assets_svg_images.dart';
-import '../../../../core/injection/injection_container.dart' as di;
 
 import '../../../../core/assets_images.dart';
 import '../../../../core/utils.dart';
 import '../../../../core/validation_text_field.dart';
-import '../../../home/presentation/page/home_screen.dart';
-import '../../../who_am_i/presentation/manager/who_am_i_cubit.dart';
 import '../../../who_am_i/presentation/pages/who_am_i_screen.dart';
 import '../bloc/login_data_bloc.dart';
 import '../cubit/login_cubit.dart';
@@ -106,23 +103,18 @@ class LoginScreen extends StatelessWidget {
                                     );
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(snackBar);
-                                  }
-                                  else if (state is CompleteLogin) {
+                                  } else if (state is CompleteLogin) {
                                     context
                                         .read<LoginCubit>()
                                         .saveUserData(userData: state.userData);
                                     Utils.navigateAndRemoveUntilTo(
-                                        BlocProvider(
-                                            create: (_) => WhoAmICubit(),
-                                            child: WhoAmIScreen()),
-                                        context);
+                                        const WhoAmIScreen(), context);
                                   }
                                 }, builder: (context, state) {
                                   log('--state:$state');
                                   if (state is LoadingLoginState) {
                                     return const CupertinoActivityIndicator();
-                                  }
-                                  else {
+                                  } else {
                                     return BlocProvider(
                                         create: (_) => LoginCubit(),
                                         child: ButtonLogin(

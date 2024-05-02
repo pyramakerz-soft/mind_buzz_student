@@ -9,26 +9,26 @@ class AppTheme {
       primaryColor: AppColor.lightBlueColor,
       fontFamily: getFontFamily(),
       textTheme: TextTheme(
-          headlineLarge: TextStyle(
-            color: Colors.black,
-            fontFamily: getFontFamily(),
-          ),
-          headlineMedium: TextStyle(
-            color: AppColor.brownColor,
-            fontFamily: getFontFamily(),
-          ),
-          headlineSmall: TextStyle(
-            color: AppColor.greyColor,
-            fontFamily: getFontFamily(),
-          ),
-        bodyMedium: TextStyle(
-          color: AppColor.brownColor4,
-          fontFamily: getFontFamily2(),
+        headlineLarge: TextStyle(
+          color: Colors.black,
+          fontFamily: getFontFamily(),
         ),
-          bodySmall: TextStyle(
-            color: Colors.white,
-            fontFamily: getFontFamily(),
-          ),
+        headlineMedium: TextStyle(
+          color: AppColor.lightGreyColor4,
+          fontFamily: getFontFamily3(),
+        ),
+        headlineSmall: TextStyle(
+          color: AppColor.greyColor,
+          fontFamily: getFontFamily(),
+        ),
+        bodyMedium: TextStyle(
+          color: Colors.black,
+          fontFamily: getFontFamily3(),
+        ),
+        bodySmall: TextStyle(
+          color: Colors.white,
+          fontFamily: getFontFamily(),
+        ),
         titleSmall: TextStyle(
           color: AppColor.darkBlueColor2,
           fontFamily: getFontFamily(),
@@ -45,19 +45,28 @@ class AppTheme {
           color: AppColor.orangeColor,
           fontFamily: getFontFamily(),
         ),
-displayMedium: TextStyle(
-  color: AppColor.titleColor,
-  fontFamily: getFontFamily(),
-),
+        displayMedium: TextStyle(
+          color: AppColor.titleColor,
+          fontFamily: getFontFamily(),
+        ),
         displayLarge: TextStyle(
-          color: AppColor.darkBlueColor, fontFamily: getFontFamily(),
+          color: AppColor.darkBlueColor,
+          fontFamily: getFontFamily(),
+        ),
+        labelLarge: TextStyle(
+          color: AppColor.lightGreyColor3,
+          fontFamily: getFontFamily3(),
         )
       ));
 
   static String getFontFamily() {
     return 'poppinsSemiBold';
   }
+
   static String getFontFamily2() {
     return 'passionOneRegular';
+  }
+  static String getFontFamily3() {
+    return 'Poppins-Regular';
   }
 }

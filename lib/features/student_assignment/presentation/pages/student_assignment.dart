@@ -87,7 +87,7 @@ class StudentAssignmentScreen extends StatelessWidget {
                 ),
                 20.ph,
                 ...List.generate(
-                  assignmentProgrammes?.length ?? 0,
+                  assignmentProgrammes?.where((element) => element.program?.tests?.isNotEmpty==true).length ?? 0,
                   (index) => CardOfAssignment(
                     assignmentTask:
                         assignmentProgrammes?[index] ?? UserCourseModel(),
