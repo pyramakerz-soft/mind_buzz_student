@@ -74,8 +74,8 @@ class ShowAssignmentStudent extends StatelessWidget {
           ),
           10.ph,
           SingleChildScrollView(
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 30),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width - 40,
               child: Column(
                 children: List.generate(
                     courseData.program?.tests?.length ?? 0,
