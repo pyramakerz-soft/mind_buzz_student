@@ -1,7 +1,7 @@
 class ChapterModel {
   final int? id;
   final int? number;
-  final String? star;
+  final int? star;
   final bool? isOpen;
   final bool? isLesson;
   final bool? isCheckPoint;

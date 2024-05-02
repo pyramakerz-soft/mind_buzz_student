@@ -67,7 +67,7 @@ List<ChapterModel> handlingDataOfChapters({required List<LessonModel> lessons}){
         isCheckPoint:x.type == 'Checkpoint',
         isOpen: x.stars!=null || x.stars!=0,
         isAssessment:x.type == 'Assessment',
-        star: "$x.stars",
+        star: x.stars,
         levelImg: (x.type == null||x.type == 'Review')?AppImages.imageCloseLesson:x.type == 'Checkpoint'?AppImages.imageCheckpointPart:AppImages.imageAssessmentPart,
       ));
     }

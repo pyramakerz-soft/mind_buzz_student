@@ -25,7 +25,7 @@ class ItemOfTitle extends StatelessWidget {
           children: List.generate(
               3,
                   (index) =>
-              (int.parse("${chapterData.star??0}") > (index))
+              (double.parse("${chapterData.star??0}") > (index))
                   ? SvgPicture.asset(
                 AppSvgImages.iconCompleteStar,
                 height: 25,
