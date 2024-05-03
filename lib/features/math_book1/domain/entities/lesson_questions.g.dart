@@ -9,17 +9,17 @@ part of 'lesson_questions.dart';
 LessonQuestionsModel _$LessonQuestionsModelFromJson(
         Map<String, dynamic> json) =>
     LessonQuestionsModel(
-      id: json['id'] as int?,
-      number: json['number'] as int?,
+      id: (json['id'] as num?)?.toInt(),
+      number: (json['number'] as num?)?.toInt(),
       question: json['question'] as String?,
       answer: json['answer'] as String?,
-      time: json['time'] as int?,
-      difficulty: json['difficulty'] as int?,
-      testId: json['test_id'] as int?,
+      time: (json['time'] as num?)?.toInt(),
+      difficulty: (json['difficulty'] as num?)?.toInt(),
+      testId: (json['test_id'] as num?)?.toInt(),
       type: json['type'] as String?,
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
-      bankId: json['bank_id'] as int?,
+      bankId: (json['bank_id'] as num?)?.toInt(),
       qtype: json['qtype'] as String?,
       secType: json['sec_type'] as String?,
       showNum: json['show_num'] as bool?,
@@ -28,7 +28,7 @@ LessonQuestionsModel _$LessonQuestionsModelFromJson(
           : ControlModel.fromJson(json['control'] as Map<String, dynamic>),
       choices:
           (json['choices'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      lessonId: json['lesson_id'] as int?,
+      lessonId: (json['lesson_id'] as num?)?.toInt(),
       sectionInBook: json['section_in_book'] as String?,
     );
 

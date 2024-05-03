@@ -7,11 +7,11 @@ part of 'program_model.dart';
 // **************************************************************************
 
 ProgramModel _$ProgramModelFromJson(Map<String, dynamic> json) => ProgramModel(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
-      schoolId: json['school_id'] as int?,
-      courseId: json['course_id'] as int?,
-      stageId: json['stage_id'] as int?,
+      schoolId: (json['school_id'] as num?)?.toInt(),
+      courseId: (json['course_id'] as num?)?.toInt(),
+      stageId: (json['stage_id'] as num?)?.toInt(),
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
       image: json['image'] as String?,

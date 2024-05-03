@@ -9,13 +9,13 @@ part of 'contact_of_lesson.dart';
 ContactOfLessonModel _$ContactOfLessonModelFromJson(
         Map<String, dynamic> json) =>
     ContactOfLessonModel(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       numbersOfAnswers: (json['numbers_of_answers'] as List<dynamic>?)
-          ?.map((e) => e as int)
+          ?.map((e) => (e as num).toInt())
           .toList(),
-      firstNumber: json['first_number'] as int?,
-      secondNumber: json['second_number'] as int?,
-      correctAnswer: json['correct_answer'] as int?,
+      firstNumber: (json['first_number'] as num?)?.toInt(),
+      secondNumber: (json['second_number'] as num?)?.toInt(),
+      correctAnswer: (json['correct_answer'] as num?)?.toInt(),
       message: json['message'] as String,
     );
 

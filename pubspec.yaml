@@ -56,6 +56,7 @@ dependencies:
   collection: ^1.18.0
   geekyants_flutter_gauges: ^1.0.3
   toggle_switch: ^2.3.0
+  circle_nav_bar: ^2.0.1+1
 #  level_map: ^0.2.0
 
 dev_dependencies:
@@ -88,6 +89,7 @@ flutter:
     - assets/fonts/
     - assets/math_ball/
     - assets/numbers_lessons/
+    - assets/svg/parent_account/
 
   fonts:
     - family: poppinsSemiBold

@@ -7,12 +7,12 @@ part of 'lesson_model.dart';
 // **************************************************************************
 
 LessonModel _$LessonModelFromJson(Map<String, dynamic> json) => LessonModel(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
-      stars: json['stars'] as int?,
-      number: json['number'] as int?,
-      unitId: json['unit_id'] as int?,
-      warmupId: json['warmup_id'] as int?,
+      stars: (json['stars'] as num?)?.toInt(),
+      number: (json['number'] as num?)?.toInt(),
+      unitId: (json['unit_id'] as num?)?.toInt(),
+      warmupId: (json['warmup_id'] as num?)?.toInt(),
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
       chapter: json['chapter'] == null

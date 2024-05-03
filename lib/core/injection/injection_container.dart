@@ -24,6 +24,10 @@ import '../../features/math_book1/data/repositories/contact_lesson_repository_im
 import '../../features/math_book1/domain/repositories/repositories_contact_lesson.dart';
 import '../../features/math_book1/domain/use_cases/contact_lesson_use_cases.dart';
 import '../../features/math_book1/presentation/manager/get_contact/contact_lesson_bloc.dart';
+import '../../features/notification/data/datasources/data_source_remotely_of_notification.dart';
+import '../../features/notification/data/repositories/notification_repository_impl.dart';
+import '../../features/notification/domain/repositories/repositories_notification.dart';
+import '../../features/notification/presentation/bloc/notification_bloc.dart';
 import '../../features/unit/data/data_sources/data_source_remotely_of_unit.dart';
 import '../../features/unit/data/repositories/unit_repository_impl.dart';
 import '../../features/unit/domain/repositories/repositories_unit.dart';

@@ -8,9 +8,9 @@ part of 'user_courses.dart';
 
 UserCourseModel _$UserCourseModelFromJson(Map<String, dynamic> json) =>
     UserCourseModel(
-      id: json['id'] as int?,
-      userId: json['user_id'] as int?,
-      programId: json['program_id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
+      userId: (json['user_id'] as num?)?.toInt(),
+      programId: (json['program_id'] as num?)?.toInt(),
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
       program: json['program'] == null

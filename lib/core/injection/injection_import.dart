@@ -9,6 +9,7 @@ Future<void> init() async {
   sl.registerFactory(() => ChapterBloc(programUserUseCases: sl()));
   sl.registerFactory(() => ContactLessonBloc(programContactUserUseCases: sl()));
   sl.registerFactory(() => GetProgramsHomeBloc(programUserUseCases: sl(), logOutUserUseCases: sl()));
+  sl.registerFactory(() => NotificationsBloc());
 
   //UseCase
   sl.registerLazySingleton(() => UnitUseCases(sl()));
@@ -34,6 +35,11 @@ Future<void> init() async {
           remoteDataSource: sl(),
           networkInfo: sl()));
 
+  sl.registerLazySingleton<NotificationRepository>(() =>
+      NotificationRepositoryImpl(
+          remoteDataSource: sl(),
+          networkInfo: sl()));
+
   //Datasources
   sl.registerLazySingleton<DataSourceRemotelyOfProgram>(
       () => DataSourceRemotelyOfProgramImpl(dio: sl()));
@@ -47,6 +53,8 @@ Future<void> init() async {
       () => DataSourceRemotelyOfContactLessonImpl(dio: sl()));
   sl.registerLazySingleton<LocalDataSourceRemotelyOfContactLesson>(
       () => LocalDataSourceRemotelyOfContactLessonImpl(dio: sl()));
+  sl.registerLazySingleton<DataSourceRemotelyOfNotification>(
+      () => DataSourceRemotelyOfNotificationImpl(dio: sl()));
 
   //! Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
