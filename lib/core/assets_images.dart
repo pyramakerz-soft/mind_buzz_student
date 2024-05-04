@@ -30,4 +30,8 @@ abstract class AppImages {
   static const String imageChapter = '${mainPathOfImages}chapter.png';
   static const String imageCloseLesson = '${mainPathOfImages}close_lesson.png';
   static const String imageOpenLesson = '${mainPathOfImages}open_lesson.png';
+  static const String iconUnitBee = '${mainPathOfImages}unit_bee.png';
+  static const String iconTree = '${mainPathOfImages}tree.png';
+  static const String iconFlowers = '${mainPathOfImages}flowers.png';
+  static const String iconWaterBee = '${mainPathOfImages}water_bee.png';
 }
