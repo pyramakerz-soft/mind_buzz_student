@@ -15,8 +15,8 @@ class CardOfAssignment extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          showBottomSheet(
-              elevation: 0,
+          showModalBottomSheet(
+              // elevation: 0,
               backgroundColor: Colors.white,
               context: context,
               builder: (BuildContext context) {
