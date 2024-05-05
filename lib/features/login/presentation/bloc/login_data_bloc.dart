@@ -21,19 +21,20 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
   final UserUseCases requestLoginData;
   final AutoUserUseCases requestAutoUserUseCases;
 
-  LoginDataBloc({required this.requestLoginData, required this.requestAutoUserUseCases}) : super(LoginDataInitial()) {
+  LoginDataBloc(
+      {required this.requestLoginData, required this.requestAutoUserUseCases})
+      : super(LoginDataInitial()) {
     on<LoginDataEvent>((event, emit) async {
-      if (event is LoginRequest){
+      if (event is LoginRequest) {
         emit(LoadingLoginState());
         await Future.delayed(Duration(milliseconds: 500));
-        final failureOrDoneMessage =
-            await requestLoginData(email: event.email, password: event.password);
+        final failureOrDoneMessage = await requestLoginData(
+            email: event.email, password: event.password);
         emit(_eitherLoadedOrErrorState(failureOrDoneMessage));
-      }else if (event is AutoLoginRequest){
+      } else if (event is AutoLoginRequest) {
         emit(LoadingLoginState());
         await Future.delayed(Duration(milliseconds: 500));
-        final failureOrDoneMessage =
-        await requestAutoUserUseCases();
+        final failureOrDoneMessage = await requestAutoUserUseCases();
         emit(_eitherLoadedOrErrorState(failureOrDoneMessage));
       }
     });
@@ -41,20 +42,18 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
 }
 
 LoginDataState _eitherLoadedOrErrorState(
-    Either<Failure, UserData> failureOrTrivia,
-    ) {
+  Either<Failure, UserData> failureOrTrivia,
+) {
   return failureOrTrivia.fold(
-        (failure) => ErrorLogin(message: _mapFailureToMessage(failure)),
-        (data) => CompleteLogin(
-        userData: data),
+    (failure) => ErrorLogin(message: _mapFailureToMessage(failure)),
+    (data) => CompleteLogin(userData: data),
   );
 }
 
 String _mapFailureToMessage(Failure failure) {
-
   switch (failure.runtimeType) {
     case ServerFailure:
-      if(failure is ServerFailure) {
+      if (failure is ServerFailure) {
         return failure.message;
       }
       return SERVER_FAILURE_MESSAGE;
