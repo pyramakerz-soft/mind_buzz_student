@@ -186,9 +186,7 @@ class UnitScreen extends StatelessWidget {
                                               'Continue from previous',
                                               style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .reDeginSize(18, context),
+                                                fontSize: 18,
                                                 fontFamily: 'Poppins',
                                                 fontWeight: FontWeight.w700,
                                                 height: 0,
@@ -255,7 +253,11 @@ class UnitScreen extends StatelessWidget {
                                                     .textTheme
                                                     .bodySmall
                                                     ?.copyWith(
-                                                        fontSize: 22,
+                                                        fontSize: MediaQuery.of(
+                                                                context)
+                                                            .size
+                                                            .reDeginSize(
+                                                                22, context),
                                                         fontWeight:
                                                             FontWeight.w700),
                                                 textAlign: TextAlign.center,
@@ -281,7 +283,7 @@ class UnitScreen extends StatelessWidget {
             Positioned(
               bottom: 0,
               width: MediaQuery.of(context).size.width,
-              height: 150,
+              height: MediaQuery.of(context).size.height / 6,
               child: Stack(
                 clipBehavior: Clip.none,
                 alignment: Alignment.bottomCenter,
@@ -289,7 +291,8 @@ class UnitScreen extends StatelessWidget {
                   Image.asset(
                     AppImages.imageLandOfUnit,
                     width: MediaQuery.of(context).size.width,
-                    fit: BoxFit.fitWidth,
+                    height: MediaQuery.of(context).size.height / 6,
+                    fit: BoxFit.fill,
                   ),
                   const Positioned(
                       bottom: 40,

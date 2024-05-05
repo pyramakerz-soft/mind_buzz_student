@@ -83,8 +83,13 @@ class _HomeScreen extends State<HomeScreen> {
                                     .bodySmall
                                     ?.copyWith(
                                         fontSize: MediaQuery.of(context)
-                                            .size
-                                            .reDeginSize(16, context),
+                                                    .size
+                                                    .reDeginSize(16, context) >
+                                                35
+                                            ? 35
+                                            : MediaQuery.of(context)
+                                                .size
+                                                .reDeginSize(16, context),
                                         fontWeight: FontWeight.w700),
                               ),
                               GestureDetector(
@@ -109,8 +114,14 @@ class _HomeScreen extends State<HomeScreen> {
                                         .titleLarge
                                         ?.copyWith(
                                             fontSize: MediaQuery.of(context)
-                                                .size
-                                                .reDeginSize(13, context),
+                                                        .size
+                                                        .reDeginSize(
+                                                            13, context) >
+                                                    35
+                                                ? 35
+                                                : MediaQuery.of(context)
+                                                    .size
+                                                    .reDeginSize(13, context),
                                             fontWeight: FontWeight.w700),
                                   ),
                                 ),
