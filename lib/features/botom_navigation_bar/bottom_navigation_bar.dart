@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../core/app_color.dart';
 import '../../core/parent_assets.dart';
+import '../calender/presentation/page/calender_screen.dart';
 import '../home/presentation/page/home_parent_screen.dart';
 import '../notification/presentation/page/notification_screen.dart';
-import 'navigation_bar_single_element.dart';
+import '../settings/presentation/page/settings_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -20,9 +21,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
   switchScreens(int index) {
     List<Widget> screens = [
       HomeParentScreen(),
-      Container(),
+      CalenderScreen(),
       NotificationsScreen(),
-      Container(),
+      SettingsScreen(),
     ];
     return screens[index];
   }

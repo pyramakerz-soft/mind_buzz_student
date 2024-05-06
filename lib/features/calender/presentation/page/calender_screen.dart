@@ -5,17 +5,17 @@ import '../../../../core/error/failures_messages.dart';
 import '../../../../core/utils.dart';
 import '../../../home/presentation/widgets/switch_bar.dart';
 import '../../../login/presentation/page/login_screen.dart';
-import '../bloc/notification_bloc.dart';
+import '../bloc/calender_bloc.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 
-class NotificationsScreen extends StatelessWidget {
-  const NotificationsScreen({Key? key}) : super(key: key);
+class CalenderScreen extends StatelessWidget {
+  const CalenderScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-        appBar: switchBar( context: context,title: 'Notifications'),
+        appBar: switchBar( context: context,title: 'Calendar'),
         body: Column(
           children: [
             Container(
@@ -25,12 +25,12 @@ class NotificationsScreen extends StatelessWidget {
             ),
             Container(
                 margin: const EdgeInsets.only(left: 20, right: 20),
-                child: BlocProvider<NotificationsBloc>(
+                child: BlocProvider<CalenderBloc>(
                   create: (_) =>
-                      di.sl<NotificationsBloc>()..add(GetNotificationsRequest()),
-                  child: BlocConsumer<NotificationsBloc, NotificationsState>(
+                      di.sl<CalenderBloc>()..add(GetCalenderRequest()),
+                  child: BlocConsumer<CalenderBloc, CalenderState>(
                     listener: (context, state) {
-                      if (state is GetNotificationsErrorInitial) {
+                      if (state is GetCalenderErrorInitial) {
                         if (state.message == RELOGIN_FAILURE_MESSAGE) {
                           Utils.navigateAndRemoveUntilTo(LoginScreen(), context);
                         } else {

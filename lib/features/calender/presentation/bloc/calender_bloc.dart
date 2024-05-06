@@ -7,17 +7,18 @@ import 'package:meta/meta.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/error/failures_messages.dart';
 
-part 'notification_event.dart';
-part 'notification_state.dart';
 
-class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
+part 'calender_event.dart';
+part 'calender_state.dart';
+
+class CalenderBloc extends Bloc<CalenderEvent, CalenderState> {
 
 
 
-  NotificationsBloc() : super(GetNotificationsInitial()) {
-    on<NotificationsEvent>((event, emit) async {
+  CalenderBloc() : super(GetCalenderInitial()) {
+    on<CalenderEvent>((event, emit) async {
       log('event##:$event');
-      if(event is GetNotificationsRequest){
+      if(event is GetCalenderRequest){
 
       }
 

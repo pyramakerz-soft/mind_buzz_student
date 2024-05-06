@@ -14,6 +14,11 @@ class UserData extends Equatable {
   String? createdAt;
   String? updatedAt;
   String? role;
+  String? parentName;
+  String? parentPhone;
+  String? parentEmail;
+  String? parentImage;
+  String? parentPassword;
   int? schoolId;
   SchoolModel? school;
 
@@ -25,6 +30,11 @@ class UserData extends Equatable {
       this.school,
       this.createdAt,
       this.updatedAt,
+        this.parentName,
+        this.parentPhone,
+        this.parentEmail,
+        this.parentImage,
+        this.parentPassword,
       this.role,
       this.schoolId});
   factory UserData.fromJson(Map<String, dynamic> json) {
@@ -40,7 +50,7 @@ class UserData extends Equatable {
   @override
   // TODO: implement props
   List<Object?> get props =>
-      [id, name, email, emailVerifiedAt, createdAt, updatedAt, role, schoolId, school];
+      [id, name, email, emailVerifiedAt, createdAt, updatedAt, role, schoolId, school,parentPhone,parentImage];
 
   static Future<void> saveToken({required String token}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

@@ -6,7 +6,7 @@ abstract class NotificationsState extends Equatable {
   List<Object> get props => [];
 }
 
-class GetProgramsHomeInitial extends NotificationsState {}
+class GetNotificationsInitial extends NotificationsState {}
 class GetNotificationsCompleteInitial extends NotificationsState {
 
 }

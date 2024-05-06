@@ -1,6 +1,10 @@
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
+import '../../features/calender/data/datasources/data_source_remotely_of_calender.dart';
+import '../../features/calender/data/repositories/calender_repository_impl.dart';
+import '../../features/calender/domain/repositories/repositories_calender.dart';
+import '../../features/calender/presentation/bloc/calender_bloc.dart';
 import '../../features/chapters/data/data_sources/data_source_remotely_of_chapter.dart';
 import '../../features/chapters/data/repositories/chapter_repository_impl.dart';
 import '../../features/chapters/domain/repositories/repositories_chapter.dart';
@@ -28,6 +32,10 @@ import '../../features/notification/data/datasources/data_source_remotely_of_not
 import '../../features/notification/data/repositories/notification_repository_impl.dart';
 import '../../features/notification/domain/repositories/repositories_notification.dart';
 import '../../features/notification/presentation/bloc/notification_bloc.dart';
+import '../../features/settings/data/datasources/data_source_remotely_of_settings.dart';
+import '../../features/settings/data/repositories/settings_repository_impl.dart';
+import '../../features/settings/domain/repositories/repositories_setting.dart';
+import '../../features/settings/presentation/bloc/settings_bloc.dart';
 import '../../features/unit/data/data_sources/data_source_remotely_of_unit.dart';
 import '../../features/unit/data/repositories/unit_repository_impl.dart';
 import '../../features/unit/domain/repositories/repositories_unit.dart';

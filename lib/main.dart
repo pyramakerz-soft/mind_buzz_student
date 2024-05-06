@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mind_buzz_refactor/features/login/presentation/cubit/login_cubit.dart';
 import 'core/theme_text.dart';
 import 'features/chapters/presentation/pages/chapters_screens.dart';
@@ -28,6 +29,7 @@ Future<void> setPreferredOrientationPortrait() async {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setPreferredOrientationPortrait();
+  await ScreenUtil.ensureScreenSize();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   await di.init();
 
@@ -58,17 +60,24 @@ class _MyApp extends State<MyApp> {
         ],
         child: BlocProvider(
             create: (_) => LoadingCubit(),
-            child: MaterialApp(
-              title: 'Mind buzz2',
-              debugShowCheckedModeBanner: false,
-              theme: AppTheme().lightTheme,
-              home: const Screens1(),
-              // home: const HomeScreen(),
+            child: ScreenUtilInit(
+              designSize: const Size(360, 690),
+              minTextAdapt: true,
+              splitScreenMode: true,
+              builder: (_ , child) {
+               return MaterialApp(
+                  title: 'Mind buzz2',
+                  debugShowCheckedModeBanner: false,
+                  theme: AppTheme().lightTheme,
+                  home: const Screens1(),
+                  // home: const HomeScreen(),
 
-              // home: ChaptersScreen(
-              //   programId: '1',
-              //   programName: '',
-              // ),
+                  // home: ChaptersScreen(
+                  //   programId: '1',
+                  //   programName: '',
+                  // ),
+                );
+              },
             )));
   }
 }

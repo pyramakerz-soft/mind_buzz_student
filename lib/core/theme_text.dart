@@ -4,9 +4,10 @@ import 'app_color.dart';
 
 class AppTheme {
   final ThemeData lightTheme = ThemeData(
-      scaffoldBackgroundColor: Colors.transparent,
+      scaffoldBackgroundColor: Colors.white,
       brightness: Brightness.light,
       primaryColor: AppColor.lightBlueColor,
+      dividerColor: AppColor.dividerColor,
       fontFamily: getFontFamily3(),
       textTheme: TextTheme(
           headlineLarge: TextStyle(
