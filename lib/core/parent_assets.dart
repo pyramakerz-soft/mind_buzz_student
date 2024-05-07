@@ -17,4 +17,5 @@ abstract class ParentImages {
   static const String email = "${mainPathOfImages}email_icon.svg";
   static const String phone = "${mainPathOfImages}phone.svg";
   static const String lock = "${mainPathOfImages}lock.svg";
+  static const String timers = "${mainPathOfImages}timers.svg";
 }

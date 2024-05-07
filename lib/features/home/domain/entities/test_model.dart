@@ -64,16 +64,15 @@ class TestModel extends Equatable {
         daysLeft
       ];
 
-  getColorOfTest(){
+  getColorOfTest() {
     return status == TestTypes.finished
         ? AppColor.resetText
         : status == TestTypes.overdue
-        ? Colors.black
-        : status == TestTypes.dueSoon &&
-        int.tryParse(formattedDueDate ?? '') !=
-            null &&
-        int.parse(formattedDueDate ?? '') <= 7
-        ? Colors.red
-        : const Color(0xFFCCCCCC);
+            ? Colors.black
+            : status == TestTypes.dueSoon &&
+                    int.tryParse(formattedDueDate ?? '') != null &&
+                    int.parse(formattedDueDate ?? '') <= 7
+                ? Colors.red
+                : const Color(0xFFCCCCCC);
   }
 }

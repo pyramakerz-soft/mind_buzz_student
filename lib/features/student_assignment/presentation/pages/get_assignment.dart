@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import 'package:sliding_switch/sliding_switch.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 
 import '../../../../core/app_color.dart';
@@ -88,45 +92,71 @@ class GetAssignmentScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: BlocProvider<GetAssignmentBloc>(
-            create: (_) => di.sl<GetAssignmentBloc>()
-              ..add(GetAssignmentRequest(programId: programId)),
-            child: BlocConsumer<GetAssignmentBloc, GetAssignmentState>(
-                listener: (context, state) {
-              if (state is GetProgramsErrorInitial) {
-                if (state.message == RELOGIN_FAILURE_MESSAGE) {
-                  Utils.navigateAndRemoveUntilTo(LoginScreen(), context);
-                } else {
-                  final snackBar = SnackBar(
-                    content: Text(state.message),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                }
-              } else if (state is LogOutLoadingState) {
-                Navigator.of(context).pop();
-              }
-            }, builder: (context, state) {
-              if (state is GetProgramsLoadingInitial) {
-                return const Center(child: CupertinoActivityIndicator());
-              } else if (state is GetProgramsCompleteInitial) {
-                return ListView(
-                    children: List.generate(
-                        state.data.tests?.length??0,
-                        (index) => Column(
-                          children: [
-                            10.ph,
+        body: Column(
+          children: [
+            FlutterToggleTab
+              (
+              width: MediaQuery.of(context).size.width/5,
+              borderRadius: 50,
 
-                            CardOfDetailsOfAssignment(
-                                  data: state.data.tests?[index]??TestModel(),
-                              dataOfTypesOfTest: (state.data.tests?[index].type==null)?TestsTypesModel():state.data.testTypes?.where((element) => element.id== (state.data.tests?[index].type??0)).first??TestsTypesModel(),
-                                ),
-                            5.ph,
+            marginSelected:const EdgeInsets.all(5),
+              selectedTextStyle: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400),
+              unSelectedTextStyle: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400),
+              labels: const ['Assignment', 'Reports'],
+              icons:const [Icons.add, Icons.abc_outlined],
+              selectedIndex: 0,
+              selectedLabelIndex: (index) {
+              },
+            ),
+            Expanded(
+              child: BlocProvider<GetAssignmentBloc>(
+                  create: (_) => di.sl<GetAssignmentBloc>()
+                    ..add(GetAssignmentRequest(programId: programId)),
+                  child: BlocConsumer<GetAssignmentBloc, GetAssignmentState>(
+                      listener: (context, state) {
+                    if (state is GetProgramsErrorInitial) {
+                      if (state.message == RELOGIN_FAILURE_MESSAGE) {
+                        Utils.navigateAndRemoveUntilTo(LoginScreen(), context);
+                      } else {
+                        final snackBar = SnackBar(
+                          content: Text(state.message),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                    } else if (state is LogOutLoadingState) {
+                      Navigator.of(context).pop();
+                    }
+                  }, builder: (context, state) {
+                    if (state is GetProgramsLoadingInitial) {
+                      return const Center(child: CupertinoActivityIndicator());
+                    } else if (state is GetProgramsCompleteInitial) {
+                      return ListView(
+                          children: List.generate(
+                              state.data.tests?.length??0,
+                              (index) => Column(
+                                children: [
+                                  10.ph,
 
-                          ],
-                        )));
-              } else {
-                return const SizedBox();
-              }
-            })));
+                                  CardOfDetailsOfAssignment(
+                                        data: state.data.tests?[index]??TestModel(),
+                                    dataOfTypesOfTest: (state.data.tests?[index].type==null)?TestsTypesModel():state.data.testTypes?.where((element) => element.id== (state.data.tests?[index].type??0)).first??TestsTypesModel(),
+                                      ),
+                                  5.ph,
+
+                                ],
+                              )));
+                    } else {
+                      return const SizedBox();
+                    }
+                  })),
+            ),
+          ],
+        ));
   }
 }
