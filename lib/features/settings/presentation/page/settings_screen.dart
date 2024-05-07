@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:mind_buzz_refactor/features/settings/presentation/page/profile_data_screen.dart';
 import 'package:mind_buzz_refactor/features/settings/presentation/widgets/user_header_loading.dart';
-import '../../../../core/app_color.dart';
+
 import '../../../../core/error/failures_messages.dart';
+import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/parent_assets.dart';
 import '../../../../core/utils.dart';
 import '../../../home/presentation/widgets/switch_bar.dart';
 import '../../../login/presentation/page/login_screen.dart';
 import '../bloc/settings_bloc.dart';
-import '../../../../core/injection/injection_container.dart' as di;
 import '../widgets/setting_item.dart';
 import '../widgets/user_header.dart';
 

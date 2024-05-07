@@ -10,7 +10,7 @@ Future<void> init() async {
   sl.registerFactory(() => ContactLessonBloc(programContactUserUseCases: sl()));
   sl.registerFactory(() => GetProgramsHomeBloc(programUserUseCases: sl(), logOutUserUseCases: sl()));
   sl.registerFactory(() => NotificationsBloc());
-  sl.registerFactory(() => CalenderBloc());
+  sl.registerFactory(() => CalenderBloc(programUserUseCases: sl()));
   sl.registerFactory(() => SettingsBloc(autoUserUseCases: sl()));
   sl.registerFactory(() => GetAssignmentBloc(programUserUseCases: sl()));
 

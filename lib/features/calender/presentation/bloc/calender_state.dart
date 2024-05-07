@@ -10,7 +10,10 @@ abstract class CalenderState extends Equatable {
 
 class GetCalenderInitial extends CalenderState {}
 class GetCalenderCompleteInitial extends CalenderState {
-
+ final MainDataTestsModel testsData;
+ GetCalenderCompleteInitial({required this.testsData});
+ @override
+ List<Object> get props => [testsData];
 }
 class GetCalenderLoadingInitial extends CalenderState {}
 class GetCalenderErrorInitial extends CalenderState {

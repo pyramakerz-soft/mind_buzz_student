@@ -9,7 +9,6 @@ abstract class CalenderEvent extends Equatable {
 
 
 class GetCalenderRequest extends CalenderEvent {
-
   GetCalenderRequest();
 
   @override

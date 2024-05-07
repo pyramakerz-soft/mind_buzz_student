@@ -1,9 +1,8 @@
-// Copyright 2019 Aleksander Woźniak
-// SPDX-License-Identifier: Apache-2.0
 
-import 'dart:collection';
+import '../../../../core/injection/injection_container.dart' as di;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
@@ -11,6 +10,7 @@ import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:mind_buzz_refactor/features/home/presentation/widgets/switch_bar.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../bloc/calender_bloc.dart';
 import '../widgets/calender_header.dart';
 
 class CalenderScreen extends StatefulWidget {
@@ -104,88 +104,92 @@ class _CalenderScreenState extends State<CalenderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(context: context, title: 'Calender'),
-      body: Column(
-        children: [
-          CalendarHeader(
-            focusedDay: DateTime.now(),
-            onLeftArrowTap: () {
-              _pageController.previousPage(
-                duration: Duration(milliseconds: 300),
-                curve: Curves.easeOut,
-              );
-            },
-            onRightArrowTap: () {
-              _pageController.nextPage(
-                duration: Duration(milliseconds: 300),
-                curve: Curves.easeOut,
-              );
-            },
-          ),
-          TableCalendar(
-            firstDay: DateTime(DateTime.now().year, 1, 1),
-            lastDay: DateTime(DateTime.now().year, 12, 31),
-            focusedDay: _focusedDay.value,
-            headerVisible: false,
-            rangeSelectionMode: RangeSelectionMode.toggledOn,
-            onDaySelected: _onDaySelected,
-            onRangeSelected: _onRangeSelected,
-            onCalendarCreated: (controller) => _pageController = controller,
-            onPageChanged: (focusedDay) => _focusedDay.value = focusedDay,
-            rowHeight: 50.h,
-            calendarBuilders: CalendarBuilders(
-              markerBuilder: (context, day, events) {
-                if (day.day == 5 || day.day == 20) {
-                  final text = DateFormat.E().format(day);
-                  return Align(
-                    alignment: Alignment.topRight,
-                    child: Container(
-                      padding: EdgeInsets.all(5.h),
-                      decoration: BoxDecoration(
-                          color: AppColor.blueColor1, shape: BoxShape.circle),
-                      child: Text(
-                        '2',
-                        style: TextStyle(color: Colors.white),
+      body: BlocProvider<CalenderBloc>(
+        create: (_) =>
+        di.sl<CalenderBloc>()..add(GetCalenderRequest()),
+        child: Column(
+          children: [
+            CalendarHeader(
+              focusedDay: DateTime.now(),
+              onLeftArrowTap: () {
+                _pageController.previousPage(
+                  duration: Duration(milliseconds: 300),
+                  curve: Curves.easeOut,
+                );
+              },
+              onRightArrowTap: () {
+                _pageController.nextPage(
+                  duration: Duration(milliseconds: 300),
+                  curve: Curves.easeOut,
+                );
+              },
+            ),
+            TableCalendar(
+              firstDay: DateTime(DateTime.now().year, 1, 1),
+              lastDay: DateTime(DateTime.now().year, 12, 31),
+              focusedDay: _focusedDay.value,
+              headerVisible: false,
+              rangeSelectionMode: RangeSelectionMode.toggledOn,
+              onDaySelected: _onDaySelected,
+              onRangeSelected: _onRangeSelected,
+              onCalendarCreated: (controller) => _pageController = controller,
+              onPageChanged: (focusedDay) => _focusedDay.value = focusedDay,
+              rowHeight: 50.h,
+              calendarBuilders: CalendarBuilders(
+                markerBuilder: (context, day, events) {
+                  if (day.day == 5 || day.day == 20) {
+                    final text = DateFormat.E().format(day);
+                    return Align(
+                      alignment: Alignment.topRight,
+                      child: Container(
+                        padding: EdgeInsets.all(5.h),
+                        decoration: BoxDecoration(
+                            color: AppColor.blueColor1, shape: BoxShape.circle),
+                        child: Text(
+                          '2',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
+                    );
+                  }
+                },
+                outsideBuilder: (context, day, date) => const SizedBox(),
+                dowBuilder: (context, day){
+                  final text = DateFormat.E().format(day);
+                  return Center(
+                     child: Text(
+                      text,
+                      style: TextStyle(color: AppColor.calenderDayText.withOpacity(0.3)),
                     ),
                   );
-                }
-              },
-              outsideBuilder: (context, day, date) => const SizedBox(),
-              dowBuilder: (context, day){
-                final text = DateFormat.E().format(day);
-                return Center(
-                   child: Text(
-                    text,
-                    style: TextStyle(color: AppColor.calenderDayText.withOpacity(0.3)),
-                  ),
-                );
-              },
+                },
 
+              ),
             ),
-          ),
-          const SizedBox(height: 8.0),
-          Expanded(
-            child: ListView.builder(
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 12.0,
-                    vertical: 4.0,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(),
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  child: ListTile(
-                    onTap: () => print('${index}'),
-                    title: Text('${index}'),
-                  ),
-                );
-              },
+            const SizedBox(height: 8.0),
+            Expanded(
+              child: ListView.builder(
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 12.0,
+                      vertical: 4.0,
+                    ),
+                    decoration: BoxDecoration(
+                      border: Border.all(),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    child: ListTile(
+                      onTap: () => print('${index}'),
+                      title: Text('${index}'),
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
