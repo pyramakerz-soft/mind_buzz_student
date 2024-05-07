@@ -70,8 +70,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(15),
-                  child: SvgPicture.asset(
-                    ParentImages.notification,
+                  child: SvgPicture.string(
+                    ParentImages.notificationOutlineIcon(3),
                   ),
                 ),
                 Padding(

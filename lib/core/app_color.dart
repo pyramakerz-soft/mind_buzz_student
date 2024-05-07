@@ -58,4 +58,6 @@ class AppColor {
   Color hexToColor(String code) {
     return Color(int.parse("0xff${code.toString().split("#").last}"));
   }
+  static const Color calenderDayText = Color(0xff3C3C43);
+
 }
