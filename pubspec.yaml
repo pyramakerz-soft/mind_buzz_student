@@ -59,6 +59,8 @@ dependencies:
   circle_nav_bar: ^2.0.1+1
   flutter_screenutil: ^5.9.0
   skeletons:
+  sliding_switch: ^1.1.0
+  flutter_toggle_tab: ^1.4.1
   table_calendar: ^3.1.1
 #  level_map: ^0.2.0
 
