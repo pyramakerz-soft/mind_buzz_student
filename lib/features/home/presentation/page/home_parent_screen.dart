@@ -28,6 +28,7 @@ class _HomeParentScreen extends State<HomeParentScreen> {
   Widget build(BuildContext context) {
     return Column(
         children: [
+        switchBar(context: context),
           10.ph,
           const CardOfMyInfo(),
           20.ph,
