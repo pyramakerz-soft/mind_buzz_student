@@ -12,6 +12,7 @@ abstract class TalkTts {
       Function? actionPause,
       Function? actionCancel,
       Function? actionComplete}) async {
+    await flutterTts.setLanguage("en-US");
     log('start talk:$text');
     data = text;
     flutterTts.setPitch(1.0);

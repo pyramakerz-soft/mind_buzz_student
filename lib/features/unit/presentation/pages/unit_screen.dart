@@ -20,12 +20,11 @@ import '../../../login/presentation/page/login_screen.dart';
 import '../manager/bloc/get_unit_bloc.dart';
 import '../widgets/animation_of_bee.dart';
 import '../widgets/animation_of_bee2.dart';
+import '../widgets/animation_of_tree.dart';
 import '../widgets/animation_of_bee3.dart';
 import '../widgets/animation_of_bee4.dart';
-import '../widgets/animation_of_tree.dart';
 import '../widgets/item_of_unit.dart';
 
-///todo:handling the performance of the screen
 class UnitScreen extends StatelessWidget {
   final String programId;
   final String programName;
@@ -80,7 +79,8 @@ class UnitScreen extends StatelessWidget {
                               ?.copyWith(
                                   fontSize: 20, fontWeight: FontWeight.w700),
                         ),
-                        const SizedBox(                                width: 45,
+                        const SizedBox(
+                          width: 45,
                         ),
                       ],
                     ),
@@ -91,17 +91,17 @@ class UnitScreen extends StatelessWidget {
                       ..add(GetUnitRequest(programId: int.parse(programId))),
                     child: BlocConsumer<GetUnitBloc, GetUnitState>(
                         listener: (context, state) {
-                          if (state is GetProgramsErrorInitial) {
-                            if(state.message == RELOGIN_FAILURE_MESSAGE){
-                              Utils.navigateAndRemoveUntilTo(LoginScreen(), context);
-
-                            }else {
-                              final snackBar = SnackBar(
-                                content: Text(state.message),
-                              );
-                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                            }
-                          }
+                      if (state is GetProgramsErrorInitial) {
+                        if (state.message == RELOGIN_FAILURE_MESSAGE) {
+                          Utils.navigateAndRemoveUntilTo(
+                              LoginScreen(), context);
+                        } else {
+                          final snackBar = SnackBar(
+                            content: Text(state.message),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+                      }
                       log('state:$state');
                     }, builder: (context, state) {
                       if (state is GetProgramsCompleteInitial) {
@@ -125,7 +125,6 @@ class UnitScreen extends StatelessWidget {
                                         child: Container(
                                           width: 6.39,
                                           height: 100,
-
                                           clipBehavior: Clip.antiAlias,
                                           decoration: const BoxDecoration(),
                                           child: Stack(
@@ -176,7 +175,7 @@ class UnitScreen extends StatelessWidget {
                                         ),
                                         decoration: const BoxDecoration(
                                             color: Color(0xFFD1232A)),
-                                        child:  Row(
+                                        child: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -187,7 +186,7 @@ class UnitScreen extends StatelessWidget {
                                               'Continue from previous',
                                               style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize:  MediaQuery.of(context).size.reDeginSize(18, context),
+                                                fontSize: 18,
                                                 fontFamily: 'Poppins',
                                                 fontWeight: FontWeight.w700,
                                                 height: 0,
@@ -213,12 +212,12 @@ class UnitScreen extends StatelessWidget {
                                   Utils.navigateTo(
                                       BlocProvider(
                                           create: (_) => JourneyBarCubit(),
-                                          child:ChaptersScreen(
-                                        programId:
-                                            state.data[index].id.toString(),
-                                        programName:
-                                            state.data[index].name ?? '',
-                                      )),
+                                          child: ChaptersScreen(
+                                            programId:
+                                                state.data[index].id.toString(),
+                                            programName:
+                                                state.data[index].name ?? '',
+                                          )),
                                       context);
                                 },
                                 child: Align(
@@ -254,7 +253,11 @@ class UnitScreen extends StatelessWidget {
                                                     .textTheme
                                                     .bodySmall
                                                     ?.copyWith(
-                                                        fontSize: 22,
+                                                        fontSize: MediaQuery.of(
+                                                                context)
+                                                            .size
+                                                            .reDeginSize(
+                                                                22, context),
                                                         fontWeight:
                                                             FontWeight.w700),
                                                 textAlign: TextAlign.center,
@@ -269,7 +272,8 @@ class UnitScreen extends StatelessWidget {
                           ],
                         );
                       } else if (state is GetProgramsLoadingInitial) {
-                        return const Center(child: CupertinoActivityIndicator());
+                        return const Center(
+                            child: CupertinoActivityIndicator());
                       } else {
                         return const SizedBox();
                       }
@@ -279,7 +283,7 @@ class UnitScreen extends StatelessWidget {
             Positioned(
               bottom: 0,
               width: MediaQuery.of(context).size.width,
-              height: 150,
+              height: MediaQuery.of(context).size.height / 6,
               child: Stack(
                 clipBehavior: Clip.none,
                 alignment: Alignment.bottomCenter,
@@ -287,13 +291,13 @@ class UnitScreen extends StatelessWidget {
                   Image.asset(
                     AppImages.imageLandOfUnit,
                     width: MediaQuery.of(context).size.width,
-                    fit: BoxFit.fitWidth,
+                    height: MediaQuery.of(context).size.height / 6,
+                    fit: BoxFit.fill,
                   ),
                   const Positioned(
                       bottom: 40,
                       // left: 40,
-                      child: AnimationOfTree()
-                  ),
+                      child: AnimationOfBee2()),
                   const Positioned(
                     right: 10,
                     top: 10,
@@ -302,7 +306,7 @@ class UnitScreen extends StatelessWidget {
                   const Positioned(
                     left: 0,
                     top: 10,
-                    child: AnimationOfBee2(),
+                    child: AnimationOfTree(),
                   ),
                   const Positioned(
                       left: 20,

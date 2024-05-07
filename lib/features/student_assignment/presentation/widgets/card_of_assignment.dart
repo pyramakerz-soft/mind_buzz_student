@@ -15,8 +15,8 @@ class CardOfAssignment extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          showBottomSheet(
-              elevation: 0,
+          showModalBottomSheet(
+              // elevation: 0,
               backgroundColor: Colors.white,
               context: context,
               builder: (BuildContext context) {
@@ -59,7 +59,17 @@ class CardOfAssignment extends StatelessWidget {
                           ),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        showModalBottomSheet(
+                            // elevation: 0,
+                            backgroundColor: Colors.white,
+                            context: context,
+                            builder: (BuildContext context) {
+                              return ShowAssignmentStudent(
+                                courseData: assignmentTask,
+                              );
+                            });
+                      },
                       child: Container(
                           alignment: Alignment.center,
                           decoration: BoxDecoration(

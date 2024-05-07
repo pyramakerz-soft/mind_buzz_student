@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/network/network_info.dart';
 import '../../domain/entities/user_data_model.dart';
@@ -21,15 +23,23 @@ class LoginRepositoryImpl implements LoginRepository {
       try {
         final res = await remoteDataSource.getLoginDataRemotely(
             email: email, password: password);
-        log('res:$res');
         return Right(res);
+      } on DioException catch (e, s) {
+        if (e is MessageException) {
+          return Left(ServerFailure(message: "${e.message}"));
+        }
+        return Left(LoginFailure());
       } catch (e, s) {
-        return Left(ServerFailure(message: "${jsonDecode(e.toString())['message']}"));
+        if (e is MessageException) {
+          return Left(ServerFailure(message: e.message));
+        }
+        return Left(LoginFailure());
       }
     } else {
       return Left(CacheFailure());
     }
   }
+
   @override
   Future<Either<Failure, UserData>> getAutoLogin() async {
     if (await networkInfo.isConnected) {
@@ -41,10 +51,9 @@ class LoginRepositoryImpl implements LoginRepository {
         try {
           return Left(
               ServerFailure(message: "${jsonDecode(e.toString())['message']}"));
-        }catch(e){
+        } catch (e) {
           log('error:$e');
-          return Left(
-              CacheFailure());
+          return Left(CacheFailure());
         }
       }
     } else {

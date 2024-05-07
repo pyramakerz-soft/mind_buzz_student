@@ -24,6 +24,7 @@ class LoginScreen extends StatelessWidget {
       TextEditingController(text: kDebugMode ? 'sherif@test.com' : '');
   final TextEditingController _passwordController =
       TextEditingController(text: kDebugMode ? '123456' : '');
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -55,88 +56,97 @@ class LoginScreen extends StatelessWidget {
                         padding:
                             const EdgeInsets.only(top: 60, left: 25, right: 25),
                         child: SingleChildScrollView(
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Log in",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineLarge
-                                      ?.copyWith(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.w600),
-                                ),
-                                28.ph,
-                                TextFieldWidget(
-                                  controler: _emailController,
-                                  validatorTextField: (val) =>
-                                      ValidationTextField.emailInput(val),
-                                  hintText: 'Email',
-                                ),
-                                16.ph,
-                                TextFieldWidget(
-                                  controler: _passwordController,
-                                  validatorTextField: (val) =>
-                                      ValidationTextField.passwordInput(val),
-                                  hintText: 'Password',
-                                ),
-                                16.ph,
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: GestureDetector(
-                                    child: Text(
-                                      'Forgot password?',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall,
+                          child: Form(
+                            key: _formKey,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Log in",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineLarge
+                                        ?.copyWith(
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.w600),
+                                  ),
+                                  28.ph,
+                                  TextFieldWidget(
+                                    controler: _emailController,
+                                    validatorTextField: (val) =>
+                                        ValidationTextField.emailInput(val),
+                                    hintText: 'Email',
+                                  ),
+                                  16.ph,
+                                  TextFieldWidget(
+                                    controler: _passwordController,
+                                    validatorTextField: (val) =>
+                                        ValidationTextField.passwordInput(val),
+                                    hintText: 'Password',
+                                  ),
+                                  16.ph,
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: GestureDetector(
+                                      child: Text(
+                                        'Forgot password?',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                40.ph,
-                                BlocConsumer<LoginDataBloc, LoginDataState>(
-                                    listener: (context, state) {
-                                  log('##state:$state');
-                                  if (state is ErrorLogin) {
-                                    final snackBar = SnackBar(
-                                      content: Text(state.message),
-                                    );
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(snackBar);
-                                  } else if (state is CompleteLogin) {
-                                    context
-                                        .read<LoginCubit>()
-                                        .saveUserData(userData: state.userData);
-                                    Utils.navigateAndRemoveUntilTo(
-                                        const WhoAmIScreen(), context);
-                                  }
-                                }, builder: (context, state) {
-                                  log('--state:$state');
-                                  if (state is LoadingLoginState) {
-                                    return const CupertinoActivityIndicator();
-                                  } else {
-                                    return BlocProvider(
-                                        create: (_) => LoginCubit(),
-                                        child: ButtonLogin(
-                                          disableAnimation: true,
-                                          dataFunction: () {
-                                            context.read<LoginDataBloc>().add(
-                                                LoginRequest(
-                                                    email:
-                                                        _emailController.text,
-                                                    password:
-                                                        _passwordController
-                                                            .text));
-                                          },
-                                          title: "Log In",
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              50,
-                                        ));
-                                  }
-                                })
-                              ]),
+                                  40.ph,
+                                  BlocConsumer<LoginDataBloc, LoginDataState>(
+                                      listener: (context, state) {
+                                    log('##state:$state');
+                                    if (state is ErrorLogin) {
+                                      final snackBar = SnackBar(
+                                        content: Text(state.message),
+                                      );
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
+                                    } else if (state is CompleteLogin) {
+                                      context.read<LoginCubit>().saveUserData(
+                                          userData: state.userData);
+                                      Utils.navigateAndRemoveUntilTo(
+                                          const WhoAmIScreen(), context);
+                                    }
+                                  }, builder: (context, state) {
+                                    log('--state:$state');
+                                    if (state is LoadingLoginState) {
+                                      return const CupertinoActivityIndicator();
+                                    } else {
+                                      return BlocProvider(
+                                          create: (_) => LoginCubit(),
+                                          child: ButtonLogin(
+                                            disableAnimation: true,
+                                            dataFunction: () {
+                                              if (!_formKey.currentState!
+                                                  .validate()) {
+                                                return;
+                                              }
+                                              _formKey.currentState!.save();
+                                              context.read<LoginDataBloc>().add(
+                                                  LoginRequest(
+                                                      email:
+                                                          _emailController.text,
+                                                      password:
+                                                          _passwordController
+                                                              .text));
+                                            },
+                                            title: "Log In",
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width -
+                                                50,
+                                          ));
+                                    }
+                                  })
+                                ]),
+                          ),
                         ))
                   ],
                 ),

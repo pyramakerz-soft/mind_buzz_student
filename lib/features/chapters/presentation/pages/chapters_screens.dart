@@ -46,7 +46,8 @@ class ChaptersScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-            image: DecorationImage(image: AssetImage(AppImages.bgChapters))),
+            image: DecorationImage(
+                image: AssetImage(AppImages.bgChapters), fit: BoxFit.fill)),
         child: Stack(
           alignment: Alignment.center,
           children: [
@@ -66,6 +67,7 @@ class ChaptersScreen extends StatelessWidget {
                         children: [
                           GestureDetector(
                               onTap: () {
+                                Navigator.of(context).pop();
                                 Navigator.of(context).pop();
                               },
                               child: Container(

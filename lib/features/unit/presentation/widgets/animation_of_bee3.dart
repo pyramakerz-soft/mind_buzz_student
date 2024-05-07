@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../core/assets_images.dart';
 import '../../../../core/assets_svg_images.dart';
 import '../manager/cubit/animation_unit_cubit.dart';
 
-class AnimationOfBee3 extends StatelessWidget{
+class AnimationOfBee3 extends StatelessWidget {
   const AnimationOfBee3({Key? key}) : super(key: key);
 
   @override
@@ -16,37 +17,34 @@ class AnimationOfBee3 extends StatelessWidget{
         width: 75,
         child: GestureDetector(
             onTap: () {
-              context
-                  .read<AnimationUnitCubit>()
-                  .animationBeeWithWaterAvatar();
+              context.read<AnimationUnitCubit>().animationBeeWithWaterAvatar();
             },
             child: Stack(children: [
               Positioned(
                   top: 0,
                   right: 0,
-                  child: BlocBuilder<AnimationUnitCubit,
-                      AnimationUnitInitial>(
+                  child: BlocBuilder<AnimationUnitCubit, AnimationUnitInitial>(
                     builder: (context, state) {
                       return state.beeWaterArtboard == null
-                          ? SvgPicture.asset(
-                        AppSvgImages.iconWaterBee,
-                        // height: 50,
-                      )
+                          ? Image.asset(
+                              AppImages.iconWaterBee,
+                              height: 120,
+                              // fit: BoxFit.fill,
+                            )
                           : Rive(
-                        artboard: state.beeWaterArtboard!,
-                        // fit: BoxFit.fitHeight,
-                        useArtboardSize: true,
-                      );
+                              artboard: state.beeWaterArtboard!,
+                              // fit: BoxFit.fitHeight,
+                              useArtboardSize: true,
+                            );
                     },
                   )),
               Positioned(
                   bottom: 0,
                   left: 0,
-                  child: SvgPicture.asset(
-                    AppSvgImages.iconFlowers,
+                  child: Image.asset(
+                    AppImages.iconFlowers,
                     height: 50,
                   ))
             ])));
   }
-
 }
