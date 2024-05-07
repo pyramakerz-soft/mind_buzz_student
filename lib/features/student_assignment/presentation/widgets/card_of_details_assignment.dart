@@ -21,20 +21,9 @@ class CardOfDetailsOfAssignment extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border(
-          left: BorderSide(width: 6, color: data.status == TestTypes.dueSoon
-              ? Color(0xFFCCCCCC)
-              : data.status == TestTypes.finished
-              ? AppColor.resetText
-              : data.status == TestTypes.overdue
-              ? Colors.black
-              : data.status == TestTypes.dueSoon &&
-              int.tryParse(data.formattedDueDate ?? '') !=
-                  null &&
-              int.parse(data.formattedDueDate ?? '') < 7
-              ? Colors.red
-              : Color(0xFFCCCCCC)),
+          left: BorderSide(width: 6, color: data.getColorOfTest()),
         ),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Color(0x14000000),
             blurRadius: 8,
@@ -43,8 +32,8 @@ class CardOfDetailsOfAssignment extends StatelessWidget {
           )
         ],
       ),
-      margin: EdgeInsets.symmetric(horizontal: 20),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.all(10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -93,7 +82,7 @@ class CardOfDetailsOfAssignment extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Expanded(
+                    const Expanded(
                       child: SizedBox(),
                     )
                   ],
@@ -145,10 +134,17 @@ class CardOfDetailsOfAssignment extends StatelessWidget {
                               )
                             : const SizedBox()),
                     Expanded(
-                        child: Text(
-                      "${ data.status},${data.daysLeft ?? ''}",
-                          textAlign: TextAlign.center,
-                    ))
+                        child: Column(
+                          children: [
+                            // if(data.status == TestTypes.notStarted)...{
+
+                              Text(
+                                "${data.formattedDueDate},${data.status}, ${data.daysLeft??''}",
+                                textAlign: TextAlign.center,
+                              ),
+                            // }
+                          ],
+                        ))
                   ],
                 ),
               ),
