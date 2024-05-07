@@ -18,9 +18,9 @@ class BasedHomeScreen extends StatelessWidget {
     // return BlocConsumer<WhoAmICubit, int>(builder: (context, state) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: switchBar( context: context),
+      appBar: currentPage == 1 ?switchBar(context: context) : null,
       body: Container(
-        child: currentPage == 1 ? const HomeScreen() : const HomeParentScreen(),
+        child: currentPage == 1 ? const HomeScreen() : const BottomNavBar(),
       ),
     );
     // }, listener: (BuildContext context, int state) {  },);
