@@ -26,9 +26,7 @@ class HomeParentScreen extends StatefulWidget {
 class _HomeParentScreen extends State<HomeParentScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: switchBar( context: context),
-      body: Column(
+    return Column(
         children: [
           10.ph,
           const CardOfMyInfo(),
@@ -70,7 +68,6 @@ class _HomeParentScreen extends State<HomeParentScreen> {
                     }
                   })))
         ],
-      ),
-    );
+      );
   }
 }
