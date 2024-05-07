@@ -15,7 +15,7 @@ class NotificationsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-        appBar: switchBar( context: context,title: 'Notifications'),
+        appBar: customAppBar( context: context,title: 'Notifications'),
         body: Column(
           children: [
             Container(

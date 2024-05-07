@@ -15,7 +15,7 @@ class CalenderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-        appBar: switchBar( context: context,title: 'Calendar'),
+        appBar: customAppBar( context: context,title: 'Calendar'),
         body: Column(
           children: [
             Container(

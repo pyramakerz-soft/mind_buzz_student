@@ -142,35 +142,7 @@ PreferredSizeWidget customAppBar(
                 action?? 0.pw,
               ],
             ),
-            actions: [
-              ToggleSwitch(
-                  minWidth: 35.0,
-                  cornerRadius: 8.0,
-                  minHeight: 35,
-                  activeBgColors: const [
-                    [AppColor.darkBlueColor],
-                    [AppColor.darkBlueColor]
-                  ],
-                  inactiveBgColor: AppColor.lightGreyColor,
-                  // inactiveFgColor: Colors.white,
-                  initialLabelIndex: context.watch<WhoAmICubit>().state,
-                  totalSwitches: 2,
-                  radiusStyle: true,
-                  onToggle: (index) {
-                    context
-                        .read<WhoAmICubit>()
-                        .addToSelected(newIndex: index ?? 0);
-                  },
-                  customWidgets: [
-                    SvgPicture.asset(context.watch<WhoAmICubit>().state == 0
-                        ? AppSvgImages.iconSelectedParent
-                        : AppSvgImages.iconUnSelectedParent),
-                    SvgPicture.asset(context.watch<WhoAmICubit>().state == 1
-                        ? AppSvgImages.iconSelectedStudent
-                        : AppSvgImages.iconUnSelectedStudent),
-                  ]),
-              24.pw,
-            ],
+
           ),
         ],
       ),

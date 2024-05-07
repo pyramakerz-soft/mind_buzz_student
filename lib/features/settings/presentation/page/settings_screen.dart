@@ -23,7 +23,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-        appBar: switchBar( context: context,title: 'Setting'),
+        appBar: customAppBar( context: context,title: 'Setting'),
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 15.h),
             child: BlocProvider<SettingsBloc>(
