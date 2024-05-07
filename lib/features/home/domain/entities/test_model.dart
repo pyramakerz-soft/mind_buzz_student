@@ -9,10 +9,11 @@ class TestModel extends Equatable {
   int? mistakeCount;
   dynamic status;
   int? testId;
+  int? lessonNum;
   String? name;
   String? testName;
   String? teacherName;
-  String? type;
+  dynamic type;
   String? formattedDueDate;
   String? daysLeft;
   String? duration;
@@ -30,6 +31,7 @@ class TestModel extends Equatable {
       this.status,
       this.testName,
       this.daysLeft,
+      this.lessonNum,
       this.formattedDueDate,
       this.teacherName,
       this.testId,

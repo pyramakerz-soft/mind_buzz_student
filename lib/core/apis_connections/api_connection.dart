@@ -37,6 +37,7 @@ class MainApiConnection {
   String getUserEndPoint = "getuserdata";
   String getStudentProgramsEndPoint = "student_programs";
   String getUnitsOfProgramsEndPoint = "units";
+  String getStudentProgramsTestEndPoint = "student_programs_test";
   String getLessonsOfProgramsEndPoint = "lessons";
   String getLessonQuestionsEndPoint = "lesson_questions";
 

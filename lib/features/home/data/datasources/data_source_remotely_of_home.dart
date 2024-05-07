@@ -25,7 +25,7 @@ class DataSourceRemotelyOfProgramImpl implements DataSourceRemotelyOfProgram {
     );
     if (dio.validResponse(response)) {
       final List<UserCourseModel> l = [];
-      response.data['data']['user_courses'].forEach((e) => l.add(UserCourseModel.fromJson(e)));
+      response.data['data']['programs']['user_courses'].forEach((e) => l.add(UserCourseModel.fromJson(e)));
       return l;
     } else {
       throw response.data['msg'];

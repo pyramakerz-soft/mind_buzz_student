@@ -12,9 +12,11 @@ class TestsTypesModel extends Equatable {
   String? enum0;
   String? name;
   String? createdAt;
+  String? textColor;
+  String? bgColor;
   String? updatedAt;
   TestsTypesModel(
-      {this.name, this.id, this.createdAt, this.enum0, this.updatedAt});
+      {this.name, this.id, this.createdAt, this.enum0, this.updatedAt, this.bgColor, this.textColor});
 
   factory TestsTypesModel.fromJson(Map<String, dynamic> json) {
     return TestsTypesModel(
@@ -22,11 +24,13 @@ class TestsTypesModel extends Equatable {
       id: (json['id'] as num?)?.toInt(),
       createdAt: json['created_at'] as String?,
       enum0: json['enum'] as String?,
+      textColor: json['textColor'] as String?,
+      bgColor: json['bgColor'] as String?,
       updatedAt: json['updated_at'] as String?,
     );
   }
   Map<String, dynamic> toJson() => <String, dynamic>{};
 
   @override
-  List<Object?> get props => [id, enum0, name, createdAt, AxisDirection.up];
+  List<Object?> get props => [id, enum0, name, createdAt,bgColor, textColor];
 }

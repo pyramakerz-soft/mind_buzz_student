@@ -25,7 +25,9 @@ class AppColor {
   static const Color redColor1 = Color(0xFFD1232A);
   static const Color redColor2 = Color(0xFFF5454C);
   static const Color redColor3 = Color(0xFFFFA1A5);
-  // static const Color darkYellowColor = Color(0xFFF7941F);
+  static const Color wightBlueColor = Color(0xFFEDF7FF);
+  static const Color blueColor = Color(0xFF1690EB);
+  static const Color burberColor = Color(0xFF6750A3);
   static const Color darkBlueColor = Color(0xFF004279);
   static const Color darkBlueColor3 = Color(0xFF003348);
   static const Color darkBlueColor2 = Color(0xFF5FA1D5);
@@ -53,4 +55,7 @@ class AppColor {
   static const Color dividerColor = Color(0xffE5E5E5);
   static const Color darkGreyText = Color(0xff33393E);
   static const Color resetText = Color(0xff008D4B);
+  Color hexToColor(String code) {
+    return Color(int.parse("0xff${code.toString().split("#").last}"));
+  }
 }

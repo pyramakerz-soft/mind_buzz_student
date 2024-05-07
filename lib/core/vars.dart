@@ -108,3 +108,10 @@ abstract class DefaultChapterData {
     return result;
   }
 }
+
+abstract class TestTypes{
+  static String finished = 'Finished';
+  static String dueSoon = 'Due Soon';
+  static String notStarted = 'Not Started';
+  static String overdue = 'Overdue';
+}

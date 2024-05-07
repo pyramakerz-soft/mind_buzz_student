@@ -20,7 +20,7 @@ class AppTheme {
           ),
           headlineSmall: TextStyle(
             color: AppColor.greyColor,
-            fontFamily: getFontFamily(),
+            fontFamily: getFontFamily3(),
           ),
           bodyMedium: TextStyle(
             color: Colors.black,
@@ -69,5 +69,8 @@ class AppTheme {
 
   static String getFontFamily3() {
     return 'Poppins-Regular';
+  }
+  static String getFontFamily4() {
+    return 'Roboto-Medium';
   }
 }

@@ -1,0 +1,161 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:mind_buzz_refactor/core/vars.dart';
+
+import '../../../../core/app_color.dart';
+import '../../../../core/theme_text.dart';
+import '../../../home/domain/entities/test_model.dart';
+import '../../domain/entities/tests_types_model.dart';
+
+class CardOfDetailsOfAssignment extends StatelessWidget {
+  final TestModel data;
+  final TestsTypesModel dataOfTypesOfTest;
+  const CardOfDetailsOfAssignment(
+      {Key? key, required this.data, required this.dataOfTypesOfTest})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border(
+          left: BorderSide(width: 6, color: data.status == TestTypes.dueSoon
+              ? Color(0xFFCCCCCC)
+              : data.status == TestTypes.finished
+              ? AppColor.resetText
+              : data.status == TestTypes.overdue
+              ? Colors.black
+              : data.status == TestTypes.dueSoon &&
+              int.tryParse(data.formattedDueDate ?? '') !=
+                  null &&
+              int.parse(data.formattedDueDate ?? '') < 7
+              ? Colors.red
+              : Color(0xFFCCCCCC)),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Color(0x14000000),
+            blurRadius: 8,
+            offset: Offset(0, 1),
+            spreadRadius: 0,
+          )
+        ],
+      ),
+      margin: EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.all(10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width - 70,
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      flex: 8,
+                      child: Text(
+                        data.testName ?? '',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge
+                            ?.copyWith(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w700,
+                                height: 0,
+                                letterSpacing: 0.44,
+                                overflow: TextOverflow.ellipsis),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        width: 50,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25),
+                            color: AppColor()
+                                .hexToColor(dataOfTypesOfTest.bgColor ?? '')),
+                        alignment: Alignment.center,
+                        // padding: EdgeInsets.symmetric(horizontal: 12 ,vertical: 4),
+                        child: Text(
+                          dataOfTypesOfTest.name ?? '',
+                          style: TextStyle(
+                              color: AppColor().hexToColor(
+                                  dataOfTypesOfTest.textColor ?? ''),
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: AppTheme.getFontFamily4()),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: SizedBox(),
+                    )
+                  ],
+                ),
+              ),
+              Text(
+                'Lesson ${data.lessonNum}',
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineMedium
+                    ?.copyWith(fontSize: 14, fontWeight: FontWeight.w400),
+              ),
+              3.ph,
+              Container(
+                height: 50,
+                width: MediaQuery.of(context).size.width - 70,
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: (data.teacherName != null)
+                            ? Row(
+                                children: [
+                                  Text(
+                                    "By ",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium
+                                        ?.copyWith(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400,
+                                          // height: 0,
+                                          // letterSpacing: 0.44,
+                                        ),
+                                  ),
+                                  Text(
+                                    data.teacherName ?? '',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall
+                                        ?.copyWith(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.black54
+                                            // height: 0,
+                                            // letterSpacing: 0.44,
+                                            ),
+                                  ),
+                                ],
+                              )
+                            : const SizedBox()),
+                    Expanded(
+                        child: Text(
+                      "${ data.status},${data.daysLeft ?? ''}",
+                          textAlign: TextAlign.center,
+                    ))
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}

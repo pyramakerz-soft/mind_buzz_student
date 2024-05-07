@@ -36,6 +36,11 @@ import '../../features/settings/data/datasources/data_source_remotely_of_setting
 import '../../features/settings/data/repositories/settings_repository_impl.dart';
 import '../../features/settings/domain/repositories/repositories_setting.dart';
 import '../../features/settings/presentation/bloc/settings_bloc.dart';
+import '../../features/student_assignment/data/datasources/data_source_remotely_of_home.dart';
+import '../../features/student_assignment/data/repositories/parent_assignment_repository_impl.dart';
+import '../../features/student_assignment/domain/repositories/repository_student_assignment.dart';
+import '../../features/student_assignment/domain/usecases/program_use_cases.dart';
+import '../../features/student_assignment/presentation/manager/bloc/get_assignment_bloc.dart';
 import '../../features/unit/data/data_sources/data_source_remotely_of_unit.dart';
 import '../../features/unit/data/repositories/unit_repository_impl.dart';
 import '../../features/unit/domain/repositories/repositories_unit.dart';

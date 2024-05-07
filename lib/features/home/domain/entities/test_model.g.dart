@@ -15,12 +15,13 @@ TestModel _$TestModelFromJson(Map<String, dynamic> json) => TestModel(
       mistakeCount: (json['mistake_count'] as num?)?.toInt(),
       programId: (json['program_id'] as num?)?.toInt(),
       status: json['status'],
+      lessonNum: json['lessonNum'],
       testName: json['test_name'] as String?,
       daysLeft: json['days_left'] as String?,
       formattedDueDate: json['formatted_due_date'] as String?,
       teacherName: json['teacher_name'] as String?,
       testId: (json['test_id'] as num?)?.toInt(),
-      type: json['type'] as String?,
+      type: json['type'] ,
     );
 
 Map<String, dynamic> _$TestModelToJson(TestModel instance) => <String, dynamic>{
