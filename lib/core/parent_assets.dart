@@ -1,22 +1,23 @@
 abstract class ParentImages {
 
-  static const String mainPathOfImages = 'assets/svg/parent_account/';
-  static const String homeIcon = "${mainPathOfImages}home_icon.svg";
-  static const String calender = "${mainPathOfImages}calender.svg";
-  static const String calenderOutline = "${mainPathOfImages}calender_outline.svg";
-  static const String homeOutline = "${mainPathOfImages}home_outline.svg";
-  static const String notification = "${mainPathOfImages}notification.svg";
-  static const String notificationOutline = "${mainPathOfImages}notification_outline.svg";
-  static const String settings = "${mainPathOfImages}settings.svg";
-  static const String settingsOutline = "${mainPathOfImages}settings_outline.svg";
-  static const String defaultUserImage = "${mainPathOfImages}default_user_image.png";
-  static const String logout= "${mainPathOfImages}logout.svg";
-  static const String personalInfo= "${mainPathOfImages}personal_info.svg";
-  static const String aboutUS= "${mainPathOfImages}about_us.svg";
-  static const String editProfile= "${mainPathOfImages}edit_profile.svg";
-  static const String email = "${mainPathOfImages}email_icon.svg";
-  static const String phone = "${mainPathOfImages}phone.svg";
-  static const String lock = "${mainPathOfImages}lock.svg";
+  static const String mainPathOfSvg = 'assets/svg/parent_account/';
+  static const String mainPathOfImages = 'assets/images/';
+  static const String homeIcon = "${mainPathOfSvg}home_icon.svg";
+  static const String calender = "${mainPathOfSvg}calender.svg";
+  static const String calenderOutline = "${mainPathOfSvg}calender_outline.svg";
+  static const String homeOutline = "${mainPathOfSvg}home_outline.svg";
+  static const String notification = "${mainPathOfSvg}notification.svg";
+  static const String notificationOutline = "${mainPathOfSvg}notification_outline.svg";
+  static const String settings = "${mainPathOfSvg}settings.svg";
+  static const String settingsOutline = "${mainPathOfSvg}settings_outline.svg";
+  static const String defaultUserImage = "${mainPathOfSvg}default_user_image.png";
+  static const String logout= "${mainPathOfSvg}logout.svg";
+  static const String personalInfo= "${mainPathOfSvg}personal_info.svg";
+  static const String aboutUS= "${mainPathOfSvg}about_us.svg";
+  static const String editProfile= "${mainPathOfSvg}edit_profile.svg";
+  static const String email = "${mainPathOfSvg}email_icon.svg";
+  static const String phone = "${mainPathOfSvg}phone.svg";
+  static const String lock = "${mainPathOfSvg}lock.svg";
   static const String dueIcon = "${mainPathOfImages}due_icon.svg";
 
   static String notificationOutlineIcon(int count) => """
@@ -27,5 +28,7 @@ abstract class ParentImages {
     <text x="13" y="15" fill="#D14663" font-size="15">count</text>
 </svg>
 """;
-  static const String timers = "${mainPathOfImages}timers.svg";
+  static const String timers = "${mainPathOfSvg}timers.svg";
+  static const String imageAssignment = "${mainPathOfImages}assignment.png";
+  static const String imageReports = "${mainPathOfImages}reports.png";
 }

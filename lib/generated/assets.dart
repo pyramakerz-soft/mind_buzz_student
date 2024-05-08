@@ -32,6 +32,7 @@ class Assets {
   static const String fontsRobotoMedium = 'assets/fonts/Roboto-Medium.ttf';
   static const String imagesAppBarOfUnits = 'assets/images/app_bar_of_units.png';
   static const String imagesAssessmentPart = 'assets/images/assessment_part.png';
+  static const String imagesAssignment = 'assets/images/assignment.png';
   static const String imagesBeeLogin = 'assets/images/bee_login.png';
   static const String imagesBgChapters = 'assets/images/bg_chapters.png';
   static const String imagesBgOfMath = 'assets/images/bg_of_math.png';
@@ -55,6 +56,7 @@ class Assets {
   static const String imagesParent = 'assets/images/parent.png';
   static const String imagesPersonAvatar = 'assets/images/person_avatar.png';
   static const String imagesRedPen = 'assets/images/red_pen.png';
+  static const String imagesReports = 'assets/images/reports.png';
   static const String imagesRocket = 'assets/images/rocket.png';
   static const String imagesScreen1 = 'assets/images/screen1.png';
   static const String imagesStar = 'assets/images/star.png';
@@ -102,6 +104,7 @@ class Assets {
   static const String parentAccountPhone = 'assets/svg/parent_account/phone.svg';
   static const String parentAccountSettings = 'assets/svg/parent_account/settings.svg';
   static const String parentAccountSettingsOutline = 'assets/svg/parent_account/settings_outline.svg';
+  static const String parentAccountTimers = 'assets/svg/parent_account/timers.svg';
   static const String soundA = 'assets/sound/a.mp3';
   static const String soundM = 'assets/sound/m.mp3';
   static const String soundS = 'assets/sound/s.mp3';

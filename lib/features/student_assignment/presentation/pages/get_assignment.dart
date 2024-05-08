@@ -15,7 +15,10 @@ import '../../../home/domain/entities/test_model.dart';
 import '../../../login/presentation/page/login_screen.dart';
 import '../../domain/entities/tests_types_model.dart';
 import '../manager/bloc/get_assignment_bloc.dart';
+import '../manager/bottom_cubit/bottom_cubit.dart';
 import '../widgets/card_of_details_assignment.dart';
+import '../widgets/filter_bottom_sheet_get_assignment.dart';
+import '../widgets/switch_button.dart';
 
 class GetAssignmentScreen extends StatelessWidget {
   final String programName;
@@ -73,7 +76,17 @@ class GetAssignmentScreen extends StatelessWidget {
                           EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                       child: GestureDetector(
                         onTap: () {
-                          // Navigator.of(context).pop();
+                          showModalBottomSheet(
+                              backgroundColor: Colors.white,
+                              context: context,
+                              isScrollControlled:true,
+                              builder: (BuildContext context0) {
+                                return  Container(
+                                  // height: MediaQuery.of(context).size.height/2+70,
+                                  child: FilterBottomSheetGetAssignment(
+                                          ),
+                                );
+                              });
                         },
                         child: Container(
                           // width: 10,
@@ -81,7 +94,10 @@ class GetAssignmentScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8.42),
                               color: AppColor.whiteRed),
-                          child: Icon(Icons.filter_alt_outlined, color: Colors.black45.withOpacity(.2),),
+                          child: Icon(
+                            Icons.filter_alt_outlined,
+                            color: Colors.black45.withOpacity(.2),
+                          ),
                         ),
                       ),
                     ),
@@ -94,26 +110,11 @@ class GetAssignmentScreen extends StatelessWidget {
         ),
         body: Column(
           children: [
-            FlutterToggleTab
-              (
-              width: MediaQuery.of(context).size.width/5,
-              borderRadius: 50,
-
-            marginSelected:const EdgeInsets.all(5),
-              selectedTextStyle: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400),
-              unSelectedTextStyle: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400),
-              labels: const ['Assignment', 'Reports'],
-              icons:const [Icons.add, Icons.abc_outlined],
-              selectedIndex: 0,
-              selectedLabelIndex: (index) {
-              },
-            ),
+            15.ph,
+            Container(
+                height: 50,
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                child: const SwitchButton()),
             Expanded(
               child: BlocProvider<GetAssignmentBloc>(
                   create: (_) => di.sl<GetAssignmentBloc>()
@@ -131,26 +132,42 @@ class GetAssignmentScreen extends StatelessWidget {
                       }
                     } else if (state is LogOutLoadingState) {
                       Navigator.of(context).pop();
+                    }else if (state is GetProgramsCompleteInitial){
+                      context.read<BottomCubit>().submitListAssignmentTypes(newStatus: state.data.testTypes??[]);
+
                     }
-                  }, builder: (context, state) {
+                  },
+                      builder: (context, state) {
                     if (state is GetProgramsLoadingInitial) {
                       return const Center(child: CupertinoActivityIndicator());
                     } else if (state is GetProgramsCompleteInitial) {
                       return ListView(
                           children: List.generate(
-                              state.data.tests?.length??0,
+                              state.data.tests?.length ?? 0,
                               (index) => Column(
-                                children: [
-                                  10.ph,
-
-                                  CardOfDetailsOfAssignment(
-                                        data: state.data.tests?[index]??TestModel(),
-                                    dataOfTypesOfTest: (state.data.tests?[index].type==null)?TestsTypesModel():state.data.testTypes?.where((element) => element.id== (state.data.tests?[index].type??0)).first??TestsTypesModel(),
+                                    children: [
+                                      10.ph,
+                                      CardOfDetailsOfAssignment(
+                                        data: state.data.tests?[index] ??
+                                            TestModel(),
+                                        dataOfTypesOfTest: (state
+                                                    .data.tests?[index].type ==
+                                                null)
+                                            ? TestsTypesModel()
+                                            : state.data.testTypes
+                                                    ?.where((element) =>
+                                                        element.id ==
+                                                        (state
+                                                                .data
+                                                                .tests?[index]
+                                                                .type ??
+                                                            0))
+                                                    .first ??
+                                                TestsTypesModel(),
                                       ),
-                                  5.ph,
-
-                                ],
-                              )));
+                                      5.ph,
+                                    ],
+                                  )));
                     } else {
                       return const SizedBox();
                     }

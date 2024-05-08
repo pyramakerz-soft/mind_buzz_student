@@ -8,6 +8,7 @@ import 'package:mind_buzz_refactor/core/assets_svg_images.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 
 import '../../../../core/utils.dart';
+import '../../../student_assignment/presentation/manager/bottom_cubit/bottom_cubit.dart';
 import '../../../student_assignment/presentation/pages/get_assignment.dart';
 import '../../../unit/presentation/manager/bloc/get_unit_bloc.dart';
 import '../../../unit/presentation/manager/cubit/animation_unit_cubit.dart';
@@ -27,12 +28,10 @@ class CardOfProgramParent extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Utils.navigateTo(
-            BlocProvider(
-                create: (_) => AnimationUnitCubit(),
-                child: GetAssignmentScreen(
+            GetAssignmentScreen(
                   programName: dataOfProgram.program?.course?.name??'',
                   programId: int.parse("${dataOfProgram.program?.id??''}"),
-                )),
+                ),
             context);
       },
       child: Container(

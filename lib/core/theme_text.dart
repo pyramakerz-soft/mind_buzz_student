@@ -52,7 +52,7 @@ class AppTheme {
           ),
           displayLarge: TextStyle(
             color: AppColor.darkBlueColor,
-            fontFamily: getFontFamily(),
+            fontFamily: getFontFamily3(),
           ),
           labelLarge: TextStyle(
             color: AppColor.lightGreyColor3,
