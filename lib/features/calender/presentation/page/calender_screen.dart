@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/parent_assets.dart';
 
@@ -15,19 +16,18 @@ import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:mind_buzz_refactor/features/home/presentation/widgets/switch_bar.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../../../../core/theme_text.dart';
 import '../../../../core/utils.dart';
 import '../../../login/presentation/page/login_screen.dart';
 import '../../../student_assignment/presentation/widgets/card_of_assignment.dart';
 import '../bloc/calender_bloc.dart';
 import '../widgets/assignment_widget.dart';
 import '../widgets/calender_header.dart';
+import '../widgets/empty_ests_widget.dart';
 
-class CalenderScreen extends StatefulWidget {
-  @override
-  _CalenderScreenState createState() => _CalenderScreenState();
-}
+class CalenderScreen extends StatelessWidget {
+  const CalenderScreen({Key? key}) : super(key: key);
 
-class _CalenderScreenState extends State<CalenderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +50,12 @@ class _CalenderScreenState extends State<CalenderScreen> {
           CalenderBloc bloc = context.watch<CalenderBloc>();
           return Column(
             children: [
+              if (state is GetCalenderLoadingInitial)
+            SizedBox(
+                height: 0.8.sh,
+                width: 1.sw,
+                child: const Center(child:  CupertinoActivityIndicator())),
+
               if (state is GetCalenderCompleteInitial)
                 CalendarHeader(
                   focusedDay: state.currentDate,
@@ -140,8 +146,9 @@ class _CalenderScreenState extends State<CalenderScreen> {
                     },
                   ),
                 ),
-              const SizedBox(height: 8.0),
+              10.ph,
               if (state is GetCalenderCompleteInitial)
+                state.tests.isNotEmpty?
                 Expanded(
                   child: ListView.builder(
                     itemCount: state.tests.length,
@@ -151,7 +158,8 @@ class _CalenderScreenState extends State<CalenderScreen> {
                       );
                     },
                   ),
-                ),
+                ):
+                const EmptyTestsWidget(),
               SizedBox(height: 0.1.sh,)
             ],
           );

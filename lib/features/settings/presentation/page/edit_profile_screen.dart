@@ -3,17 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/parent_assets.dart';
-import 'package:mind_buzz_refactor/core/utils.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:mind_buzz_refactor/features/home/presentation/widgets/switch_bar.dart';
 import 'package:mind_buzz_refactor/features/login/domain/entities/user_data_model.dart';
 
 import '../widgets/personal_info_item.dart';
-import 'edit_profile_screen.dart';
 
-class ProfileDataScreen extends StatelessWidget {
+class EditProfileScreen extends StatelessWidget {
   final UserData userData;
-  const ProfileDataScreen({Key? key, required this.userData}) : super(key: key);
+  const EditProfileScreen({Key? key, required this.userData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +20,7 @@ class ProfileDataScreen extends StatelessWidget {
           context: context,
           title: 'Personal Info',
           action: GestureDetector(
-            onTap: () {
-              Utils.navigateTo(EditProfileScreen(userData: userData,), context);
-            },
+            onTap: () {},
             child: Container(
               padding: EdgeInsets.all(6.h),
               decoration: BoxDecoration(
@@ -42,12 +38,12 @@ class ProfileDataScreen extends StatelessWidget {
             20.ph,
             userData.parentImage != null
                 ? CircleAvatar(
-                    radius: 40.r,
-                    backgroundImage: NetworkImage(userData.parentImage!),
-                  )
+              radius: 40.r,
+              backgroundImage: NetworkImage(userData.parentImage!),
+            )
                 : CircleAvatar(
-                    radius: 40.r,
-                    backgroundImage: AssetImage(ParentImages.defaultUserImage)),
+                radius: 40.r,
+                backgroundImage: AssetImage(ParentImages.defaultUserImage)),
             20.ph,
 
             PersonalInfoItem(
