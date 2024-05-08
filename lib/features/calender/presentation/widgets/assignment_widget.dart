@@ -65,7 +65,7 @@ class AssignmentWidget extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      singleTest.programName ?? '',
+                      singleTest.chapterName ?? '',
                       style: Theme.of(context)
                           .textTheme
                           .displayLarge
