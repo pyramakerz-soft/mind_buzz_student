@@ -4,7 +4,7 @@ import '../../domain/entities/main_data_test.dart';
 
 abstract class DataSourceRemotelyOfParentAssignment {
   Future<MainDataTestsModel> getParentAssignmentDataAssignment(
-      {required int programId});
+      { int? programId});
 }
 
 class DataSourceRemotelyOfParentAssignmentImpl implements DataSourceRemotelyOfParentAssignment {
@@ -14,7 +14,7 @@ class DataSourceRemotelyOfParentAssignmentImpl implements DataSourceRemotelyOfPa
 
   @override
   Future<MainDataTestsModel> getParentAssignmentDataAssignment(
-      {required int programId}) async {
+      { int? programId}) async {
     final response = await dio.post(
       url:
           '${Connection.baseURL}${dio.getStudentProgramsTestEndPoint}',

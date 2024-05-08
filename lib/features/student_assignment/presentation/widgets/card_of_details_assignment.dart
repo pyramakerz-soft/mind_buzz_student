@@ -69,15 +69,16 @@ class CardOfDetailsOfAssignment extends StatelessWidget {
                         height: 30,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(25),
-                            color: AppColor()
-                                .hexToColor(dataOfTypesOfTest.bgColor ?? '')),
+                            // color: AppColor()
+                            //     .hexToColor(data.bgColor ?? '')
+                        ),
                         alignment: Alignment.center,
                         // padding: EdgeInsets.symmetric(horizontal: 12 ,vertical: 4),
                         child: Text(
                           dataOfTypesOfTest.name ?? '',
                           style: TextStyle(
-                              color: AppColor().hexToColor(
-                                  dataOfTypesOfTest.textColor ?? ''),
+                              // color: AppColor().hexToColor(
+                              //     dataOfTypesOfTest.textColor ?? ''),
                               fontSize: 13,
                               fontWeight: FontWeight.w500,
                               fontFamily: AppTheme.getFontFamily4()),

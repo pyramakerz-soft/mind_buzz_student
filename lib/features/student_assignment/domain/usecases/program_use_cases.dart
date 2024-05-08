@@ -9,7 +9,7 @@ class ParentAssignmentUseCases {
 
   ParentAssignmentUseCases(this.repository);
 
-  Future<Either<Failure, MainDataTestsModel>> call({required int idProgram}) async {
+  Future<Either<Failure, MainDataTestsModel>> call({ int? idProgram}) async {
     return await repository.assignmentDataRepository(idProgram: idProgram);
   }
 }

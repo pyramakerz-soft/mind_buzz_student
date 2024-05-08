@@ -17,6 +17,7 @@ abstract class ParentImages {
   static const String email = "${mainPathOfImages}email_icon.svg";
   static const String phone = "${mainPathOfImages}phone.svg";
   static const String lock = "${mainPathOfImages}lock.svg";
+  static const String dueIcon = "${mainPathOfImages}due_icon.svg";
 
   static String notificationOutlineIcon(int count) => """
   <svg width="27" height="24" viewBox="0 0 27 24" fill="none" xmlns="http://www.w3.org/2000/svg">

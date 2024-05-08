@@ -15,7 +15,7 @@ class ParentAssignmentRepositoryImpl implements ParentAssignmentRepository {
       {required this.remoteDataSource, required this.networkInfo});
 
   @override
-  Future<Either<Failure, MainDataTestsModel>> assignmentDataRepository({required int idProgram}) async {
+  Future<Either<Failure, MainDataTestsModel>> assignmentDataRepository({ int? idProgram}) async {
     if (await networkInfo.isConnected) {
       try {
         final res = await remoteDataSource.getParentAssignmentDataAssignment(programId:idProgram);

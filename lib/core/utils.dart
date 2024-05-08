@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Utils {
   static void navigateTo(Widget screen, BuildContext context) {
@@ -39,4 +40,6 @@ class Utils {
         ),
       );
 
+  static String formatDate(DateTime time)=>  DateFormat('yyyy-MM-dd').format(time);
+  static String parseStringToDate(String time)=>  formatDate(DateFormat("yyyy-MM-dd").parse(time));
 }

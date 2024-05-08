@@ -395,6 +395,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_toggle_tab:
+    dependency: "direct main"
+    description:
+      name: flutter_toggle_tab
+      sha256: "90ad0d050f656df677998825f985637d010117a1793828cd7e6dadada4ecd2c5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.4.1"
   flutter_tts:
     dependency: "direct main"
     description:
@@ -885,6 +893,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  sliding_switch:
+    dependency: "direct main"
+    description:
+      name: sliding_switch
+      sha256: "049a9582c9bc30913ce4e34eb26063b468acf5fe47a053636bbf950e5b180dc0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   source_gen:
     dependency: transitive
     description:

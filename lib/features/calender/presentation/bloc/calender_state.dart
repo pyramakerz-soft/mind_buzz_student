@@ -11,11 +11,13 @@ abstract class CalenderState extends Equatable {
 class GetCalenderInitial extends CalenderState {}
 class GetCalenderCompleteInitial extends CalenderState {
  final MainDataTestsModel testsData;
- GetCalenderCompleteInitial({required this.testsData});
+ final DateTime currentDate;
+ GetCalenderCompleteInitial({required this.testsData, required this.currentDate});
  @override
  List<Object> get props => [testsData];
 }
 class GetCalenderLoadingInitial extends CalenderState {}
+
 class GetCalenderErrorInitial extends CalenderState {
   final String message;
 
@@ -23,4 +25,11 @@ class GetCalenderErrorInitial extends CalenderState {
 
   @override
   List<Object> get props => [message];
+}
+class CalenderSwapped extends CalenderState {
+  final DateTime currentDate;
+  CalenderSwapped({required this.currentDate});
+  @override
+  List<Object> get props => [currentDate];
+
 }
