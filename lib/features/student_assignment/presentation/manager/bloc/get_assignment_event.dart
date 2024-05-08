@@ -8,7 +8,11 @@ abstract class GetAssignmentEvent extends Equatable {
 
 class GetAssignmentRequest extends GetAssignmentEvent {
   final int programId;
-  GetAssignmentRequest({required this.programId});
+  final String? fromDate;
+  final String? toDate;
+  final String? status;
+  final List<String>? listOfTypes;
+  GetAssignmentRequest({this.fromDate, this.toDate, this.status, this.listOfTypes, required this.programId});
 
   @override
   List<Object> get props => [programId];

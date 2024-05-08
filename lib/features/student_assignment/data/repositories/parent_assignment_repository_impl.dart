@@ -15,10 +15,10 @@ class ParentAssignmentRepositoryImpl implements ParentAssignmentRepository {
       {required this.remoteDataSource, required this.networkInfo});
 
   @override
-  Future<Either<Failure, MainDataTestsModel>> assignmentDataRepository({ int? idProgram}) async {
+  Future<Either<Failure, MainDataTestsModel>> assignmentDataRepository({ int? idProgram, String? fromDate, String? toDate, String? status, List<String>? listOfTypes}) async {
     if (await networkInfo.isConnected) {
       try {
-        final res = await remoteDataSource.getParentAssignmentDataAssignment(programId:idProgram);
+        final res = await remoteDataSource.getParentAssignmentDataAssignment(programId:idProgram, fromDate:fromDate, toDate:toDate, status:status, listOfTypes:listOfTypes);
         return Right(res);
       } on DioException catch (e, s) {
         log('e.response:${e.response?.statusMessage}');

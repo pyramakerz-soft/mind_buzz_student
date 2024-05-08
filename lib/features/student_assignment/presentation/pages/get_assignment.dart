@@ -10,6 +10,7 @@ import '../../../../core/injection/injection_container.dart' as di;
 
 import '../../../../core/app_color.dart';
 import '../../../../core/error/failures_messages.dart';
+import '../../../../core/parent_assets.dart';
 import '../../../../core/utils.dart';
 import '../../../home/domain/entities/test_model.dart';
 import '../../../login/presentation/page/login_screen.dart';
@@ -46,7 +47,7 @@ class GetAssignmentScreen extends StatelessWidget {
                   leadingWidth: 52,
                   backgroundColor: Colors.white,
                   leading: Container(
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     child: GestureDetector(
                       onTap: () {
                         Navigator.of(context).pop();
@@ -73,7 +74,7 @@ class GetAssignmentScreen extends StatelessWidget {
                   actions: [
                     Container(
                       margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                          const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                       child: GestureDetector(
                         onTap: () {
                           showModalBottomSheet(
@@ -81,22 +82,18 @@ class GetAssignmentScreen extends StatelessWidget {
                               context: context,
                               isScrollControlled:true,
                               builder: (BuildContext context0) {
-                                return  Container(
-                                  // height: MediaQuery.of(context).size.height/2+70,
-                                  child: FilterBottomSheetGetAssignment(
-                                          ),
-                                );
+                                return  const FilterBottomSheetGetAssignment(
+                                        );
                               });
                         },
                         child: Container(
                           // width: 10,
-                          padding: EdgeInsets.all(5),
+                          padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8.42),
                               color: AppColor.whiteRed),
-                          child: Icon(
-                            Icons.filter_alt_outlined,
-                            color: Colors.black45.withOpacity(.2),
+                          child: Image.asset(ParentImages.imageFilter,height: 16,
+                            width: 16,
                           ),
                         ),
                       ),
@@ -133,7 +130,7 @@ class GetAssignmentScreen extends StatelessWidget {
                     } else if (state is LogOutLoadingState) {
                       Navigator.of(context).pop();
                     }else if (state is GetProgramsCompleteInitial){
-                      context.read<BottomCubit>().submitListAssignmentTypes(newStatus: state.data.testTypes??[]);
+                      context.read<BottomCubit>().submitListAssignmentTypes(newStatus: state.data.testTypes??[],programId:programId.toString());
 
                     }
                   },

@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 
+import '../../../../core/parent_assets.dart';
 import '../../../../core/vars.dart';
 import '../../../login/presentation/widgets/text_field_widget.dart';
+import '../manager/bloc/get_assignment_bloc.dart';
 import '../manager/bottom_cubit/bottom_cubit.dart';
 import 'bottom_sheet_select_day.dart';
 import 'item_selected.dart';
+import '../../../../core/injection/injection_container.dart' as di;
 
 class FilterBottomSheetGetAssignment extends StatelessWidget {
   const FilterBottomSheetGetAssignment({Key? key}) : super(key: key);
@@ -15,7 +18,10 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
   Widget build(BuildContext context) {
     final selectedType = context.watch<BottomCubit>().state.selectedType;
     final selectedState = context.watch<BottomCubit>().state.selectedState;
+    final selectedFromDate = context.watch<BottomCubit>().state.selectedFromDate;
+    final selectedToDate = context.watch<BottomCubit>().state.selectedToDate;
     final testTypes = context.watch<BottomCubit>().state.testTypes;
+    final programId = context.watch<BottomCubit>().state.programId;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -102,52 +108,59 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      height: 60,
+                      height: 50,
                       width: MediaQuery.of(context).size.width / 2 - 20,
                       child: TextFieldWidget(
-                          controler: TextEditingController(),
+                          controler: TextEditingController(text: selectedFromDate),
                           readOnly: true,
                           onTap: (){
                             showModalBottomSheet(
                                 backgroundColor: Colors.white,
                                 context: context,
-                                isScrollControlled:true,
                                 builder: (BuildContext context0) {
-                                  return  BottomSheetSelectDay();
+                                  return  BottomSheetSelectDay(isFrom: true,);
                                 });
                           },
                           hintText: 'From DD/MM/YY',
                           fontSize: 12,
                           borderRadius: 18,
+                          fillColor:AppColor.whiteBlue2,
                           borderSideColor: Colors.transparent,
-                          rightWidget: const Icon(
-                            Icons.calendar_month,
-                            color: AppColor.lightGreyColor3,
+                          rightWidget: Container(
+                            padding: const EdgeInsets.all(15),
+                            child: Image.asset(ParentImages.imageDate,
+                              height: 10,
+                              width: 10,
+                            ),
                           )),
                     ),
                     SizedBox(
-                      height: 60,
+                      height: 50,
                       width: MediaQuery.of(context).size.width / 2 - 20,
                       child: TextFieldWidget(
-                          controler: TextEditingController(),
+                          controler: TextEditingController(text: selectedToDate),
                           readOnly: true,
                           onTap: (){
                             showModalBottomSheet(
                                 backgroundColor: Colors.white,
                                 context: context,
-                                isScrollControlled:true,
                                 builder: (BuildContext context0) {
-                                  return  BottomSheetSelectDay();
+                                  return  BottomSheetSelectDay(isFrom: false,);
                                 });
                           },
-                          hintText: 'From DD/MM/YY',
+                          hintText: 'To DD/MM/YY',
                           fontSize: 12,
                           borderRadius: 18,
+                          fillColor:AppColor.whiteBlue2,
                           borderSideColor: Colors.transparent,
-                          rightWidget: const Icon(
-                            Icons.calendar_month,
-                            color: AppColor.lightGreyColor3,
-                          )),
+                          rightWidget: Container(
+                            padding: const EdgeInsets.all(15),
+                            child: Image.asset(ParentImages.imageDate,
+                              height: 10,
+                              width: 10,
+                            ),
+                          )
+                      ),
                     ),
                   ],
                 ),
@@ -201,8 +214,8 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                 children: List.generate(
                     testTypes?.length ?? 0,
                     (index) => ItemSelected(
-                        onTap: () {
-                          context.read<BottomCubit>().submitAssignmentType(
+                        onTap: () async {
+                          await context.read<BottomCubit>().submitAssignmentType(
                               newStatus: "${testTypes?[index].id ?? 0}");
                           print("##:${context.read<BottomCubit>().state}");
                         },
@@ -214,6 +227,11 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
               ),
               20.ph,
               GestureDetector(
+                onTap: (){
+                  di.sl<GetAssignmentBloc>()
+                    .add(GetAssignmentRequest(programId: int.parse(programId??'0'), status: selectedState, fromDate: selectedFromDate,toDate: selectedToDate, listOfTypes: selectedType??[] ));
+                Navigator.of(context).pop();
+                  },
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   alignment: Alignment.center,

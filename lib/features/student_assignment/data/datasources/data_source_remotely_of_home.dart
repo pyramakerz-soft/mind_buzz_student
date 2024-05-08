@@ -4,7 +4,7 @@ import '../../domain/entities/main_data_test.dart';
 
 abstract class DataSourceRemotelyOfParentAssignment {
   Future<MainDataTestsModel> getParentAssignmentDataAssignment(
-      { int? programId});
+      { int? programId, String? fromDate, String? toDate, String? status, List<String>? listOfTypes});
 }
 
 class DataSourceRemotelyOfParentAssignmentImpl implements DataSourceRemotelyOfParentAssignment {
@@ -14,12 +14,15 @@ class DataSourceRemotelyOfParentAssignmentImpl implements DataSourceRemotelyOfPa
 
   @override
   Future<MainDataTestsModel> getParentAssignmentDataAssignment(
-      { int? programId}) async {
+      { int? programId, String? fromDate, String? toDate, String? status, List<String>? listOfTypes}) async {
     final response = await dio.post(
       url:
           '${Connection.baseURL}${dio.getStudentProgramsTestEndPoint}',
       queryParameters: {
-        'program_id':programId
+        'program_id':programId,
+        if(fromDate!=null)'from_date':fromDate,
+        if(toDate!=null)'to_date':toDate,
+        if(status!=null)'status':status,
       }
     );
     if (dio.validResponse(response)) {

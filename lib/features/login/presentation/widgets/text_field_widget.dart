@@ -12,6 +12,7 @@ class TextFieldWidget extends StatelessWidget {
   final double? fontSize;
   final double? borderRadius;
   final Color? borderSideColor;
+  final Color? fillColor;
   final void Function()? onTap;
   final TextInputType? keyboardType;
   final FormFieldValidator? validatorTextField;
@@ -21,6 +22,7 @@ class TextFieldWidget extends StatelessWidget {
         this.obscureText,
         this.oldData,
         this.leftWidget,
+        this.fillColor,
         this.readOnly,
         this.onTap,
         this.keyboardType,
@@ -51,8 +53,7 @@ class TextFieldWidget extends StatelessWidget {
                 suffixIcon: rightWidget,
                 filled: true,
                 prefixIcon: leftWidget,
-                fillColor: Colors.white,
-
+                fillColor: fillColor??Colors.white,
                 hintText: hintText,
                 hintStyle: TextStyle(color: Colors.grey, fontSize:fontSize?? 15)),
             onTap: onTap,
