@@ -8,6 +8,8 @@ import 'package:meta/meta.dart';
 import '../../../../core/enums/direction.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/error/failures_messages.dart';
+import '../../../../core/utils.dart';
+import '../../../home/domain/entities/test_model.dart';
 import '../../../student_assignment/domain/entities/main_data_test.dart';
 import '../../../student_assignment/domain/usecases/program_use_cases.dart';
 
@@ -18,7 +20,7 @@ part 'calender_state.dart';
 
 class CalenderBloc extends Bloc<CalenderEvent, CalenderState> {
   final ParentAssignmentUseCases programUserUseCases;
-  MainDataTestsModel ?testsData;
+  List<TestModel> tests = [];
   late PageController pageController;
   DateTime focusedDay = DateTime.now();
 
@@ -39,6 +41,8 @@ class CalenderBloc extends Bloc<CalenderEvent, CalenderState> {
     });
   }
 
+  List<TestModel> get filteredList => tests.where((element) => Utils.parseStringToDate(element.createdAt!) ==
+      Utils.formatDate(focusedDay)).toList();
 
   getAssignments(emit) async {
     emit(GetCalenderLoadingInitial());
@@ -49,8 +53,8 @@ class CalenderBloc extends Bloc<CalenderEvent, CalenderState> {
         emit(GetCalenderErrorInitial(message: _mapFailureToMessage(l)));
       }, (data) {
         log('getUserDataSuccessfullyState ');
-        emit(GetCalenderCompleteInitial(testsData: data, currentDate: focusedDay));
-        testsData = data;
+        tests = data.tests??[];
+        emit(GetCalenderCompleteInitial(tests: filteredList, currentDate: focusedDay));
       });
     } catch (e) {
       log('getUserData $e ');
@@ -76,18 +80,18 @@ class CalenderBloc extends Bloc<CalenderEvent, CalenderState> {
         curve: Curves.easeOut,
       );
     }
-    emit(GetCalenderCompleteInitial(testsData: testsData!, currentDate: focusedDay));
+    emit(GetCalenderCompleteInitial(tests: filteredList, currentDate: focusedDay));
   }
 
   selectDay(emit , int day){
     emit(GetCalenderLoadingInitial());
     focusedDay = DateTime(focusedDay.year , focusedDay.month , day);
-    emit(GetCalenderCompleteInitial(testsData: testsData!, currentDate: focusedDay));
+    emit(GetCalenderCompleteInitial(tests: filteredList, currentDate: focusedDay));
   }
   selectMonth(emit , DateTime currentTime){
     emit(GetCalenderLoadingInitial());
     focusedDay = currentTime;
-    emit(GetCalenderCompleteInitial(testsData: testsData!, currentDate: focusedDay));
+    emit(GetCalenderCompleteInitial(tests: filteredList, currentDate: focusedDay));
   }
 }
 

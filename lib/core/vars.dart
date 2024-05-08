@@ -115,4 +115,5 @@ abstract class TestTypes{
   static String notStarted = 'Not Started';
   static String overdue = 'Overdue';
   static List listOfTestTypes = [finished, dueSoon, notStarted, overdue];
+  static List listOfTestColors = [AppColor.resetText, AppColor.redColor4, AppColor.lightGreyColor5, Colors.black];
 }

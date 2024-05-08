@@ -43,6 +43,7 @@ class AppColor {
   static const Color darkGreenColor2 = Color(0xFF3A9C74);
   // static const Color lightGreenColor = Color(0xFF88C979);
   static const Color redColor = Color(0xFFD1232A);
+  static const Color redColor4 = Color(0xFFE03138);
   // static const Color pinkColor = Color(0xFFEB1E83);
   static const Color orangeColor = Color(0xFFDB4E19);
   // static const Color bgMatheColor = Color(0xFFafe2fd);
@@ -51,6 +52,7 @@ class AppColor {
   static const Color lightGreyColor2 = Color(0xFFF7F7F7);
   static const Color lightGreyColor3 = Color(0xFF707070);
   static const Color lightGreyColor4 = Color(0xFFABABAB);
+  static const Color lightGreyColor5 = Color(0xFFCCCCCC);
   static const Color darkBlueColor10 = Color(0x19004279);
   static const Color dividerColor = Color(0xffE5E5E5);
   static const Color darkGreyText = Color(0xff33393E);

@@ -1,6 +1,7 @@
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/parent_assets.dart';
 
+import '../../../../core/enums/assignment_status.dart';
 import '../../../../core/enums/direction.dart';
 import '../../../../core/error/failures_messages.dart';
 import '../../../../core/injection/injection_container.dart' as di;
@@ -16,7 +17,9 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../core/utils.dart';
 import '../../../login/presentation/page/login_screen.dart';
+import '../../../student_assignment/presentation/widgets/card_of_assignment.dart';
 import '../bloc/calender_bloc.dart';
+import '../widgets/assignment_widget.dart';
 import '../widgets/calender_header.dart';
 
 class CalenderScreen extends StatefulWidget {
@@ -25,87 +28,6 @@ class CalenderScreen extends StatefulWidget {
 }
 
 class _CalenderScreenState extends State<CalenderScreen> {
-  // late final ValueNotifier<List<Event>> _selectedEvents;
-  DateTime _focusedDay = DateTime.now();
-  // final Set<DateTime> _selectedDays = LinkedHashSet<DateTime>(
-  //   equals: isSameDay,
-  //
-  // );
-
-  late PageController _pageController;
-  CalendarFormat _calendarFormat = CalendarFormat.month;
-  RangeSelectionMode _rangeSelectionMode = RangeSelectionMode.toggledOff;
-  DateTime? _rangeStart;
-  DateTime? _rangeEnd;
-
-  @override
-  void initState() {
-    super.initState();
-
-    // _selectedDays.add(_focusedDay.value);
-    // _selectedEvents = ValueNotifier(_getEventsForDay(_focusedDay.value));
-  }
-
-  @override
-  void dispose() {
-    // _focusedDay.dispose();
-    // _selectedEvents.dispose();
-    super.dispose();
-  }
-
-  // bool get canClearSelection =>
-  //     _selectedDays.isNotEmpty || _rangeStart != null || _rangeEnd != null;
-
-  // List<Event> _getEventsForDay(DateTime day) {
-  //   return kEvents[day] ?? [];
-  // }
-  //
-  // List<Event> _getEventsForDays(Iterable<DateTime> days) {
-  //   return [
-  //     for (final d in days) ..._getEventsForDay(d),
-  //   ];
-  // }
-
-  // List<Event> _getEventsForRange(DateTime start, DateTime end) {
-  //   final days = daysInRange(start, end);
-  //   return _getEventsForDays(days);
-  // }
-
-  void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
-    setState(() {
-      // if (_selectedDays.contains(selectedDay)) {
-      //   _selectedDays.remove(selectedDay);
-      // } else {
-      //   _selectedDays.add(selectedDay);
-      // }
-
-      // _focusedDay.value = focusedDay;
-      _rangeStart = null;
-      _rangeEnd = null;
-      _rangeSelectionMode = RangeSelectionMode.toggledOff;
-    });
-    //
-    // _selectedEvents.value = _getEventsForDays(_selectedDays);
-  }
-
-  void _onRangeSelected(DateTime? start, DateTime? end, DateTime focusedDay) {
-    setState(() {
-      // _focusedDay.value = focusedDay;
-      _rangeStart = start;
-      _rangeEnd = end;
-      // _selectedDays.clear();
-      _rangeSelectionMode = RangeSelectionMode.toggledOn;
-    });
-
-    // if (start != null && end != null) {
-    //   _selectedEvents.value = _getEventsForRange(start, end);
-    // } else if (start != null) {
-    //   _selectedEvents.value = _getEventsForDay(start);
-    // } else if (end != null) {
-    //   _selectedEvents.value = _getEventsForDay(end);
-    // }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -162,11 +84,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                   rowHeight: 40.h,
                   calendarBuilders: CalendarBuilders(
                     markerBuilder: (context, day, events) {
-                      if (state.testsData.tests
-                              ?.map((e) => Utils.parseStringToDate(e.createdAt!))
-                              .toList()
-                              .contains(Utils.formatDate(day)) ??
-                          false) {
+                      if (bloc.tests.map((e) => Utils.parseStringToDate(e.createdAt!)).toList().contains(Utils.formatDate(day))) {
                         return Align(
                           alignment: Alignment.topRight,
                           child: Container(
@@ -183,8 +101,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                             ]
                             ),
                             child: Text(
-                              state.testsData.tests!
-                                  .where((element) =>
+                              bloc.tests.where((element) =>
                               Utils.parseStringToDate(element.createdAt!) ==
                                   Utils.formatDate(day)    )
                                   .toList()
@@ -227,50 +144,15 @@ class _CalenderScreenState extends State<CalenderScreen> {
               if (state is GetCalenderCompleteInitial)
                 Expanded(
                   child: ListView.builder(
-                    itemCount: 5,
+                    itemCount: state.tests.length,
                     itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.all(10.h),
-                        padding: EdgeInsets.all(10.h),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border(
-                            left: BorderSide(color: Colors.black, width: 5),
-                          ),
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Math'),
-                            Row(
-                              children: [
-                                Text('Name of chapter'),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 5),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12.r),
-                                    color: Colors.red.withOpacity(0.2),
-                                  ),
-                                  child: Text('Finished'),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text('Lesson 1,2,3'),
-                                SvgPicture.asset(ParentImages.dueIcon),
-                                Text('Deadline'),
-                                Text('13/5'),
-                              ],
-                            ),
-                          ],
-                        ),
+                      return AssignmentWidget(
+                        singleTest: state.tests[index],
                       );
                     },
                   ),
                 ),
+              SizedBox(height: 0.1.sh,)
             ],
           );
         }),

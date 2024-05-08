@@ -10,11 +10,11 @@ abstract class CalenderState extends Equatable {
 
 class GetCalenderInitial extends CalenderState {}
 class GetCalenderCompleteInitial extends CalenderState {
- final MainDataTestsModel testsData;
+ final List<TestModel> tests;
  final DateTime currentDate;
- GetCalenderCompleteInitial({required this.testsData, required this.currentDate});
+ GetCalenderCompleteInitial({required this.tests, required this.currentDate});
  @override
- List<Object> get props => [testsData];
+ List<Object> get props => [tests];
 }
 class GetCalenderLoadingInitial extends CalenderState {}
 
