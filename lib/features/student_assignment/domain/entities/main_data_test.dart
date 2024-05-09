@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../home/domain/entities/test_model.dart';
@@ -12,7 +13,8 @@ class MainDataTestsModel extends Equatable {
   List<TestModel>? progress;
   List<TestsTypesModel>? testTypes;
   List<MonthModel>? tprogress;
-  MainDataTestsModel({this.testTypes, this.tests, this.progress, this.tprogress});
+  MainDataTestsModel(
+      {this.testTypes, this.tests, this.progress, this.tprogress});
 
   factory MainDataTestsModel.fromJson(Map<String, dynamic> json) {
     return _$MainDataTestsModelFromJson(json);
@@ -22,4 +24,25 @@ class MainDataTestsModel extends Equatable {
 
   @override
   List<Object?> get props => [tests, testTypes, progress, tprogress];
+
+  Map<List<String>, List<FlSpot>> getDataOfFlSpot() {
+    if (tprogress != null && (tprogress?.isNotEmpty ?? false)) {
+      List<FlSpot> subList = [];
+      List<String> subListTitle = [];
+
+      tprogress?.forEach((element) {
+        subList.add(FlSpot(
+            double.parse("${(tprogress?.indexOf(element) ?? 0) + 1}"),
+            double.parse("${element.totalScore}")));
+      });
+      tprogress?.forEach((element) {
+        subListTitle.add(element.month ?? '');
+      });
+      Map<List<String>, List<FlSpot>> finalData = {};
+      finalData[subListTitle] = subList;
+      return finalData;
+    } else {
+      return {};
+    }
+  }
 }

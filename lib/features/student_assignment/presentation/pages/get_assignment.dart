@@ -168,7 +168,7 @@ class GetAssignmentScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              body:  Column(children: [
+              body: ListView(children: [
                 15.ph,
                 Container(
                     height: 50,
@@ -178,18 +178,17 @@ class GetAssignmentScreen extends StatelessWidget {
                   if (state is GetProgramsLoadingInitial) ...{
                     const Center(child: CupertinoActivityIndicator())
                   } else if (state is GetProgramsCompleteInitial) ...{
-                    Expanded(
-                        child: ListView(
-                            children: List.generate(
-                                state.data.tests?.length ?? 0,
-                                (index) => Column(
-                                      children: [
-                                        10.ph,
-                                        CardOfDetailsOfAssignment(
-                                          data: state.data.tests?[index] ??
-                                              TestModel(),
-                                          dataOfTypesOfTest: (state.data
-                                                      .tests?[index].type ==
+                    Column(
+                        children: List.generate(
+                            state.data.tests?.length ?? 0,
+                            (index) => Column(
+                                  children: [
+                                    10.ph,
+                                    CardOfDetailsOfAssignment(
+                                      data: state.data.tests?[index] ??
+                                          TestModel(),
+                                      dataOfTypesOfTest:
+                                          (state.data.tests?[index].type ==
                                                   null)
                                               ? TestsTypesModel()
                                               : state.data.testTypes
@@ -202,10 +201,10 @@ class GetAssignmentScreen extends StatelessWidget {
                                                               0))
                                                       .first ??
                                                   TestsTypesModel(),
-                                        ),
-                                        5.ph,
-                                      ],
-                                    ))))
+                                    ),
+                                    5.ph,
+                                  ],
+                                )))
                   } else ...{
                     const SizedBox()
                   }

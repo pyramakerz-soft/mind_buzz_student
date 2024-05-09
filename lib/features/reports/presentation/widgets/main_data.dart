@@ -1,10 +1,14 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/app_color.dart';
+import '../../domain/entities/month_model.dart';
+import '../manager/bloc/reports_bloc.dart';
 import 'bottom_title_widgets.dart';
 
-LineChartData mainData(BuildContext context) {
+LineChartData mainData(
+    BuildContext context, Map<List<String>, List<FlSpot>> tprogress) {
   return LineChartData(
     gridData: const FlGridData(
       show: false,
@@ -23,7 +27,8 @@ LineChartData mainData(BuildContext context) {
           showTitles: true,
           reservedSize: 40,
           interval: 1,
-          getTitlesWidget:(size, meta)=> bottomTitleWidgets(size,meta , context),
+          getTitlesWidget: (size, meta) =>
+              bottomTitleWidgets(size, meta, context, tprogress.keys.first),
         ),
       ),
       leftTitles: const AxisTitles(
@@ -34,25 +39,15 @@ LineChartData mainData(BuildContext context) {
     ),
     borderData: FlBorderData(
       show: false,
-      border: Border.all(color:  Colors.transparent),
+      border: Border.all(color: Colors.transparent),
     ),
     minX: 0,
-    maxX: 12,
+    maxX: double.parse("${tprogress.keys.first.length}"),
     minY: 0,
-    maxY: 6,
+    maxY: 100,
     lineBarsData: [
       LineChartBarData(
-        spots:  [
-          FlSpot(0, 3),
-          FlSpot(2.6, 2),
-          FlSpot(4.9, 5),
-          FlSpot(6.8, 0),
-          FlSpot(8, 4),
-          FlSpot(9.5, 3),
-          FlSpot(11, 4),
-          FlSpot(13.6, 0),
-          FlSpot(16.2, 4),
-        ],
+        spots: tprogress.values.first,
         isCurved: true,
         gradient: const LinearGradient(
           colors: [AppColor.darkBlueColor, AppColor.darkBlueColor],
@@ -66,7 +61,6 @@ LineChartData mainData(BuildContext context) {
           show: true,
           gradient: const LinearGradient(
             begin: Alignment.topCenter,
-
             end: Alignment.bottomCenter,
             colors: [AppColor.darkBlueColor, Colors.white10],
           ),

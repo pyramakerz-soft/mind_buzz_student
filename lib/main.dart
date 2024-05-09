@@ -70,14 +70,12 @@ class _MyApp extends State<MyApp> {
               designSize: const Size(360, 690),
               minTextAdapt: true,
               splitScreenMode: true,
-              builder: (_ , child) {
-               return MaterialApp(
+              builder: (_, child) {
+                return MaterialApp(
                   title: 'Mind buzz2',
                   debugShowCheckedModeBanner: false,
                   theme: AppTheme().lightTheme,
-                  home: BlocProvider(
-                  create: (_) => IndexOfSwitchCubit(),
-                child:const GetAssignmentScreen(programName: 'dfg', programId: 4,)),
+                  home: const Screens1(),
                   // home: const HomeScreen(),
 
                   // home: ChaptersScreen(
