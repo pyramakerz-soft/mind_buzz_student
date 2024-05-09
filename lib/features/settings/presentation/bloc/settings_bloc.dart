@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 import 'package:mind_buzz_refactor/features/login/domain/entities/user_data_model.dart';
 
@@ -14,6 +15,9 @@ part 'settings_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final AutoUserUseCases autoUserUseCases;
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
 
 
   SettingsBloc({required this.autoUserUseCases}) : super(GetSettingsInitial()) {
@@ -31,6 +35,10 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       log('getUserData fold $l');
       emit(GetSettingsErrorInitial(message: _mapFailureToMessage(l)));
     }, (data) {
+
+      fullNameController.text = data.name ?? '';
+      emailController.text = data.parentEmail ?? '';
+      phoneController.text = data.parentPhone ?? '';
 
       log('getUserDataSuccessfullyState ');
       emit(GetUserDataSuccessfully(userData: data));

@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
@@ -7,82 +10,105 @@ import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:mind_buzz_refactor/features/home/presentation/widgets/switch_bar.dart';
 import 'package:mind_buzz_refactor/features/login/domain/entities/user_data_model.dart';
 
+import '../../../../core/error/failures_messages.dart';
+import '../../../../core/utils.dart';
+import '../../../../core/widgets/button_start_game.dart';
+import '../../../login/presentation/bloc/login_data_bloc.dart';
+import '../../../login/presentation/page/login_screen.dart';
+import '../bloc/settings_bloc.dart';
+import '../widgets/custom_text_field.dart';
 import '../widgets/personal_info_item.dart';
 
 class EditProfileScreen extends StatelessWidget {
   final UserData userData;
+
   const EditProfileScreen({Key? key, required this.userData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(
-          context: context,
-          title: 'Personal Info',
-          action: GestureDetector(
-            onTap: () {},
-            child: Container(
-              padding: EdgeInsets.all(6.h),
-              decoration: BoxDecoration(
-                  color: AppColor.whiteRed,
-                  borderRadius: BorderRadius.circular(5.r)),
-              child: SvgPicture.asset(ParentImages.editProfile),
-            ),
-          )),
-      body: Container(
-        width: 1.sw,
-        padding: EdgeInsets.all(10.h),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            20.ph,
-            userData.parentImage != null
-                ? CircleAvatar(
-              radius: 40.r,
-              backgroundImage: NetworkImage(userData.parentImage!),
-            )
-                : CircleAvatar(
-                radius: 40.r,
-                backgroundImage: AssetImage(ParentImages.defaultUserImage)),
-            20.ph,
+          context: context, title: 'Personal Info', backIcon: Icons.close),
+      body: BlocConsumer<LoginDataBloc, LoginDataState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            LoginDataBloc bloc = context.watch<LoginDataBloc>();
+            bloc.add(InitializeUpdateUserDataEvent());
+            if (state is LoadingLoginState) {
+              return const CupertinoActivityIndicator();
+            } else {
+              return Container(
+                width: 1.sw,
+                padding: EdgeInsets.all(10.h),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      20.ph,
+                      if(state is UpdatingDataInitial)
+                      GestureDetector(
+                        onTap: (){
+                          bloc.add(PickImageEvent());
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                             state.userImage!=null?
+                               CircleAvatar(
+                                 radius: 40.r,
+                                 backgroundImage: FileImage(state.userImage!),
+                               ) :
+                            userData.parentImage != null
+                                ? CircleAvatar(
+                                    radius: 40.r,
+                                    backgroundImage:
+                                        NetworkImage(userData.parentImage!),
+                                  )
+                                : CircleAvatar(
+                                    radius: 40.r,
+                                    backgroundImage:
+                                        AssetImage(ParentImages.defaultUserImage)),
+                            10.pw,
+                            SvgPicture.asset(ParentImages.editImageIcon),
+                            10.pw,
+                            Text('Add New Image',style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(color: Colors.black),)
+                          ],
+                        ),
+                      ),
+                      20.ph,
+                        CustomTextField(
+                          label: 'Full name',
+                          controller: bloc.fullNameController
+                        ),
+                      20.ph,
+                      CustomTextField(
+                        label: 'Email',
+                        email: true,
+                        controller: bloc.emailController,
+                      ),
+                      20.ph,
+                      CustomTextField(
+                        label: 'Phone Number',
+                        controller: bloc.phoneController,
+                      ),
+                      50.ph,
+                      ButtonLogin(
+                        width: 0.9.sw,
+                        title: 'Save Changes',
+                        dataFunction: (){
+                          bloc.add(UpdateUserDataEvent());
+                        },
+                      )
 
-            PersonalInfoItem(
-              title: 'Full name',
-              value: userData.name??'',
-              icon: ParentImages.personalInfo,
-            ),
-            PersonalInfoItem(
-              title: 'Email',
-              value: userData.email??'',
-              icon: ParentImages.email,
-            ),
-            PersonalInfoItem(
-              title: 'Phone Number',
-              value: userData.parentPhone??'',
-              icon: ParentImages.phone,
-            ),
-            Row(
-              children: [
-                PersonalInfoItem(
-                  title: 'Password',
-                  value: List.generate(userData.parentPassword?.split('').length??10, (index) => '*').toList().join(),
-                  icon: ParentImages.lock,
-                  isPassword: true,
+                    ],
+                  ),
                 ),
-                Spacer(),
-                Text('Reset',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleSmall
-                        ?.copyWith(color: AppColor.resetText)),
-              ],
-            ),
-
-
-
-          ],
-        ),
-      ),
+              );
+            }
+          }),
     );
   }
 }

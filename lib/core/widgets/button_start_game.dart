@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
-import '../../../../core/injection/injection_container.dart' as di;
-import '../cubit/login_cubit.dart';
+import '../injection/injection_container.dart' as di;
+import '../../features/login/presentation/cubit/login_cubit.dart';
 
 class ButtonLogin extends StatefulWidget {
   final void Function() dataFunction;

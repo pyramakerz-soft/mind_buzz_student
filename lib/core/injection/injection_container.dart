@@ -20,6 +20,7 @@ import '../../features/login/data/datasources/data_source_remotely_of_game.dart'
 import '../../features/login/data/repositories/login_repository_impl.dart';
 import '../../features/login/domain/repositories/repositories_user.dart';
 import '../../features/login/domain/usecases/auto_user_use_cases.dart';
+import '../../features/login/domain/usecases/update_user_data_use_case.dart';
 import '../../features/login/domain/usecases/user_use_cases.dart';
 import '../../features/login/presentation/bloc/login_data_bloc.dart';
 import '../../features/math_book1/data/data_sources/data_source_remotely_of_contact_lesson.dart';
