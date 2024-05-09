@@ -6,7 +6,8 @@ import '../../../../core/app_color.dart';
 import '../../../../core/theme_text.dart';
 
 class CardReport extends StatelessWidget{
-  const CardReport({Key? key}) : super(key: key);
+  final bool isPassed;
+  const CardReport({Key? key, required this.isPassed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class CardReport extends StatelessWidget{
         child: Row(
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
+            SizedBox(
               // height: 70,
               width: 80,
               child: CircularPercentIndicator(
@@ -33,8 +34,8 @@ class CardReport extends StatelessWidget{
                 animation: true,
                 circularStrokeCap: CircularStrokeCap.round,
                 percent: 0.5,
-                center: new Text("100%"),
-                progressColor: Colors.green,
+                center: const Text("100%"),
+                progressColor: isPassed==true?AppColor.resetText:AppColor.redColor,
               ),
             ),
             5.pw,
@@ -81,7 +82,7 @@ class CardReport extends StatelessWidget{
                             "${21} day Left",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: AppColor.redColor,
+                                color: isPassed==true?AppColor.resetText:AppColor.redColor,
                                 fontSize: 12, fontFamily: AppTheme.getFontFamily3(), fontWeight: FontWeight.w400
                             ),
                           ),

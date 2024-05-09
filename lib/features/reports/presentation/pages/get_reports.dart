@@ -22,7 +22,7 @@ class GetReportsScreen extends StatelessWidget {
     final selectedType = context.watch<FilterReportsCubit>().state.selectedType;
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 15),
+      margin: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -77,7 +77,7 @@ class GetReportsScreen extends StatelessWidget {
             ),
           ),
           10.ph,
-          SingleChildScrollView(child: CardReport())
+          const SingleChildScrollView(child: CardReport(isPassed: false,))
         ],
       ),
     );

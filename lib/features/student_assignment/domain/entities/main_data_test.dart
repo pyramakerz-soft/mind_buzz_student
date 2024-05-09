@@ -8,8 +8,9 @@ part 'main_data_test.g.dart';
 @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
 class MainDataTestsModel extends Equatable {
   List<TestModel>? tests;
+  List<TestModel>? progress;
   List<TestsTypesModel>? testTypes;
-  MainDataTestsModel({this.testTypes, this.tests});
+  MainDataTestsModel({this.testTypes, this.tests, this.progress});
 
   factory MainDataTestsModel.fromJson(Map<String, dynamic> json) {
     return _$MainDataTestsModelFromJson(json);
@@ -18,5 +19,5 @@ class MainDataTestsModel extends Equatable {
   Map<String, dynamic> toJson() => _$MainDataTestsModelToJson(this);
 
   @override
-  List<Object?> get props => [tests, testTypes];
+  List<Object?> get props => [tests, testTypes, progress];
 }

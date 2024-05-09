@@ -25,7 +25,7 @@ class DataSourceRemotelyOfParentReportsImpl implements DataSourceRemotelyOfParen
     // formData.addAll(subListOfTypes);
     final response = await dio.post(
         url:
-        '${Connection.baseURL}${dio.getStudentProgramsTestEndPoint}',
+        '${Connection.baseURL}${dio.getStudentReportsTestEndPoint}',
         queryParameters: formData
     );
     if (dio.validResponse(response)) {
