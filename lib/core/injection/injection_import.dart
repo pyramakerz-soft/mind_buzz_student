@@ -4,16 +4,21 @@ var sl = GetIt.instance;
 
 Future<void> init() async {
   // bloc
-  sl.registerFactory(() => LoginDataBloc(requestLoginData: sl(), requestAutoUserUseCases: sl(),updateUserDataUseCases :sl()));
+  sl.registerFactory(() => LoginDataBloc(
+      requestLoginData: sl(),
+      requestAutoUserUseCases: sl(),
+      updateUserDataUseCases: sl()));
   sl.registerFactory(() => GetUnitBloc(programUserUseCases: sl()));
   sl.registerFactory(() => ChapterBloc(programUserUseCases: sl()));
   sl.registerFactory(() => ContactLessonBloc(programContactUserUseCases: sl()));
-  sl.registerFactory(() => GetProgramsHomeBloc(programUserUseCases: sl(), logOutUserUseCases: sl()));
+  sl.registerFactory(() =>
+      GetProgramsHomeBloc(programUserUseCases: sl(), logOutUserUseCases: sl()));
   sl.registerFactory(() => NotificationsBloc());
   sl.registerFactory(() => CalenderBloc(programUserUseCases: sl()));
   sl.registerFactory(() => SettingsBloc(autoUserUseCases: sl()));
-  sl.registerFactory(() => GetAssignmentBloc(programUserUseCases: sl()));
-  sl.registerFactory(() => ReportsBloc(programUserUseCases: sl()));
+  sl.registerFactory(() => GetAssignmentBloc(
+      programUserUseCases: sl(), programReportsUserUseCases: sl()));
+  // sl.registerFactory(() => ReportsBloc(programUserUseCases: sl()));
 
   //UseCase
   sl.registerLazySingleton(() => UnitUseCases(sl()));
@@ -27,7 +32,6 @@ Future<void> init() async {
   sl.registerLazySingleton(() => ParentReportsUseCases(sl()));
   sl.registerLazySingleton(() => UpdateUserDataUseCases(sl()));
 
-
   //Repository
   sl.registerLazySingleton<LoginRepository>(
       () => LoginRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
@@ -36,9 +40,10 @@ Future<void> init() async {
   sl.registerLazySingleton<ProgramUnitRepository>(
       () => UnitRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<ProgramLessonRepository>(
-          () => LessonRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
-  sl.registerLazySingleton<ParentAssignmentRepository>(
-          () => ParentAssignmentRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+      () => LessonRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<ParentAssignmentRepository>(() =>
+      ParentAssignmentRepositoryImpl(
+          remoteDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<ProgramContactLessonRepository>(() =>
       ContactLessonRepositoryImpl(
           localRemoteDataSource: sl(),
@@ -46,21 +51,13 @@ Future<void> init() async {
           networkInfo: sl()));
 
   sl.registerLazySingleton<NotificationRepository>(() =>
-      NotificationRepositoryImpl(
-          remoteDataSource: sl(),
-          networkInfo: sl()));
-  sl.registerLazySingleton<CalenderRepository>(() =>
-      CalenderRepositoryImpl(
-          remoteDataSource: sl(),
-          networkInfo: sl()));
-  sl.registerLazySingleton<SettingsRepository>(() =>
-      SettingsRepositoryImpl(
-          remoteDataSource: sl(),
-          networkInfo: sl()));
+      NotificationRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<CalenderRepository>(
+      () => CalenderRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<SettingsRepository>(
+      () => SettingsRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<ParentReportsRepository>(() =>
-      ParentReportsRepositoryImpl(
-          remoteDataSource: sl(),
-          networkInfo: sl()));
+      ParentReportsRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
 
   //Datasources
   sl.registerLazySingleton<DataSourceRemotelyOfProgram>(
@@ -78,13 +75,13 @@ Future<void> init() async {
   sl.registerLazySingleton<DataSourceRemotelyOfNotification>(
       () => DataSourceRemotelyOfNotificationImpl(dio: sl()));
   sl.registerLazySingleton<DataSourceRemotelyOfCalender>(
-          () => DataSourceRemotelyOfCalenderImpl(dio: sl()));
+      () => DataSourceRemotelyOfCalenderImpl(dio: sl()));
   sl.registerLazySingleton<DataSourceRemotelyOfSettings>(
-          () => DataSourceRemotelyOfSettingsImpl(dio: sl()));
+      () => DataSourceRemotelyOfSettingsImpl(dio: sl()));
   sl.registerLazySingleton<DataSourceRemotelyOfParentAssignment>(
-          () => DataSourceRemotelyOfParentAssignmentImpl(dio: sl()));
+      () => DataSourceRemotelyOfParentAssignmentImpl(dio: sl()));
   sl.registerLazySingleton<DataSourceRemotelyOfParentReports>(
-          () => DataSourceRemotelyOfParentReportsImpl(dio: sl()));
+      () => DataSourceRemotelyOfParentReportsImpl(dio: sl()));
 
   //! Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));

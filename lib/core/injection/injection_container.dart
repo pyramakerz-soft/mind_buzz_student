@@ -10,6 +10,7 @@ import '../../features/chapters/data/repositories/chapter_repository_impl.dart';
 import '../../features/chapters/domain/repositories/repositories_chapter.dart';
 import '../../features/chapters/domain/use_cases/chapter_use_cases.dart';
 import '../../features/chapters/presentation/manager/chapter_bloc.dart';
+import '../../features/choose_assignment_reports/presentation/manager/bloc/get_assignment_bloc.dart';
 import '../../features/home/data/datasources/data_source_remotely_of_home.dart';
 import '../../features/home/data/repositories/program_repository_impl.dart';
 import '../../features/home/domain/repositories/repositories_user.dart';
@@ -37,7 +38,6 @@ import '../../features/reports/data/data_sources/data_source_remotely_of_parent_
 import '../../features/reports/data/repositories/parent_reports_repository_impl.dart';
 import '../../features/reports/domain/repositories/repository_parent_reports.dart';
 import '../../features/reports/domain/use_cases/parent_reports_use_cases.dart';
-import '../../features/reports/presentation/manager/bloc/reports_bloc.dart';
 import '../../features/settings/data/datasources/data_source_remotely_of_settings.dart';
 import '../../features/settings/data/repositories/settings_repository_impl.dart';
 import '../../features/settings/domain/repositories/repositories_setting.dart';
@@ -46,7 +46,6 @@ import '../../features/student_assignment/data/datasources/data_source_remotely_
 import '../../features/student_assignment/data/repositories/parent_assignment_repository_impl.dart';
 import '../../features/student_assignment/domain/repositories/repository_student_assignment.dart';
 import '../../features/student_assignment/domain/usecases/parent_assignment_use_cases.dart';
-import '../../features/student_assignment/presentation/manager/bloc/get_assignment_bloc.dart';
 import '../../features/unit/data/data_sources/data_source_remotely_of_unit.dart';
 import '../../features/unit/data/repositories/unit_repository_impl.dart';
 import '../../features/unit/domain/repositories/repositories_unit.dart';

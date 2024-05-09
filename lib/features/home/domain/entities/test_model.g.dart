@@ -19,7 +19,7 @@ TestModel _$TestModelFromJson(Map<String, dynamic> json) => TestModel(
       status: json['status'],
       testName: json['test_name'] as String?,
       daysLeft: json['days_left'] as String?,
-      lessonNum: (json['lesson_num'] as num?)?.toInt(),
+      lessonNum: (json['lessonNum'] as num?)?.toInt(),
       score: json['score'] as num?,
       totalScore: json['total_score'] as num?,
       formattedDueDate: json['formatted_due_date'] as String?,

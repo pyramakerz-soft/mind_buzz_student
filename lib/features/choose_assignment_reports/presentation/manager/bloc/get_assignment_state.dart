@@ -7,13 +7,17 @@ abstract class GetAssignmentState extends Equatable {
 }
 
 class GetAssignmentInitial extends GetAssignmentState {}
+
 class GetProgramsCompleteInitial extends GetAssignmentState {
   final MainDataTestsModel data;
 
   GetProgramsCompleteInitial({required this.data});
 }
+
 class GetProgramsLoadingInitial extends GetAssignmentState {}
+
 class LogOutLoadingState extends GetAssignmentState {}
+
 class GetProgramsErrorInitial extends GetAssignmentState {
   final String message;
 

@@ -9,7 +9,7 @@ import 'features/loading_intro/presentation/bloc/loading_cubit.dart';
 import 'core/injection/injection_container.dart' as di;
 import 'features/loading_intro/presentation/page/screen1.dart';
 import 'features/login/presentation/bloc/login_data_bloc.dart';
-import 'features/student_assignment/presentation/manager/bottom_cubit/bottom_cubit.dart';
+import 'features/student_assignment/presentation/manager/bottom_cubit/filter_assignment_cubit.dart';
 import 'features/student_assignment/presentation/manager/index_of_switch_cubit.dart';
 import 'features/student_assignment/presentation/pages/get_assignment.dart';
 import 'features/who_am_i/presentation/manager/who_am_i_cubit.dart';
@@ -61,7 +61,7 @@ class _MyApp extends State<MyApp> {
             create: (_) => WhoAmICubit(),
           ),
           BlocProvider(
-            create: (_) => BottomCubit(),
+            create: (_) => FilterAssignmentCubit(),
           ),
         ],
         child: BlocProvider(

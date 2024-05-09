@@ -4,21 +4,21 @@ import 'package:meta/meta.dart';
 
 import '../../../domain/entities/tests_types_model.dart';
 
-part 'bottom_state.dart';
+part 'filter_assignment_state.dart';
 
-class BottomCubit extends Cubit<BottomInitial> {
+class FilterAssignmentCubit extends Cubit<FilterAssignmentInitial> {
   final String? selectedState;
   final List<String>? selectedType;
   final String? selectedFromDate;
   final String? selectedToDate;
   final List<TestsTypesModel>? testTypes;
-  BottomCubit(
+  FilterAssignmentCubit(
       {this.selectedState,
       this.selectedType,
-        this.testTypes,
-        this.selectedFromDate,
+      this.testTypes,
+      this.selectedFromDate,
       this.selectedToDate})
-      : super(BottomInitial()) {
+      : super(FilterAssignmentInitial()) {
     emit(state.copyWith(
         selectedState: selectedState,
         selectedType: selectedType,
@@ -27,9 +27,9 @@ class BottomCubit extends Cubit<BottomInitial> {
   }
 
   submitAssignmentStatus({required String newStatus}) {
-    if (state.selectedState == newStatus){
+    if (state.selectedState == newStatus) {
       emit(state.clearSelectedState());
-    }else {
+    } else {
       emit(state.copyWith(selectedState: newStatus));
     }
   }
@@ -39,20 +39,19 @@ class BottomCubit extends Cubit<BottomInitial> {
     List<TestsTypesModel>? testTypes = state.testTypes;
     String? selectedFromDate = state.selectedFromDate;
     String? selectedToDate = state.selectedToDate;
-    List<String> currentSelectedTypes = state.selectedType??[];
+    List<String> currentSelectedTypes = state.selectedType ?? [];
     emit(SubBottomInitial());
-    if(currentSelectedTypes.contains(newStatus)){
+    if (currentSelectedTypes.contains(newStatus)) {
       currentSelectedTypes.remove(newStatus);
-    }else{
+    } else {
       currentSelectedTypes.add(newStatus);
     }
-    emit(BottomInitial(
+    emit(FilterAssignmentInitial(
         selectedState: selectedState,
         selectedType: currentSelectedTypes,
         selectedFromDate: selectedFromDate,
         selectedToDate: selectedToDate,
-      testTypes: testTypes
-    ));
+        testTypes: testTypes));
   }
 
   submitAssignmentFromDate({required String newStatus}) {
@@ -62,8 +61,9 @@ class BottomCubit extends Cubit<BottomInitial> {
   submitAssignmentToDate({required String newStatus}) {
     emit(state.copyWith(selectedToDate: newStatus));
   }
-  submitListAssignmentTypes({required List<TestsTypesModel> newStatus, required String programId}) {
 
-    emit(state.copyWith(testTypes: newStatus, programId:programId));
+  submitListAssignmentTypes(
+      {required List<TestsTypesModel> newStatus, required String programId}) {
+    emit(state.copyWith(testTypes: newStatus, programId: programId));
   }
 }

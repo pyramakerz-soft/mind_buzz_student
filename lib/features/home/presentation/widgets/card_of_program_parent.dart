@@ -8,8 +8,9 @@ import 'package:mind_buzz_refactor/core/assets_svg_images.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 
 import '../../../../core/utils.dart';
+import '../../../choose_assignment_reports/presentation/pages/choose_assignment_reports_screen.dart';
 import '../../../student_assignment/presentation/manager/index_of_switch_cubit.dart';
-import '../../../student_assignment/presentation/manager/bottom_cubit/bottom_cubit.dart';
+import '../../../student_assignment/presentation/manager/bottom_cubit/filter_assignment_cubit.dart';
 import '../../../student_assignment/presentation/manager/check_assignment_cubit.dart';
 import '../../../student_assignment/presentation/pages/get_assignment.dart';
 import '../../../unit/presentation/manager/bloc/get_unit_bloc.dart';
@@ -32,9 +33,9 @@ class CardOfProgramParent extends StatelessWidget {
         Utils.navigateTo(
             BlocProvider(
                 create: (_) => IndexOfSwitchCubit(),
-                child:GetAssignmentScreen(
-                  programName: dataOfProgram.program?.course?.name??'',
-                  programId: int.parse("${dataOfProgram.program?.id??''}"),
+                child: ChooseAssignmentReportsScreen(
+                  programName: dataOfProgram.program?.course?.name ?? '',
+                  programId: int.parse("${dataOfProgram.program?.id ?? ''}"),
                 )),
             context);
       },

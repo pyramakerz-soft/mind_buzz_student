@@ -5,25 +5,30 @@ import 'package:mind_buzz_refactor/core/app_color.dart';
 import '../../../../core/parent_assets.dart';
 import '../../../../core/vars.dart';
 import '../../../login/presentation/widgets/text_field_widget.dart';
-import '../manager/bloc/get_assignment_bloc.dart';
-import '../manager/bottom_cubit/bottom_cubit.dart';
+import '../manager/bottom_cubit/filter_assignment_cubit.dart';
 import 'bottom_sheet_select_day.dart';
 import 'item_selected.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 
 class FilterBottomSheetGetAssignment extends StatelessWidget {
-  final void Function(int programId,String? status, String? fromDate , String? toDate, List<String>? listOfTypes) addFilter;
+  final void Function(int programId, String? status, String? fromDate,
+      String? toDate, List<String>? listOfTypes) addFilter;
   final int programId;
-  const FilterBottomSheetGetAssignment({Key? key, required this.addFilter, required this.programId}) : super(key: key);
+  const FilterBottomSheetGetAssignment(
+      {Key? key, required this.addFilter, required this.programId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final selectedType = context.watch<BottomCubit>().state.selectedType;
-    final selectedState = context.watch<BottomCubit>().state.selectedState;
+    final selectedType =
+        context.watch<FilterAssignmentCubit>().state.selectedType;
+    final selectedState =
+        context.watch<FilterAssignmentCubit>().state.selectedState;
     final selectedFromDate =
-        context.watch<BottomCubit>().state.selectedFromDate;
-    final selectedToDate = context.watch<BottomCubit>().state.selectedToDate;
-    final testTypes = context.watch<BottomCubit>().state.testTypes;
+        context.watch<FilterAssignmentCubit>().state.selectedFromDate;
+    final selectedToDate =
+        context.watch<FilterAssignmentCubit>().state.selectedToDate;
+    final testTypes = context.watch<FilterAssignmentCubit>().state.testTypes;
     // final programId = context.watch<BottomCubit>().state.programId;
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -198,9 +203,13 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                                   TestTypes.listOfTestTypes[index]) ??
                               false,
                           onTap: () {
-                            context.read<BottomCubit>().submitAssignmentStatus(
-                                newStatus: TestTypes.listOfTestTypes[index]);
-                            print("##:${context.read<BottomCubit>().state}");
+                            context
+                                .read<FilterAssignmentCubit>()
+                                .submitAssignmentStatus(
+                                    newStatus:
+                                        TestTypes.listOfTestTypes[index]);
+                            print(
+                                "##:${context.read<FilterAssignmentCubit>().state}");
                           },
                         )),
               ),
@@ -223,10 +232,11 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                     (index) => ItemSelected(
                         onTap: () async {
                           await context
-                              .read<BottomCubit>()
+                              .read<FilterAssignmentCubit>()
                               .submitAssignmentType(
                                   newStatus: "${testTypes?[index].id ?? 0}");
-                          print("##:${context.read<BottomCubit>().state}");
+                          print(
+                              "##:${context.read<FilterAssignmentCubit>().state}");
                         },
                         itemId: "${testTypes?[index].id ?? 0}",
                         title: testTypes?[index].name ?? '',
@@ -237,7 +247,8 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
               20.ph,
               GestureDetector(
                 onTap: () {
-                  addFilter( programId,  selectedState,  selectedFromDate, selectedToDate,  selectedType??[] );
+                  addFilter(programId, selectedState, selectedFromDate,
+                      selectedToDate, selectedType ?? []);
                   Navigator.of(context).pop();
                 },
                 child: Container(

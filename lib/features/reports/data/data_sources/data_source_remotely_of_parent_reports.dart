@@ -6,33 +6,28 @@ import '../../../student_assignment/domain/entities/main_data_test.dart';
 
 abstract class DataSourceRemotelyOfParentReports {
   Future<MainDataTestsModel> getParentReportsDataReports(
-      { String? date});
+      {String? date, String? selectedType});
 }
 
-class DataSourceRemotelyOfParentReportsImpl implements DataSourceRemotelyOfParentReports {
+class DataSourceRemotelyOfParentReportsImpl
+    implements DataSourceRemotelyOfParentReports {
   final MainApiConnection dio;
 
   DataSourceRemotelyOfParentReportsImpl({required this.dio});
 
   @override
-  Future<MainDataTestsModel> getParentReportsDataReports({String? date}) async {
-    Map<String, dynamic>? formData = {
-      // 'program_id':programId,
-      // if(fromDate!=null)'from_date':fromDate,
-      // if(toDate!=null)'to_date':toDate,
-      // if(status!=null)'status':status,
-    };
-    // formData.addAll(subListOfTypes);
+  Future<MainDataTestsModel> getParentReportsDataReports(
+      {String? date, String? selectedType}) async {
     final response = await dio.post(
-        url:
-        '${Connection.baseURL}${dio.getStudentReportsTestEndPoint}',
-        queryParameters: formData
-    );
+        url: '${Connection.baseURL}${dio.getStudentReportsTestEndPoint}',
+        queryParameters: {
+          if (date != null) 'date': date,
+          if (selectedType != null) 'types': selectedType
+        });
     if (dio.validResponse(response)) {
       return MainDataTestsModel.fromJson(response.data['data']);
     } else {
       throw response.data['msg'];
     }
   }
-
 }

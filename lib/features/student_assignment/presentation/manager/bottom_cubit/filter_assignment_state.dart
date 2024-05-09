@@ -1,6 +1,6 @@
-part of 'bottom_cubit.dart';
+part of 'filter_assignment_cubit.dart';
 
-class BottomInitial extends Equatable {
+class FilterAssignmentInitial extends Equatable {
   final String? selectedState;
   final List<String>? selectedType;
   final String? selectedFromDate;
@@ -8,7 +8,7 @@ class BottomInitial extends Equatable {
 
   final String? selectedToDate;
   final List<TestsTypesModel>? testTypes;
-  BottomInitial(
+  FilterAssignmentInitial(
       {this.selectedState,
       this.selectedType,
       this.testTypes,
@@ -16,14 +16,14 @@ class BottomInitial extends Equatable {
       this.selectedFromDate,
       this.selectedToDate});
 
-  BottomInitial copyWith(
+  FilterAssignmentInitial copyWith(
       {String? selectedState,
       List<String>? selectedType,
-        List<TestsTypesModel>? testTypes,
+      List<TestsTypesModel>? testTypes,
       String? selectedFromDate,
       String? programId,
       String? selectedToDate}) {
-    return BottomInitial(
+    return FilterAssignmentInitial(
         selectedState: selectedState ?? this.selectedState,
         testTypes: testTypes ?? this.testTypes,
         selectedFromDate: selectedFromDate ?? this.selectedFromDate,
@@ -32,8 +32,8 @@ class BottomInitial extends Equatable {
         selectedType: selectedType ?? this.selectedType);
   }
 
-  clearSelectedState(){
-    return BottomInitial(
+  clearSelectedState() {
+    return FilterAssignmentInitial(
         selectedState: null,
         testTypes: testTypes ?? testTypes,
         selectedFromDate: selectedFromDate ?? selectedFromDate,
@@ -43,9 +43,14 @@ class BottomInitial extends Equatable {
   }
 
   @override
-  List<Object?> get props => [selectedFromDate, selectedType, selectedToDate, selectedState, testTypes, programId];
+  List<Object?> get props => [
+        selectedFromDate,
+        selectedType,
+        selectedToDate,
+        selectedState,
+        testTypes,
+        programId
+      ];
 }
 
-class SubBottomInitial extends BottomInitial{
-
-}
+class SubBottomInitial extends FilterAssignmentInitial {}
