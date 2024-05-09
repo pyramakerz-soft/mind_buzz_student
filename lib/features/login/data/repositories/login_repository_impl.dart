@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import '../../../../core/error/exceptions.dart';
@@ -58,6 +59,26 @@ class LoginRepositoryImpl implements LoginRepository {
       }
     } else {
       return Left(CheckYourNetwork());
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserData>> updateUserDataRepository(
+      {String? name, String? email, String? phone, File? filepath}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final res = await remoteDataSource.updateUserData(
+            email: email, name: name , phone: phone ,filepath: filepath);
+
+        return Right(res);
+      }catch (e, s) {
+        if (e is MessageException) {
+          return Left(ServerFailure(message: e.message));
+        }
+        return Left(LoginFailure());
+      }
+    } else {
+      return Left(CacheFailure());
     }
   }
 }

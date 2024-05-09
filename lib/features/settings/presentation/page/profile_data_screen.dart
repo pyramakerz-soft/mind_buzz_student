@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
@@ -7,6 +8,7 @@ import 'package:mind_buzz_refactor/core/utils.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:mind_buzz_refactor/features/home/presentation/widgets/switch_bar.dart';
 import 'package:mind_buzz_refactor/features/login/domain/entities/user_data_model.dart';
+import 'package:mind_buzz_refactor/features/settings/presentation/bloc/settings_bloc.dart';
 
 import '../widgets/personal_info_item.dart';
 import 'edit_profile_screen.dart';
@@ -14,6 +16,7 @@ import 'edit_profile_screen.dart';
 class ProfileDataScreen extends StatelessWidget {
   final UserData userData;
   const ProfileDataScreen({Key? key, required this.userData}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class ProfileDataScreen extends StatelessWidget {
               Utils.navigateTo(EditProfileScreen(userData: userData,), context);
             },
             child: Container(
-              padding: EdgeInsets.all(6.h),
+              padding: EdgeInsets.all(8.h),
               decoration: BoxDecoration(
                   color: AppColor.whiteRed,
                   borderRadius: BorderRadius.circular(5.r)),

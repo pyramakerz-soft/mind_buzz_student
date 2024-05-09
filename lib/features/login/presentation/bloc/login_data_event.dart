@@ -25,3 +25,6 @@ class AutoLoginRequest extends LoginDataEvent {
   @override
   List<Object> get props => [];
 }
+class InitializeUpdateUserDataEvent extends LoginDataEvent {}
+class UpdateUserDataEvent extends LoginDataEvent {}
+class PickImageEvent extends LoginDataEvent {}

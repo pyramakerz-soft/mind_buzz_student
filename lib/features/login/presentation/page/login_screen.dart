@@ -15,7 +15,7 @@ import '../../../../core/validation_text_field.dart';
 import '../../../who_am_i/presentation/pages/who_am_i_screen.dart';
 import '../bloc/login_data_bloc.dart';
 import '../cubit/login_cubit.dart';
-import '../widgets/button_start_game.dart';
+import '../../../../core/widgets/button_start_game.dart';
 import '../widgets/text_field_widget.dart';
 
 class LoginScreen extends StatelessWidget {

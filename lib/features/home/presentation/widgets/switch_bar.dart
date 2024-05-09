@@ -94,7 +94,7 @@ PreferredSizeWidget switchBar(
 
 
 PreferredSizeWidget customAppBar(
-    {required BuildContext context, required String title, Widget? action}) {
+    {required BuildContext context, required String title, Widget? action, IconData? backIcon}) {
   return PreferredSize(
     preferredSize: const Size.fromHeight(kToolbarHeight),
     child: Container(
@@ -123,7 +123,7 @@ PreferredSizeWidget customAppBar(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.42),
                       color: AppColor.whiteRed),
-                  child: const Icon(Icons.arrow_back),
+                  child:  Icon(backIcon ?? Icons.arrow_back),
                 ),
               ),
             )
@@ -138,7 +138,7 @@ PreferredSizeWidget customAppBar(
                     fontSize: 22,
                   ),
                 ),
-                20.pw,
+                Spacer(),
                 action?? 0.pw,
               ],
             ),

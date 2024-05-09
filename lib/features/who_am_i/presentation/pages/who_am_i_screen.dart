@@ -17,7 +17,7 @@ import '../../../home/presentation/page/home_parent_screen.dart';
 import '../../../home/presentation/page/home_screen.dart';
 import '../../../loading_intro/presentation/bloc/loading_cubit.dart';
 import '../../../login/presentation/page/login_screen.dart';
-import '../../../login/presentation/widgets/button_start_game.dart';
+import '../../../../core/widgets/button_start_game.dart';
 import '../manager/who_am_i_cubit.dart';
 import '../widgets/item_in_choose.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

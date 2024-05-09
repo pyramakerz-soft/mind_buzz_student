@@ -71,7 +71,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 Padding(
                   padding: const EdgeInsets.all(15),
                   child: SvgPicture.string(
-                    ParentImages.notificationOutlineIcon(3),
+                    ParentImages.notificationOutlineIcon('3'),
                   ),
                 ),
                 Padding(
@@ -117,7 +117,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SvgPicture.asset(ParentImages.notificationOutline),
+                    SvgPicture.string(
+                      ParentImages.notificationIcon('3'),
+                    ),
                     const SizedBox(
                       height: 5,
                     ),
