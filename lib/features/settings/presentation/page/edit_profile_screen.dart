@@ -30,7 +30,15 @@ class EditProfileScreen extends StatelessWidget {
       appBar: customAppBar(
           context: context, title: 'Personal Info', backIcon: Icons.close),
       body: BlocConsumer<LoginDataBloc, LoginDataState>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is CompleteUpdatingData) {
+              final snackBar = SnackBar(
+                content: Text(state.message??''),
+              );
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(snackBar);
+            }
+          },
           builder: (context, state) {
             LoginDataBloc bloc = context.watch<LoginDataBloc>();
             bloc.add(InitializeUpdateUserDataEvent());
@@ -45,7 +53,6 @@ class EditProfileScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       20.ph,
-                      if(state is UpdatingDataInitial)
                       GestureDetector(
                         onTap: (){
                           bloc.add(PickImageEvent());
@@ -53,11 +60,13 @@ class EditProfileScreen extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                             state.userImage!=null?
+
+                            if(state is UpdatingDataInitial && state.userImage!=null)
                                CircleAvatar(
                                  radius: 40.r,
                                  backgroundImage: FileImage(state.userImage!),
-                               ) :
+                               )
+                            else
                             userData.parentImage != null
                                 ? CircleAvatar(
                                     radius: 40.r,
@@ -95,9 +104,13 @@ class EditProfileScreen extends StatelessWidget {
                         controller: bloc.phoneController,
                       ),
                       50.ph,
+                      if(state is UpdatingDataLoading)
+                        Center(child: CupertinoActivityIndicator())
+                      else
                       ButtonLogin(
                         width: 0.9.sw,
                         title: 'Save Changes',
+                        disableAnimation: true,
                         dataFunction: (){
                           bloc.add(UpdateUserDataEvent());
                         },
