@@ -12,8 +12,7 @@ import '../../../../core/app_color.dart';
 import '../../../../core/assets_svg_images.dart';
 import '../../../../core/utils.dart';
 
-PreferredSizeWidget switchBar(
-    {required BuildContext context,  String? title}) {
+PreferredSizeWidget switchBar({required BuildContext context, String? title}) {
   return PreferredSize(
     preferredSize: const Size.fromHeight(kToolbarHeight),
     child: Container(
@@ -29,26 +28,10 @@ PreferredSizeWidget switchBar(
           AppBar(
             leadingWidth: 52,
             backgroundColor: Colors.white,
-            leading: (Navigator.canPop(context))
-                ? Container(
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Container(
-                        width: 10,
-                        height: 10,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.42),
-                            color: AppColor.whiteRed),
-                        child: const Icon(Icons.arrow_back),
-                      ),
-                    ),
-                  )
-                : null,
             title: Text(
-              context.watch<WhoAmICubit>().state == 1 ? 'Student Account' : title ?? 'Parent Account',
+              context.watch<WhoAmICubit>().state == 1
+                  ? 'Student Account'
+                  : title ?? 'Parent Account',
               style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                     fontWeight: FontWeight.w600,
                     // height: 0,
@@ -92,9 +75,11 @@ PreferredSizeWidget switchBar(
   );
 }
 
-
 PreferredSizeWidget customAppBar(
-    {required BuildContext context, required String title, Widget? action, IconData? backIcon}) {
+    {required BuildContext context,
+    required String title,
+    Widget? action,
+    IconData? backIcon}) {
   return PreferredSize(
     preferredSize: const Size.fromHeight(kToolbarHeight),
     child: Container(
@@ -112,37 +97,37 @@ PreferredSizeWidget customAppBar(
             backgroundColor: Colors.white,
             leading: (Navigator.canPop(context))
                 ? Container(
-              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                child: Container(
-                  width: 10,
-                  height: 10,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.42),
-                      color: AppColor.whiteRed),
-                  child:  Icon(backIcon ?? Icons.arrow_back),
-                ),
-              ),
-            )
+                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Container(
+                        width: 10,
+                        height: 10,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.42),
+                            color: AppColor.whiteRed),
+                        child: Icon(backIcon ?? Icons.arrow_back),
+                      ),
+                    ),
+                  )
                 : null,
             title: Row(
               children: [
-                Text(title ,
+                Text(
+                  title,
                   style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    // height: 0,
-                    // letterSpacing: 0.44,
-                    fontSize: 22,
-                  ),
+                        fontWeight: FontWeight.w600,
+                        // height: 0,
+                        // letterSpacing: 0.44,
+                        fontSize: 22,
+                      ),
                 ),
                 Spacer(),
-                action?? 0.pw,
+                action ?? 0.pw,
               ],
             ),
-
           ),
         ],
       ),
