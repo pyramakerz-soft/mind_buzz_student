@@ -73,16 +73,18 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
 
   updateUserData(emit)async{
     try {
-      // emit(UpdatingDataInitial.copyWith(userData: userData));
+      emit(UpdatingDataLoading());
       var res = await updateUserDataUseCases(filepath: profileImage , name: fullNameController.text ,
           phone: phoneController.text , email: emailController.text);
+
       res.fold((l) {
         log('getUserData fold $l');
-        emit(UpdatingDataError(message: _mapFailureToMessage(l)));
+        emit(UpdatingDataError(message: l.toString()));
       }, (data) {
         log('getUserDataSuccessfullyState ');
         userData = data;
-        emit(UpdatingDataInitial(userData: data));
+        // TODO Dynamic message
+        emit(CompleteUpdatingData(userData: data, message: 'Updated Successfully'));
       });
     } catch (e) {
       log('getUserData $e ');

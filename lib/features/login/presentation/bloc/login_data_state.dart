@@ -30,29 +30,18 @@ class ErrorLogin extends LoginDataState {
 class UpdatingDataInitial extends LoginDataState {
   final UserData userData;
   final File? userImage;
-  final bool loading;
-  UpdatingDataInitial ({required this.userData, this.userImage, this.loading = false,});
-  UpdatingDataInitial copyWith({
-    required UserData userData,
-    File? userImage,
-    bool? loading,
-  }) {
-    return UpdatingDataInitial(
-      userData: this.userData,
-      userImage: this.userImage,
-      loading: this.loading
-    );
-  }
+  UpdatingDataInitial ({required this.userData, this.userImage});
+
   @override
   List<Object?> get props => [userData, userImage];
 }
 class CompleteUpdatingData extends LoginDataState {
   final UserData userData;
-  final String? userImage;
-  CompleteUpdatingData({required this.userData, this.userImage});
+  final String? message;
+  CompleteUpdatingData({required this.userData,this.message});
 
   @override
-  List<Object?> get props => [userData];
+  List<Object?> get props => [userData,message];
 }
 
 class UpdatingDataLoading extends LoginDataState {}

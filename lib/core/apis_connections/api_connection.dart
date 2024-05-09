@@ -113,7 +113,7 @@ class MainApiConnection {
       throw response;
     }
   }
-
+  // TODO DIO uploadImage
   Future<http.Response>  uploadImage({
     required String url,
      File? filePath,
@@ -126,7 +126,6 @@ class MainApiConnection {
     var multipartFile;
     var stream;
     var length;
-
     var request = http.MultipartRequest("POST", Uri.parse(url),);
     request.headers['AUTHORIZATION'] = 'Bearer ${token!}';
     request.headers['Accept'] = "application/json";
