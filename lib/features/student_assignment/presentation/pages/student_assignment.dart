@@ -12,7 +12,7 @@ import '../../../home/domain/entities/user_courses.dart';
 import '../../../home/presentation/bloc/get_programs_home_bloc.dart';
 import '../../../login/presentation/cubit/login_cubit.dart';
 import '../../../login/presentation/page/login_screen.dart';
-import '../manager/check_assignment_cubit.dart';
+import '../manager/check_assignment_cubit/check_assignment_cubit.dart';
 import '../widgets/card_of_assignment.dart';
 
 class StudentAssignmentScreen extends StatelessWidget {

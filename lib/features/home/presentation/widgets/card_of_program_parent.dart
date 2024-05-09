@@ -9,9 +9,8 @@ import 'package:mind_buzz_refactor/core/vars.dart';
 
 import '../../../../core/utils.dart';
 import '../../../choose_assignment_reports/presentation/pages/choose_assignment_reports_screen.dart';
-import '../../../student_assignment/presentation/manager/index_of_switch_cubit.dart';
-import '../../../student_assignment/presentation/manager/bottom_cubit/filter_assignment_cubit.dart';
-import '../../../student_assignment/presentation/manager/check_assignment_cubit.dart';
+import '../../../choose_assignment_reports/presentation/manager/index_of_switch_cubit.dart';
+import '../../../student_assignment/presentation/manager/check_assignment_cubit/check_assignment_cubit.dart';
 import '../../../student_assignment/presentation/pages/get_assignment.dart';
 import '../../../unit/presentation/manager/bloc/get_unit_bloc.dart';
 import '../../../unit/presentation/manager/cubit/animation_unit_cubit.dart';

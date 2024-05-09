@@ -5,9 +5,9 @@ import 'package:mind_buzz_refactor/core/app_color.dart';
 import '../../../../core/parent_assets.dart';
 import '../../../../core/vars.dart';
 import '../../../login/presentation/widgets/text_field_widget.dart';
-import '../manager/bottom_cubit/filter_assignment_cubit.dart';
+import '../../../student_assignment/presentation/manager/filter_assignment_cubit/filter_assignment_cubit.dart';
 import 'bottom_sheet_select_day.dart';
-import 'item_selected.dart';
+import '../../../student_assignment/presentation/widgets/item_selected.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 
 class FilterBottomSheetGetAssignment extends StatelessWidget {
@@ -129,6 +129,9 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                                 builder: (BuildContext context0) {
                                   return BottomSheetSelectDay(
                                     isFrom: true,
+                                    currentDate: selectedFromDate != null
+                                        ? DateTime.parse(selectedFromDate)
+                                        : DateTime.now(),
                                   );
                                 });
                           },
@@ -160,6 +163,9 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                                 builder: (BuildContext context0) {
                                   return BottomSheetSelectDay(
                                     isFrom: false,
+                                    currentDate: selectedToDate != null
+                                        ? DateTime.parse(selectedToDate)
+                                        : DateTime.now(),
                                   );
                                 });
                           },

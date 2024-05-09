@@ -8,14 +8,13 @@ import '../../../../core/error/failures_messages.dart';
 import '../../../../core/parent_assets.dart';
 import '../../../../core/utils.dart';
 import '../../../login/presentation/page/login_screen.dart';
-import '../../../reports/presentation/manager/cubit/filter_reports_cubit.dart';
 import '../../../reports/presentation/pages/get_reports.dart';
-import '../../../student_assignment/presentation/manager/bottom_cubit/filter_assignment_cubit.dart';
-import '../../../student_assignment/presentation/manager/index_of_switch_cubit.dart';
+import '../../../student_assignment/presentation/manager/filter_assignment_cubit/filter_assignment_cubit.dart';
+import '../manager/index_of_switch_cubit.dart';
 import '../../../student_assignment/presentation/pages/get_assignment.dart';
-import '../../../student_assignment/presentation/widgets/bottom_sheet_select_day.dart';
-import '../../../student_assignment/presentation/widgets/filter_bottom_sheet_get_assignment.dart';
-import '../../../student_assignment/presentation/widgets/switch_button.dart';
+import '../widgets/bottom_sheet_select_day.dart';
+import '../widgets/filter_bottom_sheet_get_assignment.dart';
+import '../widgets/switch_button.dart';
 import '../manager/bloc/get_assignment_bloc.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 
@@ -53,6 +52,9 @@ class ChooseAssignmentReportsScreen extends StatelessWidget {
                 programId: programId.toString());
           }
         }, builder: (context, state) {
+          final selectedType =
+              context.watch<FilterAssignmentCubit>().state.selectedTypeReport;
+
           return Scaffold(
               appBar: PreferredSize(
                 preferredSize: const Size.fromHeight(kToolbarHeight),
@@ -129,16 +131,27 @@ class ChooseAssignmentReportsScreen extends StatelessWidget {
                                         );
                                       });
                                 } else {
+                                  final selectedDate = context
+                                      .read<FilterAssignmentCubit>()
+                                      .state
+                                      .selectedDate;
+
                                   showModalBottomSheet(
                                       backgroundColor: Colors.white,
                                       context: context,
                                       builder: (BuildContext context0) {
                                         return BottomSheetSelectDay(
-                                            isFrom: true,
-                                            isReport: (String? date) => context
+                                          isFrom: true,
+                                          isReport: (String? date) {
+                                            context
                                                 .read<GetAssignmentBloc>()
                                                 .add(GetReportsRequest(
-                                                    date: date)));
+                                                    date: date));
+                                          },
+                                          currentDate: selectedDate != null
+                                              ? DateTime.parse(selectedDate)
+                                              : DateTime.now(),
+                                        );
                                       });
                                 }
                               },
@@ -191,11 +204,7 @@ class ChooseAssignmentReportsScreen extends StatelessWidget {
                   )
                 } else if (state is GetProgramsCompleteInitial &&
                     indexOfSwitchCubit == 1) ...{
-                  BlocProvider(
-                      create: (_) => FilterReportsCubit(),
-                      child: GetReportsScreen(
-                        data: state.data,
-                      ))
+                  GetReportsScreen(data: state.data, selectedType: selectedType)
                 } else ...{
                   const SizedBox()
                 }

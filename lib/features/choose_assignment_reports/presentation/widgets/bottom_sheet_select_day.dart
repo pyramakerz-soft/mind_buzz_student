@@ -6,15 +6,19 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../core/app_color.dart';
 import '../../../calender/presentation/widgets/calender_header.dart';
-import '../../../reports/presentation/manager/cubit/filter_reports_cubit.dart';
-import '../manager/bottom_cubit/filter_assignment_cubit.dart';
+import '../../../student_assignment/presentation/manager/filter_assignment_cubit/filter_assignment_cubit.dart';
 
 class BottomSheetSelectDay extends StatelessWidget {
   final bool isFrom;
   final void Function(String? date)? isReport;
+  final DateTime currentDate;
   late PageController pageController;
 
-  BottomSheetSelectDay({Key? key, required this.isFrom, this.isReport})
+  BottomSheetSelectDay(
+      {Key? key,
+      required this.isFrom,
+      this.isReport,
+      required this.currentDate})
       : super(key: key);
 
   @override
@@ -22,14 +26,14 @@ class BottomSheetSelectDay extends StatelessWidget {
     return Column(
       children: [
         TableCalendar(
-          firstDay: DateTime.now().month <= 7
-              ? DateTime(DateTime.now().year - 1, 9, 1)
-              : DateTime(DateTime.now().year, 9, 1),
-          lastDay: DateTime.now().month <= 12 && DateTime.now().month > 8
-              ? DateTime(DateTime.now().year + 1, 8, 31)
-              : DateTime(DateTime.now().year + 1, 8, 31),
-          focusedDay: DateTime.now(),
-          currentDay: DateTime.now(),
+          firstDay: currentDate.month <= 7
+              ? DateTime(currentDate.year - 1, 9, 1)
+              : DateTime(currentDate.year, 9, 1),
+          lastDay: currentDate.month <= 12 && currentDate.month > 8
+              ? DateTime(currentDate.year + 1, 8, 31)
+              : DateTime(currentDate.year + 1, 8, 31),
+          focusedDay: currentDate,
+          currentDay: currentDate,
           headerVisible: true,
           rangeSelectionMode: RangeSelectionMode.toggledOn,
           onDaySelected: (day, focused) {
@@ -49,9 +53,8 @@ class BottomSheetSelectDay extends StatelessWidget {
               if (isReport != null) {
                 isReport!(day.toString().split(' ').first);
               }
-              // context
-              //     .read<FilterReportsCubit>()
-              //     .submitNewDate(newType: day.toString().split(' ').first);
+              context.read<FilterAssignmentCubit>().submitAssignmentDate(
+                  newStatus: day.toString().split(' ').first);
             }
             Navigator.pop(context);
           },

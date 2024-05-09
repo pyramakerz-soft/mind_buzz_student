@@ -17,18 +17,21 @@ import '../../../choose_assignment_reports/presentation/manager/bloc/get_assignm
 import '../../../home/domain/entities/test_model.dart';
 import '../../../login/presentation/page/login_screen.dart';
 import '../../../student_assignment/domain/entities/main_data_test.dart';
-import '../manager/cubit/filter_reports_cubit.dart';
+import '../../../student_assignment/presentation/manager/filter_assignment_cubit/filter_assignment_cubit.dart';
 import '../widgets/card_report.dart';
 import '../../../student_assignment/presentation/widgets/item_selected.dart';
 import '../widgets/main_data.dart';
 
 class GetReportsScreen extends StatelessWidget {
   final MainDataTestsModel data;
+  final String? selectedType;
 
-  const GetReportsScreen({Key? key, required this.data}) : super(key: key);
+  const GetReportsScreen(
+      {Key? key, required this.data, required this.selectedType})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final selectedType = context.watch<FilterReportsCubit>().state.selectedType;
+    // final selectedType = context.watch<FilterAssignmentCubit>().state.selectedType;
 
     return Container(
         margin: const EdgeInsets.symmetric(horizontal: 15),
@@ -77,9 +80,11 @@ class GetReportsScreen extends StatelessWidget {
                                       ? true
                                       : false,
                               onTap: () {
-                                context.read<FilterReportsCubit>().submitNewType(
-                                    newType:
-                                        "${data.testTypes?[index].id ?? 0}");
+                                context
+                                    .read<FilterAssignmentCubit>()
+                                    .submitNewType(
+                                        newType:
+                                            "${data.testTypes?[index].id ?? 0}");
                                 // final date  = ;
                                 context.read<GetAssignmentBloc>().add(
                                     GetReportsRequest(
