@@ -34,7 +34,8 @@ class GetAssignmentScreen extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final indexOfSwitchCubit = context.select((IndexOfSwitchCubit value) => value.state);
+    final indexOfSwitchCubit =
+        context.select((IndexOfSwitchCubit value) => value.state);
 
     return BlocProvider<GetAssignmentBloc>(
         create: (_) => di.sl<GetAssignmentBloc>()
@@ -109,7 +110,7 @@ class GetAssignmentScreen extends StatelessWidget {
                                 vertical: 10, horizontal: 10),
                             child: GestureDetector(
                               onTap: () {
-                                if(indexOfSwitchCubit==0) {
+                                if (indexOfSwitchCubit == 0) {
                                   showModalBottomSheet(
                                       backgroundColor: Colors.white,
                                       context: context,
@@ -117,23 +118,23 @@ class GetAssignmentScreen extends StatelessWidget {
                                       builder: (BuildContext context0) {
                                         return FilterBottomSheetGetAssignment(
                                           addFilter: (int programId,
-                                              String? status,
-                                              String? fromDate,
-                                              String? toDate,
-                                              List<String>? listOfTypes) =>
-                                              context.read<GetAssignmentBloc>()
-                                                  .add(
-                                                  GetAssignmentRequest(
+                                                  String? status,
+                                                  String? fromDate,
+                                                  String? toDate,
+                                                  List<String>? listOfTypes) =>
+                                              context
+                                                  .read<GetAssignmentBloc>()
+                                                  .add(GetAssignmentRequest(
                                                       programId: programId,
                                                       status: status,
                                                       fromDate: fromDate,
                                                       toDate: toDate,
                                                       listOfTypes:
-                                                      listOfTypes)),
-                                          programId: programId,);
+                                                          listOfTypes)),
+                                          programId: programId,
+                                        );
                                       });
-                                }else{
-
+                                } else {
                                   showModalBottomSheet(
                                       backgroundColor: Colors.white,
                                       context: context,
@@ -151,7 +152,9 @@ class GetAssignmentScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(8.42),
                                     color: AppColor.whiteRed),
                                 child: Image.asset(
-                                  (indexOfSwitchCubit==0)? ParentImages.imageFilter:ParentImages.imageDate,
+                                  (indexOfSwitchCubit == 0)
+                                      ? ParentImages.imageFilter
+                                      : ParentImages.imageDate,
                                   height: 16,
                                   width: 16,
                                 ),
@@ -165,58 +168,53 @@ class GetAssignmentScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              body: Column(children: [
+              body:  Column(children: [
                 15.ph,
                 Container(
                     height: 50,
                     margin: const EdgeInsets.symmetric(horizontal: 20),
                     child: const SwitchButton()),
-                if(indexOfSwitchCubit==0)...{
+                if (indexOfSwitchCubit == 0) ...{
                   if (state is GetProgramsLoadingInitial) ...{
                     const Center(child: CupertinoActivityIndicator())
-                  } else
-                    if (state is GetProgramsCompleteInitial) ...{
-                      Expanded(
-                          child: ListView(
-                              children: List.generate(
-                                  state.data.tests?.length ?? 0,
-                                      (index) =>
-                                      Column(
-                                        children: [
-                                          10.ph,
-                                          CardOfDetailsOfAssignment(
-                                            data: state.data.tests?[index] ??
-                                                TestModel(),
-                                            dataOfTypesOfTest: (state
-                                                .data.tests?[index].type ==
-                                                null)
-                                                ? TestsTypesModel()
-                                                : state.data.testTypes
-                                                ?.where((element) =>
-                                            element.id ==
-                                                (state
-                                                    .data
-                                                    .tests?[index]
-                                                    .type ??
-                                                    0))
-                                                .first ??
-                                                TestsTypesModel(),
-                                          ),
-                                          5.ph,
-                                        ],
-                                      ))))
-                    } else
-                      ...{
-                        const SizedBox()
-                      }
-                }else...{
-                BlocProvider(
-                create: (_) => FilterReportsCubit(),
-                child:GetReportsScreen())
+                  } else if (state is GetProgramsCompleteInitial) ...{
+                    Expanded(
+                        child: ListView(
+                            children: List.generate(
+                                state.data.tests?.length ?? 0,
+                                (index) => Column(
+                                      children: [
+                                        10.ph,
+                                        CardOfDetailsOfAssignment(
+                                          data: state.data.tests?[index] ??
+                                              TestModel(),
+                                          dataOfTypesOfTest: (state.data
+                                                      .tests?[index].type ==
+                                                  null)
+                                              ? TestsTypesModel()
+                                              : state.data.testTypes
+                                                      ?.where((element) =>
+                                                          element.id ==
+                                                          (state
+                                                                  .data
+                                                                  .tests?[index]
+                                                                  .type ??
+                                                              0))
+                                                      .first ??
+                                                  TestsTypesModel(),
+                                        ),
+                                        5.ph,
+                                      ],
+                                    ))))
+                  } else ...{
+                    const SizedBox()
+                  }
+                } else ...{
+                  BlocProvider(
+                      create: (_) => FilterReportsCubit(),
+                      child: GetReportsScreen())
                 }
               ]));
-
-
         }));
   }
 }

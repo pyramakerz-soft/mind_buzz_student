@@ -4,13 +4,16 @@ import 'package:percent_indicator/percent_indicator.dart';
 
 import '../../../../core/app_color.dart';
 import '../../../../core/theme_text.dart';
+import '../../../home/domain/entities/test_model.dart';
 
 class CardReport extends StatelessWidget{
-  final bool isPassed;
-  const CardReport({Key? key, required this.isPassed}) : super(key: key);
+  // final bool isPassed;
+  final TestModel data;
+  const CardReport({Key? key,  required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    bool isPassed = (data.score??0)*2 >( data.totalScore??0);
     return Container(
       // height: 150,
       decoration: BoxDecoration(
@@ -34,7 +37,7 @@ class CardReport extends StatelessWidget{
                 animation: true,
                 circularStrokeCap: CircularStrokeCap.round,
                 percent: 0.5,
-                center: const Text("100%"),
+                center:  Text("${((data.score??0)/(data.totalScore??0))*100}%"),
                 progressColor: isPassed==true?AppColor.resetText:AppColor.redColor,
               ),
             ),
@@ -46,7 +49,7 @@ class CardReport extends StatelessWidget{
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'test',
+                    '${data.testName}',
                     style: Theme.of(context)
                         .textTheme
                         .displayLarge
@@ -61,7 +64,7 @@ class CardReport extends StatelessWidget{
                     children: [
                       Expanded(
                         child: Text(
-                          'Lesson 1',
+                          'Lesson ${data.lessonNum}',
                           style: Theme.of(context)
                               .textTheme
                               .headlineMedium
@@ -79,7 +82,7 @@ class CardReport extends StatelessWidget{
                                 fontSize: 12, fontFamily: AppTheme.getFontFamily3(), fontWeight: FontWeight.w400
                             ),),
                           Text(
-                            "${21} day Left",
+                            "${data.score} day ${data.totalScore}",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: isPassed==true?AppColor.resetText:AppColor.redColor,

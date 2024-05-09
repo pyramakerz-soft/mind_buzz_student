@@ -42,7 +42,7 @@ LineChartData mainData(BuildContext context) {
     maxY: 6,
     lineBarsData: [
       LineChartBarData(
-        spots: const [
+        spots:  [
           FlSpot(0, 3),
           FlSpot(2.6, 2),
           FlSpot(4.9, 5),
