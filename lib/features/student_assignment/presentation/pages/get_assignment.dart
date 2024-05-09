@@ -30,115 +30,132 @@ class GetAssignmentScreen extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(kToolbarHeight),
-          child: Container(
-            decoration: const BoxDecoration(boxShadow: [
-              BoxShadow(
-                color: AppColor.lightGreyColor,
-                offset: Offset(1, 1.0),
-                blurRadius: 5.0,
-              )
-            ]),
-            child: Column(
-              children: [
-                AppBar(
-                  leadingWidth: 52,
-                  backgroundColor: Colors.white,
-                  leading: Container(
-                    margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Container(
-                        width: 10,
-                        height: 10,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.42),
-                            color: AppColor.whiteRed),
-                        child: const Icon(Icons.arrow_back),
-                      ),
-                    ),
-                  ),
-                  title: Text(
-                    programName,
-                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          // height: 0,
-                          // letterSpacing: 0.44,
-                          fontSize: 22,
-                        ),
-                  ),
-                  actions: [
-                    Container(
-                      margin:
-                          const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      child: GestureDetector(
-                        onTap: () {
-                          showModalBottomSheet(
-                              backgroundColor: Colors.white,
-                              context: context,
-                              isScrollControlled:true,
-                              builder: (BuildContext context0) {
-                                return  const FilterBottomSheetGetAssignment(
-                                        );
-                              });
-                        },
-                        child: Container(
-                          // width: 10,
-                          padding: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.42),
-                              color: AppColor.whiteRed),
-                          child: Image.asset(ParentImages.imageFilter,height: 16,
-                            width: 16,
+    return BlocProvider<GetAssignmentBloc>(
+        create: (_) => di.sl<GetAssignmentBloc>()
+          ..add(GetAssignmentRequest(programId: programId)),
+        child: BlocConsumer<GetAssignmentBloc, GetAssignmentState>(
+            listener: (context, state) {
+          if (state is GetProgramsErrorInitial) {
+            if (state.message == RELOGIN_FAILURE_MESSAGE) {
+              Utils.navigateAndRemoveUntilTo(LoginScreen(), context);
+            } else {
+              final snackBar = SnackBar(
+                content: Text(state.message),
+              );
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            }
+          } else if (state is LogOutLoadingState) {
+            Navigator.of(context).pop();
+          } else if (state is GetProgramsCompleteInitial) {
+            context.read<BottomCubit>().submitListAssignmentTypes(
+                newStatus: state.data.testTypes ?? [],
+                programId: programId.toString());
+          }
+        }, builder: (context, state) {
+          return Scaffold(
+              appBar: PreferredSize(
+                preferredSize: const Size.fromHeight(kToolbarHeight),
+                child: Container(
+                  decoration: const BoxDecoration(boxShadow: [
+                    BoxShadow(
+                      color: AppColor.lightGreyColor,
+                      offset: Offset(1, 1.0),
+                      blurRadius: 5.0,
+                    )
+                  ]),
+                  child: Column(
+                    children: [
+                      AppBar(
+                        leadingWidth: 52,
+                        backgroundColor: Colors.white,
+                        leading: Container(
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Container(
+                              width: 10,
+                              height: 10,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8.42),
+                                  color: AppColor.whiteRed),
+                              child: const Icon(Icons.arrow_back),
+                            ),
                           ),
                         ),
+                        title: Text(
+                          programName,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge
+                              ?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                // height: 0,
+                                // letterSpacing: 0.44,
+                                fontSize: 22,
+                              ),
+                        ),
+                        actions: [
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            child: GestureDetector(
+                              onTap: () {
+                                showModalBottomSheet(
+                                    backgroundColor: Colors.white,
+                                    context: context,
+                                    isScrollControlled: true,
+                                    builder: (BuildContext context0) {
+                                      return FilterBottomSheetGetAssignment(
+                                          addFilter: (int programId,
+                                                  String? status,
+                                                  String? fromDate,
+                                                  String? toDate,
+                                                  List<String>? listOfTypes) =>
+                                          context.read<GetAssignmentBloc>().add(
+                                                  GetAssignmentRequest(
+                                                      programId: programId,
+                                                      status: status,
+                                                      fromDate: fromDate,
+                                                      toDate: toDate,
+                                                      listOfTypes:
+                                                          listOfTypes)), programId: programId,);
+                                    });
+                              },
+                              child: Container(
+                                // width: 10,
+                                padding: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.42),
+                                    color: AppColor.whiteRed),
+                                child: Image.asset(
+                                  ParentImages.imageFilter,
+                                  height: 16,
+                                  width: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                          // 24.pw,
+                        ],
                       ),
-                    ),
-                    // 24.pw,
-                  ],
+                    ],
+                  ),
                 ),
-              ],
-            ),
-          ),
-        ),
-        body: Column(
-          children: [
-            15.ph,
-            Container(
-                height: 50,
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                child: const SwitchButton()),
-            Expanded(
-              child: BlocProvider<GetAssignmentBloc>(
-                  create: (_) => di.sl<GetAssignmentBloc>()
-                    ..add(GetAssignmentRequest(programId: programId)),
-                  child: BlocConsumer<GetAssignmentBloc, GetAssignmentState>(
-                      listener: (context, state) {
-                    if (state is GetProgramsErrorInitial) {
-                      if (state.message == RELOGIN_FAILURE_MESSAGE) {
-                        Utils.navigateAndRemoveUntilTo(LoginScreen(), context);
-                      } else {
-                        final snackBar = SnackBar(
-                          content: Text(state.message),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      }
-                    } else if (state is LogOutLoadingState) {
-                      Navigator.of(context).pop();
-                    }else if (state is GetProgramsCompleteInitial){
-                      context.read<BottomCubit>().submitListAssignmentTypes(newStatus: state.data.testTypes??[],programId:programId.toString());
-
-                    }
-                  },
-                      builder: (context, state) {
-                    if (state is GetProgramsLoadingInitial) {
-                      return const Center(child: CupertinoActivityIndicator());
-                    } else if (state is GetProgramsCompleteInitial) {
-                      return ListView(
+              ),
+              body: Column(children: [
+                15.ph,
+                Container(
+                    height: 50,
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    child: const SwitchButton()),
+                if (state is GetProgramsLoadingInitial) ...{
+                  const Center(child: CupertinoActivityIndicator())
+                } else if (state is GetProgramsCompleteInitial) ...{
+                  Expanded(
+                      child: ListView(
                           children: List.generate(
                               state.data.tests?.length ?? 0,
                               (index) => Column(
@@ -164,13 +181,11 @@ class GetAssignmentScreen extends StatelessWidget {
                                       ),
                                       5.ph,
                                     ],
-                                  )));
-                    } else {
-                      return const SizedBox();
-                    }
-                  })),
-            ),
-          ],
-        ));
+                                  ))))
+                } else ...{
+                  const SizedBox()
+                }
+              ]));
+        }));
   }
 }

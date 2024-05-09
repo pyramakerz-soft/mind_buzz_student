@@ -27,7 +27,11 @@ class BottomCubit extends Cubit<BottomInitial> {
   }
 
   submitAssignmentStatus({required String newStatus}) {
-    emit(state.copyWith(selectedState: newStatus));
+    if (state.selectedState == newStatus){
+      emit(state.clearSelectedState());
+    }else {
+      emit(state.copyWith(selectedState: newStatus));
+    }
   }
 
   submitAssignmentType({required String newStatus}) async {

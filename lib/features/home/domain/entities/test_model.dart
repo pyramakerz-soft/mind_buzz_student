@@ -11,7 +11,7 @@ class TestModel extends Equatable {
   int? id;
   int? programId;
   int? mistakeCount;
-  String? status;
+  dynamic status;
   int? testId;
   int? lessonNum;
   String? name;

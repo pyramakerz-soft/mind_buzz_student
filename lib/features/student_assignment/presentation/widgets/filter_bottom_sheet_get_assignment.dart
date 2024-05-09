@@ -12,16 +12,19 @@ import 'item_selected.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 
 class FilterBottomSheetGetAssignment extends StatelessWidget {
-  const FilterBottomSheetGetAssignment({Key? key}) : super(key: key);
+  final void Function(int programId,String? status, String? fromDate , String? toDate, List<String>? listOfTypes) addFilter;
+  final int programId;
+  const FilterBottomSheetGetAssignment({Key? key, required this.addFilter, required this.programId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final selectedType = context.watch<BottomCubit>().state.selectedType;
     final selectedState = context.watch<BottomCubit>().state.selectedState;
-    final selectedFromDate = context.watch<BottomCubit>().state.selectedFromDate;
+    final selectedFromDate =
+        context.watch<BottomCubit>().state.selectedFromDate;
     final selectedToDate = context.watch<BottomCubit>().state.selectedToDate;
     final testTypes = context.watch<BottomCubit>().state.testTypes;
-    final programId = context.watch<BottomCubit>().state.programId;
+    // final programId = context.watch<BottomCubit>().state.programId;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -111,24 +114,28 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                       height: 50,
                       width: MediaQuery.of(context).size.width / 2 - 20,
                       child: TextFieldWidget(
-                          controler: TextEditingController(text: selectedFromDate),
+                          controler:
+                              TextEditingController(text: selectedFromDate),
                           readOnly: true,
-                          onTap: (){
+                          onTap: () {
                             showModalBottomSheet(
                                 backgroundColor: Colors.white,
                                 context: context,
                                 builder: (BuildContext context0) {
-                                  return  BottomSheetSelectDay(isFrom: true,);
+                                  return BottomSheetSelectDay(
+                                    isFrom: true,
+                                  );
                                 });
                           },
                           hintText: 'From DD/MM/YY',
                           fontSize: 12,
                           borderRadius: 18,
-                          fillColor:AppColor.whiteBlue2,
+                          fillColor: AppColor.whiteBlue2,
                           borderSideColor: Colors.transparent,
                           rightWidget: Container(
                             padding: const EdgeInsets.all(15),
-                            child: Image.asset(ParentImages.imageDate,
+                            child: Image.asset(
+                              ParentImages.imageDate,
                               height: 10,
                               width: 10,
                             ),
@@ -138,29 +145,32 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                       height: 50,
                       width: MediaQuery.of(context).size.width / 2 - 20,
                       child: TextFieldWidget(
-                          controler: TextEditingController(text: selectedToDate),
+                          controler:
+                              TextEditingController(text: selectedToDate),
                           readOnly: true,
-                          onTap: (){
+                          onTap: () {
                             showModalBottomSheet(
                                 backgroundColor: Colors.white,
                                 context: context,
                                 builder: (BuildContext context0) {
-                                  return  BottomSheetSelectDay(isFrom: false,);
+                                  return BottomSheetSelectDay(
+                                    isFrom: false,
+                                  );
                                 });
                           },
                           hintText: 'To DD/MM/YY',
                           fontSize: 12,
                           borderRadius: 18,
-                          fillColor:AppColor.whiteBlue2,
+                          fillColor: AppColor.whiteBlue2,
                           borderSideColor: Colors.transparent,
                           rightWidget: Container(
                             padding: const EdgeInsets.all(15),
-                            child: Image.asset(ParentImages.imageDate,
+                            child: Image.asset(
+                              ParentImages.imageDate,
                               height: 10,
                               width: 10,
                             ),
-                          )
-                      ),
+                          )),
                     ),
                   ],
                 ),
@@ -188,11 +198,8 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                                   TestTypes.listOfTestTypes[index]) ??
                               false,
                           onTap: () {
-                            context
-                                .read<BottomCubit>()
-                                .submitAssignmentStatus(
-                                    newStatus:
-                                        TestTypes.listOfTestTypes[index]);
+                            context.read<BottomCubit>().submitAssignmentStatus(
+                                newStatus: TestTypes.listOfTestTypes[index]);
                             print("##:${context.read<BottomCubit>().state}");
                           },
                         )),
@@ -215,8 +222,10 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                     testTypes?.length ?? 0,
                     (index) => ItemSelected(
                         onTap: () async {
-                          await context.read<BottomCubit>().submitAssignmentType(
-                              newStatus: "${testTypes?[index].id ?? 0}");
+                          await context
+                              .read<BottomCubit>()
+                              .submitAssignmentType(
+                                  newStatus: "${testTypes?[index].id ?? 0}");
                           print("##:${context.read<BottomCubit>().state}");
                         },
                         itemId: "${testTypes?[index].id ?? 0}",
@@ -227,11 +236,10 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
               ),
               20.ph,
               GestureDetector(
-                onTap: (){
-                  di.sl<GetAssignmentBloc>()
-                    .add(GetAssignmentRequest(programId: int.parse(programId??'0'), status: selectedState, fromDate: selectedFromDate,toDate: selectedToDate, listOfTypes: selectedType??[] ));
-                Navigator.of(context).pop();
-                  },
+                onTap: () {
+                  addFilter( programId,  selectedState,  selectedFromDate, selectedToDate,  selectedType??[] );
+                  Navigator.of(context).pop();
+                },
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   alignment: Alignment.center,

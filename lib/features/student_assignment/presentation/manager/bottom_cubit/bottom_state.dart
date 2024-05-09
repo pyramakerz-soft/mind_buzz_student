@@ -32,6 +32,16 @@ class BottomInitial extends Equatable {
         selectedType: selectedType ?? this.selectedType);
   }
 
+  clearSelectedState(){
+    return BottomInitial(
+        selectedState: null,
+        testTypes: testTypes ?? testTypes,
+        selectedFromDate: selectedFromDate ?? selectedFromDate,
+        selectedToDate: selectedToDate ?? selectedToDate,
+        programId: programId ?? programId,
+        selectedType: selectedType ?? selectedType);
+  }
+
   @override
   List<Object?> get props => [selectedFromDate, selectedType, selectedToDate, selectedState, testTypes, programId];
 }
