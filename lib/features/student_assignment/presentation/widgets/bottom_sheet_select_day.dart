@@ -6,13 +6,15 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../core/app_color.dart';
 import '../../../calender/presentation/widgets/calender_header.dart';
+import '../../../reports/presentation/manager/cubit/filter_reports_cubit.dart';
 import '../manager/bottom_cubit/bottom_cubit.dart';
 
 class BottomSheetSelectDay extends StatelessWidget {
   final bool isFrom;
+  final bool? isReport;
   late PageController pageController;
 
-   BottomSheetSelectDay({Key? key, required this.isFrom}) : super(key: key);
+   BottomSheetSelectDay({Key? key, required this.isFrom, this.isReport}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,17 +33,26 @@ class BottomSheetSelectDay extends StatelessWidget {
           rangeSelectionMode: RangeSelectionMode.toggledOn,
           onDaySelected: (day, focused) {
             print('selected:${day.toString().split(' ').first}');
-            if(isFrom==true) {
-              context.read<BottomCubit>().submitAssignmentFromDate(
-                  newStatus: day
+            if(isReport!=true) {
+              if (isFrom == true) {
+                context.read<BottomCubit>().submitAssignmentFromDate(
+                    newStatus: day
+                        .toString()
+                        .split(' ')
+                        .first);
+              } else {
+                context.read<BottomCubit>().submitAssignmentToDate(
+                    newStatus: day
+                        .toString()
+                        .split(' ')
+                        .first);
+              }
+            }else{
+              context.read<FilterReportsCubit>().submitNewDate(
+                  newType: day
                       .toString()
                       .split(' ')
                       .first);
-            }else {
-              context.read<BottomCubit>().submitAssignmentToDate(newStatus: day
-                  .toString()
-                  .split(' ')
-                  .first);
             }
             Navigator.pop(context);
           },

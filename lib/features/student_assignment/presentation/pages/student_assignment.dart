@@ -71,10 +71,6 @@ class StudentAssignmentScreen extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Column(
               children: [
-                // 40.ph,
-                // const CardOfMyInfo(
-                //   showLogOut: true,
-                // ),
                 10.ph,
                 ...List.generate(
                   assignmentProgrammes

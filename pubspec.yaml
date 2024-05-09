@@ -62,6 +62,8 @@ dependencies:
   sliding_switch: ^1.1.0
   flutter_toggle_tab: ^1.4.1
   table_calendar: ^3.1.1
+  fl_chart: ^0.68.0
+  percent_indicator: ^4.2.3
 #  level_map: ^0.2.0
 
 dev_dependencies:

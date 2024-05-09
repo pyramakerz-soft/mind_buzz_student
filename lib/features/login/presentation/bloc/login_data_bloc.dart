@@ -27,13 +27,13 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
     on<LoginDataEvent>((event, emit) async {
       if (event is LoginRequest) {
         emit(LoadingLoginState());
-        await Future.delayed(Duration(milliseconds: 500));
+        await Future.delayed(const Duration(milliseconds: 500));
         final failureOrDoneMessage = await requestLoginData(
             email: event.email, password: event.password);
         emit(_eitherLoadedOrErrorState(failureOrDoneMessage));
       } else if (event is AutoLoginRequest) {
         emit(LoadingLoginState());
-        await Future.delayed(Duration(milliseconds: 500));
+        await Future.delayed(const Duration(milliseconds: 500));
         final failureOrDoneMessage = await requestAutoUserUseCases();
         emit(_eitherLoadedOrErrorState(failureOrDoneMessage));
       }

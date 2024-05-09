@@ -12,4 +12,8 @@ class CheckAssignmentCubit extends Cubit<CheckAssignmentInitial> {
       : super(const CheckAssignmentInitial()) {
     emit(state.copyWith(assignmentProgrammes: assignmentProgrammes));
   }
+
+  updateIndexOfSwitch({int? newIndex}) {
+    emit(state.copyWith(currentIndexOfSwitch: newIndex));
+  }
 }

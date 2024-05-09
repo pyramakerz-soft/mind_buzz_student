@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_buzz_refactor/core/parent_assets.dart';
 import 'package:mind_buzz_refactor/core/theme_text.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import 'package:mind_buzz_refactor/features/student_assignment/presentation/manager/check_assignment_cubit.dart';
 
 import '../../../../core/app_color.dart';
+import '../manager/index_of_switch_cubit.dart';
 
 class SwitchButton extends StatefulWidget {
   const SwitchButton({Key? key}) : super(key: key);
@@ -87,6 +90,9 @@ class _SwitchButton extends State<SwitchButton>
 
                 ),
               ],
+              onTap: (index){
+                context.read<IndexOfSwitchCubit>().updateIndexOfSwitch(newIndex: index);
+              },
             ),
           ),
     );

@@ -9,7 +9,7 @@ import 'package:meta/meta.dart';
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/error/failures_messages.dart';
 import '../../../domain/entities/main_data_test.dart';
-import '../../../domain/usecases/program_use_cases.dart';
+import '../../../domain/usecases/parent_assignment_use_cases.dart';
 
 part 'get_assignment_event.dart';
 part 'get_assignment_state.dart';

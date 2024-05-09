@@ -43,8 +43,8 @@ class AppTheme {
             fontFamily: getFontFamily3(),
           ),
           displaySmall: TextStyle(
-            color: AppColor.orangeColor,
-            fontFamily: getFontFamily(),
+            color: AppColor.lightGreyColor6,
+            fontFamily: getFontFamily3(),
           ),
           displayMedium: TextStyle(
             color: AppColor.titleColor,

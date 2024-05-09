@@ -10,6 +10,8 @@ import 'core/injection/injection_container.dart' as di;
 import 'features/loading_intro/presentation/page/screen1.dart';
 import 'features/login/presentation/bloc/login_data_bloc.dart';
 import 'features/student_assignment/presentation/manager/bottom_cubit/bottom_cubit.dart';
+import 'features/student_assignment/presentation/manager/index_of_switch_cubit.dart';
+import 'features/student_assignment/presentation/pages/get_assignment.dart';
 import 'features/who_am_i/presentation/manager/who_am_i_cubit.dart';
 import 'features/who_am_i/presentation/pages/who_am_i_screen.dart';
 
@@ -73,7 +75,9 @@ class _MyApp extends State<MyApp> {
                   title: 'Mind buzz2',
                   debugShowCheckedModeBanner: false,
                   theme: AppTheme().lightTheme,
-                  home: const Screens1(),
+                  home: BlocProvider(
+                  create: (_) => IndexOfSwitchCubit(),
+                child:const GetAssignmentScreen(programName: 'dfg', programId: 4,)),
                   // home: const HomeScreen(),
 
                   // home: ChaptersScreen(
