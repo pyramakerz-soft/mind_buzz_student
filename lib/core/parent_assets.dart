@@ -43,4 +43,6 @@ abstract class ParentImages {
   static const String timers = "${mainPathOfSvg}timers.svg";
   static const String imageAssignment = "${mainPathOfImages}assignment.png";
   static const String imageReports = "${mainPathOfImages}reports.png";
+  static const String imageFilter = "${mainPathOfImages}filter.png";
+  static const String imageDate = "${mainPathOfImages}calendar.png";
 }

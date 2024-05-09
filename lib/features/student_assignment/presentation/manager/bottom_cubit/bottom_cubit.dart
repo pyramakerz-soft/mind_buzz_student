@@ -27,25 +27,32 @@ class BottomCubit extends Cubit<BottomInitial> {
   }
 
   submitAssignmentStatus({required String newStatus}) {
-    emit(state.copyWith(selectedState: newStatus));
+    if (state.selectedState == newStatus){
+      emit(state.clearSelectedState());
+    }else {
+      emit(state.copyWith(selectedState: newStatus));
+    }
   }
 
-  submitAssignmentType({required String newStatus}) {
+  submitAssignmentType({required String newStatus}) async {
+    String? selectedState = state.selectedState;
+    List<TestsTypesModel>? testTypes = state.testTypes;
+    String? selectedFromDate = state.selectedFromDate;
+    String? selectedToDate = state.selectedToDate;
     List<String> currentSelectedTypes = state.selectedType??[];
+    emit(SubBottomInitial());
     if(currentSelectedTypes.contains(newStatus)){
-      print('########');
       currentSelectedTypes.remove(newStatus);
-      emit(state.copyWith(selectedType: currentSelectedTypes));
-
     }else{
-      print('----------');
       currentSelectedTypes.add(newStatus);
-      emit(state.copyWith(selectedType: currentSelectedTypes));
     }
-    emit(state);
-    print('currentSelectedTypes:$currentSelectedTypes');
-    print('----currentSelectedTypes:${state.selectedType}');
-
+    emit(BottomInitial(
+        selectedState: selectedState,
+        selectedType: currentSelectedTypes,
+        selectedFromDate: selectedFromDate,
+        selectedToDate: selectedToDate,
+      testTypes: testTypes
+    ));
   }
 
   submitAssignmentFromDate({required String newStatus}) {
@@ -55,8 +62,8 @@ class BottomCubit extends Cubit<BottomInitial> {
   submitAssignmentToDate({required String newStatus}) {
     emit(state.copyWith(selectedToDate: newStatus));
   }
-  submitListAssignmentTypes({required List<TestsTypesModel> newStatus}) {
+  submitListAssignmentTypes({required List<TestsTypesModel> newStatus, required String programId}) {
 
-    emit(state.copyWith(testTypes: newStatus));
+    emit(state.copyWith(testTypes: newStatus, programId:programId));
   }
 }

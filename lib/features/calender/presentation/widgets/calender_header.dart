@@ -24,11 +24,8 @@ class CalendarHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           15.pw,
-          IconButton(
-            icon: Icon(Icons.chevron_left,size: 30,),
-            onPressed: onLeftArrowTap,
-          ),
-          Spacer(),
+
+          // Spacer(),
           Text(
             headerText,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -38,7 +35,10 @@ class CalendarHeader extends StatelessWidget {
           ),
 
           Spacer(),
-
+          IconButton(
+            icon: Icon(Icons.chevron_left,size: 30,),
+            onPressed: onLeftArrowTap,
+          ),
           IconButton(
             icon: Icon(Icons.chevron_right,size: 30,),
             onPressed: onRightArrowTap,

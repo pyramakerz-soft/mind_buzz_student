@@ -9,7 +9,7 @@ class ParentAssignmentUseCases {
 
   ParentAssignmentUseCases(this.repository);
 
-  Future<Either<Failure, MainDataTestsModel>> call({ int? idProgram}) async {
-    return await repository.assignmentDataRepository(idProgram: idProgram);
+  Future<Either<Failure, MainDataTestsModel>> call({ int? idProgram, String? fromDate, String? toDate, String? status, List<String>? listOfTypes}) async {
+    return await repository.assignmentDataRepository(idProgram: idProgram, fromDate:fromDate, toDate:toDate, status:status, listOfTypes:listOfTypes);
   }
 }

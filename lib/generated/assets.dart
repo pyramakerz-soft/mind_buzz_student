@@ -38,6 +38,7 @@ class Assets {
   static const String imagesBgOfMath = 'assets/images/bg_of_math.png';
   static const String imagesBluePen = 'assets/images/blue_pen.png';
   static const String imagesBoarderTitle = 'assets/images/boarder_title.png';
+  static const String imagesCalendar = 'assets/images/calendar.png';
   static const String imagesChapter = 'assets/images/chapter.png';
   static const String imagesCheckpointPart = 'assets/images/checkpoint_part.png';
   static const String imagesChild = 'assets/images/child.png';
@@ -46,6 +47,7 @@ class Assets {
   static const String imagesCompleteBar = 'assets/images/complete_bar.png';
   static const String imagesCurrentBlack = 'assets/images/current_black.png';
   static const String imagesEmptyStar = 'assets/images/empty_star.png';
+  static const String imagesFilter = 'assets/images/filter.png';
   static const String imagesFlowers = 'assets/images/flowers.png';
   static const String imagesGetInstruction = 'assets/images/get_instruction.png';
   static const String imagesHalfBee = 'assets/images/half_bee.png';
@@ -92,6 +94,7 @@ class Assets {
   static const String parentAccountCalenderOutline = 'assets/svg/parent_account/calender_outline.svg';
   static const String parentAccountDefaultAccountImage = 'assets/svg/parent_account/default_account_image.svg';
   static const String parentAccountDefaultUserImage = 'assets/svg/parent_account/default_user_image.png';
+  static const String parentAccountDueIcon = 'assets/svg/parent_account/due_icon.svg';
   static const String parentAccountEditProfile = 'assets/svg/parent_account/edit_profile.svg';
   static const String parentAccountEmailIcon = 'assets/svg/parent_account/email_icon.svg';
   static const String parentAccountHomeIcon = 'assets/svg/parent_account/home_icon.svg';

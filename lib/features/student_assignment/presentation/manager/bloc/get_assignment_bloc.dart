@@ -24,7 +24,9 @@ class GetAssignmentBloc extends Bloc<GetAssignmentEvent, GetAssignmentState> {
       if(event is GetAssignmentRequest){
         emit(GetProgramsLoadingInitial());
         final failureOrDoneMessage =
-        await programUserUseCases(idProgram:event.programId);
+        await programUserUseCases(idProgram:event.programId,
+            status: event.status, fromDate: event.fromDate,
+            toDate: event.toDate,listOfTypes:event.listOfTypes);
         emit(_eitherLoadedOrErrorState(failureOrDoneMessage));
       }
     });
