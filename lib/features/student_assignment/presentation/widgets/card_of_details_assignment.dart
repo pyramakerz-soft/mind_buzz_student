@@ -139,87 +139,109 @@ class CardOfDetailsOfAssignment extends StatelessWidget {
                             : const SizedBox()),
                     Expanded(
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            if(data.status == TestTypes.finished)...{
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        if (data.status == TestTypes.finished) ...{
+                          Text(
+                            "${data.status}",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: AppColor.resetText,
+                                fontSize: 12,
+                                fontFamily: AppTheme.getFontFamily3(),
+                                fontWeight: FontWeight.w400),
+                          ),
+                        } else if (data.status == TestTypes.overdue) ...{
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              SvgPicture.asset(
+                                ParentImages.timers,
+                                height: 13,
+                              ),
+                              5.pw,
+                              Text(
+                                'Deadline  ',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                    fontFamily: AppTheme.getFontFamily3(),
+                                    fontWeight: FontWeight.w400),
+                              ),
                               Text(
                                 "${data.status}",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: AppColor.resetText,
-                                  fontSize: 12, fontFamily: AppTheme.getFontFamily3(), fontWeight: FontWeight.w400
-                                ),
+                                    color: AppColor.redColor,
+                                    fontSize: 12,
+                                    fontFamily: AppTheme.getFontFamily3(),
+                                    fontWeight: FontWeight.w400),
                               ),
-                            }else if(data.status == TestTypes.overdue)...{
-                              Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  SvgPicture.asset(ParentImages.timers, height: 13,),
-                                  5.pw,
-                                  Text('Deadline  ',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 12, fontFamily: AppTheme.getFontFamily3(), fontWeight: FontWeight.w400
-                                    ),),
-                                  Text(
-                                    "${data.status}",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: AppColor.redColor,
-                                        fontSize: 12, fontFamily: AppTheme.getFontFamily3(), fontWeight: FontWeight.w400
-                                    ),
-                                  ),
-                                ],
-                              )
-                            }else if (data.status == TestTypes.dueSoon &&
-                                int.tryParse(data.formattedDueDate ?? '') != null &&
-                                int.parse(data.formattedDueDate ?? '') <= 7)...{
-                              Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  SvgPicture.asset(ParentImages.timers, height: 13,),
-                                  5.pw,
-                                  Text('Deadline  ',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 12, fontFamily: AppTheme.getFontFamily3(), fontWeight: FontWeight.w400
-                                    ),),
-                                  Text(
-                                    "${(int.tryParse(data.formattedDueDate??'0')??0)+1} day Left",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: AppColor.redColor,
-                                        fontSize: 12, fontFamily: AppTheme.getFontFamily3(), fontWeight: FontWeight.w400
-                                    ),
-                                  ),
-                                ],
-                              )
-                            }else...{
-                              Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  SvgPicture.asset(ParentImages.timers, height: 13,),
-                                  5.pw,
-                                  Text('Deadline  ',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 12, fontFamily: AppTheme.getFontFamily3(), fontWeight: FontWeight.w400
-                                    ),),
-                                  Text(
-                                    "${data.daysLeft}",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: AppColor.lightGreyColor4,
-                                        fontSize: 12, fontFamily: AppTheme.getFontFamily3(), fontWeight: FontWeight.w400
-                                    ),
-                                  ),
-                                ],
-                              )
-                            }
-                          ],
-                        ))
+                            ],
+                          )
+                        } else if (data.status == TestTypes.dueSoon &&
+                            int.tryParse(data.formattedDueDate ?? '') != null &&
+                            int.parse(data.formattedDueDate ?? '') <= 7) ...{
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              SvgPicture.asset(
+                                ParentImages.timers,
+                                height: 13,
+                              ),
+                              5.pw,
+                              Text(
+                                'Deadline  ',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                    fontFamily: AppTheme.getFontFamily3(),
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              Text(
+                                "${(int.tryParse(data.formattedDueDate ?? '0') ?? 0) + 1} day Left",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: AppColor.redColor,
+                                    fontSize: 12,
+                                    fontFamily: AppTheme.getFontFamily3(),
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ],
+                          )
+                        } else ...{
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              SvgPicture.asset(
+                                ParentImages.timers,
+                                height: 13,
+                              ),
+                              5.pw,
+                              Text(
+                                'Deadline  ',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                    fontFamily: AppTheme.getFontFamily3(),
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              Text(
+                                "${data.daysLeft}",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: AppColor.lightGreyColor4,
+                                    fontSize: 12,
+                                    fontFamily: AppTheme.getFontFamily3(),
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ],
+                          )
+                        }
+                      ],
+                    ))
                   ],
                 ),
               ),

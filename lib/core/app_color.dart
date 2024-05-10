@@ -55,6 +55,7 @@ class AppColor {
   static const Color lightGreyColor4 = Color(0xFFABABAB);
   static const Color lightGreyColor5 = Color(0xFFCCCCCC);
   static const Color lightGreyColor6 = Color(0xFF77838F);
+  static const Color lightGreyColor7 = Color(0xFF475467);
   static const Color darkBlueColor10 = Color(0x19004279);
   static const Color dividerColor = Color(0xffE5E5E5);
   static const Color darkGreyText = Color(0xff33393E);
@@ -63,6 +64,6 @@ class AppColor {
   Color hexToColor(String code) {
     return Color(int.parse("0xff${code.toString().split("#").last}"));
   }
-  static const Color calenderDayText = Color(0xff3C3C43);
 
+  static const Color calenderDayText = Color(0xff3C3C43);
 }
