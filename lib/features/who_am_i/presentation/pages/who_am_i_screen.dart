@@ -131,6 +131,7 @@ class WhoAmIScreen extends StatelessWidget {
             ),
             const Spacer(),
             ButtonLogin(
+              playButton: (currentIndex != null),
               dataFunction: () {
                 if (currentIndex != null) {
                   log('currentIndex:$currentIndex');

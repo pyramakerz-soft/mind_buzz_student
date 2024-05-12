@@ -176,6 +176,9 @@ class LoginScreen extends StatelessWidget {
                                                   return;
                                                 }
                                                 _formKey.currentState!.save();
+                                                if((supLoginState.disableButton==null?true:(supLoginState.disableButton))!=true){
+                                                  return;
+                                                }
                                                 context
                                                     .read<LoginDataBloc>()
                                                     .add(LoginRequest(

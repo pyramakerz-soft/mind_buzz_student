@@ -26,11 +26,15 @@ class LoginRepositoryImpl implements LoginRepository {
             email: email, password: password);
         return Right(res);
       } on DioException catch (e, s) {
-        if (e is MessageException) {
+       if (e is MessageException) {
           return Left(ServerFailure(message: "${e.message}"));
         }
         return Left(LoginFailure());
       } catch (e, s) {
+        if(json.decode(e.toString())['message']!=null){
+          return Left(ServerFailure(message: json.decode(e.toString())['message']));
+
+        }
         if (e is MessageException) {
           return Left(ServerFailure(message: e.message));
         }
