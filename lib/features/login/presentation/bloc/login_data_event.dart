@@ -3,7 +3,7 @@ part of 'login_data_bloc.dart';
 @immutable
 abstract class LoginDataEvent extends Equatable {
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 
@@ -14,7 +14,7 @@ class LoginRequest extends LoginDataEvent {
   LoginRequest({required this.email, required this.password});
 
   @override
-  List<Object> get props => [email, password];
+  List<Object?> get props => [email, password];
 }
 
 
@@ -26,5 +26,6 @@ class AutoLoginRequest extends LoginDataEvent {
   List<Object> get props => [];
 }
 class InitializeUpdateUserDataEvent extends LoginDataEvent {}
+class ChangeInUpdateUserDataEvent extends LoginDataEvent {}
 class UpdateUserDataEvent extends LoginDataEvent {}
 class PickImageEvent extends LoginDataEvent {}

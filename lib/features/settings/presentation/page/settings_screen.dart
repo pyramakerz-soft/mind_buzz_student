@@ -55,7 +55,7 @@ class SettingsScreen extends StatelessWidget {
                       ),
 
                       SettingItem(
-                        title: 'About US',
+                        title: 'About Us',
                         svgPicture: ParentImages.aboutUS,
                       ),
 

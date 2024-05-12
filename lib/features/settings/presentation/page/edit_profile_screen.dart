@@ -12,6 +12,7 @@ import 'package:mind_buzz_refactor/features/login/domain/entities/user_data_mode
 
 import '../../../../core/error/failures_messages.dart';
 import '../../../../core/utils.dart';
+import '../../../../core/validation_text_field.dart';
 import '../../../../core/widgets/button_start_game.dart';
 import '../../../login/presentation/bloc/login_data_bloc.dart';
 import '../../../login/presentation/page/login_screen.dart';
@@ -20,37 +21,46 @@ import '../widgets/custom_text_field.dart';
 import '../widgets/personal_info_item.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 
-class EditProfileScreen extends StatelessWidget {
+class EditProfileScreen extends StatefulWidget {
   final UserData userData;
 
+
   const EditProfileScreen({Key? key, required this.userData}) : super(key: key);
+
+  @override
+  State<EditProfileScreen> createState() => _EditProfileScreenState();
+}
+
+class _EditProfileScreenState extends State<EditProfileScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(
           context: context, title: 'Personal Info', backIcon: Icons.close),
-      body: BlocProvider(
-        create: (_)=> context.read<LoginDataBloc>()..add(InitializeUpdateUserDataEvent()),
-        child: BlocConsumer<LoginDataBloc, LoginDataState>(
-            listener: (context, state) {
-              if (state is CompleteUpdatingData) {
-                final snackBar = SnackBar(
-                  content: Text(state.message??''),
-                );
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(snackBar);
-              }
-            },
-            builder: (context, state) {
-              LoginDataBloc bloc = context.watch<LoginDataBloc>();
-              if (state is LoadingLoginState) {
-                return const CupertinoActivityIndicator();
-              } else {
-                return Container(
-                  width: 1.sw,
-                  padding: EdgeInsets.all(10.h),
-                  child: SingleChildScrollView(
+      body: BlocConsumer<LoginDataBloc, LoginDataState>(
+          listener: (context, state) {
+            if (state is CompleteUpdatingData) {
+              final snackBar = SnackBar(
+                content: Text(state.message??''),
+              );
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(snackBar);
+            }
+          },
+          builder: (context, state) {
+            LoginDataBloc bloc = context.watch<LoginDataBloc>();
+            if (state is LoadingLoginState) {
+              return const CupertinoActivityIndicator();
+            } else {
+              return Container(
+                width: 1.sw,
+                padding: EdgeInsets.all(10.h),
+                child: SingleChildScrollView(
+                  child: Form(
+                    key: _formKey,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -69,11 +79,11 @@ class EditProfileScreen extends StatelessWidget {
                                    backgroundImage: FileImage(state.userImage!),
                                  )
                               else
-                              userData.parentImage != null
+                              widget.userData.parentImage != null
                                   ? CircleAvatar(
                                       radius: 40.r,
                                       backgroundImage:
-                                          NetworkImage(userData.parentImage!),
+                                          NetworkImage(widget.userData.parentImage!),
                                     )
                                   : CircleAvatar(
                                       radius: 40.r,
@@ -92,18 +102,39 @@ class EditProfileScreen extends StatelessWidget {
                         20.ph,
                           CustomTextField(
                             label: 'Full name',
-                            controller: bloc.fullNameController
+                            controller: bloc.fullNameController,
+                            onChanged: (value){
+                              bloc.add(ChangeInUpdateUserDataEvent());
+                            },
+                            validator: (value){
+                              return ValidationTextField.textInput(value);
+                            },
+
+
+
                           ),
                         20.ph,
                         CustomTextField(
                           label: 'Email',
                           email: true,
                           controller: bloc.emailController,
+                          onChanged: (value){
+                            bloc.add(ChangeInUpdateUserDataEvent());
+                          },
+                          validator: (value){
+                           return ValidationTextField.emailInput(value);
+                          },
                         ),
                         20.ph,
                         CustomTextField(
                           label: 'Phone Number',
                           controller: bloc.phoneController,
+                          onChanged: (value){
+                            bloc.add(ChangeInUpdateUserDataEvent());
+                          },
+                          validator: (value){
+                            return ValidationTextField.textInput(value,length: 5);
+                          },
                         ),
                         50.ph,
                         if(state is UpdatingDataLoading)
@@ -113,7 +144,9 @@ class EditProfileScreen extends StatelessWidget {
                           width: 0.9.sw,
                           title: 'Save Changes',
                           disableAnimation: true,
+                          playButton: state is UpdatingDataChanged,
                           dataFunction: (){
+                            if(_formKey.currentState!.validate())
                             bloc.add(UpdateUserDataEvent());
                           },
                         )
@@ -121,10 +154,10 @@ class EditProfileScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                );
-              }
-            }),
-      ),
+                ),
+              );
+            }
+          }),
     );
   }
 }

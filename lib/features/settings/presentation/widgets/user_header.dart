@@ -19,10 +19,11 @@ class UserHeader extends StatelessWidget {
     return Padding(
       padding:  EdgeInsets.all(5.h),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           image !=null?
           CircleAvatar(
-            radius: 25.h,
+            radius: 30.h,
             backgroundColor: Colors.white,
             backgroundImage: NetworkImage(
               image!,
@@ -32,15 +33,18 @@ class UserHeader extends StatelessWidget {
              ParentImages.defaultUserImage,
             height: 0.08.sh,
           ),
-          25.pw,
+          20.pw,
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(name,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineSmall
-                      ?.copyWith(color: Colors.black)),
+              SizedBox(
+                width: 0.6.sw,
+                child: Text(name,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineSmall
+                        ?.copyWith(color: Colors.black)),
+              ),
               Text(school,
                   style: Theme.of(context)
                       .textTheme

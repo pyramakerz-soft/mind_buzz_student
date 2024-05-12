@@ -30,6 +30,7 @@ class ProfileDataScreen extends StatelessWidget {
               title: 'Personal Info',
               action: GestureDetector(
                 onTap: () {
+                  bloc.add(InitializeUpdateUserDataEvent());
                   Utils.navigateTo(
                       EditProfileScreen(
                         userData: bloc.userData!,

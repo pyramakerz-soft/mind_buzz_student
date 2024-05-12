@@ -17,6 +17,7 @@ class CustomTextField extends StatefulWidget {
         this.disabledColor,
         this.controller,
         this.validator,
+        this.onChanged,
         this.height,
         this.email = false, this.suffixIcon})
       : super(key: key);
@@ -34,6 +35,7 @@ class CustomTextField extends StatefulWidget {
   final Widget ? suffixIcon;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
+  final  Function(String?)? onChanged;
   final double? height ;
 
   @override
@@ -87,12 +89,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   ? TextInputType.emailAddress
                   : TextInputType.text,
               maxLines: widget.description == true ? 6: 1,
-              onChanged: (val) {},
+              onChanged: widget.onChanged,
               decoration: InputDecoration(
                 //    contentPadding: EdgeInsets.zero,
                 //contentPadding: EdgeInsets.only(bottom: widget.height??0.075.sh / 3, left: 4.w,right: 4.w),
 
-                  contentPadding: EdgeInsets.symmetric(vertical: 10.h,horizontal: 2.w),
+                  contentPadding: EdgeInsets.symmetric(vertical: 10.h,horizontal: 5.w),
                   fillColor: AppColor.textFieldColor,
                   filled: true,
                   border: OutlineInputBorder(

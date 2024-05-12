@@ -54,3 +54,5 @@ class UpdatingDataError extends LoginDataState {
   @override
   List<Object?> get props => [message];
 }
+
+class UpdatingDataChanged extends LoginDataState {}

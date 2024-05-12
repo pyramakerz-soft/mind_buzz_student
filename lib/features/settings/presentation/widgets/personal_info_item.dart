@@ -33,11 +33,14 @@ class PersonalInfoItem extends StatelessWidget {
                       .textTheme
                       .titleSmall
                       ?.copyWith(color: AppColor.lightGreyColor3)),
-              Text(value,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleMedium
-                      ?.copyWith(color: isPassword ? AppColor.darkGreyText : Colors.black)),
+              SizedBox(
+                width: 0.7.sw,
+                child: Text(value,
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(color: isPassword ? AppColor.darkGreyText : Colors.black)),
+              ),
             ],
           )
         ],

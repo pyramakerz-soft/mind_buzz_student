@@ -58,6 +58,14 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
       phoneController.text = userData?.parentPhone ?? '';
      emit(UpdatingDataInitial(userData: userData!, userImage: profileImage));
     });
+
+    on<ChangeInUpdateUserDataEvent>((event, emit) {
+      print('fkfgjkfgk');
+      if(fullNameController.text!= userData?.name || emailController.text!= userData?.email || phoneController.text != userData?.parentPhone)
+        emit(UpdatingDataChanged());
+      else
+        emit(UpdatingDataInitial(userData: userData!, userImage: profileImage));
+    });
   }
   LoginDataState _eitherLoadedOrErrorState(
       Either<Failure, UserData> failureOrTrivia,
@@ -86,12 +94,14 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
         userData = data;
         // TODO Dynamic message
         emit(CompleteUpdatingData(userData: data, message: 'Updated Successfully'));
+        emit(AutoLoginRequest());
       });
     } catch (e) {
       log('updateUserData $e ');
       emit(UpdatingDataError(message: e.toString()));
     }
   }
+
 
   pickImage(emit) async{
     emit(UpdatingDataLoading());
@@ -102,6 +112,7 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
     }
     emit(UpdatingDataInitial(userData: userData!, userImage: profileImage));
   }
+
 
 }
 
