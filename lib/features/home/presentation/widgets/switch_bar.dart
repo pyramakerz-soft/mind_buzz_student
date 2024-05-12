@@ -95,6 +95,7 @@ PreferredSizeWidget customAppBar(
           AppBar(
             leadingWidth: 52,
             backgroundColor: Colors.white,
+            surfaceTintColor: Colors.white,
             leading: (Navigator.canPop(context))
                 ? Container(
                     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class Utils {
-  static void navigateTo(Widget screen, BuildContext context) {
+
+  static Future<void> navigateTo(Widget screen, BuildContext context) async {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return screen;
     }));

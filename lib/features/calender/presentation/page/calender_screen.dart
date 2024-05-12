@@ -57,93 +57,99 @@ class CalenderScreen extends StatelessWidget {
                 child: const Center(child:  CupertinoActivityIndicator())),
 
               if (state is GetCalenderCompleteInitial)
-                CalendarHeader(
-                  focusedDay: state.currentDate,
-                  onLeftArrowTap: () {
-                    bloc.add(SwapCalenderEvent(direction: Direction.right));
-                  },
-                  onRightArrowTap: () {
-                    bloc.add(SwapCalenderEvent(direction: Direction.left));
-                  },
+                Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: 3.h),
+                  child: CalendarHeader(
+                    focusedDay: state.currentDate,
+                    onLeftArrowTap: () {
+                      bloc.add(SwapCalenderEvent(direction: Direction.right));
+                    },
+                    onRightArrowTap: () {
+                      bloc.add(SwapCalenderEvent(direction: Direction.left));
+                    },
+                  ),
                 ),
               if (state is GetCalenderCompleteInitial)
-                TableCalendar(
-                  firstDay: DateTime.now().month <= 7
-                      ? DateTime(DateTime.now().year - 1, 9, 1)
-                      : DateTime(DateTime.now().year, 9, 1),
-                  lastDay:
-                      DateTime.now().month <= 12 && DateTime.now().month > 8
-                          ? DateTime(DateTime.now().year + 1, 8, 31)
-                          : DateTime(DateTime.now().year + 1, 8, 31),
-                  focusedDay: state.currentDate,
-                  currentDay: state.currentDate,
-                  headerVisible: false,
-                  rangeSelectionMode: RangeSelectionMode.toggledOn,
-                  onDaySelected: (day, focused) {
-                    bloc.add(SelectDayEvent(day: day.day));
-                  },
-                  onCalendarCreated: (controller) =>
-                      bloc.pageController = controller,
-                  onPageChanged: (focusedDay) {
-                    bloc.add(SelectMonthEvent(currentTime: focusedDay));
-                  },
-                  rowHeight: 40.h,
-                  calendarBuilders: CalendarBuilders(
-                    markerBuilder: (context, day, events) {
-                      if (bloc.tests.map((e) => Utils.parseStringToDate(e.createdAt!)).toList().contains(Utils.formatDate(day))) {
-                        return Align(
-                          alignment: Alignment.topRight,
-                          child: Container(
-                            padding: EdgeInsets.all(5.h),
-                            decoration: BoxDecoration(
-                                color: Utils.formatDate(state.currentDate)== Utils.formatDate(day) ? Colors.white : AppColor.darkBlueColor,
-                                shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black12,
-                                blurRadius: 1,
-                                spreadRadius: 1
-                              )
-                            ]
+                Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: 12.h),
+                  child: TableCalendar(
+                    firstDay: DateTime.now().month <= 7
+                        ? DateTime(DateTime.now().year - 1, 9, 1)
+                        : DateTime(DateTime.now().year, 9, 1),
+                    lastDay:
+                        DateTime.now().month <= 12 && DateTime.now().month > 8
+                            ? DateTime(DateTime.now().year + 1, 8, 31)
+                            : DateTime(DateTime.now().year + 1, 8, 31),
+                    focusedDay: state.currentDate,
+                    currentDay: state.currentDate,
+                    headerVisible: false,
+                    rangeSelectionMode: RangeSelectionMode.toggledOn,
+                    onDaySelected: (day, focused) {
+                      bloc.add(SelectDayEvent(day: day.day));
+                    },
+                    onCalendarCreated: (controller) =>
+                        bloc.pageController = controller,
+                    onPageChanged: (focusedDay) {
+                      bloc.add(SelectMonthEvent(currentTime: focusedDay));
+                    },
+                    rowHeight: 40.h,
+                    calendarBuilders: CalendarBuilders(
+                      markerBuilder: (context, day, events) {
+                        if (bloc.tests.map((e) => Utils.parseStringToDate(e.createdAt!)).toList().contains(Utils.formatDate(day))) {
+                          return Align(
+                            alignment: Alignment.topRight,
+                            child: Container(
+                              padding: EdgeInsets.all(5.h),
+                              decoration: BoxDecoration(
+                                  color: Utils.formatDate(state.currentDate)== Utils.formatDate(day) ? Colors.white : AppColor.darkBlueColor,
+                                  shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 1,
+                                  spreadRadius: 1
+                                )
+                              ]
+                              ),
+                              child: Text(
+                                bloc.tests.where((element) =>
+                                Utils.parseStringToDate(element.createdAt!) ==
+                                    Utils.formatDate(day)    )
+                                    .toList()
+                                    .length
+                                    .toString(),
+                                style: TextStyle(color: Utils.formatDate(state.currentDate)== Utils.formatDate(day) ? AppColor.darkBlueColor: Colors.white),
+                              ),
                             ),
+                          );
+                        }
+                      },
+                      outsideBuilder: (context, day, date) => const SizedBox(),
+                      dowBuilder: (context, day) {
+                        final text = DateFormat.E().format(day);
+                        return Center(
+                          child: Text(
+                            text,
+                            style: TextStyle(
+                                color: AppColor.calenderDayText.withOpacity(0.3)),
+                          ),
+                        );
+                      },
+                      todayBuilder: (context, day, date) {
+                        return Container(
+                          height: 40.h,
+                          decoration: BoxDecoration(
+                              color: AppColor.darkBlueColor,
+                              shape: BoxShape.circle),
+                          child: Center(
                             child: Text(
-                              bloc.tests.where((element) =>
-                              Utils.parseStringToDate(element.createdAt!) ==
-                                  Utils.formatDate(day)    )
-                                  .toList()
-                                  .length
-                                  .toString(),
-                              style: TextStyle(color: Utils.formatDate(state.currentDate)== Utils.formatDate(day) ? AppColor.darkBlueColor: Colors.white),
+                              day.day.toString(),
+                              style: TextStyle(color: Colors.white),
                             ),
                           ),
                         );
-                      }
-                    },
-                    outsideBuilder: (context, day, date) => const SizedBox(),
-                    dowBuilder: (context, day) {
-                      final text = DateFormat.E().format(day);
-                      return Center(
-                        child: Text(
-                          text,
-                          style: TextStyle(
-                              color: AppColor.calenderDayText.withOpacity(0.3)),
-                        ),
-                      );
-                    },
-                    todayBuilder: (context, day, date) {
-                      return Container(
-                        height: 40.h,
-                        decoration: BoxDecoration(
-                            color: AppColor.darkBlueColor,
-                            shape: BoxShape.circle),
-                        child: Center(
-                          child: Text(
-                            day.day.toString(),
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      );
-                    },
+                      },
+                    ),
                   ),
                 ),
               10.ph,
