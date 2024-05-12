@@ -8,6 +8,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mind_buzz_refactor/core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/error/failures_messages.dart';
 import '../../domain/entities/user_data_model.dart';
@@ -72,22 +73,22 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
 
 
   updateUserData(emit)async{
+    emit(UpdatingDataLoading());
     try {
-      emit(UpdatingDataLoading());
       var res = await updateUserDataUseCases(filepath: profileImage , name: fullNameController.text ,
           phone: phoneController.text , email: emailController.text);
 
       res.fold((l) {
-        log('getUserData fold $l');
+        log('updateUserData fold $l');
         emit(UpdatingDataError(message: l.toString()));
       }, (data) {
-        log('getUserDataSuccessfullyState ');
+        log('updateUserDataSuccessfullyState ');
         userData = data;
         // TODO Dynamic message
         emit(CompleteUpdatingData(userData: data, message: 'Updated Successfully'));
       });
     } catch (e) {
-      log('getUserData $e ');
+      log('updateUserData $e ');
       emit(UpdatingDataError(message: e.toString()));
     }
   }

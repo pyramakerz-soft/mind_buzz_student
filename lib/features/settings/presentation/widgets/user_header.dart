@@ -16,29 +16,40 @@ class UserHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Image.asset(
-          image ?? ParentImages.defaultUserImage,
-          height: 0.08.sh,
-        ),
-        10.pw,
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(name,
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineSmall
-                    ?.copyWith(color: Colors.black)),
-            Text(school,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall
-                    ?.copyWith(color: AppColor.lightGreyColor3)),
-          ],
-        ),
-      ],
+    return Padding(
+      padding:  EdgeInsets.all(5.h),
+      child: Row(
+        children: [
+          image !=null?
+          CircleAvatar(
+            radius: 25.h,
+            backgroundColor: Colors.white,
+            backgroundImage: NetworkImage(
+              image!,
+            ),
+          ):
+          Image.asset(
+             ParentImages.defaultUserImage,
+            height: 0.08.sh,
+          ),
+          25.pw,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(name,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineSmall
+                      ?.copyWith(color: Colors.black)),
+              Text(school,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall
+                      ?.copyWith(color: AppColor.lightGreyColor3)),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

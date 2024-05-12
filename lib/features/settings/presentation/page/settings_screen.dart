@@ -9,7 +9,9 @@ import '../../../../core/error/failures_messages.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/parent_assets.dart';
 import '../../../../core/utils.dart';
+import '../../../home/presentation/bloc/get_programs_home_bloc.dart';
 import '../../../home/presentation/widgets/switch_bar.dart';
+import '../../../loading_intro/presentation/bloc/loading_cubit.dart';
 import '../../../login/presentation/bloc/login_data_bloc.dart';
 import '../../../login/presentation/page/login_screen.dart';
 import '../bloc/settings_bloc.dart';
@@ -23,21 +25,21 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-        appBar: customAppBar( context: context,title: 'Setting'),
+        appBar: customAppBar( context: context,title: 'Settings'),
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 15.h),
             child: BlocConsumer<LoginDataBloc, LoginDataState>(
               listener: (context, state) {},
               builder: (context, state) {
+                LoginDataBloc bloc = context.read<LoginDataBloc>();
                 return Padding(
                   padding:  EdgeInsets.only(top: 12.h),
                   child: Column(
                     children: [
-                      if(state is CompleteLogin)
                       UserHeader(
-                        name: state.userData.name ?? '',
-                        school: state.userData.school?.name ?? '',
-                        image: state.userData.parentImage,
+                        name: bloc.userData?.name ?? '',
+                        school: bloc.userData?.school?.name ?? '',
+                        image: bloc.userData?.parentImage,
                       ),
                       if(state is LoadingLoginState)
                       const  UserHeaderLoading(),
@@ -48,8 +50,7 @@ class SettingsScreen extends StatelessWidget {
                         title: 'Personal Info',
                         svgPicture: ParentImages.personalInfo,
                         onTap: (){
-                          if(state is CompleteLogin)
-                          Utils.navigateTo(ProfileDataScreen(userData: state.userData,), context);
+                          Utils.navigateTo(ProfileDataScreen(userData: bloc.userData!,), context);
                         },
                       ),
 
@@ -63,11 +64,24 @@ class SettingsScreen extends StatelessWidget {
                         svgPicture: ParentImages.aboutUS,
                       ),
 
-                      SettingItem(
-                        title: 'Logout',
-                        svgPicture: ParentImages.logout,
-                        isLogout: true,
-                        isLast: true,
+                      BlocProvider<GetProgramsHomeBloc>(
+                        create: (_) => di.sl<GetProgramsHomeBloc>(),
+                        child: SettingItem(
+                          title: 'Logout',
+                          svgPicture: ParentImages.logout,
+                          isLogout: true,
+                          isLast: true,
+                          onTap: (){
+                            di.sl<GetProgramsHomeBloc>()
+                              ..add(LogOutRequest());
+
+                            Utils.navigateAndRemoveUntilTo(
+                                BlocProvider(
+                                    create: (_) => LoadingCubit(),
+                                    child: LoginScreen()),
+                                context);
+                          },
+                        ),
                       ),
                     ],
                   ),

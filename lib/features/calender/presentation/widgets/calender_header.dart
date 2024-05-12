@@ -24,21 +24,21 @@ class CalendarHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           15.pw,
-
-          // Spacer(),
-          Text(
-            headerText,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              color: Colors.black,
-              fontWeight: FontWeight.bold
-            ),
-          ),
-
-          Spacer(),
           IconButton(
             icon: Icon(Icons.chevron_left,size: 30,),
             onPressed: onLeftArrowTap,
           ),
+          Spacer(),
+          Text(
+            headerText,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: Colors.black,
+                fontWeight: FontWeight.bold
+            ),
+          ),
+
+          Spacer(),
+
           IconButton(
             icon: Icon(Icons.chevron_right,size: 30,),
             onPressed: onRightArrowTap,

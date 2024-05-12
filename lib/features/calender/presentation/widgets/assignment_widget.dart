@@ -121,7 +121,7 @@ class AssignmentWidget extends StatelessWidget {
                           fontSize: 12, fontFamily: AppTheme.getFontFamily3(), fontWeight: FontWeight.w700
                       ),),
                     Text(
-                      "${singleTest.formattedDueDate}",
+                      "${singleTest.daysLeft}",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: AppColor.lightGreyColor3.withOpacity(0.7),
