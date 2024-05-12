@@ -16,6 +16,7 @@ class TextFieldWidget extends StatelessWidget {
   final void Function()? onTap;
   final TextInputType? keyboardType;
   final FormFieldValidator? validatorTextField;
+  final void Function(String)? onChanged;
 
   const TextFieldWidget(
       {this.rightWidget,
@@ -28,6 +29,7 @@ class TextFieldWidget extends StatelessWidget {
         this.keyboardType,
         this.fontSize,
         this.borderSideColor,
+        this.onChanged,
         this.borderRadius,
         required this.hintText,
         this.controler,
@@ -41,6 +43,7 @@ class TextFieldWidget extends StatelessWidget {
             initialValue: oldData,
             readOnly: readOnly??false,
             validator: (val) => validatorTextField!(val),
+            onChanged: (val)=> onChanged!(val),
             decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(borderRadius??5.0),

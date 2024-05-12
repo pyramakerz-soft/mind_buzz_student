@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
+import '../../features/login/presentation/cubit/login_state.dart';
 import '../injection/injection_container.dart' as di;
 import '../../features/login/presentation/cubit/login_cubit.dart';
 
@@ -9,11 +10,13 @@ class ButtonLogin extends StatefulWidget {
   final String title;
   final double width;
   final bool? disableAnimation;
+  final bool? playButton;
   const ButtonLogin(
       {Key? key,
       this.disableAnimation,
       required this.dataFunction,
       required this.title,
+      this.playButton ,
       required this.width})
       : super(key: key);
 
@@ -88,15 +91,15 @@ class _ButtonLogin extends State<ButtonLogin>
                 padding:
                     const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                 decoration: BoxDecoration(
-                  color: AppColor.darkBlueColor.withOpacity(.5),
+                  color: (widget.playButton==true)?AppColor.darkBlueColor.withOpacity(.5):AppColor.lightGreyColor8,
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
             ),
-            BlocBuilder<LoginCubit, int>(builder: (context, state) {
+            BlocBuilder<LoginCubit, LoginStateInitial>(builder: (context, state) {
               return AnimatedPositioned(
                 curve: Curves.easeIn,
-                bottom: double.parse("$state"),
+                bottom: double.parse("${state.position??0}"),
                 width: widget.width,
                 duration: const Duration(milliseconds: 70),
                 child: Container(
@@ -107,7 +110,7 @@ class _ButtonLogin extends State<ButtonLogin>
                     // image: DecorationImage(
                     //     image: AssetImage(AppImages.buttonImage),
                     //     fit: BoxFit.fitWidth),
-                    color: AppColor.darkBlueColor,
+                    color: (widget.playButton==true)?AppColor.darkBlueColor:AppColor.lightGreyColor8,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   alignment: Alignment.center,

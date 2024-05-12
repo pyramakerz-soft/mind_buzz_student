@@ -134,12 +134,8 @@ class WhoAmIScreen extends StatelessWidget {
               dataFunction: () {
                 if (currentIndex != null) {
                   log('currentIndex:$currentIndex');
-                  if (currentIndex == 1) {
-                    Utils.navigateTo(const BasedHomeScreen(), context);
-                  } else if (currentIndex == 0) {
-                    Utils.navigateAndRemoveUntilTo(
+                   Utils.navigateAndRemoveUntilTo(
                         const BasedHomeScreen(), context);
-                  }
                 } else {
                   const snackBar = SnackBar(
                     content: Text('select who you are'),

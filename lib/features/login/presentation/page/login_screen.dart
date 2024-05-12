@@ -16,6 +16,7 @@ import '../../../who_am_i/presentation/pages/who_am_i_screen.dart';
 import '../bloc/login_data_bloc.dart';
 import '../cubit/login_cubit.dart';
 import '../../../../core/widgets/button_start_game.dart';
+import '../cubit/login_state.dart';
 import '../widgets/text_field_widget.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -28,6 +29,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final showPassword =
+        context.select((LoginCubit value) => value.state.showPassword) ?? true;
     return Scaffold(
         body: Container(
             decoration: const BoxDecoration(color: AppColor.lightBlueColor8),
@@ -74,18 +77,58 @@ class LoginScreen extends StatelessWidget {
                                   ),
                                   28.ph,
                                   TextFieldWidget(
-                                    controler: _emailController,
-                                    validatorTextField: (val) =>
-                                        ValidationTextField.emailInput(val),
-                                    hintText: 'Email',
-                                  ),
+                                      controler: _emailController,
+                                      validatorTextField: (val) =>
+                                          ValidationTextField.emailInput(val),
+                                      hintText: 'Email',
+                                      onChanged: (val) {
+                                        if (_emailController.text.isNotEmpty &&
+                                            _passwordController
+                                                .text.isNotEmpty) {
+                                          context
+                                              .read<LoginCubit>()
+                                              .updateDisableButton(
+                                                  supState: true);
+                                        } else {
+                                          context
+                                              .read<LoginCubit>()
+                                              .updateDisableButton(
+                                                  supState: false);
+                                        }
+                                      }),
                                   16.ph,
                                   TextFieldWidget(
-                                    controler: _passwordController,
-                                    validatorTextField: (val) =>
-                                        ValidationTextField.passwordInput(val),
-                                    hintText: 'Password',
-                                  ),
+                                      controler: _passwordController,
+                                      validatorTextField: (val) =>
+                                          ValidationTextField.passwordInput(
+                                              val),
+                                      hintText: 'Password',
+                                      obscureText: showPassword,
+                                      rightWidget: IconButton(
+                                        onPressed: () {
+                                          context
+                                              .read<LoginCubit>()
+                                              .updateTheShowPassword();
+                                        },
+                                        icon: Icon(showPassword == true
+                                            ? CupertinoIcons.eye_fill
+                                            : CupertinoIcons.eye_slash_fill, color: Colors.grey,),
+                                      ),
+                                      onChanged: (val) {
+                                        if (_emailController.text.isNotEmpty &&
+                                            _passwordController
+                                                .text.isNotEmpty) {
+                                          context
+                                              .read<LoginCubit>()
+                                              .updateDisableButton(
+                                              supState: true);
+                                        } else {
+                                          context
+                                              .read<LoginCubit>()
+                                              .updateDisableButton(
+                                              supState: false);
+                                        }
+                                      }),
                                   16.ph,
                                   Align(
                                     alignment: Alignment.centerRight,
@@ -119,30 +162,36 @@ class LoginScreen extends StatelessWidget {
                                     if (state is LoadingLoginState) {
                                       return const CupertinoActivityIndicator();
                                     } else {
-                                      return BlocProvider(
-                                          create: (_) => LoginCubit(),
-                                          child: ButtonLogin(
-                                            disableAnimation: true,
-                                            dataFunction: () {
-                                              if (!_formKey.currentState!
-                                                  .validate()) {
-                                                return;
-                                              }
-                                              _formKey.currentState!.save();
-                                              context.read<LoginDataBloc>().add(
-                                                  LoginRequest(
-                                                      email:
-                                                          _emailController.text,
-                                                      password:
-                                                          _passwordController
-                                                              .text));
-                                            },
-                                            title: "Log In",
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width -
-                                                50,
-                                          ));
+                                      return BlocConsumer<LoginCubit,
+                                              LoginStateInitial>(
+                                          listener: (context, supLoginState) {},
+                                          builder: (context, supLoginState) {
+                                            return ButtonLogin(
+                                              playButton:
+                                                  supLoginState.disableButton==null?true:(supLoginState.disableButton),
+                                              disableAnimation: true,
+                                              dataFunction: () {
+                                                if (!_formKey.currentState!
+                                                    .validate()) {
+                                                  return;
+                                                }
+                                                _formKey.currentState!.save();
+                                                context
+                                                    .read<LoginDataBloc>()
+                                                    .add(LoginRequest(
+                                                        email: _emailController
+                                                            .text,
+                                                        password:
+                                                            _passwordController
+                                                                .text));
+                                              },
+                                              title: "Log In",
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width -
+                                                  50,
+                                            );
+                                          });
                                     }
                                   })
                                 ]),
