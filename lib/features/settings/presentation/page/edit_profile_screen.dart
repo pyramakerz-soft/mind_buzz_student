@@ -147,16 +147,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           disableAnimation: true,
                           playButton: state is UpdatingDataChanged,
                           dataFunction: (){
+                            if(state is UpdatingDataChanged) {
                             if (state is UpdatingDataError) {
-                              final snackBar = SnackBar(
-                                content: Text(state.message),
-                              );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
+                              // final snackBar = SnackBar(
+                              //   content: Text(state.message),
+                              // );
+                              // ScaffoldMessenger.of(context)
+                              //     .showSnackBar(snackBar);
                             }
-                            if(_formKey.currentState!.validate())
-                            bloc.add(UpdateUserDataEvent());
-                          },
+                            if (_formKey.currentState!.validate())
+                              bloc.add(UpdateUserDataEvent());
+                          }
+                        },
                         )
 
                       ],

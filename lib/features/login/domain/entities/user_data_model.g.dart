@@ -8,6 +8,7 @@ part of 'user_data_model.dart';
 
 UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       id: (json['id'] as num?)?.toInt(),
+      pwLength: (json['pw_length'] as num?)?.toInt(),
       name: json['name'] as String?,
       email: json['email'] as String?,
       emailVerifiedAt: json['email_verified_at'] as String?,
@@ -30,6 +31,7 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
 Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'pw_length': instance.pwLength,
       'email': instance.email,
       'email_verified_at': instance.emailVerifiedAt,
       'created_at': instance.createdAt,
