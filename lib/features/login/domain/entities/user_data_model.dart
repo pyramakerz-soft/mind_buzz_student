@@ -9,6 +9,7 @@ part 'user_data_model.g.dart';
 @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
 class UserData extends Equatable {
   int? id;
+  int? pwLength;
   String? name;
   String? email;
   String? emailVerifiedAt;
@@ -26,6 +27,7 @@ class UserData extends Equatable {
 
   UserData(
       {this.id,
+      this.pwLength,
       this.name,
       this.email,
       this.emailVerifiedAt,

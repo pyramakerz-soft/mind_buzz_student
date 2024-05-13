@@ -60,7 +60,6 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
     });
 
     on<ChangeInUpdateUserDataEvent>((event, emit) {
-      print('fkfgjkfgk');
       if(fullNameController.text!= userData?.name || emailController.text!= userData?.email || phoneController.text != userData?.parentPhone)
         emit(UpdatingDataChanged());
       else

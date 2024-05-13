@@ -83,7 +83,7 @@ class ProfileDataScreen extends StatelessWidget {
                     PersonalInfoItem(
                       title: 'Password',
                       value: List.generate(
-                          bloc.userData!.parentPassword?.split('').length ?? 10,
+                          bloc.userData!.pwLength ?? 10,
                           (index) => '*').toList().join(),
                       icon: ParentImages.lock,
                       isPassword: true,

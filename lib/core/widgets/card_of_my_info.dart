@@ -27,6 +27,7 @@ class CardOfMyInfo extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
+
           children: [
             15.pw,
             if( userData?.parentImage!= null)
@@ -42,24 +43,23 @@ class CardOfMyInfo extends StatelessWidget {
               borderRadius: BorderRadius.circular(100),
               child: Image.asset(
                 AppImages.imagePersonAvatar,
-                width: 22.h,
+                width: 50,
               ),
             ),
             10.pw,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width-100,
-                  child: Text(
-                    'Hi ${userData?.name ?? ''} !',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineLarge
-                        ?.copyWith(fontSize: 18, fontWeight: FontWeight.w700),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
+                 SizedBox(
+                   width: 0.7.sw,
+                   child: Text(
+                     'Hi ${userData?.name ?? ''} !',
+                     style: Theme.of(context)
+                         .textTheme
+                         .headlineLarge
+                         ?.copyWith(fontSize: 18, fontWeight: FontWeight.w700),
+                   ),
+                 ),
                 Text(userData?.school?.name ?? '',
                     style: Theme.of(context)
                         .textTheme
