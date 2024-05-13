@@ -191,10 +191,18 @@ class ChooseAssignmentReportsScreen extends StatelessWidget {
                       child: SwitchButton(
                         getAssignment: () {
                           context
+                              .read<FilterAssignmentCubit>()
+                              .clearAssignmentFilter();
+
+                          context
                               .read<GetAssignmentBloc>()
                               .add(GetAssignmentRequest(programId: programId));
                         },
                         getReports: () {
+                          context
+                              .read<FilterAssignmentCubit>()
+                              .clearReportFilter();
+
                           context
                               .read<GetAssignmentBloc>()
                               .add(GetReportsRequest());
