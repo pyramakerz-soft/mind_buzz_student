@@ -70,7 +70,7 @@ class WhoAmIScreen extends StatelessWidget {
                               onTap: () {
                                 di.sl<GetProgramsHomeBloc>()
                                   ..add(LogOutRequest());
-
+                                context.read<WhoAmICubit>().clearIndex();
                                 Utils.navigateAndRemoveUntilTo(
                                     BlocProvider(
                                         create: (_) => LoadingCubit(),

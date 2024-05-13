@@ -31,7 +31,7 @@ class CardOfMyInfo extends StatelessWidget {
             15.pw,
             if( userData?.parentImage!= null)
               CircleAvatar(
-                radius: 25.h,
+                radius: 22.h,
                 backgroundColor: Colors.white,
                 backgroundImage: NetworkImage(
                   userData!.parentImage!,
@@ -42,18 +42,23 @@ class CardOfMyInfo extends StatelessWidget {
               borderRadius: BorderRadius.circular(100),
               child: Image.asset(
                 AppImages.imagePersonAvatar,
-                width: 50,
+                width: 22.h,
               ),
             ),
             10.pw,
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Hi ${userData?.name ?? ''} !',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineLarge
-                      ?.copyWith(fontSize: 18, fontWeight: FontWeight.w700),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width-100,
+                  child: Text(
+                    'Hi ${userData?.name ?? ''} !',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineLarge
+                        ?.copyWith(fontSize: 18, fontWeight: FontWeight.w700),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 Text(userData?.school?.name ?? '',
                     style: Theme.of(context)

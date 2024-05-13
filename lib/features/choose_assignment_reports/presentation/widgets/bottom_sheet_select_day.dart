@@ -26,20 +26,17 @@ class BottomSheetSelectDay extends StatelessWidget {
     return Column(
       children: [
         TableCalendar(
-          firstDay: currentDate.month <= 7
-              ? DateTime(currentDate.year - 1, 9, 1)
-              : DateTime(currentDate.year, 9, 1),
+          firstDay: DateTime.now().month <= 7
+              ? DateTime(DateTime.now().year - 1, 9, 1)
+              : DateTime(DateTime.now().year, 9, 1),
           lastDay: currentDate.month <= 12 && currentDate.month > 8
-              ? DateTime(currentDate.year + 1, 8, 31)
-              : DateTime(currentDate.year + 1, 8, 31),
+              ? DateTime(DateTime.now().year + 1, 8, 31)
+              : DateTime(DateTime.now().year + 1, 8, 31),
           focusedDay: currentDate,
           currentDay: currentDate,
           headerVisible: true,
           rangeSelectionMode: RangeSelectionMode.toggledOn,
           onDaySelected: (day, focused) {
-            print('selected:${day.toString().split(' ').first}');
-            print('------:${(isReport != null)}');
-
             if (isReport == null) {
               if (isFrom == true) {
                 context.read<FilterAssignmentCubit>().submitAssignmentFromDate(
@@ -49,7 +46,6 @@ class BottomSheetSelectDay extends StatelessWidget {
                     newStatus: day.toString().split(' ').first);
               }
             } else {
-              print('------:${(isReport != null)}');
               if (isReport != null) {
                 isReport!(day.toString().split(' ').first);
               }

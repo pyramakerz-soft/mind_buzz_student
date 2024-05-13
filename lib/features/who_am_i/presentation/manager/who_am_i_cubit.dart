@@ -7,4 +7,7 @@ class WhoAmICubit extends Cubit<int?> {
   addToSelected({required int newIndex}){
     emit(newIndex);
   }
+  clearIndex(){
+    emit(null);
+  }
 }

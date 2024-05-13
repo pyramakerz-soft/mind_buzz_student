@@ -23,7 +23,8 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       parentPassword: json['parent_password'] as String?,
       role: json['role'] as String?,
       schoolId: (json['school_id'] as num?)?.toInt(),
-      details: (json['details'] as List<dynamic>?)?.map((e) => UserDetails.fromJson(e as Map<String, dynamic>))
+      details: (json['details'] as List<dynamic>?)
+          ?.map((e) => UserDetails.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
