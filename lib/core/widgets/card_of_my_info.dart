@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 import '../../../../core/injection/injection_container.dart' as di;
@@ -27,6 +28,16 @@ class CardOfMyInfo extends StatelessWidget {
       children: [
         Row(
           children: [
+            15.pw,
+            if( userData?.parentImage!= null)
+              CircleAvatar(
+                radius: 25.h,
+                backgroundColor: Colors.white,
+                backgroundImage: NetworkImage(
+                  userData!.parentImage!,
+                ),
+              )
+            else
             ClipRRect(
               borderRadius: BorderRadius.circular(100),
               child: Image.asset(

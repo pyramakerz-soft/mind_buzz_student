@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:mind_buzz_refactor/features/login/domain/entities/user_details_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'school_model.dart';
@@ -21,6 +22,7 @@ class UserData extends Equatable {
   String? parentPassword;
   int? schoolId;
   SchoolModel? school;
+  List<UserDetails>? details;
 
   UserData(
       {this.id,
@@ -36,7 +38,9 @@ class UserData extends Equatable {
         this.parentImage,
         this.parentPassword,
       this.role,
-      this.schoolId});
+      this.schoolId,
+        this.details
+      });
   factory UserData.fromJson(Map<String, dynamic> json) {
     String? token = json['token'];
     if(token!=null) {

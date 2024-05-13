@@ -22,7 +22,6 @@ import '../../../login/presentation/page/login_screen.dart';
 import '../../../student_assignment/presentation/widgets/card_of_assignment.dart';
 import '../bloc/calender_bloc.dart';
 import '../widgets/assignment_widget.dart';
-import '../widgets/calender_header.dart';
 import '../widgets/empty_ests_widget.dart';
 
 class CalenderScreen extends StatelessWidget {
@@ -56,19 +55,19 @@ class CalenderScreen extends StatelessWidget {
                 width: 1.sw,
                 child: const Center(child:  CupertinoActivityIndicator())),
 
-              if (state is GetCalenderCompleteInitial)
-                Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 3.h),
-                  child: CalendarHeader(
-                    focusedDay: state.currentDate,
-                    onLeftArrowTap: () {
-                      bloc.add(SwapCalenderEvent(direction: Direction.right));
-                    },
-                    onRightArrowTap: () {
-                      bloc.add(SwapCalenderEvent(direction: Direction.left));
-                    },
-                  ),
-                ),
+              // if (state is GetCalenderCompleteInitial)
+              //   Padding(
+              //     padding:  EdgeInsets.symmetric(horizontal: 3.h),
+              //     child: CalendarHeader(
+              //       focusedDay: state.currentDate,
+              //       onLeftArrowTap: () {
+              //         bloc.add(SwapCalenderEvent(direction: Direction.right));
+              //       },
+              //       onRightArrowTap: () {
+              //         bloc.add(SwapCalenderEvent(direction: Direction.left));
+              //       },
+              //     ),
+              //   ),
               if (state is GetCalenderCompleteInitial)
                 Padding(
                   padding:  EdgeInsets.symmetric(horizontal: 12.h),
@@ -79,10 +78,10 @@ class CalenderScreen extends StatelessWidget {
                     lastDay:
                         DateTime.now().month <= 12 && DateTime.now().month > 8
                             ? DateTime(DateTime.now().year + 1, 8, 31)
-                            : DateTime(DateTime.now().year + 1, 8, 31),
+                            : DateTime(DateTime.now().year, 8, 31),
                     focusedDay: state.currentDate,
                     currentDay: state.currentDate,
-                    headerVisible: false,
+                    headerVisible: true,
                     rangeSelectionMode: RangeSelectionMode.toggledOn,
                     onDaySelected: (day, focused) {
                       bloc.add(SelectDayEvent(day: day.day));
@@ -93,6 +92,9 @@ class CalenderScreen extends StatelessWidget {
                       bloc.add(SelectMonthEvent(currentTime: focusedDay));
                     },
                     rowHeight: 40.h,
+                    headerStyle: HeaderStyle(
+                      formatButtonVisible: false
+                    ),
                     calendarBuilders: CalendarBuilders(
                       markerBuilder: (context, day, events) {
                         if (bloc.tests.map((e) => Utils.parseStringToDate(e.createdAt!)).toList().contains(Utils.formatDate(day))) {
@@ -149,6 +151,18 @@ class CalenderScreen extends StatelessWidget {
                           ),
                         );
                       },
+                      headerTitleBuilder: (context , day){
+                        return Center(
+                          child: Text(
+                            DateFormat.yMMM().format(day),
+                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold
+                            ),
+                          ),
+                        );
+                      }
+
                     ),
                   ),
                 ),

@@ -38,7 +38,7 @@ class SettingsScreen extends StatelessWidget {
                     children: [
                       UserHeader(
                         name: bloc.userData?.name ?? '',
-                        school: bloc.userData?.school?.name ?? '',
+                        school: bloc.userData?.details?[0].stage?.name ?? '',
                         image: bloc.userData?.parentImage,
                       ),
                       if(state is LoadingLoginState)
