@@ -59,7 +59,7 @@ class FilterAssignmentCubit extends Cubit<FilterAssignmentInitial> {
   }
 
   submitAssignmentDate({required String newStatus}) {
-    emit(state.copyWith(selectedDate: newStatus));
+    emit(state.copyWith(selectedDateReport: newStatus));
   }
 
   submitNewType({required String newType}) {
@@ -73,5 +73,9 @@ class FilterAssignmentCubit extends Cubit<FilterAssignmentInitial> {
   submitListAssignmentTypes(
       {required List<TestsTypesModel> newStatus, required String programId}) {
     emit(state.copyWith(testTypes: newStatus, programId: programId));
+  }
+
+  clearState() {
+    emit(state.clearFilter());
   }
 }

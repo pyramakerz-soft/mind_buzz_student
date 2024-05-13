@@ -6,19 +6,24 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../core/app_color.dart';
 
+import '../../../../core/error/failures_messages.dart';
 import '../../../student_assignment/presentation/manager/filter_assignment_cubit/filter_assignment_cubit.dart';
 
 class BottomSheetSelectDay extends StatelessWidget {
   final bool isFrom;
   final void Function(String? date)? isReport;
   final DateTime currentDate;
+  final DateTime? checkStartDate;
+  final DateTime? checkEndDate;
   late PageController pageController;
 
   BottomSheetSelectDay(
       {Key? key,
       required this.isFrom,
       this.isReport,
-      required this.currentDate})
+      this.checkEndDate,
+      required this.currentDate,
+      this.checkStartDate})
       : super(key: key);
 
   @override
@@ -26,12 +31,14 @@ class BottomSheetSelectDay extends StatelessWidget {
     return Column(
       children: [
         TableCalendar(
-          firstDay: DateTime.now().month <= 7
-              ? DateTime(DateTime.now().year - 1, 9, 1)
-              : DateTime(DateTime.now().year, 9, 1),
-          lastDay: currentDate.month <= 12 && currentDate.month > 8
-              ? DateTime(DateTime.now().year + 1, 8, 31)
-              : DateTime(DateTime.now().year + 1, 8, 31),
+          firstDay: checkStartDate ??
+              (DateTime.now().month <= 7
+                  ? DateTime(DateTime.now().year - 1, 9, 1)
+                  : DateTime(DateTime.now().year, 9, 1)),
+          lastDay: checkEndDate ??
+              (currentDate.month <= 12 && currentDate.month > 8
+                  ? DateTime(DateTime.now().year + 1, 8, 31)
+                  : DateTime(DateTime.now().year + 1, 8, 31)),
           focusedDay: currentDate,
           currentDay: currentDate,
           headerVisible: true,

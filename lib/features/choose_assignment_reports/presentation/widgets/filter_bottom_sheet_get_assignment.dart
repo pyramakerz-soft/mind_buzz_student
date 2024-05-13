@@ -128,11 +128,13 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                                 context: context,
                                 builder: (BuildContext context0) {
                                   return BottomSheetSelectDay(
-                                    isFrom: true,
-                                    currentDate: selectedFromDate != null
-                                        ? DateTime.parse(selectedFromDate)
-                                        : DateTime.now(),
-                                  );
+                                      isFrom: true,
+                                      currentDate: selectedFromDate != null
+                                          ? DateTime.parse(selectedFromDate)
+                                          : DateTime.now(),
+                                      checkEndDate: (selectedToDate != null)
+                                          ? DateTime.parse(selectedToDate)
+                                          : null);
                                 });
                           },
                           hintText: 'From DD/MM/YY',
@@ -166,6 +168,9 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                                     currentDate: selectedToDate != null
                                         ? DateTime.parse(selectedToDate)
                                         : DateTime.now(),
+                                    checkStartDate: (selectedFromDate != null)
+                                        ? DateTime.parse(selectedFromDate)
+                                        : null,
                                   );
                                 });
                           },
