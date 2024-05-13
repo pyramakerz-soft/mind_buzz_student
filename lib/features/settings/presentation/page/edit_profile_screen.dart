@@ -107,7 +107,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               bloc.add(ChangeInUpdateUserDataEvent());
                             },
                             validator: (value){
-                              return ValidationTextField.textInput(value);
+                              return ValidationTextField.textOnlyInput(value);
                             },
 
 
@@ -129,6 +129,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         CustomTextField(
                           label: 'Phone Number',
                           controller: bloc.phoneController,
+                          number: true,
                           onChanged: (value){
                             bloc.add(ChangeInUpdateUserDataEvent());
                           },
@@ -146,6 +147,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           disableAnimation: true,
                           playButton: state is UpdatingDataChanged,
                           dataFunction: (){
+                            if (state is UpdatingDataError) {
+                              final snackBar = SnackBar(
+                                content: Text(state.message),
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            }
                             if(_formKey.currentState!.validate())
                             bloc.add(UpdateUserDataEvent());
                           },

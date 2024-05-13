@@ -25,4 +25,19 @@ abstract class ValidationTextField {
       return null;
     }
   }
+
+  static textOnlyInput(String? value,{int? minLength , int? maxLength}) {
+    if ((value?.length ?? 0) < (minLength ?? 3)) {
+      return 'length must be more than ${minLength ?? 3} letters';
+    }  if ((value?.length ?? 0) > (maxLength ?? 20)) {
+      return 'length must be less than ${(maxLength??20) + 1} letters';
+    }
+
+    else if (RegExp(r'[a-zA-Z]').hasMatch(value!)){
+      return null;
+    }
+    else{
+      return 'this field accepts letters only';
+    }
+  }
 }

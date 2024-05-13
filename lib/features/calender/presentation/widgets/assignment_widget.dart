@@ -100,6 +100,7 @@ class AssignmentWidget extends StatelessWidget {
                 ],
               ),
             ),
+            if(AssignmentStatus.notStarted.text() == singleTest.status)
             Row(
               children: [
                 Text(
