@@ -48,14 +48,31 @@ class GetReportsScreen extends StatelessWidget {
                     fontSize: 18,
                   ),
             ),
-            SizedBox(
-              // aspectRatio: 1.70,
-              height: 250,
-              width: MediaQuery.of(context).size.width - 30,
-              child: LineChart(
-                mainData(context, data.getDataOfFlSpot()),
+            if (data.getDataOfFlSpot().isNotEmpty &&
+                data.getDataOfFlSpot().keys.first.isNotEmpty) ...{
+              SizedBox(
+                // aspectRatio: 1.70,
+                height: 250,
+                width: MediaQuery.of(context).size.width - 30,
+                child: LineChart(
+                  mainData(context, data.getDataOfFlSpot()),
+                ),
               ),
-            ),
+            } else ...{
+              Container(
+                alignment: Alignment.center,
+                // aspectRatio: 1.70,
+                height: 250,
+                width: MediaQuery.of(context).size.width - 30,
+                child: Text(
+                  'There is not data to show',
+                  style: Theme.of(context)
+                      .textTheme
+                      .displayLarge
+                      ?.copyWith(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ),
+            },
             5.ph,
             Divider(
               height: 1,

@@ -55,7 +55,7 @@ class FilterAssignmentInitial extends Equatable {
   clearFilter() {
     return FilterAssignmentInitial(
         selectedState: null,
-        testTypes: null,
+        testTypes: testTypes ?? testTypes,
         selectedFromDate: null,
         selectedTypeReport: null,
         selectedToDate: null,
@@ -79,7 +79,7 @@ class FilterAssignmentInitial extends Equatable {
   clearAssignmentFilter() {
     return FilterAssignmentInitial(
         selectedState: null,
-        testTypes: null,
+        testTypes: testTypes ?? testTypes,
         selectedFromDate: null,
         selectedTypeReport: selectedTypeReport ?? selectedTypeReport,
         selectedToDate: null,

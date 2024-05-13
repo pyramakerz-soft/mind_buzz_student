@@ -255,30 +255,59 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                                 ?.contains("${testTypes?[index].id ?? 0}") ??
                             false)),
               ),
-              20.ph,
-              GestureDetector(
-                onTap: () {
-                  addFilter(programId, selectedState, selectedFromDate,
-                      selectedToDate, selectedType ?? []);
-                  Navigator.of(context).pop();
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width - 20,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: AppColor.darkBlueColor),
-                  child: Text(
-                    'Done',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall
-                        ?.copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+              10.ph,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      context
+                          .read<FilterAssignmentCubit>()
+                          .clearAssignmentFilter();
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      alignment: Alignment.center,
+                      width: (MediaQuery.of(context).size.width - 40) / 2,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: AppColor.darkBlueColor),
+                          color: Colors.white),
+                      child: Text(
+                        'Reset',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge
+                            ?.copyWith(
+                                fontSize: 16, fontWeight: FontWeight.w500),
+                      ),
+                    ),
                   ),
-                ),
+                  20.pw,
+                  GestureDetector(
+                    onTap: () {
+                      addFilter(programId, selectedState, selectedFromDate,
+                          selectedToDate, selectedType ?? []);
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      alignment: Alignment.center,
+                      width: (MediaQuery.of(context).size.width - 40) / 2,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: AppColor.darkBlueColor),
+                      child: Text(
+                        'Done',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            fontSize: 16, fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              20.ph
+              30.ph
             ],
           ),
         ),

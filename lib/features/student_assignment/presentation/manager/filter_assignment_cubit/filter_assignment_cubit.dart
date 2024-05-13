@@ -58,7 +58,7 @@ class FilterAssignmentCubit extends Cubit<FilterAssignmentInitial> {
     emit(state.copyWith(selectedFromDate: newStatus));
   }
 
-  submitAssignmentDate({required String newStatus}) {
+  submitReportDate({required String newStatus}) {
     emit(state.copyWith(selectedDateReport: newStatus));
   }
 
@@ -77,5 +77,13 @@ class FilterAssignmentCubit extends Cubit<FilterAssignmentInitial> {
 
   clearState() {
     emit(state.clearFilter());
+  }
+
+  clearReportFilter() {
+    emit(state.clearReportFilter());
+  }
+
+  clearAssignmentFilter() {
+    emit(state.clearAssignmentFilter());
   }
 }
