@@ -38,7 +38,7 @@ class _BottomSheetSelectDay extends State<BottomSheetSelectDay> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
+      // mainAxisSize: MainAxisSize.min,
       children: [
         TableCalendar(
           firstDay: widget.checkStartDate ??
@@ -49,10 +49,14 @@ class _BottomSheetSelectDay extends State<BottomSheetSelectDay> {
               (widget.currentDate.month <= 12 && widget.currentDate.month > 8
                   ? DateTime(DateTime.now().year + 1, 8, 31)
                   : DateTime(DateTime.now().year + 1, 8, 31)),
-          focusedDay: widget.currentDate,
+          focusedDay: widget.checkStartDate??widget.currentDate,
           currentDay: tempDate != null
               ? DateTime.parse(tempDate ?? '')
-              : widget.currentDate,
+              : widget.checkStartDate!=null?
+                (widget.checkStartDate??DateTime.now()).isAfter(widget.currentDate)
+                    ?null
+                    :widget.currentDate
+                :widget.currentDate,
           headerVisible: true,
           rangeSelectionMode: RangeSelectionMode.toggledOn,
           onDaySelected: (day, focused) {
