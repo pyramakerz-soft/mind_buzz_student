@@ -55,160 +55,175 @@ class ChooseAssignmentReportsScreen extends StatelessWidget {
           final selectedType =
               context.watch<FilterAssignmentCubit>().state.selectedTypeReport;
 
-          return Scaffold(
-              appBar: PreferredSize(
-                preferredSize: const Size.fromHeight(kToolbarHeight),
-                child: Container(
-                  decoration: const BoxDecoration(boxShadow: [
-                    BoxShadow(
-                      color: AppColor.lightGreyColor,
-                      offset: Offset(1, 1.0),
-                      blurRadius: 5.0,
-                    )
-                  ]),
-                  child: Column(
-                    children: [
-                      AppBar(
-                        leadingWidth: 52,
-                        backgroundColor: Colors.white,
-                        leading: Container(
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 10),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Container(
-                              width: 10,
-                              height: 10,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.42),
-                                  color: AppColor.whiteRed),
-                              child: const Icon(Icons.arrow_back),
-                            ),
-                          ),
-                        ),
-                        title: Text(
-                          programName,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineLarge
-                              ?.copyWith(
-                                fontWeight: FontWeight.w600,
-                                // height: 0,
-                                // letterSpacing: 0.44,
-                                fontSize: 22,
-                              ),
-                        ),
-                        actions: [
-                          Container(
+          return PopScope(
+            onPopInvoked: (x) {
+              context.read<FilterAssignmentCubit>().clearState();
+            },
+            child: Scaffold(
+                appBar: PreferredSize(
+                  preferredSize: const Size.fromHeight(kToolbarHeight),
+                  child: Container(
+                    decoration: const BoxDecoration(boxShadow: [
+                      BoxShadow(
+                        color: AppColor.lightGreyColor,
+                        offset: Offset(1, 1.0),
+                        blurRadius: 5.0,
+                      )
+                    ]),
+                    child: Column(
+                      children: [
+                        AppBar(
+                          leadingWidth: 52,
+                          backgroundColor: Colors.white,
+                          leading: Container(
                             margin: const EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 10),
                             child: GestureDetector(
                               onTap: () {
-                                if (indexOfSwitchCubit == 0) {
-                                  showModalBottomSheet(
-                                      backgroundColor: Colors.white,
-                                      context: context,
-                                      isScrollControlled: true,
-                                      builder: (BuildContext context0) {
-                                        return FilterBottomSheetGetAssignment(
-                                          addFilter: (int programId,
-                                                  String? status,
-                                                  String? fromDate,
-                                                  String? toDate,
-                                                  List<String>? listOfTypes) =>
-                                              context
-                                                  .read<GetAssignmentBloc>()
-                                                  .add(GetAssignmentRequest(
-                                                      programId: programId,
-                                                      status: status,
-                                                      fromDate: fromDate,
-                                                      toDate: toDate,
-                                                      listOfTypes:
-                                                          listOfTypes)),
-                                          programId: programId,
-                                        );
-                                      });
-                                } else {
-                                  final selectedDate = context
-                                      .read<FilterAssignmentCubit>()
-                                      .state
-                                      .selectedDate;
-
-                                  showModalBottomSheet(
-                                      backgroundColor: Colors.white,
-                                      context: context,
-                                      builder: (BuildContext context0) {
-                                        return BottomSheetSelectDay(
-                                          isFrom: true,
-                                          isReport: (String? date) {
-                                            context
-                                                .read<GetAssignmentBloc>()
-                                                .add(GetReportsRequest(
-                                                    date: date));
-                                          },
-                                          currentDate: selectedDate != null
-                                              ? DateTime.parse(selectedDate)
-                                              : DateTime.now(),
-                                        );
-                                      });
-                                }
+                                Navigator.of(context).pop();
                               },
                               child: Container(
-                                // width: 10,
-                                padding: const EdgeInsets.all(5),
+                                width: 10,
+                                height: 10,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8.42),
                                     color: AppColor.whiteRed),
-                                child: Image.asset(
-                                  (indexOfSwitchCubit == 0)
-                                      ? ParentImages.imageFilter
-                                      : ParentImages.imageDate,
-                                  height: 16,
-                                  width: 16,
-                                ),
+                                child: const Icon(Icons.arrow_back),
                               ),
                             ),
                           ),
-                          // 24.pw,
-                        ],
-                      ),
-                    ],
+                          title: Text(
+                            programName,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineLarge
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  // height: 0,
+                                  // letterSpacing: 0.44,
+                                  fontSize: 22,
+                                ),
+                          ),
+                          actions: [
+                            Container(
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 10),
+                              child: GestureDetector(
+                                onTap: () {
+                                  if (indexOfSwitchCubit == 0) {
+                                    showModalBottomSheet(
+                                        backgroundColor: Colors.white,
+                                        context: context,
+                                        isScrollControlled: true,
+                                        builder: (BuildContext context0) {
+                                          return FilterBottomSheetGetAssignment(
+                                            addFilter: (int programId,
+                                                    String? status,
+                                                    String? fromDate,
+                                                    String? toDate,
+                                                    List<String>?
+                                                        listOfTypes) =>
+                                                context
+                                                    .read<GetAssignmentBloc>()
+                                                    .add(GetAssignmentRequest(
+                                                        programId: programId,
+                                                        status: status,
+                                                        fromDate: fromDate,
+                                                        toDate: toDate,
+                                                        listOfTypes:
+                                                            listOfTypes)),
+                                            programId: programId,
+                                          );
+                                        });
+                                  } else {
+                                    final selectedDate = context
+                                        .read<FilterAssignmentCubit>()
+                                        .state
+                                        .selectedDateReport;
+
+                                    showModalBottomSheet(
+                                        backgroundColor: Colors.white,
+                                        context: context,
+                                        builder: (BuildContext context0) {
+                                          return BottomSheetSelectDay(
+                                            isFrom: true,
+                                            isReport: (String? date) {
+                                              context
+                                                  .read<GetAssignmentBloc>()
+                                                  .add(GetReportsRequest(
+                                                      date: date));
+                                            },
+                                            currentDate: selectedDate != null
+                                                ? DateTime.parse(selectedDate)
+                                                : DateTime.now(),
+                                          );
+                                        });
+                                  }
+                                },
+                                child: Container(
+                                  // width: 10,
+                                  padding: const EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8.42),
+                                      color: AppColor.whiteRed),
+                                  child: Image.asset(
+                                    (indexOfSwitchCubit == 0)
+                                        ? ParentImages.imageFilter
+                                        : ParentImages.imageDate,
+                                    height: 16,
+                                    width: 16,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            // 24.pw,
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              body: ListView(children: [
-                15.ph,
-                Container(
-                    height: 50,
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    child: SwitchButton(
-                      getAssignment: () {
-                        context
-                            .read<GetAssignmentBloc>()
-                            .add(GetAssignmentRequest(programId: programId));
-                      },
-                      getReports: () {
-                        context
-                            .read<GetAssignmentBloc>()
-                            .add(GetReportsRequest());
-                      },
-                    )),
-                if (state is GetProgramsLoadingInitial) ...{
-                  const Center(child: CupertinoActivityIndicator())
-                } else if (state is GetProgramsCompleteInitial &&
-                    indexOfSwitchCubit == 0) ...{
-                  GetAssignmentScreen(
-                    data: state.data,
-                  )
-                } else if (state is GetProgramsCompleteInitial &&
-                    indexOfSwitchCubit == 1) ...{
-                  GetReportsScreen(data: state.data, selectedType: selectedType)
-                } else ...{
-                  const SizedBox()
-                }
-              ]));
+                body: ListView(children: [
+                  15.ph,
+                  Container(
+                      height: 50,
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      child: SwitchButton(
+                        getAssignment: () {
+                          context
+                              .read<FilterAssignmentCubit>()
+                              .clearAssignmentFilter();
+
+                          context
+                              .read<GetAssignmentBloc>()
+                              .add(GetAssignmentRequest(programId: programId));
+                        },
+                        getReports: () {
+                          context
+                              .read<FilterAssignmentCubit>()
+                              .clearReportFilter();
+
+                          context
+                              .read<GetAssignmentBloc>()
+                              .add(GetReportsRequest());
+                        },
+                      )),
+                  if (state is GetProgramsLoadingInitial) ...{
+                    const Center(child: CupertinoActivityIndicator())
+                  } else if (state is GetProgramsCompleteInitial &&
+                      indexOfSwitchCubit == 0) ...{
+                    GetAssignmentScreen(
+                      data: state.data,
+                    )
+                  } else if (state is GetProgramsCompleteInitial &&
+                      indexOfSwitchCubit == 1) ...{
+                    GetReportsScreen(
+                        data: state.data, selectedType: selectedType)
+                  } else ...{
+                    const SizedBox()
+                  }
+                ])),
+          );
         }));
   }
 }

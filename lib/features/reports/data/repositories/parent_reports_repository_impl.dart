@@ -19,8 +19,8 @@ class ParentReportsRepositoryImpl implements ParentReportsRepository {
       {String? date, String? selectedType}) async {
     if (await networkInfo.isConnected) {
       try {
-        final res =
-            await remoteDataSource.getParentReportsDataReports(date: date);
+        final res = await remoteDataSource.getParentReportsDataReports(
+            date: date, selectedType: selectedType);
         return Right(res);
       } on DioException catch (e, s) {
         log('e.response:${e.response?.statusMessage}');

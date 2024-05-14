@@ -32,7 +32,7 @@ class CardOfMyInfo extends StatelessWidget {
             15.pw,
             if( userData?.parentImage!= null)
               CircleAvatar(
-                radius: 25.h,
+                radius: 22.h,
                 backgroundColor: Colors.white,
                 backgroundImage: NetworkImage(
                   userData!.parentImage!,

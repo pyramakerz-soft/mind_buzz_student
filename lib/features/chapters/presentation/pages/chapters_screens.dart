@@ -16,6 +16,7 @@ import '../../../../core/error/failures_messages.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/app_color.dart';
 import '../../../../core/assets_svg_images.dart';
+import '../../../../core/theme_text.dart';
 import '../../../../core/utils.dart';
 import '../../../login/presentation/page/login_screen.dart';
 import '../../../math_book1/presentation/manager/current_game_cubit.dart';
@@ -123,7 +124,7 @@ class ChaptersScreen extends StatelessWidget {
                             ),
                           }
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -156,44 +157,89 @@ class ChaptersScreen extends StatelessWidget {
                     }
                   }, builder: (context, state) {
                     if (state is GetProgramsCompleteInitial) {
-                      return Expanded(
-                        child: LevelMap(
-                          backgroundColor: Colors.transparent,
-                          onTapLevel: (index) {
-                            if (state.data[index].isLesson == true &&
-                                state.data[index].isOpen == true) {
-                              Utils.navigateTo(
-                                  BlocProvider(
-                                      create: (_) => CurrentGameCubit(),
-                                      child: MyHomePageBook1(
-                                        lessonId: "${state.data[index].id}",
-                                      )),
-                                  context);
-                            }
-                          },
-                          levelMapParams: LevelMapParams(
-                            showPathShadow: false,
-                            levelCount: state.data.length,
-                            pathStrokeWidth: 1,
-                            currentLevel: state.data
-                                    .where((element) => element.isOpen == true)
-                                    .toList()
-                                    .isEmpty
-                                ? 1
-                                : state.data
-                                    .where((element) => element.isOpen == true)
-                                    .toList()
-                                    .length
-                                    .toDouble(),
-                            pathColor: Colors.grey,
-                            levelsImages: state.data.reversed
-                                .map((e) => ImageParams(
-                                    path: e.levelImg!,
-                                    size: Size(100, 100),
-                                    bodyWidget: ItemOfSubBody(chapterData: e),
-                                    title: ItemOfTitle(chapterData: e)))
-                                .toList(),
-                          ),
+                      return SizedBox(
+                        height: MediaQuery.of(context).size.height - 150,
+                        child: Column(
+                          children: [
+                            RichText(
+                              text: TextSpan(
+                                text: 'Chapter ',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColor.darkBlueColor3,
+                                  fontFamily: AppTheme.getFontFamily(),
+                                  fontSize: 20,
+                                ),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text:
+                                        '${state.data.where((element) => element.isChapter == true && element.isOpen == true).length}',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColor.redColor4,
+                                      fontFamily: AppTheme.getFontFamily(),
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text:
+                                        ' of ${state.data.where((element) => element.isChapter == true).length}',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColor.darkBlueColor3,
+                                      fontFamily: AppTheme.getFontFamily(),
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            Expanded(
+                              child: LevelMap(
+                                backgroundColor: Colors.transparent,
+                                onTapLevel: (index) {
+                                  if (state.data[index].isLesson == true &&
+                                      state.data[index].isOpen == true) {
+                                    Utils.navigateTo(
+                                        BlocProvider(
+                                            create: (_) => CurrentGameCubit(),
+                                            child: MyHomePageBook1(
+                                              lessonId:
+                                                  "${state.data[index].id}",
+                                            )),
+                                        context);
+                                  }
+                                },
+                                levelMapParams: LevelMapParams(
+                                  showPathShadow: false,
+                                  levelCount: state.data.length,
+                                  pathStrokeWidth: 1,
+                                  currentLevel: state.data
+                                          .where((element) =>
+                                              element.isOpen == true)
+                                          .toList()
+                                          .isEmpty
+                                      ? 1
+                                      : state.data
+                                          .where((element) =>
+                                              element.isOpen == true)
+                                          .toList()
+                                          .length
+                                          .toDouble(),
+                                  pathColor: Colors.grey,
+                                  levelsImages: state.data.reversed
+                                      .map((e) => ImageParams(
+                                          path: e.levelImg!,
+                                          size: Size(100, 100),
+                                          bodyWidget:
+                                              ItemOfSubBody(chapterData: e),
+                                          title: ItemOfTitle(chapterData: e)))
+                                      .toList(),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       );
                     } else if (state is GetProgramsLoadingInitial) {

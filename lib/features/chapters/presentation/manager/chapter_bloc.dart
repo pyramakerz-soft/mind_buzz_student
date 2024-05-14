@@ -39,8 +39,8 @@ ChapterState _eitherLoadedOrErrorState(
     ) {
   return failureOrTrivia.fold(
         (failure) => GetProgramsErrorInitial(message: _mapFailureToMessage(failure)),
-        (data) => GetProgramsCompleteInitial(
-        data: handlingDataOfChapters(lessons:data)),
+        (data) =>data.isNotEmpty? GetProgramsCompleteInitial(
+        data: handlingDataOfChapters(lessons:data)):EmptyState(),
   );
 }
 

@@ -134,23 +134,28 @@ class _HomeScreen extends State<HomeScreen> {
                         ),
                       ),
                       25.ph,
-                      ...List.generate(
-                          state.data.length,
-                          (index) => Column(
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height-(210),
+                        child: ListView(
+                          children: List.generate(
+                              state.data.length,
+                                  (index) => Column(
                                 children: [
                                   CardOfProgram(
                                     programId:
-                                        "${state.data[index].programId ?? ''}",
+                                    "${state.data[index].programId ?? ''}",
                                     colors: DefaultHomeData.getColor(
                                         index: (index + 1)),
                                     mainImage: state.data[index].program?.image,
                                     title: state.data[index].program?.course
-                                            ?.name ??
+                                        ?.name ??
                                         '',
                                   ),
                                   15.ph,
                                 ],
-                              ))
+                              )),
+                        ),
+                      )
                     ],
                   );
                 } else {

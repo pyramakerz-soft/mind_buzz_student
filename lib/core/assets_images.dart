@@ -11,7 +11,11 @@ abstract class AppImages {
   static const String halfBee = "${mainPathOfImages}half_bee.png";
   static const String imageChild = "${mainPathOfImages}child.png";
   static const String imageParent = "${mainPathOfImages}parent.png";
+  static const String iconEmptyStar = "${mainPathOfImages}empty_star.png";
   static const String imageStar = "${mainPathOfImages}star.png";
+  static const String emptyAssignment =
+      "${mainPathOfImages}empty_assignment.png";
+  static const String emptyReports = "${mainPathOfImages}empty_reports.png";
   static const String imageEmptyStar = "${mainPathOfImages}empty_star.png";
   static const String bgOfMath = "${mainPathOfImages}bg_of_math.png";
   static const String iconGetInstruction =

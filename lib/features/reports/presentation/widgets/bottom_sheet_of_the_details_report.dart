@@ -65,96 +65,99 @@ class BottomSheetOfTheDetailsReport extends StatelessWidget {
         ),
       ),
       10.ph,
-      Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    'Lesson 1 make 5',
-                    style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600,
-                        ),
-                  ),
-                  const SizedBox(width: 8),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 5),
-                    // width: 50,
-                    height: 30,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: Color(0x1985207B)),
-                    alignment: Alignment.center,
-                    // padding: EdgeInsets.symmetric(horizontal: 12 ,vertical: 4),
-                    child: Text(
-                      'Checkpoint',
-                      style: TextStyle(
-                          color: Color(0xff85207B),
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: AppTheme.getFontFamily4()),
+      Container(
+        margin: const EdgeInsets.symmetric(horizontal: 20),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  // mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Lesson 1 make 5',
+                      style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600,
+                          ),
                     ),
-                  )
-                ],
-              ),
-              const SizedBox(height: 4),
-              Text(
-                'August 6,2024',
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
-              ),
-            ],
-          ),
-          const SizedBox(width: 104),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                '80%',
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      // color: Color(0xFF707070),
-                      fontSize: 22,
-                      // fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                      // height: 0,
-                      // letterSpacing: 0.44,
-                    ),
-              ),
-              Text(
-                'Pass',
-                style: TextStyle(
-                  color: AppColor.resetText,
-                  fontSize: 18,
-                  fontFamily: AppTheme.getFontFamily4(),
-                  fontWeight: FontWeight.w600,
-                  // height: 0.06,
+                    const SizedBox(width: 8),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      // width: 50,
+                      height: 30,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: const Color(0x1985207B)),
+                      alignment: Alignment.center,
+                      // padding: EdgeInsets.symmetric(horizontal: 12 ,vertical: 4),
+                      child: Text(
+                        'Checkpoint',
+                        style: TextStyle(
+                            color: const Color(0xff85207B),
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: AppTheme.getFontFamily4()),
+                      ),
+                    )
+                  ],
                 ),
-              ),
-            ],
-          ),
-        ],
+                const SizedBox(height: 4),
+                Text(
+                  'August 6,2024',
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                ),
+              ],
+            ),
+            const Spacer(),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  '80%',
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        // color: Color(0xFF707070),
+                        fontSize: 22,
+                        // fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                        // height: 0,
+                        // letterSpacing: 0.44,
+                      ),
+                ),
+                Text(
+                  'Pass',
+                  style: TextStyle(
+                    color: AppColor.resetText,
+                    fontSize: 18,
+                    fontFamily: AppTheme.getFontFamily4(),
+                    fontWeight: FontWeight.w600,
+                    // height: 0.06,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
       10.ph,
       Container(
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
-          border: Border(
+          border: const Border(
             left: BorderSide(width: 6, color: AppColor.resetText),
           ),
           boxShadow: const [

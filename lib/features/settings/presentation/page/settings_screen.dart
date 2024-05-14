@@ -14,6 +14,7 @@ import '../../../home/presentation/widgets/switch_bar.dart';
 import '../../../loading_intro/presentation/bloc/loading_cubit.dart';
 import '../../../login/presentation/bloc/login_data_bloc.dart';
 import '../../../login/presentation/page/login_screen.dart';
+import '../../../who_am_i/presentation/manager/who_am_i_cubit.dart';
 import '../bloc/settings_bloc.dart';
 import '../widgets/setting_item.dart';
 import '../widgets/user_header.dart';
@@ -75,6 +76,7 @@ class SettingsScreen extends StatelessWidget {
                             di.sl<GetProgramsHomeBloc>()
                               ..add(LogOutRequest());
 
+                            context.read<WhoAmICubit>().clearIndex();
                             Utils.navigateAndRemoveUntilTo(
                                 BlocProvider(
                                     create: (_) => LoadingCubit(),

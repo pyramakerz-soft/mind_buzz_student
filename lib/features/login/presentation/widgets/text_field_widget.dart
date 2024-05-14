@@ -54,6 +54,7 @@ class TextFieldWidget extends StatelessWidget {
                   borderSide:  BorderSide(color: borderSideColor??AppColor.greyColor),
                 ),
                 suffixIcon: rightWidget,
+                isDense: true,
                 filled: true,
                 prefixIcon: leftWidget,
                 fillColor: fillColor??Colors.white,

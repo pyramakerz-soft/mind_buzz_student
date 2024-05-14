@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import '../../../../core/assets_images.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 
 import '../../../../core/error/failures_messages.dart';
@@ -32,85 +33,125 @@ class GetReportsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final selectedType = context.watch<FilterAssignmentCubit>().state.selectedType;
-
-    return Container(
-        margin: const EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            25.ph,
-            Text(
-              'Total Progress',
-              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    // height: 0,
-                    // letterSpacing: 0.44,
-                    fontSize: 18,
-                  ),
-            ),
-            SizedBox(
-              // aspectRatio: 1.70,
-              height: 250,
-              width: MediaQuery.of(context).size.width - 30,
-              child: LineChart(
-                mainData(context, data.getDataOfFlSpot()),
+    if ((data.tprogress?.isNotEmpty ?? false) &&
+        (data.progress?.isNotEmpty ?? false)) {
+      return Container(
+          margin: const EdgeInsets.symmetric(horizontal: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              25.ph,
+              Text(
+                'Total Progress',
+                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      // height: 0,
+                      // letterSpacing: 0.44,
+                      fontSize: 18,
+                    ),
               ),
-            ),
-            5.ph,
-            Divider(
-              height: 1,
-              color: AppColor.lightGreyColor5.withOpacity(.3),
-            ),
-            10.ph,
-            SizedBox(
-              width: MediaQuery.of(context).size.width - 30,
-              height: 40,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
+              if (data.getDataOfFlSpot().isNotEmpty &&
+                  data.getDataOfFlSpot().keys.first.isNotEmpty) ...{
+                SizedBox(
+                  // aspectRatio: 1.70,
+                  height: 250,
+                  width: MediaQuery.of(context).size.width - 30,
+                  child: LineChart(
+                    mainData(context, data.getDataOfFlSpot()),
+                  ),
+                ),
+              } else ...{
+                Container(
+                  alignment: Alignment.center,
+                  // aspectRatio: 1.70,
+                  height: 250,
+                  width: MediaQuery.of(context).size.width - 30,
+                  child: Text(
+                    'There is not data to show',
+                    style: Theme.of(context)
+                        .textTheme
+                        .displayLarge
+                        ?.copyWith(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              },
+              5.ph,
+              Divider(
+                height: 1,
+                color: AppColor.lightGreyColor5.withOpacity(.3),
+              ),
+              10.ph,
+              SizedBox(
+                width: MediaQuery.of(context).size.width - 30,
+                height: 40,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: List.generate(
+                      data.testTypes?.length ?? 0,
+                      (index) => Row(
+                            children: [
+                              ItemSelected(
+                                itemId: "${data.testTypes?[index].id ?? 0}",
+                                title: "${data.testTypes?[index].name ?? 0}",
+                                currentItemSelected:
+                                    "${data.testTypes?[index].id ?? 0}" ==
+                                            selectedType
+                                        ? true
+                                        : false,
+                                onTap: () {
+                                  context
+                                      .read<FilterAssignmentCubit>()
+                                      .submitNewType(
+                                          newType:
+                                              "${data.testTypes?[index].id ?? 0}");
+                                  // final date  = ;
+                                  context.read<GetAssignmentBloc>().add(
+                                      GetReportsRequest(
+                                          selectedType:
+                                              "${data.testTypes?[index].id ?? 0}"));
+                                },
+                              ),
+                              5.pw,
+                            ],
+                          )),
+                ),
+              ),
+              10.ph,
+              Column(
                 children: List.generate(
-                    data.testTypes?.length ?? 0,
-                    (index) => Row(
+                    data.progress?.length ?? 0,
+                    (index) => Column(
                           children: [
-                            ItemSelected(
-                              itemId: "${data.testTypes?[index].id ?? 0}",
-                              title: "${data.testTypes?[index].name ?? 0}",
-                              currentItemSelected:
-                                  "${data.testTypes?[index].id ?? 0}" ==
-                                          selectedType
-                                      ? true
-                                      : false,
-                              onTap: () {
-                                context
-                                    .read<FilterAssignmentCubit>()
-                                    .submitNewType(
-                                        newType:
-                                            "${data.testTypes?[index].id ?? 0}");
-                                // final date  = ;
-                                context.read<GetAssignmentBloc>().add(
-                                    GetReportsRequest(
-                                        selectedType:
-                                            "${data.testTypes?[index].id ?? 0}"));
-                              },
-                            ),
-                            5.pw,
+                            CardReport(
+                                // isPassed: false,
+                                data: data.progress?[index] ?? TestModel()),
+                            10.ph
                           ],
                         )),
-              ),
+              )
+            ],
+          ));
+    } else {
+      return SizedBox(
+        height: MediaQuery.of(context).size.height / 2,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset(
+              AppImages.emptyReports,
+              height: 150,
             ),
-            10.ph,
-            Column(
-              children: List.generate(
-                  data.progress?.length ?? 0,
-                  (index) => Column(
-                        children: [
-                          CardReport(
-                              // isPassed: false,
-                              data: data.progress?[index] ?? TestModel()),
-                          10.ph
-                        ],
-                      )),
+            Text(
+              'There is no reports data',
+              style: Theme.of(context)
+                  .textTheme
+                  .labelLarge
+                  ?.copyWith(fontSize: 16, fontWeight: FontWeight.w500),
             )
           ],
-        ));
+        ),
+      );
+    }
   }
 }

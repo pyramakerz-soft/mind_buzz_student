@@ -42,7 +42,7 @@ class CardReport extends StatelessWidget {
                   lineWidth: 7,
                   animation: true,
                   circularStrokeCap: CircularStrokeCap.round,
-                  percent: 0.5,
+                  percent: double.parse("${((data.score??0)/(data.totalScore??0))}"),
                   center: Text(
                       "${((data.score ?? 0) / (data.totalScore ?? 0)) * 100}%"),
                   progressColor:
@@ -89,7 +89,7 @@ class CardReport extends StatelessWidget {
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              "${data.score} day ${data.totalScore}",
+                              "${data.score} of ${data.totalScore}",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: isPassed == true

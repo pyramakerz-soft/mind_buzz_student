@@ -21,8 +21,8 @@ class DataSourceRemotelyOfParentReportsImpl
     final response = await dio.post(
         url: '${Connection.baseURL}${dio.getStudentReportsTestEndPoint}',
         queryParameters: {
-          if (date != null) 'date': date,
-          if (selectedType != null) 'types': selectedType
+          if (date != null) 'month': date,
+          if (selectedType != null) 'type': selectedType
         });
     if (dio.validResponse(response)) {
       return MainDataTestsModel.fromJson(response.data['data']);

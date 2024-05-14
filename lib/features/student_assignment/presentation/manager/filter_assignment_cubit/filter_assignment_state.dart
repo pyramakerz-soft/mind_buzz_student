@@ -5,7 +5,7 @@ class FilterAssignmentInitial extends Equatable {
   final List<String>? selectedType;
   final String? selectedTypeReport;
   final String? selectedFromDate;
-  final String? selectedDate;
+  final String? selectedDateReport;
   final String? programId;
 
   final String? selectedToDate;
@@ -14,7 +14,7 @@ class FilterAssignmentInitial extends Equatable {
       {this.selectedState,
       this.selectedType,
       this.testTypes,
-      this.selectedDate,
+      this.selectedDateReport,
       this.selectedTypeReport,
       this.programId,
       this.selectedFromDate,
@@ -25,7 +25,7 @@ class FilterAssignmentInitial extends Equatable {
       List<String>? selectedType,
       List<TestsTypesModel>? testTypes,
       String? selectedFromDate,
-      String? selectedDate,
+      String? selectedDateReport,
       String? selectedTypeReport,
       String? programId,
       String? selectedToDate}) {
@@ -36,7 +36,7 @@ class FilterAssignmentInitial extends Equatable {
         selectedToDate: selectedToDate ?? this.selectedToDate,
         programId: programId ?? this.programId,
         selectedTypeReport: selectedTypeReport ?? this.selectedTypeReport,
-        selectedDate: selectedDate ?? this.selectedDate,
+        selectedDateReport: selectedDateReport ?? this.selectedDateReport,
         selectedType: selectedType ?? this.selectedType);
   }
 
@@ -48,15 +48,51 @@ class FilterAssignmentInitial extends Equatable {
         selectedToDate: selectedToDate ?? selectedToDate,
         selectedTypeReport: selectedTypeReport ?? selectedTypeReport,
         programId: programId ?? programId,
-        selectedDate: selectedDate ?? selectedDate,
+        selectedDateReport: selectedDateReport ?? selectedDateReport,
         selectedType: selectedType ?? selectedType);
+  }
+
+  clearFilter() {
+    return FilterAssignmentInitial(
+        selectedState: null,
+        testTypes: testTypes ?? testTypes,
+        selectedFromDate: null,
+        selectedTypeReport: null,
+        selectedToDate: null,
+        programId: programId ?? programId,
+        selectedDateReport: null,
+        selectedType: null);
+  }
+
+  clearReportFilter() {
+    return FilterAssignmentInitial(
+        selectedState: selectedState ?? selectedState,
+        testTypes: testTypes ?? testTypes,
+        selectedFromDate: selectedFromDate ?? selectedFromDate,
+        selectedToDate: selectedToDate ?? selectedToDate,
+        selectedTypeReport: null,
+        programId: programId ?? programId,
+        selectedDateReport: null,
+        selectedType: selectedType ?? selectedType);
+  }
+
+  clearAssignmentFilter() {
+    return FilterAssignmentInitial(
+        selectedState: null,
+        testTypes: testTypes ?? testTypes,
+        selectedFromDate: null,
+        selectedTypeReport: selectedTypeReport ?? selectedTypeReport,
+        selectedToDate: null,
+        programId: programId ?? programId,
+        selectedDateReport: null,
+        selectedType: null);
   }
 
   @override
   List<Object?> get props => [
         selectedFromDate,
         selectedType,
-        selectedDate,
+        selectedDateReport,
         selectedToDate,
         selectedState,
         selectedTypeReport,
