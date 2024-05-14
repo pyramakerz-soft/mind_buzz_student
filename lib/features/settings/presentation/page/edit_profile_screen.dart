@@ -19,7 +19,7 @@ import '../../../login/presentation/page/login_screen.dart';
 import '../bloc/settings_bloc.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/personal_info_item.dart';
-import '../../../../core/injection/injection_container.dart' as di;
+
 
 class EditProfileScreen extends StatefulWidget {
   final UserData userData;
@@ -116,14 +116,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         20.ph,
                         CustomTextField(
                           label: 'Email',
-                          email: true,
-                          controller: bloc.emailController,
-                          onChanged: (value){
-                            bloc.add(ChangeInUpdateUserDataEvent());
-                          },
-                          validator: (value){
-                           return ValidationTextField.emailInput(value);
-                          },
+                          enabled: false,
+                          // controller: bloc.emailController,
+                          // onChanged: (value){
+                          //   bloc.add(ChangeInUpdateUserDataEvent());
+                          // },
+                          // validator: (value){
+                          //  return ValidationTextField.emailInput(value);
+                          // },
                         ),
                         20.ph,
                         CustomTextField(
