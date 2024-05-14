@@ -59,7 +59,7 @@ class CardOfProgramParent extends StatelessWidget {
           children: [
             Text(dataOfProgram.program?.course?.name ?? '',
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                      fontSize: 25,
+                      fontSize: 16,
                       fontWeight: FontWeight.w700,
                       height: 0,
                       letterSpacing: 0.50,

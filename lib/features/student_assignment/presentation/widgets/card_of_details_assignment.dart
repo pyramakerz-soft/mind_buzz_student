@@ -55,7 +55,7 @@ class CardOfDetailsOfAssignment extends StatelessWidget {
                             .textTheme
                             .displayLarge
                             ?.copyWith(
-                                fontSize: 22,
+                                fontSize: 16,
                                 fontWeight: FontWeight.w700,
                                 height: 0,
                                 letterSpacing: 0.44,
