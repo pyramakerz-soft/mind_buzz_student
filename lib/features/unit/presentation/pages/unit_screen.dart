@@ -41,6 +41,7 @@ class UnitScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.white,
         body: Stack(
+          alignment: Alignment.center,
           children: [
             Column(
               children: [
@@ -199,7 +200,7 @@ class UnitScreen extends StatelessWidget {
                                       ),
                                     ),
                                     const Positioned(
-                                      left: -5,
+                                      left: -8,
                                       child: AnimationOfBee4(),
                                     )
                                   ],
@@ -210,69 +211,80 @@ class UnitScreen extends StatelessWidget {
                           20.ph,
                           Container(
                             margin: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Column(
+                            width: MediaQuery.of(context).size.width-30,
+                            height: MediaQuery.of(context).size.height-(20+100+(MediaQuery.of(context).size.height / 6)+160),
+                            child: ListView(
                               children:
                                   List.generate(state.data.length, (index) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    Utils.navigateTo(
-                                        BlocProvider(
-                                            create: (_) => JourneyBarCubit(),
-                                            child: ChaptersScreen(
-                                              programId: state.data[index].id
-                                                  .toString(),
-                                              programName:
-                                                  state.data[index].name ?? '',
-                                            )),
-                                        context);
-                                  },
-                                  child: Align(
-                                    alignment: (index == 0) || index % 2 == 0
-                                        ? Alignment.topLeft
-                                        : Alignment.topRight,
-                                    child: Transform.flip(
-                                      flipX: (index == 0) || index % 2 == 0
-                                          ? false
-                                          : true,
-                                      child: SizedBox(
-                                        height: (width * 0.2692307692307692),
-                                        width: width,
-                                        child: CustomPaint(
-                                            size: Size(
-                                                width,
-                                                (width * 0.2692307692307692)
-                                                    .toDouble()),
-                                            //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
-                                            painter: RPSCustomPainter(
-                                                currentColor: DefaultUnitData
-                                                    .fullDataOfCardColor
-                                                    .random()),
-                                            child: Transform.flip(
-                                              flipX:
-                                                  (index == 0) || index % 2 == 0
-                                                      ? false
-                                                      : true,
-                                              child: Center(
-                                                child: Text(
-                                                  state.data[index].name ?? '',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodySmall
-                                                      ?.copyWith(
-                                                          fontSize: MediaQuery
-                                                                  .of(context)
-                                                              .size
-                                                              .reDeginSize(
-                                                                  22, context),
-                                                          fontWeight:
-                                                              FontWeight.w700),
-                                                  textAlign: TextAlign.center,
-                                                ),
-                                              ),
-                                            )),
+                                return Column(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        Utils.navigateTo(
+                                            BlocProvider(
+                                                create: (_) => JourneyBarCubit(),
+                                                child: ChaptersScreen(
+                                                  programId: state.data[index].id
+                                                      .toString(),
+                                                  programName:
+                                                      state.data[index].name ?? '',
+                                                )),
+                                            context);
+                                      },
+                                      child: Align(
+                                        alignment: (index == 0) || index % 2 == 0
+                                            ? Alignment.topLeft
+                                            : Alignment.topRight,
+                                        child: Transform.flip(
+                                          flipX: (index == 0) || index % 2 == 0
+                                              ? false
+                                              : true,
+                                          child: SizedBox(
+                                            height: (width * 0.2692307692307692),
+                                            width: width,
+                                            child: CustomPaint(
+                                                size: Size(
+                                                    width,
+                                                    (width * 0.2692307692307692)
+                                                        .toDouble()),
+                                                //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
+                                                painter: RPSCustomPainter(
+                                                    currentColor: DefaultUnitData
+                                                        .fullDataOfCardColor
+                                                        .random()),
+                                                child: Transform.flip(
+                                                  flipX:
+                                                      (index == 0) || index % 2 == 0
+                                                          ? false
+                                                          : true,
+                                                  child: Container(
+                                                    alignment: ((index == 0) || index % 2 == 0)?Alignment.centerLeft:Alignment.centerRight,
+                                                    margin: EdgeInsets.symmetric(horizontal: 10),
+                                                    child: Text(
+                                                      state.data[index].name ?? '',
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodySmall
+                                                          ?.copyWith(
+                                                              fontSize: MediaQuery
+                                                                      .of(context)
+                                                                  .size
+                                                                  .reDeginSize(
+                                                                      22, context),
+                                                              fontWeight:
+                                                                  FontWeight.w700),
+                                                      textAlign: TextAlign.center,
+                                                      maxLines: 2,
+                                                      overflow: TextOverflow.ellipsis,
+                                                    ),
+                                                  ),
+                                                )),
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                    5.ph
+                                  ],
                                 );
                               }),
                             ),
@@ -280,7 +292,13 @@ class UnitScreen extends StatelessWidget {
                         ],
                       );
                     } else if (state is GetProgramsLoadingInitial) {
-                      return const Center(child: CupertinoActivityIndicator());
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Center(child: CupertinoActivityIndicator())
+                        ],
+                      );
                     } else {
                       return const SizedBox();
                     }
@@ -301,13 +319,13 @@ class UnitScreen extends StatelessWidget {
                     fit: BoxFit.fill,
                   ),
                   const Positioned(
-                      bottom: 30,
-                      // left: 40,
-                      child: AnimationOfBee2()),
-                  const Positioned(
                       top: 10,
                       // left: 40,
                       child: AnimationOfBee5()),
+                  const Positioned(
+                      bottom: 30,
+                      // left: 40,
+                      child: AnimationOfBee2()),
                   const Positioned(
                     right: 10,
                     top: 10,

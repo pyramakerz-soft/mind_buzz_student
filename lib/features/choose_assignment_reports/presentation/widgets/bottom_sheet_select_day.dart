@@ -48,7 +48,7 @@ class _BottomSheetSelectDay extends State<BottomSheetSelectDay> {
               (widget.currentDate.month <= 12 && widget.currentDate.month > 8
                   ? DateTime(DateTime.now().year + 1, 8, 31)
                   : DateTime(DateTime.now().year + 1, 8, 31)),
-          focusedDay: widget.checkStartDate??widget.currentDate,
+          focusedDay: widget.checkStartDate??widget.checkEndDate??widget.currentDate,
           currentDay: tempDate != null
               ? DateTime.parse(tempDate ?? '')
               : widget.checkStartDate!=null?

@@ -194,6 +194,7 @@ class ChaptersScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
+
                             Expanded(
                               child: LevelMap(
                                 backgroundColor: Colors.transparent,

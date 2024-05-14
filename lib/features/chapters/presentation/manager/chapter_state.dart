@@ -15,6 +15,7 @@ class GetProgramsCompleteInitial extends ChapterState {
 }
 class GetProgramsLoadingInitial extends ChapterState {}
 class LogOutLoadingState extends ChapterState {}
+class EmptyState extends ChapterState {}
 class GetProgramsErrorInitial extends ChapterState {
   final String message;
 

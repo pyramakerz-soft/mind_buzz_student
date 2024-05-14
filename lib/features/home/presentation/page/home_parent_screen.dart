@@ -54,16 +54,20 @@ class _HomeParentScreen extends State<HomeParentScreen> {
                     if (state is GetProgramsLoadingInitial) {
                       return const Center(child: CupertinoActivityIndicator());
                     } else if (state is GetProgramsCompleteInitial) {
-                      return Wrap(
-                        spacing: 16,
-                        runSpacing: 20,
-                        children: List.generate(
-                          state.data.length,
-                          (index) => CardOfProgramParent(
-                            dataOfProgram: state.data[index],
+                      return SizedBox(
+                          height: MediaQuery.of(context).size.height-(210),
+                    child:SingleChildScrollView(
+                        child: Wrap(
+                          spacing: 16,
+                          runSpacing: 20,
+                          children: List.generate(
+                            state.data.length,
+                            (index) => CardOfProgramParent(
+                              dataOfProgram: state.data[index],
+                            ),
                           ),
                         ),
-                      );
+                      ));
                     } else {
                       return const SizedBox();
                     }
