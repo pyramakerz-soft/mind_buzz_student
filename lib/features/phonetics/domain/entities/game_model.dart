@@ -24,7 +24,6 @@ class GameModel extends Equatable {
   GameTypesModel? gameTypes;
   List<GameLettersModel>? gameLetters;
   List<GameImagesModel>? gameImages;
-  UserCourseModel? unit;
   int? lessonId;
   // String? sectionInBook;
 
@@ -34,7 +33,7 @@ class GameModel extends Equatable {
       this.audioFlag,
       this.numOfLetters,
       this.numOfLetterRepeat,
-      this.unit,
+      // this.unit,
       this.mainLetter,
       this.inst,
       this.numOfTrials,
@@ -55,12 +54,11 @@ class GameModel extends Equatable {
         id,
         lessonId,
         gameTypeId,
-    mainLetter,
+        mainLetter,
         audioFlag,
         numOfLetters,
         numOfLetterRepeat,
-    inst,
-    unit,
+        inst,
         numOfTrials,
         lesson,
         gameTypes,

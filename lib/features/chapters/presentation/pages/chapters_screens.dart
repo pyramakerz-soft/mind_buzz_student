@@ -155,8 +155,7 @@ class ChaptersScreen extends StatelessWidget {
                               .where((element) => element.isChapter != true)
                               .length);
                     }
-                  },
-                      builder: (context, state) {
+                  }, builder: (context, state) {
                     if (state is GetProgramsCompleteInitial) {
                       return SizedBox(
                         height: MediaQuery.of(context).size.height - 150,
@@ -195,20 +194,19 @@ class ChaptersScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
-
                             Expanded(
                               child: LevelMap(
                                 backgroundColor: Colors.transparent,
                                 onTapLevel: (index) {
-                                  if (state.data[index].isLesson == true &&
-                                      state.data[index].isOpen == true) {
-                                    print('${state.data[index].id}');
-                                    Utils.navigateTo(
-                                        PhoneticsBook(
-                                              lessonId:3,
-                                            ),
-                                        context);
-                                  }
+                                  // if (state.data[index].isLesson == true &&
+                                  //     state.data[index].isOpen == true) {
+                                  print('${state.data[index].id}');
+                                  Utils.navigateTo(
+                                      const PhoneticsBook(
+                                        lessonId: 3,
+                                      ),
+                                      context);
+                                  // }
                                 },
                                 levelMapParams: LevelMapParams(
                                   showPathShadow: false,

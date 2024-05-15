@@ -48,7 +48,7 @@ class MainApiConnection {
   String getStudentProgramsTestEndPoint = "student_programs_test";
   String getStudentReportsTestEndPoint = "student_progress";
   String getLessonsOfProgramsEndPoint = "lessons";
-  String getLessonQuestionsEndPoint = "lesson_questions";
+  String getLessonQuestionsEndPoint = "game";
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -113,10 +113,11 @@ class MainApiConnection {
       throw response;
     }
   }
+
   // TODO DIO uploadImage
-  Future<http.Response>  uploadImage({
+  Future<http.Response> uploadImage({
     required String url,
-     File? filePath,
+    File? filePath,
     Map<String, String>? queryParameters,
     Map<String, String>? data,
     Map<String, String?>? headers,
@@ -126,23 +127,26 @@ class MainApiConnection {
     var multipartFile;
     var stream;
     var length;
-    var request = http.MultipartRequest("POST", Uri.parse(url),);
+    var request = http.MultipartRequest(
+      "POST",
+      Uri.parse(url),
+    );
     request.headers['AUTHORIZATION'] = 'Bearer ${token!}';
     request.headers['Accept'] = "application/json";
     data?.forEach((key, value) {
       request.fields[key] = value;
     });
     if (filePath != null) {
-      stream =
-      new http.ByteStream(DelegatingStream.typed(filePath.openRead()));
+      stream = new http.ByteStream(DelegatingStream.typed(filePath.openRead()));
       length = await filePath.length();
-      multipartFile = new http.MultipartFile('photo', stream, length, filename: basename(filePath.path));
+      multipartFile = new http.MultipartFile('photo', stream, length,
+          filename: basename(filePath.path));
       request.files.add(multipartFile);
     }
     StreamedResponse response = await request.send();
     http.Response res = await http.Response.fromStream(response);
     var bodyData = json.decode(res.body);
-    if (bodyData['result'] !=null && res.statusCode == 200 ) {
+    if (bodyData['result'] != null && res.statusCode == 200) {
       return res;
     } else {
       throw res;

@@ -18,9 +18,9 @@ class DataSourceRemotelyOfContactLessonImpl
   @override
   Future<List<GameModel>> getContactLessonDataRemotely(
       {required int programId}) async {
-    final response = await dio.get(
-      url: '${Connection.baseURL}${dio.getLessonQuestionsEndPoint}/$programId',
-    );
+    final response = await dio.post(
+        url: '${Connection.baseURL}${dio.getLessonQuestionsEndPoint}',
+        queryParameters: {'lesson_id': programId});
     if (dio.validResponse(response)) {
       final List<GameModel> l = [];
       response.data['data']['games']

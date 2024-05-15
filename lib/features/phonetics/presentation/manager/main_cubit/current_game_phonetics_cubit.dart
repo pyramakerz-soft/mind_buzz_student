@@ -8,21 +8,28 @@ import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../../core/assets_animation.dart';
+import '../../../../../core/assets_sound.dart';
+import '../../../../../core/audio_player.dart';
+import '../../../../../core/phonetics/assets_images_phonetics.dart';
+import '../../../../../core/phonetics/basic_of_every_game.dart';
 import '../../../../../core/phonetics/basic_of_phonetics.dart';
+import '../../../domain/entities/game_model.dart';
 
 part 'current_game_phonetics_state.dart';
 
 class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
-  CurrentGamePhoneticsCubit() : super(CurrentGamePhoneticsState(index: 0));
+  CurrentGamePhoneticsCubit() : super(CurrentGamePhoneticsState(index: 0)) {
+    getTheBackGroundLoading();
+  }
 
   getTheBackGround() {
     rootBundle.load(AppAnimation.beeRive).then(
-          (data) async {
+      (data) async {
         try {
           final file = RiveFile.import(data);
           final artboard = file.mainArtboard;
           var controller =
-          StateMachineController.fromArtboard(artboard, 'State Machine 1');
+              StateMachineController.fromArtboard(artboard, 'State Machine 1');
 
           if (controller != null) {
             artboard.addController(controller);
@@ -35,13 +42,131 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
       },
     );
   }
-  updateIndexOfCurrentGame(){
+
+  getTheBackGroundLoading() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      rootBundle.load(AppImagesPhonetics.loadingRiv).then(
+        (data) async {
+          try {
+            final file = RiveFile.import(data);
+            final artboard = file.mainArtboard;
+
+            var controller = StateMachineController.fromArtboard(
+                artboard, 'State Machine 1');
+            controller?.inputs.forEach((element) {
+              log('element:${element.name}');
+            });
+            if (controller != null) {
+              artboard.addController(controller);
+            }
+            emit(state.copyWith(avatarArtboardLoading: artboard));
+          } catch (e) {
+            log(e.toString());
+          }
+        },
+      );
+    });
+  }
+
+  updateIndexOfCurrentGame() {
     int currentIndex = state.index;
-    currentIndex = currentIndex+1;
+    currentIndex = currentIndex + 1;
     emit(state.copyWith(index: currentIndex));
   }
 
-  updateDataOfCurrentGame({required MainDataOfPhonetics basicData}){
-    emit(state.copyWith(basicData:basicData));
+  updateDataOfCurrentGame(
+      {required MainDataOfPhonetics basicData,
+      required List<GameModel> gameData}) {
+    emit(state.copyWith(
+        basicData: basicData,
+        currentAvatar: basicData.basicAvatar,
+        statesOfAddStars: BasicOfEveryGame.getTheStarsAddState(gameData.length),
+        gameData: gameData));
+  }
+
+  bool checkIfIsTheLastGameOfLesson() {
+    int currentIndex = state.index;
+    currentIndex = currentIndex + 1;
+    if ((state.gameData?.length ?? 0) > currentIndex) {
+      updateIndexOfCurrentGame();
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  addStarToStudent() {
+    int stateOfCountOfCorrectAnswer = state.countOfCorrectAnswer ?? 0;
+    int countOfStar = state.countOfStar ?? 0;
+    List<int> stateOfStarsAdd = state.statesOfAddStars ?? [];
+    if ((state.gameData?.length ?? 0) > 2) {
+      if (stateOfStarsAdd[0] > stateOfCountOfCorrectAnswer) {
+        if (stateOfStarsAdd[0] == stateOfCountOfCorrectAnswer) {
+          emit(state.copyWith(countOfStar: (countOfStar + 1)));
+        } else {
+          if (stateOfStarsAdd[1] > stateOfCountOfCorrectAnswer) {
+            if (stateOfStarsAdd[1] == stateOfCountOfCorrectAnswer) {
+              emit(state.copyWith(countOfStar: (countOfStar + 1)));
+            } else {
+              if (stateOfStarsAdd[2] > stateOfCountOfCorrectAnswer) {
+                if (stateOfStarsAdd[2] == stateOfCountOfCorrectAnswer) {
+                  emit(state.copyWith(countOfStar: (countOfStar + 1)));
+                }
+              }
+            }
+          }
+        }
+      }
+    } else {
+      if (state.gameData?.length == 1) {
+        emit(state.copyWith(countOfStar: 3));
+      } else if (state.gameData?.length == 2) {
+        if (stateOfCountOfCorrectAnswer == 1) {
+          emit(state.copyWith(countOfStar: 1));
+        } else if (stateOfCountOfCorrectAnswer == 2) {
+          emit(state.copyWith(countOfStar: 3));
+        }
+      }
+    }
+  }
+
+  addSuccessAnswer({required void Function() actionInEndOfLesson}) async {
+    await animationOfCorrectAnswer();
+    increaseCountOfCorrectAnswer();
+    addStarToStudent();
+    bool isLastLesson = checkIfIsTheLastGameOfLesson();
+
+    if (isLastLesson == true) {
+      await Future.delayed(const Duration(seconds: 2));
+      actionInEndOfLesson.call();
+    } else {
+      backToMainAvatar();
+    }
+  }
+
+  addWrongAnswer() async {
+    AudioPlayerClass.startPlaySound(
+        soundPath: AppSound.getRandomSoundOfWrong());
+    animationOfWrongAnswer();
+    backToMainAvatar();
+  }
+
+  animationOfWrongAnswer() {
+    emit(state.copyWith(currentAvatar: state.basicData?.sadAvatar ?? ''));
+  }
+
+  animationOfCorrectAnswer() {
+    emit(state.copyWith(currentAvatar: state.basicData?.winAvatar ?? ''));
+  }
+
+  increaseCountOfCorrectAnswer() {
+    int stateOfCountOfCorrectAnswer = state.countOfCorrectAnswer ?? 0;
+    stateOfCountOfCorrectAnswer = stateOfCountOfCorrectAnswer + 1;
+    emit(state.copyWith(countOfCorrectAnswer: stateOfCountOfCorrectAnswer));
+  }
+
+  backToMainAvatar() async {
+    await Future.delayed(const Duration(seconds: 2));
+    emit(state.copyWith(currentAvatar: state.basicData?.basicAvatar ?? ''));
   }
 }
