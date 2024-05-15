@@ -1,5 +1,6 @@
 part of 'contact_lesson_bloc.dart';
 
+
 @immutable
 abstract class ContactLessonState extends Equatable {
   @override
@@ -9,14 +10,26 @@ abstract class ContactLessonState extends Equatable {
 class ContactLessonInitial extends ContactLessonState {}
 
 class GetContactInitial extends ContactLessonState {
-  final List<LessonQuestionsModel> data;
+  final List<GameModel> data;
 
   GetContactInitial({required this.data});
+
+  MainDataOfPhonetics? getMainContactData({required int index}){
+
+    String subProgram = data[index].unit?.program?.course?.name??'';
+    if(subProgram == BasicOfEveryGame.phonics){
+      String subLetter = data[index].mainLetter??'';
+      if(subLetter == MainDataOfPhonetics.letterS){
+        return   SPhonetics(mineGameData: DragOutGameS());
+      }
+    }
+  }
 }
 
 class GetContactLoadingInitial extends ContactLessonState {}
 
 class LogOutLoadingState extends ContactLessonState {}
+class NotSupportTypeState extends ContactLessonState {}
 
 class CompleteGameState extends ContactLessonState {}
 

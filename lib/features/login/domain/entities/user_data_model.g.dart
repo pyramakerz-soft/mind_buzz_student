@@ -31,8 +31,8 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
 
 Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'id': instance.id,
-      'name': instance.name,
       'pw_length': instance.pwLength,
+      'name': instance.name,
       'email': instance.email,
       'email_verified_at': instance.emailVerifiedAt,
       'created_at': instance.createdAt,

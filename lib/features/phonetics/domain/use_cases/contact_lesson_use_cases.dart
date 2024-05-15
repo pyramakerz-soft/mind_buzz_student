@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import '../../../../../core/error/failures.dart';
-import '../entities/contact_of_lesson.dart';
-import '../entities/lesson_questions.dart';
+import '../entities/game_model.dart';
 import '../repositories/repositories_contact_lesson.dart';
 
 class ContactLessonUseCases {
@@ -9,7 +8,7 @@ class ContactLessonUseCases {
 
   ContactLessonUseCases(this.repository);
 
-  Future<Either<Failure, List<LessonQuestionsModel>>> call(
+  Future<Either<Failure, List<GameModel>>> call(
       {required int programId}) async {
     return await repository.lessonContactDataRepository(programId: programId);
   }

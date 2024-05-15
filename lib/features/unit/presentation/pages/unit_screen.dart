@@ -200,7 +200,7 @@ class UnitScreen extends StatelessWidget {
                                       ),
                                     ),
                                     const Positioned(
-                                      left: -8,
+                                      left: -12,
                                       child: AnimationOfBee4(),
                                     )
                                   ],

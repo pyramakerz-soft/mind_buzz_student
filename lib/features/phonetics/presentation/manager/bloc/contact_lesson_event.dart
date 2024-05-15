@@ -25,3 +25,8 @@ class CompleteLessonRequest extends ContactLessonEvent {
   @override
   List<Object> get props => [];
 }
+class ThisTypeNotSupportedRequest extends ContactLessonEvent {
+  ThisTypeNotSupportedRequest();
+  @override
+  List<Object> get props => [];
+}

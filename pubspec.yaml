@@ -99,6 +99,7 @@ flutter:
     - assets/animation/
     - assets/fonts/
     - assets/math_ball/
+    - assets/phonetics/
     - assets/numbers_lessons/
     - assets/svg/parent_account/
 

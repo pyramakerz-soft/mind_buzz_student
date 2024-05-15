@@ -7,9 +7,11 @@ import 'package:meta/meta.dart';
 
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/error/failures_messages.dart';
+import '../../../../../core/phonetics/basic_of_every_game.dart';
+import '../../../../../core/phonetics/basic_of_phonetics.dart';
 import '../../../../../core/talk_tts.dart';
-import '../../../domain/entities/lesson_questions.dart';
-import '../../../domain/use_cases/contact_lesson_use_cases.dart';
+import '../../../domain/entities/game_model.dart';
+import '../../../../phonetics/domain/use_cases/contact_lesson_use_cases.dart';
 
 part 'contact_lesson_event.dart';
 part 'contact_lesson_state.dart';
@@ -28,20 +30,22 @@ class ContactLessonBloc extends Bloc<ContactLessonEvent, ContactLessonState> {
         emit(await _eitherLoadedOrErrorState(failureOrDoneMessage));
       } else if (event is CompleteLessonRequest) {
         emit(CompleteGameState());
+      } else if (event is ThisTypeNotSupportedRequest) {
+        emit(NotSupportTypeState());
       }
     });
   }
 }
 
 Future<ContactLessonState> _eitherLoadedOrErrorState(
-  Either<Failure, List<LessonQuestionsModel>> failureOrTrivia,
+  Either<Failure, List<GameModel>> failureOrTrivia,
 ) async {
   ContactLessonState tempState = failureOrTrivia.fold(
     (failure) => GetContactErrorInitial(message: _mapFailureToMessage(failure)),
     (data) => GetContactInitial(data: data),
   );
   if (tempState is GetContactInitial) {
-    TalkTts.startTalk(text: tempState.data[0].question ?? '');
+    TalkTts.startTalk(text: tempState.data.first.inst ?? '');
   }
   return tempState;
 }
