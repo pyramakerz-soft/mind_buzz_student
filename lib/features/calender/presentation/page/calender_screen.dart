@@ -84,7 +84,10 @@ class CalenderScreen extends StatelessWidget {
                     headerVisible: true,
                     rangeSelectionMode: RangeSelectionMode.toggledOn,
                     onDaySelected: (day, focused) {
+
+                      if(day.month == state.currentDate.month)
                       bloc.add(SelectDayEvent(day: day.day));
+
                     },
                     onCalendarCreated: (controller) =>
                         bloc.pageController = controller,

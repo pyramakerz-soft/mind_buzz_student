@@ -30,10 +30,10 @@ abstract class ValidationTextField {
     if ((value?.length ?? 0) < (minLength ?? 3)) {
       return 'length must be more than ${minLength ?? 3} letters';
     }  if ((value?.length ?? 0) > (maxLength ?? 20)) {
-      return 'length must be less than ${(maxLength??20) + 1} letters';
+      return 'length must be less than ${maxLength??20} letters';
     }
 
-    else if (RegExp(r'[a-zA-Z]').hasMatch(value!)){
+    else if (!value!.split('').map((e) => RegExp(r'[a-zA-Z]').hasMatch(e)).toList().contains(false)){
       return null;
     }
     else{

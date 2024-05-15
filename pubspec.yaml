@@ -66,6 +66,8 @@ dependencies:
   percent_indicator: ^4.2.3
   image_picker: ^1.1.1
   http:
+  intl_phone_field: ^3.1.0
+#  phone_numbers_parser: ^8.2.1
 #  level_map: ^0.2.0
 
 dev_dependencies:

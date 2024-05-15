@@ -4,6 +4,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl_phone_field/countries.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:intl_phone_field/phone_number.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/parent_assets.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
@@ -19,6 +22,7 @@ import '../../../login/presentation/page/login_screen.dart';
 import '../bloc/settings_bloc.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/personal_info_item.dart';
+import '../widgets/phone_number_text_field.dart';
 
 
 class EditProfileScreen extends StatefulWidget {
@@ -68,6 +72,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         GestureDetector(
                           onTap: (){
                             bloc.add(PickImageEvent());
+
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -107,7 +112,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               bloc.add(ChangeInUpdateUserDataEvent());
                             },
                             validator: (value){
-                              return ValidationTextField.textOnlyInput(value);
+                              return ValidationTextField.textOnlyInput(value,maxLength: 20);
                             },
 
 
@@ -117,7 +122,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         CustomTextField(
                           label: 'Email',
                           enabled: false,
-                          // controller: bloc.emailController,
+                          controller: bloc.emailController,
+
                           // onChanged: (value){
                           //   bloc.add(ChangeInUpdateUserDataEvent());
                           // },
@@ -126,16 +132,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           // },
                         ),
                         20.ph,
-                        CustomTextField(
+
+                        PhoneTextField(
                           label: 'Phone Number',
                           controller: bloc.phoneController,
-                          number: true,
+                          phoneCode: state is UpdatingDataInitial ? state.phoneCode : 'EG',
                           onChanged: (value){
                             bloc.add(ChangeInUpdateUserDataEvent());
+                            bloc.add(ChangeInUpdateUserDataEvent());
                           },
-                          validator: (value){
-                            return ValidationTextField.textInput(value,length: 5);
+                          onCountryChanged: (country){
+                            bloc.add(ChangePhoneCodeEvent(country: country));
+                            bloc.add(ChangeInUpdateUserDataEvent());
                           },
+
                         ),
                         50.ph,
                         if(state is UpdatingDataLoading)

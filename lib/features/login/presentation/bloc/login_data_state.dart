@@ -30,10 +30,11 @@ class ErrorLogin extends LoginDataState {
 class UpdatingDataInitial extends LoginDataState {
   final UserData userData;
   final File? userImage;
-  UpdatingDataInitial ({required this.userData, this.userImage});
+  final String? phoneCode;
+  UpdatingDataInitial ({required this.userData, this.userImage, this.phoneCode});
 
   @override
-  List<Object?> get props => [userData, userImage];
+  List<Object?> get props => [userData, userImage,phoneCode];
 }
 class CompleteUpdatingData extends LoginDataState {
   final UserData userData;

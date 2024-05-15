@@ -8,6 +8,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl_phone_field/countries.dart';
+import 'package:intl_phone_field/phone_number.dart';
 import 'package:mind_buzz_refactor/core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/error/failures_messages.dart';
@@ -26,6 +28,7 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
   TextEditingController fullNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  PhoneNumber? phoneCode ;
   File? profileImage;
   UserData? userData;
 
@@ -52,11 +55,16 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
     on<PickImageEvent>((event, emit) async {
      await pickImage(emit);
     });
+    on<ChangePhoneCodeEvent>((event, emit) async {
+      phoneCode = PhoneNumber(countryISOCode: event.country.dialCode, countryCode: event.country.code, number: phoneController.text) ;
+      emit(UpdatingDataInitial(userData: userData!, userImage: profileImage));
+    });
     on<InitializeUpdateUserDataEvent>((event, emit) async {
       fullNameController.text = userData?.name ?? '';
       emailController.text =  userData?.email ?? '';
-      phoneController.text = userData?.parentPhone ?? '';
-     emit(UpdatingDataInitial(userData: userData!, userImage: profileImage));
+      phoneCode = PhoneNumber.fromCompleteNumber(completeNumber: userData?.parentPhone??'');
+      phoneController.text = userData?.parentPhone?.substring(phoneCode?.countryCode.length??0) ?? '';
+     emit(UpdatingDataInitial(userData: userData!, userImage: profileImage,phoneCode: phoneCode?.countryISOCode));
     });
 
     on<ChangeInUpdateUserDataEvent>((event, emit) {
@@ -79,11 +87,11 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
   }
 
 
-  updateUserData(emit)async{
+  updateUserData(emit,)async{
     emit(UpdatingDataLoading());
     try {
       var res = await updateUserDataUseCases(filepath: profileImage , name: fullNameController.text ,
-          phone: phoneController.text , email: emailController.text);
+          phone: (phoneCode?.countryISOCode??'') + phoneController.text , email: emailController.text);
 
       res.fold((l) {
         log('updateUserData fold $l');
@@ -109,6 +117,7 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
     if(image != null) {
       profileImage = File(image.path);
     }
+   add(ChangeInUpdateUserDataEvent());
     emit(UpdatingDataInitial(userData: userData!, userImage: profileImage));
   }
 

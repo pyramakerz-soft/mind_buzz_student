@@ -29,3 +29,7 @@ class InitializeUpdateUserDataEvent extends LoginDataEvent {}
 class ChangeInUpdateUserDataEvent extends LoginDataEvent {}
 class UpdateUserDataEvent extends LoginDataEvent {}
 class PickImageEvent extends LoginDataEvent {}
+class ChangePhoneCodeEvent extends LoginDataEvent {
+  final Country country;
+  ChangePhoneCodeEvent({required this.country});
+}
