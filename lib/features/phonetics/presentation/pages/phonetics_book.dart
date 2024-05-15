@@ -19,6 +19,7 @@ import '../games/drag_out/manager/drag_out_cubit.dart';
 import '../games/drag_out/pages/drag_out_game.dart';
 import '../manager/bloc/contact_lesson_bloc.dart';
 import '../manager/main_cubit/current_game_phonetics_cubit.dart';
+import '../widget/based_of_game_phonetics.dart';
 import '../widget/star_widget.dart';
 
 class PhoneticsBook extends StatefulWidget {
@@ -92,123 +93,9 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                     }
                   }, builder: (context, stateOfGameData) {
                     if (stateOfGameData is GetContactInitial) {
-                      return Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage(
-                                    stateOfGame.basicData?.background ?? ''),
-                                fit: BoxFit.fill)),
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              top: 15,
-                              child: SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                height: 60.h,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        20.pw,
-                                        Image.asset(
-                                          stateOfGame.basicData?.gameData
-                                                  ?.titleImage ??
-                                              '',
-                                          height: 60.h,
-                                        )
-                                      ],
-                                    ),
-                                    Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 5, horizontal: 10),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4),
-                                              bottomLeft: Radius.circular(4),
-                                            ),
-                                            color: stateOfGame.basicData
-                                                ?.backGroundOfStarBar),
-                                        // margin: const EdgeInsets.symmetric(
-                                        // vertical: 5),
-                                        child: RatingBar(
-                                          initialRating: double.parse(
-                                              "${(stateOfGame.countOfStar ?? 0)}"),
-                                          direction: Axis.horizontal,
-                                          allowHalfRating: false,
-                                          itemCount: 3,
-                                          itemSize: 25,
-                                          ratingWidget: RatingWidget(
-                                            full: const StarWidget(
-                                              image: AppImagesPhonetics
-                                                  .imageCompleteStar,
-                                            ),
-                                            half: const StarWidget(
-                                              image: AppImagesPhonetics
-                                                  .imageEmptyStar,
-                                            ),
-                                            empty: const StarWidget(
-                                              image: AppImagesPhonetics
-                                                  .imageEmptyStar,
-                                            ),
-                                          ),
-                                          itemPadding:
-                                              const EdgeInsets.symmetric(
-                                                  horizontal: 4.0),
-                                          onRatingUpdate: (rating) {
-                                            print(rating);
-                                          },
-                                        )),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 15,
-                              child: SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const SizedBox(),
-                                    Container(
-                                        margin:
-                                            const EdgeInsets.only(right: 40),
-                                        child: Image.asset(
-                                          stateOfGame.currentAvatar ?? '',
-                                          height: (MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  2)
-                                              .h,
-                                          width: 130,
-                                        )),
-                                    // SizedBox(),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                                left: 0,
-                                bottom: 0,
-                                child: SizedBox(
-                                    height: MediaQuery.of(context).size.height -
-                                        (70.h),
-                                    child: (stateOfGame.basicData?.gameData
-                                            is DragOutGameS)
-                                        ? BlocProvider<DragOutCubit>(
-                                            create: (_) => DragOutCubit(
-                                                gameData: stateOfGameData
-                                                    .data[stateOfGame.index]),
-                                            child: DragOutGame())
-                                        : const SizedBox()))
-                          ],
-                        ),
+                      return BasedOfGamePhonetics(
+                        stateOfGame: stateOfGame,
+                        stateOfGameData: stateOfGameData,
                       );
                     } else if (stateOfGameData is GetContactLoadingInitial) {
                       return stateOfGame.avatarArtboardLoading != null
