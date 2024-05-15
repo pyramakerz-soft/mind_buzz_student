@@ -69,94 +69,97 @@ class _HomeScreen extends State<HomeScreen> {
                 if (state is GetProgramsLoadingInitial) {
                   return const Center(child: CupertinoActivityIndicator());
                 } else if (state is GetProgramsCompleteInitial) {
-                  return Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: AppColor.redColor),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 7, horizontal: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              DefaultHomeData.haveAnAssignment,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                      fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .reDeginSize(16, context) >
-                                              35
-                                          ? 35
-                                          : MediaQuery.of(context)
-                                              .size
-                                              .reDeginSize(16, context),
-                                      fontWeight: FontWeight.w700),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Utils.navigateTo(
-                                    BlocProvider(
-                                        create: (_) => CheckAssignmentCubit(
-                                            assignmentProgrammes: state.data),
-                                        child: StudentAssignmentScreen()),
-                                    context);
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 5, horizontal: 5),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                    color: Colors.white),
-                                child: Text(
-                                  'Start Now?',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleLarge
-                                      ?.copyWith(
-                                          fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .reDeginSize(
-                                                          13, context) >
-                                                  35
-                                              ? 35
-                                              : MediaQuery.of(context)
-                                                  .size
-                                                  .reDeginSize(13, context),
-                                          fontWeight: FontWeight.w700),
-                                ),
+                  return SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: AppColor.redColor),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 7, horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                DefaultHomeData.haveAnAssignment,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                        fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .reDeginSize(16, context) >
+                                                35
+                                            ? 35
+                                            : MediaQuery.of(context)
+                                                .size
+                                                .reDeginSize(16, context),
+                                        fontWeight: FontWeight.w700),
                               ),
-                            )
-                          ],
-                        ),
-                      ),
-                      25.ph,
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height-(210),
-                        child: ListView(
-                          children: List.generate(
-                              state.data.length,
-                                  (index) => Column(
-                                children: [
-                                  CardOfProgram(
-                                    programId:
-                                    "${state.data[index].programId ?? ''}",
-                                    colors: DefaultHomeData.getColor(
-                                        index: (index + 1)),
-                                    mainImage: state.data[index].program?.image,
-                                    title: state.data[index].program?.course
-                                        ?.name ??
-                                        '',
+                              GestureDetector(
+                                onTap: () {
+                                  Utils.navigateTo(
+                                      BlocProvider(
+                                          create: (_) => CheckAssignmentCubit(
+                                              assignmentProgrammes: state.data),
+                                          child: StudentAssignmentScreen()),
+                                      context);
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 5, horizontal: 5),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: Colors.white),
+                                  child: Text(
+                                    'Start Now?',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleLarge
+                                        ?.copyWith(
+                                            fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .reDeginSize(
+                                                            13, context) >
+                                                    35
+                                                ? 35
+                                                : MediaQuery.of(context)
+                                                    .size
+                                                    .reDeginSize(13, context),
+                                            fontWeight: FontWeight.w700),
                                   ),
-                                  15.ph,
-                                ],
-                              )),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      )
-                    ],
+                        25.ph,
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height - (210),
+                          child: ListView(
+                            children: List.generate(
+                                state.data.length,
+                                (index) => Column(
+                                      children: [
+                                        CardOfProgram(
+                                          programId:
+                                              "${state.data[index].programId ?? ''}",
+                                          colors: DefaultHomeData.getColor(
+                                              index: (index + 1)),
+                                          mainImage:
+                                              state.data[index].program?.image,
+                                          title: state.data[index].program
+                                                  ?.course?.name ??
+                                              '',
+                                        ),
+                                        15.ph,
+                                      ],
+                                    )),
+                          ),
+                        )
+                      ],
+                    ),
                   );
                 } else {
                   return const SizedBox();

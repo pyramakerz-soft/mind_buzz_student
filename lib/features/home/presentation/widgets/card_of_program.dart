@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
@@ -32,7 +33,7 @@ class CardOfProgram extends StatelessWidget {
         Utils.navigateTo(
             BlocProvider(
                 create: (_) => AnimationUnitCubit(),
-                child:UnitScreen(
+                child: UnitScreen(
                   programId: programId,
                   programName: title,
                 )),
@@ -88,20 +89,21 @@ class CardOfProgram extends StatelessWidget {
                 ],
               ),
             ),
-            ClipRRect(
-              borderRadius: const BorderRadius.only(
-                  bottomRight: Radius.circular(20),
-                  topRight: Radius.circular(20)),
-              child: CachedNetworkImage(
-                imageUrl:mainImage ?? DefaultHomeData.image,
-                height: MediaQuery.of(context).size.height / 5,
-                  errorWidget:(context, url, error){
-                  return Image.network( DefaultHomeData.image,
-                    width: MediaQuery.of(context).size.width / 2,
+            Expanded(
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                    bottomRight: Radius.circular(20),
+                    topRight: Radius.circular(20)),
+                child: CachedNetworkImage(
+                    imageUrl: mainImage ?? DefaultHomeData.image,
                     height: MediaQuery.of(context).size.height / 5,
-
-                  );
-                  }
+                    errorWidget: (context, url, error) {
+                      return Image.network(
+                        DefaultHomeData.image,
+                        width: MediaQuery.of(context).size.width / 2,
+                        height: MediaQuery.of(context).size.height / 5,
+                      );
+                    }),
               ),
             ),
           ],
