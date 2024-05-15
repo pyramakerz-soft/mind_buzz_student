@@ -69,7 +69,6 @@ class ChaptersScreen extends StatelessWidget {
                           GestureDetector(
                               onTap: () {
                                 Navigator.of(context).pop();
-                                Navigator.of(context).pop();
                               },
                               child: Container(
                                   padding: const EdgeInsets.all(10),
@@ -79,8 +78,8 @@ class ChaptersScreen extends StatelessWidget {
                                   decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: AppColor.darkBlueColor3),
-                                  child: SvgPicture.asset(
-                                    AppSvgImages.iconHome,
+                                  child: Image.asset(
+                                    AppImages.iconBackButton,
                                     fit: BoxFit.fill,
                                     color: Colors.white,
                                   ))),

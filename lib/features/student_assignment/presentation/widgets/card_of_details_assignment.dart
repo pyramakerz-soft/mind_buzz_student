@@ -139,13 +139,13 @@ class CardOfDetailsOfAssignment extends StatelessWidget {
                             : const SizedBox()),
                     Expanded(
                         child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         if (data.status == TestTypes.finished) ...{
                           Text(
-                            "${data.status}",
+                            "${data.status}: ${data.daysLeft}",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: AppColor.resetText,
@@ -159,7 +159,7 @@ class CardOfDetailsOfAssignment extends StatelessWidget {
                             children: [
 
                               Text(
-                                "${data.status}",
+                                "${data.status}: ${data.daysLeft}",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: AppColor.redColor,
