@@ -258,7 +258,7 @@ class UnitScreen extends StatelessWidget {
                                                           ? false
                                                           : true,
                                                   child: Container(
-                                                    alignment: ((index == 0) || index % 2 == 0)?Alignment.centerLeft:Alignment.centerRight,
+                                                    alignment: Alignment.center,
                                                     margin: EdgeInsets.symmetric(horizontal: 10),
                                                     child: Text(
                                                       state.data[index].name ?? '',
