@@ -5,8 +5,12 @@ abstract class BasicOfEveryGame {
   late bool isRound;
   late String titleImage;
   late String keyGame;
+  late String completeBasket;
 
   static String phonics = 'Phonics';
+  static String stateOIdle = 'idle';
+  static String stateOfWin = 'win';
+  static String stateOfSad = 'sad';
   static List<int> getTheStarsAddState(int number) {
     if (number % 3 == 0) {
       return List.generate(3, (index) => (number / 3).round()).toList();
@@ -40,4 +44,7 @@ class DragOutGameS implements BasicOfEveryGame {
 
   @override
   String keyGame = 'Drag Out';
+
+  @override
+  String completeBasket = AppImagesPhonetics.imageBasketComplete;
 }

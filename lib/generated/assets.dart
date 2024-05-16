@@ -16,6 +16,7 @@ class Assets {
   static const String animationUnitsBee2 = 'assets/animation/units_bee2.riv';
   static const String animationUnitsTree = 'assets/animation/units_tree.riv';
   static const String animationWateringUnitsBee = 'assets/animation/watering_units_bee.riv';
+  static const String assetsPhoneticsSnowmanSad = 'assets/phonetics/snowman_sad.riv';
   static const String baseGoodJob = 'assets/sound/base/good_job.ogg';
   static const String baseNope = 'assets/sound/base/nope.ogg';
   static const String baseNotThatOne = 'assets/sound/base/not_that_one.ogg';
@@ -115,10 +116,16 @@ class Assets {
   static const String parentAccountTimers = 'assets/svg/parent_account/timers.svg';
   static const String phoneticsBackGroundOfS = 'assets/phonetics/backGroundOfS.png';
   static const String phoneticsBasicAvatarNormal = 'assets/phonetics/basicAvatarNormal.png';
+  static const String phoneticsBasket = 'assets/phonetics/basket.png';
+  static const String phoneticsBasketComplete = 'assets/phonetics/basket_complete.png';
   static const String phoneticsCompleteStar = 'assets/phonetics/complete_star.png';
   static const String phoneticsDragOut = 'assets/phonetics/dragOut.png';
   static const String phoneticsEmptyStar = 'assets/phonetics/empty_star.png';
+  static const String phoneticsLoading = 'assets/phonetics/Loading.riv';
   static const String phoneticsSadAvatarSad = 'assets/phonetics/sadAvatarSad.png';
+  static const String phoneticsSnowmanHappy = 'assets/phonetics/snowman_happy.riv';
+  static const String phoneticsSnowmanIdle = 'assets/phonetics/snowman_idle.riv';
+  static const String phoneticsSnowmanSad = 'assets/phonetics/snowman_sad.gif';
   static const String phoneticsWinAvatar = 'assets/phonetics/winAvatar.png';
   static const String soundA = 'assets/sound/a.mp3';
   static const String soundM = 'assets/sound/m.mp3';

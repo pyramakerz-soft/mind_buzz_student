@@ -202,7 +202,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   animationOfCorrectAnswer() {
-    emit(state.copyWith(avatarArtboard: state.avatarArtboardSuccess));
+    emit(state.copyWith(avatarArtboard: state.avatarArtboardSuccess, stateOfAvatar: BasicOfEveryGame.stateOfWin));
   }
 
   increaseCountOfCorrectAnswer() {

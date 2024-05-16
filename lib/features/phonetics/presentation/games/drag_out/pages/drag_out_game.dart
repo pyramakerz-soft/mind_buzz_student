@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/phonetics/assets_images_phonetics.dart';
+import '../../../../../../core/phonetics/basic_of_every_game.dart';
 import '../../../../../../core/phonetics/phonetics_color.dart';
 import '../../../../domain/entities/game_images_model.dart';
 import '../../../manager/bloc/contact_lesson_bloc.dart';
@@ -14,6 +15,8 @@ class DragOutGame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gameData = context.read<DragOutCubit>().state.gameData;
+    final stateOfCurrentGamePhoneticsCubit =
+        context.read<CurrentGamePhoneticsCubit>().state;
     return Container(
       alignment: Alignment.center,
       // height: MediaQuery.of(context).size.height - (70.h),
@@ -29,19 +32,26 @@ class DragOutGame extends StatelessWidget {
                 List<dynamic> accepted,
                 List<dynamic> rejected,
               ) {
-                return Image.asset(
-                  AppImagesPhonetics.imageBasket,
+                return (stateOfCurrentGamePhoneticsCubit.stateOfAvatar ==
+                        BasicOfEveryGame.stateOfWin)
+                    ? Image.asset(
+                  stateOfCurrentGamePhoneticsCubit.basicData?.gameData?.completeBasket??'',
                   height: (MediaQuery.of(context).size.height / 2.8).h,
                   width: 130,
-                );
+                )
+                    : Image.asset(
+                        AppImagesPhonetics.imageBasket,
+                        height: (MediaQuery.of(context).size.height / 2.8).h,
+                        width: 130,
+                      );
               }, onAcceptWithDetails: (item) {
-                print('item:${item.data.word.toString().split('').first.toLowerCase()}, ${gameData.mainLetter?.toLowerCase()}');
                 if (item.data.word.toString().split('').first.toLowerCase() !=
-                    (gameData.mainLetter?.toLowerCase()??'')) {
+                    (gameData.mainLetter?.toLowerCase() ?? '')) {
                   context.read<CurrentGamePhoneticsCubit>().addSuccessAnswer(
                       actionInEndOfLesson: () {
-                    // Navigator.of(context).pop();
+                    Navigator.of(context).pop();
                   });
+
                 } else {
                   context.read<CurrentGamePhoneticsCubit>().addWrongAnswer();
                 }
@@ -76,14 +86,29 @@ class DragOutGame extends StatelessWidget {
                         height: 130.h,
                         // height: ,
                       ),
-                      child: CachedNetworkImage(
-                        imageUrl: gameData.gameImages?[index].image ?? '',
-                        width: (MediaQuery.of(context).size.width -
-                                (130 + 50 + 130)) /
-                            4,
-                        height: 130.h,
-                        // height: ,
-                      ))),
+                      child: (stateOfCurrentGamePhoneticsCubit.stateOfAvatar ==
+                                  BasicOfEveryGame.stateOfWin &&
+                              gameData.gameImages?[index].word
+                                      .toString()
+                                      .split('')
+                                      .first
+                                      .toLowerCase() !=
+                                  (gameData.mainLetter?.toLowerCase() ?? ''))
+                          ? SizedBox(
+                              width: (MediaQuery.of(context).size.width -
+                                      (130 + 50 + 130)) /
+                                  4,
+                              height: 130.h,
+                              // height: ,
+                            )
+                          : CachedNetworkImage(
+                              imageUrl: gameData.gameImages?[index].image ?? '',
+                              width: (MediaQuery.of(context).size.width -
+                                      (130 + 50 + 130)) /
+                                  4,
+                              height: 130.h,
+                              // height: ,
+                            ))),
             ),
           )
         ],

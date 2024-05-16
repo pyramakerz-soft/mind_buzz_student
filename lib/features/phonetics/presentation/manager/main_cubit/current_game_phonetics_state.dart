@@ -7,6 +7,7 @@ class CurrentGamePhoneticsState extends Equatable {
   Artboard? avatarArtboardSad;
   Artboard? avatarArtboardLoading;
 
+  String? stateOfAvatar;
   String? currentAvatar;
   int index;
   List<GameModel>? gameData;
@@ -19,6 +20,7 @@ class CurrentGamePhoneticsState extends Equatable {
       this.avatarArtboard,
       this.gameData,
       this.avatarArtboardLoading,
+      this.stateOfAvatar,
       this.avatarArtboardIdle,
       this.avatarArtboardSad,
       this.avatarArtboardSuccess,
@@ -35,6 +37,7 @@ class CurrentGamePhoneticsState extends Equatable {
       Artboard? avatarArtboardSad,
       Artboard? avatarArtboardLoading,
       String? currentAvatar,
+      String? stateOfAvatar,
       List<GameModel>? gameData,
       List<int>? statesOfAddStars,
       int? index,
@@ -47,6 +50,7 @@ class CurrentGamePhoneticsState extends Equatable {
             avatarArtboardLoading ?? this.avatarArtboardLoading,
         gameData: gameData ?? this.gameData,
         statesOfAddStars: statesOfAddStars ?? this.statesOfAddStars,
+        stateOfAvatar: stateOfAvatar ?? this.stateOfAvatar,
         currentAvatar: currentAvatar ?? this.currentAvatar,
         avatarArtboardSad: avatarArtboardSad ?? this.avatarArtboardSad,
         avatarArtboardSuccess: avatarArtboardSuccess ?? this.avatarArtboardSuccess,
@@ -54,6 +58,23 @@ class CurrentGamePhoneticsState extends Equatable {
         countOfCorrectAnswer: countOfCorrectAnswer ?? this.countOfCorrectAnswer,
         countOfStar: countOfStar ?? this.countOfStar,
         avatarArtboard: avatarArtboard ?? this.avatarArtboard);
+  }
+  clearStateOfAvatar(){
+    return CurrentGamePhoneticsState(
+        basicData: basicData ?? basicData,
+        index: index ?? index,
+        avatarArtboardLoading:
+        avatarArtboardLoading ?? avatarArtboardLoading,
+        gameData: gameData ?? gameData,
+        statesOfAddStars: statesOfAddStars ?? statesOfAddStars,
+        stateOfAvatar: null,
+        currentAvatar: currentAvatar ?? currentAvatar,
+        avatarArtboardSad: avatarArtboardSad ?? avatarArtboardSad,
+        avatarArtboardSuccess: avatarArtboardSuccess ?? avatarArtboardSuccess,
+        avatarArtboardIdle: avatarArtboardIdle ?? avatarArtboardIdle,
+        countOfCorrectAnswer: countOfCorrectAnswer ?? countOfCorrectAnswer,
+        countOfStar: countOfStar ?? countOfStar,
+        avatarArtboard: avatarArtboard ?? avatarArtboard);
   }
 
   @override
@@ -64,6 +85,7 @@ class CurrentGamePhoneticsState extends Equatable {
         gameData,
         avatarArtboardLoading,
         countOfCorrectAnswer,
+    stateOfAvatar,
         statesOfAddStars,
         avatarArtboard,
         index,
