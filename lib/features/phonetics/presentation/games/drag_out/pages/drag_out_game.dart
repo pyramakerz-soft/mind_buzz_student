@@ -35,12 +35,12 @@ class DragOutGame extends StatelessWidget {
                   width: 130,
                 );
               }, onAcceptWithDetails: (item) {
-                print('item:${item.data.word}');
-                if (item.data.word.toString().split('').first ==
-                    gameData.mainLetter) {
+                print('item:${item.data.word.toString().split('').first.toLowerCase()}, ${gameData.mainLetter?.toLowerCase()}');
+                if (item.data.word.toString().split('').first.toLowerCase() !=
+                    (gameData.mainLetter?.toLowerCase()??'')) {
                   context.read<CurrentGamePhoneticsCubit>().addSuccessAnswer(
                       actionInEndOfLesson: () {
-                    Navigator.of(context).pop();
+                    // Navigator.of(context).pop();
                   });
                 } else {
                   context.read<CurrentGamePhoneticsCubit>().addWrongAnswer();

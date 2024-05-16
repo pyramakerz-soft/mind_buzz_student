@@ -1,3 +1,5 @@
+import 'package:flame_rive/flame_rive.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -21,7 +23,6 @@ class BasedOfGamePhonetics extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
@@ -93,13 +94,28 @@ class BasedOfGamePhonetics extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const SizedBox(),
-                  Container(
-                      margin: const EdgeInsets.only(right: 40),
-                      child: Image.asset(
-                        stateOfGame.currentAvatar ?? '',
-                        height: (MediaQuery.of(context).size.height / 2).h,
-                        width: 130,
-                      )),
+                  GestureDetector(
+                    onTap: (){
+
+                    },
+                    child: Container(
+                        // margin: const EdgeInsets.only(right: 40),
+                        child:stateOfGame.avatarArtboard==null?
+
+
+
+                        Image.asset(
+                          stateOfGame.currentAvatar ?? '',
+                          height: MediaQuery.of(context).size.height - (70.h),
+                          width: 130,
+                        ):SizedBox(
+                            height: MediaQuery.of(context).size.height - (70.h),
+                            width: 170,
+
+                            child: Rive(artboard: stateOfGame.avatarArtboard!,
+                              fit: BoxFit.cover,))
+                    ),
+                  ),
                   // SizedBox(),
                 ],
               ),

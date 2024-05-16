@@ -2,6 +2,9 @@ part of 'current_game_phonetics_cubit.dart';
 
 class CurrentGamePhoneticsState extends Equatable {
   Artboard? avatarArtboard;
+  Artboard? avatarArtboardIdle;
+  Artboard? avatarArtboardSuccess;
+  Artboard? avatarArtboardSad;
   Artboard? avatarArtboardLoading;
 
   String? currentAvatar;
@@ -16,6 +19,9 @@ class CurrentGamePhoneticsState extends Equatable {
       this.avatarArtboard,
       this.gameData,
       this.avatarArtboardLoading,
+      this.avatarArtboardIdle,
+      this.avatarArtboardSad,
+      this.avatarArtboardSuccess,
       this.statesOfAddStars,
       this.currentAvatar,
       this.countOfCorrectAnswer,
@@ -24,6 +30,9 @@ class CurrentGamePhoneticsState extends Equatable {
   CurrentGamePhoneticsState copyWith(
       {MainDataOfPhonetics? basicData,
       Artboard? avatarArtboard,
+      Artboard? avatarArtboardSuccess,
+      Artboard? avatarArtboardIdle,
+      Artboard? avatarArtboardSad,
       Artboard? avatarArtboardLoading,
       String? currentAvatar,
       List<GameModel>? gameData,
@@ -39,6 +48,9 @@ class CurrentGamePhoneticsState extends Equatable {
         gameData: gameData ?? this.gameData,
         statesOfAddStars: statesOfAddStars ?? this.statesOfAddStars,
         currentAvatar: currentAvatar ?? this.currentAvatar,
+        avatarArtboardSad: avatarArtboardSad ?? this.avatarArtboardSad,
+        avatarArtboardSuccess: avatarArtboardSuccess ?? this.avatarArtboardSuccess,
+        avatarArtboardIdle: avatarArtboardIdle ?? this.avatarArtboardIdle,
         countOfCorrectAnswer: countOfCorrectAnswer ?? this.countOfCorrectAnswer,
         countOfStar: countOfStar ?? this.countOfStar,
         avatarArtboard: avatarArtboard ?? this.avatarArtboard);
@@ -48,6 +60,7 @@ class CurrentGamePhoneticsState extends Equatable {
   List<Object?> get props => [
         basicData,
         currentAvatar,
+    avatarArtboardIdle, avatarArtboardSad,avatarArtboardSuccess,
         gameData,
         avatarArtboardLoading,
         countOfCorrectAnswer,

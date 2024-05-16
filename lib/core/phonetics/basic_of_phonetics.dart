@@ -6,6 +6,7 @@ import 'basic_of_every_game.dart';
 abstract class MainDataOfPhonetics {
   late String basicAvatar;
   late String winAvatar;
+  late String idelAvatar;
   late String sadAvatar;
   late String background;
    BasicOfEveryGame? gameData;
@@ -25,16 +26,19 @@ class SPhonetics implements  MainDataOfPhonetics{
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  String sadAvatar = AppImagesPhonetics.sadAvatarSad;
+  String sadAvatar = AppImagesPhonetics.snowmanSadRiv;
 
   @override
   BasicOfEveryGame? gameData;
 
   @override
-  String winAvatar= AppImagesPhonetics.winAvatar;
+  String winAvatar= AppImagesPhonetics.snowmanHappyRiv;
 
   SPhonetics({required this.mineGameData}){
     gameData = mineGameData;
   }
+
+  @override
+  String idelAvatar= AppImagesPhonetics.snowmanIdleRiv;
 
 }

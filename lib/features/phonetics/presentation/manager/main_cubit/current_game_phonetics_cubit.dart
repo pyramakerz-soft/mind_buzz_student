@@ -20,21 +20,64 @@ part 'current_game_phonetics_state.dart';
 class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   CurrentGamePhoneticsCubit() : super(CurrentGamePhoneticsState(index: 0)) {
     getTheBackGroundLoading();
+
   }
 
   getTheBackGround() {
-    rootBundle.load(AppAnimation.beeRive).then(
-      (data) async {
+    rootBundle.load(state.basicData?.idelAvatar??'').then(
+          (data) async {
         try {
           final file = RiveFile.import(data);
           final artboard = file.mainArtboard;
           var controller =
-              StateMachineController.fromArtboard(artboard, 'State Machine 1');
+          StateMachineController.fromArtboard(artboard, 'State Machine 1');
 
           if (controller != null) {
             artboard.addController(controller);
           }
-          // emit(state.copyWith(avatarArtboard: artboard));
+          emit(state.copyWith(avatarArtboardIdle: artboard));
+          emit(state.copyWith(avatarArtboard: state.avatarArtboardIdle));
+
+        } catch (e) {
+          log('###');
+          log(e.toString());
+        }
+      },
+    );
+  }
+  getTheBackGroundSuccess() {
+    rootBundle.load(state.basicData?.winAvatar??'').then(
+          (data) async {
+        try {
+          final file = RiveFile.import(data);
+          final artboard = file.mainArtboard;
+          var controller =
+          StateMachineController.fromArtboard(artboard, 'State Machine 1');
+
+          if (controller != null) {
+            artboard.addController(controller);
+          }
+          emit(state.copyWith(avatarArtboardSuccess: artboard));
+        } catch (e) {
+          log('###');
+          log(e.toString());
+        }
+      },
+    );
+  }
+  getTheBackGroundad() {
+    rootBundle.load(state.basicData?.sadAvatar??'').then(
+          (data) async {
+        try {
+          final file = RiveFile.import(data);
+          final artboard = file.mainArtboard;
+          var controller =
+          StateMachineController.fromArtboard(artboard, 'State Machine 1');
+
+          if (controller != null) {
+            artboard.addController(controller);
+          }
+          emit(state.copyWith(avatarArtboardSad: artboard));
         } catch (e) {
           log('###');
           log(e.toString());
@@ -82,6 +125,9 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         currentAvatar: basicData.basicAvatar,
         statesOfAddStars: BasicOfEveryGame.getTheStarsAddState(gameData.length),
         gameData: gameData));
+    getTheBackGround();
+    getTheBackGroundSuccess();
+    getTheBackGroundad();
   }
 
   bool checkIfIsTheLastGameOfLesson() {
@@ -152,11 +198,11 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   animationOfWrongAnswer() {
-    emit(state.copyWith(currentAvatar: state.basicData?.sadAvatar ?? ''));
+    emit(state.copyWith(avatarArtboard: state.avatarArtboardSad));
   }
 
   animationOfCorrectAnswer() {
-    emit(state.copyWith(currentAvatar: state.basicData?.winAvatar ?? ''));
+    emit(state.copyWith(avatarArtboard: state.avatarArtboardSuccess));
   }
 
   increaseCountOfCorrectAnswer() {
@@ -167,6 +213,6 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
 
   backToMainAvatar() async {
     await Future.delayed(const Duration(seconds: 2));
-    emit(state.copyWith(currentAvatar: state.basicData?.basicAvatar ?? ''));
+    emit(state.copyWith(avatarArtboard: state.avatarArtboardIdle));
   }
 }
