@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 
@@ -73,9 +74,8 @@ class ShowAssignmentStudent extends StatelessWidget {
             ),
           ),
           10.ph,
-          SingleChildScrollView(
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width - 40,
+          Expanded(
+            child: SingleChildScrollView(
               child: Column(
                 children: List.generate(
                     courseData.program?.tests?.length ?? 0,
