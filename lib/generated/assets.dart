@@ -114,6 +114,7 @@ class Assets {
   static const String parentAccountSettings = 'assets/svg/parent_account/settings.svg';
   static const String parentAccountSettingsOutline = 'assets/svg/parent_account/settings_outline.svg';
   static const String parentAccountTimers = 'assets/svg/parent_account/timers.svg';
+  static const String phoneticsBackGroundOfA = 'assets/phonetics/backGroundOfA.png';
   static const String phoneticsBackGroundOfS = 'assets/phonetics/backGroundOfS.png';
   static const String phoneticsBasicAvatarNormal = 'assets/phonetics/basicAvatarNormal.png';
   static const String phoneticsBasket = 'assets/phonetics/basket.png';

@@ -48,3 +48,17 @@ class DragOutGameS implements BasicOfEveryGame {
   @override
   String completeBasket = AppImagesPhonetics.imageBasketComplete;
 }
+
+// class DragOutGameA implements BasicOfEveryGame {
+//   @override
+//   bool isRound = false;
+//
+//   @override
+//   String titleImage = AppImagesPhonetics.dragOut;
+//
+//   @override
+//   String keyGame = 'Drag Out';
+//
+//   @override
+//   String completeBasket = AppImagesPhonetics.imageBasketComplete;
+// }

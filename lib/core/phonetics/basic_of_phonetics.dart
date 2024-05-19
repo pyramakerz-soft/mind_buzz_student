@@ -12,6 +12,7 @@ abstract class MainDataOfPhonetics {
    BasicOfEveryGame? gameData;
   late Color backGroundOfStarBar;
   static String letterS = 's';
+  static String letterA = 'a';
 }
 
 class SPhonetics implements  MainDataOfPhonetics{
@@ -35,6 +36,34 @@ class SPhonetics implements  MainDataOfPhonetics{
   String winAvatar= AppImagesPhonetics.snowmanHappyRiv;
 
   SPhonetics({required this.mineGameData}){
+    gameData = mineGameData;
+  }
+
+  @override
+  String idelAvatar= AppImagesPhonetics.snowmanIdleRiv;
+
+}
+class APhonetics implements  MainDataOfPhonetics{
+  final BasicOfEveryGame mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xff1481D1);
+
+  @override
+  String background = AppImagesPhonetics.backGroundOfA;
+
+  @override
+  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
+
+  @override
+  String sadAvatar = AppImagesPhonetics.snowmanSadRiv;
+
+  @override
+  BasicOfEveryGame? gameData;
+
+  @override
+  String winAvatar= AppImagesPhonetics.snowmanHappyRiv;
+
+  APhonetics({required this.mineGameData}){
     gameData = mineGameData;
   }
 
