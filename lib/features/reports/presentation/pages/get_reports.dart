@@ -133,20 +133,21 @@ class GetReportsScreen extends StatelessWidget {
             else ...{
               SizedBox(
                 width: MediaQuery.of(context).size.width,
+                height: 100.h*2,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image.asset(
                       AppImages.emptyReports,
-                      height: 100,
+                      height: 100.h,
                     ),
                     Text(
                       'There is no reports data',
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge
-                          ?.copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+                          ?.copyWith(fontSize: 16.sp, fontWeight: FontWeight.w500),
                     )
                   ],
                 ),

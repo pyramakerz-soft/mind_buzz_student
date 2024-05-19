@@ -126,78 +126,82 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width / 2 - 20,
-                        child: TextFieldWidget(
-                            controler:
-                                TextEditingController(text: selectedFromDate),
-                            readOnly: true,
-                            onTap: () {
-                              showModalBottomSheet(
-                                  backgroundColor: Colors.white,
-                                  context: context,
-                                  builder: (BuildContext context0) {
-                                    return BottomSheetSelectDay(
-                                        isFrom: true,
-                                        currentDate: selectedFromDate != null
-                                            ? DateTime.parse(selectedFromDate)
-                                            : DateTime.now(),
-                                        checkEndDate: (selectedToDate != null)
-                                            ? DateTime.parse(selectedToDate)
-                                            : null);
-                                  });
-                            },
-                            hintText: 'From DD/MM/YY',
-                            fontSize: 12,
-                            borderRadius: 18,
-                            fillColor: AppColor.whiteBlue2,
-                            borderSideColor: Colors.transparent,
-                            rightWidget: Container(
-                              padding: const EdgeInsets.all(15),
-                              child: Image.asset(
-                                ParentImages.imageDate,
-                                height: 10,
-                                width: 10,
-                              ),
-                            )),
+                      Expanded(
+                        child: SizedBox(
+                          height: 50,
+                          width: MediaQuery.of(context).size.width / 2 - 20,
+                          child: TextFieldWidget(
+                              controler:
+                                  TextEditingController(text: selectedFromDate),
+                              readOnly: true,
+                              onTap: () {
+                                showModalBottomSheet(
+                                    backgroundColor: Colors.white,
+                                    context: context,
+                                    builder: (BuildContext context0) {
+                                      return BottomSheetSelectDay(
+                                          isFrom: true,
+                                          currentDate: selectedFromDate != null
+                                              ? DateTime.parse(selectedFromDate)
+                                              : DateTime.now(),
+                                          checkEndDate: (selectedToDate != null)
+                                              ? DateTime.parse(selectedToDate)
+                                              : null);
+                                    });
+                              },
+                              hintText: 'From DD/MM/YY',
+                              fontSize: 12,
+                              borderRadius: 18,
+                              fillColor: AppColor.whiteBlue2,
+                              borderSideColor: Colors.transparent,
+                              rightWidget: Container(
+                                padding: const EdgeInsets.all(15),
+                                child: Image.asset(
+                                  ParentImages.imageDate,
+                                  height: 10,
+                                  width: 10,
+                                ),
+                              )),
+                        ),
                       ),
-                      SizedBox(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width / 2 - 20,
-                        child: TextFieldWidget(
-                            controler:
-                                TextEditingController(text: selectedToDate),
-                            readOnly: true,
-                            onTap: () {
-                              showModalBottomSheet(
-                                  backgroundColor: Colors.white,
-                                  context: context,
-                                  builder: (BuildContext context0) {
-                                    return BottomSheetSelectDay(
-                                      isFrom: false,
-                                      currentDate: selectedToDate != null
-                                          ? DateTime.parse(selectedToDate)
-                                          : DateTime.now(),
-                                      checkStartDate: (selectedFromDate != null)
-                                          ? DateTime.parse(selectedFromDate)
-                                          : null,
-                                    );
-                                  });
-                            },
-                            hintText: 'To DD/MM/YY',
-                            fontSize: 12,
-                            borderRadius: 18,
-                            fillColor: AppColor.whiteBlue2,
-                            borderSideColor: Colors.transparent,
-                            rightWidget: Container(
-                              padding: const EdgeInsets.all(15),
-                              child: Image.asset(
-                                ParentImages.imageDate,
-                                height: 10,
-                                width: 10,
-                              ),
-                            )),
+                      Expanded(
+                        child: SizedBox(
+                          height: 50,
+                          width: MediaQuery.of(context).size.width / 2 - 20,
+                          child: TextFieldWidget(
+                              controler:
+                                  TextEditingController(text: selectedToDate),
+                              readOnly: true,
+                              onTap: () {
+                                showModalBottomSheet(
+                                    backgroundColor: Colors.white,
+                                    context: context,
+                                    builder: (BuildContext context0) {
+                                      return BottomSheetSelectDay(
+                                        isFrom: false,
+                                        currentDate: selectedToDate != null
+                                            ? DateTime.parse(selectedToDate)
+                                            : DateTime.now(),
+                                        checkStartDate: (selectedFromDate != null)
+                                            ? DateTime.parse(selectedFromDate)
+                                            : null,
+                                      );
+                                    });
+                              },
+                              hintText: 'To DD/MM/YY',
+                              fontSize: 12,
+                              borderRadius: 18,
+                              fillColor: AppColor.whiteBlue2,
+                              borderSideColor: Colors.transparent,
+                              rightWidget: Container(
+                                padding: const EdgeInsets.all(15),
+                                child: Image.asset(
+                                  ParentImages.imageDate,
+                                  height: 10,
+                                  width: 10,
+                                ),
+                              )),
+                        ),
                       ),
                     ],
                   ),
@@ -296,52 +300,58 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        context
-                            .read<FilterAssignmentCubit>()
-                            .clearAssignmentFilter();
-                        Navigator.of(context).pop();
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        alignment: Alignment.center,
-                        width: (MediaQuery.of(context).size.width - 40) / 2,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: AppColor.darkBlueColor),
-                            color: Colors.white),
-                        child: Text(
-                          'Reset',
-                          style: Theme.of(context)
-                              .textTheme
-                              .displayLarge
-                              ?.copyWith(
-                              fontSize: 16, fontWeight: FontWeight.w500),
+                    5.pw,
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          context
+                              .read<FilterAssignmentCubit>()
+                              .clearAssignmentFilter();
+                          Navigator.of(context).pop();
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          alignment: Alignment.center,
+                          width: (MediaQuery.of(context).size.width - 40) / 2,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: AppColor.darkBlueColor),
+                              color: Colors.white),
+                          child: Text(
+                            'Reset',
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayLarge
+                                ?.copyWith(
+                                fontSize: 16, fontWeight: FontWeight.w500),
+                          ),
                         ),
                       ),
                     ),
                     20.pw,
-                    GestureDetector(
-                      onTap: () {
-                        addFilter(programId, selectedState, selectedFromDate,
-                            selectedToDate, selectedType ?? []);
-                        Navigator.of(context).pop();
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        alignment: Alignment.center,
-                        width: (MediaQuery.of(context).size.width - 40) / 2,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: AppColor.darkBlueColor),
-                        child: Text(
-                          'Done',
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              fontSize: 16, fontWeight: FontWeight.w500),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          addFilter(programId, selectedState, selectedFromDate,
+                              selectedToDate, selectedType ?? []);
+                          Navigator.of(context).pop();
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          alignment: Alignment.center,
+                          width: (MediaQuery.of(context).size.width - 40) / 2,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: AppColor.darkBlueColor),
+                          child: Text(
+                            'Done',
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                fontSize: 16, fontWeight: FontWeight.w500),
+                          ),
                         ),
                       ),
                     ),
+                    5.pw
                   ],
                 ),
                 20.ph

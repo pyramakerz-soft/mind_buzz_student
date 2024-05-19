@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/assets_svg_images.dart';
@@ -59,7 +60,7 @@ class CardOfProgramParent extends StatelessWidget {
           children: [
             Text(dataOfProgram.program?.course?.name ?? '',
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.w700,
                       height: 0,
                       letterSpacing: 0.50,
@@ -90,7 +91,7 @@ class CardOfProgramParent extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge
-                          ?.copyWith(fontSize: 12, fontWeight: FontWeight.w400),
+                          ?.copyWith(fontSize: 12.sp, fontWeight: FontWeight.w400),
                     ),
                     // 5.pw,
                     if ((dataOfProgram.program?.tests?.length ?? 0) > 0) ...{
@@ -110,7 +111,7 @@ class CardOfProgramParent extends StatelessWidget {
                               .textTheme
                               .displayLarge
                               ?.copyWith(
-                                  fontSize: 8, fontWeight: FontWeight.w400),
+                                  fontSize: 8.sp, fontWeight: FontWeight.w400),
                         ),
                       )
                     }
@@ -125,7 +126,7 @@ class CardOfProgramParent extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge
-                          ?.copyWith(fontSize: 12, fontWeight: FontWeight.w400),
+                          ?.copyWith(fontSize: 12.sp, fontWeight: FontWeight.w400),
                     ),
                   ],
                 )

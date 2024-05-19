@@ -174,47 +174,55 @@ class BottomSheetOfTheDetailsReport extends StatelessWidget {
           children: [
             Row(
               children: [
-                Container(
-                  height: 40,
-                  alignment: Alignment.center,
-                  width: (MediaQuery.of(context).size.width / 4) - 12,
-                  child: Text(
-                    'Question',
-                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: AppColor.lightGreyColor7,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500),
+                Expanded(
+                  child: Container(
+                    height: 40,
+                    alignment: Alignment.center,
+                    // width: (MediaQuery.of(context).size.width / 4) - 12,
+                    child: Text(
+                      'Question',
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          color: AppColor.lightGreyColor7,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500),
+                    ),
                   ),
                 ),
-                Container(
-                  height: 40,
-                  alignment: Alignment.center,
-                  width: (MediaQuery.of(context).size.width / 4) - 12,
-                  child: Text('Time',
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: AppColor.lightGreyColor7,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500)),
+                Expanded(
+                  child: Container(
+                    height: 40,
+                    alignment: Alignment.center,
+                    // width: (MediaQuery.of(context).size.width / 4) - 12,
+                    child: Text('Time',
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: AppColor.lightGreyColor7,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500)),
+                  ),
                 ),
-                Container(
-                  height: 40,
-                  alignment: Alignment.center,
-                  width: (MediaQuery.of(context).size.width / 4) - 12,
-                  child: Text('Stars',
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: AppColor.lightGreyColor7,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500)),
+                Expanded(
+                  child: Container(
+                    height: 40,
+                    alignment: Alignment.center,
+                    // width: (MediaQuery.of(context).size.width / 4) - 12,
+                    child: Text('Stars',
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: AppColor.lightGreyColor7,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500)),
+                  ),
                 ),
-                Container(
-                  height: 40,
-                  alignment: Alignment.center,
-                  width: (MediaQuery.of(context).size.width / 4) - 12,
-                  child: Text('Attempts',
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: AppColor.lightGreyColor7,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500)),
+                Expanded(
+                  child: Container(
+                    height: 40,
+                    alignment: Alignment.center,
+                    // width: (MediaQuery.of(context).size.width / 4) - 12,
+                    child: Text('Attempts',
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: AppColor.lightGreyColor7,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500)),
+                  ),
                 ),
               ],
             ),
@@ -224,45 +232,53 @@ class BottomSheetOfTheDetailsReport extends StatelessWidget {
             ),
             Row(
               children: [
-                Container(
-                  height: 56,
-                  alignment: Alignment.center,
-                  width: (MediaQuery.of(context).size.width / 4) - 12,
-                  child: Text('1',
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500)),
+                Expanded(
+                  child: Container(
+                    height: 56,
+                    alignment: Alignment.center,
+                    // width: (MediaQuery.of(context).size.width / 4) - 12,
+                    child: Text('1',
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500)),
+                  ),
                 ),
-                Container(
-                  height: 56,
-                  alignment: Alignment.center,
-                  width: (MediaQuery.of(context).size.width / 4) - 12,
-                  child: Text('3 Min',
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: AppColor.lightGreyColor7,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500)),
+                Expanded(
+                  child: Container(
+                    height: 56,
+                    alignment: Alignment.center,
+                    // width: (MediaQuery.of(context).size.width / 4) - 12,
+                    child: Text('3 Min',
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: AppColor.lightGreyColor7,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500)),
+                  ),
                 ),
-                Container(
-                  height: 56,
-                  alignment: Alignment.center,
-                  width: (MediaQuery.of(context).size.width / 4) - 12,
-                  child: Text('3 Stars',
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: AppColor.lightGreyColor7,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500)),
+                Expanded(
+                  child: Container(
+                    height: 56,
+                    alignment: Alignment.center,
+                    // width: (MediaQuery.of(context).size.width / 4) - 12,
+                    child: Text('3 Stars',
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: AppColor.lightGreyColor7,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500)),
+                  ),
                 ),
-                Container(
-                  height: 56,
-                  alignment: Alignment.center,
-                  width: (MediaQuery.of(context).size.width / 4) - 12,
-                  child: Text('1',
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: AppColor.lightGreyColor7,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500)),
+                Expanded(
+                  child: Container(
+                    height: 56,
+                    alignment: Alignment.center,
+                    // width: (MediaQuery.of(context).size.width / 4) - 12,
+                    child: Text('1',
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: AppColor.lightGreyColor7,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500)),
+                  ),
                 ),
               ],
             ),
@@ -272,45 +288,53 @@ class BottomSheetOfTheDetailsReport extends StatelessWidget {
             ),
             Row(
               children: [
-                Container(
-                  height: 56,
-                  alignment: Alignment.center,
-                  width: (MediaQuery.of(context).size.width / 4) - 12,
-                  child: Text('1',
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500)),
+                Expanded(
+                  child: Container(
+                    height: 56,
+                    alignment: Alignment.center,
+                    // width: (MediaQuery.of(context).size.width / 4) - 12,
+                    child: Text('1',
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500)),
+                  ),
                 ),
-                Container(
-                  height: 56,
-                  alignment: Alignment.center,
-                  width: (MediaQuery.of(context).size.width / 4) - 12,
-                  child: Text('3 Min',
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: AppColor.lightGreyColor7,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500)),
+                Expanded(
+                  child: Container(
+                    height: 56,
+                    alignment: Alignment.center,
+                    // width: (MediaQuery.of(context).size.width / 4) - 12,
+                    child: Text('3 Min',
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: AppColor.lightGreyColor7,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500)),
+                  ),
                 ),
-                Container(
-                  height: 56,
-                  alignment: Alignment.center,
-                  width: (MediaQuery.of(context).size.width / 4) - 12,
-                  child: Text('3 Stars',
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: AppColor.lightGreyColor7,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500)),
+                Expanded(
+                  child: Container(
+                    height: 56,
+                    alignment: Alignment.center,
+                    // width: (MediaQuery.of(context).size.width / 4) - 12,
+                    child: Text('3 Stars',
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: AppColor.lightGreyColor7,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500)),
+                  ),
                 ),
-                Container(
-                  height: 56,
-                  alignment: Alignment.center,
-                  width: (MediaQuery.of(context).size.width / 4) - 12,
-                  child: Text('1',
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: AppColor.lightGreyColor7,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500)),
+                Expanded(
+                  child: Container(
+                    height: 56,
+                    alignment: Alignment.center,
+                    // width: (MediaQuery.of(context).size.width / 4) - 12,
+                    child: Text('1',
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: AppColor.lightGreyColor7,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500)),
+                  ),
                 ),
               ],
             ),
