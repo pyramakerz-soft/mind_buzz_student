@@ -13,6 +13,7 @@ import '../../../student_assignment/presentation/manager/filter_assignment_cubit
 import '../manager/index_of_switch_cubit.dart';
 import '../../../student_assignment/presentation/pages/get_assignment.dart';
 import '../widgets/bottom_sheet_select_day.dart';
+import '../widgets/bottom_sheet_select_day_of_report.dart';
 import '../widgets/filter_bottom_sheet_get_assignment.dart';
 import '../widgets/switch_button.dart';
 import '../manager/bloc/get_assignment_bloc.dart';
@@ -145,7 +146,7 @@ class ChooseAssignmentReportsScreen extends StatelessWidget {
                                         backgroundColor: Colors.white,
                                         context: context,
                                         builder: (BuildContext context0) {
-                                          return BottomSheetSelectDay(
+                                          return BottomSheetSelectDayOfReport(
                                             isFrom: true,
                                             isReport: (String? date) {
                                               context
