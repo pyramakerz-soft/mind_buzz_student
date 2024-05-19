@@ -1,6 +1,7 @@
 import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,55 +34,90 @@ class BasedOfGamePhonetics extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
-            top: 15,
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 60.h,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            top: 0,
+            child: Center(
+              child: Column(
                 children: [
-                  Row(
-                    children: [
-                      20.pw,
-                      Image.asset(
-                        stateOfGame.basicData?.gameData?.titleImage ?? '',
-                        height: 60.h,
-                      )
-                    ],
-                  ),
                   Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 10),
-                      decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(4),
-                            bottomLeft: Radius.circular(4),
-                          ),
-                          color: stateOfGame.basicData?.backGroundOfStarBar),
-                      child: RatingBar(
-                        initialRating:
-                            double.parse("${(stateOfGame.countOfStar ?? 0)}"),
-                        direction: Axis.horizontal,
-                        allowHalfRating: false,
-                        itemCount: 3,
-                        itemSize: 25,
-                        ratingWidget: RatingWidget(
-                          full: const StarWidget(
-                            image: AppImagesPhonetics.imageCompleteStar,
-                          ),
-                          half: const StarWidget(
-                            image: AppImagesPhonetics.imageEmptyStar,
-                          ),
-                          empty: const StarWidget(
-                            image: AppImagesPhonetics.imageEmptyStar,
-                          ),
+                    height: 40.h + 5,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      color: stateOfGame.basicData?.backGroundOfStarBar,
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color(0x19000000),
+                          blurRadius: 24,
+                          offset: Offset(0, 4),
+                          spreadRadius: 0,
+                        )
+                      ],
+                    ),
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.symmetric(vertical: 5),
+                    child: Row(
+                      children: [
+                        Expanded(
+                            flex: 4,
+                            child: Container(
+                              height: 40,
+                              child: Row(
+                                children: [
+                                  30.pw,
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Image.asset(
+                                      AppImagesPhonetics.backButtonIcon,
+                                      height: 40.h,
+                                      // width: 40.w,
+                                    ),
+                                  ),
+                                  10.pw,
+                                  GestureDetector(
+                                    child: Image.asset(
+                                      AppImagesPhonetics.settingButtonIcon,
+                                      height: 45.h,
+                                      // width: 40.w,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )),
+                        Expanded(
+                            child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Image.asset(
+                              AppImagesPhonetics.stayOfStarBar,
+                              width: 50.w,
+                            ),
+                            Image.asset(AppImagesPhonetics.barOneStar,
+                                width: 40.w)
+                          ],
+                        )),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 60.h,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            20.pw,
+                            Image.asset(
+                              stateOfGame.basicData?.gameData?.titleImage ?? '',
+                              height: 60.h,
+                            ),
+                            SizedBox()
+                          ],
                         ),
-                        itemPadding:
-                            const EdgeInsets.symmetric(horizontal: 4.0),
-                        onRatingUpdate: (rating) {
-                          print(rating);
-                        },
-                      )),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),

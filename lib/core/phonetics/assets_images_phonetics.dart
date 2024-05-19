@@ -31,4 +31,9 @@ abstract class AppImagesPhonetics {
   static const String snowmanHappyRiv = "${mainPathOfImages}snowman_happy.riv";
   static const String snowmanIdleRiv = "${mainPathOfImages}snowman_idle.riv";
   static const String snowmanSadRiv = "${mainPathOfImages}snowman_sad.riv";
+  static const String settingButtonIcon =
+      "${mainPathOfImages}settingButtonIcon.png";
+  static const String backButtonIcon = "${mainPathOfImages}backButtonIcon.png";
+  static const String stayOfStarBar = "${mainPathOfImages}stayOfStarBar.png";
+  static const String barOneStar = "${mainPathOfImages}barOneStar.png";
 }

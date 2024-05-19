@@ -1,4 +1,5 @@
 import 'package:flutter/animation.dart';
+import 'package:flutter/material.dart';
 
 import 'assets_images_phonetics.dart';
 import 'basic_of_every_game.dart';
@@ -32,7 +33,7 @@ abstract class MainDataOfPhonetics {
 class SPhonetics implements MainDataOfPhonetics {
   final BasicOfEveryGame mineGameData;
   @override
-  Color backGroundOfStarBar = const Color(0xff114677);
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
   String background = AppImagesPhonetics.backGroundOfS;
@@ -60,7 +61,7 @@ class SPhonetics implements MainDataOfPhonetics {
 class APhonetics implements MainDataOfPhonetics {
   final BasicOfEveryGame mineGameData;
   @override
-  Color backGroundOfStarBar = const Color(0xff1481D1);
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
   String background = AppImagesPhonetics.backGroundOfA;
@@ -88,7 +89,7 @@ class APhonetics implements MainDataOfPhonetics {
 class FPhonetics implements MainDataOfPhonetics {
   final BasicOfEveryGame mineGameData;
   @override
-  Color backGroundOfStarBar = const Color(0xff1481D1);
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
   String background = AppImagesPhonetics.backGroundOfA;
@@ -116,7 +117,7 @@ class FPhonetics implements MainDataOfPhonetics {
 class MPhonetics implements MainDataOfPhonetics {
   final BasicOfEveryGame mineGameData;
   @override
-  Color backGroundOfStarBar = const Color(0xff114677);
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
   String background = AppImagesPhonetics.backGroundOfM;
@@ -144,7 +145,7 @@ class MPhonetics implements MainDataOfPhonetics {
 class TPhonetics implements MainDataOfPhonetics {
   final BasicOfEveryGame mineGameData;
   @override
-  Color backGroundOfStarBar = const Color(0xff114677);
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
   String background = AppImagesPhonetics.backGroundOfT;
@@ -172,7 +173,7 @@ class TPhonetics implements MainDataOfPhonetics {
 class CPhonetics implements MainDataOfPhonetics {
   final BasicOfEveryGame mineGameData;
   @override
-  Color backGroundOfStarBar = const Color(0xff1481D1);
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
   String background = AppImagesPhonetics.backGroundOfC;
@@ -200,7 +201,7 @@ class CPhonetics implements MainDataOfPhonetics {
 class RPhonetics implements MainDataOfPhonetics {
   final BasicOfEveryGame mineGameData;
   @override
-  Color backGroundOfStarBar = const Color(0xff1481D1);
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
   String background = AppImagesPhonetics.backGroundOfR;
@@ -228,7 +229,7 @@ class RPhonetics implements MainDataOfPhonetics {
 class IPhonetics implements MainDataOfPhonetics {
   final BasicOfEveryGame mineGameData;
   @override
-  Color backGroundOfStarBar = const Color(0xff1481D1);
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
   String background = AppImagesPhonetics.backGroundOfI;
@@ -256,7 +257,7 @@ class IPhonetics implements MainDataOfPhonetics {
 class PPhonetics implements MainDataOfPhonetics {
   final BasicOfEveryGame mineGameData;
   @override
-  Color backGroundOfStarBar = const Color(0xff1481D1);
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
   String background = AppImagesPhonetics.backGroundOfP;
@@ -284,7 +285,7 @@ class PPhonetics implements MainDataOfPhonetics {
 class HPhonetics implements MainDataOfPhonetics {
   final BasicOfEveryGame mineGameData;
   @override
-  Color backGroundOfStarBar = const Color(0xff1481D1);
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
   String background = AppImagesPhonetics.backGroundOfH;
@@ -312,7 +313,7 @@ class HPhonetics implements MainDataOfPhonetics {
 class JPhonetics implements MainDataOfPhonetics {
   final BasicOfEveryGame mineGameData;
   @override
-  Color backGroundOfStarBar = const Color(0xff1481D1);
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
   String background = AppImagesPhonetics.backGroundOfJ;
@@ -340,7 +341,7 @@ class JPhonetics implements MainDataOfPhonetics {
 class UPhonetics implements MainDataOfPhonetics {
   final BasicOfEveryGame mineGameData;
   @override
-  Color backGroundOfStarBar = const Color(0xff1481D1);
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
   String background = AppImagesPhonetics.backGroundOfJ;
@@ -368,7 +369,7 @@ class UPhonetics implements MainDataOfPhonetics {
 class LPhonetics implements MainDataOfPhonetics {
   final BasicOfEveryGame mineGameData;
   @override
-  Color backGroundOfStarBar = const Color(0xff1481D1);
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
   String background = AppImagesPhonetics.backGroundOfL;
@@ -396,7 +397,7 @@ class LPhonetics implements MainDataOfPhonetics {
 class BPhonetics implements MainDataOfPhonetics {
   final BasicOfEveryGame mineGameData;
   @override
-  Color backGroundOfStarBar = const Color(0xff1481D1);
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
   String background = AppImagesPhonetics.backGroundOfL;
@@ -424,7 +425,7 @@ class BPhonetics implements MainDataOfPhonetics {
 class OPhonetics implements MainDataOfPhonetics {
   final BasicOfEveryGame mineGameData;
   @override
-  Color backGroundOfStarBar = const Color(0xff1481D1);
+  Color backGroundOfStarBar = Colors.white.withOpacity(.1);
 
   @override
   String background = AppImagesPhonetics.backGroundOfO;
@@ -452,7 +453,7 @@ class OPhonetics implements MainDataOfPhonetics {
 class GPhonetics implements MainDataOfPhonetics {
   final BasicOfEveryGame mineGameData;
   @override
-  Color backGroundOfStarBar = const Color(0xff1481D1);
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
   String background = AppImagesPhonetics.backGroundOfG;
