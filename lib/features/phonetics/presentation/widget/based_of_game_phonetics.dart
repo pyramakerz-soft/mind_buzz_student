@@ -126,7 +126,7 @@ class BasedOfGamePhonetics extends StatelessWidget {
                   child: Column(
                     children: [
                       if ((stateOfGame.basicData?.gameData
-                          is DragOutGameS)) ...{
+                          is BasicDragOutGame)) ...{
                         BlocProvider<DragOutCubit>(
                             create: (_) => DragOutCubit(
                                 gameData:

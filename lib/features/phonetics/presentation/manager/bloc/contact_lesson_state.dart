@@ -19,58 +19,59 @@ class GetContactInitial extends ContactLessonState {
       String subLetter = data[index].mainLetter ?? '';
       String subGame = data[index].gameTypes?.name ?? '';
       print("subLetter:$subLetter ,subGame:$subGame");
-      if (subGame.toLowerCase() == DragOutGameS().keyGame.toLowerCase()) {
+      if (subGame.toLowerCase() == BasicDragOutGame().keyGame.toLowerCase()) {
         if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterS.toLowerCase()) {
-          return SPhonetics(mineGameData: DragOutGameS());
+          return SPhonetics(mineGameData: BasicDragOutGame());
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterA.toLowerCase()) {
-          return APhonetics(mineGameData: DragOutGameS());
+          return APhonetics(mineGameData: BasicDragOutGame());
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterF.toLowerCase()) {
-          return FPhonetics(mineGameData: DragOutGameS());
+          return FPhonetics(mineGameData: BasicDragOutGame());
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterM.toLowerCase()) {
-          return MPhonetics(mineGameData: DragOutGameS());
+          return MPhonetics(mineGameData: BasicDragOutGame());
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterT.toLowerCase()) {
-          return TPhonetics(mineGameData: DragOutGameS());
+          return TPhonetics(mineGameData: BasicDragOutGame());
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterC.toLowerCase()) {
-          return CPhonetics(mineGameData: DragOutGameS());
+          return CPhonetics(mineGameData: BasicDragOutGame());
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterR.toLowerCase()) {
-          return RPhonetics(mineGameData: DragOutGameS());
+          return RPhonetics(mineGameData: BasicDragOutGame());
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterI.toLowerCase()) {
-          return IPhonetics(mineGameData: DragOutGameS());
+          return IPhonetics(mineGameData: BasicDragOutGame());
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterP.toLowerCase()) {
-          return PPhonetics(mineGameData: DragOutGameS());
+          return PPhonetics(mineGameData: BasicDragOutGame());
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterH.toLowerCase()) {
-          return HPhonetics(mineGameData: DragOutGameS());
+          return HPhonetics(mineGameData: BasicDragOutGame());
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterJ.toLowerCase()) {
-          return JPhonetics(mineGameData: DragOutGameS());
+          return JPhonetics(mineGameData: BasicDragOutGame());
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterU.toLowerCase()) {
-          return UPhonetics(mineGameData: DragOutGameS());
+          return UPhonetics(mineGameData: BasicDragOutGame());
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterL.toLowerCase()) {
-          return LPhonetics(mineGameData: DragOutGameS());
+          return LPhonetics(mineGameData: BasicDragOutGame());
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterB.toLowerCase()) {
-          return BPhonetics(mineGameData: DragOutGameS());
+          return BPhonetics(mineGameData: BasicDragOutGame());
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterO.toLowerCase()) {
-          return OPhonetics(mineGameData: DragOutGameS());
+          return OPhonetics(mineGameData: BasicDragOutGame());
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterG.toLowerCase()) {
-          return GPhonetics(mineGameData: DragOutGameS());
+          return GPhonetics(mineGameData: BasicDragOutGame());
         }
       }
     }
+    return null;
   }
 }
 

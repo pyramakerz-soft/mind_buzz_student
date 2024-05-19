@@ -65,7 +65,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     );
   }
 
-  getTheBackGroundad() {
+  getTheBackGroundSad() {
     rootBundle.load(state.basicData?.sadAvatar ?? '').then(
       (data) async {
         try {
@@ -127,7 +127,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         gameData: gameData));
     getTheBackGround();
     getTheBackGroundSuccess();
-    getTheBackGroundad();
+    getTheBackGroundSad();
   }
 
   bool checkIfIsTheLastGameOfLesson() {
@@ -145,22 +145,16 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     int countOfStar = state.countOfStar ?? 0;
     List<int> stateOfStarsAdd = state.statesOfAddStars ?? [];
     if ((state.gameData?.length ?? 0) > 2) {
-      if (stateOfStarsAdd[0] > stateOfCountOfCorrectAnswer) {
-        if (stateOfStarsAdd[0] == stateOfCountOfCorrectAnswer) {
-          emit(state.copyWith(countOfStar: (countOfStar + 1)));
-        } else {
-          if (stateOfStarsAdd[1] > stateOfCountOfCorrectAnswer) {
-            if (stateOfStarsAdd[1] == stateOfCountOfCorrectAnswer) {
-              emit(state.copyWith(countOfStar: (countOfStar + 1)));
-            } else {
-              if (stateOfStarsAdd[2] > stateOfCountOfCorrectAnswer) {
-                if (stateOfStarsAdd[2] == stateOfCountOfCorrectAnswer) {
-                  emit(state.copyWith(countOfStar: (countOfStar + 1)));
-                }
-              }
-            }
-          }
-        }
+      if (stateOfStarsAdd[0] >= stateOfCountOfCorrectAnswer) {
+        emit(state.copyWith(countOfStar: (countOfStar + 1)));
+      } else if ((stateOfStarsAdd[1] + stateOfStarsAdd[0]) >=
+          stateOfCountOfCorrectAnswer) {
+        emit(state.copyWith(countOfStar: (countOfStar + 1)));
+      } else if ((stateOfStarsAdd[2] +
+              stateOfStarsAdd[0] +
+              stateOfStarsAdd[1]) >=
+          stateOfCountOfCorrectAnswer) {
+        emit(state.copyWith(countOfStar: (countOfStar + 1)));
       }
     } else {
       if (state.gameData?.length == 1) {
