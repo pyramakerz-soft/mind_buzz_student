@@ -62,6 +62,7 @@ class AppColor {
   static const Color darkGreyText = Color(0xff33393E);
   static const Color resetText = Color(0xff008D4B);
   static const Color textFieldColor = Color(0xffF9F9FA);
+  static const Color selectedColor = Color(0xff5AE2C8);
   Color hexToColor(String code) {
     return Color(int.parse("0xff${code.toString().split("#").last}"));
   }

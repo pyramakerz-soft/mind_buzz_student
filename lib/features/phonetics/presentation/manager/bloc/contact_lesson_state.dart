@@ -23,6 +23,12 @@ class GetContactInitial extends ContactLessonState {
           return SPhonetics(mineGameData: DragOutGameS());
         }
       }
+///////////////////// click picture assignment ///////////////////////////
+     else if (subGame.toLowerCase() == ClickPictureS().keyGame.toLowerCase()) {
+        if (subLetter == MainDataOfPhonetics.letterS) {
+          return SPhonetics(mineGameData: ClickPictureS());
+        }
+      }
     }
   }
 }

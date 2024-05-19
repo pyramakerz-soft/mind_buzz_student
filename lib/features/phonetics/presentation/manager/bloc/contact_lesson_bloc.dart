@@ -28,7 +28,8 @@ class ContactLessonBloc extends Bloc<ContactLessonEvent, ContactLessonState> {
         final failureOrDoneMessage =
             await programContactUserUseCases(programId: event.programId);
         emit(await _eitherLoadedOrErrorState(failureOrDoneMessage));
-      } else if (event is CompleteLessonRequest) {
+      }
+      else if (event is CompleteLessonRequest) {
         emit(CompleteGameState());
       } else if (event is ThisTypeNotSupportedRequest) {
         emit(NotSupportTypeState());

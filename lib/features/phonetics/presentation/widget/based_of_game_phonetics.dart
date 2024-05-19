@@ -9,6 +9,8 @@ import 'package:mind_buzz_refactor/features/phonetics/presentation/widget/star_w
 
 import '../../../../core/phonetics/assets_images_phonetics.dart';
 import '../../../../core/phonetics/basic_of_every_game.dart';
+import '../games/click_the_picture/manager/click_picture_cubit.dart';
+import '../games/click_the_picture/pages/click_picture_game.dart';
 import '../games/drag_out/manager/drag_out_cubit.dart';
 import '../games/drag_out/pages/drag_out_game.dart';
 import '../manager/bloc/contact_lesson_bloc.dart';
@@ -36,7 +38,7 @@ class BasedOfGamePhonetics extends StatelessWidget {
             top: 15,
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
-              height: 60.h,
+              height: 100.h,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -45,7 +47,6 @@ class BasedOfGamePhonetics extends StatelessWidget {
                       20.pw,
                       Image.asset(
                         stateOfGame.basicData?.gameData?.titleImage ?? '',
-                        height: 60.h,
                       )
                     ],
                   ),
@@ -101,9 +102,6 @@ class BasedOfGamePhonetics extends StatelessWidget {
                     child: Container(
                         // margin: const EdgeInsets.only(right: 40),
                         child:stateOfGame.avatarArtboard==null?
-
-
-
                         Image.asset(
                           stateOfGame.currentAvatar ?? '',
                           height: MediaQuery.of(context).size.height - (70.h),
@@ -135,6 +133,14 @@ class BasedOfGamePhonetics extends StatelessWidget {
                                 gameData:
                                     stateOfGameData.data[stateOfGame.index]),
                             child: DragOutGame())
+                      }
+                      else if ((stateOfGame.basicData?.gameData
+                          is ClickPictureS)) ...{
+                        BlocProvider<ClickPictureCubit>(
+                            create: (_) => ClickPictureCubit(
+                                gameData: stateOfGameData.data[stateOfGame.index],
+                            background: (stateOfGame.basicData?.gameData as ClickPictureS).getBackGround(stateOfGameData.data[stateOfGame.index].gameImages?.length ??0)),
+                            child: ClickPictureGame())
                       }
                     ],
                   )))

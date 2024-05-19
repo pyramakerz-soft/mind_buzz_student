@@ -141,6 +141,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     }
   }
 
+
   addStarToStudent() {
     int stateOfCountOfCorrectAnswer = state.countOfCorrectAnswer ?? 0;
     int countOfStar = state.countOfStar ?? 0;
