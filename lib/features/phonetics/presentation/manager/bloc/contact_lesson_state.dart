@@ -70,6 +70,12 @@ class GetContactInitial extends ContactLessonState {
           return GPhonetics(mineGameData: BasicDragOutGame());
         }
       }
+///////////////////// click picture assignment ///////////////////////////
+     else if (subGame.toLowerCase() == ClickPictureS().keyGame.toLowerCase()) {
+        if (subLetter == MainDataOfPhonetics.letterS) {
+          return SPhonetics(mineGameData: ClickPictureS());
+        }
+      }
     }
     return null;
   }
