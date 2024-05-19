@@ -202,8 +202,8 @@ class ChaptersScreen extends StatelessWidget {
                                   //     state.data[index].isOpen == true) {
                                   print('${state.data[index].id}');
                                   Utils.navigateTo(
-                                      const PhoneticsBook(
-                                        lessonId: 3,
+                                       PhoneticsBook(
+                                        lessonId: state.data[index].id!,
                                       ),
                                       context);
                                   // }

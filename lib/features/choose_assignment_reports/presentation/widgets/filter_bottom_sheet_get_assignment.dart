@@ -164,6 +164,7 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                               )),
                         ),
                       ),
+                      5.pw,
                       Expanded(
                         child: SizedBox(
                           height: 50,

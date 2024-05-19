@@ -7,10 +7,11 @@ class GameTypesModel extends Equatable{
   int? id;
   int? gameId;
   String? letter;
+  String? name;
   String? createdAt;
   String? updatedAt;
 
-  GameTypesModel({this.id, this.gameId, this.letter, this.createdAt, this.updatedAt});
+  GameTypesModel({this.id,this.name, this.gameId, this.letter, this.createdAt, this.updatedAt});
 
 
   factory GameTypesModel.fromJson(Map<String, dynamic> json) {
@@ -20,5 +21,5 @@ class GameTypesModel extends Equatable{
   Map<String, dynamic> toJson() => _$GameTypesModelToJson(this);
 
   @override
-  List<Object?> get props => [id, gameId, letter, createdAt, updatedAt];
+  List<Object?> get props => [id,name, gameId, letter, createdAt, updatedAt];
 }

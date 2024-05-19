@@ -17,8 +17,11 @@ class GetContactInitial extends ContactLessonState {
     String subProgram = data[index].lesson?.unit?.program?.course?.name ?? '';
     if (subProgram == BasicOfEveryGame.phonics) {
       String subLetter = data[index].mainLetter ?? '';
-      if (subLetter == MainDataOfPhonetics.letterS) {
-        return SPhonetics(mineGameData: DragOutGameS());
+      String subGame = data[index].gameTypes?.name ?? '';
+      if (subGame.toLowerCase() == DragOutGameS().keyGame.toLowerCase()) {
+        if (subLetter == MainDataOfPhonetics.letterS) {
+          return SPhonetics(mineGameData: DragOutGameS());
+        }
       }
     }
   }
