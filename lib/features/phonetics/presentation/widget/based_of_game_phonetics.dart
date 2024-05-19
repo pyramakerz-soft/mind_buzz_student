@@ -169,14 +169,22 @@ class BasedOfGamePhonetics extends StatelessWidget {
                             create: (_) => DragOutCubit(
                                 gameData:
                                     stateOfGameData.data[stateOfGame.index]),
-                            child: DragOutGame())
-                      }
-                      else if ((stateOfGame.basicData?.gameData
+                            child: DragOutGame(
+                              gameData: stateOfGameData.data[stateOfGame.index],
+                            ))
+                      } else if ((stateOfGame.basicData?.gameData
                           is ClickPictureS)) ...{
                         BlocProvider<ClickPictureCubit>(
                             create: (_) => ClickPictureCubit(
-                                gameData: stateOfGameData.data[stateOfGame.index],
-                            background: (stateOfGame.basicData?.gameData as ClickPictureS).getBackGround(stateOfGameData.data[stateOfGame.index].gameImages?.length ??0)),
+                                gameData:
+                                    stateOfGameData.data[stateOfGame.index],
+                                background: (stateOfGame.basicData?.gameData
+                                        as ClickPictureS)
+                                    .getBackGround(stateOfGameData
+                                            .data[stateOfGame.index]
+                                            .gameImages
+                                            ?.length ??
+                                        0)),
                             child: ClickPictureGame())
                       }
                     ],
