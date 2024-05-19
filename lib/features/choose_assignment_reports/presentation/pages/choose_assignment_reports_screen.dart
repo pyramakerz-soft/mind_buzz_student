@@ -152,7 +152,9 @@ class ChooseAssignmentReportsScreen extends StatelessWidget {
                                               context
                                                   .read<GetAssignmentBloc>()
                                                   .add(GetReportsRequest(
-                                                      date: date, selectedType: selectedType));
+                                                      date: date,
+                                                      selectedType:
+                                                          selectedType));
                                             },
                                             currentDate: selectedDate != null
                                                 ? DateTime.parse(selectedDate)

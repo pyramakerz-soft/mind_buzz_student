@@ -59,13 +59,9 @@ class _PhoneticsBook extends State<PhoneticsBook> {
               ..add(GetContactLessonRequest(programId: widget.lessonId)),
             child: BlocProvider<CurrentGamePhoneticsCubit>(
                 create: (_) => di.sl<CurrentGamePhoneticsCubit>(),
-                child: BlocConsumer<CurrentGamePhoneticsCubit,
+                child: BlocBuilder<CurrentGamePhoneticsCubit,
                         CurrentGamePhoneticsState>(
-                    listener: (contextOfGame, stateOfGame) {
-                  print("index:${stateOfGame.index}");
-                  print("countOfStar:${stateOfGame.countOfStar}");
-
-                }, builder: (contextOfGame, stateOfGame) {
+                    builder: (contextOfGame, stateOfGame) {
                   return BlocConsumer<ContactLessonBloc, ContactLessonState>(
                       listener: (context, state) {
                     if (state is GetContactErrorInitial) {
@@ -77,11 +73,9 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
-                    }
-                    else if (state is LogOutLoadingState) {
+                    } else if (state is LogOutLoadingState) {
                       Navigator.of(context).pop();
-                    }
-                    else if (state is GetContactInitial) {
+                    } else if (state is GetContactInitial) {
                       MainDataOfPhonetics? dataType =
                           state.getMainContactData(index: stateOfGame.index);
                       if (dataType != null) {
@@ -95,9 +89,10 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                             .add(ThisTypeNotSupportedRequest());
                       }
                     }
-                  },
-                      builder: (context, stateOfGameData) {
+                  }, builder: (context, stateOfGameData) {
                     if (stateOfGameData is GetContactInitial) {
+                      // final stateOfGame =
+                      //     context.watch<CurrentGamePhoneticsCubit>().state;
                       return BasedOfGamePhonetics(
                         stateOfGame: stateOfGame,
                         stateOfGameData: stateOfGameData,

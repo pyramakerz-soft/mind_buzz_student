@@ -95,26 +95,23 @@ class BasedOfGamePhonetics extends StatelessWidget {
                 children: [
                   const SizedBox(),
                   GestureDetector(
-                    onTap: (){
-
-                    },
+                    onTap: () {},
                     child: Container(
-                        // margin: const EdgeInsets.only(right: 40),
-                        child:stateOfGame.avatarArtboard==null?
-
-
-
-                        Image.asset(
-                          stateOfGame.currentAvatar ?? '',
-                          height: MediaQuery.of(context).size.height - (70.h),
-                          width: 130,
-                        ):SizedBox(
-                            height: MediaQuery.of(context).size.height - (70.h),
-                            width: 170,
-
-                            child: Rive(artboard: stateOfGame.avatarArtboard!,
-                              fit: BoxFit.cover,))
-                    ),
+                        child: stateOfGame.avatarArtboard == null
+                            ? Image.asset(
+                                stateOfGame.currentAvatar ?? '',
+                                height:
+                                    MediaQuery.of(context).size.height - (70.h),
+                                width: 130,
+                              )
+                            : SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height - (70.h),
+                                width: 170,
+                                child: Rive(
+                                  artboard: stateOfGame.avatarArtboard!,
+                                  fit: BoxFit.cover,
+                                ))),
                   ),
                   // SizedBox(),
                 ],
@@ -134,7 +131,9 @@ class BasedOfGamePhonetics extends StatelessWidget {
                             create: (_) => DragOutCubit(
                                 gameData:
                                     stateOfGameData.data[stateOfGame.index]),
-                            child: DragOutGame())
+                            child: DragOutGame(
+                                gameData:
+                                    stateOfGameData.data[stateOfGame.index]))
                       }
                     ],
                   )))

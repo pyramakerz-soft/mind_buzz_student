@@ -20,24 +20,22 @@ part 'current_game_phonetics_state.dart';
 class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   CurrentGamePhoneticsCubit() : super(CurrentGamePhoneticsState(index: 0)) {
     getTheBackGroundLoading();
-
   }
 
   getTheBackGround() {
-    rootBundle.load(state.basicData?.idelAvatar??'').then(
-          (data) async {
+    rootBundle.load(state.basicData?.idelAvatar ?? '').then(
+      (data) async {
         try {
           final file = RiveFile.import(data);
           final artboard = file.mainArtboard;
           var controller =
-          StateMachineController.fromArtboard(artboard, 'State Machine 1');
+              StateMachineController.fromArtboard(artboard, 'State Machine 1');
 
           if (controller != null) {
             artboard.addController(controller);
           }
           emit(state.copyWith(avatarArtboardIdle: artboard));
           emit(state.copyWith(avatarArtboard: state.avatarArtboardIdle));
-
         } catch (e) {
           log('###');
           log(e.toString());
@@ -45,14 +43,15 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
       },
     );
   }
+
   getTheBackGroundSuccess() {
-    rootBundle.load(state.basicData?.winAvatar??'').then(
-          (data) async {
+    rootBundle.load(state.basicData?.winAvatar ?? '').then(
+      (data) async {
         try {
           final file = RiveFile.import(data);
           final artboard = file.mainArtboard;
           var controller =
-          StateMachineController.fromArtboard(artboard, 'State Machine 1');
+              StateMachineController.fromArtboard(artboard, 'State Machine 1');
 
           if (controller != null) {
             artboard.addController(controller);
@@ -65,14 +64,15 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
       },
     );
   }
+
   getTheBackGroundad() {
-    rootBundle.load(state.basicData?.sadAvatar??'').then(
-          (data) async {
+    rootBundle.load(state.basicData?.sadAvatar ?? '').then(
+      (data) async {
         try {
           final file = RiveFile.import(data);
           final artboard = file.mainArtboard;
           var controller =
-          StateMachineController.fromArtboard(artboard, 'State Machine 1');
+              StateMachineController.fromArtboard(artboard, 'State Machine 1');
 
           if (controller != null) {
             artboard.addController(controller);
@@ -134,7 +134,6 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     int currentIndex = state.index;
     currentIndex = currentIndex + 1;
     if ((state.gameData?.length ?? 0) > currentIndex) {
-      updateIndexOfCurrentGame();
       return false;
     } else {
       return true;
@@ -186,7 +185,9 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
       await Future.delayed(const Duration(seconds: 2));
       actionInEndOfLesson.call();
     } else {
-      backToMainAvatar();
+      await backToMainAvatar();
+      updateIndexOfCurrentGame();
+      print('${state.stateOfAvatar}');
     }
   }
 
@@ -198,11 +199,15 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   animationOfWrongAnswer() {
-    emit(state.copyWith(avatarArtboard: state.avatarArtboardSad));
+    emit(state.copyWith(
+        avatarArtboard: state.avatarArtboardSad,
+        stateOfAvatar: BasicOfEveryGame.stateOfSad));
   }
 
   animationOfCorrectAnswer() {
-    emit(state.copyWith(avatarArtboard: state.avatarArtboardSuccess, stateOfAvatar: BasicOfEveryGame.stateOfWin));
+    emit(state.copyWith(
+        avatarArtboard: state.avatarArtboardSuccess,
+        stateOfAvatar: BasicOfEveryGame.stateOfWin));
   }
 
   increaseCountOfCorrectAnswer() {
@@ -213,6 +218,8 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
 
   backToMainAvatar() async {
     await Future.delayed(const Duration(seconds: 2));
-    emit(state.copyWith(avatarArtboard: state.avatarArtboardIdle));
+    emit(state.copyWith(
+        avatarArtboard: state.avatarArtboardIdle,
+        stateOfAvatar: BasicOfEveryGame.stateOIdle));
   }
 }

@@ -18,15 +18,56 @@ class GetContactInitial extends ContactLessonState {
     if (subProgram == BasicOfEveryGame.phonics) {
       String subLetter = data[index].mainLetter ?? '';
       String subGame = data[index].gameTypes?.name ?? '';
-      // print("subLetter:$subLetter ,subGame:$subGame");
+      print("subLetter:$subLetter ,subGame:$subGame");
       if (subGame.toLowerCase() == DragOutGameS().keyGame.toLowerCase()) {
-        // print((subGame.toLowerCase() == DragOutGameS().keyGame.toLowerCase()));
-        // print((subLetter.toLowerCase() == MainDataOfPhonetics.letterS.toLowerCase()));
-        // print((subLetter.toLowerCase() == MainDataOfPhonetics.letterA.toLowerCase()));
-        if (subLetter.toLowerCase() == MainDataOfPhonetics.letterS.toLowerCase()) {
+        if (subLetter.toLowerCase() ==
+            MainDataOfPhonetics.letterS.toLowerCase()) {
           return SPhonetics(mineGameData: DragOutGameS());
-        }else if(subLetter.toLowerCase() == MainDataOfPhonetics.letterA.toLowerCase()) {
+        } else if (subLetter.toLowerCase() ==
+            MainDataOfPhonetics.letterA.toLowerCase()) {
           return APhonetics(mineGameData: DragOutGameS());
+        } else if (subLetter.toLowerCase() ==
+            MainDataOfPhonetics.letterF.toLowerCase()) {
+          return FPhonetics(mineGameData: DragOutGameS());
+        } else if (subLetter.toLowerCase() ==
+            MainDataOfPhonetics.letterM.toLowerCase()) {
+          return MPhonetics(mineGameData: DragOutGameS());
+        } else if (subLetter.toLowerCase() ==
+            MainDataOfPhonetics.letterT.toLowerCase()) {
+          return TPhonetics(mineGameData: DragOutGameS());
+        } else if (subLetter.toLowerCase() ==
+            MainDataOfPhonetics.letterC.toLowerCase()) {
+          return CPhonetics(mineGameData: DragOutGameS());
+        } else if (subLetter.toLowerCase() ==
+            MainDataOfPhonetics.letterR.toLowerCase()) {
+          return RPhonetics(mineGameData: DragOutGameS());
+        } else if (subLetter.toLowerCase() ==
+            MainDataOfPhonetics.letterI.toLowerCase()) {
+          return IPhonetics(mineGameData: DragOutGameS());
+        } else if (subLetter.toLowerCase() ==
+            MainDataOfPhonetics.letterP.toLowerCase()) {
+          return PPhonetics(mineGameData: DragOutGameS());
+        } else if (subLetter.toLowerCase() ==
+            MainDataOfPhonetics.letterH.toLowerCase()) {
+          return HPhonetics(mineGameData: DragOutGameS());
+        } else if (subLetter.toLowerCase() ==
+            MainDataOfPhonetics.letterJ.toLowerCase()) {
+          return JPhonetics(mineGameData: DragOutGameS());
+        } else if (subLetter.toLowerCase() ==
+            MainDataOfPhonetics.letterU.toLowerCase()) {
+          return UPhonetics(mineGameData: DragOutGameS());
+        } else if (subLetter.toLowerCase() ==
+            MainDataOfPhonetics.letterL.toLowerCase()) {
+          return LPhonetics(mineGameData: DragOutGameS());
+        } else if (subLetter.toLowerCase() ==
+            MainDataOfPhonetics.letterB.toLowerCase()) {
+          return BPhonetics(mineGameData: DragOutGameS());
+        } else if (subLetter.toLowerCase() ==
+            MainDataOfPhonetics.letterO.toLowerCase()) {
+          return OPhonetics(mineGameData: DragOutGameS());
+        } else if (subLetter.toLowerCase() ==
+            MainDataOfPhonetics.letterG.toLowerCase()) {
+          return GPhonetics(mineGameData: DragOutGameS());
         }
       }
     }

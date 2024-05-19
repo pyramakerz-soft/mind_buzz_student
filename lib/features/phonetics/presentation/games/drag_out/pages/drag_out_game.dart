@@ -7,16 +7,19 @@ import '../../../../../../core/phonetics/assets_images_phonetics.dart';
 import '../../../../../../core/phonetics/basic_of_every_game.dart';
 import '../../../../../../core/phonetics/phonetics_color.dart';
 import '../../../../domain/entities/game_images_model.dart';
+import '../../../../domain/entities/game_model.dart';
 import '../../../manager/bloc/contact_lesson_bloc.dart';
 import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
 import '../manager/drag_out_cubit.dart';
 
 class DragOutGame extends StatelessWidget {
+  final GameModel gameData;
+  DragOutGame({required this.gameData});
   @override
   Widget build(BuildContext context) {
-    final gameData = context.read<DragOutCubit>().state.gameData;
+    // final gameData = context.watch<DragOutCubit>().state.gameData;
     final stateOfCurrentGamePhoneticsCubit =
-        context.read<CurrentGamePhoneticsCubit>().state;
+        context.watch<CurrentGamePhoneticsCubit>().state;
     return Container(
       alignment: Alignment.center,
       // height: MediaQuery.of(context).size.height - (70.h),
@@ -35,10 +38,12 @@ class DragOutGame extends StatelessWidget {
                 return (stateOfCurrentGamePhoneticsCubit.stateOfAvatar ==
                         BasicOfEveryGame.stateOfWin)
                     ? Image.asset(
-                  stateOfCurrentGamePhoneticsCubit.basicData?.gameData?.completeBasket??'',
-                  height: (MediaQuery.of(context).size.height / 2.8).h,
-                  width: 130,
-                )
+                        stateOfCurrentGamePhoneticsCubit
+                                .basicData?.gameData?.completeBasket ??
+                            '',
+                        height: (MediaQuery.of(context).size.height / 2.8).h,
+                        width: 130,
+                      )
                     : Image.asset(
                         AppImagesPhonetics.imageBasket,
                         height: (MediaQuery.of(context).size.height / 2.8).h,
@@ -51,7 +56,6 @@ class DragOutGame extends StatelessWidget {
                       actionInEndOfLesson: () {
                     Navigator.of(context).pop();
                   });
-
                 } else {
                   context.read<CurrentGamePhoneticsCubit>().addWrongAnswer();
                 }
@@ -84,16 +88,23 @@ class DragOutGame extends StatelessWidget {
                                 (130 + 50 + 130)) /
                             4,
                         height: 130.h,
+                        placeholder: (context, url) => Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        errorWidget: (context, url, error) => Icon(
+                          Icons.error,
+                          color: Colors.red,
+                        ),
                         // height: ,
                       ),
-                      child: (stateOfCurrentGamePhoneticsCubit.stateOfAvatar ==
-                                  BasicOfEveryGame.stateOfWin &&
-                              gameData.gameImages?[index].word
+                      child: ((stateOfCurrentGamePhoneticsCubit.stateOfAvatar ==
+                                  BasicOfEveryGame.stateOfWin) &&
+                              (gameData.gameImages?[index].word
                                       .toString()
                                       .split('')
                                       .first
                                       .toLowerCase() !=
-                                  (gameData.mainLetter?.toLowerCase() ?? ''))
+                                  (gameData.mainLetter?.toLowerCase() ?? '')))
                           ? SizedBox(
                               width: (MediaQuery.of(context).size.width -
                                       (130 + 50 + 130)) /
@@ -107,6 +118,13 @@ class DragOutGame extends StatelessWidget {
                                       (130 + 50 + 130)) /
                                   4,
                               height: 130.h,
+                              placeholder: (context, url) => Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                              errorWidget: (context, url, error) => Icon(
+                                Icons.error,
+                                color: Colors.red,
+                              ),
                               // height: ,
                             ))),
             ),
