@@ -146,6 +146,8 @@ class MainApiConnection {
     StreamedResponse response = await request.send();
     http.Response res = await http.Response.fromStream(response);
     var bodyData = json.decode(res.body);
+    print('result11'+ bodyData['result'].toString());
+    print('result11'+ bodyData.toString());
     if (bodyData['result'] != null && res.statusCode == 200) {
       return res;
     } else {
