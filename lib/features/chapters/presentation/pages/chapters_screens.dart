@@ -35,10 +35,9 @@ import '../widgets/level_map_parameters.dart';
 
 class ChaptersScreen extends StatelessWidget {
   final String programId;
-  final String programName;
 
   const ChaptersScreen(
-      {Key? key, required this.programId, required this.programName})
+      {Key? key, required this.programId})
       : super(key: key);
 
   @override
@@ -198,27 +197,26 @@ class ChaptersScreen extends StatelessWidget {
                               child: LevelMap(
                                 backgroundColor: Colors.transparent,
                                 onTapLevel: (index) {
-                                  // if (state.data[index].isLesson == true &&
-                                  //     state.data[index].isOpen == true) {
-                                  print('${state.data[index].id}');
+                                  if (state.data.reversed.toList()[index].isLesson == true &&
+                                      state.data.reversed.toList()[index].isOpen == true) {
                                   Utils.navigateTo(
                                        PhoneticsBook(
-                                        lessonId: state.data[index].id!,
+                                        lessonId: state.data.reversed.toList()[index].id!,
                                       ),
                                       context);
-                                  // }
+                                  }
                                 },
                                 levelMapParams: LevelMapParams(
                                   showPathShadow: false,
                                   levelCount: state.data.length,
                                   pathStrokeWidth: 1,
-                                  currentLevel: state.data
+                                  currentLevel: state.data.reversed
                                           .where((element) =>
                                               element.isOpen == true)
                                           .toList()
                                           .isEmpty
                                       ? 1
-                                      : state.data
+                                      : state.data.reversed
                                           .where((element) =>
                                               element.isOpen == true)
                                           .toList()
@@ -228,7 +226,7 @@ class ChaptersScreen extends StatelessWidget {
                                   levelsImages: state.data.reversed
                                       .map((e) => ImageParams(
                                           path: e.levelImg!,
-                                          size: Size(100, 100),
+                                          size: const Size(100, 100),
                                           bodyWidget:
                                               ItemOfSubBody(chapterData: e),
                                           title: ItemOfTitle(chapterData: e)))
@@ -239,7 +237,8 @@ class ChaptersScreen extends StatelessWidget {
                           ],
                         ),
                       );
-                    } else if (state is GetProgramsLoadingInitial) {
+                    }
+                    else if (state is GetProgramsLoadingInitial) {
                       return const Center(child: CupertinoActivityIndicator());
                     } else {
                       return const SizedBox();
