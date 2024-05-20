@@ -47,6 +47,7 @@ Future<ContactLessonState> _eitherLoadedOrErrorState(
   );
   if (tempState is GetContactInitial) {
     TalkTts.startTalk(text: tempState.data.first.inst ?? '');
+    TalkTts.startTalk(text: tempState.data.first.mainLetter ?? '');
   }
   return tempState;
 }

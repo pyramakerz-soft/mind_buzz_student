@@ -10,6 +10,7 @@ import 'package:mind_buzz_refactor/features/phonetics/presentation/widget/star_w
 
 import '../../../../core/phonetics/assets_images_phonetics.dart';
 import '../../../../core/phonetics/basic_of_every_game.dart';
+import '../../../../core/talk_tts.dart';
 import '../games/click_the_picture/manager/click_picture_cubit.dart';
 import '../games/click_the_picture/pages/click_picture_game.dart';
 import '../games/drag_out/manager/drag_out_cubit.dart';
@@ -139,7 +140,10 @@ class BasedOfGamePhonetics extends StatelessWidget {
                 children: [
                   const SizedBox(),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () async {
+                      await TalkTts.startTalk(text:  stateOfGameData.data[stateOfGame.index].inst ?? '');
+                      // await TalkTts.startTalk(text:  stateOfGameData.data[stateOfGame.index].mainLetter ?? '');
+                    },
                     child: Container(
                         child: stateOfGame.avatarArtboard == null
                             ? Image.asset(

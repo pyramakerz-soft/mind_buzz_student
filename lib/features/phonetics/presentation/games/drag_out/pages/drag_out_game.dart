@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -60,7 +61,7 @@ class DragOutGame extends StatelessWidget {
                 }
                 else {
                   context.read<CurrentGamePhoneticsCubit>().addWrongAnswer(actionOfWrongAnswer: (){
-                    TalkTts.startTalk(text: gameData.mainLetter ?? '');
+                    // TalkTts.startTalk(text: gameData.mainLetter ?? '');
 
                   });
                 }
@@ -93,10 +94,10 @@ class DragOutGame extends StatelessWidget {
                                 (130 + 50 + 130)) /
                             4,
                         height: 130.h,
-                        placeholder: (context, url) => Center(
-                          child: CircularProgressIndicator(),
+                        placeholder: (context, url) => const Center(
+                          child: CupertinoActivityIndicator(),
                         ),
-                        errorWidget: (context, url, error) => Icon(
+                        errorWidget: (context, url, error) => const Icon(
                           Icons.error,
                           color: Colors.red,
                         ),
@@ -117,21 +118,26 @@ class DragOutGame extends StatelessWidget {
                               height: 130.h,
                               // height: ,
                             )
-                          : CachedNetworkImage(
-                              imageUrl: gameData.gameImages?[index].image ?? '',
-                              width: (MediaQuery.of(context).size.width -
-                                      (130 + 50 + 130)) /
-                                  4,
-                              height: 130.h,
-                              placeholder: (context, url) => Center(
-                                child: CircularProgressIndicator(),
+                          : GestureDetector(
+                        onTap: (){
+                          TalkTts.startTalk(text: gameData.gameImages?[index].word ?? '');
+                        },
+                            child: CachedNetworkImage(
+                                imageUrl: gameData.gameImages?[index].image ?? '',
+                                width: (MediaQuery.of(context).size.width -
+                                        (130 + 50 + 130)) /
+                                    4,
+                                height: 130.h,
+                                placeholder: (context, url) => Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                                errorWidget: (context, url, error) => Icon(
+                                  Icons.error,
+                                  color: Colors.red,
+                                ),
+                                // height: ,
                               ),
-                              errorWidget: (context, url, error) => Icon(
-                                Icons.error,
-                                color: Colors.red,
-                              ),
-                              // height: ,
-                            ))),
+                          ))),
             ),
           )
         ],
