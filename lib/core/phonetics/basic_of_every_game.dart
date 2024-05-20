@@ -104,8 +104,11 @@ class ClickPictureS implements BasicOfEveryGame {
       List<String> newList = [];
       for(int i = 0; i < backgroundImages.length ; i++ ){
         newList.add(backgroundImages[i]);
-        if(i == backgroundImages.length - 1 || newList.length  == length) {
+        if(i == backgroundImages.length - 1) {
           i = 0;
+        }
+        if(newList.length  == length){
+          break;
         }
       }
 

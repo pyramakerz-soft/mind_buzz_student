@@ -170,10 +170,16 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     }
   }
 
+  increaseDirectlyCountOfStar(){
+    int countOfStar= state.countOfStar ??0;
+    emit(state.copyWith(countOfStar: (countOfStar+1)));
+  }
+
   addSuccessAnswer({required void Function() actionInEndOfLesson}) async {
     await animationOfCorrectAnswer();
     increaseCountOfCorrectAnswer();
     addStarToStudent();
+
     bool isLastLesson = checkIfIsTheLastGameOfLesson();
 
     if (isLastLesson == true) {

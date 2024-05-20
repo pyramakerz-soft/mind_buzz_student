@@ -36,13 +36,50 @@ class BasedOfGamePhonetics extends StatelessWidget {
               fit: BoxFit.fill)),
       child: Stack(
         children: [
+          /////////////////////game//////////////////
+          Positioned(
+              left: 0,
+              bottom: 0,
+              child: SizedBox(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      if ((stateOfGame.basicData?.gameData
+                          is BasicDragOutGame)) ...{
+                        BlocProvider<DragOutCubit>(
+                            create: (_) => DragOutCubit(
+                                gameData:
+                                    stateOfGameData.data[stateOfGame.index]),
+                            child: DragOutGame(
+                              gameData: stateOfGameData.data[stateOfGame.index],
+                            ))
+                      } else if ((stateOfGame.basicData?.gameData
+                          is ClickPictureS)) ...{
+                        BlocProvider<ClickPictureCubit>(
+                            create: (_) => ClickPictureCubit(
+                                gameData:
+                                    stateOfGameData.data[stateOfGame.index],
+                                background: (stateOfGame.basicData?.gameData
+                                        as ClickPictureS)
+                                    .getBackGround(stateOfGameData
+                                            .data[stateOfGame.index]
+                                            .gameImages
+                                            ?.length ??
+                                        0)),
+                            child: ClickPictureGame())
+                      }
+                    ],
+                  ))),
+
+
+          /////////////////////game title//////////////////
           Positioned(
             top: 0,
             child: Center(
               child: Column(
                 children: [
                   Container(
-                    height: 40.h + 5,
+                    height: 50.h + 5,
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
                       color: stateOfGame.basicData?.backGroundOfStarBar,
@@ -110,7 +147,7 @@ class BasedOfGamePhonetics extends StatelessWidget {
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    height: 60.h,
+                    height: 75.h,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -119,7 +156,7 @@ class BasedOfGamePhonetics extends StatelessWidget {
                             20.pw,
                             Image.asset(
                               stateOfGame.basicData?.gameData?.titleImage ?? '',
-                              height: 60.h,
+                              height: 75.h,
                             ),
                             SizedBox()
                           ],
@@ -133,72 +170,41 @@ class BasedOfGamePhonetics extends StatelessWidget {
           ),
           Positioned(
             bottom: 15,
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(),
-                  GestureDetector(
-                    onTap: () async {
-                      await TalkTts.startTalk(text:  stateOfGameData.data[stateOfGame.index].inst ?? '');
-                      // await TalkTts.startTalk(text:  stateOfGameData.data[stateOfGame.index].mainLetter ?? '');
-                    },
-                    child: Container(
-                        child: stateOfGame.avatarArtboard == null
-                            ? Image.asset(
-                                stateOfGame.currentAvatar ?? '',
-                                height:
-                                    MediaQuery.of(context).size.height - (70.h),
-                                width: 130,
-                              )
-                            : SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height - (70.h),
-                                width: 170,
-                                child: Rive(
-                                  artboard: stateOfGame.avatarArtboard!,
-                                  fit: BoxFit.cover,
-                                ))),
-                  ),
-                  // SizedBox(),
-                ],
+            child: Padding(
+              padding: const EdgeInsets.only(left: 5.0),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const SizedBox(),
+                    GestureDetector(
+                      onTap: () async{
+                        await TalkTts.startTalk(text:  stateOfGameData.data[stateOfGame.index].inst ?? '');
+                      },
+                      child: Container(
+                          child: stateOfGame.avatarArtboard == null
+                              ? Image.asset(
+                            stateOfGame.currentAvatar ?? '',
+                            height:
+                            MediaQuery.of(context).size.height - (70.h),
+                            width: 130,
+                          )
+                              : SizedBox(
+                              height:
+                              MediaQuery.of(context).size.height - (70.h),
+                              width: 170,
+                              child: Rive(
+                                artboard: stateOfGame.avatarArtboard!,
+                                fit: BoxFit.cover,
+                              ))),
+                    ),
+                    // SizedBox(),
+                  ],
+                ),
               ),
             ),
           ),
-          Positioned(
-              left: 0,
-              bottom: 0,
-              child: SizedBox(
-                  height: MediaQuery.of(context).size.height - (70.h),
-                  child: Column(
-                    children: [
-                      if ((stateOfGame.basicData?.gameData
-                          is BasicDragOutGame)) ...{
-                        BlocProvider<DragOutCubit>(
-                            create: (_) => DragOutCubit(
-                                gameData:
-                                    stateOfGameData.data[stateOfGame.index]),
-                            child: DragOutGame(
-                              gameData: stateOfGameData.data[stateOfGame.index],
-                            ))
-                      } else if ((stateOfGame.basicData?.gameData
-                          is ClickPictureS)) ...{
-                        BlocProvider<ClickPictureCubit>(
-                            create: (_) => ClickPictureCubit(
-                                gameData:
-                                    stateOfGameData.data[stateOfGame.index],
-                                background: (stateOfGame.basicData?.gameData
-                                        as ClickPictureS)
-                                    .getBackGround(stateOfGameData
-                                            .data[stateOfGame.index]
-                                            .gameImages
-                                            ?.length ??
-                                        0)),
-                            child: ClickPictureGame())
-                      }
-                    ],
-                  )))
         ],
       ),
     );
