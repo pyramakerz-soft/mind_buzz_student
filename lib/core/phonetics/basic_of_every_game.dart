@@ -3,16 +3,40 @@
 import 'assets_images_phonetics.dart';
 import 'basic_of_phonetics.dart';
 
+enum GameTypes {
+  dragOut,
+  clickPicture,
+}
+
+extension TypeExtension on GameTypes {
+  String text() {
+    switch (this) {
+      case GameTypes.dragOut:
+        return "Drag Out".toLowerCase();
+      case GameTypes.clickPicture:
+        return 'Click the picture'.toLowerCase();
+    }
+  }
+
+}
+
 abstract class BasicOfEveryGame {
   late bool isRound;
   late String titleImage;
-  late String keyGame;
   late String? completeBasket;
-
   static String phonics = 'Phonics';
   static String stateOIdle = 'idle';
   static String stateOfWin = 'win';
   static String stateOfSad = 'sad';
+
+  static getTheGameType({required String gameType}){
+    gameType.toLowerCase();
+    if (gameType == GameTypes.dragOut.text()) {
+      return BasicDragOutGame();
+    } else if (gameType == GameTypes.clickPicture.text()) {
+      return ClickPictureS();
+    }
+  }
   static List<int> getTheStarsAddState(int number) {
     if (number % 3 == 0) {
       return List.generate(3, (index) => (number / 3).round()).toList();
@@ -44,8 +68,8 @@ class BasicDragOutGame implements BasicOfEveryGame {
   @override
   String titleImage = AppImagesPhonetics.dragOut;
 
-  @override
-  String keyGame = 'Drag Out';
+  // @override
+  // String keyGame = BasicOfEveryGame.;
 
   @override
   String? completeBasket = AppImagesPhonetics.imageBasketComplete;
@@ -58,8 +82,8 @@ class ClickPictureS implements BasicOfEveryGame {
   @override
   String titleImage = AppImagesPhonetics.clickPicture;
 
-  @override
-  String keyGame = 'Click the picture';
+  // @override
+  // String keyGame = 'Click the picture';
 
   @override
   String? completeBasket;
