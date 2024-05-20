@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../core/phonetics/assets_images_phonetics.dart';
 import '../../../../../../core/phonetics/basic_of_every_game.dart';
 import '../../../../../../core/phonetics/phonetics_color.dart';
+import '../../../../../../core/talk_tts.dart';
 import '../../../../domain/entities/game_images_model.dart';
 import '../../../../domain/entities/game_model.dart';
 import '../../../manager/bloc/contact_lesson_bloc.dart';
@@ -56,8 +57,12 @@ class DragOutGame extends StatelessWidget {
                       actionInEndOfLesson: () {
                     Navigator.of(context).pop();
                   });
-                } else {
-                  context.read<CurrentGamePhoneticsCubit>().addWrongAnswer();
+                }
+                else {
+                  context.read<CurrentGamePhoneticsCubit>().addWrongAnswer(actionOfWrongAnswer: (){
+                    TalkTts.startTalk(text: gameData.mainLetter ?? '');
+
+                  });
                 }
               })),
           Container(

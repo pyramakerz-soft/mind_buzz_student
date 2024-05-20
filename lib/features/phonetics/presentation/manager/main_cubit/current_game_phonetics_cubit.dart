@@ -186,10 +186,15 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     }
   }
 
-  addWrongAnswer() async {
-    AudioPlayerClass.startPlaySound(
+  addWrongAnswer({void Function()? actionOfWrongAnswer}) async {
+    await AudioPlayerClass.startPlaySound(
         soundPath: AppSound.getRandomSoundOfWrong());
     animationOfWrongAnswer();
+    if(actionOfWrongAnswer!=null){
+      AudioPlayerClass.player.onPlayerComplete.listen((event) {
+        actionOfWrongAnswer.call();
+      });
+    }
     backToMainAvatar();
   }
 

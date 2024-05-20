@@ -94,7 +94,13 @@ class BasedOfGamePhonetics extends StatelessWidget {
                               AppImagesPhonetics.stayOfStarBar,
                               width: 50.w,
                             ),
+                            ((stateOfGame.countOfStar ?? 0) ==0)?
+                            Image.asset(AppImagesPhonetics.barZeroStar,
+                                width: 40.w):((stateOfGame.countOfStar ?? 0) ==1)?
                             Image.asset(AppImagesPhonetics.barOneStar,
+                                width: 40.w):((stateOfGame.countOfStar ?? 0) ==2)?
+                            Image.asset(AppImagesPhonetics.barTwoStar,
+                                width: 40.w):Image.asset(AppImagesPhonetics.barThreeStar,
                                 width: 40.w)
                           ],
                         )),

@@ -43,4 +43,7 @@ abstract class AppImagesPhonetics {
   static const String backButtonIcon = "${mainPathOfImages}backButtonIcon.png";
   static const String stayOfStarBar = "${mainPathOfImages}stayOfStarBar.png";
   static const String barOneStar = "${mainPathOfImages}barOneStar.png";
+  static const String barTwoStar = "${mainPathOfImages}barTwoStar.png";
+  static const String barZeroStar = "${mainPathOfImages}barZeroStar.png";
+  static const String barThreeStar = "${mainPathOfImages}barThreeStar.png";
 }
