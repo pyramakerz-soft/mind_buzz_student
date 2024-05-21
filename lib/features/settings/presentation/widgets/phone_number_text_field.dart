@@ -84,7 +84,7 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
                   ?? WidgetsBinding.instance.window.locale.countryCode,
               cursorColor: AppColor.darkBlueColor,
               enabled: widget.enabled,
-              disableLengthCheck: true,
+              disableLengthCheck: false,
               inputFormatters: <TextInputFormatter>[
                 FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                 FilteringTextInputFormatter.digitsOnly

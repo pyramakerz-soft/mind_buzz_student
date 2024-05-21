@@ -6,6 +6,7 @@ import 'basic_of_phonetics.dart';
 enum GameTypes {
   dragOut,
   clickPicture,
+  clickTheSound,
 }
 
 extension TypeExtension on GameTypes {
@@ -15,6 +16,8 @@ extension TypeExtension on GameTypes {
         return "Drag Out".toLowerCase();
       case GameTypes.clickPicture:
         return 'Click the picture'.toLowerCase();
+        case GameTypes.clickTheSound:
+        return 'Click the sound'.toLowerCase();
     }
   }
 
@@ -37,6 +40,9 @@ abstract class BasicOfEveryGame {
       return ClickPictureS();
     } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 0) {
       return ClickPictureOfWord();
+    }
+    else if (gameType == GameTypes.clickTheSound.text()) {
+      return BasicClickTheSoundGame();
     }
   }
   static List<int> getTheStarsAddState(int number) {
@@ -117,6 +123,17 @@ class ClickPictureS implements BasicOfEveryGame {
       return newList;
     }
   }
+}
+
+class BasicClickTheSoundGame implements BasicOfEveryGame {
+  @override
+  bool isRound = false;
+
+  @override
+  String titleImage = AppImagesPhonetics.clickTheSound;
+
+  @override
+  String? completeBasket;
 }
 
 class ClickPictureOfWord implements BasicOfEveryGame {
