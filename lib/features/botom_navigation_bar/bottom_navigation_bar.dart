@@ -140,7 +140,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       height: 5,
                     ),
                     Text(
-                      "Setting",
+                      "Settings",
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge
