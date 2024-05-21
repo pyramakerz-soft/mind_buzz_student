@@ -228,4 +228,5 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         avatarArtboard: state.avatarArtboardIdle,
         stateOfAvatar: BasicOfEveryGame.stateOIdle));
   }
+
 }

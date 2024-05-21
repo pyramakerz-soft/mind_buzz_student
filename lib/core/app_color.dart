@@ -26,6 +26,7 @@ class AppColor {
   static const Color redColor2 = Color(0xFFF5454C);
   static const Color redColor3 = Color(0xFFFFA1A5);
   static const Color whiteBlue = Color(0xFFEDF7FF);
+  static const Color white = Color(0xFFFFFFFF);
   static const Color blueColor = Color(0xFF1690EB);
   static const Color burberColor = Color(0xFF6750A3);
   static const Color darkBlueColor = Color(0xFF004279);

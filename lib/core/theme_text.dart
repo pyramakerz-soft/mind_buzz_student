@@ -73,4 +73,7 @@ class AppTheme {
   static String getFontFamily4() {
     return 'Roboto-Medium';
   }
+  static String getFontFamily5() {
+    return 'poetsenOneRegular';
+  }
 }

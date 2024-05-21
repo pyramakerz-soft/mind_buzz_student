@@ -42,4 +42,20 @@ class AppSound {
     int randomIndex = random.nextInt(ofSoundsOfWrong.length);
     return ofSoundsOfWrong[randomIndex];
   }
+  
+    static getSoundOfLetter({required String mainGameLetter}) {
+      if(mainGameLetter.toLowerCase()== 'a') {
+            return AppSound.letterA;
+      }
+      if(mainGameLetter.toLowerCase()== 't') {
+            return AppSound.letterT;
+      }
+      if(mainGameLetter.toLowerCase()== 'm') {
+            return AppSound.letterM;
+      }
+      if(mainGameLetter.toLowerCase()== 's') {
+            return AppSound.letterS;
+      }
+    return AppSound.letterS;
+  }
 }
