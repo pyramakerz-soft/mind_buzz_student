@@ -15,6 +15,10 @@ import '../../../../core/phonetics/basic_of_every_game.dart';
 import '../../../../core/talk_tts.dart';
 import '../games/click_the_picture/manager/click_picture_cubit.dart';
 import '../games/click_the_picture/pages/click_picture_game.dart';
+import '../games/click_the_picture_with_word/manager/click_the_picture_with_word_cubit.dart';
+import '../games/click_the_picture_with_word/page/click_the_picture_with_word.dart';
+import '../games/click_the_picture_with_word/manager/click_the_picture_with_word_cubit.dart';
+import '../games/click_the_picture_with_word/page/click_the_picture_with_word.dart';
 import '../games/click_the_sound/pages/click_the_sound_game.dart';
 import '../games/drag_out/manager/drag_out_cubit.dart';
 import '../games/drag_out/pages/drag_out_game.dart';
@@ -70,6 +74,18 @@ class BasedOfGamePhonetics extends StatelessWidget {
                                             ?.length ??
                                         0)),
                             child: ClickPictureGame())
+                      } else if ((stateOfGame.basicData?.gameData
+                      is ClickPictureOfWord)) ...{
+                        BlocProvider<ClickThePictureWithWordCubit>(
+                            create: (_) => ClickThePictureWithWordCubit(
+                                gameData:
+                                stateOfGameData.data[stateOfGame.index],
+                                backGround: (stateOfGame.basicData?.gameData as ClickPictureOfWord).getBackGround(stateOfGameData
+                                    .data[stateOfGame.index]
+                                    .gameImages
+                                    ?.length ??
+                                    0)),
+                            child: ClickThePictureWithWord(gameData: stateOfGameData.data[stateOfGame.index],))
                       } else if ((stateOfGame.basicData?.gameData
                           is BasicClickTheSoundGame)) ...{
                         BlocProvider<ClickTheSoundCubit>(

@@ -10,12 +10,16 @@ class SingleElement extends StatelessWidget {
   final bool selected;
   final String image;
   final int index;
+  final double? width;
+  final double? height;
   const SingleElement(
       {Key? key,
       required this.onTap,
       required this.background,
       required this.selected,
       required this.image,
+      this.height,
+      this.width,
       required this.index})
       : super(key: key);
 
@@ -24,21 +28,21 @@ class SingleElement extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: (MediaQuery.of(context).size.width - (130 + 50 + 130)) / 6,
-        height: 120.h,
+        width: width??(MediaQuery.of(context).size.width - (130 + 50 + 130)) / 6,
+        height: height??120.h,
         padding: EdgeInsets.only(bottom: index%2 == 0 ? 30:0),
         child: Stack(
           children: [
             Image.asset(
               background,
-              width: (MediaQuery.of(context).size.width - (130 + 50 + 130)) / 6,
-              height: 120.h,
+              width: width??(MediaQuery.of(context).size.width - (130 + 50 + 130)) / 6,
+              height: height??120.h,
               color: selected ? AppColor.selectedColor : null,
             ),
             CachedNetworkImage(
               imageUrl: image,
-              width: (MediaQuery.of(context).size.width - (130 + 50 + 130)) / 6,
-              height: 120.h,
+              width: width??(MediaQuery.of(context).size.width - (130 + 50 + 130)) / 6,
+              height: height??120.h,
               // height: ,
             ),
           ],
