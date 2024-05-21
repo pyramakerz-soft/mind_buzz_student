@@ -22,7 +22,7 @@ class GetContactInitial extends ContactLessonState {
       // if (subGame.toLowerCase() == BasicDragOutGame().keyGame.toLowerCase()) {
         if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterS.toLowerCase()) {
-          return SPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase()));
+        return SPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase()));
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterA.toLowerCase()) {
           return APhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase()));
