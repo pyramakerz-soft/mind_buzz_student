@@ -38,7 +38,7 @@ class GetContactInitial extends ContactLessonState {
           return TPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag));
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterC.toLowerCase()) {
-          return CPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase()));
+          return CPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag));
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterR.toLowerCase()) {
           return RPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag));
