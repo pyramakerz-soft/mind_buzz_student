@@ -29,12 +29,14 @@ abstract class BasicOfEveryGame {
   static String stateOfWin = 'win';
   static String stateOfSad = 'sad';
 
-  static getTheGameType({required String gameType}){
+  static getTheGameType({required String gameType, required int audioFlag}){
     gameType.toLowerCase();
     if (gameType == GameTypes.dragOut.text()) {
       return BasicDragOutGame();
-    } else if (gameType == GameTypes.clickPicture.text()) {
+    } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 1) {
       return ClickPictureS();
+    } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 0) {
+      return ClickPictureOfWord();
     }
   }
   static List<int> getTheStarsAddState(int number) {
@@ -84,6 +86,46 @@ class ClickPictureS implements BasicOfEveryGame {
 
   // @override
   // String keyGame = 'Click the picture';
+
+  @override
+  String? completeBasket;
+
+  List<String> backgroundImages = [
+    AppImagesPhonetics.circleShape,
+    AppImagesPhonetics.cloudShape,
+    AppImagesPhonetics.diamondShape,
+    AppImagesPhonetics.hexagonShape,
+  ];
+
+  List<String> getBackGround(int length){
+    if(length <= backgroundImages.length){
+      return backgroundImages.sublist(0,length);
+    }
+    else{
+
+      List<String> newList = [];
+      for(int i = 0; i < backgroundImages.length ; i++ ){
+        newList.add(backgroundImages[i]);
+        if(i == backgroundImages.length - 1) {
+          i = 0;
+        }
+        if(newList.length  == length){
+          break;
+        }
+      }
+
+      return newList;
+    }
+  }
+}
+
+class ClickPictureOfWord implements BasicOfEveryGame {
+  @override
+  bool isRound = false;
+
+  @override
+  String titleImage = AppImagesPhonetics.clickPicture;
+
 
   @override
   String? completeBasket;
