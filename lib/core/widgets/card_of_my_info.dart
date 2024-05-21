@@ -21,7 +21,7 @@ class CardOfMyInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userData = context.read<LoginCubit>().userData;
+    final userData = context.watch<LoginCubit>().userData;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
