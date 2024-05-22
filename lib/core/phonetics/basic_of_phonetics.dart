@@ -28,6 +28,7 @@ abstract class MainDataOfPhonetics {
   static String letterB = 'b';
   static String letterO = 'o';
   static String letterG = 'g';
+  static String smat = 'smat';
 }
 
 class SPhonetics implements MainDataOfPhonetics {
@@ -471,6 +472,34 @@ class GPhonetics implements MainDataOfPhonetics {
   String winAvatar = AppImagesPhonetics.snowmanHappyRiv;
 
   GPhonetics({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  String idelAvatar = AppImagesPhonetics.snowmanIdleRiv;
+}
+
+class SMATConnection implements MainDataOfPhonetics {
+  final BasicOfEveryGame mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesPhonetics.backGroundOfConnect;
+
+  @override
+  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
+
+  @override
+  String sadAvatar = AppImagesPhonetics.snowmanSadRiv;
+
+  @override
+  BasicOfEveryGame? gameData;
+
+  @override
+  String winAvatar = AppImagesPhonetics.snowmanHappyRiv;
+
+  SMATConnection({required this.mineGameData}) {
     gameData = mineGameData;
   }
 

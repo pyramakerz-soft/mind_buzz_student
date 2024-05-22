@@ -9,6 +9,7 @@ class GameLettersModel extends Equatable{
   int? number;
   int? warmupId;
   int? unitId;
+  bool? hide = false;
   int? gameId;
   String? createdAt;
   String? updatedAt;
@@ -19,6 +20,7 @@ class GameLettersModel extends Equatable{
         this.letter,
         this.number,
         this.gameId,
+        this.hide,
         this.warmupId,
         this.unitId,
         this.createdAt,
@@ -31,5 +33,5 @@ class GameLettersModel extends Equatable{
   Map<String, dynamic> toJson() => _$GameLettersModelToJson(this);
 
   @override
-  List<Object?> get props => [gameId, id, letter, number, warmupId, unitId, createdAt, updatedAt, stars];
+  List<Object?> get props => [hide, gameId, id, letter, number, warmupId, unitId, createdAt, updatedAt, stars];
 }

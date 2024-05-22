@@ -19,6 +19,7 @@ import '../games/drag_out/manager/drag_out_cubit.dart';
 import '../games/drag_out/pages/drag_out_game.dart';
 import '../manager/bloc/contact_lesson_bloc.dart';
 import '../manager/main_cubit/current_game_phonetics_cubit.dart';
+import '../widget/based_of_game_connect.dart';
 import '../widget/based_of_game_phonetics.dart';
 import '../widget/star_widget.dart';
 
@@ -76,8 +77,10 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                     } else if (state is LogOutLoadingState) {
                       Navigator.of(context).pop();
                     } else if (state is GetContactInitial) {
+                      print('state:${state}');
                       MainDataOfPhonetics? dataType =
                           state.getMainContactData(index: stateOfGame.index);
+                      print('dataType:$dataType');
                       if (dataType != null) {
                         context
                             .read<CurrentGamePhoneticsCubit>()
@@ -91,12 +94,17 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                     }
                   }, builder: (context, stateOfGameData) {
                     if (stateOfGameData is GetContactInitial) {
-                      // final stateOfGame =
-                      //     context.watch<CurrentGamePhoneticsCubit>().state;
-                      return BasedOfGamePhonetics(
-                        stateOfGame: stateOfGame,
-                        stateOfGameData: stateOfGameData,
-                      );
+                      if (stateOfGame.basicData?.gameData?.isConnect == true){
+                        return BasedOfGameConnect(
+                          stateOfGame: stateOfGame,
+                          stateOfGameData: stateOfGameData,
+                        );
+                      }else {
+                        return BasedOfGamePhonetics(
+                          stateOfGame: stateOfGame,
+                          stateOfGameData: stateOfGameData,
+                        );
+                      }
                     } else if (stateOfGameData is GetContactLoadingInitial) {
                       return stateOfGame.avatarArtboardLoading != null
                           ? Rive(
