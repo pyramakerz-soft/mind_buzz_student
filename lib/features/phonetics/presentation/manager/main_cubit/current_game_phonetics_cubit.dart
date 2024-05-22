@@ -146,7 +146,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     int countOfStar = state.countOfStar ?? 0;
     List<int> stateOfStarsAdd =
         BasicOfEveryGame.getTheStarsAddState(mainCountOfQuestion);
-   if ((mainCountOfQuestion) > 2) {
+    if ((mainCountOfQuestion) > 2) {
       if (stateOfStarsAdd[0] == stateOfCountOfCorrectAnswer) {
         emit(state.copyWith(countOfStar: (countOfStar + 1)));
       } else if ((stateOfStarsAdd[1] + stateOfStarsAdd[0]) ==
@@ -231,4 +231,17 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         stateOfAvatar: BasicOfEveryGame.stateOIdle));
   }
 
+  // Map<int, Offset> touchPositions = <int, Offset>{};
+  void savePointerPosition(int index, Offset position) {
+    Map<int, Offset> touchPositions = state.touchPositions ?? {};
+    touchPositions[index] = position;
+    emit(state.updateTouchPositions(touchPositions: touchPositions));
+  }
+
+  void clearPointerPosition(int index) {
+    Map<int, Offset> touchPositions = state.touchPositions ?? {};
+
+    touchPositions.remove(index);
+    emit(state.updateTouchPositions(touchPositions: touchPositions));
+  }
 }

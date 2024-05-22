@@ -93,18 +93,60 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                       }
                     }
                   }, builder: (context, stateOfGameData) {
+                    final countOfFingers =
+                        stateOfGame.touchPositions?.length ?? 0;
+                    // stateOfGame.stateOfAvatar
                     if (stateOfGameData is GetContactInitial) {
-                      if (stateOfGame.basicData?.gameData?.isConnect == true){
-                        return BasedOfGameConnect(
-                          stateOfGame: stateOfGame,
-                          stateOfGameData: stateOfGameData,
-                        );
-                      }else {
-                        return BasedOfGamePhonetics(
-                          stateOfGame: stateOfGame,
-                          stateOfGameData: stateOfGameData,
-                        );
-                      }
+                      return Listener(
+                          onPointerDown: (opm) {
+                            context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .savePointerPosition(opm.pointer, opm.position);
+                            // savePointerPosition(opm.pointer, opm.position);
+                          },
+                          onPointerMove: (opm) {
+                            context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .savePointerPosition(opm.pointer, opm.position);
+                            // savePointerPosition(opm.pointer, opm.position);
+                          },
+                          onPointerCancel: (opm) {
+                            context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .clearPointerPosition(opm.pointer);
+                            // savePointerPosition(opm.pointer, opm.position);
+                          },
+                          onPointerUp: (opm) {
+                            context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .clearPointerPosition(opm.pointer);
+                            // savePointerPosition(opm.pointer, opm.position);
+                          },
+                          child: Stack(
+                            children: [
+                              if (stateOfGame.basicData?.gameData?.isConnect ==
+                                  true) ...{
+                                BasedOfGameConnect(
+                                  stateOfGame: stateOfGame,
+                                  stateOfGameData: stateOfGameData,
+                                ),
+                              } else ...{
+                                BasedOfGamePhonetics(
+                                  stateOfGame: stateOfGame,
+                                  stateOfGameData: stateOfGameData,
+                                ),
+                              },
+                              if (countOfFingers > 1 ||
+                                  stateOfGame.stateOfAvatar !=
+                                      BasicOfEveryGame.stateOIdle) ...{
+                                Container(
+                                  color: Colors.transparent,
+                                  width: MediaQuery.of(context).size.width,
+                                  height: MediaQuery.of(context).size.height,
+                                )
+                              }
+                            ],
+                          ));
                     } else if (stateOfGameData is GetContactLoadingInitial) {
                       return stateOfGame.avatarArtboardLoading != null
                           ? Rive(
