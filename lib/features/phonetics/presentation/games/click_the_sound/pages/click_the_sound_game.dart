@@ -9,6 +9,7 @@ import 'package:mind_buzz_refactor/core/app_color.dart';
 import '../../../../../../core/assets_svg_images.dart';
 import '../../../../../../core/phonetics/phonetics_color.dart';
 import '../../../../../../core/theme_text.dart';
+import '../../../../../../core/widgets/stroke_text.dart';
 import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -120,38 +121,4 @@ class ClickTheSoundGame extends StatelessWidget {
 
 }
 
-class StrokeText extends StatelessWidget {
-  final String text;
-final isDisabled;
-  const StrokeText({
-    required this.text,
-    required this.isDisabled,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Text(
-          text,
-          style: TextStyle(
-            fontSize: 39,
-            fontFamily:  AppTheme.getFontFamily5(),
-            foreground: Paint()..color = isDisabled ? AppColor.white.withOpacity(0.5) : AppColor.white,
-          ),
-        ),
-        Text(
-          text,
-          style: TextStyle(
-            fontFamily:  AppTheme.getFontFamily5(),
-            fontSize: 39,
-            foreground: Paint()
-              ..strokeWidth = 1.7
-              ..color = isDisabled ? AppColor.lightGreyColor4.withOpacity(0.5) :AppColor.darkBlueColor
-              ..style = PaintingStyle.stroke,
-          ),
-        ),
-      ],
-    );
-  }
-}

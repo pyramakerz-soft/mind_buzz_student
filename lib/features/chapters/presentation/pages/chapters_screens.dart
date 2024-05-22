@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:geekyants_flutter_gauges/geekyants_flutter_gauges.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
@@ -18,9 +19,11 @@ import '../../../../core/app_color.dart';
 import '../../../../core/assets_svg_images.dart';
 import '../../../../core/theme_text.dart';
 import '../../../../core/utils.dart';
+import '../../../../core/widgets/stroke_text.dart';
 import '../../../login/presentation/page/login_screen.dart';
 import '../../../math_book1/presentation/manager/current_game_cubit.dart';
 import '../../../math_book1/presentation/screen/my_home_page_book1.dart';
+import '../../../phonetics/presentation/games/click_the_sound/pages/click_the_sound_game.dart';
 import '../../../phonetics/presentation/pages/phonetics_book.dart';
 import '../../domain/entities/chapter_model.dart';
 import '../../domain/entities/image_details.dart';
@@ -35,9 +38,11 @@ import '../widgets/level_map_parameters.dart';
 
 class ChaptersScreen extends StatelessWidget {
   final String programId;
+  final int unitsCount;
+  final int unitsIndex;
 
   const ChaptersScreen(
-      {Key? key, required this.programId})
+      {Key? key, required this.programId, required this.unitsCount,required this.unitsIndex})
       : super(key: key);
 
   @override
@@ -61,8 +66,6 @@ class ChaptersScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      SizedBox(),
-                      SizedBox(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -75,21 +78,17 @@ class ChaptersScreen extends StatelessWidget {
                                   height: 45,
                                   width: 45,
                                   alignment: Alignment.center,
-                                  decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
+                                  decoration:  BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12.r),
                                       color: AppColor.darkBlueColor3),
                                   child: Image.asset(
                                     AppImages.iconBackButton,
                                     fit: BoxFit.fill,
                                     color: Colors.white,
                                   ))),
-                          Text(
-                            'Journey',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(
-                                    fontSize: 20, fontWeight: FontWeight.w700),
+                          StrokeText(
+                          text:  'Unit $unitsIndex of $unitsCount',
+                            isDisabled: false,
                           ),
                           const SizedBox(
                             width: 45,
