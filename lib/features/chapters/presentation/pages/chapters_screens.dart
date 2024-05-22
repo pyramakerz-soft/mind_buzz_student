@@ -57,77 +57,8 @@ class ChaptersScreen extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-              SizedBox(
-                height: 150,
-                width: MediaQuery.of(context).size.width,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 22),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: Container(
-                                  padding: const EdgeInsets.all(10),
-                                  height: 45,
-                                  width: 45,
-                                  alignment: Alignment.center,
-                                  decoration:  BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12.r),
-                                      color: AppColor.darkBlueColor3),
-                                  child: Image.asset(
-                                    AppImages.iconBackButton,
-                                    fit: BoxFit.fill,
-                                    color: Colors.white,
-                                  ))),
-                          StrokeText(
-                          text:  'Unit $unitsIndex of $unitsCount',
-                            isDisabled: false,
-                            fontSize: 0.025.sh,
-                          ),
-                          const SizedBox(
-                            width: 45,
-                          ),
-                        ],
-                      ),
-                      Stack(
-                        alignment: Alignment.centerLeft,
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width / 2,
-                            decoration: BoxDecoration(
-                                color: AppColor.darkBlueColor7,
-                                borderRadius: BorderRadius.circular(15),
-                                border:
-                                    Border.all(color: Colors.white, width: 2)),
-                            padding: EdgeInsets.zero,
-                            height: 20,
-                          ),
-                          if (numberOfBar != 0 && numberOfBar != null) ...{
-                            Container(
-                              width: numberOfBar,
-                              margin: const EdgeInsets.only(left: 2),
-                              decoration: BoxDecoration(
-                                color: AppColor.yellowColor,
-                                borderRadius: BorderRadius.circular(15),
-                                // border: Border.all(color: Colors.white, width: 2)
-                              ),
-                              padding: EdgeInsets.zero,
-                              height: 16,
-                            ),
-                          }
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+            Stack(children: [
+
               BlocProvider<ChapterBloc>(
                   create: (_) => di.sl<ChapterBloc>()
                     ..add(GetUnitRequest(programId: int.parse(programId))),
@@ -157,42 +88,42 @@ class ChaptersScreen extends StatelessWidget {
                   }, builder: (context, state) {
                     if (state is GetProgramsCompleteInitial) {
                       return SizedBox(
-                        height: MediaQuery.of(context).size.height - 150,
+                        height: MediaQuery.of(context).size.height,
                         child: Column(
                           children: [
-                            RichText(
-                              text: TextSpan(
-                                text: 'Chapter ',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColor.darkBlueColor3,
-                                  fontFamily: AppTheme.getFontFamily(),
-                                  fontSize: 20,
-                                ),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text:
-                                        '${state.data.where((element) => element.isChapter == true && element.isOpen == true).length}',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: AppColor.redColor4,
-                                      fontFamily: AppTheme.getFontFamily(),
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text:
-                                        ' of ${state.data.where((element) => element.isChapter == true).length}',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: AppColor.darkBlueColor3,
-                                      fontFamily: AppTheme.getFontFamily(),
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            // RichText(
+                            //   text: TextSpan(
+                            //     text: 'Chapter ',
+                            //     style: TextStyle(
+                            //       fontWeight: FontWeight.bold,
+                            //       color: AppColor.darkBlueColor3,
+                            //       fontFamily: AppTheme.getFontFamily(),
+                            //       fontSize: 20,
+                            //     ),
+                            //     children: <TextSpan>[
+                            //       TextSpan(
+                            //         text:
+                            //             '${state.data.where((element) => element.isChapter == true && element.isOpen == true).length}',
+                            //         style: TextStyle(
+                            //           fontWeight: FontWeight.bold,
+                            //           color: AppColor.redColor4,
+                            //           fontFamily: AppTheme.getFontFamily(),
+                            //           fontSize: 20,
+                            //         ),
+                            //       ),
+                            //       TextSpan(
+                            //         text:
+                            //             ' of ${state.data.where((element) => element.isChapter == true).length}',
+                            //         style: TextStyle(
+                            //           fontWeight: FontWeight.bold,
+                            //           color: AppColor.darkBlueColor3,
+                            //           fontFamily: AppTheme.getFontFamily(),
+                            //           fontSize: 20,
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                             Expanded(
                               child: LevelMap(
                                 backgroundColor: Colors.transparent,
@@ -244,9 +175,80 @@ class ChaptersScreen extends StatelessWidget {
                       return const SizedBox();
                     }
                   })),
+              SizedBox(
+                height: 100,
+                width: MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 22),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Row(
+                        children: [
+                          GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Container(
+                                  padding: const EdgeInsets.all(10),
+                                  height: 45,
+                                  width: 45,
+                                  alignment: Alignment.center,
+                                  decoration:  BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12.r),
+                                      color: AppColor.darkBlueColor3),
+                                  child: Image.asset(
+                                    AppImages.iconBackButton,
+                                    fit: BoxFit.fill,
+                                    color: Colors.white,
+                                  ))),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          StrokeText(
+                            text:  'Unit $unitsIndex of $unitsCount',
+                            isDisabled: false,
+                            fontSize: 0.04.sh,
+                            strokeWidth: 3,
+                          ),
+
+                        ],
+                      ),
+                      // Stack(
+                      //   alignment: Alignment.centerLeft,
+                      //   children: [
+                      //     Container(
+                      //       width: MediaQuery.of(context).size.width / 2,
+                      //       decoration: BoxDecoration(
+                      //           color: AppColor.darkBlueColor7,
+                      //           borderRadius: BorderRadius.circular(15),
+                      //           border:
+                      //               Border.all(color: Colors.white, width: 2)),
+                      //       padding: EdgeInsets.zero,
+                      //       height: 20,
+                      //     ),
+                      //     if (numberOfBar != 0 && numberOfBar != null) ...{
+                      //       Container(
+                      //         width: numberOfBar,
+                      //         margin: const EdgeInsets.only(left: 2),
+                      //         decoration: BoxDecoration(
+                      //           color: AppColor.yellowColor,
+                      //           borderRadius: BorderRadius.circular(15),
+                      //           // border: Border.all(color: Colors.white, width: 2)
+                      //         ),
+                      //         padding: EdgeInsets.zero,
+                      //         height: 16,
+                      //       ),
+                      //     }
+                      //   ],
+                      // ),
+                    ],
+                  ),
+                ),
+              ),
             ]),
             Positioned(
-              left: -50,
+              left: -55,
               child: Align(
                   alignment: Alignment.centerLeft,
                   child: Column(
@@ -256,9 +258,9 @@ class ChaptersScreen extends StatelessWidget {
                           builder: (context, state) =>
                               state.beeWinningArtboard != null
                                   ? Transform.rotate(
-                                      angle: pi / 8,
+                                      angle: pi / 10,
                                       child: SizedBox(
-                                        width: 140,
+                                        width: 200,
                                         child: Rive(
                                             artboard: state.beeWinningArtboard!,
                                             useArtboardSize: true),
