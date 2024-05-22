@@ -13,7 +13,6 @@ import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../manager/click_the_sound_cubit.dart';
-import '../widgets/letter_border_painter.dart';
 
 class ClickTheSoundGame extends StatelessWidget {
   ClickTheSoundGame({Key? key}) : super(key: key);
