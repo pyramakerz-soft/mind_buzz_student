@@ -31,7 +31,7 @@ class StrokeText extends StatelessWidget {
           text,
           style: TextStyle(
             fontFamily:  AppTheme.getFontFamily5(),
-            fontSize: 39,
+            fontSize: fontSize?? 39,
             foreground: Paint()
               ..strokeWidth = strokeWidth ?? 2.7
               ..color = isDisabled ? AppColor.lightGreyColor4.withOpacity(0.5) :AppColor.darkBlueColor

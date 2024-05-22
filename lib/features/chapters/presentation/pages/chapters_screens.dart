@@ -89,6 +89,7 @@ class ChaptersScreen extends StatelessWidget {
                           StrokeText(
                           text:  'Unit $unitsIndex of $unitsCount',
                             isDisabled: false,
+                            fontSize: 0.025.sh,
                           ),
                           const SizedBox(
                             width: 45,
