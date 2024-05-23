@@ -126,9 +126,20 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         currentAvatar: basicData.basicAvatar,
         // statesOfAddStars: BasicOfEveryGame.getTheStarsAddState(gameData.length),
         gameData: gameData));
+    saveCountOfTries();
     getTheBackGround();
     getTheBackGroundSuccess();
     getTheBackGroundSad();
+  }
+
+  saveCountOfTries(){
+    int countOfTries = 3;//state.gameData?[state.index].numOfTrials??0;
+    emit(state.copyWith(countOfTries:countOfTries, countOfStar: 0));
+  }
+
+  decreaseCountOfTries(){
+    int countOfTries = (state.countOfTries??1)-1;
+    emit(state.copyWith(countOfTries:countOfTries));
   }
 
   bool checkIfIsTheLastGameOfLesson() {
@@ -180,8 +191,6 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
 
   addSuccessAnswer({required void Function() actionInEndOfLesson}) async {
     await animationOfCorrectAnswer();
-    // increaseCountOfCorrectAnswer();
-    // addStarToStudent();
 
     bool isLastLesson = checkIfIsTheLastGameOfLesson();
 
@@ -208,9 +217,11 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   animationOfWrongAnswer() {
+
     emit(state.copyWith(
         avatarArtboard: state.avatarArtboardSad,
         stateOfAvatar: BasicOfEveryGame.stateOfSad));
+    decreaseCountOfTries();
   }
 
   animationOfCorrectAnswer() {

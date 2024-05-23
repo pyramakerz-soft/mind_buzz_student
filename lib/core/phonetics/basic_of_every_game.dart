@@ -106,32 +106,15 @@ abstract class BasicOfEveryGame {
     }
   }
 
+  static List listOfConnectGames = [ GameTypes.bingo.text(),
+    GameTypes.sortingPictures.text(),
+    GameTypes.sortingCups.text(),
+    GameTypes.dice.text(),
+    GameTypes.xOut.text(),
+    GameTypes.spelling.text()];
+
   static bool isConnectGame({required String game}){
-    if(game ==  GameTypes.dragOut.text()) {
-      return false;
-    }
-    else if(game == GameTypes.clickPicture.text()) {
-      return false;
-    }
-    else if(game ==  GameTypes.clickTheSound.text()) {
-      return false;
-    }
-    else if(game == GameTypes.bingo.text()) {
-      return true;
-    }
-    else if(game == GameTypes.sortingCups.text()) {
-      return true;
-    }
-    else if(game == GameTypes.sortingPictures.text()) {
-      return true;
-    }
-    else if(game == GameTypes.dice.text()) {
-      return true;
-    }
-    else if(game == GameTypes.xOut.text()) {
-      return true;
-    }
-    else if(game == GameTypes.spelling.text()) {
+    if(listOfConnectGames.contains(game)) {
       return true;
     }else{
       return false;

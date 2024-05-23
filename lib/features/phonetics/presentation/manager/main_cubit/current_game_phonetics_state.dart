@@ -10,6 +10,7 @@ class CurrentGamePhoneticsState extends Equatable {
   String? stateOfAvatar;
   String? currentAvatar;
   int index;
+  int? countOfTries;
   List<GameModel>? gameData;
   List<int>? statesOfAddStars;
   int? countOfStar = 0;
@@ -26,6 +27,7 @@ class CurrentGamePhoneticsState extends Equatable {
       this.touchPositions,
       this.avatarArtboardSuccess,
       this.statesOfAddStars,
+      this.countOfTries,
       this.currentAvatar,
       this.countOfCorrectAnswer,
       required this.index,
@@ -44,6 +46,7 @@ class CurrentGamePhoneticsState extends Equatable {
       List<GameModel>? gameData,
       List<int>? statesOfAddStars,
       int? index,
+      int? countOfTries,
       int? countOfCorrectAnswer,
       int? countOfStar}) {
     return CurrentGamePhoneticsState(
@@ -57,6 +60,7 @@ class CurrentGamePhoneticsState extends Equatable {
         stateOfAvatar: stateOfAvatar ?? this.stateOfAvatar,
         currentAvatar: currentAvatar ?? this.currentAvatar,
         avatarArtboardSad: avatarArtboardSad ?? this.avatarArtboardSad,
+        countOfTries: countOfTries ?? this.countOfTries,
         avatarArtboardSuccess:
             avatarArtboardSuccess ?? this.avatarArtboardSuccess,
         avatarArtboardIdle: avatarArtboardIdle ?? this.avatarArtboardIdle,
@@ -64,24 +68,6 @@ class CurrentGamePhoneticsState extends Equatable {
         countOfStar: countOfStar ?? this.countOfStar,
         avatarArtboard: avatarArtboard ?? this.avatarArtboard);
   }
-
-  // updateTouchPositions({Map<int, Offset>? touchPositions}) {
-  //   return CurrentGamePhoneticsState(
-  //       basicData: basicData ?? basicData,
-  //       index: index ?? index,
-  //       avatarArtboardLoading: avatarArtboardLoading ?? avatarArtboardLoading,
-  //       gameData: gameData ?? gameData,
-  //       touchPositions: touchPositions,
-  //       statesOfAddStars: statesOfAddStars ?? statesOfAddStars,
-  //       stateOfAvatar: stateOfAvatar ?? stateOfAvatar,
-  //       currentAvatar: currentAvatar ?? currentAvatar,
-  //       avatarArtboardSad: avatarArtboardSad ?? avatarArtboardSad,
-  //       avatarArtboardSuccess: avatarArtboardSuccess ?? avatarArtboardSuccess,
-  //       avatarArtboardIdle: avatarArtboardIdle ?? avatarArtboardIdle,
-  //       countOfCorrectAnswer: countOfCorrectAnswer ?? countOfCorrectAnswer,
-  //       countOfStar: countOfStar ?? countOfStar,
-  //       avatarArtboard: avatarArtboard ?? avatarArtboard);
-  // }
 
   clearStateOfAvatar() {
     return CurrentGamePhoneticsState(
@@ -93,6 +79,7 @@ class CurrentGamePhoneticsState extends Equatable {
         stateOfAvatar: null,
         touchPositions: touchPositions,
         currentAvatar: currentAvatar ?? currentAvatar,
+        countOfTries: countOfTries ?? countOfTries,
         avatarArtboardSad: avatarArtboardSad ?? avatarArtboardSad,
         avatarArtboardSuccess: avatarArtboardSuccess ?? avatarArtboardSuccess,
         avatarArtboardIdle: avatarArtboardIdle ?? avatarArtboardIdle,
@@ -111,6 +98,7 @@ class CurrentGamePhoneticsState extends Equatable {
         gameData,
         avatarArtboardLoading,
         touchPositions,
+        countOfTries,
         countOfCorrectAnswer,
         stateOfAvatar,
         statesOfAddStars,

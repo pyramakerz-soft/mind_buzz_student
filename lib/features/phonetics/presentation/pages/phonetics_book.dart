@@ -22,6 +22,7 @@ import '../manager/main_cubit/current_game_phonetics_cubit.dart';
 import '../widget/based_of_game_connect.dart';
 import '../widget/based_of_game_phonetics.dart';
 import '../widget/star_widget.dart';
+import '../widget/widget_of_tries.dart';
 
 class PhoneticsBook extends StatefulWidget {
   final int lessonId;
@@ -131,23 +132,30 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                       .add(ThisTypeNotSupportedRequest());
                                 }
                               }
-                            }, builder: (context, stateOfGameData) {
+                            },
+                                builder: (context, stateOfGameData) {
                               if (stateOfGameData is GetContactInitial) {
                                 return Stack(
                                   children: [
-                                    if (stateOfGame
+                                    if(stateOfGame.countOfTries == 0)...{
+                                      widgetOfTries(context: context)
+                                    }else
+                                      ...{
+                                        if (stateOfGame
                                             .basicData?.gameData?.isConnect ==
-                                        true) ...{
-                                      BasedOfGameConnect(
-                                        stateOfGame: stateOfGame,
-                                        stateOfGameData: stateOfGameData,
-                                      ),
-                                    } else ...{
-                                      BasedOfGamePhonetics(
-                                        stateOfGame: stateOfGame,
-                                        stateOfGameData: stateOfGameData,
-                                      ),
-                                    },
+                                            true) ...{
+                                          BasedOfGameConnect(
+                                            stateOfGame: stateOfGame,
+                                            stateOfGameData: stateOfGameData,
+                                          ),
+                                        } else
+                                          ...{
+                                            BasedOfGamePhonetics(
+                                              stateOfGame: stateOfGame,
+                                              stateOfGameData: stateOfGameData,
+                                            ),
+                                          },
+                                      }
                                   ],
                                 );
                               } else if (stateOfGameData

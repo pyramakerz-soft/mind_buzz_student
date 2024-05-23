@@ -46,8 +46,10 @@ Future<ContactLessonState> _eitherLoadedOrErrorState(
     (data) => GetContactInitial(data: data),
   );
   if (tempState is GetContactInitial) {
-    TalkTts.startTalk(text: tempState.data.first.inst ?? '');
-    TalkTts.startTalk(text: tempState.data.first.mainLetter ?? '');
+    if(tempState.data.isNotEmpty) {
+      TalkTts.startTalk(text: tempState.data.first.inst ?? '');
+      TalkTts.startTalk(text: tempState.data.first.mainLetter ?? '');
+    }
   }
   return tempState;
 }
