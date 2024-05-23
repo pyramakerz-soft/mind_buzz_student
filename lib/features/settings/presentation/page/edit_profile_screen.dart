@@ -1,27 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl_phone_field/countries.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:intl_phone_field/phone_number.dart';
-import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/parent_assets.dart';
+import 'package:mind_buzz_refactor/core/utils.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import 'package:mind_buzz_refactor/features/botom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:mind_buzz_refactor/features/home/presentation/widgets/switch_bar.dart';
 import 'package:mind_buzz_refactor/features/login/domain/entities/user_data_model.dart';
 
-import '../../../../core/error/failures_messages.dart';
-import '../../../../core/utils.dart';
+import '../../../../core/injection/injection_container.dart';
 import '../../../../core/validation_text_field.dart';
 import '../../../../core/widgets/button_start_game.dart';
 import '../../../login/presentation/bloc/login_data_bloc.dart';
-import '../../../login/presentation/page/login_screen.dart';
-import '../bloc/settings_bloc.dart';
+import '../../../login/presentation/cubit/login_cubit.dart';
 import '../widgets/custom_text_field.dart';
-import '../widgets/personal_info_item.dart';
 import '../widgets/phone_number_text_field.dart';
 
 
@@ -47,6 +41,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       body: BlocConsumer<LoginDataBloc, LoginDataState>(
           listener: (context, state) {
             if (state is CompleteUpdatingData) {
+              final snackBar = SnackBar(
+                content: Text(state.message??''),
+              );
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(snackBar);
+              context.read<LoginCubit>().saveUserData(userData: state.userData);
+              // Utils.navigateAndRemoveUntilTo(BlocProvider<LoginDataBloc>(
+              //     create: (_) => sl<LoginDataBloc>()..add(AutoLoginRequest()),
+              //     child: BottomNavBar()), context);
+            }
+            if (state is UpdatingDataError) {
               final snackBar = SnackBar(
                 content: Text(state.message??''),
               );
@@ -78,10 +83,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
 
-                              if(state is UpdatingDataInitial && state.userImage!=null)
+                              if(bloc.profileImage!=null)
                                  CircleAvatar(
                                    radius: 40.r,
-                                   backgroundImage: FileImage(state.userImage!),
+                                   backgroundImage: FileImage(bloc.profileImage!),
                                  )
                               else
                               widget.userData.parentImage != null
@@ -157,6 +162,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           disableAnimation: true,
                           playButton: state is UpdatingDataChanged,
                           dataFunction: (){
+
                             if(state is UpdatingDataChanged) {
                             if (state is UpdatingDataError) {
                               // final snackBar = SnackBar(
@@ -165,8 +171,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               // ScaffoldMessenger.of(context)
                               //     .showSnackBar(snackBar);
                             }
-                            if (_formKey.currentState!.validate())
+
+                            if (_formKey.currentState!.validate()) {
                               bloc.add(UpdateUserDataEvent());
+
+                            }
                           }
                         },
                         )

@@ -23,5 +23,7 @@ class ClickPictureInitial extends Equatable {
   @override
   List<Object?> get props => [gameData,correctIndexes];
 
-
 }
+
+
+

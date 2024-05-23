@@ -20,24 +20,23 @@ part 'current_game_phonetics_state.dart';
 class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   CurrentGamePhoneticsCubit() : super(CurrentGamePhoneticsState(index: 0)) {
     getTheBackGroundLoading();
-
   }
 
   getTheBackGround() {
-    rootBundle.load(state.basicData?.idelAvatar??'').then(
-          (data) async {
+    print('state.basicData?.idelAvatar:${state.basicData?.idelAvatar}');
+    rootBundle.load(state.basicData?.idelAvatar ?? '').then(
+      (data) async {
         try {
           final file = RiveFile.import(data);
           final artboard = file.mainArtboard;
           var controller =
-          StateMachineController.fromArtboard(artboard, 'State Machine 1');
+              StateMachineController.fromArtboard(artboard, 'State Machine 1');
 
           if (controller != null) {
             artboard.addController(controller);
           }
           emit(state.copyWith(avatarArtboardIdle: artboard));
           emit(state.copyWith(avatarArtboard: state.avatarArtboardIdle));
-
         } catch (e) {
           log('###');
           log(e.toString());
@@ -45,14 +44,15 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
       },
     );
   }
+
   getTheBackGroundSuccess() {
-    rootBundle.load(state.basicData?.winAvatar??'').then(
-          (data) async {
+    rootBundle.load(state.basicData?.winAvatar ?? '').then(
+      (data) async {
         try {
           final file = RiveFile.import(data);
           final artboard = file.mainArtboard;
           var controller =
-          StateMachineController.fromArtboard(artboard, 'State Machine 1');
+              StateMachineController.fromArtboard(artboard, 'State Machine 1');
 
           if (controller != null) {
             artboard.addController(controller);
@@ -65,14 +65,15 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
       },
     );
   }
-  getTheBackGroundad() {
-    rootBundle.load(state.basicData?.sadAvatar??'').then(
-          (data) async {
+
+  getTheBackGroundSad() {
+    rootBundle.load(state.basicData?.sadAvatar ?? '').then(
+      (data) async {
         try {
           final file = RiveFile.import(data);
           final artboard = file.mainArtboard;
           var controller =
-          StateMachineController.fromArtboard(artboard, 'State Machine 1');
+              StateMachineController.fromArtboard(artboard, 'State Machine 1');
 
           if (controller != null) {
             artboard.addController(controller);
@@ -123,46 +124,51 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     emit(state.copyWith(
         basicData: basicData,
         currentAvatar: basicData.basicAvatar,
-        statesOfAddStars: BasicOfEveryGame.getTheStarsAddState(gameData.length),
+        // statesOfAddStars: BasicOfEveryGame.getTheStarsAddState(gameData.length),
         gameData: gameData));
+    saveCountOfTries();
     getTheBackGround();
     getTheBackGroundSuccess();
-    getTheBackGroundad();
+    getTheBackGroundSad();
+  }
+
+  saveCountOfTries(){
+    int countOfTries = 3;//state.gameData?[state.index].numOfTrials??0;
+    emit(state.copyWith(countOfTries:countOfTries, countOfStar: 0));
+  }
+
+  decreaseCountOfTries(){
+    int countOfTries = (state.countOfTries??1)-1;
+    emit(state.copyWith(countOfTries:countOfTries));
   }
 
   bool checkIfIsTheLastGameOfLesson() {
     int currentIndex = state.index;
     currentIndex = currentIndex + 1;
     if ((state.gameData?.length ?? 0) > currentIndex) {
-      updateIndexOfCurrentGame();
       return false;
     } else {
       return true;
     }
   }
 
-
-  addStarToStudent() {
-    int stateOfCountOfCorrectAnswer = state.countOfCorrectAnswer ?? 0;
+  addStarToStudent(
+      {required int stateOfCountOfCorrectAnswer,
+      required int mainCountOfQuestion}) {
     int countOfStar = state.countOfStar ?? 0;
-    List<int> stateOfStarsAdd = state.statesOfAddStars ?? [];
-    if ((state.gameData?.length ?? 0) > 2) {
-      if (stateOfStarsAdd[0] > stateOfCountOfCorrectAnswer) {
-        if (stateOfStarsAdd[0] == stateOfCountOfCorrectAnswer) {
-          emit(state.copyWith(countOfStar: (countOfStar + 1)));
-        } else {
-          if (stateOfStarsAdd[1] > stateOfCountOfCorrectAnswer) {
-            if (stateOfStarsAdd[1] == stateOfCountOfCorrectAnswer) {
-              emit(state.copyWith(countOfStar: (countOfStar + 1)));
-            } else {
-              if (stateOfStarsAdd[2] > stateOfCountOfCorrectAnswer) {
-                if (stateOfStarsAdd[2] == stateOfCountOfCorrectAnswer) {
-                  emit(state.copyWith(countOfStar: (countOfStar + 1)));
-                }
-              }
-            }
-          }
-        }
+    List<int> stateOfStarsAdd =
+        BasicOfEveryGame.getTheStarsAddState(mainCountOfQuestion);
+    if ((mainCountOfQuestion) > 2) {
+      if (stateOfStarsAdd[0] == stateOfCountOfCorrectAnswer) {
+        emit(state.copyWith(countOfStar: (countOfStar + 1)));
+      } else if ((stateOfStarsAdd[1] + stateOfStarsAdd[0]) ==
+          stateOfCountOfCorrectAnswer) {
+        emit(state.copyWith(countOfStar: (countOfStar + 1)));
+      } else if ((stateOfStarsAdd[2] +
+              stateOfStarsAdd[0] +
+              stateOfStarsAdd[1]) ==
+          stateOfCountOfCorrectAnswer) {
+        emit(state.copyWith(countOfStar: (countOfStar + 1)));
       }
     } else {
       if (state.gameData?.length == 1) {
@@ -175,35 +181,53 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         }
       }
     }
+    print('countOfStar:$countOfStar');
+  }
+
+  increaseDirectlyCountOfStar() {
+    int countOfStar = state.countOfStar ?? 0;
+    emit(state.copyWith(countOfStar: (countOfStar + 1)));
   }
 
   addSuccessAnswer({required void Function() actionInEndOfLesson}) async {
     await animationOfCorrectAnswer();
-    increaseCountOfCorrectAnswer();
-    addStarToStudent();
+
     bool isLastLesson = checkIfIsTheLastGameOfLesson();
 
     if (isLastLesson == true) {
       await Future.delayed(const Duration(seconds: 2));
       actionInEndOfLesson.call();
     } else {
-      backToMainAvatar();
+      await backToMainAvatar();
+      updateIndexOfCurrentGame();
+      print('${state.stateOfAvatar}');
     }
   }
 
-  addWrongAnswer() async {
-    AudioPlayerClass.startPlaySound(
+  Future<void> addWrongAnswer({void Function()? actionOfWrongAnswer}) async {
+    await AudioPlayerClass.startPlaySound(
         soundPath: AppSound.getRandomSoundOfWrong());
-    animationOfWrongAnswer();
-    backToMainAvatar();
+    await animationOfWrongAnswer();
+    if (actionOfWrongAnswer != null) {
+      AudioPlayerClass.player.onPlayerComplete.listen((event) {
+        actionOfWrongAnswer.call();
+      });
+    }
+    await backToMainAvatar();
   }
 
   animationOfWrongAnswer() {
-    emit(state.copyWith(avatarArtboard: state.avatarArtboardSad));
+
+    emit(state.copyWith(
+        avatarArtboard: state.avatarArtboardSad,
+        stateOfAvatar: BasicOfEveryGame.stateOfSad));
+    decreaseCountOfTries();
   }
 
   animationOfCorrectAnswer() {
-    emit(state.copyWith(avatarArtboard: state.avatarArtboardSuccess, stateOfAvatar: BasicOfEveryGame.stateOfWin));
+    emit(state.copyWith(
+        avatarArtboard: state.avatarArtboardSuccess,
+        stateOfAvatar: BasicOfEveryGame.stateOfWin));
   }
 
   increaseCountOfCorrectAnswer() {
@@ -214,6 +238,20 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
 
   backToMainAvatar() async {
     await Future.delayed(const Duration(seconds: 2));
-    emit(state.copyWith(avatarArtboard: state.avatarArtboardIdle));
+    emit(state.copyWith(
+        avatarArtboard: state.avatarArtboardIdle,
+        stateOfAvatar: BasicOfEveryGame.stateOIdle));
+  }
+
+
+
+  Map<int, Offset> touchPositions = <int, Offset>{};
+  void savePointerPosition(int index, Offset position) {
+    touchPositions[index] = position;
+    emit(state.copyWith(touchPositions: !(state.touchPositions??false)));
+  }
+  clearPointerPosition(int index) {
+    touchPositions.remove(index);
+    emit(state.copyWith(touchPositions: !(state.touchPositions??false)));
   }
 }

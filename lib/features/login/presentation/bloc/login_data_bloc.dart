@@ -62,8 +62,9 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
     on<InitializeUpdateUserDataEvent>((event, emit) async {
       fullNameController.text = userData?.name ?? '';
       emailController.text =  userData?.email ?? '';
-      phoneCode = PhoneNumber.fromCompleteNumber(completeNumber: userData?.parentPhone??'');
-      phoneController.text = userData?.parentPhone?.substring(phoneCode?.countryCode.length??0) ?? '';
+ if(userData?.parentPhone!=null && userData!.parentPhone!.isNotEmpty)
+      phoneCode = PhoneNumber.fromCompleteNumber(completeNumber: userData!.parentPhone!);
+      phoneController.text = userData?.parentPhone?.substring(phoneCode?.countryISOCode.length??0) ?? '';
      emit(UpdatingDataInitial(userData: userData!, userImage: profileImage,phoneCode: phoneCode?.countryISOCode));
     });
 
@@ -88,10 +89,12 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
 
 
   updateUserData(emit,)async{
+
     emit(UpdatingDataLoading());
     try {
       var res = await updateUserDataUseCases(filepath: profileImage , name: fullNameController.text ,
-          phone: (phoneCode?.countryISOCode??'') + phoneController.text , email: emailController.text);
+          phone: (int.tryParse(phoneCode?.countryISOCode??'20')?? int.tryParse(phoneCode?.countryCode??'20')??'20').toString() + phoneController.text ,
+          email: emailController.text);
 
       res.fold((l) {
         log('updateUserData fold $l');
@@ -101,7 +104,7 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
         userData = data;
         // TODO Dynamic message
         emit(CompleteUpdatingData(userData: data, message: 'Updated Successfully'));
-        emit(AutoLoginRequest());
+        // add(AutoLoginRequest());
       });
     } catch (e) {
       log('updateUserData $e ');
@@ -116,9 +119,11 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     if(image != null) {
       profileImage = File(image.path);
+      add(ChangeInUpdateUserDataEvent());
     }
-   add(ChangeInUpdateUserDataEvent());
+
     emit(UpdatingDataInitial(userData: userData!, userImage: profileImage));
+
   }
 
 

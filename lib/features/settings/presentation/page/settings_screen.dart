@@ -37,6 +37,7 @@ class SettingsScreen extends StatelessWidget {
                   padding:  EdgeInsets.only(top: 12.h),
                   child: Column(
                     children: [
+                      if(state.runtimeType.toString() != 'LoadingLoginState')
                       UserHeader(
                         name: bloc.userData?.name ?? '',
                         school: bloc.userData?.details?[0].stage?.name ?? '',

@@ -6,10 +6,11 @@ class CurrentGamePhoneticsState extends Equatable {
   Artboard? avatarArtboardSuccess;
   Artboard? avatarArtboardSad;
   Artboard? avatarArtboardLoading;
-
+  bool? touchPositions = false;
   String? stateOfAvatar;
   String? currentAvatar;
   int index;
+  int? countOfTries;
   List<GameModel>? gameData;
   List<int>? statesOfAddStars;
   int? countOfStar = 0;
@@ -23,29 +24,35 @@ class CurrentGamePhoneticsState extends Equatable {
       this.stateOfAvatar,
       this.avatarArtboardIdle,
       this.avatarArtboardSad,
+      this.touchPositions,
       this.avatarArtboardSuccess,
       this.statesOfAddStars,
+      this.countOfTries,
       this.currentAvatar,
       this.countOfCorrectAnswer,
       required this.index,
       this.countOfStar});
+
   CurrentGamePhoneticsState copyWith(
       {MainDataOfPhonetics? basicData,
       Artboard? avatarArtboard,
       Artboard? avatarArtboardSuccess,
       Artboard? avatarArtboardIdle,
       Artboard? avatarArtboardSad,
+      bool? touchPositions,
       Artboard? avatarArtboardLoading,
       String? currentAvatar,
       String? stateOfAvatar,
       List<GameModel>? gameData,
       List<int>? statesOfAddStars,
       int? index,
+      int? countOfTries,
       int? countOfCorrectAnswer,
       int? countOfStar}) {
     return CurrentGamePhoneticsState(
         basicData: basicData ?? this.basicData,
         index: index ?? this.index,
+        touchPositions:touchPositions??this.touchPositions,
         avatarArtboardLoading:
             avatarArtboardLoading ?? this.avatarArtboardLoading,
         gameData: gameData ?? this.gameData,
@@ -53,22 +60,26 @@ class CurrentGamePhoneticsState extends Equatable {
         stateOfAvatar: stateOfAvatar ?? this.stateOfAvatar,
         currentAvatar: currentAvatar ?? this.currentAvatar,
         avatarArtboardSad: avatarArtboardSad ?? this.avatarArtboardSad,
-        avatarArtboardSuccess: avatarArtboardSuccess ?? this.avatarArtboardSuccess,
+        countOfTries: countOfTries ?? this.countOfTries,
+        avatarArtboardSuccess:
+            avatarArtboardSuccess ?? this.avatarArtboardSuccess,
         avatarArtboardIdle: avatarArtboardIdle ?? this.avatarArtboardIdle,
         countOfCorrectAnswer: countOfCorrectAnswer ?? this.countOfCorrectAnswer,
         countOfStar: countOfStar ?? this.countOfStar,
         avatarArtboard: avatarArtboard ?? this.avatarArtboard);
   }
-  clearStateOfAvatar(){
+
+  clearStateOfAvatar() {
     return CurrentGamePhoneticsState(
         basicData: basicData ?? basicData,
         index: index ?? index,
-        avatarArtboardLoading:
-        avatarArtboardLoading ?? avatarArtboardLoading,
+        avatarArtboardLoading: avatarArtboardLoading ?? avatarArtboardLoading,
         gameData: gameData ?? gameData,
         statesOfAddStars: statesOfAddStars ?? statesOfAddStars,
         stateOfAvatar: null,
+        touchPositions: touchPositions,
         currentAvatar: currentAvatar ?? currentAvatar,
+        countOfTries: countOfTries ?? countOfTries,
         avatarArtboardSad: avatarArtboardSad ?? avatarArtboardSad,
         avatarArtboardSuccess: avatarArtboardSuccess ?? avatarArtboardSuccess,
         avatarArtboardIdle: avatarArtboardIdle ?? avatarArtboardIdle,
@@ -81,11 +92,15 @@ class CurrentGamePhoneticsState extends Equatable {
   List<Object?> get props => [
         basicData,
         currentAvatar,
-    avatarArtboardIdle, avatarArtboardSad,avatarArtboardSuccess,
+        avatarArtboardIdle,
+        avatarArtboardSad,
+        avatarArtboardSuccess,
         gameData,
         avatarArtboardLoading,
+        touchPositions,
+        countOfTries,
         countOfCorrectAnswer,
-    stateOfAvatar,
+        stateOfAvatar,
         statesOfAddStars,
         avatarArtboard,
         index,

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mind_buzz_refactor/core/app_color.dart';
+
 
 import '../../../../core/assets_svg_images.dart';
 import '../../../../core/vars.dart';
+import '../../../../core/widgets/stroke_text.dart';
 import '../../domain/entities/chapter_model.dart';
 
 class ItemOfSubBody extends StatelessWidget {
@@ -11,35 +15,15 @@ class ItemOfSubBody extends StatelessWidget {
   const ItemOfSubBody({Key? key, required this.chapterData}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    if (chapterData.isChapter == true) {
-      if (chapterData.isOpen == true) {
-        return Text(
-          "1",
-          style: Theme.of(context)
-              .textTheme
-              .bodySmall
-              ?.copyWith(fontSize: 25, fontWeight: FontWeight.w700),
+    if (chapterData.isLetter == true) {
+        return  StrokeText(
+          text: (chapterData.name??'').length < 9? chapterData.name!  : chapterData.name!.substring(0,7),
+          isDisabled: false,
+          fontSize: 0.03.sh,
+          strokeWidth: 1.5,
         );
-      } else {
-        return SvgPicture.asset(AppSvgImages.iconLock);
-      }
     }
-    else if (chapterData.isCheckPoint == true) {
-      if (chapterData.isOpen == true) {
-        return const SizedBox();
-      } else {
-        return SvgPicture.asset(AppSvgImages.iconLock);
-      }
-    }
-    else if (chapterData.isAssessment == true) {
-      if (chapterData.isOpen == true) {
-        return const SizedBox();
-      } else {
-        return SvgPicture.asset(AppSvgImages.iconLock);
-      }
-    }
-    else if (chapterData.isLesson == true) {
-      if (chapterData.isOpen == true) {
+    else if (chapterData.isGame == true) {
         return Column(
           children: [
             Text(
@@ -47,24 +31,30 @@ class ItemOfSubBody extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .headlineLarge
-                  ?.copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+                  ?.copyWith(fontSize: 16, fontWeight: FontWeight.w500,color: AppColor.darkBlueColor3),
             ),
-            ...List.generate(
-                1,
-                (index) => SvgPicture.asset(
-                      DefaultChapterData.getTheNumberOfChapter(
-                        number: chapterData.number??0,
-                      ).first,
-                      height: 20,
-                    ))
+            chapterData.star!=null?
+            Text(
+              '${chapterData.number??0}',
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineLarge
+                  ?.copyWith(fontSize: 16, fontWeight: FontWeight.w500,color: AppColor.darkBlueColor3),
+            ):
+            StrokeText(
+              text:  '${chapterData.number??0}',
+              isDisabled: true,
+              fontSize: 0.025.sh,
+              strokeWidth: 1.5,
+              color:AppColor.lightGreyColor9,
+              strokeColor: AppColor.lightGreyColor4,
+            )
+
           ],
         );
       } else {
         return const SizedBox();
       }
-    }
-    else {
-      return const SizedBox();
-    }
+
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl_phone_field/countries.dart';
+import 'package:intl_phone_field/country_picker_dialog.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
@@ -82,6 +84,11 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
                   ?? WidgetsBinding.instance.window.locale.countryCode,
               cursorColor: AppColor.darkBlueColor,
               enabled: widget.enabled,
+              disableLengthCheck: false,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                FilteringTextInputFormatter.digitsOnly
+              ],
               style: Theme.of(context)
                   .textTheme
                   .bodyLarge!
@@ -89,6 +96,9 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
               keyboardType: TextInputType.number,
               onChanged: widget.onChanged,
               onCountryChanged: widget.onCountryChanged,
+              pickerDialogStyle: PickerDialogStyle(
+                backgroundColor: Colors.white
+              ),
               decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10.h, horizontal: 5.w),

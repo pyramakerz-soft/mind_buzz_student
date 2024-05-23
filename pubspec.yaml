@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.22+22
+version: 1.0.23+23
 
 environment:
   sdk: '>=2.12.0 <4.0.0'
@@ -68,6 +68,8 @@ dependencies:
   http:
   intl_phone_field: ^3.1.0
   flutter_rating_bar: ^4.0.1
+  flutter_staggered_grid_view: ^0.4.0
+  stroke_text: ^0.0.3
 #  phone_numbers_parser: ^8.2.1
 #  level_map: ^0.2.0
 
@@ -113,6 +115,10 @@ flutter:
     - family: passionOneRegular
       fonts:
         - asset: assets/fonts/PassionOne-Regular.ttf
+          weight: 600
+    - family: poetsenOneRegular
+      fonts:
+        - asset: assets/fonts/PoetsenOne-Regular.ttf
           weight: 600
     - family: Poppins-Regular
       fonts:

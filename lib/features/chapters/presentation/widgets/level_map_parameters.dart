@@ -34,7 +34,7 @@ class LevelMapParams {
     required this.levelCount,
     required double currentLevel,
     this.pathColor = Colors.black,
-    this.levelHeight = 200,
+    this.levelHeight = 220,
     this.pathStrokeWidth = 3,
     this.dashLengthFactor = 0.025,
     this.enableVariationBetweenCurves = true,
@@ -71,19 +71,11 @@ class LevelMapParams {
         "dx and dy of maxEndReferenceOffsetVariationFactor should be between 0 and 1"),
         this.curveReferenceOffsetVariationForEachLevel = List.generate(
             levelCount,
-                (index) => Offset(
-                (_random.nextBool()
-                    ? _random.nextDouble()
-                    : -_random.nextDouble()) *
-                    maxVariationFactor,
-                (_random.nextBool()
-                    ? _random.nextDouble()
-                    : -_random.nextDouble()) *
-                    maxVariationFactor),
+                (index) => Offset(0.8,1),
             growable: false) {
     this.currentLevel = currentLevel.clamp(1, levelCount).toDouble();
     this.firstCurveReferencePointOffsetFactor =
         firstCurveReferencePointOffsetFactor ??
-            Offset(_random.nextDouble(), _random.nextDouble());
+            Offset(0.7,1);
   }
 }
