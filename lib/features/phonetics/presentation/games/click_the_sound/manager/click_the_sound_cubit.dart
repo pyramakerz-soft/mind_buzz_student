@@ -2,11 +2,9 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 
 import '../../../../../../core/assets_sound.dart';
 import '../../../../../../core/audio_player.dart';
-import '../../../../../../core/talk_tts.dart';
 import '../../../../domain/entities/game_model.dart';
 
 part 'click_the_sound_state.dart';
@@ -18,8 +16,9 @@ class ClickTheSoundCubit extends Cubit<ClickTheSoundInitial> {
   int? correctAnswers = 0;
 
   ClickTheSoundCubit({required this.gameData, this.letters, this.correctAnswers, this.correctIndexes}) : super(ClickTheSoundInitial(gameData: gameData, letters: letters, correctAnswers: correctAnswers, correctIndexes: correctIndexes)) {
-    sayTheLetter();
     generateRandomLetters();
+    sayTheLetter();
+
   }
 
   sayTheLetter() async {
@@ -55,11 +54,11 @@ class ClickTheSoundCubit extends Cubit<ClickTheSoundInitial> {
   }
 
   Future<void> incrementCorrectAnswerCount(int index) async {
-    print('here here incrementCorrectAnswerCount $index');
     if (correctAnswers == null) correctAnswers = 0;
     correctAnswers = correctAnswers! + 1;
-    if(correctIndexes == null) correctIndexes = [];
+    if (correctIndexes == null) correctIndexes = [];
     correctIndexes?.add(index);
     emit(state.copyWith(correctAnswers: correctAnswers, correctIndexes: correctIndexes));
   }
+  
 }
