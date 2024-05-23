@@ -231,17 +231,15 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         stateOfAvatar: BasicOfEveryGame.stateOIdle));
   }
 
-  // Map<int, Offset> touchPositions = <int, Offset>{};
+
+
+  Map<int, Offset> touchPositions = <int, Offset>{};
   void savePointerPosition(int index, Offset position) {
-    Map<int, Offset> touchPositions = state.touchPositions ?? {};
     touchPositions[index] = position;
-    emit(state.updateTouchPositions(touchPositions: touchPositions));
+    emit(state.copyWith(touchPositions: !(state.touchPositions??false)));
   }
-
-  void clearPointerPosition(int index) {
-    Map<int, Offset> touchPositions = state.touchPositions ?? {};
-
+  clearPointerPosition(int index) {
     touchPositions.remove(index);
-    emit(state.updateTouchPositions(touchPositions: touchPositions));
+    emit(state.copyWith(touchPositions: !(state.touchPositions??false)));
   }
 }

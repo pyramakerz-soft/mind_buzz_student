@@ -6,7 +6,7 @@ class CurrentGamePhoneticsState extends Equatable {
   Artboard? avatarArtboardSuccess;
   Artboard? avatarArtboardSad;
   Artboard? avatarArtboardLoading;
-  Map<int, Offset>? touchPositions = <int, Offset>{};
+  bool? touchPositions = false;
   String? stateOfAvatar;
   String? currentAvatar;
   int index;
@@ -30,13 +30,14 @@ class CurrentGamePhoneticsState extends Equatable {
       this.countOfCorrectAnswer,
       required this.index,
       this.countOfStar});
+
   CurrentGamePhoneticsState copyWith(
       {MainDataOfPhonetics? basicData,
       Artboard? avatarArtboard,
       Artboard? avatarArtboardSuccess,
       Artboard? avatarArtboardIdle,
       Artboard? avatarArtboardSad,
-      Map<int, Offset>? touchPositions,
+      bool? touchPositions,
       Artboard? avatarArtboardLoading,
       String? currentAvatar,
       String? stateOfAvatar,
@@ -48,6 +49,7 @@ class CurrentGamePhoneticsState extends Equatable {
     return CurrentGamePhoneticsState(
         basicData: basicData ?? this.basicData,
         index: index ?? this.index,
+        touchPositions:touchPositions??this.touchPositions,
         avatarArtboardLoading:
             avatarArtboardLoading ?? this.avatarArtboardLoading,
         gameData: gameData ?? this.gameData,
@@ -63,23 +65,23 @@ class CurrentGamePhoneticsState extends Equatable {
         avatarArtboard: avatarArtboard ?? this.avatarArtboard);
   }
 
-  updateTouchPositions({Map<int, Offset>? touchPositions}) {
-    return CurrentGamePhoneticsState(
-        basicData: basicData ?? basicData,
-        index: index ?? index,
-        avatarArtboardLoading: avatarArtboardLoading ?? avatarArtboardLoading,
-        gameData: gameData ?? gameData,
-        touchPositions: touchPositions,
-        statesOfAddStars: statesOfAddStars ?? statesOfAddStars,
-        stateOfAvatar: stateOfAvatar ?? stateOfAvatar,
-        currentAvatar: currentAvatar ?? currentAvatar,
-        avatarArtboardSad: avatarArtboardSad ?? avatarArtboardSad,
-        avatarArtboardSuccess: avatarArtboardSuccess ?? avatarArtboardSuccess,
-        avatarArtboardIdle: avatarArtboardIdle ?? avatarArtboardIdle,
-        countOfCorrectAnswer: countOfCorrectAnswer ?? countOfCorrectAnswer,
-        countOfStar: countOfStar ?? countOfStar,
-        avatarArtboard: avatarArtboard ?? avatarArtboard);
-  }
+  // updateTouchPositions({Map<int, Offset>? touchPositions}) {
+  //   return CurrentGamePhoneticsState(
+  //       basicData: basicData ?? basicData,
+  //       index: index ?? index,
+  //       avatarArtboardLoading: avatarArtboardLoading ?? avatarArtboardLoading,
+  //       gameData: gameData ?? gameData,
+  //       touchPositions: touchPositions,
+  //       statesOfAddStars: statesOfAddStars ?? statesOfAddStars,
+  //       stateOfAvatar: stateOfAvatar ?? stateOfAvatar,
+  //       currentAvatar: currentAvatar ?? currentAvatar,
+  //       avatarArtboardSad: avatarArtboardSad ?? avatarArtboardSad,
+  //       avatarArtboardSuccess: avatarArtboardSuccess ?? avatarArtboardSuccess,
+  //       avatarArtboardIdle: avatarArtboardIdle ?? avatarArtboardIdle,
+  //       countOfCorrectAnswer: countOfCorrectAnswer ?? countOfCorrectAnswer,
+  //       countOfStar: countOfStar ?? countOfStar,
+  //       avatarArtboard: avatarArtboard ?? avatarArtboard);
+  // }
 
   clearStateOfAvatar() {
     return CurrentGamePhoneticsState(
@@ -89,6 +91,7 @@ class CurrentGamePhoneticsState extends Equatable {
         gameData: gameData ?? gameData,
         statesOfAddStars: statesOfAddStars ?? statesOfAddStars,
         stateOfAvatar: null,
+        touchPositions: touchPositions,
         currentAvatar: currentAvatar ?? currentAvatar,
         avatarArtboardSad: avatarArtboardSad ?? avatarArtboardSad,
         avatarArtboardSuccess: avatarArtboardSuccess ?? avatarArtboardSuccess,
