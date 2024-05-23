@@ -71,25 +71,21 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                         contextOfGame
                             .read<CurrentGamePhoneticsCubit>()
                             .savePointerPosition(opm.pointer, opm.position);
-                        print('onPointerDown:$countOfFingers');
                       },
                       onPointerMove: (opm) {
                         contextOfGame
                             .read<CurrentGamePhoneticsCubit>()
                             .savePointerPosition(opm.pointer, opm.position);
-                        print('onPointerMove:$countOfFingers');
                       },
                       onPointerCancel: (opm) {
                         contextOfGame
                             .read<CurrentGamePhoneticsCubit>()
                             .clearPointerPosition(opm.pointer);
-                        print('onPointerDown:$countOfFingers');
                       },
                       onPointerUp: (opm) {
                         contextOfGame
                             .read<CurrentGamePhoneticsCubit>()
                             .clearPointerPosition(opm.pointer);
-                        // savePointerPosition(opm.pointer, opm.position);
                       },
                       child: Stack(
                     children: [
@@ -107,10 +103,8 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                         } else if (state is LogOutLoadingState) {
                           Navigator.of(context).pop();
                         } else if (state is GetContactInitial) {
-                          print('state:${state}');
                           MainDataOfPhonetics? dataType =
                               state.getMainContactData(index: stateOfGame.index);
-                          print('dataType:$dataType');
                           if (dataType != null) {
                             context
                                 .read<CurrentGamePhoneticsCubit>()

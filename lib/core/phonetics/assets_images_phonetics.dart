@@ -18,8 +18,7 @@ abstract class AppImagesPhonetics {
   static const String backGroundOfF = "${mainPathOfImages}backGroundOfF.png";
   static const String backGroundOfM = "${mainPathOfImages}backGroundOfM.png";
   static const String backGroundOfT = "${mainPathOfImages}backGroundOfT.png";
-  static const String basicAvatarNormal =
-      "${mainPathOfImages}basicAvatarNormal.png";
+  static const String basicAvatarNormal = "${mainPathOfImages}basicAvatarNormal.png";
   static const String sadAvatarSad = "${mainPathOfImages}sadAvatarSad.png";
   static const String winAvatar = "${mainPathOfImages}winAvatar.png";
   static const String dragOut = "${mainPathOfImages}dragOut.png";
@@ -35,6 +34,10 @@ abstract class AppImagesPhonetics {
   static const String snowmanHappyRiv = "${mainPathOfImages}snowman_happy.riv";
   static const String snowmanIdleRiv = "${mainPathOfImages}snowman_idle.riv";
   static const String snowmanSadRiv = "${mainPathOfImages}snowman_sad.riv";
+  static const String beeFailureRiv = "${mainPathOfImages}beeFailure.riv";
+  static const String beeIdleRiv = "${mainPathOfImages}beeIdle.riv";
+  static const String beeSuccess = "${mainPathOfImages}beeSuccess.riv";
+  static const String basicBess = "${mainPathOfImages}basicBess.png";
 
   static const String circleShape = "${mainPathOfImages}circle_shape.png";
   static const String cloudShape = "${mainPathOfImages}cloud_shape.png";

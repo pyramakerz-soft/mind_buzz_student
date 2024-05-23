@@ -23,6 +23,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   getTheBackGround() {
+    print('state.basicData?.idelAvatar:${state.basicData?.idelAvatar}');
     rootBundle.load(state.basicData?.idelAvatar ?? '').then(
       (data) async {
         try {

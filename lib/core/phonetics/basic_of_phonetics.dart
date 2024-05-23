@@ -488,21 +488,21 @@ class SMATConnection implements MainDataOfPhonetics {
   String background = AppImagesPhonetics.backGroundOfConnect;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
+  String basicAvatar = AppImagesPhonetics.basicBess;
 
   @override
-  String sadAvatar = AppImagesPhonetics.snowmanSadRiv;
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
   BasicOfEveryGame? gameData;
 
   @override
-  String winAvatar = AppImagesPhonetics.snowmanHappyRiv;
+  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   SMATConnection({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
   @override
-  String idelAvatar = AppImagesPhonetics.snowmanIdleRiv;
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 }

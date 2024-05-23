@@ -112,7 +112,7 @@ class BingoGameScreen extends StatelessWidget {
                             maxWidth:
                                 MediaQuery.of(context).size.width - (107.w),
                             hide: gameState.correctIndexes?.contains(
-                                (gameState.cardsLetters)?[rowIndex].id),
+                                (gameState.cardsLetters)?[rowIndex].id), index: rowIndex,
                           )),
               ));
             }));
