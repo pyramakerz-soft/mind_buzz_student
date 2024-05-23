@@ -29,7 +29,7 @@ class _HomeParentScreen extends State<HomeParentScreen> {
     return Column(
         children: [
         switchBar(context: context),
-          10.ph,
+          20.ph,
           const CardOfMyInfo(),
           20.ph,
           Expanded(

@@ -136,15 +136,15 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                   stateOfGameData: stateOfGameData,
                                 ),
                               },
-                              if (countOfFingers > 1 ||
-                                  stateOfGame.stateOfAvatar !=
-                                      BasicOfEveryGame.stateOIdle) ...{
-                                Container(
-                                  color: Colors.transparent,
-                                  width: MediaQuery.of(context).size.width,
-                                  height: MediaQuery.of(context).size.height,
-                                )
-                              }
+                              // if (countOfFingers > 1 ||
+                              //     stateOfGame.stateOfAvatar !=
+                              //         BasicOfEveryGame.stateOIdle) ...{
+                              //   Container(
+                              //     color: Colors.transparent,
+                              //     width: MediaQuery.of(context).size.width,
+                              //     height: MediaQuery.of(context).size.height,
+                              //   )
+                              // }
                             ],
                           ));
                     } else if (stateOfGameData is GetContactLoadingInitial) {

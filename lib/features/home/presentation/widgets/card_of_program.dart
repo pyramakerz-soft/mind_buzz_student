@@ -63,7 +63,7 @@ class CardOfProgram extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(left: 20),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(

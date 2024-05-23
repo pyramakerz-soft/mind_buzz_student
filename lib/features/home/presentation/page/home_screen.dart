@@ -42,17 +42,15 @@ class _HomeScreen extends State<HomeScreen> {
     final userData = context.read<LoginCubit>().userData;
     return Column(
       children: [
-        10.ph,
+        20.ph,
         const CardOfMyInfo(),
         20.ph,
         Expanded(
             child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: BlocProvider<GetProgramsHomeBloc>(
-              create: (_) =>
-                  di.sl<GetProgramsHomeBloc>()..add(GetProgramsRequest()),
-              child: BlocConsumer<GetProgramsHomeBloc, GetProgramsHomeState>(
-                  listener: (context, state) {
+              create: (_) => di.sl<GetProgramsHomeBloc>()..add(GetProgramsRequest()),
+              child: BlocConsumer<GetProgramsHomeBloc, GetProgramsHomeState>(listener: (context, state) {
                 if (state is GetProgramsErrorInitial) {
                   if (state.message == RELOGIN_FAILURE_MESSAGE) {
                     Utils.navigateAndRemoveUntilTo(LoginScreen(), context);
@@ -73,91 +71,53 @@ class _HomeScreen extends State<HomeScreen> {
                     child: Column(
                       children: [
                         Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              color: AppColor.redColor),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 7, horizontal: 10),
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: AppColor.redColor),
+                          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 DefaultHomeData.haveAnAssignment,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(
-                                        fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .reDeginSize(16, context) >
-                                                35
-                                            ? 35
-                                            : MediaQuery.of(context)
-                                                .size
-                                                .reDeginSize(16, context),
-                                        fontWeight: FontWeight.w700),
+                                style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontSize:MediaQuery.of(context).size.reDeginSize(16, context) > 35 ? 35 : 16, fontWeight: FontWeight.w700,color: AppColor.white),
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  Utils.navigateTo(
-                                      BlocProvider(
-                                          create: (_) => CheckAssignmentCubit(
-                                              assignmentProgrammes: state.data),
-                                          child: StudentAssignmentScreen()),
-                                      context);
+                                  Utils.navigateTo(BlocProvider(create: (_) => CheckAssignmentCubit(assignmentProgrammes: state.data), child: StudentAssignmentScreen()), context);
                                 },
                                 child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 5, horizontal: 5),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      color: Colors.white),
+                                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.white),
                                   child: Text(
                                     'Start Now?',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleLarge
-                                        ?.copyWith(
-                                            fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .reDeginSize(
-                                                            13, context) >
-                                                    35
-                                                ? 35
-                                                : MediaQuery.of(context)
-                                                    .size
-                                                    .reDeginSize(13, context),
-                                            fontWeight: FontWeight.w700),
+                                    //style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColor.redColor4, fontSize: MediaQuery.of(context).size.reDeginSize(13, context) > 35 ? 35 : MediaQuery.of(context).size.reDeginSize(13, context), fontWeight: FontWeight.w700),
+                                    style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColor.redColor4, fontSize:16, fontWeight: FontWeight.w700),
                                   ),
                                 ),
                               )
                             ],
                           ),
                         ),
-                        25.ph,
+                        32.ph,
                         SizedBox(
-                          height: MediaQuery.of(context).size.height - (210),
+                         height: MediaQuery.of(context).size.height - (240),
                           child: ListView(
+                            shrinkWrap: true,
                             children: List.generate(
                                 state.data.length,
                                 (index) => Column(
                                       children: [
                                         CardOfProgram(
-                                          programId:
-                                              "${state.data[index].programId ?? ''}",
-                                          colors: DefaultHomeData.getColor(
-                                              index: (index + 1)),
-                                          mainImage:
-                                              state.data[index].program?.image,
-                                          title: state.data[index].program
-                                                  ?.course?.name ??
-                                              '',
+                                          programId: "${state.data[index].programId ?? ''}",
+                                          colors: DefaultHomeData.getColor(index: (index + 1)),
+                                          mainImage: state.data[index].program?.image,
+                                          title: state.data[index].program?.course?.name ?? '',
                                         ),
-                                        15.ph,
+                                        24.ph,
                                       ],
                                     )),
                           ),
-                        )
+                        ),
+                        40.ph,
                       ],
                     ),
                   );

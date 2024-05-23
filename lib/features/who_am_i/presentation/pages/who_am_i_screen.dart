@@ -1,10 +1,13 @@
 import 'dart:developer';
 
+import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import 'package:mind_buzz_refactor/features/phonetics/presentation/games/click_the_sound/widgets/stroked_text_widget.dart';
+import '../../../../core/assets_animation.dart';
 import '../../../../core/assets_svg_images.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 
@@ -50,65 +53,92 @@ class WhoAmIScreen extends StatelessWidget {
                               children: [
                                 SvgPicture.asset(
                                   AppSvgImages.bgChooseWhoAmI,
+                                  color: AppColor.skyBlueColor,
                                   width: MediaQuery.of(context).size.width - 70,
                                 ),
-                                Text(
-                                  'Tell us more \n about you!',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium
-                                      ?.copyWith(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.w700,
-                                        fontFamily: AppTheme.getFontFamily3(),
+                                const Positioned(
+                                  top: -30,
+                                  left: 0,
+                                  child: SizedBox(
+                                    height: 120,
+                                    width: 120,
+                                    child: RiveAnimation.asset(
+                                      AppAnimation.cloudRive,
+                                    ),
+                                  ),
+                                ),
+                                     const Positioned(
+                                  top: 0,
+                                  right: 0,
+                                  child: SizedBox(
+                                    height: 170,
+                                    width: 170,
+                                    child: RiveAnimation.asset(
+                                      AppAnimation.cloudRive,
+                                    ),
+                                  ),
+                                ),
+                                  Positioned(
+                                  top: 50,
+                                  left: 25,
+                                  child: Row(
+                                    children: [
+                                      GestureDetector(
+                                          onTap: () {
+                                            di.sl<GetProgramsHomeBloc>()..add(LogOutRequest());
+                                            context.read<WhoAmICubit>().clearIndex();
+                                            Utils.navigateAndRemoveUntilTo(BlocProvider(create: (_) => LoadingCubit(), child: LoginScreen()), context);
+                                          },
+                                          child: Container(
+                                              padding: const EdgeInsets.all(9),
+                                              alignment: Alignment.center,
+                                              height: 42,
+                                              width: 42,
+                                              decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: AppColor.darkBlueColor),
+                                              child: SvgPicture.asset(
+                                                AppSvgImages.iconLogout,
+                                                fit: BoxFit.fill,
+                                              ))),
+                                      20.pw,
+                         
+                                      Text(
+                                        'Sign In',
+                                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                              color: AppColor.darkBlueColor,
+                                              fontSize: 40,
+                                              fontWeight: FontWeight.w700,
+                                              fontFamily: AppTheme.getFontFamily5(),
+                                            ),
                                       ),
-                                )
+                                    ],
+                                  ),
+                                ),
+                                 
                               ],
                             ),
                           ),
-                          GestureDetector(
-                              onTap: () {
-                                di.sl<GetProgramsHomeBloc>()
-                                  ..add(LogOutRequest());
-                                context.read<WhoAmICubit>().clearIndex();
-                                Utils.navigateAndRemoveUntilTo(
-                                    BlocProvider(
-                                        create: (_) => LoadingCubit(),
-                                        child: LoginScreen()),
-                                    context);
-                              },
-                              child: Container(
-                                  padding: const EdgeInsets.all(10),
-                                  alignment: Alignment.center,
-                                  height: 50,
-                                  width: 50,
-                                  decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: AppColor.darkBlueColor3),
-                                  child: SvgPicture.asset(
-                                    AppSvgImages.iconLogout,
-                                    fit: BoxFit.fill,
-                                    color: Colors.white,
-                                  ))),
-                          const SizedBox()
                         ],
                       ),
                     )),
                 Positioned(
-                  bottom: -15,
-                  child: Image.asset(
-                    AppImages.halfBee,
-                    height: 150,
-                  ),
-                )
+                    bottom: -20,
+                    left: -50,
+                    child: Transform.rotate(
+                      angle: 0.25,
+                      child: SizedBox(
+                        height: 170,
+                        width: 170,
+                        child: RiveAnimation.asset(
+                          AppAnimation.beeRive,
+                        ),
+                      ),
+                    )
+                    // Image.asset(
+                    //   AppImages.halfBee,
+                    //   height: 150,
+                    // ),
+                    )
               ],
-            ),
-            Text(
-              'Sign in as',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium
-                  ?.copyWith(fontSize: 22, fontWeight: FontWeight.w700),
             ),
             20.ph,
             Container(
@@ -135,8 +165,7 @@ class WhoAmIScreen extends StatelessWidget {
               dataFunction: () {
                 if (currentIndex != null) {
                   log('currentIndex:$currentIndex');
-                   Utils.navigateAndRemoveUntilTo(
-                        const BasedHomeScreen(), context);
+                  Utils.navigateAndRemoveUntilTo(const BasedHomeScreen(), context);
                 } else {
                   const snackBar = SnackBar(
                     content: Text('select who you are'),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/app_color.dart';
+import '../../../../core/border_manager.dart';
 
 class TextFieldWidget extends StatelessWidget {
   final String hintText;
@@ -45,14 +46,18 @@ class TextFieldWidget extends StatelessWidget {
             validator: (val) => validatorTextField!(val),
             onChanged: (val)=> onChanged!(val),
             decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(borderRadius??5.0),
-                  borderSide: BorderSide(color: borderSideColor??AppColor.greyColor),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(borderRadius??5.0),
-                  borderSide:  BorderSide(color: borderSideColor??AppColor.greyColor),
-                ),
+                // focusedBorder: OutlineInputBorder(
+                //   borderRadius: BorderRadius.circular(borderRadius??5.0),
+                //   borderSide: BorderSide(color: borderSideColor??AppColor.greyColor),
+                // ),
+                // enabledBorder: OutlineInputBorder(
+                //   borderRadius: BorderRadius.circular(borderRadius??5.0),
+                //   borderSide:  BorderSide(color: borderSideColor??AppColor.greyColor),
+                // ),
+              enabledBorder: getRegularBorderStyle(),
+              focusedBorder: getFocusedBorderStyle(),
+                errorBorder:getErroredBorderStyle(),
+                focusedErrorBorder:getErroredBorderStyle(),
                 suffixIcon: rightWidget,
                 isDense: true,
                 filled: true,

@@ -26,30 +26,19 @@ class ClickTheSoundCubit extends Cubit<ClickTheSoundInitial> {
   }
 
   Future<void> generateRandomLetters() async {
-    List<String> alphabetRange = 'smatd'.split('');
-    //TODO: Must be fixed form the model itself 'letter' instead of 'name'
-    // List<String> gameLetters = state.gameData.gameLetters.map((e) => e.letter).toList();
+    //List<String> gameLetters = 'smatd'.split('');
+    List<String> gameLetters = state.gameData.gameLetters?.map((e) => e.letter.toString()).toList() ?? [];
 
-    // Remove the mainLetter from alphabetRange if it exists
     String mainLetter = state.gameData.mainLetter ?? '';
-    alphabetRange.remove(mainLetter);
+    gameLetters.remove(mainLetter);
+    gameLetters.shuffle();
 
-    // Shuffle the alphabetRange to randomize it
-    alphabetRange.shuffle();
-
-    // Get two random letters from the shuffled alphabetRange
-    List<String> randomLetters = alphabetRange.sublist(0, 3);
-
-    // Add the main letter at a random position within the first three places
+    List<String> randomLetters = gameLetters.sublist(0, 3);
     int randomIndex = Random().nextInt(3);
     randomLetters.insert(randomIndex, mainLetter);
-
-    // Fill the rest of the list with the main letter until the length is 8
     while (randomLetters.length < 8) {
       randomLetters.add(mainLetter);
     }
-
-    // emit with  the new list of letters
     emit(state.copyWith(letters: randomLetters));
   }
 
