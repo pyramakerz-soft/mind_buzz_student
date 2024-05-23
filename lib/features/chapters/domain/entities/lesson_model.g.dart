@@ -15,6 +15,9 @@ LessonModel _$LessonModelFromJson(Map<String, dynamic> json) => LessonModel(
       warmupId: (json['warmup_id'] as num?)?.toInt(),
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
+    games: (json['games'] as List<dynamic>?)
+        ?.map((e) => GameModel.fromJson(e as Map<String, dynamic>))
+        .toList(),
       chapter: json['chapter'] == null
           ? null
           : SubChapterModel.fromJson(json['chapter'] as Map<String, dynamic>),

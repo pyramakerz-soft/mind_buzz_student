@@ -8,11 +8,15 @@ class StrokeText extends StatelessWidget {
   final isDisabled;
   final double ?fontSize;
   final double ?strokeWidth;
+  final Color ?color;
+  final Color ?strokeColor;
   const StrokeText({
     required this.text,
     required this.isDisabled,
     this.strokeWidth,
-    this.fontSize
+    this.fontSize,
+    this.color,
+    this.strokeColor
   });
 
   @override
@@ -24,7 +28,7 @@ class StrokeText extends StatelessWidget {
           style: TextStyle(
             fontSize:fontSize?? 39,
             fontFamily:  AppTheme.getFontFamily5(),
-            foreground: Paint()..color = isDisabled ? AppColor.white.withOpacity(0.5) : AppColor.white,
+            foreground: Paint()..color =  color!=null? color! : isDisabled ? AppColor.white.withOpacity(0.5) : AppColor.white,
           ),
         ),
         Text(
@@ -34,10 +38,16 @@ class StrokeText extends StatelessWidget {
             fontSize: fontSize?? 39,
             foreground: Paint()
               ..strokeWidth = strokeWidth ?? 2
-              ..color = isDisabled ? AppColor.lightGreyColor4.withOpacity(0.5) :AppColor.darkBlueColor
+              ..color = strokeColor!=null? strokeColor! : isDisabled ? AppColor.lightGreyColor4.withOpacity(0.5) :AppColor.darkBlueColor
               ..style = PaintingStyle.stroke,
           ),
+
+
         ),
+
+
+
+
       ],
     );
   }
