@@ -7,6 +7,7 @@ enum GameTypes {
   dragOut,
   clickPicture,
   clickTheSound,
+  bing,
 }
 
 extension TypeExtension on GameTypes {
@@ -16,12 +17,17 @@ extension TypeExtension on GameTypes {
         return "Drag Out".toLowerCase();
       case GameTypes.clickPicture:
         return 'Click the picture'.toLowerCase();
-        case GameTypes.clickTheSound:
+      case GameTypes.clickTheSound:
         return 'Click the sound'.toLowerCase();
+      case GameTypes.bing:
+        return 'Bingo'.toLowerCase();
     }
   }
 
 }
+// abstract class ConnectGames{
+//   bool isCoonect0
+// }
 
 abstract class BasicOfEveryGame {
   late bool isRound;
@@ -31,9 +37,11 @@ abstract class BasicOfEveryGame {
   static String stateOIdle = 'idle';
   static String stateOfWin = 'win';
   static String stateOfSad = 'sad';
+  bool isConnect = false;
 
   static getTheGameType({required String gameType, required int audioFlag}){
     gameType.toLowerCase();
+    print('dataType:$gameType');
     if (gameType == GameTypes.dragOut.text()) {
       return BasicDragOutGame();
     } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 1) {
@@ -43,6 +51,8 @@ abstract class BasicOfEveryGame {
     }
     else if (gameType == GameTypes.clickTheSound.text()) {
       return BasicClickTheSoundGame();
+    } else if (gameType == GameTypes.bing.text()) {
+      return BingoGame();
     }
   }
   static List<int> getTheStarsAddState(int number) {
@@ -81,6 +91,9 @@ class BasicDragOutGame implements BasicOfEveryGame {
 
   @override
   String? completeBasket = AppImagesPhonetics.imageBasketComplete;
+
+  @override
+  bool isConnect = false;
 }
 
 class ClickPictureS implements BasicOfEveryGame {
@@ -123,6 +136,9 @@ class ClickPictureS implements BasicOfEveryGame {
       return newList;
     }
   }
+
+  @override
+  bool isConnect = false;
 }
 
 class BasicClickTheSoundGame implements BasicOfEveryGame {
@@ -134,6 +150,9 @@ class BasicClickTheSoundGame implements BasicOfEveryGame {
 
   @override
   String? completeBasket;
+
+  @override
+  bool isConnect = false;
 }
 
 class ClickPictureOfWord implements BasicOfEveryGame {
@@ -174,4 +193,23 @@ class ClickPictureOfWord implements BasicOfEveryGame {
       return newList;
     }
   }
+
+  @override
+  bool isConnect = false;
+}
+
+class BingoGame implements BasicOfEveryGame {
+  @override
+  bool isRound = false;
+
+  @override
+  String titleImage = AppImagesPhonetics.bingoNameGame;
+
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = true;
+
 }

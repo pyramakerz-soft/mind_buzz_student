@@ -19,7 +19,7 @@ class GetContactInitial extends ContactLessonState {
       String subLetter = data[index].mainLetter ?? '';
       String subGame = data[index].gameTypes?.name ?? '';
       int audioFlag = data[index].audioFlag ?? 0;
-      print("subLetter:$subLetter ,subGame:$subGame");
+      print("subLetter:$subLetter ,subGame:$subGame, audioFlag:$audioFlag");
       // if (subGame.toLowerCase() == BasicDragOutGame().keyGame.toLowerCase()) {
         if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterS.toLowerCase()) {
@@ -44,31 +44,34 @@ class GetContactInitial extends ContactLessonState {
           return RPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag));
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterI.toLowerCase()) {
-          return IPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag)());
+          return IPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag));
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterP.toLowerCase()) {
-          return PPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag)());
+          return PPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag));
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterH.toLowerCase()) {
-          return HPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag)());
+          return HPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag));
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterJ.toLowerCase()) {
-          return JPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag)());
+          return JPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag));
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterU.toLowerCase()) {
-          return UPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag)());
+          return UPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag));
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterL.toLowerCase()) {
-          return LPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag)());
+          return LPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag));
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterB.toLowerCase()) {
-          return BPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag)());
+          return BPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag));
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterO.toLowerCase()) {
-          return OPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag)());
+          return OPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag));
         } else if (subLetter.toLowerCase() ==
             MainDataOfPhonetics.letterG.toLowerCase()) {
-          return GPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag)());
+          return GPhonetics(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+        } else if (subLetter.toLowerCase() ==
+            MainDataOfPhonetics.smat.toLowerCase()) {
+          return SMATConnection(mineGameData: BasicOfEveryGame.getTheGameType(gameType: subGame.toLowerCase(), audioFlag: audioFlag));
         }
     }
     return null;

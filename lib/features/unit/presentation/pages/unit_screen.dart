@@ -226,6 +226,8 @@ class UnitScreen extends StatelessWidget {
                                                 child: ChaptersScreen(
                                                   programId: state.data[index].id
                                                       .toString(),
+                                                  unitsCount: state.data.length,
+                                                  unitsIndex: index + 1,
                                                   // programName:
                                                   //     state.data[index].name ?? '',
                                                 )),

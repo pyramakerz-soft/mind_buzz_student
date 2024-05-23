@@ -7,6 +7,8 @@ import 'package:mind_buzz_refactor/core/app_color.dart';
 
 import '../../../../../../core/assets_svg_images.dart';
 import '../../../../../../core/phonetics/phonetics_color.dart';
+import '../../../../../../core/theme_text.dart';
+import '../../../../../../core/widgets/stroke_text.dart';
 import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -22,6 +24,7 @@ class ClickTheSoundGame extends StatelessWidget {
     final stateOfCurrentGamePhoneticsCubit = context.watch<CurrentGamePhoneticsCubit>().state;
     final clickTheSoundCubit = context.watch<ClickTheSoundCubit>().state;
     final _viewModel = context.watch<ClickTheSoundCubit>();
+    
     String mainGameLetter = stateOfCurrentGamePhoneticsCubit.gameData?.first.mainLetter ?? 'a';
     letters = clickTheSoundCubit.letters ?? [];
     return BlocConsumer<ClickTheSoundCubit, ClickTheSoundInitial>(

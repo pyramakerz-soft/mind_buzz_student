@@ -19,6 +19,7 @@ import '../games/drag_out/manager/drag_out_cubit.dart';
 import '../games/drag_out/pages/drag_out_game.dart';
 import '../manager/bloc/contact_lesson_bloc.dart';
 import '../manager/main_cubit/current_game_phonetics_cubit.dart';
+import '../widget/based_of_game_connect.dart';
 import '../widget/based_of_game_phonetics.dart';
 import '../widget/star_widget.dart';
 
@@ -76,8 +77,10 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                     } else if (state is LogOutLoadingState) {
                       Navigator.of(context).pop();
                     } else if (state is GetContactInitial) {
+                      print('state:${state}');
                       MainDataOfPhonetics? dataType =
                           state.getMainContactData(index: stateOfGame.index);
+                      print('dataType:$dataType');
                       if (dataType != null) {
                         context
                             .read<CurrentGamePhoneticsCubit>()
@@ -90,13 +93,60 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                       }
                     }
                   }, builder: (context, stateOfGameData) {
+                    final countOfFingers =
+                        stateOfGame.touchPositions?.length ?? 0;
+                    // stateOfGame.stateOfAvatar
                     if (stateOfGameData is GetContactInitial) {
-                      // final stateOfGame =
-                      //     context.watch<CurrentGamePhoneticsCubit>().state;
-                      return BasedOfGamePhonetics(
-                        stateOfGame: stateOfGame,
-                        stateOfGameData: stateOfGameData,
-                      );
+                      return Listener(
+                          onPointerDown: (opm) {
+                            context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .savePointerPosition(opm.pointer, opm.position);
+                            // savePointerPosition(opm.pointer, opm.position);
+                          },
+                          onPointerMove: (opm) {
+                            context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .savePointerPosition(opm.pointer, opm.position);
+                            // savePointerPosition(opm.pointer, opm.position);
+                          },
+                          onPointerCancel: (opm) {
+                            context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .clearPointerPosition(opm.pointer);
+                            // savePointerPosition(opm.pointer, opm.position);
+                          },
+                          onPointerUp: (opm) {
+                            context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .clearPointerPosition(opm.pointer);
+                            // savePointerPosition(opm.pointer, opm.position);
+                          },
+                          child: Stack(
+                            children: [
+                              if (stateOfGame.basicData?.gameData?.isConnect ==
+                                  true) ...{
+                                BasedOfGameConnect(
+                                  stateOfGame: stateOfGame,
+                                  stateOfGameData: stateOfGameData,
+                                ),
+                              } else ...{
+                                BasedOfGamePhonetics(
+                                  stateOfGame: stateOfGame,
+                                  stateOfGameData: stateOfGameData,
+                                ),
+                              },
+                              if (countOfFingers > 1 ||
+                                  stateOfGame.stateOfAvatar !=
+                                      BasicOfEveryGame.stateOIdle) ...{
+                                Container(
+                                  color: Colors.transparent,
+                                  width: MediaQuery.of(context).size.width,
+                                  height: MediaQuery.of(context).size.height,
+                                )
+                              }
+                            ],
+                          ));
                     } else if (stateOfGameData is GetContactLoadingInitial) {
                       return stateOfGame.avatarArtboardLoading != null
                           ? Rive(
