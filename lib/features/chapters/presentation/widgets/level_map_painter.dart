@@ -49,7 +49,7 @@ class LevelMapPainter extends CustomPainter {
         params.firstCurveReferencePointOffsetFactor!.dx;
     double _p2_dy_VariationFactor =
         params.firstCurveReferencePointOffsetFactor!.dy;
-    List<Offset> offsets = [];
+
     for (int thisLevel = 0; thisLevel < params.levelCount; thisLevel++) {
       List<ImageDetails> imageDetails = imagesToPaint?.bgImages??[];
       final Offset p1 = Offset(_centerWidth, -(thisLevel * params.levelHeight));
@@ -63,7 +63,7 @@ class LevelMapPainter extends CustomPainter {
 
       _drawBezierCurve(
           canvas,
-          ui.Offset(p1.dx, thisLevel == 0 ? p1.dy - 30 : p1.dy),
+          ui.Offset(p1.dx, thisLevel == 0 ? p1.dy - 50 : p1.dy),
           p2,
           ui.Offset(
               p3.dx, thisLevel == imageDetails.length - 1 ? p3.dy + 45 : p3.dy),

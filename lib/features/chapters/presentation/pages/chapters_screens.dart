@@ -57,8 +57,41 @@ class ChaptersScreen extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Stack(children: [
+            Column(children: [
+              Container(
+                height: 50.h,
+                child: Row(
+                  textDirection: TextDirection.ltr,
+                  children: [
+                    20.pw,
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Container(
+                            padding: const EdgeInsets.all(10),
+                            height: 45,
+                            width: 45,
+                            alignment: Alignment.center,
+                            decoration:  BoxDecoration(
+                                borderRadius: BorderRadius.circular(12.r),
+                                color: AppColor.darkBlueColor3),
+                            child: Icon(
+                             Icons.arrow_back_ios_new,
+                              color: Colors.white,
+                            ))),
+                    20.pw,
+                    StrokeText(
+                      text:  'Unit $unitsIndex of $unitsCount',
+                      isDisabled: false,
+                      fontSize: 0.04.sh,
+                      strokeWidth: 3,
+                    ),
 
+
+                  ],
+                ),
+              ),
               BlocProvider<ChapterBloc>(
                   create: (_) => di.sl<ChapterBloc>()
                     ..add(GetUnitRequest(programId: int.parse(programId))),
@@ -78,17 +111,18 @@ class ChaptersScreen extends StatelessWidget {
                           width: MediaQuery.of(context).size.width,
                           completed: state.data
                               .where((element) =>
-                                  element.isChapter != true &&
+                                  element.isLetter != true &&
                                   element.star != null)
                               .length,
                           countOfLessons: state.data
-                              .where((element) => element.isChapter != true)
+                              .where((element) => element.isLetter!= true)
                               .length);
                     }
                   }, builder: (context, state) {
                     if (state is GetProgramsCompleteInitial) {
+
                       return SizedBox(
-                        height: MediaQuery.of(context).size.height,
+                        height: MediaQuery.of(context).size.height - 50.h,
                         child: Column(
                           children: [
                             // RichText(
@@ -128,8 +162,7 @@ class ChaptersScreen extends StatelessWidget {
                               child: LevelMap(
                                 backgroundColor: Colors.transparent,
                                 onTapLevel: (index) {
-                                  if (state.data.reversed.toList()[index].isLesson == true &&
-                                      state.data.reversed.toList()[index].isOpen == true) {
+                                  if (state.data.reversed.toList()[index].isGame == true) {
                                   Utils.navigateTo(
                                        PhoneticsBook(
                                         lessonId: state.data.reversed.toList()[index].id!,
@@ -142,14 +175,10 @@ class ChaptersScreen extends StatelessWidget {
                                   levelCount: state.data.length,
                                   pathStrokeWidth: 1,
                                   currentLevel: state.data.reversed
-                                          .where((element) =>
-                                              element.isOpen == true)
                                           .toList()
                                           .isEmpty
                                       ? 1
                                       : state.data.reversed
-                                          .where((element) =>
-                                              element.isOpen == true)
                                           .toList()
                                           .length
                                           .toDouble(),
@@ -157,7 +186,9 @@ class ChaptersScreen extends StatelessWidget {
                                   levelsImages: state.data.reversed
                                       .map((e) => ImageParams(
                                           path: e.levelImg!,
-                                          size: const Size(100, 100),
+                                          size:  Size(100,
+                                              (e.isGame??false)?
+                                              90 : 65),
                                           bodyWidget:
                                               ItemOfSubBody(chapterData: e),
                                           title: ItemOfTitle(chapterData: e)))
@@ -175,77 +206,7 @@ class ChaptersScreen extends StatelessWidget {
                       return const SizedBox();
                     }
                   })),
-              SizedBox(
-                height: 100,
-                width: MediaQuery.of(context).size.width,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 22),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Row(
-                        children: [
-                          GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: Container(
-                                  padding: const EdgeInsets.all(10),
-                                  height: 45,
-                                  width: 45,
-                                  alignment: Alignment.center,
-                                  decoration:  BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12.r),
-                                      color: AppColor.darkBlueColor3),
-                                  child: Image.asset(
-                                    AppImages.iconBackButton,
-                                    fit: BoxFit.fill,
-                                    color: Colors.white,
-                                  ))),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          StrokeText(
-                            text:  'Unit $unitsIndex of $unitsCount',
-                            isDisabled: false,
-                            fontSize: 0.04.sh,
-                            strokeWidth: 3,
-                          ),
 
-                        ],
-                      ),
-                      // Stack(
-                      //   alignment: Alignment.centerLeft,
-                      //   children: [
-                      //     Container(
-                      //       width: MediaQuery.of(context).size.width / 2,
-                      //       decoration: BoxDecoration(
-                      //           color: AppColor.darkBlueColor7,
-                      //           borderRadius: BorderRadius.circular(15),
-                      //           border:
-                      //               Border.all(color: Colors.white, width: 2)),
-                      //       padding: EdgeInsets.zero,
-                      //       height: 20,
-                      //     ),
-                      //     if (numberOfBar != 0 && numberOfBar != null) ...{
-                      //       Container(
-                      //         width: numberOfBar,
-                      //         margin: const EdgeInsets.only(left: 2),
-                      //         decoration: BoxDecoration(
-                      //           color: AppColor.yellowColor,
-                      //           borderRadius: BorderRadius.circular(15),
-                      //           // border: Border.all(color: Colors.white, width: 2)
-                      //         ),
-                      //         padding: EdgeInsets.zero,
-                      //         height: 16,
-                      //       ),
-                      //     }
-                      //   ],
-                      // ),
-                    ],
-                  ),
-                ),
-              ),
             ]),
             Positioned(
               left: -55,
