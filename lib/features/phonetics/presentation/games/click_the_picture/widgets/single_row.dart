@@ -27,6 +27,8 @@ class SingleElement extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
+      onDoubleTap: (){
+      },
       child: Container(
         width: width??(MediaQuery.of(context).size.width - (130 + 50 + 130)) / 6,
         height: height??120.h,

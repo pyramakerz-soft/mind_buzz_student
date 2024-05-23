@@ -4,7 +4,7 @@ class ClickThePictureWithWordInitial extends Equatable {
   final GameModel gameData;
   final List<GameImagesModel>? gameDataPartOne;
   final List<GameImagesModel>? gameDataPartTwo;
-  final List<String> backGround;
+  List<String> backGround;
   List<int> correctIndexes;
   GameImagesModel? chooseWord;
   int? correctAnswer;
@@ -36,6 +36,13 @@ class ClickThePictureWithWordInitial extends Equatable {
   }
 
   @override
-  List<Object?> get props =>
-      [chooseWord, correctIndexes, gameData, backGround, correctAnswer, gameDataPartTwo, gameDataPartOne];
+  List<Object?> get props => [
+        chooseWord,
+        correctIndexes,
+        gameData,
+        backGround,
+        correctAnswer,
+        gameDataPartTwo,
+        gameDataPartOne
+      ];
 }

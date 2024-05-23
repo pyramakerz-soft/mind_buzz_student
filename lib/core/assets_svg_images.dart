@@ -34,6 +34,7 @@ abstract class AppSvgImages {
   static const String iconAssign = '${mainPathOfSvg}assign.svg';
   static const String bubble = '${mainPathOfSvg}bubble.svg';
   static const String bubbleDisabled = '${mainPathOfSvg}bubbleDisabled.svg';
+  static const String bubbleSelected = '${mainPathOfSvg}bubbleSelected.svg';
 
   static const String iconCurrentChapter1 =
       '${mainPathOfSvg}current_chapter1.svg';
