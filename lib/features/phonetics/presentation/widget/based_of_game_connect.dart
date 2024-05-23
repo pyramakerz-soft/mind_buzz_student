@@ -129,22 +129,40 @@ class BasedOfGameConnect extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: (75.h+40.h),
-                    width: 75.w,
+                    height: (75.h+55.h),
+                    width: (80.w),
                     child: Stack(
                       // crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Positioned(
                           top:0,
 
-                          child: SizedBox(
-                            width: 130,
-
-                            child: Image.asset(
-                              stateOfGame.currentAvatar ?? '',
-                              height: 50.h,
-                              width: 80.w,
-                            ),
+                          child:GestureDetector(
+                            onTap: () async{
+                              await TalkTts.startTalk(text:  stateOfGameData.data[stateOfGame.index].inst ?? '');
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                                child: stateOfGame.avatarArtboard == null
+                                    ? Image.asset(
+                                  stateOfGame.currentAvatar ?? '',
+                                  // height:
+                                  // MediaQuery.of(context).size.height - (70.h),
+                                  height: 75.h,
+                                  width: 80.w,
+                                )
+                                    : Container(
+                                  margin: EdgeInsets.only(left: 7.w),
+                                      child: SizedBox(
+                                      height: 90.h,
+                                      width: 65.w,
+                                      child: Rive(
+                                        artboard: stateOfGame.avatarArtboard!,
+                                        fit: BoxFit.fill,
+                                        useArtboardSize: true,
+                                        alignment: Alignment.center,
+                                      )),
+                                    )),
                           ),
                         ),
                         Positioned(

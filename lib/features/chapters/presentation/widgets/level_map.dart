@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui' as ui;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 
@@ -39,80 +41,91 @@ class LevelMap extends StatelessWidget {
         behavior: const MyBehavior(),
         child: SingleChildScrollView(
           controller: ScrollController(
-              initialScrollOffset: (((scrollToCurrentLevel
-                          ? (levelMapParams.levelCount -
-                              levelMapParams.currentLevel +
-                              2)
-                          : levelMapParams.levelCount)) *
+              initialScrollOffset: ((( levelMapParams.levelCount)) *
                       levelMapParams.levelHeight) -
                   constraints.maxHeight),
           // physics: FixedExtentScrollPhysics(),
-          child: ColoredBox(
-            color: backgroundColor,
-            child: FutureBuilder<ImagesToPaint?>(
-              future: loadImagesToPaint(
-                levelMapParams,
-                levelMapParams.levelCount,
-                levelMapParams.levelHeight,
-                constraints.maxWidth,
-              ),
-              builder: (context, snapshot) {
-                return Stack(
-                  children: [
-                    CustomPaint(
-                      size: Size(
-                          constraints.maxWidth,
-                          levelMapParams.levelCount *
-                              levelMapParams.levelHeight),
-                      painter: LevelMapPainter(
-                          params: levelMapParams, imagesToPaint: snapshot.data),
-                    ),
-                    ...List.generate(
-                        levelMapParams.levelsImages.length,
-                        (index) => Positioned(
-                            left: index % 2 != 0
-                                ? constraints.maxWidth * 0.5
-                                : constraints.maxWidth / 3,
-                            top: index == levelMapParams.levelsImages.length - 1
-                                ? (index * (levelMapParams.levelHeight)) + 120
-                                : index * (levelMapParams.levelHeight),
-                            child: InkWell(
-                                onTap: () {
-                                  onTapLevel.call(index);
-                                },
-                                child:
-                                    Column(
-                                      children: [
-                                        levelMapParams.levelsImages[index].title??const SizedBox(height: 20,),
-                                        Stack(
-                                          alignment: Alignment.center,
+          child: Padding(
+            padding:  EdgeInsets.only(left: 0.3.sw,right: 10, top: 0.1.sh,bottom: 20),
+            child: ColoredBox(
+              color: backgroundColor,
+              child: FutureBuilder<ImagesToPaint?>(
+                future: loadImagesToPaint(
+                  levelMapParams,
+                  levelMapParams.levelCount,
+                  levelMapParams.levelHeight,
+                  constraints.maxWidth,
+                ),
+                builder: (context, snapshot) {
+                  return Stack(
+                    children: [
+                      CustomPaint(
+                        size: Size(
+                            constraints.maxWidth*0.9,
+                            levelMapParams.levelCount *
+                                levelMapParams.levelHeight),
+                        painter: LevelMapPainter(
+                            params: levelMapParams, imagesToPaint: snapshot.data),
+                      ),
+                      ...List.generate(
+                          levelMapParams.levelsImages.length,
+                          (index) => Positioned(
+                              left: index == levelMapParams.levelsImages.length - 1 || index== 0?
+                              constraints.maxWidth * 0.1  + 20:
+                              index % 2 != 0
+                                  ? constraints.maxWidth * 0.06
+                                  : constraints.maxWidth / 3.7,
+                              top: index == levelMapParams.levelsImages.length - 1
+                                  ? (index * (levelMapParams.levelHeight)) + 120
+                                  : index * (levelMapParams.levelHeight),
+                              child: InkWell(
+                                  onTap: () {
+                                    onTapLevel.call(index);
+                                  },
+                                  child:
+                                  Column(
+                                    children: [
 
-                                          children: [
-                                            Image.asset(
+                                      Stack(
+                                        alignment: Alignment.center,
+
+                                        children: [
+
+                                          Padding(
+                                            padding: const EdgeInsets.all(15),
+                                            child: Image.asset(
                                               levelMapParams.levelsImages[index].path ??
                                                   '',
-                                              height: 70,
+                                              height: levelMapParams.levelsImages[index].size.height,
+                                              width: 125,
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ),
+
+                                          if(levelMapParams.levelsImages[index].bodyWidget != null)...{
+                                            Column(
+                                              children: [
+                                                10.ph,
+                                                levelMapParams
+                                                    .levelsImages[index].bodyWidget??const SizedBox(),
+                                                10.ph
+                                              ],
                                             ),
 
-                                            if(levelMapParams
-                                                .levelsImages[index].bodyWidget != null)...{
-                                              Column(
-                                                children: [
-                                                  10.ph,
-                                                  levelMapParams
-                                                      .levelsImages[index].bodyWidget??const SizedBox(),
-                                                  10.ph
-                                                ],
-                                              )
-                                            }
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    ))),
-                  ],
-                );
-              },
+
+                                            Positioned(
+                                                top:-2,
+                                                child: levelMapParams.levelsImages[index].title??const SizedBox(height: 20,)),
+                                          }
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                      ))),
+                    ],
+                  );
+                },
+              ),
             ),
           ),
         ),

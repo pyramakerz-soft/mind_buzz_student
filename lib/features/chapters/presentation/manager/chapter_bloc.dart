@@ -47,31 +47,59 @@ ChapterState _eitherLoadedOrErrorState(
 List<ChapterModel> handlingDataOfChapters({required List<LessonModel> lessons}){
   Map<int, List<LessonModel>>listOfData =  groupBy(lessons, (LessonModel obj) => (obj.chapter?.id??0));
   List<ChapterModel> dataOfChapters = [];
-  listOfData.forEach((key, value) {
-    List<LessonModel> lessonsData= lessons.where((element) => (element.chapter?.id??0) == key ).toList();
-    dataOfChapters.add(ChapterModel(
-      id: lessonsData.first.chapter?.id,
-      name: lessonsData.first.chapter?.name,
-      number: lessonsData.first.chapter?.number,
-      isChapter:true,
-      isOpen: true,
-      levelImg: AppImages.imageChapter,
-    ));
-    lessonsData.sort((a, b) => a.number?.compareTo(b.number??0)??0);
-    for(LessonModel x in lessonsData){
-      dataOfChapters.add(ChapterModel(
-        id: x.id,
-        name: x.name,
-        number: x.number,
-        isLesson:(x.type == null||x.type == 'Review'),
-        isCheckPoint:x.type == 'Checkpoint',
-        isOpen: x.stars!=null || x.stars!=0,
-        isAssessment:x.type == 'Assessment',
-        star: x.stars,
-        levelImg: (x.type == null||x.type == 'Review')?AppImages.imageCloseLesson:x.type == 'Checkpoint'?AppImages.imageCheckpointPart:AppImages.imageAssessmentPart,
-      ));
-    }
+  lessons.forEach((lesson) {
+    dataOfChapters.add(
+        ChapterModel(
+          id: lesson.id,
+          name: lesson.name,
+          number: lesson.number,
+          star: lesson.stars,
+          levelImg: AppImages.lessonImg,
+          isGame: false,
+          isLetter: true
+        ),
+    );
+    lesson.games?.asMap().forEach((i,game) {
+      dataOfChapters.add(
+        ChapterModel(
+            id: game.id,
+            name: 'Lesson ${i + 1}',
+            number: i + 1,
+            star: game.stars,
+            levelImg: AppImages.imageCloseLesson,
+            isGame: true,
+            isLetter: false,
+        ),
+      );
+    });
+
   });
+
+  // listOfData.forEach((key, value) {
+  //   List<LessonModel> lessonsData= lessons.where((element) => (element.chapter?.id??0) == key ).toList();
+  //   dataOfChapters.add(ChapterModel(
+  //     id: lessonsData.first.chapter?.id,
+  //     name: lessonsData.first.chapter?.name,
+  //     number: lessonsData.first.chapter?.number,
+  //     isChapter:true,
+  //     isOpen: true,
+  //     levelImg: AppImages.imageChapter,
+  //   ));
+  //   lessonsData.sort((a, b) => a.number?.compareTo(b.number??0)??0);
+  //   for(LessonModel x in lessonsData){
+  //     dataOfChapters.add(ChapterModel(
+  //       id: x.id,
+  //       name: x.name,
+  //       number: x.number,
+  //       isLesson:(x.type == null||x.type == 'Review'),
+  //       isCheckPoint:x.type == 'Checkpoint',
+  //       isOpen: x.stars!=null || x.stars!=0,
+  //       isAssessment:x.type == 'Assessment',
+  //       star: x.stars,
+  //       levelImg: (x.type == null||x.type == 'Review')?AppImages.imageCloseLesson:x.type == 'Checkpoint'?AppImages.imageCheckpointPart:AppImages.imageAssessmentPart,
+  //     ));
+  //   }
+  // });
 
   return dataOfChapters;
 }

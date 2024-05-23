@@ -55,7 +55,7 @@ class BingoGameScreen extends StatelessWidget {
                             onTap: () async {
                               if ((gameState.cardsLetters)?[rowIndex]
                                       .letter
-                                      ?.toLowerCase() !=
+                                      ?.toLowerCase() ==
                                   (gameState.chooseWord?.letter
                                           ?.toLowerCase() ??
                                       '')) {
@@ -81,9 +81,7 @@ class BingoGameScreen extends StatelessWidget {
                                               .gameData?.gameLetters?.length ??
                                           0,
                                     );
-                                await context
-                                    .read<BingoCubit>()
-                                    .getTheRandomWord();
+
                                 bool isLastLesson = context
                                     .read<BingoCubit>()
                                     .checkIfIsTheLastGameOfLesson();
@@ -95,6 +93,9 @@ class BingoGameScreen extends StatelessWidget {
                                   await context
                                       .read<CurrentGamePhoneticsCubit>()
                                       .backToMainAvatar();
+                                  await context
+                                      .read<BingoCubit>()
+                                      .getTheRandomWord(awaitTime: false);
                                 }
                               } else {
                                 context
@@ -111,7 +112,7 @@ class BingoGameScreen extends StatelessWidget {
                             maxWidth:
                                 MediaQuery.of(context).size.width - (107.w),
                             hide: gameState.correctIndexes?.contains(
-                                (gameState.cardsLetters)?[rowIndex].id),
+                                (gameState.cardsLetters)?[rowIndex].id), index: rowIndex,
                           )),
               ));
             }));

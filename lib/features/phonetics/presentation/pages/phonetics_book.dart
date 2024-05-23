@@ -22,6 +22,7 @@ import '../manager/main_cubit/current_game_phonetics_cubit.dart';
 import '../widget/based_of_game_connect.dart';
 import '../widget/based_of_game_phonetics.dart';
 import '../widget/star_widget.dart';
+import '../widget/widget_of_tries.dart';
 
 class PhoneticsBook extends StatefulWidget {
   final int lessonId;
@@ -60,106 +61,130 @@ class _PhoneticsBook extends State<PhoneticsBook> {
               ..add(GetContactLessonRequest(programId: widget.lessonId)),
             child: BlocProvider<CurrentGamePhoneticsCubit>(
                 create: (_) => di.sl<CurrentGamePhoneticsCubit>(),
-                child: BlocBuilder<CurrentGamePhoneticsCubit,
-                        CurrentGamePhoneticsState>(
-                    builder: (contextOfGame, stateOfGame) {
-                  return BlocConsumer<ContactLessonBloc, ContactLessonState>(
-                      listener: (context, state) {
-                    if (state is GetContactErrorInitial) {
-                      if (state.message == RELOGIN_FAILURE_MESSAGE) {
-                        Utils.navigateAndRemoveUntilTo(LoginScreen(), context);
-                      } else {
-                        final snackBar = SnackBar(
-                          content: Text(state.message),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      }
-                    } else if (state is LogOutLoadingState) {
-                      Navigator.of(context).pop();
-                    } else if (state is GetContactInitial) {
-                      print('state:${state}');
-                      MainDataOfPhonetics? dataType =
-                          state.getMainContactData(index: stateOfGame.index);
-                      print('dataType:$dataType');
-                      if (dataType != null) {
-                        context
-                            .read<CurrentGamePhoneticsCubit>()
-                            .updateDataOfCurrentGame(
-                                basicData: dataType, gameData: state.data);
-                      } else {
-                        context
-                            .read<ContactLessonBloc>()
-                            .add(ThisTypeNotSupportedRequest());
-                      }
-                    }
-                  }, builder: (context, stateOfGameData) {
-                    final countOfFingers =
-                        stateOfGame.touchPositions?.length ?? 0;
-                    // stateOfGame.stateOfAvatar
-                    if (stateOfGameData is GetContactInitial) {
-                      return Listener(
-                          onPointerDown: (opm) {
-                            context
-                                .read<CurrentGamePhoneticsCubit>()
-                                .savePointerPosition(opm.pointer, opm.position);
-                            // savePointerPosition(opm.pointer, opm.position);
-                          },
-                          onPointerMove: (opm) {
-                            context
-                                .read<CurrentGamePhoneticsCubit>()
-                                .savePointerPosition(opm.pointer, opm.position);
-                            // savePointerPosition(opm.pointer, opm.position);
-                          },
-                          onPointerCancel: (opm) {
-                            context
-                                .read<CurrentGamePhoneticsCubit>()
-                                .clearPointerPosition(opm.pointer);
-                            // savePointerPosition(opm.pointer, opm.position);
-                          },
-                          onPointerUp: (opm) {
-                            context
-                                .read<CurrentGamePhoneticsCubit>()
-                                .clearPointerPosition(opm.pointer);
-                            // savePointerPosition(opm.pointer, opm.position);
-                          },
-                          child: Stack(
-                            children: [
-                              if (stateOfGame.basicData?.gameData?.isConnect ==
-                                  true) ...{
-                                BasedOfGameConnect(
-                                  stateOfGame: stateOfGame,
-                                  stateOfGameData: stateOfGameData,
-                                ),
-                              } else ...{
-                                BasedOfGamePhonetics(
-                                  stateOfGame: stateOfGame,
-                                  stateOfGameData: stateOfGameData,
-                                ),
-                              },
-                              // if (countOfFingers > 1 ||
-                              //     stateOfGame.stateOfAvatar !=
-                              //         BasicOfEveryGame.stateOIdle) ...{
-                              //   Container(
-                              //     color: Colors.transparent,
-                              //     width: MediaQuery.of(context).size.width,
-                              //     height: MediaQuery.of(context).size.height,
-                              //   )
-                              // }
-                            ],
-                          ));
-                    } else if (stateOfGameData is GetContactLoadingInitial) {
-                      return stateOfGame.avatarArtboardLoading != null
-                          ? Rive(
-                              artboard: stateOfGame.avatarArtboardLoading!,
-                              fit: BoxFit.fill,
-                            )
-                          : const SizedBox();
-                    } else if (stateOfGameData is NotSupportTypeState) {
-                      return const Text('the data of game is not supported');
-                    } else {
-                      return const SizedBox();
-                    }
-                  });
-                }))));
+                child: BlocConsumer<CurrentGamePhoneticsCubit,
+                    CurrentGamePhoneticsState>(
+                  listener: (BuildContext context,
+                      CurrentGamePhoneticsState state) {},
+                  builder: (contextOfGame, stateOfGame) {
+                    final countOfFingers = contextOfGame
+                        .watch<CurrentGamePhoneticsCubit>()
+                        .touchPositions
+                        .length;
+
+                    return Listener(
+                        onPointerDown: (opm) {
+                          contextOfGame
+                              .read<CurrentGamePhoneticsCubit>()
+                              .savePointerPosition(opm.pointer, opm.position);
+                        },
+                        onPointerMove: (opm) {
+                          contextOfGame
+                              .read<CurrentGamePhoneticsCubit>()
+                              .savePointerPosition(opm.pointer, opm.position);
+                        },
+                        onPointerCancel: (opm) {
+                          contextOfGame
+                              .read<CurrentGamePhoneticsCubit>()
+                              .clearPointerPosition(opm.pointer);
+                        },
+                        onPointerUp: (opm) {
+                          contextOfGame
+                              .read<CurrentGamePhoneticsCubit>()
+                              .clearPointerPosition(opm.pointer);
+                        },
+                        child: Stack(
+                          children: [
+                            BlocConsumer<ContactLessonBloc, ContactLessonState>(
+                                listener: (context, state) {
+                              if (state is GetContactErrorInitial) {
+                                if (state.message == RELOGIN_FAILURE_MESSAGE) {
+                                  Utils.navigateAndRemoveUntilTo(
+                                      LoginScreen(), context);
+                                } else {
+                                  final snackBar = SnackBar(
+                                    content: Text(state.message),
+                                  );
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                }
+                              } else if (state is LogOutLoadingState) {
+                                Navigator.of(context).pop();
+                              } else if (state is GetContactInitial) {
+                                try {
+                                  MainDataOfPhonetics? dataType =
+                                      state.getMainContactData(
+                                          index: stateOfGame.index);
+                                  print('dataType:$dataType');
+                                  if (dataType != null) {
+                                    context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .updateDataOfCurrentGame(
+                                            basicData: dataType,
+                                            gameData: state.data);
+                                  } else {
+                                    context
+                                        .read<ContactLessonBloc>()
+                                        .add(ThisTypeNotSupportedRequest());
+                                  }
+                                } catch (e) {
+                                  context
+                                      .read<ContactLessonBloc>()
+                                      .add(ThisTypeNotSupportedRequest());
+                                }
+                              }
+                            },
+                                builder: (context, stateOfGameData) {
+                              if (stateOfGameData is GetContactInitial) {
+                                return Stack(
+                                  children: [
+                                    if(stateOfGame.countOfTries == 0)...{
+                                      widgetOfTries(context: context)
+                                    }else
+                                      ...{
+                                        if (stateOfGame
+                                            .basicData?.gameData?.isConnect ==
+                                            true) ...{
+                                          BasedOfGameConnect(
+                                            stateOfGame: stateOfGame,
+                                            stateOfGameData: stateOfGameData,
+                                          ),
+                                        } else
+                                          ...{
+                                            BasedOfGamePhonetics(
+                                              stateOfGame: stateOfGame,
+                                              stateOfGameData: stateOfGameData,
+                                            ),
+                                          },
+                                      }
+                                  ],
+                                );
+                              } else if (stateOfGameData
+                                  is GetContactLoadingInitial) {
+                                return stateOfGame.avatarArtboardLoading != null
+                                    ? Rive(
+                                        artboard:
+                                            stateOfGame.avatarArtboardLoading!,
+                                        fit: BoxFit.fill,
+                                      )
+                                    : const SizedBox();
+                              } else if (stateOfGameData
+                                  is NotSupportTypeState) {
+                                return const Text(
+                                    'the data of game is not supported');
+                              } else {
+                                return const SizedBox();
+                              }
+                            }),
+                            if (countOfFingers > 1) ...{
+                              Container(
+                                color: Colors.transparent,
+                                width: MediaQuery.of(context).size.width,
+                                height: MediaQuery.of(context).size.height,
+                              )
+                            }
+                          ],
+                        ));
+                  },
+                ))));
   }
 }

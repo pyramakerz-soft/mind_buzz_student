@@ -23,6 +23,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   getTheBackGround() {
+    print('state.basicData?.idelAvatar:${state.basicData?.idelAvatar}');
     rootBundle.load(state.basicData?.idelAvatar ?? '').then(
       (data) async {
         try {
@@ -125,9 +126,20 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         currentAvatar: basicData.basicAvatar,
         // statesOfAddStars: BasicOfEveryGame.getTheStarsAddState(gameData.length),
         gameData: gameData));
+    saveCountOfTries();
     getTheBackGround();
     getTheBackGroundSuccess();
     getTheBackGroundSad();
+  }
+
+  saveCountOfTries(){
+    int countOfTries = 3;//state.gameData?[state.index].numOfTrials??0;
+    emit(state.copyWith(countOfTries:countOfTries, countOfStar: 0));
+  }
+
+  decreaseCountOfTries(){
+    int countOfTries = (state.countOfTries??1)-1;
+    emit(state.copyWith(countOfTries:countOfTries));
   }
 
   bool checkIfIsTheLastGameOfLesson() {
@@ -179,8 +191,6 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
 
   addSuccessAnswer({required void Function() actionInEndOfLesson}) async {
     await animationOfCorrectAnswer();
-    // increaseCountOfCorrectAnswer();
-    // addStarToStudent();
 
     bool isLastLesson = checkIfIsTheLastGameOfLesson();
 
@@ -207,9 +217,11 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   animationOfWrongAnswer() {
+
     emit(state.copyWith(
         avatarArtboard: state.avatarArtboardSad,
         stateOfAvatar: BasicOfEveryGame.stateOfSad));
+    decreaseCountOfTries();
   }
 
   animationOfCorrectAnswer() {
@@ -231,17 +243,15 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         stateOfAvatar: BasicOfEveryGame.stateOIdle));
   }
 
-  // Map<int, Offset> touchPositions = <int, Offset>{};
+
+
+  Map<int, Offset> touchPositions = <int, Offset>{};
   void savePointerPosition(int index, Offset position) {
-    Map<int, Offset> touchPositions = state.touchPositions ?? {};
     touchPositions[index] = position;
-    emit(state.updateTouchPositions(touchPositions: touchPositions));
+    emit(state.copyWith(touchPositions: !(state.touchPositions??false)));
   }
-
-  void clearPointerPosition(int index) {
-    Map<int, Offset> touchPositions = state.touchPositions ?? {};
-
+  clearPointerPosition(int index) {
     touchPositions.remove(index);
-    emit(state.updateTouchPositions(touchPositions: touchPositions));
+    emit(state.copyWith(touchPositions: !(state.touchPositions??false)));
   }
 }
