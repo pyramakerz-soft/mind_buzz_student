@@ -7,7 +7,12 @@ enum GameTypes {
   dragOut,
   clickPicture,
   clickTheSound,
-  bing,
+  bingo,
+  sortingCups,
+  sortingPictures,
+  dice,
+  xOut,
+  spelling
 }
 
 extension TypeExtension on GameTypes {
@@ -19,15 +24,21 @@ extension TypeExtension on GameTypes {
         return 'Click the picture'.toLowerCase();
       case GameTypes.clickTheSound:
         return 'Click the sound'.toLowerCase();
-      case GameTypes.bing:
+      case GameTypes.bingo:
         return 'Bingo'.toLowerCase();
+      case GameTypes.sortingCups:
+        return 'Sorting Cups'.toLowerCase();
+      case GameTypes.sortingPictures:
+        return 'Sorting Pictures'.toLowerCase();
+      case GameTypes.dice:
+        return 'Dice'.toLowerCase();
+      case GameTypes.xOut:
+        return 'X-Out'.toLowerCase();
+      case GameTypes.spelling:
+        return 'Spelling'.toLowerCase();
     }
   }
-
 }
-// abstract class ConnectGames{
-//   bool isCoonect0
-// }
 
 abstract class BasicOfEveryGame {
   late bool isRound;
@@ -41,18 +52,35 @@ abstract class BasicOfEveryGame {
 
   static getTheGameType({required String gameType, required int audioFlag}){
     gameType.toLowerCase();
-    print('dataType:$gameType');
     if (gameType == GameTypes.dragOut.text()) {
       return BasicDragOutGame();
-    } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 1) {
+    }
+    else if (gameType == GameTypes.clickPicture.text() && audioFlag == 1) {
       return ClickPictureS();
-    } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 0) {
+    }
+    else if (gameType == GameTypes.clickPicture.text() && audioFlag == 0) {
       return ClickPictureOfWord();
     }
     else if (gameType == GameTypes.clickTheSound.text()) {
       return BasicClickTheSoundGame();
-    } else if (gameType == GameTypes.bing.text()) {
+    }
+    else if (gameType == GameTypes.bingo.text()) {
       return BingoGame();
+    }
+    else if (gameType == GameTypes.sortingCups.text()) {
+      return SortingCupsGame();
+    }
+    else if (gameType == GameTypes.sortingPictures.text()) {
+      return SortingPicturesGame();
+    }
+    else if (gameType == GameTypes.spelling.text()) {
+      return SpellingGame();
+    }
+    else if (gameType == GameTypes.xOut.text()) {
+      return XOutGame();
+    }
+    else if (gameType == GameTypes.dice.text()) {
+      return DiceGame();
     }
   }
   static List<int> getTheStarsAddState(int number) {
@@ -75,6 +103,38 @@ abstract class BasicOfEveryGame {
           (result / 3).round()
         ];
       }
+    }
+  }
+
+  static bool isConnectGame({required String game}){
+    if(game ==  GameTypes.dragOut.text()) {
+      return false;
+    }
+    else if(game == GameTypes.clickPicture.text()) {
+      return false;
+    }
+    else if(game ==  GameTypes.clickTheSound.text()) {
+      return false;
+    }
+    else if(game == GameTypes.bingo.text()) {
+      return true;
+    }
+    else if(game == GameTypes.sortingCups.text()) {
+      return true;
+    }
+    else if(game == GameTypes.sortingPictures.text()) {
+      return true;
+    }
+    else if(game == GameTypes.dice.text()) {
+      return true;
+    }
+    else if(game == GameTypes.xOut.text()) {
+      return true;
+    }
+    else if(game == GameTypes.spelling.text()) {
+      return true;
+    }else{
+      return false;
     }
   }
 }
@@ -199,6 +259,84 @@ class ClickPictureOfWord implements BasicOfEveryGame {
 }
 
 class BingoGame implements BasicOfEveryGame {
+  @override
+  bool isRound = false;
+
+  @override
+  String titleImage = AppImagesPhonetics.bingoNameGame;
+
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = true;
+
+}
+
+class SortingCupsGame implements BasicOfEveryGame {
+  @override
+  bool isRound = false;
+
+  @override
+  String titleImage = AppImagesPhonetics.bingoNameGame;
+
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = true;
+
+}
+
+class SortingPicturesGame implements BasicOfEveryGame {
+  @override
+  bool isRound = false;
+
+  @override
+  String titleImage = AppImagesPhonetics.bingoNameGame;
+
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = true;
+
+}
+
+class SpellingGame implements BasicOfEveryGame {
+  @override
+  bool isRound = false;
+
+  @override
+  String titleImage = AppImagesPhonetics.bingoNameGame;
+
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = true;
+
+}
+class XOutGame implements BasicOfEveryGame {
+  @override
+  bool isRound = false;
+
+  @override
+  String titleImage = AppImagesPhonetics.bingoNameGame;
+
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = true;
+
+}
+class DiceGame implements BasicOfEveryGame {
   @override
   bool isRound = false;
 

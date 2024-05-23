@@ -4,6 +4,47 @@ import 'package:flutter/material.dart';
 import 'assets_images_phonetics.dart';
 import 'basic_of_every_game.dart';
 
+enum MainDataOfPhoneticsTypes { s, a, f, m, t, c, i, r, p, h, j, u, l, b, o, g }
+
+extension TypeExtension on MainDataOfPhoneticsTypes {
+  String text() {
+    switch (this) {
+      case MainDataOfPhoneticsTypes.a:
+        return "a".toLowerCase();
+      case MainDataOfPhoneticsTypes.b:
+        return 'b'.toLowerCase();
+      case MainDataOfPhoneticsTypes.f:
+        return 'f'.toLowerCase();
+      case MainDataOfPhoneticsTypes.m:
+        return 'm'.toLowerCase();
+      case MainDataOfPhoneticsTypes.t:
+        return 't'.toLowerCase();
+      case MainDataOfPhoneticsTypes.c:
+        return 'c'.toLowerCase();
+      case MainDataOfPhoneticsTypes.i:
+        return 'i'.toLowerCase();
+      case MainDataOfPhoneticsTypes.g:
+        return 'g'.toLowerCase();
+      case MainDataOfPhoneticsTypes.o:
+        return 'o'.toLowerCase();
+      case MainDataOfPhoneticsTypes.j:
+        return 'j'.toLowerCase();
+      case MainDataOfPhoneticsTypes.l:
+        return 'l'.toLowerCase();
+      case MainDataOfPhoneticsTypes.u:
+        return 'u'.toLowerCase();
+      case MainDataOfPhoneticsTypes.h:
+        return 'h'.toLowerCase();
+      case MainDataOfPhoneticsTypes.p:
+        return 'p'.toLowerCase();
+      case MainDataOfPhoneticsTypes.r:
+        return 'r'.toLowerCase();
+      case MainDataOfPhoneticsTypes.s:
+        return 's'.toLowerCase();
+    }
+  }
+}
+
 abstract class MainDataOfPhonetics {
   late String basicAvatar;
   late String winAvatar;
@@ -12,23 +53,102 @@ abstract class MainDataOfPhonetics {
   late String background;
   BasicOfEveryGame? gameData;
   late Color backGroundOfStarBar;
-  static String letterS = 's';
-  static String letterA = 'a';
-  static String letterF = 'f';
-  static String letterM = 'm';
-  static String letterT = 't';
-  static String letterC = 'c';
-  static String letterI = 'i';
-  static String letterR = 'r';
-  static String letterP = 'p';
-  static String letterH = 'h';
-  static String letterJ = 'j';
-  static String letterU = 'u';
-  static String letterL = 'l';
-  static String letterB = 'b';
-  static String letterO = 'o';
-  static String letterG = 'g';
-  static String smat = 'smat';
+  static getGameDataType(
+      {required String subLetter,
+      required String subGame,
+      required int audioFlag}) {
+    if (BasicOfEveryGame.isConnectGame(game:subGame.toLowerCase()) ==true) {
+      if(subGame.toLowerCase() == GameTypes.sortingCups.text()){
+        return ConnectionSortingCups(
+            mineGameData: SortingCupsGame());
+      }
+      else {
+        return ConnectionWithoutSortingCups(
+            mineGameData: BasicOfEveryGame.getTheGameType(
+                gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+      }
+    }
+    else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.s.text()) {
+      return SPhonetics(
+          mineGameData: BasicOfEveryGame.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.a.text()) {
+      return APhonetics(
+          mineGameData: BasicOfEveryGame.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.f.text()) {
+      return FPhonetics(
+          mineGameData: BasicOfEveryGame.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.m.text()) {
+      return MPhonetics(
+          mineGameData: BasicOfEveryGame.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.t.text()) {
+      return TPhonetics(
+          mineGameData: BasicOfEveryGame.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.c.text()) {
+      return CPhonetics(
+          mineGameData: BasicOfEveryGame.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.r.text()) {
+      return RPhonetics(
+          mineGameData: BasicOfEveryGame.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.i.text()) {
+      return IPhonetics(
+          mineGameData: BasicOfEveryGame.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.p.text()) {
+      return PPhonetics(
+          mineGameData: BasicOfEveryGame.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.h.text()) {
+      return HPhonetics(
+          mineGameData: BasicOfEveryGame.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.j.text()) {
+      return JPhonetics(
+          mineGameData: BasicOfEveryGame.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.u.text()) {
+      return UPhonetics(
+          mineGameData: BasicOfEveryGame.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.l.text()) {
+      return LPhonetics(
+          mineGameData: BasicOfEveryGame.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.b.text()) {
+      return BPhonetics(
+          mineGameData: BasicOfEveryGame.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.o.text()) {
+      return OPhonetics(
+          mineGameData: BasicOfEveryGame.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.g.text()) {
+      return GPhonetics(
+          mineGameData: BasicOfEveryGame.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+  }
 }
 
 class SPhonetics implements MainDataOfPhonetics {
@@ -479,7 +599,7 @@ class GPhonetics implements MainDataOfPhonetics {
   String idelAvatar = AppImagesPhonetics.snowmanIdleRiv;
 }
 
-class SMATConnection implements MainDataOfPhonetics {
+class ConnectionWithoutSortingCups implements MainDataOfPhonetics {
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -499,7 +619,35 @@ class SMATConnection implements MainDataOfPhonetics {
   @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
 
-  SMATConnection({required this.mineGameData}) {
+  ConnectionWithoutSortingCups({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
+}
+
+class ConnectionSortingCups implements MainDataOfPhonetics {
+  final BasicOfEveryGame mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesPhonetics.backGroundOfConnect;
+
+  @override
+  String basicAvatar = AppImagesPhonetics.basicBess;
+
+  @override
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
+
+  @override
+  BasicOfEveryGame? gameData;
+
+  @override
+  String winAvatar = AppImagesPhonetics.beeSuccess;
+
+  ConnectionSortingCups({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
