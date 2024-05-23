@@ -137,14 +137,27 @@ class BasedOfGameConnect extends StatelessWidget {
                         Positioned(
                           top:0,
 
-                          child: SizedBox(
-                            width: 130,
-
-                            child: Image.asset(
-                              stateOfGame.currentAvatar ?? '',
-                              height: 50.h,
-                              width: 80.w,
-                            ),
+                          child:GestureDetector(
+                            onTap: () async{
+                              await TalkTts.startTalk(text:  stateOfGameData.data[stateOfGame.index].inst ?? '');
+                            },
+                            child: Container(
+                                child: stateOfGame.avatarArtboard == null
+                                    ? Image.asset(
+                                  stateOfGame.currentAvatar ?? '',
+                                  // height:
+                                  // MediaQuery.of(context).size.height - (70.h),
+                                  height: 50.h,
+                                  width: 80.w,
+                                )
+                                    : SizedBox(
+                                    height: 50.h,
+                                    width: 80.w,
+                                    child: Rive(
+                                      artboard: stateOfGame.avatarArtboard!,
+                                      fit: BoxFit.fill,
+                                      useArtboardSize: true,
+                                    ))),
                           ),
                         ),
                         Positioned(
