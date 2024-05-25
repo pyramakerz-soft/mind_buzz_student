@@ -22,6 +22,8 @@ class AppColor {
   static const Color greenColor1 = Color(0xFF52C495);
   static const Color greenColor2 = Color(0xFF52C495);
   static const Color greenColor3 = Color(0xFFA6F4D6);
+  static const Color correct = Color(0xFFB1E59F);
+  static const Color incorrect = Color(0xFFF9B1B1);
   static const Color redColor1 = Color(0xFFD1232A);
   static const Color redColor2 = Color(0xFFF5454C);
   static const Color redColor3 = Color(0xFFFFA1A5);

@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:mind_buzz_refactor/features/phonetics/presentation/games/click_the_sound/manager/click_the_sound_cubit.dart';
 import 'package:mind_buzz_refactor/features/phonetics/presentation/games/click_the_sound/manager/click_the_sound_cubit.dart';
+import 'package:mind_buzz_refactor/features/phonetics/presentation/games/x_out_game/manager/x_out_cubit.dart';
 import 'package:mind_buzz_refactor/features/phonetics/presentation/widget/star_widget.dart';
 
 import '../../../../core/phonetics/assets_images_phonetics.dart';
@@ -24,6 +25,7 @@ import '../games/click_the_picture_with_word/page/click_the_picture_with_word.da
 import '../games/click_the_sound/pages/click_the_sound_game.dart';
 import '../games/drag_out/manager/drag_out_cubit.dart';
 import '../games/drag_out/pages/drag_out_game.dart';
+import '../games/x_out_game/pages/x_out_game.dart';
 import '../manager/bloc/contact_lesson_bloc.dart';
 import '../manager/main_cubit/current_game_phonetics_cubit.dart';
 
@@ -195,6 +197,13 @@ class BasedOfGameConnect extends StatelessWidget {
                               gameData: stateOfGameData.data[stateOfGame.index],
                             ),
                             child: BingoGameScreen())
+                      }
+                         else if ((stateOfGame.basicData?.gameData is XOutGame)) ...{
+                        BlocProvider<XOutCubit>(
+                            create: (_) => XOutCubit(
+                              gameData: stateOfGameData.data[stateOfGame.index],
+                            ),
+                            child: XOutGameScreen())
                       }
                     ],
                   ),
