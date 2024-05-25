@@ -311,7 +311,7 @@ class XOutGame implements BasicOfEveryGame {
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.bingoNameGame;
+  String titleImage = AppImagesPhonetics.xOutGameName;
 
 
   @override

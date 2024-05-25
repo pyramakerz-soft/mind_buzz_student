@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:mind_buzz_refactor/features/phonetics/presentation/games/click_the_sound/manager/click_the_sound_cubit.dart';
 import 'package:mind_buzz_refactor/features/phonetics/presentation/games/click_the_sound/manager/click_the_sound_cubit.dart';
+import 'package:mind_buzz_refactor/features/phonetics/presentation/games/x_out_game/manager/x_out_cubit.dart';
 import 'package:mind_buzz_refactor/features/phonetics/presentation/widget/star_widget.dart';
 
 import '../../../../core/phonetics/assets_images_phonetics.dart';
@@ -25,6 +26,7 @@ import '../games/click_the_picture_with_word/page/click_the_picture_with_word.da
 import '../games/click_the_sound/pages/click_the_sound_game.dart';
 import '../games/drag_out/manager/drag_out_cubit.dart';
 import '../games/drag_out/pages/drag_out_game.dart';
+import '../games/x_out_game/pages/x_out_game.dart';
 import '../games/spelling_game/manager/spelling_cubit.dart';
 import '../games/spelling_game/pages/spelling_game.dart';
 import '../manager/bloc/contact_lesson_bloc.dart';
@@ -49,8 +51,9 @@ class BasedOfGameConnect extends StatelessWidget {
       child: Stack(
         alignment: Alignment.topRight,
         children: [
-          /////////////////////game title//////////////////
 
+
+          /////////////////////game title//////////////////
           Positioned(
             top: 0,
             left: 0,
@@ -73,7 +76,7 @@ class BasedOfGameConnect extends StatelessWidget {
                       ],
                     ),
                     width: MediaQuery.of(context).size.width,
-                    // padding: EdgeInsets.symmetric(vertical: 5),
+                    padding: EdgeInsets.symmetric(vertical: 5),
                     child: Row(
                       children: [
                         Expanded(
@@ -227,29 +230,35 @@ class BasedOfGameConnect extends StatelessWidget {
             ),
           ),
           /////////////////////game//////////////////
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              110.ph,
-              if ((stateOfGame.basicData?.gameData is BingoGame)) ...{
-                BlocProvider<BingoCubit>(
-                    create: (_) => BingoCubit(
-                          gameData: stateOfGameData.data[stateOfGame.index],
-                        ),
-                    child: BingoGameScreen())
-              },
-
-              if ((stateOfGame.basicData?.gameData is SpellingGame)) ...{
-                BlocProvider<SpellingCubit>(
-                    create: (_) => SpellingCubit(
-                          gameData: stateOfGameData.data[stateOfGame.index],
-                      background: (stateOfGame.basicData?.gameData as SpellingGame).woodenBackground
-                        ),
-                    child: SpellingGameScreen())
-              }
-            ],
-          ),
+           Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      60.ph,
+                      if ((stateOfGame.basicData?.gameData is BingoGame)) ...{
+                        BlocProvider<BingoCubit>(
+                            create: (_) => BingoCubit(
+                              gameData: stateOfGameData.data[stateOfGame.index],
+                            ),
+                            child: BingoGameScreen())
+                      }
+                         else if ((stateOfGame.basicData?.gameData is XOutGame)) ...{
+                        BlocProvider<XOutCubit>(
+                            create: (_) => XOutCubit(
+                              gameData: stateOfGameData.data[stateOfGame.index],
+                            ),
+                            child: XOutGameScreen())
+                      }
+                      if ((stateOfGame.basicData?.gameData is SpellingGame)) ...{
+                        BlocProvider<SpellingCubit>(
+                            create: (_) => SpellingCubit(
+                                gameData: stateOfGameData.data[stateOfGame.index],
+                                background: (stateOfGame.basicData?.gameData as SpellingGame).woodenBackground
+                            ),
+                            child: SpellingGameScreen())
+                      }
+                    ],
+                  ),
         ],
       ),
     );
