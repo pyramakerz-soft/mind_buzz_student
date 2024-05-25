@@ -20,7 +20,10 @@ class GetContactInitial extends ContactLessonState {
       String subGame = data[index].gameTypes?.name ?? '';
       int audioFlag = data[index].audioFlag ?? 0;
       print("subLetter:$subLetter ,subGame:$subGame, audioFlag:$audioFlag");
-     return MainDataOfPhonetics.getGameDataType(subLetter: subLetter, subGame: subGame,audioFlag:audioFlag );
+     return MainDataOfPhonetics.getGameDataType(
+         subLetter: subLetter,
+         subGame: subGame,
+         audioFlag:audioFlag );
     }
     return null;
   }

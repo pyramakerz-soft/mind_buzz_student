@@ -26,7 +26,8 @@ import '../widget/widget_of_tries.dart';
 
 class PhoneticsBook extends StatefulWidget {
   final int lessonId;
-  const PhoneticsBook({Key? key, required this.lessonId}) : super(key: key);
+  final int index;
+  const PhoneticsBook({Key? key, required this.lessonId, required this.index}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
     return _PhoneticsBook();
@@ -38,6 +39,7 @@ class _PhoneticsBook extends State<PhoneticsBook> {
   void initState() {
     super.initState();
     // context.read<CurrentGameCubit>().getTheBackGround();
+
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
@@ -58,7 +60,7 @@ class _PhoneticsBook extends State<PhoneticsBook> {
     return Scaffold(
         body: BlocProvider<ContactLessonBloc>(
             create: (_) => di.sl<ContactLessonBloc>()
-              ..add(GetContactLessonRequest(programId: widget.lessonId)),
+              ..add(GetContactLessonRequest(programId: widget.lessonId,index: widget.index)),
             child: BlocProvider<CurrentGamePhoneticsCubit>(
                 create: (_) => di.sl<CurrentGamePhoneticsCubit>(),
                 child: BlocConsumer<CurrentGamePhoneticsCubit,
@@ -113,7 +115,7 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                 try {
                                   MainDataOfPhonetics? dataType =
                                       state.getMainContactData(
-                                          index: stateOfGame.index);
+                                          index: 10);
                                   print('dataType:$dataType');
                                   if (dataType != null) {
                                     context
@@ -158,7 +160,8 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                       }
                                   ],
                                 );
-                              } else if (stateOfGameData
+                              }
+                              else if (stateOfGameData
                                   is GetContactLoadingInitial) {
                                 return stateOfGame.avatarArtboardLoading != null
                                     ? Rive(
@@ -167,7 +170,8 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                         fit: BoxFit.fill,
                                       )
                                     : const SizedBox();
-                              } else if (stateOfGameData
+                              }
+                              else if (stateOfGameData
                                   is NotSupportTypeState) {
                                 return const Text(
                                     'the data of game is not supported');

@@ -11,8 +11,9 @@ abstract class ContactLessonEvent extends Equatable {
 
 class GetContactLessonRequest extends ContactLessonEvent {
   final int programId;
+  final int index;
 
-  GetContactLessonRequest({required this.programId});
+  GetContactLessonRequest({required this.programId,required this.index});
 
   @override
   List<Object> get props => [programId];

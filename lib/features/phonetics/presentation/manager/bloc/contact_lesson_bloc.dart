@@ -27,7 +27,7 @@ class ContactLessonBloc extends Bloc<ContactLessonEvent, ContactLessonState> {
         emit(GetContactLoadingInitial());
         final failureOrDoneMessage =
             await programContactUserUseCases(programId: event.programId);
-        emit(await _eitherLoadedOrErrorState(failureOrDoneMessage));
+        emit(await _eitherLoadedOrErrorState(failureOrDoneMessage,event.index));
       }
       else if (event is CompleteLessonRequest) {
         emit(CompleteGameState());
@@ -40,15 +40,17 @@ class ContactLessonBloc extends Bloc<ContactLessonEvent, ContactLessonState> {
 
 Future<ContactLessonState> _eitherLoadedOrErrorState(
   Either<Failure, List<GameModel>> failureOrTrivia,
+    int gameIndex
 ) async {
   ContactLessonState tempState = failureOrTrivia.fold(
     (failure) => GetContactErrorInitial(message: _mapFailureToMessage(failure)),
     (data) => GetContactInitial(data: data),
   );
   if (tempState is GetContactInitial) {
+
     if(tempState.data.isNotEmpty) {
-      TalkTts.startTalk(text: tempState.data.first.inst ?? '');
-      TalkTts.startTalk(text: tempState.data.first.mainLetter ?? '');
+      TalkTts.startTalk(text: tempState.data[gameIndex].inst ?? '');
+      TalkTts.startTalk(text: tempState.data[gameIndex].mainLetter ?? '');
     }
   }
   return tempState;
