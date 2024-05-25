@@ -57,7 +57,6 @@ class ClickTheSoundGame extends StatelessWidget {
                   children: List.generate(
                       8,
                       (index) => Center(
-                        
                             child: _buildBubbleWidget(
                                 letter: letters[index],
                                 viewModel: _viewModel,
@@ -95,10 +94,8 @@ class ClickTheSoundGame extends StatelessWidget {
             width: 64,
             height: 64,
           ),
-          StrokeText(
-            text: letter,
-            isDisabled: viewModel.correctIndexes?.contains(index) ?? false,
-          ),
+          StrokedText(text: letter, isDisabled: viewModel.correctIndexes?.contains(index) ?? false,),
+         
         ],
       ),
     );

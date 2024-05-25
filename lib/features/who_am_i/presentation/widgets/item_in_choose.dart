@@ -22,41 +22,46 @@ class ItemInChoose extends StatelessWidget {
         context.read<WhoAmICubit>().addToSelected(newIndex: id);
       },
       child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 8),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: AppColor.lightBlueColor3,
+             boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.15), // Shadow color with opacity
+            offset: Offset(0, 4), // Shadow position
+            blurRadius: 14, // Shadow blur radius
+          ),
+        ],
             gradient: currentIndex == id
-                ? const LinearGradient(
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                    colors: [
-                      AppColor.darkBlueColor4,
-                      AppColor.darkBlueColor5,
-                      AppColor.darkBlueColor6
-                    ],
-                  )
+                ? AppColor.gradientColor1
                 : null),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const SizedBox(),
-            Text(
-              text,
-              style: currentIndex == id
-                  ? Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: AppTheme.getFontFamily3(),
-                      )
-                  : Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: AppTheme.getFontFamily3(),
-                      ),
+            Padding(
+              padding: const EdgeInsets.only(left:55),
+              child: Text(
+                text,
+                style: currentIndex == id
+                    ? Theme.of(context).textTheme.bodySmall?.copyWith(
+                          fontSize: 30,
+                         // fontWeight: FontWeight.w700,
+                          fontFamily: AppTheme.getFontFamily5(),
+                        )
+                    : Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontSize: 30,
+                         // fontWeight: FontWeight.w700,
+                          fontFamily: AppTheme.getFontFamily5(),
+                        ),
+              ),
             ),
+            Spacer(),
             Image.asset(
               image,
-              height: 140,
+              height: 145,
+              
             ),
           ],
         ),

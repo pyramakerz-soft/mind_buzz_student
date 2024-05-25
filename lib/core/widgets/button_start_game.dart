@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
+import 'package:mind_buzz_refactor/core/assets_svg_images.dart';
 import '../../features/login/presentation/cubit/login_state.dart';
 import '../injection/injection_container.dart' as di;
 import '../../features/login/presentation/cubit/login_cubit.dart';
+import '../theme_text.dart';
 
 class ButtonLogin extends StatefulWidget {
   final void Function() dataFunction;
@@ -11,12 +14,16 @@ class ButtonLogin extends StatefulWidget {
   final double width;
   final bool? disableAnimation;
   final bool? playButton;
+  final double? fontSize;
+  final bool? applyFontFamily5;
   const ButtonLogin(
       {Key? key,
       this.disableAnimation,
       required this.dataFunction,
       required this.title,
       this.playButton ,
+      this.fontSize ,
+      this.applyFontFamily5 ,
       required this.width})
       : super(key: key);
 
@@ -117,8 +124,9 @@ class _ButtonLogin extends State<ButtonLogin>
                   child: Text(
                     widget.title,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontSize: 24,
+                          fontSize:widget.fontSize ?? 24,
                           fontWeight: FontWeight.w600,
+                          fontFamily: widget.applyFontFamily5 == true ?AppTheme.getFontFamily5() : null,
                           height: 0,
                           letterSpacing: 0.50,
                         ),

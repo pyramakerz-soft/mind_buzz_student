@@ -7,6 +7,11 @@ class AppSound {
   static const String letterT = "${mainPathOfSound}t.mp3";
   static const String letterM = "${mainPathOfSound}m.mp3";
   static const String letterS = "${mainPathOfSound}s.mp3";
+  static const String letterC = "${mainPathOfSound}c.mp3";
+  static const String letterK = "${mainPathOfSound}c.mp3";
+  // static const String successSound = "${mainPathOfSoundBase}success.mp3";
+  static const String starSound = "${mainPathOfSoundBase}star_sound.wav";
+  // static const String wrongAnswerSound = "${mainPathOfSoundBase}wrong_answer.ogg";
   static const String notThatOneSound =
       "${mainPathOfSoundBase}notThatOneSound.mp3";
   static const String notThatOneSound1 = "${mainPathOfSoundBase}notThatOneSound1.mp3";
@@ -54,6 +59,11 @@ class AppSound {
       }
       if(mainGameLetter.toLowerCase()== 's') {
             return AppSound.letterS;
+      }  
+      if(mainGameLetter.toLowerCase()== 'c') {
+            return AppSound.letterC;
+      } if(mainGameLetter.toLowerCase()== 'k') {
+            return AppSound.letterK;
       }
     return AppSound.letterS;
   }

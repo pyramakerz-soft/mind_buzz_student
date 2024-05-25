@@ -67,7 +67,8 @@ abstract class DefaultUnitData {
     AppColor.yellowColor1,
     AppColor.darkBlueColor4,
     AppColor.darkGreenColor2,
-    AppColor.redColor
+    AppColor.redColor,
+    AppColor.purpleColor
   ];
 }
 
