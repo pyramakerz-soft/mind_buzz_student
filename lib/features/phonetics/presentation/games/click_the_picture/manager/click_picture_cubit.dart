@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../../../core/assets_sound.dart';
+import '../../../../../../core/audio_player.dart';
 import '../../../../../../core/talk_tts.dart';
 import '../../../../domain/entities/game_model.dart';
 import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
@@ -19,6 +21,7 @@ class ClickPictureCubit extends Cubit<ClickPictureInitial> {
       : super(ClickPictureInitial(
             gameData: gameData, backGround: background, correctIndexes: [])) {
     TalkTts.startTalk(text: gameData.mainLetter ?? '');
+    sayTheLetter();
   }
 
   bool addAnswer(int index) {
@@ -34,6 +37,8 @@ class ClickPictureCubit extends Cubit<ClickPictureInitial> {
 
   }
 
-
+  sayTheLetter() async {
+    await AudioPlayerClass.startPlaySound(soundPath: AppSound.getSoundOfLetter(mainGameLetter: state.gameData.mainLetter ?? ''));
+  }
 
 }

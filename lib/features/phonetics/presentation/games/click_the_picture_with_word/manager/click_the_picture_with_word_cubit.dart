@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../core/assets_sound.dart';
+import '../../../../../../core/audio_player.dart';
 import '../../../../../../core/talk_tts.dart';
 import '../../../../domain/entities/game_images_model.dart';
 import '../../../../domain/entities/game_letters_model.dart';
@@ -18,6 +20,7 @@ class ClickThePictureWithWordCubit
       : super(ClickThePictureWithWordInitial(
             gameData: gameData, backGround: backGround, correctIndexes: [])) {
     getTheRandomWord();
+    sayTheLetter();
     emit(state.copyWith(gameDataPartOne: gameData.gameImages?.sublist(0, ((gameData.gameImages?.length??0)/2).ceil()), gameDataPartTwo:gameData.gameImages?.sublist(((gameData.gameImages?.length??0)/2).ceil(), gameData.gameImages?.length??0) ));
   }
 
@@ -70,6 +73,9 @@ class ClickThePictureWithWordCubit
     reStateOfAvatar();
   }
 
+  sayTheLetter() async {
+    await AudioPlayerClass.startPlaySound(soundPath: AppSound.getSoundOfLetter(mainGameLetter: state.gameData.mainLetter ?? ''));
+  }
   sayTheCorrectAnswer() async {
     await TalkTts.startTalk(text: state.chooseWord?.word ?? '');
   }

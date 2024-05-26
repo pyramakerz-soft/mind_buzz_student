@@ -106,6 +106,7 @@ flutter:
     - assets/phonetics/
     - assets/numbers_lessons/
     - assets/svg/parent_account/
+    - assets/svg/parent_account/
 
   fonts:
     - family: poppinsSemiBold
