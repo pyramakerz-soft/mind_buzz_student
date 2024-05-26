@@ -13,14 +13,13 @@ part 'spelling_state.dart';
 
 class SpellingCubit extends Cubit<SpellingInitial> {
   final GameModel gameData;
+  final List<GameModel> allGames;
   final String background;
-
-  SpellingCubit({required this.gameData, required this.background})
+  final int index;
+  SpellingCubit({required this.gameData, required this.background, required this.index, required this.allGames})
       : super(SpellingInitial(gameData: gameData,woodenBackground: background)) {
-    // List<GameLettersModel> supList = gameData.gameLetters ?? [];
-    // supList.addAll(List.from(supList));
-    // supList.insert(4, GameLettersModel());
-    emit(state.copyWith(cardsLetters: gameData.gameLetters?.toSet().toList()));
+    print('gameData.gameImages?.map((e) => e.image)');
+    emit(state.copyWith(cardsLetters: gameData.gameLetters));
     // getTheRandomWord(awaitTime:true);
   }
 
@@ -53,12 +52,15 @@ class SpellingCubit extends Cubit<SpellingInitial> {
   //     emit(state.copyWith(chooseWord: chooseWord));
   //   }
   // }
+  navigateToNextIndex(){
+    emit(state.copyWith(gameData: allGames.firstWhere((element) => element.id == state.gameData?.nextGameId),correctAnswers: []));
+  }
 
-  addTheCorrectAnswer({required int idOfUserAnswer}) async {
-    List<int> correctAnswer = state.correctIndexes ?? [];
+  addTheCorrectAnswer({required String answer}) async {
+    List<String> correctAnswer = state.correctAnswers ?? [];
     print('correctAnswer:${correctAnswer.length}');
-    correctAnswer.add(idOfUserAnswer);
-    emit(state.copyWith(correctIndexes: correctAnswer));
+    correctAnswer.add(answer);
+    emit(state.copyWith(correctAnswers: correctAnswer));
 
     print('correctAnswer:${correctAnswer.length}');
   }
@@ -71,12 +73,13 @@ class SpellingCubit extends Cubit<SpellingInitial> {
   }
 
   bool checkIfIsTheLastGameOfLesson() {
-    int currentIndexOfAnswers = state.correctIndexes?.length ?? 0;
-    int currentIndexOfLetters = state.cardsLetters?.length ?? 0;
-    if (currentIndexOfAnswers != (currentIndexOfLetters-1)) {
-      return false;
-    } else {
-      return true;
-    }
+      if (state.gameData?.nextGameId == null) {
+        return true;
+      } else {
+        return false;
+      }
+  }
+  bool checkCurrentFinished() {
+    return state.gameData?.correctAns?.split('').length == state.correctAnswers?.length;
   }
 }

@@ -1,5 +1,6 @@
 class ChapterModel {
   final int? id;
+  final int? lessonId;
   final int? number;
   final int? star;
   // final bool? isOpen;
@@ -13,7 +14,7 @@ class ChapterModel {
 
   ChapterModel(
       {this.id,
-      // this.isOpen,
+      this.lessonId,
         this.name,
         this.star,
         this.number,

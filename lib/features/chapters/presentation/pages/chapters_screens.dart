@@ -165,9 +165,8 @@ class ChaptersScreen extends StatelessWidget {
                                   if (state.data.reversed.toList()[index].isGame == true) {
                                   Utils.navigateTo(
                                        PhoneticsBook(
-                                        // lessonId: state.data.reversed.toList()[index].id!,
-                                        lessonId: 62,
-                                         index: index,
+                                        lessonId: state.data.reversed.toList()[index].lessonId!,
+                                         gameId: state.data.reversed.toList()[index].id!,
                                       ),
                                       context);
                                   }

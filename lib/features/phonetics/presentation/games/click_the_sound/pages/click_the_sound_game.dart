@@ -68,7 +68,9 @@ class ClickTheSoundGame extends StatelessWidget {
                                     _viewModel.incrementCorrectAnswerCount(index);
                                     context.read<CurrentGamePhoneticsCubit>().addStarToStudent(stateOfCountOfCorrectAnswer: _viewModel.correctAnswers ?? 0, mainCountOfQuestion: stateOfCurrentGamePhoneticsCubit.gameData?.first.numOfLetterRepeat ?? 0);
                                     if (_viewModel.correctAnswers == stateOfCurrentGamePhoneticsCubit.gameData?.first.numOfLetterRepeat) {
-                                      context.read<CurrentGamePhoneticsCubit>().addSuccessAnswer(actionInEndOfLesson: () {
+                                      context.read<CurrentGamePhoneticsCubit>().addSuccessAnswer(
+                                          nextGameId: state.gameData.nextGameId,
+                                          actionInEndOfLesson: () {
                                         Navigator.of(context).pop();
                                       });
                                     }

@@ -36,4 +36,24 @@ class ContactLessonRepositoryImpl implements ProgramContactLessonRepository {
       return Left(CacheFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, List<GameModel>>>
+  gameById({required int gameId}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final res = await remoteDataSource.getGameById(
+            gameId: gameId);
+        // final res = await localRemoteDataSource.getContactLessonDataRemotely(programId: programId);
+        log('res:$res');
+        return Right(res);
+      } catch (e, s) {
+        log('error:${e.toString()}');
+        log('error:${e.runtimeType}');
+        return Left(LoginFailure());
+      }
+    } else {
+      return Left(CacheFailure());
+    }
+  }
 }

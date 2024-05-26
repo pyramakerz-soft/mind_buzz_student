@@ -74,7 +74,7 @@ class ProfileDataScreen extends StatelessWidget {
                   icon: ParentImages.email,
                 ),
                 PersonalInfoItem(
-                  title: 'Phone Number',
+                  title: 'Phone number',
                   value: bloc.userData!.parentPhone ?? '',
                   icon: ParentImages.phone,
                 ),

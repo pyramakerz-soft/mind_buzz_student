@@ -18,6 +18,7 @@ import '../../../domain/entities/game_model.dart';
 part 'current_game_phonetics_state.dart';
 
 class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
+
   CurrentGamePhoneticsCubit() : super(CurrentGamePhoneticsState(index: 0)) {
     getTheBackGroundLoading();
   }
@@ -112,19 +113,20 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     });
   }
 
-  updateIndexOfCurrentGame() {
-    int currentIndex = state.index;
-    currentIndex = currentIndex + 1;
-    emit(state.copyWith(index: currentIndex));
+  updateIndexOfCurrentGame({required int nextIndex}) {
+    // int currentIndex = state.index;
+    // currentIndex = currentIndex + 1;
+    emit(state.copyWith(index: nextIndex));
   }
 
   updateDataOfCurrentGame(
       {required MainDataOfPhonetics basicData,
-      required List<GameModel> gameData}) {
+      required List<GameModel> gameData,
+      required int gameIndex}) {
     emit(state.copyWith(
         basicData: basicData,
         currentAvatar: basicData.basicAvatar,
-        // statesOfAddStars: BasicOfEveryGame.getTheStarsAddState(gameData.length),
+        index: gameIndex,
         gameData: gameData));
     saveCountOfTries();
     getTheBackGround();
@@ -189,7 +191,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     emit(state.copyWith(countOfStar: (countOfStar + 1)));
   }
 
-  addSuccessAnswer({required void Function() actionInEndOfLesson}) async {
+  addSuccessAnswer({required void Function() actionInEndOfLesson,int? nextGameId}) async {
     await animationOfCorrectAnswer();
 
     bool isLastLesson = checkIfIsTheLastGameOfLesson();
@@ -199,7 +201,8 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
       actionInEndOfLesson.call();
     } else {
       await backToMainAvatar();
-      updateIndexOfCurrentGame();
+      if(nextGameId!=null)
+      updateIndexOfCurrentGame(nextIndex: state.gameData!.indexWhere((element) => element.id == nextGameId));
       print('${state.stateOfAvatar}');
     }
   }

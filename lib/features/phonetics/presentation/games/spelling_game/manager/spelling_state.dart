@@ -4,14 +4,14 @@ part of 'spelling_cubit.dart';
 class SpellingInitial extends Equatable {
   List<GameLettersModel>? cardsLetters;
   GameModel? gameData;
-  List<int>? correctIndexes;
+  List<String>? correctAnswers;
   int? correctAnswer;
   GameLettersModel? chooseWord;
   String? woodenBackground;
 
   SpellingInitial(
       {this.gameData,
-      this.correctIndexes,
+      this.correctAnswers,
       this.cardsLetters,
       this.correctAnswer,
       this.chooseWord,
@@ -23,19 +23,19 @@ class SpellingInitial extends Equatable {
       GameLettersModel? chooseWord,
       int? correctAnswer,
       List<String>? indexOfCorrectAnswers,
-      List<int>? correctIndexes,
+      List<String>? correctAnswers,
       String? woodenBackground}) {
     return SpellingInitial(
         gameData: gameData ?? this.gameData,
         cardsLetters: cardsLetters ?? this.cardsLetters,
         chooseWord: chooseWord ?? this.chooseWord,
         correctAnswer: correctAnswer ?? this.correctAnswer,
-        correctIndexes: correctIndexes ?? this.correctIndexes,
+      correctAnswers: correctAnswers ?? this.correctAnswers,
       woodenBackground: woodenBackground ?? this.woodenBackground,
     );
   }
 
   @override
   List<Object?> get props =>
-      [gameData, correctIndexes, cardsLetters, correctAnswer, chooseWord,woodenBackground];
+      [gameData, correctAnswers, cardsLetters, correctAnswer, chooseWord,woodenBackground];
 }

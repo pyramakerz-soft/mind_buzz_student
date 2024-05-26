@@ -249,11 +249,13 @@ class BasedOfGameConnect extends StatelessWidget {
                             ),
                             child: XOutGameScreen())
                       }
-                      if ((stateOfGame.basicData?.gameData is SpellingGame)) ...{
+                     else if ((stateOfGame.basicData?.gameData is SpellingGame)) ...{
                         BlocProvider<SpellingCubit>(
                             create: (_) => SpellingCubit(
                                 gameData: stateOfGameData.data[stateOfGame.index],
-                                background: (stateOfGame.basicData?.gameData as SpellingGame).woodenBackground
+                                index: stateOfGame.index,
+                                background: (stateOfGame.basicData?.gameData as SpellingGame).woodenBackground,
+                              allGames: stateOfGameData.data
                             ),
                             child: SpellingGameScreen())
                       }

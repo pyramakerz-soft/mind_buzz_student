@@ -5,4 +5,6 @@ import '../entities/game_model.dart';
 abstract class ProgramContactLessonRepository {
   Future<Either<Failure, List<GameModel>>>
       lessonContactDataRepository({required int programId});
+  Future<Either<Failure, List<GameModel>>>
+  gameById({required int gameId});
 }
