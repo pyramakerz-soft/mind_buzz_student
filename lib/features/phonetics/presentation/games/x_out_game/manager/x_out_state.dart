@@ -2,28 +2,32 @@ part of 'x_out_cubit.dart';
 
 @immutable
 class XOutInitial extends Equatable {
-  final GameModel? gameData;
+  final List<GameModel>? gameData;
   final int? correctAnswers;
+  final int? currentGameIndex;
   final List<int>? selectedItems;
 
   XOutInitial({
     this.gameData,
     this.correctAnswers = 0,
+    this.currentGameIndex = 0,
     this.selectedItems = const [],
   });
 
   XOutInitial copyWith({
-    GameModel? gameData,
+    List<GameModel>? gameData,
     int? correctAnswers,
+    int? currentGameIndex,
     List<int>? selectedItems,
   }) {
     return XOutInitial(
       gameData: gameData ?? this.gameData,
       correctAnswers: correctAnswers ?? this.correctAnswers,
+      currentGameIndex: currentGameIndex ?? this.currentGameIndex,
       selectedItems: selectedItems ?? this.selectedItems,
     );
   }
 
   @override
-  List<Object?> get props => [gameData, correctAnswers, selectedItems];
+  List<Object?> get props => [gameData, correctAnswers, selectedItems,currentGameIndex];
 }

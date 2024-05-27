@@ -56,6 +56,24 @@ class WhoAmIScreen extends StatelessWidget {
                                   color: AppColor.skyBlueColor,
                                   width: MediaQuery.of(context).size.width - 70,
                                 ),
+                                 Positioned(
+                    bottom: -20,
+                    left: -50,
+                    child: Transform.rotate(
+                      angle: 0.25,
+                      child: SizedBox(
+                        height: 150,
+                        width: 150,
+                        child: RiveAnimation.asset(
+                          AppAnimation.beeRive,
+                        ),
+                      ),
+                    )
+                    // Image.asset(
+                    //   AppImages.halfBee,
+                    //   height: 150,
+                    // ),
+                    ),
                                 const Positioned(
                                   top: -30,
                                   left: 0,
@@ -120,24 +138,24 @@ class WhoAmIScreen extends StatelessWidget {
                         ],
                       ),
                     )),
-                Positioned(
-                    bottom: -20,
-                    left: -50,
-                    child: Transform.rotate(
-                      angle: 0.25,
-                      child: SizedBox(
-                        height: 170,
-                        width: 170,
-                        child: RiveAnimation.asset(
-                          AppAnimation.beeRive,
-                        ),
-                      ),
-                    )
-                    // Image.asset(
-                    //   AppImages.halfBee,
-                    //   height: 150,
-                    // ),
-                    )
+                // Positioned(
+                //     bottom: -20,
+                //     left: -50,
+                //     child: Transform.rotate(
+                //       angle: 0.25,
+                //       child: SizedBox(
+                //         height: 150,
+                //         width: 150,
+                //         child: RiveAnimation.asset(
+                //           AppAnimation.beeRive,
+                //         ),
+                //       ),
+                //     )
+                //     // Image.asset(
+                //     //   AppImages.halfBee,
+                //     //   height: 150,
+                //     // ),
+                //     )
               ],
             ),
             20.ph,

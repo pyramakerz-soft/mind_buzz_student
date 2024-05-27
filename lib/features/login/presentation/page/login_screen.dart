@@ -40,28 +40,28 @@ class LoginScreen extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Column(children: [
-             const LoginAnimatedVectors(),
+              const LoginAnimatedVectors(),
               Container(
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(topLeft: Radius.circular(32), topRight: Radius.circular(32)),
                   ),
                   width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 25),
+                  padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 25),
                   child: SingleChildScrollView(
                     child: Form(
                       key: _formKey,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                         Text(
-                                        'Welcome',
-                                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                              color: AppColor.darkBlueColor,
-                                              fontSize: 40,
-                                              fontWeight: FontWeight.w700,
-                                              fontFamily: AppTheme.getFontFamily5(),
-                                            ),
-                                      ),
+                          'Welcome',
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                color: AppColor.darkBlueColor,
+                                fontSize: 40,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: AppTheme.getFontFamily5(),
+                              ),
+                        ),
                         // StrokedText(
                         //   text: 'Log In',
                         //   isDisabled: false,
@@ -131,8 +131,10 @@ class LoginScreen extends StatelessWidget {
                           log('--state:$state');
                           if (state is LoadingLoginState) {
                             return const Padding(
-                              padding:  EdgeInsets.symmetric(vertical: 32.0,),
-                              child:  CupertinoActivityIndicator(),
+                              padding: EdgeInsets.symmetric(
+                                vertical: 32.0,
+                              ),
+                              child: CupertinoActivityIndicator(),
                             );
                           } else {
                             return BlocConsumer<LoginCubit, LoginStateInitial>(
@@ -162,7 +164,7 @@ class LoginScreen extends StatelessWidget {
                         30.ph,
                       ]),
                     ),
-                  )), 
+                  )),
               // Expanded(
               //   flex: 2,
               //   child: Stack(
@@ -332,6 +334,8 @@ class LoginAnimatedVectors extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     return Expanded(
         child: SizedBox(
       width: MediaQuery.of(context).size.width,
@@ -340,19 +344,22 @@ class LoginAnimatedVectors extends StatelessWidget {
         children: [
           // SvgPicture.asset(AppSvgImages.iconSkyLogin),
           // Image.asset(AppImages.imageBeeLogin),
-          const Positioned(
+          Positioned(
             top: 0,
             left: 0,
             child: SizedBox(
-              height: 120,
-              width: 120,
+              // height: 110,
+              // width: 110,
+              height: screenHeight * 0.1,
+              width: screenWidth * 0.25,
               child: RiveAnimation.asset(
                 AppAnimation.cloudRive,
               ),
             ),
           ),
-          const Positioned(
-            right: 10,
+          Positioned(
+            //   right: 10,
+            right: screenWidth * 0.03,
             top: 0,
             child: SizedBox(
               height: 90,
@@ -370,7 +377,7 @@ class LoginAnimatedVectors extends StatelessWidget {
             top: 100,
             child: SizedBox(
               height: 100,
-              width: 200,
+              width: 150,
               child: RiveAnimation.asset(
                 AppAnimation.cloudRive,
               ),

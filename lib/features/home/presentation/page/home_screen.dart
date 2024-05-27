@@ -47,7 +47,7 @@ class _HomeScreen extends State<HomeScreen> {
         20.ph,
         Expanded(
             child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 18),
           child: BlocProvider<GetProgramsHomeBloc>(
               create: (_) => di.sl<GetProgramsHomeBloc>()..add(GetProgramsRequest()),
               child: BlocConsumer<GetProgramsHomeBloc, GetProgramsHomeState>(listener: (context, state) {
@@ -72,25 +72,25 @@ class _HomeScreen extends State<HomeScreen> {
                       children: [
                         Container(
                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: AppColor.redColor),
-                          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 DefaultHomeData.haveAnAssignment,
-                                style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontSize:MediaQuery.of(context).size.reDeginSize(16, context) > 35 ? 35 : 16, fontWeight: FontWeight.w700,color: AppColor.white),
+                                style: TextStyle(fontSize:MediaQuery.of(context).size.reDeginSize(16, context) > 16 ? 16 : MediaQuery.of(context).size.reDeginSize(16, context), fontWeight: FontWeight.w600,color: AppColor.white),
                               ),
                               GestureDetector(
                                 onTap: () {
                                   Utils.navigateTo(BlocProvider(create: (_) => CheckAssignmentCubit(assignmentProgrammes: state.data), child: StudentAssignmentScreen()), context);
                                 },
                                 child: Container(
-                                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
                                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.white),
                                   child: Text(
                                     'Start Now?',
                                     //style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColor.redColor4, fontSize: MediaQuery.of(context).size.reDeginSize(13, context) > 35 ? 35 : MediaQuery.of(context).size.reDeginSize(13, context), fontWeight: FontWeight.w700),
-                                    style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColor.redColor4, fontSize:16, fontWeight: FontWeight.w700),
+                                    style: TextStyle(color: AppColor.redColor4, fontSize:MediaQuery.of(context).size.reDeginSize(13, context) > 14 ? 14 : MediaQuery.of(context).size.reDeginSize(13, context), fontWeight: FontWeight.w700),
                                   ),
                                 ),
                               )

@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
@@ -80,8 +81,8 @@ class UnitScreen extends StatelessWidget {
                                   top: 0,
                                   right: 0,
                                   child: SizedBox(
-                                    height: 170,
-                                    width: 170,
+                                    height: 160,
+                                    width: 160,
                                     child: RiveAnimation.asset(
                                       AppAnimation.cloudRive,
                                     ),
@@ -131,8 +132,8 @@ class UnitScreen extends StatelessWidget {
                         child: Transform.rotate(
                           angle: 0.25,
                           child: SizedBox(
-                            height: 170,
-                            width: 170,
+                             height: 150,
+                             width: 150,
                             child: RiveAnimation.asset(
                               AppAnimation.beeRive,
                             ),
@@ -322,7 +323,7 @@ class UnitScreen extends StatelessWidget {
                           32.ph,
                           Container(
                             margin: const EdgeInsets.symmetric(horizontal: 15),
-                            width: MediaQuery.of(context).size.width - 30,
+                            width: MediaQuery.of(context).size.width - 5,
                             //height: MediaQuery.of(context).size.height-(20+100+(MediaQuery.of(context).size.height / 6)+160),
                             height: MediaQuery.of(context).size.height - (150 + (MediaQuery.of(context).size.height / 6) + 160),
                             child: ListView(

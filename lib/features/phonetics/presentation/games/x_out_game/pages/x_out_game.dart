@@ -38,16 +38,17 @@ class XOutGameScreen extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                state.gameData?.mainLetter ?? '',
+                state.gameData?[state.currentGameIndex ?? 0].mainLetter ?? '',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  fontSize: 40,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: AppTheme.getFontFamily5(),
-                  color: AppColor.white,
-                  height: 0,
-                  letterSpacing: 0.50,
-                ),
+                      fontSize: 40,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: AppTheme.getFontFamily5(),
+                      color: AppColor.white,
+                      height: 0,
+                      letterSpacing: 0.50,
+                    ),
               ),
+              if (state.gameData?[state.currentGameIndex ?? 0].gameImages?.isNotEmpty ?? false)
               Expanded(
                 child: GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
@@ -57,20 +58,28 @@ class XOutGameScreen extends StatelessWidget {
                   ),
                   itemCount: 4,
                   itemBuilder: (context, index) {
+                  
                     final isSelected = state.selectedItems?.contains(index) == true;
-                    final isCorrect = state.gameData?.gameImages?[index].correct == 0;
-                    return XOutItemWidget(
-                      imageName: state.gameData?.gameImages?[index].image ?? "",
+                    final isCorrect = state.gameData?[state.currentGameIndex ?? 0].gameImages?[index].correct == 0;
+                    final bool gameHasData = state.gameData?[state.currentGameIndex ?? 0].gameImages?.isNotEmpty ?? false;
+                    return !gameHasData ? SizedBox(): XOutItemWidget(
+                      imageName: state.gameData?[state.currentGameIndex ?? 0].gameImages?[index].image ?? "",
                       isSelected: isSelected,
                       isCorrect: isCorrect,
                       onTap: () {
                         context.read<XOutCubit>().selectItem(index).then((_) {
                           if (isCorrect) {
-                            context.read<XOutCubit>().increaseCountOfCorrectAnswers().then((countOfCorrect) {
-                              context.read<CurrentGamePhoneticsCubit>().addStarToStudent(
-                                  stateOfCountOfCorrectAnswer: countOfCorrect,
-                                  mainCountOfQuestion: state.gameData?.numOfLetters ?? 0);
-                              //here should load next game data 
+                            context.read<XOutCubit>().increaseCountOfCorrectAnswers().then((countOfCorrect) async {
+                              context.read<CurrentGamePhoneticsCubit>().addStarToStudent(stateOfCountOfCorrectAnswer: countOfCorrect, mainCountOfQuestion: state.gameData?[state.currentGameIndex ?? 0].numOfLetters ?? 0);
+                              bool isLastLesson = context.read<XOutCubit>().isLastGame();
+                              print('isLastLesson: $isLastLesson');
+                              if (isLastLesson == true) {
+                                await Future.delayed(const Duration(seconds: 2));
+                                Navigator.of(context).pop();
+                              } else {
+                                await context.read<CurrentGamePhoneticsCubit>().backToMainAvatar();
+                                context.read<XOutCubit>().updateGameIndex();
+                              }
                             });
                           } else {
                             context.read<CurrentGamePhoneticsCubit>().addWrongAnswer();
@@ -81,6 +90,7 @@ class XOutGameScreen extends StatelessWidget {
                   },
                 ),
               ),
+              
             ],
           ),
         );
