@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import 'package:mind_buzz_refactor/features/phonetics/presentation/games/spelling_game/widget/drag_target_card.dart';
 
 import '../../../../../../core/phonetics/phonetics_color.dart';
 import '../../../../../../core/theme_text.dart';
@@ -21,8 +22,6 @@ class SpellingGameScreen extends StatelessWidget {
     return BlocConsumer<SpellingCubit, SpellingInitial>(
         listener: (context, state) {},
         builder: (context, gameState) {
-          log((gameState.gameData?.toJson()).toString());
-          print('(gameState.gameData?.toJson()).toString()');
           return Padding(
             padding: const EdgeInsets.only(top: 40, left: 30),
             child: Row(
@@ -43,7 +42,7 @@ class SpellingGameScreen extends StatelessWidget {
                             gameState.gameData!.gameImages![0].image!,
                             height: 0.35.sh,
                           ),
-                          10.ph,
+                          7.ph,
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 25),
                             child: Row(
@@ -59,37 +58,8 @@ class SpellingGameScreen extends StatelessWidget {
                                           List<dynamic> accepted,
                                           List<dynamic> rejected,
                                         ) {
-                                          return Container(
-                                            height: 0.14.sh,
-                                            width: 70.0,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(12.r),
-                                                color:
-                                                    AppColor.dragContainerColor,
-                                                border: Border.all(
-                                                    color:
-                                                        AppColor.strokeColor)),
-                                            child: Center(
-                                              child: Text(
-                                                ((gameState.correctAnswers
-                                                                    ?.length ??
-                                                                0) -
-                                                            1) >=
-                                                        index
-                                                    ? (gameState.correctAnswers?[
-                                                            index] ??
-                                                        '')
-                                                    : '',
-                                                style: TextStyle(
-                                                    color:
-                                                        AppColor.darkBlueColor,
-                                                    fontSize: 0.04.sw,
-                                                    fontWeight:
-                                                        FontWeight.w900),
-                                              ),
-                                            ),
-                                          );
+                                          return DragTargetWidget(
+                                              title: gameState.correctAnswers[index] );
                                         },
                                         onAcceptWithDetails:
                                             (DragTargetDetails<String>
@@ -97,6 +67,7 @@ class SpellingGameScreen extends StatelessWidget {
                                           await context
                                               .read<SpellingCubit>()
                                               .addTheCorrectAnswer(
+                                                  index: index,
                                                   answer: details.data);
 
                                           if (context
@@ -138,12 +109,14 @@ class SpellingGameScreen extends StatelessWidget {
                                                     .read<
                                                         CurrentGamePhoneticsCubit>()
                                                     .backToMainAvatar();
-                                                // await context
-                                                //     .read<SpellingCubit>()
-                                                //     .navigateToNextIndex();
+                                                if (context
+                                                    .read<SpellingCubit>()
+                                                    .checkIsCorrectAnswer())
+                                                  await context
+                                                      .read<SpellingCubit>()
+                                                      .navigateToNextIndex();
                                               }
-                                            }
-                                            else {
+                                            } else {
                                               context
                                                   .read<
                                                       CurrentGamePhoneticsCubit>()
@@ -164,7 +137,7 @@ class SpellingGameScreen extends StatelessWidget {
                                       )),
                             ),
                           ),
-                          10.ph,
+                          20.ph,
                         ],
                       )
                     ],

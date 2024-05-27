@@ -4,14 +4,14 @@ part of 'spelling_cubit.dart';
 class SpellingInitial extends Equatable {
   List<GameLettersModel>? cardsLetters;
   GameModel? gameData;
-  List<String>? correctAnswers;
+  List<String> correctAnswers;
   int? correctAnswer;
   GameLettersModel? chooseWord;
   String? woodenBackground;
 
   SpellingInitial(
       {this.gameData,
-      this.correctAnswers,
+     required this.correctAnswers,
       this.cardsLetters,
       this.correctAnswer,
       this.chooseWord,

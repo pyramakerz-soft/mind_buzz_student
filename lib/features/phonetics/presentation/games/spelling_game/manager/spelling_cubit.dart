@@ -17,49 +17,17 @@ class SpellingCubit extends Cubit<SpellingInitial> {
   final String background;
   final int index;
   SpellingCubit({required this.gameData, required this.background, required this.index, required this.allGames})
-      : super(SpellingInitial(gameData: gameData,woodenBackground: background)) {
-    print('gameData.gameImages?.map((e) => e.image)');
-    emit(state.copyWith(cardsLetters: gameData.gameLetters));
-    // getTheRandomWord(awaitTime:true);
+      : super(SpellingInitial(gameData: gameData,woodenBackground: background,correctAnswers: ['','',''])) {
+    emit(state.copyWith(cardsLetters: gameData.gameLetters,correctAnswers: ['','','']));
   }
-
-  // getTheRandomWord({required bool awaitTime}) async {
-  //   List<GameLettersModel> checkImages = [];
-  //
-  //
-  //   state.cardsLetters?.forEach((element) {
-  //     print('element.id${element.id}');
-  //     print('${state.correctIndexes}');
-  //     if (state.correctIndexes==null||(state.correctIndexes?.contains(element.id) == false)) {
-  //       checkImages.add(element);
-  //     }
-  //   });
-  //   int countOfTheImage = checkImages.length;
-  //   if (countOfTheImage != 0) {
-  //     Random random = Random();
-  //     int randomNumber = random.nextInt(countOfTheImage);
-  //     GameLettersModel chooseWord = checkImages[randomNumber];
-  //     if(chooseWord.id == null){
-  //       getTheRandomWord(awaitTime:awaitTime);
-  //       return ;
-  //     }
-  //     if(awaitTime==true) {
-  //       await Future.delayed(Duration(seconds: 1, milliseconds: 200));
-  //     }
-  //     await AudioPlayerClass.startPlaySound(soundPath:  AppSound.getSoundOfLetter(
-  //         mainGameLetter: chooseWord.letter?.toLowerCase() ?? ''));
-  //     // await TalkTts.startTalk(text: chooseWord. ?? '');
-  //     emit(state.copyWith(chooseWord: chooseWord));
-  //   }
-  // }
   navigateToNextIndex(){
-    emit(state.copyWith(gameData: allGames.firstWhere((element) => element.id == state.gameData?.nextGameId),correctAnswers: []));
+    emit(state.copyWith(gameData: allGames.firstWhere((element) => element.id == state.gameData?.nextGameId),correctAnswers: ['','','']));
   }
 
-  addTheCorrectAnswer({required String answer}) async {
-    List<String> correctAnswer = state.correctAnswers ?? [];
-    print('correctAnswer:${correctAnswer.length}');
-    correctAnswer.add(answer);
+  addTheCorrectAnswer({required String answer,required int index}) async {
+    List<String> correctAnswer = state.correctAnswers;
+    correctAnswer.removeAt(index);
+    correctAnswer.insert(index , answer);
     emit(state.copyWith(correctAnswers: correctAnswer));
 
   }
@@ -70,8 +38,9 @@ class SpellingCubit extends Cubit<SpellingInitial> {
     emit(state.copyWith(correctAnswer: sub));
     return Future.value(state.correctAnswer);
   }
+
   clearAnswers(){
-    emit(state.copyWith(correctAnswers: []));
+    emit(state.copyWith(correctAnswers: ['','','']));
   }
 
   bool checkIfIsTheLastGameOfLesson() {
@@ -83,9 +52,9 @@ class SpellingCubit extends Cubit<SpellingInitial> {
   }
 
   bool checkIsCorrectAnswer(){
-   return state.gameData?.correctAns?.toLowerCase() == state.correctAnswers?.join().toLowerCase();
+   return state.gameData?.correctAns?.toLowerCase() == state.correctAnswers.join().toLowerCase();
   }
   bool checkCurrentFinished() {
-    return state.gameData?.correctAns?.split('').length == state.correctAnswers?.length;
+    return state.gameData?.correctAns?.length == state.correctAnswers.join('').length;
   }
 }
