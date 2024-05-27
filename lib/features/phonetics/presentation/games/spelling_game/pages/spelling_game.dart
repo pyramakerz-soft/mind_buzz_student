@@ -102,6 +102,9 @@ class SpellingGameScreen extends StatelessWidget {
                                                         0,
                                                   );
 
+                                     if(context
+                                        .read<SpellingCubit>()
+                                        .checkCurrentFinished()){
                                               bool isLastLesson = context
                                                   .read<SpellingCubit>()
                                                   .checkIfIsTheLastGameOfLesson();
@@ -110,9 +113,7 @@ class SpellingGameScreen extends StatelessWidget {
                                                     const Duration(seconds: 2));
                                                 Navigator.of(context).pop();
                                               }
-                                              else if(context
-                                                  .read<SpellingCubit>()
-                                                  .checkCurrentFinished()){
+
                                                 await context
                                                     .read<
                                                         CurrentGamePhoneticsCubit>()

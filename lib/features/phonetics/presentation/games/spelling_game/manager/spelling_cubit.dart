@@ -80,6 +80,9 @@ class SpellingCubit extends Cubit<SpellingInitial> {
       }
   }
   bool checkCurrentFinished() {
+    print(state.gameData?.correctAns);
+    print(state.correctAnswers);
+    print('state.correctAnswers');
     return state.gameData?.correctAns?.split('').length == state.correctAnswers?.length;
   }
 }
