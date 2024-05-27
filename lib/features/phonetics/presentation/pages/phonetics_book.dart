@@ -117,7 +117,10 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                 try {
                                   MainDataOfPhonetics? dataType =
                                       state.getMainContactData(
-                                          index: state.data.indexWhere((element) => element.id == widget.gameId));
+                                          index: state.data.firstWhere((element) => element.id == widget.gameId).nextGameId==null?
+                                          state.data.indexWhere((element) => element.id == widget.gameId):
+                                          state.data.indexWhere((element) => element.id ==
+                                              state.data.firstWhere((element) => element.id == widget.gameId).nextGameId));
                                   print('dataType:$dataType');
                                   if (dataType != null) {
                                     context
@@ -125,7 +128,10 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                         .updateDataOfCurrentGame(
                                             basicData: dataType,
                                             gameData: state.data,
-                                      gameIndex: state.data.indexWhere((element) => element.id == widget.gameId)
+                                      gameIndex: state.data.firstWhere((element) => element.id == widget.gameId).nextGameId==null?
+                                      state.data.indexWhere((element) => element.id == widget.gameId):
+                                      state.data.indexWhere((element) => element.id ==
+                                          state.data.firstWhere((element) => element.id == widget.gameId).nextGameId)
                                     );
                                   }
                                   else {
@@ -146,7 +152,11 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                   children: [
                                     if(stateOfGame.countOfTries == 0)...{
                                       widgetOfTries(context: context,
-                                      nextGameIndex: stateOfGameData.data.indexWhere((element) => element.id == stateOfGameData.data.firstWhere((element) => element.id == widget.gameId).nextGameId))
+                                      nextGameIndex:
+                                      stateOfGameData.data.firstWhere((element) => element.id == widget.gameId).nextGameId==null?
+                                      stateOfGameData.data.indexWhere((element) => element.id == widget.gameId):
+                                      stateOfGameData.data.indexWhere((element) => element.id ==
+                                          stateOfGameData.data.firstWhere((element) => element.id == widget.gameId).nextGameId))
                                     }else
                                       ...{
                                         if (stateOfGame
