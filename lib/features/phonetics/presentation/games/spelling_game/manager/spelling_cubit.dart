@@ -1,4 +1,6 @@
-import 'dart:math';
+
+
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -21,6 +23,8 @@ class SpellingCubit extends Cubit<SpellingInitial> {
     emit(state.copyWith(cardsLetters: gameData.gameLetters,correctAnswers: ['','','']));
   }
   navigateToNextIndex(){
+    log((allGames.firstWhere((element) => element.id == state.gameData?.nextGameId)).toJson().toString());
+    print('allGames.firstWhere((element) => element.id == state.gameData?.nextGameId).toJson()');
     emit(state.copyWith(gameData: allGames.firstWhere((element) => element.id == state.gameData?.nextGameId),correctAnswers: ['','','']));
   }
 
@@ -32,11 +36,14 @@ class SpellingCubit extends Cubit<SpellingInitial> {
 
   }
 
-  Future<int> increaseCountOfCorrectAnswers() async {
+   increaseCountOfCorrectAnswers() async {
     int sub = state.correctAnswer ?? 0;
     sub = sub + 1;
     emit(state.copyWith(correctAnswer: sub));
-    return Future.value(state.correctAnswer);
+    return state.correctAnswer;
+  }
+   increaseCountOfWrongAnswers({int? count}) async {
+    emit(state.copyWith(countOfWrong: count?? state.countOfWrong + 1));
   }
 
   clearAnswers(){

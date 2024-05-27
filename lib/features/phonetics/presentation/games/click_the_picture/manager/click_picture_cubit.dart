@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
@@ -8,6 +10,7 @@ import 'package:meta/meta.dart';
 import '../../../../../../core/assets_sound.dart';
 import '../../../../../../core/audio_player.dart';
 import '../../../../../../core/talk_tts.dart';
+import '../../../../domain/entities/game_images_model.dart';
 import '../../../../domain/entities/game_model.dart';
 import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
 
@@ -20,12 +23,14 @@ class ClickPictureCubit extends Cubit<ClickPictureInitial> {
   ClickPictureCubit({required this.gameData, required this.background})
       : super(ClickPictureInitial(
             gameData: gameData, backGround: background, correctIndexes: [])) {
-    TalkTts.startTalk(text: gameData.mainLetter ?? '');
-    sayTheLetter();
+    generateRandomPictures();
+    Future.delayed(const Duration(seconds: 2),(){
+      sayTheLetter();
+    });
+
   }
 
   bool addAnswer(int index) {
-
       if (gameData.gameImages?[index].correct == 1) {
         emit(state);
         correctIndexes.add(index);
@@ -37,8 +42,21 @@ class ClickPictureCubit extends Cubit<ClickPictureInitial> {
 
   }
 
+  Future<void> generateRandomPictures() async {
+    state.gameData.gameImages = state.gameData.gameImages?..shuffle();
+    emit(state.copyWith(gameData: state.gameData ));
+  }
+
   sayTheLetter() async {
     await AudioPlayerClass.startPlaySound(soundPath: AppSound.getSoundOfLetter(mainGameLetter: state.gameData.mainLetter ?? ''));
   }
 
+  checkCurrentClickTime({required DateTime current}){
+    if (state.currentPressTime == null ||
+        current.difference(state.currentPressTime!) > Duration(seconds: 2)) {
+      state.copyWith(currentPressTime: current);
+      return true;
+    }
+    else return false;
+  }
 }

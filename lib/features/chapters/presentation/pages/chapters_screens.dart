@@ -167,6 +167,7 @@ class ChaptersScreen extends StatelessWidget {
                                        PhoneticsBook(
                                         lessonId: state.data.reversed.toList()[index].lessonId!,
                                          gameId: state.data.reversed.toList()[index].id!,
+                                         firstTry: true,
                                       ),
                                       context);
                                   }

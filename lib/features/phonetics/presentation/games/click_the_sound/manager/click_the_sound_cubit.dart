@@ -17,13 +17,10 @@ class ClickTheSoundCubit extends Cubit<ClickTheSoundInitial> {
 
   ClickTheSoundCubit({required this.gameData, this.letters, this.correctAnswers, this.correctIndexes}) : super(ClickTheSoundInitial(gameData: gameData, letters: letters, correctAnswers: correctAnswers, correctIndexes: correctIndexes)) {
     generateRandomLetters();
-    sayTheLetter();
+
 
   }
 
-  sayTheLetter() async {
-    await AudioPlayerClass.startPlaySound(soundPath: AppSound.getSoundOfLetter(mainGameLetter: state.gameData?.mainLetter ?? ''));
-  }
 
   Future<void> generateRandomLetters() async {
     //List<String> gameLetters = 'smatd'.split('');

@@ -143,6 +143,10 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     int countOfTries = (state.countOfTries??1)-1;
     emit(state.copyWith(countOfTries:countOfTries));
   }
+  increaseCountOfTries(){
+    int countOfTries = 3;
+    emit(state.copyWith(countOfTries:countOfTries));
+  }
 
   bool checkIfIsTheLastGameOfLesson() {
     int currentIndex = state.index;

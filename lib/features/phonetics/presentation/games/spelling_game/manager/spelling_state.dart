@@ -6,36 +6,37 @@ class SpellingInitial extends Equatable {
   GameModel? gameData;
   List<String> correctAnswers;
   int? correctAnswer;
-  GameLettersModel? chooseWord;
   String? woodenBackground;
+  int countOfWrong;
 
   SpellingInitial(
       {this.gameData,
      required this.correctAnswers,
       this.cardsLetters,
       this.correctAnswer,
-      this.chooseWord,
-      this.woodenBackground});
+      this.woodenBackground,
+        this.countOfWrong = 0});
 
   SpellingInitial copyWith(
       {GameModel? gameData,
       List<GameLettersModel>? cardsLetters,
       GameLettersModel? chooseWord,
       int? correctAnswer,
+      int? countOfWrong,
       List<String>? indexOfCorrectAnswers,
       List<String>? correctAnswers,
       String? woodenBackground}) {
     return SpellingInitial(
         gameData: gameData ?? this.gameData,
         cardsLetters: cardsLetters ?? this.cardsLetters,
-        chooseWord: chooseWord ?? this.chooseWord,
         correctAnswer: correctAnswer ?? this.correctAnswer,
       correctAnswers: correctAnswers ?? this.correctAnswers,
       woodenBackground: woodenBackground ?? this.woodenBackground,
+      countOfWrong: countOfWrong ?? this.countOfWrong,
     );
   }
 
   @override
   List<Object?> get props =>
-      [gameData, correctAnswers, cardsLetters, correctAnswer, chooseWord,woodenBackground];
+      [gameData, correctAnswers, cardsLetters, correctAnswer,woodenBackground,countOfWrong];
 }

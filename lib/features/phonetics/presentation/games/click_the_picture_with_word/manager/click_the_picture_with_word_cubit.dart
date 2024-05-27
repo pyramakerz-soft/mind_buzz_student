@@ -20,7 +20,6 @@ class ClickThePictureWithWordCubit
       : super(ClickThePictureWithWordInitial(
             gameData: gameData, backGround: backGround, correctIndexes: [])) {
     getTheRandomWord();
-    sayTheLetter();
     emit(state.copyWith(gameDataPartOne: gameData.gameImages?.sublist(0, ((gameData.gameImages?.length??0)/2).ceil()), gameDataPartTwo:gameData.gameImages?.sublist(((gameData.gameImages?.length??0)/2).ceil(), gameData.gameImages?.length??0) ));
   }
 
@@ -73,9 +72,7 @@ class ClickThePictureWithWordCubit
     reStateOfAvatar();
   }
 
-  sayTheLetter() async {
-    await AudioPlayerClass.startPlaySound(soundPath: AppSound.getSoundOfLetter(mainGameLetter: state.gameData.mainLetter ?? ''));
-  }
+
   sayTheCorrectAnswer() async {
     await TalkTts.startTalk(text: state.chooseWord?.word ?? '');
   }

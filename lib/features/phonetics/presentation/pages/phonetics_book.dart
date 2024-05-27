@@ -27,7 +27,8 @@ import '../widget/widget_of_tries.dart';
 class PhoneticsBook extends StatefulWidget {
   final int lessonId;
   final int gameId;
-  const PhoneticsBook({Key? key, required this.lessonId, required this.gameId}) : super(key: key);
+  final bool firstTry;
+  const PhoneticsBook({Key? key, required this.lessonId, required this.gameId, this.firstTry = false}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
     return _PhoneticsBook();
@@ -39,9 +40,6 @@ class _PhoneticsBook extends State<PhoneticsBook> {
   void initState() {
     super.initState();
     // context.read<CurrentGameCubit>().getTheBackGround();
-    print(widget.gameId);
-    print('widget.index');
-
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
@@ -117,7 +115,7 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                 try {
                                   MainDataOfPhonetics? dataType =
                                       state.getMainContactData(
-                                          index: state.data.firstWhere((element) => element.id == widget.gameId).nextGameId==null?
+                                          index: widget.firstTry || state.data.firstWhere((element) => element.id == widget.gameId).nextGameId==null?
                                           state.data.indexWhere((element) => element.id == widget.gameId):
                                           state.data.indexWhere((element) => element.id ==
                                               state.data.firstWhere((element) => element.id == widget.gameId).nextGameId));
@@ -128,7 +126,7 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                         .updateDataOfCurrentGame(
                                             basicData: dataType,
                                             gameData: state.data,
-                                      gameIndex: state.data.firstWhere((element) => element.id == widget.gameId).nextGameId==null?
+                                      gameIndex: widget.firstTry || state.data.firstWhere((element) => element.id == widget.gameId).nextGameId==null?
                                       state.data.indexWhere((element) => element.id == widget.gameId):
                                       state.data.indexWhere((element) => element.id ==
                                           state.data.firstWhere((element) => element.id == widget.gameId).nextGameId)
