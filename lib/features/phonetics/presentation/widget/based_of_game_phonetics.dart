@@ -94,7 +94,7 @@ class BasedOfGamePhonetics extends StatelessWidget {
                         BlocProvider<ClickTheSoundCubit>(
                             create: (_) => ClickTheSoundCubit(
                                 gameData: stateOfGameData.data[stateOfGame.index],),
-                            child: ClickTheSoundGame())
+                            child: ClickTheSoundGame()),
                       }
                     ],
                   ))),

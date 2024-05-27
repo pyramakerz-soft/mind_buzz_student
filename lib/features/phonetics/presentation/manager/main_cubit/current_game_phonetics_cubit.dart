@@ -194,7 +194,8 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   addSuccessAnswer({required void Function() actionInEndOfLesson,int? nextGameId}) async {
     await animationOfCorrectAnswer();
 
-    bool isLastLesson = checkIfIsTheLastGameOfLesson();
+    bool isLastLesson = nextGameId == null;
+    // checkIfIsTheLastGameOfLesson();
 
     if (isLastLesson == true) {
       await Future.delayed(const Duration(seconds: 2));

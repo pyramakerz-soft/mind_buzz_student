@@ -19,9 +19,7 @@ class SpellingGameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SpellingCubit, SpellingInitial>(
-        listener: (context, state) {
-
-        },
+        listener: (context, state) {},
         builder: (context, gameState) {
           log((gameState.gameData?.toJson()).toString());
           print('(gameState.gameData?.toJson()).toString()');
@@ -46,38 +44,67 @@ class SpellingGameScreen extends StatelessWidget {
                             height: 0.35.sh,
                           ),
                           10.ph,
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: List.generate(gameState.gameData?.correctAns?.split('').length??0,
-                                    (index) =>   DragTarget<String>(
-                                  builder: (
-                                      BuildContext context,
-                                      List<dynamic> accepted,
-                                      List<dynamic> rejected,
-                                      ) {
-                                    return Container(
-                                      height: 0.14.sh,
-                                      width: 70.0,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(12.r),
-                                          color: AppColor.dragContainerColor,
-                                          border: Border.all(
-                                              color: AppColor.strokeColor)),
-                                      child: Center(
-                                        child: Text(((gameState.correctAnswers?.length??0) - 1) >= index ? (gameState.correctAnswers?[index]??''): '',
-                                          style: TextStyle(color: AppColor.darkBlueColor, fontSize: 0.04.sw,
-                                              fontWeight: FontWeight.w900
-                                          ),),
-                                      ),
-                                    );
-                                  },
-                                  onAcceptWithDetails:
-                                      (DragTargetDetails<String> details) async{
-                                    if(details.data ==
-                                        gameState.gameData?.correctAns?.split('')[index].toLowerCase() &&
-                                    !(gameState.correctAnswers?.contains(details.data )??false)) {
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 25),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: List.generate(
+                                  gameState.gameData?.correctAns
+                                          ?.split('')
+                                          .length ??
+                                      0,
+                                  (index) => DragTarget<String>(
+                                        builder: (
+                                          BuildContext context,
+                                          List<dynamic> accepted,
+                                          List<dynamic> rejected,
+                                        ) {
+                                          return Container(
+                                            height: 0.14.sh,
+                                            width: 70.0,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(12.r),
+                                                color:
+                                                    AppColor.dragContainerColor,
+                                                border: Border.all(
+                                                    color:
+                                                        AppColor.strokeColor)),
+                                            child: Center(
+                                              child: Text(
+                                                ((gameState.correctAnswers
+                                                                    ?.length ??
+                                                                0) -
+                                                            1) >=
+                                                        index
+                                                    ? (gameState.correctAnswers?[
+                                                            index] ??
+                                                        '')
+                                                    : '',
+                                                style: TextStyle(
+                                                    color:
+                                                        AppColor.darkBlueColor,
+                                                    fontSize: 0.04.sw,
+                                                    fontWeight:
+                                                        FontWeight.w900),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        onAcceptWithDetails:
+                                            (DragTargetDetails<String>
+                                                details) async {
+                                          await context
+                                              .read<SpellingCubit>()
+                                              .addTheCorrectAnswer(
+                                                  answer: details.data);
+
+                                          if (context
+                                              .read<SpellingCubit>()
+                                              .checkCurrentFinished()) {
+                                            if (context
+                                                .read<SpellingCubit>()
+                                                .checkIsCorrectAnswer()) {
                                               await context
                                                   .read<
                                                       CurrentGamePhoneticsCubit>()
@@ -85,26 +112,20 @@ class SpellingGameScreen extends StatelessWidget {
                                               int countOfCorrect = await context
                                                   .read<SpellingCubit>()
                                                   .increaseCountOfCorrectAnswers();
-                                              await context
-                                                  .read<SpellingCubit>()
-                                                  .addTheCorrectAnswer(
-                                                      answer: details.data);
+
                                               context
                                                   .read<
                                                       CurrentGamePhoneticsCubit>()
                                                   .addStarToStudent(
                                                     stateOfCountOfCorrectAnswer:
                                                         countOfCorrect,
-                                                    mainCountOfQuestion: gameState
-                                                            .gameData
-                                                            ?.gameLetters
-                                                            ?.length ??
-                                                        0,
+                                                    mainCountOfQuestion:
+                                                        gameState
+                                                                .gameData
+                                                                ?.gameLetters
+                                                                ?.length ??
+                                                            0,
                                                   );
-
-                                     if(context
-                                        .read<SpellingCubit>()
-                                        .checkCurrentFinished()){
                                               bool isLastLesson = context
                                                   .read<SpellingCubit>()
                                                   .checkIfIsTheLastGameOfLesson();
@@ -112,36 +133,37 @@ class SpellingGameScreen extends StatelessWidget {
                                                 await Future.delayed(
                                                     const Duration(seconds: 2));
                                                 Navigator.of(context).pop();
-                                              }
-
+                                              } else {
                                                 await context
                                                     .read<
                                                         CurrentGamePhoneticsCubit>()
                                                     .backToMainAvatar();
-                                                await context
-                                                    .read<SpellingCubit>()
-                                                    .navigateToNextIndex();
-
                                                 // await context
                                                 //     .read<SpellingCubit>()
-                                                //     .getTheRandomWord(awaitTime: false);
+                                                //     .navigateToNextIndex();
                                               }
-
+                                            }
+                                            else {
+                                              context
+                                                  .read<
+                                                      CurrentGamePhoneticsCubit>()
+                                                  .addWrongAnswer(
+                                                      actionOfWrongAnswer: () {
+                                                // TalkTts.startTalk(text: gameData.mainLetter ?? '');
+                                              });
+                                              await context
+                                                  .read<SpellingCubit>()
+                                                  .clearAnswers();
+                                            }
                                           }
-                                    else if(details.data !=
-                                        gameState.gameData?.correctAns?.split('')[index].toLowerCase()) {
-                                      context
-                                          .read<
-                                          CurrentGamePhoneticsCubit>()
-                                          .addWrongAnswer(
-                                          actionOfWrongAnswer: () {
-                                            // TalkTts.startTalk(text: gameData.mainLetter ?? '');
-                                          });
-                                    }
+
+                                          // await context
+                                          //     .read<SpellingCubit>()
+                                          //     .getTheRandomWord(awaitTime: false);
                                         },
-                                )),
+                                      )),
+                            ),
                           ),
-                        ),
                           10.ph,
                         ],
                       )
@@ -187,7 +209,8 @@ class SpellingGameScreen extends StatelessWidget {
                                 body: (gameState.cardsLetters)
                                         ?.map((e) => e.letter)
                                         .toSet()
-                                        .toList()[index] ?? '',
+                                        .toList()[index] ??
+                                    '',
                                 maxHeight: 0.095.sh,
                                 maxWidth: 0.07.sw,
                                 index: index,

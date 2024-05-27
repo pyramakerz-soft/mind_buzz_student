@@ -62,7 +62,6 @@ class SpellingCubit extends Cubit<SpellingInitial> {
     correctAnswer.add(answer);
     emit(state.copyWith(correctAnswers: correctAnswer));
 
-    print('correctAnswer:${correctAnswer.length}');
   }
 
   Future<int> increaseCountOfCorrectAnswers() async {
@@ -70,6 +69,9 @@ class SpellingCubit extends Cubit<SpellingInitial> {
     sub = sub + 1;
     emit(state.copyWith(correctAnswer: sub));
     return Future.value(state.correctAnswer);
+  }
+  clearAnswers(){
+    emit(state.copyWith(correctAnswers: []));
   }
 
   bool checkIfIsTheLastGameOfLesson() {
@@ -79,10 +81,11 @@ class SpellingCubit extends Cubit<SpellingInitial> {
         return false;
       }
   }
+
+  bool checkIsCorrectAnswer(){
+   return state.gameData?.correctAns?.toLowerCase() == state.correctAnswers?.join().toLowerCase();
+  }
   bool checkCurrentFinished() {
-    print(state.gameData?.correctAns);
-    print(state.correctAnswers);
-    print('state.correctAnswers');
     return state.gameData?.correctAns?.split('').length == state.correctAnswers?.length;
   }
 }
