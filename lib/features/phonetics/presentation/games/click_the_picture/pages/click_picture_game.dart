@@ -66,8 +66,7 @@ class ClickPictureGame extends StatelessWidget {
                             .correctIndexes
                             .contains(index),
                         onTap: () {
-
-                          // if (clickPictureCubit.checkCurrentClickTime(current: DateTime.now())) {
+                          if (clickPictureCubit.checkCurrentClickTime(current: DateTime.now())) {
                             if (!stateOfGameData.correctIndexes
                                 .contains(index)) {
                               if (clickPictureCubit.addAnswer(index)) {
@@ -92,7 +91,7 @@ class ClickPictureGame extends StatelessWidget {
                                 });
                               }
                             }
-                          // }
+                          }
                         },
                       )),
             ),

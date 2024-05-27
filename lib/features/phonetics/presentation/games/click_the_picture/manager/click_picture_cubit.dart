@@ -52,11 +52,13 @@ class ClickPictureCubit extends Cubit<ClickPictureInitial> {
   }
 
   checkCurrentClickTime({required DateTime current}){
-    if (state.currentPressTime == null ||
-        current.difference(state.currentPressTime!) > Duration(seconds: 2)) {
-      state.copyWith(currentPressTime: current);
+    if (current.difference(state.currentPressTime ?? current) >  Duration(seconds: 2)) {
+      emit(state.copyWith(currentPressTime: current));
       return true;
     }
-    else return false;
+    else {
+      emit(state.copyWith(currentPressTime: current));
+      return false;
+    }
   }
 }
