@@ -19,8 +19,6 @@ class ClickThePictureWithWord extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final stateOfAvatar =
-        context.watch<CurrentGamePhoneticsCubit>().state.stateOfAvatar;
     return Container(
         alignment: Alignment.center,
         // height: MediaQuery.of(context).size.height - (70.h),
@@ -36,91 +34,115 @@ class ClickThePictureWithWord extends StatelessWidget {
                 border: Border.all(
                     color: AppColorPhonetics.boarderColor, width: 5)),
             child: BlocConsumer<ClickThePictureWithWordCubit,
-                    ClickThePictureWithWordInitial>(
-                listener: (context, state) {},
-                builder: (context, gameState) {
-                  return Wrap(
-                      spacing: 25,
-                      // runSpacing: 10,
-                      alignment: WrapAlignment.center,
-                      children: List.generate(
-                          (gameData.gameImages?.length ?? 0),
-                          (index) => SingleElement(
-                              width: (MediaQuery.of(context).size.width -
-                                      (130 + 40)) /
-                                  5,
-                              height: (MediaQuery.of(context).size.height -
-                                      (50.h + 90 + 20)) /
-                                  2,
-                              index: index,
-                              background: gameState.backGround[index],
-                              image: gameData.gameImages?[index].image ?? '',
-                              selected: gameState.correctIndexes
-                                  .contains(gameData.gameImages?[index].id),
-                              onTap: () async {
-                                print('stateOfAvatar:$stateOfAvatar');
-                                if ((stateOfAvatar ==
-                                        BasicOfEveryGame.stateOIdle ||
-                                    stateOfAvatar == null)&& gameState.correctIndexes
-                                    .contains(gameData.gameImages?[index].id)==false) {
-                                  print("###:${(gameState.chooseWord?.word ?? '')}, ${(gameData.gameImages?[index].word)}");
-                                  if ((gameState.chooseWord?.word ?? '') ==
-                                      (gameData.gameImages?[index].word)) {
-                                    await context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .animationOfCorrectAnswer().whenComplete(() async {
-                                      context
-                                          .read<ClickThePictureWithWordCubit>().addTheCorrectAnswer(idOfUserAnswer:(gameData
-                                          .gameImages?[index].id ??
-                                          0));
-                                      context
-                                          .read<ClickThePictureWithWordCubit>().submitCorrectTheAnswer();
-                                      final sub = context
-                                          .read<ClickThePictureWithWordCubit>().state.correctAnswer;
-                                      context
-                                          .read<
-                                          CurrentGamePhoneticsCubit>()
-                                          .addStarToStudent(
-                                          stateOfCountOfCorrectAnswer:
-                                          sub??0,
-                                          mainCountOfQuestion:
-                                          gameData.gameImages
-                                              ?.length ??
-                                              0);
-                                      if((context
-                                          .read<ClickThePictureWithWordCubit>().state.gameData.gameImages?.length??0) == sub){
-                                        await Future.delayed(Duration(seconds: 1));
-                                        Navigator.of(context).pop();
-
-                                      }else {
-                                        AudioPlayerClass.player.onPlayerComplete.listen((finished) async {
-                                          await context
-                                              .read<
-                                              ClickThePictureWithWordCubit>()
-                                              .getTheRandomWord();
-                                        });
-                                      }
-
-                                    });
-
-                                  } else {
-                                    await context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .addWrongAnswer(
-                                      actionOfWrongAnswer: (){
+                ClickThePictureWithWordInitial>(listener: (context, state) {
+              context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
+                  stateOfStringIsWord: true,
+                  stateOfStringWillSay: state.chooseWord?.word ?? '');
+            }, builder: (context, gameState) {
+              return Wrap(
+                  spacing: 25,
+                  // runSpacing: 10,
+                  alignment: WrapAlignment.center,
+                  children: List.generate(
+                      (gameData.gameImages?.length ?? 0),
+                      (index) => BlocConsumer<CurrentGamePhoneticsCubit,
+                              CurrentGamePhoneticsState>(
+                          listener: (context, state) {},
+                          builder: (context, generalStateOfGame) {
+                            return SingleElement(
+                                width: (MediaQuery.of(context).size.width -
+                                        (130 + 40)) /
+                                    5,
+                                height: (MediaQuery.of(context).size.height -
+                                        (50.h + 90 + 20)) /
+                                    2,
+                                index: index,
+                                background: gameState.backGround[index],
+                                image: gameData.gameImages?[index].image ?? '',
+                                selected: gameState.correctIndexes
+                                    .contains(gameData.gameImages?[index].id),
+                                onTap: () async {
+                                  print('stateOfAvatar:$generalStateOfGame');
+                                  if ((generalStateOfGame.stateOfAvatar ==
+                                              BasicOfEveryGame.stateOIdle ||
+                                          generalStateOfGame.stateOfAvatar ==
+                                              null) &&
+                                      gameState.correctIndexes.contains(
+                                              gameData.gameImages?[index].id) ==
+                                          false) {
+                                    print(
+                                        "###:${(gameState.chooseWord?.word ?? '')}, ${(gameData.gameImages?[index].word)}, ${generalStateOfGame.stateOfAvatar}");
+                                    if ((gameState.chooseWord?.word ?? '') ==
+                                        (gameData.gameImages?[index].word)) {
+                                      await context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .animationOfCorrectAnswer()
+                                          .whenComplete(() async {
                                         context
-                                            .read<ClickThePictureWithWordCubit>()
+                                            .read<
+                                                ClickThePictureWithWordCubit>()
+                                            .addTheCorrectAnswer(
+                                                idOfUserAnswer: (gameData
+                                                        .gameImages?[index]
+                                                        .id ??
+                                                    0));
+                                        context
+                                            .read<
+                                                ClickThePictureWithWordCubit>()
+                                            .submitCorrectTheAnswer();
+                                        final sub = context
+                                            .read<
+                                                ClickThePictureWithWordCubit>()
+                                            .state
+                                            .correctAnswer;
+                                        context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .addStarToStudent(
+                                                stateOfCountOfCorrectAnswer:
+                                                    sub ?? 0,
+                                                mainCountOfQuestion: gameData
+                                                        .gameImages?.length ??
+                                                    0);
+                                        if ((context
+                                                    .read<
+                                                        ClickThePictureWithWordCubit>()
+                                                    .state
+                                                    .gameData
+                                                    .gameImages
+                                                    ?.length ??
+                                                0) ==
+                                            sub) {
+                                          await Future.delayed(
+                                              Duration(seconds: 1));
+                                          Navigator.of(context).pop();
+                                        } else {
+                                          AudioPlayerClass
+                                              .player.onPlayerComplete
+                                              .listen((finished) async {
+                                            await context
+                                                .read<
+                                                    ClickThePictureWithWordCubit>()
+                                                .getTheRandomWord();
+                                          });
+                                        }
+                                      });
+                                    } else {
+                                      await context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .addWrongAnswer(
+                                              actionOfWrongAnswer: () {
+                                        context
+                                            .read<
+                                                ClickThePictureWithWordCubit>()
                                             .sayTheCorrectAnswer();
-                                      }
-                                    );
-
+                                      });
+                                    }
+                                    context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .backToMainAvatar();
                                   }
-                                context
-                                    .read<
-                                    CurrentGamePhoneticsCubit>()
-                                    .backToMainAvatar();
-                                }
-                              })));
-                })));
+                                });
+                          })));
+            })));
   }
 }

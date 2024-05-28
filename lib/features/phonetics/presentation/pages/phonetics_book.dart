@@ -28,7 +28,12 @@ class PhoneticsBook extends StatefulWidget {
   final int lessonId;
   final int gameId;
   final bool firstTry;
-  const PhoneticsBook({Key? key, required this.lessonId, required this.gameId, this.firstTry = false}) : super(key: key);
+  const PhoneticsBook(
+      {Key? key,
+      required this.lessonId,
+      required this.gameId,
+      this.firstTry = false})
+      : super(key: key);
   @override
   State<StatefulWidget> createState() {
     return _PhoneticsBook();
@@ -60,7 +65,8 @@ class _PhoneticsBook extends State<PhoneticsBook> {
     return Scaffold(
         body: BlocProvider<ContactLessonBloc>(
             create: (_) => di.sl<ContactLessonBloc>()
-              ..add(GetContactLessonRequest(lessonId: widget.lessonId,gameId: widget.gameId)),
+              ..add(GetContactLessonRequest(
+                  lessonId: widget.lessonId, gameId: widget.gameId)),
             child: BlocProvider<CurrentGamePhoneticsCubit>(
                 create: (_) => di.sl<CurrentGamePhoneticsCubit>(),
                 child: BlocConsumer<CurrentGamePhoneticsCubit,
@@ -115,10 +121,22 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                 try {
                                   MainDataOfPhonetics? dataType =
                                       state.getMainContactData(
-                                          index: widget.firstTry || state.data.firstWhere((element) => element.id == widget.gameId).nextGameId==null?
-                                          state.data.indexWhere((element) => element.id == widget.gameId):
-                                          state.data.indexWhere((element) => element.id ==
-                                              state.data.firstWhere((element) => element.id == widget.gameId).nextGameId));
+                                          index: widget.firstTry ||
+                                                  state.data
+                                                          .firstWhere(
+                                                              (element) =>
+                                                                  element.id ==
+                                                                  widget.gameId)
+                                                          .nextGameId ==
+                                                      null
+                                              ? state.data.indexWhere((element) =>
+                                                  element.id == widget.gameId)
+                                              : state.data.indexWhere((element) =>
+                                                  element.id ==
+                                                  state.data
+                                                      .firstWhere((element) =>
+                                                          element.id == widget.gameId)
+                                                      .nextGameId));
                                   print('dataType:$dataType');
                                   if (dataType != null) {
                                     context
@@ -126,13 +144,28 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                         .updateDataOfCurrentGame(
                                             basicData: dataType,
                                             gameData: state.data,
-                                      gameIndex: widget.firstTry || state.data.firstWhere((element) => element.id == widget.gameId).nextGameId==null?
-                                      state.data.indexWhere((element) => element.id == widget.gameId):
-                                      state.data.indexWhere((element) => element.id ==
-                                          state.data.firstWhere((element) => element.id == widget.gameId).nextGameId)
-                                    );
-                                  }
-                                  else {
+                                            gameIndex: widget.firstTry ||
+                                                    state.data
+                                                            .firstWhere(
+                                                                (element) =>
+                                                                    element
+                                                                        .id ==
+                                                                    widget
+                                                                        .gameId)
+                                                            .nextGameId ==
+                                                        null
+                                                ? state.data.indexWhere(
+                                                    (element) =>
+                                                        element.id ==
+                                                        widget.gameId)
+                                                : state.data.indexWhere((element) =>
+                                                    element.id ==
+                                                    state.data
+                                                        .firstWhere((element) =>
+                                                            element.id ==
+                                                            widget.gameId)
+                                                        .nextGameId));
+                                  } else {
                                     context
                                         .read<ContactLessonBloc>()
                                         .add(ThisTypeNotSupportedRequest());
@@ -143,36 +176,34 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                       .add(ThisTypeNotSupportedRequest());
                                 }
                               }
-                            },
-                                builder: (context, stateOfGameData) {
+                            }, builder: (context, stateOfGameData) {
                               if (stateOfGameData is GetContactInitial) {
                                 return Stack(
                                   children: [
-                                    if(stateOfGame.countOfTries == 0)...{
-                                      widgetOfTries(context: context,
-                                      nextGameIndex:stateOfGameData.data.indexWhere((element) => element.id == widget.gameId))
-                                    }
-                                    else
-                                      ...{
-                                        if (stateOfGame
-                                            .basicData?.gameData?.isConnect ==
-                                            true) ...{
-                                          BasedOfGameConnect(
-                                            stateOfGame: stateOfGame,
-                                            stateOfGameData: stateOfGameData,
-                                          ),
-                                        } else
-                                          ...{
-                                            BasedOfGamePhonetics(
-                                              stateOfGame: stateOfGame,
-                                              stateOfGameData: stateOfGameData,
-                                            ),
-                                          },
+                                    if (stateOfGame.countOfTries == 0) ...{
+                                      widgetOfTries(
+                                          context: context,
+                                          nextGameIndex: stateOfGameData.data
+                                              .indexWhere((element) =>
+                                                  element.id == widget.gameId))
+                                    } else ...{
+                                      if (stateOfGame
+                                              .basicData?.gameData?.isConnect ==
+                                          true) ...{
+                                        BasedOfGameConnect(
+                                          stateOfGame: stateOfGame,
+                                          stateOfGameData: stateOfGameData,
+                                        ),
+                                      } else ...{
+                                        BasedOfGamePhonetics(
+                                          stateOfGame: stateOfGame,
+                                          stateOfGameData: stateOfGameData,
+                                        ),
                                       },
+                                    },
                                   ],
                                 );
-                              }
-                              else if (stateOfGameData
+                              } else if (stateOfGameData
                                   is GetContactLoadingInitial) {
                                 return stateOfGame.avatarArtboardLoading != null
                                     ? Rive(
@@ -181,8 +212,7 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                         fit: BoxFit.fill,
                                       )
                                     : const SizedBox();
-                              }
-                              else if (stateOfGameData
+                              } else if (stateOfGameData
                                   is NotSupportTypeState) {
                                 return const Text(
                                     'the data of game is not supported');
@@ -190,9 +220,19 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                 return const SizedBox();
                               }
                             }),
-                            if (countOfFingers > 1) ...{
+                            if (countOfFingers > 1 ||
+                                (contextOfGame
+                                            .watch<CurrentGamePhoneticsCubit>()
+                                            .state
+                                            .stateOfAvatar !=
+                                        null &&
+                                    contextOfGame
+                                            .watch<CurrentGamePhoneticsCubit>()
+                                            .state
+                                            .stateOfAvatar !=
+                                        BasicOfEveryGame.stateOIdle)) ...{
                               Container(
-                                color: Colors.red,
+                                color: Colors.transparent,
                                 width: MediaQuery.of(context).size.width,
                                 height: MediaQuery.of(context).size.height,
                               )
