@@ -27,6 +27,7 @@ class GameModel extends Equatable {
   List<GameImagesModel>? gameImages;
   int? lessonId;
   int? stars;
+  int? isEdited;
   int? nextGameId;
   int? previousGameId;
   // String? sectionInBook;
@@ -50,6 +51,7 @@ class GameModel extends Equatable {
       this.nextGameId,
       this.correctAns,
       this.previousGameId,
+      this.isEdited,
       this.gameImages});
   factory GameModel.fromJson(Map<String, dynamic> json) {
     return _$GameModelFromJson(json);
@@ -77,6 +79,7 @@ class GameModel extends Equatable {
         gameImages,
     nextGameId,
     correctAns,
+    isEdited,
     previousGameId
       ];
 }

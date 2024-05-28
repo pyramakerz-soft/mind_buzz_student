@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
@@ -67,7 +69,7 @@ class WhoAmIScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                     const Positioned(
+                                const Positioned(
                                   top: 0,
                                   right: 0,
                                   child: SizedBox(
@@ -78,71 +80,91 @@ class WhoAmIScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                  Positioned(
-                                  top: 50,
+                                Positioned(
+                                  top: 30,
                                   left: 25,
-                                  child: Row(
+                                  height: 0.2.sh,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      GestureDetector(
-                                          onTap: () {
-                                            di.sl<GetProgramsHomeBloc>()..add(LogOutRequest());
-                                            context.read<WhoAmICubit>().clearIndex();
-                                            Utils.navigateAndRemoveUntilTo(BlocProvider(create: (_) => LoadingCubit(), child: LoginScreen()), context);
-                                          },
-                                          child: Container(
-                                              padding: const EdgeInsets.all(9),
-                                              alignment: Alignment.center,
-                                              height: 42,
-                                              width: 42,
-                                              decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: AppColor.darkBlueColor),
-                                              child: SvgPicture.asset(
-                                                AppSvgImages.iconLogout,
-                                                fit: BoxFit.fill,
-                                              ))),
-                                      20.pw,
-                         
-                                      Text(
-                                        'Sign In',
-                                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                              color: AppColor.darkBlueColor,
-                                              fontSize: 40,
-                                              fontWeight: FontWeight.w700,
-                                              fontFamily: AppTheme.getFontFamily5(),
-                                            ),
+                                      Row(
+                                        children: [
+                                          GestureDetector(
+                                              onTap: () {
+                                                di.sl<GetProgramsHomeBloc>()
+                                                  ..add(LogOutRequest());
+                                                context
+                                                    .read<WhoAmICubit>()
+                                                    .clearIndex();
+                                                Utils.navigateAndRemoveUntilTo(
+                                                    BlocProvider(
+                                                        create: (_) =>
+                                                            LoadingCubit(),
+                                                        child: LoginScreen()),
+                                                    context);
+                                              },
+                                              child: Container(
+                                                  padding: const EdgeInsets.all(9),
+                                                  alignment: Alignment.center,
+                                                  height: 42,
+                                                  width: 42,
+                                                  decoration: const BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(10)),
+                                                      color:
+                                                          AppColor.darkBlueColor),
+                                                  child: SvgPicture.asset(
+                                                    AppSvgImages.iconLogout,
+                                                    fit: BoxFit.fill,
+                                                  ))),
+                                          20.pw,
+                                          Text(
+                                            'Sign In',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium
+                                                ?.copyWith(
+                                                  color: AppColor.darkBlueColor,
+                                                  fontSize: 40,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontFamily:
+                                                      AppTheme.getFontFamily5(),
+                                                ),
+                                          ),
+                                        ],
                                       ),
+
                                     ],
                                   ),
                                 ),
-                                 
                               ],
                             ),
                           ),
                         ],
                       ),
                     )),
+
                 Positioned(
-                    bottom: -20,
-                    left: -50,
-                    child: Transform.rotate(
-                      angle: 0.25,
-                      child: SizedBox(
-                        height: 170,
-                        width: 170,
-                        child: RiveAnimation.asset(
-                          AppAnimation.beeRive,
-                        ),
+                  top: 0.11.sh,
+                  child: Transform.rotate(
+                    angle: 0.25,
+                    child: SizedBox(
+                      height: 0.17.sh,
+                      width: 0.35.sw,
+                      child: RiveAnimation.asset(
+                        AppAnimation.beeRive,
+                        fit: BoxFit.fill,
                       ),
-                    )
-                    // Image.asset(
-                    //   AppImages.halfBee,
-                    //   height: 150,
-                    // ),
-                    )
+                    ),
+                  ),
+                )
+
               ],
             ),
             20.ph,
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 24),
+              margin: const EdgeInsets.symmetric(horizontal: 24,vertical: 30),
               child: Column(
                 children: [
                   const ItemInChoose(
@@ -165,7 +187,8 @@ class WhoAmIScreen extends StatelessWidget {
               dataFunction: () {
                 if (currentIndex != null) {
                   log('currentIndex:$currentIndex');
-                  Utils.navigateAndRemoveUntilTo(const BasedHomeScreen(), context);
+                  Utils.navigateAndRemoveUntilTo(
+                      const BasedHomeScreen(), context);
                 } else {
                   const snackBar = SnackBar(
                     content: Text('select who you are'),

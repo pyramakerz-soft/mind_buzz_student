@@ -53,6 +53,7 @@ abstract class MainDataOfPhonetics {
   late String background;
   BasicOfEveryGame? gameData;
   late Color backGroundOfStarBar;
+
   static getGameDataType(
       {required String subLetter,
       required String subGame,
@@ -159,6 +160,7 @@ class SPhonetics implements MainDataOfPhonetics {
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
 
   @override
   String background = AppImagesPhonetics.backGroundOfS;

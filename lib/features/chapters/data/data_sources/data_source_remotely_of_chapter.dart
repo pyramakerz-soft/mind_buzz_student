@@ -23,7 +23,9 @@ log('getUnitDataRemotely');
     );
     if (dio.validResponse(response)) {
       final List<LessonModel> l = [];
-      response.data['data'].forEach((e) => l.add(LessonModel.fromJson(e)));
+      response.data['data'].forEach((e) {
+        l.add(LessonModel.fromJson(e));
+      });
       return l;
     } else {
       throw response.data['msg'];

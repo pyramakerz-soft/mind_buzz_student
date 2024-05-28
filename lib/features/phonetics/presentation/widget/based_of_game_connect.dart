@@ -26,6 +26,8 @@ import '../games/click_the_picture_with_word/page/click_the_picture_with_word.da
 import '../games/click_the_sound/pages/click_the_sound_game.dart';
 import '../games/drag_out/manager/drag_out_cubit.dart';
 import '../games/drag_out/pages/drag_out_game.dart';
+import '../games/sorting_game/manager/sorting_cubit.dart';
+import '../games/sorting_game/pages/sorting_game.dart';
 import '../games/x_out_game/pages/x_out_game.dart';
 import '../games/spelling_game/manager/spelling_cubit.dart';
 import '../games/spelling_game/pages/spelling_game.dart';
@@ -131,7 +133,7 @@ class BasedOfGameConnect extends StatelessWidget {
                       ],
                     ),
                   ),
-                  stateOfGame.basicData is SpellTheWord
+                  stateOfGame.basicData!.gameData!.isRound
                       ? Padding(
                           padding: EdgeInsets.only(left: 10.w),
                           child: Container(
@@ -266,6 +268,18 @@ class BasedOfGameConnect extends StatelessWidget {
                         allGames: stateOfGameData.data),
                     child: SpellingGameScreen())
               }
+
+              else if ((stateOfGame.basicData?.gameData is SortingPicturesGame)) ...{
+                  BlocProvider<sortingCubit>(
+                      create: (_) => sortingCubit(
+                          gameData: stateOfGameData.data[stateOfGame.index],
+                          index: stateOfGame.index,
+                          background:
+                          (stateOfGame.basicData?.gameData as SortingPicturesGame)
+                              .woodenBackground,
+                          allGames: stateOfGameData.data),
+                      child: SortingGameScreen())
+                }
             ],
           ),
         ],

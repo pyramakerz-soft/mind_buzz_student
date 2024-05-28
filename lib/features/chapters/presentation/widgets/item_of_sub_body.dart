@@ -27,7 +27,7 @@ class ItemOfSubBody extends StatelessWidget {
         return Column(
           children: [
             Text(
-              "Lesson",
+              "Game",
               style: Theme.of(context)
                   .textTheme
                   .headlineLarge

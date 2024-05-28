@@ -48,6 +48,7 @@ List<ChapterModel> handlingDataOfChapters({required List<LessonModel> lessons}){
   Map<int, List<LessonModel>>listOfData =  groupBy(lessons, (LessonModel obj) => (obj.chapter?.id??0));
   List<ChapterModel> dataOfChapters = [];
   lessons.forEach((lesson) {
+
     dataOfChapters.add(
         ChapterModel(
           id: lesson.id,
@@ -61,8 +62,9 @@ List<ChapterModel> handlingDataOfChapters({required List<LessonModel> lessons}){
         ),
     );
     lesson.games?.asMap().forEach((i,game) {
-      dataOfChapters.add(
-        ChapterModel(
+      if(game.isEdited == 0) {
+        dataOfChapters.add(
+          ChapterModel(
             id: game.id,
             lessonId: game.lessonId,
             name: 'Lesson ${i + 1}',
@@ -71,8 +73,9 @@ List<ChapterModel> handlingDataOfChapters({required List<LessonModel> lessons}){
             levelImg: AppImages.imageCloseLesson,
             isGame: true,
             isLetter: false,
-        ),
-      );
+          ),
+        );
+      }
     });
 
   });

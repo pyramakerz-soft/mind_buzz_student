@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,9 +43,18 @@ class SpellingGameScreen extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      Image.network(
-                        gameState.gameData!.gameImages![0].image!,
+                      CachedNetworkImage(
+                        imageUrl:gameState.gameData!.gameImages![0].image!,
                         height: 0.35.sh,
+                        placeholder: (context, url) => const Center(
+                          child: CupertinoActivityIndicator(),
+                        ),
+                        errorWidget: (context, url, error) =>
+                        const Icon(
+                          Icons.error,
+                          color: Colors.red,
+                        ),
+                        // height: ,
                       ),
                       7.ph,
                       Padding(
