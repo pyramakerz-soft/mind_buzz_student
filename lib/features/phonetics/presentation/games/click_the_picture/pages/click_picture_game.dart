@@ -21,16 +21,16 @@ class ClickPictureGame extends StatelessWidget {
     return BlocConsumer<ClickPictureCubit, ClickPictureInitial>(
         listener: (context, state) {
       int success = state.correctIndexes.length;
-      if (state.correctIndexes.length ==
+      if (success ==
           (gameData.gameImages?.where((e) => e.correct == 1).toList().length ??
               1)) {
         Future.delayed(Duration(seconds: 2), () {
           Navigator.pop(context);
         });
       }
-      if (success == 2 || success == 4 || success ==5) {
-        context.read<CurrentGamePhoneticsCubit>().increaseDirectlyCountOfStar();
-      }
+      // if (success == 2 || success == 4 || success ==5) {
+      //   context.read<CurrentGamePhoneticsCubit>().increaseDirectlyCountOfStar();
+      // }
     }, builder: (context, stateOfGameData) {
       ClickPictureCubit clickPictureCubit = context.watch<ClickPictureCubit>();
       return Container(
@@ -73,6 +73,11 @@ class ClickPictureGame extends StatelessWidget {
                                 context
                                     .read<CurrentGamePhoneticsCubit>()
                                     .animationOfCorrectAnswer();
+                                print(stateOfGameData.correctIndexes.length);
+                                context
+                                    .read<CurrentGamePhoneticsCubit>()
+                                    .addStarToStudent(stateOfCountOfCorrectAnswer: stateOfGameData.correctIndexes.length + 1,
+                                    mainCountOfQuestion: stateOfGameData.gameData.gameImages!.where((element) => element.correct == 1).length);
                                 context
                                     .read<CurrentGamePhoneticsCubit>()
                                     .animationOfCorrectAnswer();

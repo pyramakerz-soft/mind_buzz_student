@@ -24,10 +24,7 @@ class ClickPictureCubit extends Cubit<ClickPictureInitial> {
       : super(ClickPictureInitial(
             gameData: gameData, backGround: background, correctIndexes: [])) {
     generateRandomPictures();
-    Future.delayed(const Duration(seconds: 2),(){
       sayTheLetter();
-    });
-
   }
 
   bool addAnswer(int index) {
@@ -48,11 +45,12 @@ class ClickPictureCubit extends Cubit<ClickPictureInitial> {
   }
 
   sayTheLetter() async {
+    await TalkTts.startTalk(text: state.gameData.inst ?? '');
     await AudioPlayerClass.startPlaySound(soundPath: AppSound.getSoundOfLetter(mainGameLetter: state.gameData.mainLetter ?? ''));
   }
 
   checkCurrentClickTime({required DateTime current}){
-    if (current.difference(state.currentPressTime ?? current) >  Duration(seconds: 2)) {
+    if (current.difference(state.currentPressTime ?? current) >  Duration(seconds: 1)) {
       emit(state.copyWith(currentPressTime: current));
       return true;
     }
@@ -61,4 +59,5 @@ class ClickPictureCubit extends Cubit<ClickPictureInitial> {
       return false;
     }
   }
+
 }
