@@ -169,20 +169,20 @@ class SPhonetics implements MainDataOfPhonetics {
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  String sadAvatar = AppImagesPhonetics.snowmanSadRiv;
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
   BasicOfEveryGame? gameData;
 
   @override
-  String winAvatar = AppImagesPhonetics.snowmanHappyRiv;
+  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   SPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
   @override
-  String idelAvatar = AppImagesPhonetics.snowmanIdleRiv;
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 }
 
 class APhonetics implements MainDataOfPhonetics {
@@ -197,20 +197,20 @@ class APhonetics implements MainDataOfPhonetics {
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  String sadAvatar = AppImagesPhonetics.snowmanSadRiv;
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
   BasicOfEveryGame? gameData;
 
   @override
-  String winAvatar = AppImagesPhonetics.snowmanHappyRiv;
+  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   APhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
   @override
-  String idelAvatar = AppImagesPhonetics.snowmanIdleRiv;
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 }
 
 class FPhonetics implements MainDataOfPhonetics {
@@ -225,20 +225,20 @@ class FPhonetics implements MainDataOfPhonetics {
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  String sadAvatar = AppImagesPhonetics.snowmanSadRiv;
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
   BasicOfEveryGame? gameData;
 
   @override
-  String winAvatar = AppImagesPhonetics.snowmanHappyRiv;
+  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   FPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
   @override
-  String idelAvatar = AppImagesPhonetics.snowmanIdleRiv;
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 }
 
 class MPhonetics implements MainDataOfPhonetics {
@@ -253,20 +253,20 @@ class MPhonetics implements MainDataOfPhonetics {
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  String sadAvatar = AppImagesPhonetics.snowmanSadRiv;
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
   BasicOfEveryGame? gameData;
 
   @override
-  String winAvatar = AppImagesPhonetics.snowmanHappyRiv;
+  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   MPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
   @override
-  String idelAvatar = AppImagesPhonetics.snowmanIdleRiv;
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 }
 
 class TPhonetics implements MainDataOfPhonetics {
@@ -281,20 +281,20 @@ class TPhonetics implements MainDataOfPhonetics {
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  String sadAvatar = AppImagesPhonetics.snowmanSadRiv;
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
   BasicOfEveryGame? gameData;
 
   @override
-  String winAvatar = AppImagesPhonetics.snowmanHappyRiv;
+  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   TPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
   @override
-  String idelAvatar = AppImagesPhonetics.snowmanIdleRiv;
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 }
 
 class CPhonetics implements MainDataOfPhonetics {
@@ -309,20 +309,20 @@ class CPhonetics implements MainDataOfPhonetics {
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  String sadAvatar = AppImagesPhonetics.snowmanSadRiv;
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
   BasicOfEveryGame? gameData;
 
   @override
-  String winAvatar = AppImagesPhonetics.snowmanHappyRiv;
+  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   CPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
   @override
-  String idelAvatar = AppImagesPhonetics.snowmanIdleRiv;
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 }
 
 class RPhonetics implements MainDataOfPhonetics {
@@ -337,20 +337,20 @@ class RPhonetics implements MainDataOfPhonetics {
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  String sadAvatar = AppImagesPhonetics.snowmanSadRiv;
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
   BasicOfEveryGame? gameData;
 
   @override
-  String winAvatar = AppImagesPhonetics.snowmanHappyRiv;
+  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   RPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
   @override
-  String idelAvatar = AppImagesPhonetics.snowmanIdleRiv;
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 }
 
 class IPhonetics implements MainDataOfPhonetics {
@@ -365,20 +365,20 @@ class IPhonetics implements MainDataOfPhonetics {
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  String sadAvatar = AppImagesPhonetics.snowmanSadRiv;
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
   BasicOfEveryGame? gameData;
 
   @override
-  String winAvatar = AppImagesPhonetics.snowmanHappyRiv;
+  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   IPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
   @override
-  String idelAvatar = AppImagesPhonetics.snowmanIdleRiv;
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 }
 
 class PPhonetics implements MainDataOfPhonetics {
@@ -393,20 +393,20 @@ class PPhonetics implements MainDataOfPhonetics {
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  String sadAvatar = AppImagesPhonetics.snowmanSadRiv;
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
   BasicOfEveryGame? gameData;
 
   @override
-  String winAvatar = AppImagesPhonetics.snowmanHappyRiv;
+  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   PPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
   @override
-  String idelAvatar = AppImagesPhonetics.snowmanIdleRiv;
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 }
 
 class HPhonetics implements MainDataOfPhonetics {
@@ -421,20 +421,20 @@ class HPhonetics implements MainDataOfPhonetics {
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  String sadAvatar = AppImagesPhonetics.snowmanSadRiv;
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
   BasicOfEveryGame? gameData;
 
   @override
-  String winAvatar = AppImagesPhonetics.snowmanHappyRiv;
+  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   HPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
   @override
-  String idelAvatar = AppImagesPhonetics.snowmanIdleRiv;
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 }
 
 class JPhonetics implements MainDataOfPhonetics {
@@ -449,20 +449,20 @@ class JPhonetics implements MainDataOfPhonetics {
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  String sadAvatar = AppImagesPhonetics.snowmanSadRiv;
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
   BasicOfEveryGame? gameData;
 
   @override
-  String winAvatar = AppImagesPhonetics.snowmanHappyRiv;
+  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   JPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
   @override
-  String idelAvatar = AppImagesPhonetics.snowmanIdleRiv;
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 }
 
 class UPhonetics implements MainDataOfPhonetics {
@@ -477,20 +477,20 @@ class UPhonetics implements MainDataOfPhonetics {
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  String sadAvatar = AppImagesPhonetics.snowmanSadRiv;
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
   BasicOfEveryGame? gameData;
 
   @override
-  String winAvatar = AppImagesPhonetics.snowmanHappyRiv;
+  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   UPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
   @override
-  String idelAvatar = AppImagesPhonetics.snowmanIdleRiv;
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 }
 
 class LPhonetics implements MainDataOfPhonetics {
@@ -505,20 +505,20 @@ class LPhonetics implements MainDataOfPhonetics {
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  String sadAvatar = AppImagesPhonetics.snowmanSadRiv;
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
   BasicOfEveryGame? gameData;
 
   @override
-  String winAvatar = AppImagesPhonetics.snowmanHappyRiv;
+  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   LPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
   @override
-  String idelAvatar = AppImagesPhonetics.snowmanIdleRiv;
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 }
 
 class BPhonetics implements MainDataOfPhonetics {
@@ -533,20 +533,20 @@ class BPhonetics implements MainDataOfPhonetics {
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  String sadAvatar = AppImagesPhonetics.snowmanSadRiv;
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
   BasicOfEveryGame? gameData;
 
   @override
-  String winAvatar = AppImagesPhonetics.snowmanHappyRiv;
+  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   BPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
   @override
-  String idelAvatar = AppImagesPhonetics.snowmanIdleRiv;
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 }
 
 class OPhonetics implements MainDataOfPhonetics {
@@ -561,20 +561,20 @@ class OPhonetics implements MainDataOfPhonetics {
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  String sadAvatar = AppImagesPhonetics.snowmanSadRiv;
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
   BasicOfEveryGame? gameData;
 
   @override
-  String winAvatar = AppImagesPhonetics.snowmanHappyRiv;
+  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   OPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
   @override
-  String idelAvatar = AppImagesPhonetics.snowmanIdleRiv;
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 }
 
 class GPhonetics implements MainDataOfPhonetics {
@@ -589,20 +589,20 @@ class GPhonetics implements MainDataOfPhonetics {
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  String sadAvatar = AppImagesPhonetics.snowmanSadRiv;
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
   BasicOfEveryGame? gameData;
 
   @override
-  String winAvatar = AppImagesPhonetics.snowmanHappyRiv;
+  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   GPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
   @override
-  String idelAvatar = AppImagesPhonetics.snowmanIdleRiv;
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 }
 
 class ConnectionWithoutSortingCups implements MainDataOfPhonetics {
@@ -613,12 +613,14 @@ class ConnectionWithoutSortingCups implements MainDataOfPhonetics {
   @override
   String background = AppImagesPhonetics.backGroundOfConnect;
 
+
+  @override
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
   @override
   String basicAvatar = AppImagesPhonetics.basicBess;
 
   @override
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
   @override
   BasicOfEveryGame? gameData;
 
@@ -629,8 +631,6 @@ class ConnectionWithoutSortingCups implements MainDataOfPhonetics {
     gameData = mineGameData;
   }
 
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 }
 
 class ConnectionSortingCups implements MainDataOfPhonetics {
@@ -670,12 +670,6 @@ class SpellTheWord implements MainDataOfPhonetics {
   String background = AppImagesPhonetics.backGroundOfConnect;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicBess;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfEveryGame? gameData;
 
   @override
@@ -687,4 +681,9 @@ class SpellTheWord implements MainDataOfPhonetics {
 
   @override
   String idelAvatar = AppImagesPhonetics.beeIdleRiv;
+  @override
+  String basicAvatar = AppImagesPhonetics.basicBess;
+
+  @override
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 }

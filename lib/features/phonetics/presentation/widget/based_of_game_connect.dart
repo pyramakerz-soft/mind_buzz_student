@@ -240,6 +240,28 @@ class BasedOfGameConnect extends StatelessWidget {
             ),
           ),
           /////////////////////game//////////////////
+          //  Column(
+          //           mainAxisAlignment: MainAxisAlignment.center,
+          //           crossAxisAlignment: CrossAxisAlignment.start,
+          //           children: [
+          //             60.ph,
+          //             if ((stateOfGame.basicData?.gameData is BingoGame)) ...{
+          //               BlocProvider<BingoCubit>(
+          //                   create: (_) => BingoCubit(
+          //                     gameData: stateOfGameData.data[stateOfGame.index],
+          //                   ),
+          //                   child: BingoGameScreen())
+          //             }
+          //                else if ((stateOfGame.basicData?.gameData is XOutGame)) ...{
+          //               BlocProvider<XOutCubit>(
+          //                   create: (_) => XOutCubit(
+          //                     //gameData: stateOfGameData.data[stateOfGame.index],
+          //                     gameData: stateOfGameData.data,
+          //                   ),
+          //                   child: XOutGameScreen())
+          //             }
+          //           ],
+          //         ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -254,7 +276,7 @@ class BasedOfGameConnect extends StatelessWidget {
               } else if ((stateOfGame.basicData?.gameData is XOutGame)) ...{
                 BlocProvider<XOutCubit>(
                     create: (_) => XOutCubit(
-                          gameData: stateOfGameData.data[stateOfGame.index],
+                          gameData: stateOfGameData.data,
                         ),
                     child: XOutGameScreen())
               } else if ((stateOfGame.basicData?.gameData is SpellingGame)) ...{

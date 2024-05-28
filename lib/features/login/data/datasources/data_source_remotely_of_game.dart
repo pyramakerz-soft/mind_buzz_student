@@ -30,6 +30,7 @@ class DataSourceRemotelyOfLoginImpl implements DataSourceRemotelyOfLogin {
       'email': email,
       'password': password
     });
+    print("response.data:${response.data}");
     if (dio.validResponse(response) && response.data['result'] != false) {
       return UserData.fromJson(response.data['data']);
     } else {

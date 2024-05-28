@@ -7,7 +7,7 @@ import 'package:mind_buzz_refactor/features/phonetics/domain/entities/game_model
 part 'x_out_state.dart';
 
 class XOutCubit extends Cubit<XOutInitial> {
-  final GameModel gameData;
+  final List<GameModel> gameData;
 
   XOutCubit({required this.gameData}) : super(XOutInitial(gameData: gameData));
 
@@ -35,5 +35,30 @@ class XOutCubit extends Cubit<XOutInitial> {
 
   void resetSelectedItems() {
     emit(state.copyWith(selectedItems: []));
+  }
+
+  updateGameIndex() {
+    int currentIndex = state.currentGameIndex ?? 0;
+    currentIndex = currentIndex + 1;
+    emit(state.copyWith(currentGameIndex: currentIndex));
+  }
+
+  bool isLastGame() {
+    int currentIndex = state.currentGameIndex ?? 0;
+    currentIndex = currentIndex + 1;
+    print('state.gameData?.length : ${state.gameData?.length}');
+    if ((state.gameData?.length ?? 0) > currentIndex) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  void startInteraction() {
+    emit(state.copyWith(isInteracting: true));
+  }
+
+  void stopInteraction() {
+    emit(state.copyWith(isInteracting: false));
   }
 }

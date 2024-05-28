@@ -150,12 +150,9 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                   children: [
                                     if(stateOfGame.countOfTries == 0)...{
                                       widgetOfTries(context: context,
-                                      nextGameIndex:
-                                      stateOfGameData.data.firstWhere((element) => element.id == widget.gameId).nextGameId==null?
-                                      stateOfGameData.data.indexWhere((element) => element.id == widget.gameId):
-                                      stateOfGameData.data.indexWhere((element) => element.id ==
-                                          stateOfGameData.data.firstWhere((element) => element.id == widget.gameId).nextGameId))
-                                    }else
+                                      nextGameIndex:stateOfGameData.data.indexWhere((element) => element.id == widget.gameId))
+                                    }
+                                    else
                                       ...{
                                         if (stateOfGame
                                             .basicData?.gameData?.isConnect ==
@@ -171,7 +168,7 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                               stateOfGameData: stateOfGameData,
                                             ),
                                           },
-                                      }
+                                      },
                                   ],
                                 );
                               }
@@ -195,7 +192,7 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                             }),
                             if (countOfFingers > 1) ...{
                               Container(
-                                color: Colors.transparent,
+                                color: Colors.red,
                                 width: MediaQuery.of(context).size.width,
                                 height: MediaQuery.of(context).size.height,
                               )
