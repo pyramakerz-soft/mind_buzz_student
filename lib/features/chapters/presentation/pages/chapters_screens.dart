@@ -60,10 +60,12 @@ class ChaptersScreen extends StatelessWidget {
             Column(children: [
               Container(
                 height: 50.h,
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   textDirection: TextDirection.ltr,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    20.pw,
+
                     GestureDetector(
                         onTap: () {
                           Navigator.of(context).pop();
@@ -75,18 +77,37 @@ class ChaptersScreen extends StatelessWidget {
                             alignment: Alignment.center,
                             decoration:  BoxDecoration(
                                 borderRadius: BorderRadius.circular(12.r),
-                                color: AppColor.darkBlueColor3),
+                                color: AppColor.darkBlueColor,),
                             child: Icon(
                              Icons.arrow_back_ios_new,
                               color: Colors.white,
                             ))),
-                    20.pw,
-                    StrokeText(
-                      text:  'Unit $unitsIndex of $unitsCount',
-                      isDisabled: false,
-                      fontSize: 0.04.sh,
-                      strokeWidth: 3,
+                    Text(
+                      'Unit $unitsIndex of $unitsCount',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: AppColor.darkBlueColor,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: AppTheme.getFontFamily5(),
+                      ),
                     ),
+                    GestureDetector(
+                        onTap: () {
+                          // Navigator.of(context).pop();
+                        },
+                        child: Container(
+                            padding: const EdgeInsets.all(10),
+                            height: 45,
+                            width: 45,
+                            alignment: Alignment.center,
+                            decoration:  BoxDecoration(
+                              borderRadius: BorderRadius.circular(12.r),
+                              color: AppColor.darkBlueColor,),
+                            child: Icon(
+                              Icons.arrow_forward_ios,
+                              color: Colors.white,
+                            ))),
+
 
 
                   ],

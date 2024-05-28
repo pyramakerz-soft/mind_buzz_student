@@ -275,10 +275,11 @@ class SortingCupsGame implements BasicOfEveryGame {
 
 class SortingPicturesGame implements BasicOfEveryGame {
   @override
-  bool isRound = false;
+  bool isRound = true;
 
   @override
-  String titleImage = AppImagesPhonetics.bingoNameGame;
+  String titleImage = AppImagesPhonetics.sortingGame;
+  String woodenBackground = AppImagesPhonetics.woodBackground;
 
 
   @override
@@ -291,7 +292,7 @@ class SortingPicturesGame implements BasicOfEveryGame {
 
 class SpellingGame implements BasicOfEveryGame {
   @override
-  bool isRound = false;
+  bool isRound = true;
 
   @override
   String titleImage = AppImagesPhonetics.spellingNameGame;

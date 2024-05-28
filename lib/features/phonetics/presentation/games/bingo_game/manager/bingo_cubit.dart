@@ -16,13 +16,20 @@ class BingoCubit extends Cubit<BingoInitial> {
 
   BingoCubit({required this.gameData})
       : super(BingoInitial(gameData: gameData)) {
-    List<GameLettersModel> supList = gameData.gameLetters ?? [];
-    // supList.addAll(List.from(supList));
-    supList.insert(4, GameLettersModel());
-    emit(state.copyWith(cardsLetters: supList.toList()));
+    // bool haveNullId  =  (gameData.gameLetters ?? []).where((element) => element.id == null).toList().isNotEmpty;
+    // if(haveNullId == false) {
+      List<GameLettersModel> supList = (gameData.gameLetters ?? []).where((element) => element.id != null).toList();
+      // supList.addAll(List.from(supList));
+      supList.insert(4, GameLettersModel());
+      emit(state.copyWith(cardsLetters: supList.toList()));
+    // }
+    print("supList:${state.cardsLetters?.length}");
     getTheRandomWord(awaitTime:true);
   }
 
+  updateStopAction(){
+    emit(state.copyWith(stopAction: !(state.stopAction??false)));
+  }
   getTheRandomWord({required bool awaitTime}) async {
     List<GameLettersModel> checkImages = [];
 

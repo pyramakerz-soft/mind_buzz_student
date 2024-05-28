@@ -37,8 +37,8 @@ class SingleElement extends StatelessWidget {
           children: [
             Image.asset(
               background,
-              width: width??(MediaQuery.of(context).size.width - (130 + 50 + 130)) / 6,
-              height: height??120.h,
+              width: width==null?(MediaQuery.of(context).size.width - (130 + 50 + 130)) / 6:((width??1)+20),
+              height: height == null?120.h:((height??1)+20),
               color: selected ? AppColor.selectedColor : null,
             ),
             Padding(

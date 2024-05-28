@@ -11,6 +11,8 @@ import 'package:mind_buzz_refactor/features/phonetics/presentation/games/click_t
 import 'package:mind_buzz_refactor/features/phonetics/presentation/games/x_out_game/manager/x_out_cubit.dart';
 import 'package:mind_buzz_refactor/features/phonetics/presentation/widget/star_widget.dart';
 
+import '../../../../core/assets_sound.dart';
+import '../../../../core/audio_player.dart';
 import '../../../../core/phonetics/assets_images_phonetics.dart';
 import '../../../../core/phonetics/basic_of_every_game.dart';
 import '../../../../core/phonetics/basic_of_phonetics.dart';
@@ -26,6 +28,8 @@ import '../games/click_the_picture_with_word/page/click_the_picture_with_word.da
 import '../games/click_the_sound/pages/click_the_sound_game.dart';
 import '../games/drag_out/manager/drag_out_cubit.dart';
 import '../games/drag_out/pages/drag_out_game.dart';
+import '../games/sorting_game/manager/sorting_cubit.dart';
+import '../games/sorting_game/pages/sorting_game.dart';
 import '../games/x_out_game/pages/x_out_game.dart';
 import '../games/spelling_game/manager/spelling_cubit.dart';
 import '../games/spelling_game/pages/spelling_game.dart';
@@ -131,7 +135,7 @@ class BasedOfGameConnect extends StatelessWidget {
                       ],
                     ),
                   ),
-                  stateOfGame.basicData is SpellTheWord
+                  stateOfGame.basicData!.gameData!.isRound
                       ? Padding(
                           padding: EdgeInsets.only(left: 10.w),
                           child: Container(
@@ -148,10 +152,35 @@ class BasedOfGameConnect extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                   onTap: () async {
+                                    print(
+                                        '%%:${MediaQuery.of(context).size.height}');
                                     await TalkTts.startTalk(
                                         text: stateOfGameData
                                                 .data[stateOfGame.index].inst ??
                                             '');
+                                    print(
+                                        'stateOfGame.stateOfStringIsWord:${stateOfGame.stateOfStringIsWord}');
+                                    print(
+                                        'stateOfGame.stateOfStringIsWord:${stateOfGame.stateOfStringWillSay}');
+                                    if (stateOfGame.stateOfStringIsWord ==
+                                        true) {
+                                      await TalkTts.startTalk(
+                                          text: stateOfGame
+                                                  .stateOfStringWillSay ??
+                                              '');
+
+                                      await AudioPlayerClass.startPlaySound(
+                                          soundPath: AppSound.getSoundOfLetter(
+                                              mainGameLetter: stateOfGame
+                                                      .stateOfStringWillSay ??
+                                                  ''));
+                                    } else {
+                                      await AudioPlayerClass.startPlaySound(
+                                          soundPath: AppSound.getSoundOfLetter(
+                                              mainGameLetter: stateOfGame
+                                                      .stateOfStringWillSay ??
+                                                  ''));
+                                    }
                                   },
                                   child: Container(
                                       alignment: Alignment.center,
@@ -189,10 +218,35 @@ class BasedOfGameConnect extends StatelessWidget {
                                 top: 0,
                                 child: GestureDetector(
                                   onTap: () async {
+                                    print(
+                                        '%%:${MediaQuery.of(context).size.height}');
                                     await TalkTts.startTalk(
                                         text: stateOfGameData
                                                 .data[stateOfGame.index].inst ??
                                             '');
+                                    print(
+                                        'stateOfGame.stateOfStringIsWord:${stateOfGame.stateOfStringIsWord}');
+                                    print(
+                                        'stateOfGame.stateOfStringIsWord:${stateOfGame.stateOfStringWillSay}');
+                                    if (stateOfGame.stateOfStringIsWord ==
+                                        true) {
+                                      await TalkTts.startTalk(
+                                          text: stateOfGame
+                                                  .stateOfStringWillSay ??
+                                              '');
+
+                                      await AudioPlayerClass.startPlaySound(
+                                          soundPath: AppSound.getSoundOfLetter(
+                                              mainGameLetter: stateOfGame
+                                                      .stateOfStringWillSay ??
+                                                  ''));
+                                    } else {
+                                      await AudioPlayerClass.startPlaySound(
+                                          soundPath: AppSound.getSoundOfLetter(
+                                              mainGameLetter: stateOfGame
+                                                      .stateOfStringWillSay ??
+                                                  ''));
+                                    }
                                   },
                                   child: Container(
                                       alignment: Alignment.center,
@@ -222,12 +276,42 @@ class BasedOfGameConnect extends StatelessWidget {
                               ),
                               Positioned(
                                 bottom: 0,
-                                child: Image.asset(
-                                  stateOfGame.basicData?.gameData?.titleImage ??
-                                      '',
-                                  height: 75.h,
-                                  width: 75.w,
-                                  fit: BoxFit.fill,
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    print(
+                                        '%%:${MediaQuery.of(context).size.height}');
+                                    await TalkTts.startTalk(
+                                        text: stateOfGameData
+                                                .data[stateOfGame.index].inst ??
+                                            '');
+                                    if (stateOfGame.stateOfStringIsWord ==
+                                        true) {
+                                      await TalkTts.startTalk(
+                                          text: stateOfGame
+                                                  .stateOfStringWillSay ??
+                                              '');
+
+                                      await AudioPlayerClass.startPlaySound(
+                                          soundPath: AppSound.getSoundOfLetter(
+                                              mainGameLetter: stateOfGame
+                                                      .stateOfStringWillSay ??
+                                                  ''));
+                                    } else {
+                                      await AudioPlayerClass.startPlaySound(
+                                          soundPath: AppSound.getSoundOfLetter(
+                                              mainGameLetter: stateOfGame
+                                                      .stateOfStringWillSay ??
+                                                  ''));
+                                    }
+                                  },
+                                  child: Image.asset(
+                                    stateOfGame
+                                            .basicData?.gameData?.titleImage ??
+                                        '',
+                                    height: 75.h,
+                                    width: 75.w,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
                               ),
                             ],
@@ -287,6 +371,17 @@ class BasedOfGameConnect extends StatelessWidget {
                                 .woodenBackground,
                         allGames: stateOfGameData.data),
                     child: SpellingGameScreen())
+              } else if ((stateOfGame.basicData?.gameData
+                  is SortingPicturesGame)) ...{
+                BlocProvider<sortingCubit>(
+                    create: (_) => sortingCubit(
+                        gameData: stateOfGameData.data[stateOfGame.index],
+                        index: stateOfGame.index,
+                        background: (stateOfGame.basicData?.gameData
+                                as SortingPicturesGame)
+                            .woodenBackground,
+                        allGames: stateOfGameData.data),
+                    child: SortingGameScreen())
               }
             ],
           ),

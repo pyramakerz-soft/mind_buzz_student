@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../../core/assets_sound.dart';
+import '../../../../../../core/audio_player.dart';
+import '../../../../../../core/phonetics/basic_of_every_game.dart';
 import '../../../../../../core/phonetics/phonetics_color.dart';
 import '../../../../domain/entities/game_model.dart';
 import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
@@ -31,68 +34,115 @@ class ClickThePictureWithWord extends StatelessWidget {
                 border: Border.all(
                     color: AppColorPhonetics.boarderColor, width: 5)),
             child: BlocConsumer<ClickThePictureWithWordCubit,
-                ClickThePictureWithWordInitial>(
-                listener: (context, state) {},
-                builder: (context, gameState) {
-                  return Wrap(
-                      spacing: 25,
-                      // runSpacing: 10,
-                      alignment: WrapAlignment.center,
-                      children: List.generate(
-                          (gameData.gameImages?.length ?? 0),
-                              (index) => SingleElement(
-                              width: (MediaQuery.of(context).size.width - (130 + 40) )/5,
-                              height: (MediaQuery.of(context).size.height - (50.h + 90+20))/2,
-                              index: index,
-                              background: gameState.backGround[index],
-                              image: gameData.gameImages?[index].image ?? '',
-                              selected: gameState.correctIndexes
-                                  .contains(gameData.gameImages?[index].id),
-                              onTap: () async {
-                                if ((gameState.chooseWord?.word ?? '') ==
-                                    (gameData.gameImages?[index].word)) {
-                                  context
-                                      .read<CurrentGamePhoneticsCubit>()
-                                      .animationOfCorrectAnswer();
-                                  context
-                                      .read<ClickThePictureWithWordCubit>()
-                                      .submitCorrectTheAnswer(
-                                      winAnimation: () => context
+                ClickThePictureWithWordInitial>(listener: (context, state) {
+              context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
+                  stateOfStringIsWord: true,
+                  stateOfStringWillSay: state.chooseWord?.word ?? '');
+            }, builder: (context, gameState) {
+              return Wrap(
+                  spacing: 25,
+                  // runSpacing: 10,
+                  alignment: WrapAlignment.center,
+                  children: List.generate(
+                      (gameData.gameImages?.length ?? 0),
+                      (index) => BlocConsumer<CurrentGamePhoneticsCubit,
+                              CurrentGamePhoneticsState>(
+                          listener: (context, state) {},
+                          builder: (context, generalStateOfGame) {
+                            return SingleElement(
+                                width: (MediaQuery.of(context).size.width -
+                                        (130 + 40)) /
+                                    5,
+                                height: (MediaQuery.of(context).size.height -
+                                        (50.h + 90 + 20)) /
+                                    2,
+                                index: index,
+                                background: gameState.backGround[index],
+                                image: gameData.gameImages?[index].image ?? '',
+                                selected: gameState.correctIndexes
+                                    .contains(gameData.gameImages?[index].id),
+                                onTap: () async {
+                                  print('stateOfAvatar:$generalStateOfGame');
+                                  if ((generalStateOfGame.stateOfAvatar ==
+                                              BasicOfEveryGame.stateOIdle ||
+                                          generalStateOfGame.stateOfAvatar ==
+                                              null) &&
+                                      gameState.correctIndexes.contains(
+                                              gameData.gameImages?[index].id) ==
+                                          false) {
+                                    print(
+                                        "###:${(gameState.chooseWord?.word ?? '')}, ${(gameData.gameImages?[index].word)}, ${generalStateOfGame.stateOfAvatar}");
+                                    if ((gameState.chooseWord?.word ?? '') ==
+                                        (gameData.gameImages?[index].word)) {
+                                      await context
                                           .read<CurrentGamePhoneticsCubit>()
-                                          .animationOfCorrectAnswer(),
-                                      reStateOfAvatar: () => context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .backToMainAvatar(),
-                                      idOfUserAnswer:
-                                      (gameData.gameImages?[index].id ??
-                                          0),
-                                      increaseCountOfCorrectAnswer:
-                                          (correctAnswer) {
+                                          .animationOfCorrectAnswer()
+                                          .whenComplete(() async {
                                         context
                                             .read<
-                                            CurrentGamePhoneticsCubit>()
+                                                ClickThePictureWithWordCubit>()
+                                            .addTheCorrectAnswer(
+                                                idOfUserAnswer: (gameData
+                                                        .gameImages?[index]
+                                                        .id ??
+                                                    0));
+                                        context
+                                            .read<
+                                                ClickThePictureWithWordCubit>()
+                                            .submitCorrectTheAnswer();
+                                        final sub = context
+                                            .read<
+                                                ClickThePictureWithWordCubit>()
+                                            .state
+                                            .correctAnswer;
+                                        context
+                                            .read<CurrentGamePhoneticsCubit>()
                                             .addStarToStudent(
-                                            stateOfCountOfCorrectAnswer:
-                                            correctAnswer,
-                                            mainCountOfQuestion:
-                                            gameData.gameImages
-                                                ?.length ??
-                                                0);
-                                      },
-                                      actionWhenComplete: () {
-                                        Navigator.of(context).pop();
+                                                stateOfCountOfCorrectAnswer:
+                                                    sub ?? 0,
+                                                mainCountOfQuestion: gameData
+                                                        .gameImages?.length ??
+                                                    0);
+                                        if ((context
+                                                    .read<
+                                                        ClickThePictureWithWordCubit>()
+                                                    .state
+                                                    .gameData
+                                                    .gameImages
+                                                    ?.length ??
+                                                0) ==
+                                            sub) {
+                                          await Future.delayed(
+                                              Duration(seconds: 1));
+                                          Navigator.of(context).pop();
+                                        } else {
+                                          AudioPlayerClass
+                                              .player.onPlayerComplete
+                                              .listen((finished) async {
+                                            await context
+                                                .read<
+                                                    ClickThePictureWithWordCubit>()
+                                                .getTheRandomWord();
+                                          });
+                                        }
                                       });
-                                } else {
-                                  await context
-                                      .read<CurrentGamePhoneticsCubit>()
-                                      .addWrongAnswer()
-                                      .whenComplete(() {
+                                    } else {
+                                      await context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .addWrongAnswer(
+                                              actionOfWrongAnswer: () {
+                                        context
+                                            .read<
+                                                ClickThePictureWithWordCubit>()
+                                            .sayTheCorrectAnswer();
+                                      });
+                                    }
                                     context
-                                        .read<ClickThePictureWithWordCubit>()
-                                        .sayTheCorrectAnswer();
-                                  });
-                                }
-                              })));
-                })));
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .backToMainAvatar();
+                                  }
+                                });
+                          })));
+            })));
   }
 }

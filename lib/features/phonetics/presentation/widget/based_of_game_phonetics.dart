@@ -51,54 +51,54 @@ class BasedOfGamePhonetics extends StatelessWidget {
               bottom: 0,
               child: SizedBox(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      if ((stateOfGame.basicData?.gameData
-                          is BasicDragOutGame)) ...{
-                        BlocProvider<DragOutCubit>(
-                            create: (_) => DragOutCubit(
-                                gameData:
-                                    stateOfGameData.data),
-                            child: DragOutGame(
-                              // gameData: stateOfGameData.data,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  if ((stateOfGame.basicData?.gameData
+                      is BasicDragOutGame)) ...{
+                    BlocProvider<DragOutCubit>(
+                        create: (_) =>
+                            DragOutCubit(gameData: stateOfGameData.data),
+                        child: DragOutGame(
+                            // gameData: stateOfGameData.data,
                             ))
-                      }
-                      else if ((stateOfGame.basicData?.gameData
-                          is ClickPictureS)) ...{
-                        BlocProvider<ClickPictureCubit>(
-                            create: (_) => ClickPictureCubit(
-                                gameData:
-                                    stateOfGameData.data[stateOfGame.index],
-                                background: (stateOfGame.basicData?.gameData
-                                        as ClickPictureS)
-                                    .getBackGround(stateOfGameData
-                                            .data[stateOfGame.index]
-                                            .gameImages
-                                            ?.length ??
-                                        0)),
-                            child: ClickPictureGame())
-                      } else if ((stateOfGame.basicData?.gameData
-                      is ClickPictureOfWord)) ...{
-                        BlocProvider<ClickThePictureWithWordCubit>(
-                            create: (_) => ClickThePictureWithWordCubit(
-                                gameData:
-                                stateOfGameData.data[stateOfGame.index],
-                                backGround: (stateOfGame.basicData?.gameData as ClickPictureOfWord).getBackGround(stateOfGameData
-                                    .data[stateOfGame.index]
-                                    .gameImages
-                                    ?.length ??
+                  } else if ((stateOfGame.basicData?.gameData
+                      is ClickPictureS)) ...{
+                    BlocProvider<ClickPictureCubit>(
+                        create: (_) => ClickPictureCubit(
+                            gameData: stateOfGameData.data[stateOfGame.index],
+                            background: (stateOfGame.basicData?.gameData
+                                    as ClickPictureS)
+                                .getBackGround(stateOfGameData
+                                        .data[stateOfGame.index]
+                                        .gameImages
+                                        ?.length ??
                                     0)),
-                            child: ClickThePictureWithWord(gameData: stateOfGameData.data[stateOfGame.index],))
-                      } else if ((stateOfGame.basicData?.gameData
-                          is BasicClickTheSoundGame)) ...{
-                        BlocProvider<ClickTheSoundCubit>(
-                            create: (_) => ClickTheSoundCubit(
-                                gameData: stateOfGameData.data[stateOfGame.index],),
-                            child: ClickTheSoundGame()),
-                      }
-                    ],
-                  ))),
-
+                        child: ClickPictureGame())
+                  } else if ((stateOfGame.basicData?.gameData
+                      is ClickPictureOfWord)) ...{
+                    BlocProvider<ClickThePictureWithWordCubit>(
+                        create: (_) => ClickThePictureWithWordCubit(
+                            gameData: stateOfGameData.data[stateOfGame.index],
+                            backGround: (stateOfGame.basicData?.gameData
+                                    as ClickPictureOfWord)
+                                .getBackGround(stateOfGameData
+                                        .data[stateOfGame.index]
+                                        .gameImages
+                                        ?.length ??
+                                    0)),
+                        child: ClickThePictureWithWord(
+                          gameData: stateOfGameData.data[stateOfGame.index],
+                        ))
+                  } else if ((stateOfGame.basicData?.gameData
+                      is BasicClickTheSoundGame)) ...{
+                    BlocProvider<ClickTheSoundCubit>(
+                        create: (_) => ClickTheSoundCubit(
+                              gameData: stateOfGameData.data[stateOfGame.index],
+                            ),
+                        child: ClickTheSoundGame()),
+                  }
+                ],
+              ))),
 
           /////////////////////game title//////////////////
           Positioned(
@@ -158,16 +158,35 @@ class BasedOfGamePhonetics extends StatelessWidget {
                           children: [
                             Image.asset(
                               AppImagesPhonetics.stayOfStarBar,
-                              width: 50.w,
+                              width: 65.w,
+                              fit: BoxFit.contain,
                             ),
-                            ((stateOfGame.countOfStar ?? 0) ==0)?
-                            Image.asset(AppImagesPhonetics.barZeroStar,
-                                width: 40.w):((stateOfGame.countOfStar ?? 0) ==1)?
-                            Image.asset(AppImagesPhonetics.barOneStar,
-                                width: 40.w):((stateOfGame.countOfStar ?? 0) ==2)?
-                            Image.asset(AppImagesPhonetics.barTwoStar,
-                                width: 40.w):Image.asset(AppImagesPhonetics.barThreeStar,
-                                width: 40.w)
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: Column(
+                                children: [
+                                  ((stateOfGame.countOfStar ?? 0) == 0)
+                                      ? Image.asset(
+                                          AppImagesPhonetics.barZeroStar,
+                                          width: 40.w,
+                                          fit: BoxFit.contain,
+                                        )
+                                      : ((stateOfGame.countOfStar ?? 0) == 1)
+                                          ? Image.asset(
+                                              AppImagesPhonetics.barOneStar,
+                                              width: 40.w)
+                                          : ((stateOfGame.countOfStar ?? 0) ==
+                                                  2)
+                                              ? Image.asset(
+                                                  AppImagesPhonetics.barTwoStar,
+                                                  width: 40.w)
+                                              : Image.asset(
+                                                  AppImagesPhonetics
+                                                      .barThreeStar,
+                                                  width: 40.w)
+                                ],
+                              ),
+                            )
                           ],
                         )),
                       ],
@@ -207,27 +226,52 @@ class BasedOfGamePhonetics extends StatelessWidget {
                   children: [
                     const SizedBox(),
                     GestureDetector(
-                      onTap: () async{
-                        await TalkTts.startTalk(text:  stateOfGameData.data[stateOfGame.index].inst ?? '');
-                        await AudioPlayerClass.startPlaySound(soundPath: AppSound.getSoundOfLetter(mainGameLetter: stateOfGameData.data[stateOfGame.index].mainLetter ?? ''));
+                      onTap: () async {
+                        print('%%:${MediaQuery.of(context).size.height}');
+                        await TalkTts.startTalk(
+                            text:
+                                stateOfGameData.data[stateOfGame.index].inst ??
+                                    '');
+                        print(
+                            'stateOfGame.stateOfStringIsWord:${stateOfGame.stateOfStringIsWord}');
+                        print(
+                            'stateOfGame.stateOfStringIsWord:${stateOfGame.stateOfStringWillSay}');
+                        if (stateOfGame.stateOfStringIsWord == true) {
+                          await TalkTts.startTalk(
+                              text: stateOfGame.stateOfStringWillSay ?? '');
+
+                          await AudioPlayerClass.startPlaySound(
+                              soundPath: AppSound.getSoundOfLetter(
+                                  mainGameLetter:
+                                      stateOfGame.stateOfStringWillSay ?? ''));
+                        } else {
+                          await AudioPlayerClass.startPlaySound(
+                              soundPath: AppSound.getSoundOfLetter(
+                                  mainGameLetter:
+                                      stateOfGame.stateOfStringWillSay ?? ''));
+                        }
                       },
                       child: Container(
                           child: stateOfGame.avatarArtboard == null
                               ? Image.asset(
-                            stateOfGame.currentAvatar ?? '',
-                            height:
-                            MediaQuery.of(context).size.height - (70.h),
-                            width: 130,
-                          )
+                                  stateOfGame.currentAvatar ?? '',
+                                  height:
+                                      MediaQuery.of(context).size.height > 450
+                                          ? 250.h
+                                          : 200.h,
+                                  width: 100.w,
+                                )
                               : SizedBox(
-                              height:
-                              MediaQuery.of(context).size.height - (70.h),
-                              width: 170,
-                              child: Rive(
-                                artboard: stateOfGame.avatarArtboard!,
-                                fit: BoxFit.cover,
-
-                              ))),
+                                  height:
+                                      MediaQuery.of(context).size.height > 450
+                                          ? 250.h
+                                          : 200.h,
+                                  width: 100.w,
+                                  child: Rive(
+                                    artboard: stateOfGame.avatarArtboard!,
+                                    fit: BoxFit.fill,
+                                    // useArtboardSize: true,
+                                  ))),
                     ),
                     // SizedBox(),
                   ],

@@ -4,24 +4,19 @@ import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
-import 'package:mind_buzz_refactor/core/widgets/stroke_text.dart';
-import 'package:mind_buzz_refactor/features/phonetics/presentation/games/click_the_sound/widgets/stroked_text_widget.dart';
-import '../../../../core/assets_animation.dart';
-import '../../../../core/assets_svg_images.dart';
 
+import '../../../../core/assets_animation.dart';
 import '../../../../core/assets_images.dart';
 import '../../../../core/theme_text.dart';
 import '../../../../core/utils.dart';
 import '../../../../core/validation_text_field.dart';
+import '../../../../core/widgets/button_start_game.dart';
 import '../../../who_am_i/presentation/pages/who_am_i_screen.dart';
 import '../bloc/login_data_bloc.dart';
 import '../cubit/login_cubit.dart';
-import '../../../../core/widgets/button_start_game.dart';
 import '../cubit/login_state.dart';
 import '../widgets/text_field_widget.dart';
 
@@ -40,28 +35,28 @@ class LoginScreen extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Column(children: [
-              const LoginAnimatedVectors(),
+             const LoginAnimatedVectors(),
               Container(
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(topLeft: Radius.circular(32), topRight: Radius.circular(32)),
                   ),
                   width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 25),
+                  padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 25),
                   child: SingleChildScrollView(
                     child: Form(
                       key: _formKey,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                         Text(
-                          'Welcome',
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                color: AppColor.darkBlueColor,
-                                fontSize: 40,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: AppTheme.getFontFamily5(),
-                              ),
-                        ),
+                                        'Welcome',
+                                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                              color: AppColor.darkBlueColor,
+                                              fontSize: 40,
+                                              fontWeight: FontWeight.w700,
+                                              fontFamily: AppTheme.getFontFamily5(),
+                                            ),
+                                      ),
                         // StrokedText(
                         //   text: 'Log In',
                         //   isDisabled: false,
@@ -130,11 +125,9 @@ class LoginScreen extends StatelessWidget {
                         }, builder: (context, state) {
                           log('--state:$state');
                           if (state is LoadingLoginState) {
-                            return const Padding(
-                              padding: EdgeInsets.symmetric(
-                                vertical: 32.0,
-                              ),
-                              child: CupertinoActivityIndicator(),
+                            return  Container(
+                            height: 60,
+                              child:  Center(child: CupertinoActivityIndicator()),
                             );
                           } else {
                             return BlocConsumer<LoginCubit, LoginStateInitial>(
@@ -164,7 +157,7 @@ class LoginScreen extends StatelessWidget {
                         30.ph,
                       ]),
                     ),
-                  )),
+                  )), 
               // Expanded(
               //   flex: 2,
               //   child: Stack(
@@ -334,8 +327,6 @@ class LoginAnimatedVectors extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
     return Expanded(
         child: SizedBox(
       width: MediaQuery.of(context).size.width,
@@ -344,22 +335,19 @@ class LoginAnimatedVectors extends StatelessWidget {
         children: [
           // SvgPicture.asset(AppSvgImages.iconSkyLogin),
           // Image.asset(AppImages.imageBeeLogin),
-          Positioned(
+          const Positioned(
             top: 0,
             left: 0,
             child: SizedBox(
-              // height: 110,
-              // width: 110,
-              height: screenHeight * 0.1,
-              width: screenWidth * 0.25,
+              height: 120,
+              width: 120,
               child: RiveAnimation.asset(
                 AppAnimation.cloudRive,
               ),
             ),
           ),
-          Positioned(
-            //   right: 10,
-            right: screenWidth * 0.03,
+          const Positioned(
+            right: 10,
             top: 0,
             child: SizedBox(
               height: 90,
@@ -377,23 +365,27 @@ class LoginAnimatedVectors extends StatelessWidget {
             top: 100,
             child: SizedBox(
               height: 100,
-              width: 150,
+              width: 200,
               child: RiveAnimation.asset(
                 AppAnimation.cloudRive,
               ),
             ),
           ),
-          Positioned(bottom: screenHeight*0.2, child: Image.asset(AppImages.mindBuzzLogo)),
-          const Positioned(
-            bottom: 0,
-            child: SizedBox(
-              height: 190,
-              width: 190,
-              child: RiveAnimation.asset(
-                AppAnimation.beeRive,
-              ),
+          Positioned(top: 25,
+            child: Column(
+              children: [
+                Image.asset(AppImages.mindBuzzLogo),
+              const  SizedBox(
+                  height: 200,
+                  width: 220,
+                  child: RiveAnimation.asset(
+                    AppAnimation.beeRive,
+                  ),
+                ),
+              ],
             ),
-          ),
+          )
+
         ],
       ),
     ));

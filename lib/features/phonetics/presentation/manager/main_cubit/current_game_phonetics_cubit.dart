@@ -18,7 +18,6 @@ import '../../../domain/entities/game_model.dart';
 part 'current_game_phonetics_state.dart';
 
 class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
-
   CurrentGamePhoneticsCubit() : super(CurrentGamePhoneticsState(index: 0)) {
     getTheBackGroundLoading();
   }
@@ -44,6 +43,14 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         }
       },
     );
+  }
+
+  saveTheStringWillSay(
+      {required bool stateOfStringIsWord,
+      required String stateOfStringWillSay}) {
+    emit(state.copyWith(
+        stateOfStringIsWord: stateOfStringIsWord,
+        stateOfStringWillSay: stateOfStringWillSay));
   }
 
   getTheBackGroundSuccess() {
@@ -123,6 +130,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
       {required MainDataOfPhonetics basicData,
       required List<GameModel> gameData,
       required int gameIndex}) {
+    emit(state.clearAllData());
     emit(state.copyWith(
         basicData: basicData,
         currentAvatar: basicData.basicAvatar,
@@ -134,18 +142,19 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     getTheBackGroundSad();
   }
 
-  saveCountOfTries(){
-    int countOfTries = 3;//state.gameData?[state.index].numOfTrials??0;
-    emit(state.copyWith(countOfTries:countOfTries, countOfStar: 0));
+  saveCountOfTries() {
+    int countOfTries = 3; //state.gameData?[state.index].numOfTrials??0;
+    emit(state.copyWith(countOfTries: countOfTries, countOfStar: 0));
   }
 
-  decreaseCountOfTries(){
-    int countOfTries = (state.countOfTries??1)-1;
-    emit(state.copyWith(countOfTries:countOfTries));
+  decreaseCountOfTries() {
+    int countOfTries = (state.countOfTries ?? 1) - 1;
+    emit(state.copyWith(countOfTries: countOfTries));
   }
-  increaseCountOfTries(){
+
+  increaseCountOfTries() {
     int countOfTries = 3;
-    emit(state.copyWith(countOfTries:countOfTries));
+    emit(state.copyWith(countOfTries: countOfTries));
   }
 
   bool checkIfIsTheLastGameOfLesson() {
@@ -195,9 +204,11 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     emit(state.copyWith(countOfStar: (countOfStar + 1)));
   }
 
-  addSuccessAnswer({required void Function() actionInEndOfLesson,int? nextGameId}) async {
+  addSuccessAnswer(
+      {required void Function() actionInEndOfLesson, int? nextGameId}) async {
     await animationOfCorrectAnswer();
-
+    await AudioPlayerClass.startPlaySound(
+        soundPath: AppSound.getRandomSoundOfCorrect());
     bool isLastLesson = nextGameId == null;
     // checkIfIsTheLastGameOfLesson();
 
@@ -206,8 +217,10 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
       actionInEndOfLesson.call();
     } else {
       await backToMainAvatar();
-      if(nextGameId!=null)
-      updateIndexOfCurrentGame(nextIndex: state.gameData!.indexWhere((element) => element.id == nextGameId));
+      if (nextGameId != null)
+        updateIndexOfCurrentGame(
+            nextIndex: state.gameData!
+                .indexWhere((element) => element.id == nextGameId));
       print('${state.stateOfAvatar}');
     }
   }
@@ -225,17 +238,19 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   animationOfWrongAnswer() {
-
     emit(state.copyWith(
         avatarArtboard: state.avatarArtboardSad,
         stateOfAvatar: BasicOfEveryGame.stateOfSad));
     decreaseCountOfTries();
   }
 
-  animationOfCorrectAnswer() {
+  Future<void> animationOfCorrectAnswer() async {
     emit(state.copyWith(
         avatarArtboard: state.avatarArtboardSuccess,
         stateOfAvatar: BasicOfEveryGame.stateOfWin));
+
+    await AudioPlayerClass.startPlaySound(
+        soundPath: AppSound.getRandomSoundOfCorrect());
   }
 
   increaseCountOfCorrectAnswer() {
@@ -251,15 +266,14 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         stateOfAvatar: BasicOfEveryGame.stateOIdle));
   }
 
-
-
   Map<int, Offset> touchPositions = <int, Offset>{};
   void savePointerPosition(int index, Offset position) {
     touchPositions[index] = position;
-    emit(state.copyWith(touchPositions: !(state.touchPositions??false)));
+    emit(state.copyWith(touchPositions: !(state.touchPositions ?? false)));
   }
+
   clearPointerPosition(int index) {
     touchPositions.remove(index);
-    emit(state.copyWith(touchPositions: !(state.touchPositions??false)));
+    emit(state.copyWith(touchPositions: !(state.touchPositions ?? false)));
   }
 }

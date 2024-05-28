@@ -54,20 +54,17 @@ class UnitScreen extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.only(bottom: 30),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            width: MediaQuery.of(context).size.width,
+                            width: MediaQuery.of(context).size.width - 70,
                             child: Stack(
-                             // alignment: Alignment.center,
+                              alignment: Alignment.center,
                               children: [
                                 SvgPicture.asset(
                                   AppSvgImages.bgChooseWhoAmI,
                                   color: AppColor.skyBlueColor,
-                                  width: MediaQuery.of(context).size.width -70,
-                                  height: MediaQuery.of(context).size.width < 370 ? MediaQuery.of(context).size.height*0.24 : MediaQuery.of(context).size.height*0.21,
-
+                                  width: MediaQuery.of(context).size.width - 70,
                                 ),
                                 const Positioned(
                                   top: -30,
@@ -80,45 +77,52 @@ class UnitScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                 Positioned(
-                                  top: -10,
-                                  right: 30,
+                                const Positioned(
+                                  top: 0,
+                                  right: 0,
                                   child: SizedBox(
-                                    height: MediaQuery.of(context).size.width < 370 ? 120 : 160,
-                                    width: MediaQuery.of(context).size.width < 370 ? 120 : 160,
-                                    child:const  RiveAnimation.asset(
+                                    height: 170,
+                                    width: 170,
+                                    child: RiveAnimation.asset(
                                       AppAnimation.cloudRive,
                                     ),
                                   ),
                                 ),
                                 Positioned(
-                                  top: 50,
+                                  top:50,
                                   left: 25,
                                   child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      GestureDetector(
-                                          onTap: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                          child: Container(
-                                              padding: const EdgeInsets.all(9),
-                                              alignment: Alignment.center,
-                                              height: 42,
-                                              width: 42,
-                                              decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: AppColor.darkBlueColor),
-                                              child: SvgPicture.asset(
-                                                AppSvgImages.iconHome,
-                                                fit: BoxFit.fill,
-                                              ))),
-                                      16.pw,
-                                      Text(
-                                        programName,
-                                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                              color: AppColor.darkBlueColor,
-                                              fontSize: 35,
-                                              fontWeight: FontWeight.w700,
-                                              fontFamily: AppTheme.getFontFamily5(),
-                                            ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 10.0),
+                                        child: GestureDetector(
+                                            onTap: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Container(
+                                                padding: const EdgeInsets.all(9),
+                                                alignment: Alignment.center,
+                                                height: 42,
+                                                width: 42,
+                                                decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: AppColor.darkBlueColor),
+                                                child: SvgPicture.asset(
+                                                  AppSvgImages.iconHome,
+                                                  fit: BoxFit.fill,
+                                                ))),
+                                      ),
+                                      20.pw,
+                                      Container(
+                                        width: 0.65.sw,
+                                        child: Text(
+                                          programName,
+                                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                                color: AppColor.darkBlueColor,
+                                                fontSize: 40,
+                                                fontWeight: FontWeight.w700,
+                                                fontFamily: AppTheme.getFontFamily5(),
+                                              ),
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -129,20 +133,7 @@ class UnitScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Positioned(
-                        bottom: -15,
-                        left: -50,
-                        child: Transform.rotate(
-                          angle: 0.25,
-                          child: SizedBox(
-                             height:MediaQuery.of(context).size.width < 370 ? 120 : 150,
-                             width: MediaQuery.of(context).size.width < 370 ? 130 : 150,
-                            child:const  RiveAnimation.asset(
-                              AppAnimation.beeRive,
-                            ),
-                          ),
-                        )
-                        )
+
                   ],
                 ),
               
@@ -193,6 +184,7 @@ class UnitScreen extends StatelessWidget {
               ],
             ),
 
+
             20.ph,
             Positioned(
               bottom: 0,
@@ -204,7 +196,7 @@ class UnitScreen extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: 200,
+              top: 210,
               child: BlocProvider<GetUnitBloc>(
                   create: (_) => di.sl<GetUnitBloc>()..add(GetUnitRequest(programId: int.parse(programId))),
                   child: BlocConsumer<GetUnitBloc, GetUnitState>(listener: (context, state) {
@@ -319,18 +311,18 @@ class UnitScreen extends StatelessWidget {
                           //   ],
                           // ),
                           // 20.ph,
-                          24.ph,
+                          32.ph,
                           Container(
                             margin: const EdgeInsets.symmetric(horizontal: 15),
-                            width: MediaQuery.of(context).size.width - 5,
+                            width: MediaQuery.of(context).size.width - 30,
                             //height: MediaQuery.of(context).size.height-(20+100+(MediaQuery.of(context).size.height / 6)+160),
-                            height: MediaQuery.of(context).size.height - (120 + (MediaQuery.of(context).size.height / 6) + 140),
+                            height: MediaQuery.of(context).size.height - (150 + (MediaQuery.of(context).size.height / 6) + 160),
                             child: ListView(
                               children: List.generate(state.data.length, (index) {
                                 return Column(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                                      padding: const EdgeInsets.symmetric(horizontal: 20),
                                       child: GestureDetector(
                                         onTap: () {
                                           Utils.navigateTo(
@@ -361,15 +353,13 @@ class UnitScreen extends StatelessWidget {
                                                     child: Center(
                                                       child: Container(
                                                         width: width,
-                                                        //newly added
-                                                        height: 32,
                                                         // alignment: Alignment.center,
                                                         padding: EdgeInsets.only(top: 10, left: (index == 0) || index % 2 == 0 ? 0 : 30, right: (index == 0) || index % 2 == 0 ? 30 : 0),
                                                         child: Text(
                                                           state.data[index].name ?? '',
                                                           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                                                 color: AppColor.white,
-                                                                fontSize: 17,
+                                                                fontSize: 18,
                                                                 fontWeight: FontWeight.w700,
                                                               ),
                                                           textAlign: TextAlign.center,
@@ -403,6 +393,22 @@ class UnitScreen extends StatelessWidget {
                     }
                   })),
             ),
+
+            Positioned(
+              top: 0.15.sh,
+              left: 0,
+              child: Transform.rotate(
+                angle: 0.25,
+                child: SizedBox(
+                  height: 0.17.sh,
+                  width: 0.35.sw,
+                  child: RiveAnimation.asset(
+                    AppAnimation.beeRive,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+            )
 
             //old
             // Positioned(

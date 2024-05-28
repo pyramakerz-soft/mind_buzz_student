@@ -21,7 +21,8 @@ class ContactLessonBloc extends Bloc<ContactLessonEvent, ContactLessonState> {
   final ContactLessonUseCases programContactUserUseCases;
   final GetGameUseCases getGameUseCases;
 
-  ContactLessonBloc({required this.programContactUserUseCases, required this.getGameUseCases})
+  ContactLessonBloc(
+      {required this.programContactUserUseCases, required this.getGameUseCases})
       : super(ContactLessonInitial()) {
     on<ContactLessonEvent>((event, emit) async {
       log('event##:$event');
@@ -29,7 +30,8 @@ class ContactLessonBloc extends Bloc<ContactLessonEvent, ContactLessonState> {
         emit(GetContactLoadingInitial());
         final failureOrDoneMessage =
             await programContactUserUseCases(programId: event.lessonId);
-        emit(await _eitherLoadedOrErrorState(failureOrDoneMessage,event.gameId));
+        emit(await _eitherLoadedOrErrorState(
+            failureOrDoneMessage, event.gameId));
       }
       // if (event is GetGameRequest) {
       //   emit(GetContactLoadingInitial());
@@ -47,20 +49,18 @@ class ContactLessonBloc extends Bloc<ContactLessonEvent, ContactLessonState> {
 }
 
 Future<ContactLessonState> _eitherLoadedOrErrorState(
-  Either<Failure, List<GameModel>> failureOrTrivia,
-    int gameId
-) async {
+    Either<Failure, List<GameModel>> failureOrTrivia, int gameId) async {
   ContactLessonState tempState = failureOrTrivia.fold(
     (failure) => GetContactErrorInitial(message: _mapFailureToMessage(failure)),
     (data) => GetContactInitial(data: data),
   );
-  // if (tempState is GetContactInitial) {
-    // if(tempState.data.isNotEmpty) {
-    //  int index =  tempState.data.indexWhere((element) => element.id == gameId);
-    //   TalkTts.startTalk(text: tempState.data[index].inst ?? '');
-    //   TalkTts.startTalk(text: tempState.data[index].mainLetter ?? '');
-    // }
-  // }
+  if (tempState is GetContactInitial) {
+    if (tempState.data.isNotEmpty) {
+      int index = tempState.data.indexWhere((element) => element.id == gameId);
+      TalkTts.startTalk(text: tempState.data[index].inst ?? '');
+      //   TalkTts.startTalk(text: tempState.data[index].mainLetter ?? '');
+    }
+  }
   return tempState;
 }
 
@@ -77,7 +77,6 @@ Future<ContactLessonState> _eitherLoadedOrErrorState(
 //   }
 //   return tempState;
 // }
-
 
 String _mapFailureToMessage(Failure failure) {
   switch (failure.runtimeType) {
