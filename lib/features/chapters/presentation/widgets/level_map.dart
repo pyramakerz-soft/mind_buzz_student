@@ -62,7 +62,10 @@ class LevelMap extends StatelessWidget {
                       CustomPaint(
                         size: Size(
                             constraints.maxWidth*0.9,
-                            levelMapParams.levelCount *
+                            levelMapParams.levelCount< 15?
+                            (levelMapParams.levelCount *
+                                levelMapParams.levelHeight) + 50 :
+                           levelMapParams.levelCount *
                                 levelMapParams.levelHeight),
                         painter: LevelMapPainter(
                             params: levelMapParams, imagesToPaint: snapshot.data),

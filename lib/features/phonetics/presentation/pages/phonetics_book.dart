@@ -26,7 +26,9 @@ import '../widget/widget_of_tries.dart';
 
 class PhoneticsBook extends StatefulWidget {
   final int lessonId;
-  const PhoneticsBook({Key? key, required this.lessonId}) : super(key: key);
+  final int gameId;
+  final bool firstTry;
+  const PhoneticsBook({Key? key, required this.lessonId, required this.gameId, this.firstTry = false}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
     return _PhoneticsBook();
@@ -58,7 +60,7 @@ class _PhoneticsBook extends State<PhoneticsBook> {
     return Scaffold(
         body: BlocProvider<ContactLessonBloc>(
             create: (_) => di.sl<ContactLessonBloc>()
-              ..add(GetContactLessonRequest(programId: widget.lessonId)),
+              ..add(GetContactLessonRequest(lessonId: widget.lessonId,gameId: widget.gameId)),
             child: BlocProvider<CurrentGamePhoneticsCubit>(
                 create: (_) => di.sl<CurrentGamePhoneticsCubit>(),
                 child: BlocConsumer<CurrentGamePhoneticsCubit,
@@ -113,15 +115,24 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                 try {
                                   MainDataOfPhonetics? dataType =
                                       state.getMainContactData(
-                                          index: stateOfGame.index);
+                                          index: widget.firstTry || state.data.firstWhere((element) => element.id == widget.gameId).nextGameId==null?
+                                          state.data.indexWhere((element) => element.id == widget.gameId):
+                                          state.data.indexWhere((element) => element.id ==
+                                              state.data.firstWhere((element) => element.id == widget.gameId).nextGameId));
                                   print('dataType:$dataType');
                                   if (dataType != null) {
                                     context
                                         .read<CurrentGamePhoneticsCubit>()
                                         .updateDataOfCurrentGame(
                                             basicData: dataType,
-                                            gameData: state.data);
-                                  } else {
+                                            gameData: state.data,
+                                      gameIndex: widget.firstTry || state.data.firstWhere((element) => element.id == widget.gameId).nextGameId==null?
+                                      state.data.indexWhere((element) => element.id == widget.gameId):
+                                      state.data.indexWhere((element) => element.id ==
+                                          state.data.firstWhere((element) => element.id == widget.gameId).nextGameId)
+                                    );
+                                  }
+                                  else {
                                     context
                                         .read<ContactLessonBloc>()
                                         .add(ThisTypeNotSupportedRequest());
@@ -138,7 +149,12 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                 return Stack(
                                   children: [
                                     if(stateOfGame.countOfTries == 0)...{
-                                      widgetOfTries(context: context)
+                                      widgetOfTries(context: context,
+                                      nextGameIndex:
+                                      stateOfGameData.data.firstWhere((element) => element.id == widget.gameId).nextGameId==null?
+                                      stateOfGameData.data.indexWhere((element) => element.id == widget.gameId):
+                                      stateOfGameData.data.indexWhere((element) => element.id ==
+                                          stateOfGameData.data.firstWhere((element) => element.id == widget.gameId).nextGameId))
                                     }else
                                       ...{
                                         if (stateOfGame
@@ -158,7 +174,8 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                       }
                                   ],
                                 );
-                              } else if (stateOfGameData
+                              }
+                              else if (stateOfGameData
                                   is GetContactLoadingInitial) {
                                 return stateOfGame.avatarArtboardLoading != null
                                     ? Rive(
@@ -167,7 +184,8 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                         fit: BoxFit.fill,
                                       )
                                     : const SizedBox();
-                              } else if (stateOfGameData
+                              }
+                              else if (stateOfGameData
                                   is NotSupportTypeState) {
                                 return const Text(
                                     'the data of game is not supported');

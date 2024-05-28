@@ -14,8 +14,11 @@ GameModel _$GameModelFromJson(Map<String, dynamic> json) => GameModel(
       stars: (json['stars'] as num?)?.toInt(),
       numOfLetterRepeat: (json['num_of_letter_repeat'] as num?)?.toInt(),
       mainLetter: json['main_letter'] as String?,
+      correctAns: json['correct_ans'] as String?,
       inst: json['inst'] as String?,
       numOfTrials: (json['num_of_trials'] as num?)?.toInt(),
+      nextGameId: (json['next_game_id'] as num?)?.toInt(),
+      previousGameId: (json['prev_game_id'] as num?)?.toInt(),
       lesson: json['lesson'] == null
           ? null
           : LessonModel.fromJson(json['lesson'] as Map<String, dynamic>),
@@ -49,4 +52,8 @@ Map<String, dynamic> _$GameModelToJson(GameModel instance) => <String, dynamic>{
       'game_letters': instance.gameLetters?.map((e) => e.toJson()).toList(),
       'game_images': instance.gameImages?.map((e) => e.toJson()).toList(),
       'lesson_id': instance.lessonId,
+      'next_game_id': instance.nextGameId,
+      'prev_game_id': instance.previousGameId,
+      'correct_ans': instance.correctAns,
+
     };

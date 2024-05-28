@@ -41,11 +41,14 @@ class SingleElement extends StatelessWidget {
               height: height??120.h,
               color: selected ? AppColor.selectedColor : null,
             ),
-            CachedNetworkImage(
-              imageUrl: image,
-              width: width??(MediaQuery.of(context).size.width - (130 + 50 + 130)) / 6,
-              height: height??120.h,
-              // height: ,
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: CachedNetworkImage(
+                imageUrl: image,
+                width: width??(MediaQuery.of(context).size.width - (130 + 50 + 130)) / 7,
+                height: height??100.h,
+                // height: ,
+              ),
             ),
           ],
         ),

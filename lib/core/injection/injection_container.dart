@@ -29,6 +29,7 @@ import '../../features/math_book1/data/data_sources/local_data_source_remotely_o
 import '../../features/phonetics/data/repositories/contact_lesson_repository_impl.dart';
 import '../../features/phonetics/domain/repositories/repositories_contact_lesson.dart';
 import '../../features/phonetics/domain/use_cases/contact_lesson_use_cases.dart';
+import '../../features/phonetics/domain/use_cases/game_use_cases.dart';
 import '../../features/phonetics/presentation/manager/bloc/contact_lesson_bloc.dart';
 import '../../features/notification/data/datasources/data_source_remotely_of_notification.dart';
 import '../../features/notification/data/repositories/notification_repository_impl.dart';

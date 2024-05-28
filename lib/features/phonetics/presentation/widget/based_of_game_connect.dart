@@ -13,6 +13,7 @@ import 'package:mind_buzz_refactor/features/phonetics/presentation/widget/star_w
 
 import '../../../../core/phonetics/assets_images_phonetics.dart';
 import '../../../../core/phonetics/basic_of_every_game.dart';
+import '../../../../core/phonetics/basic_of_phonetics.dart';
 import '../../../../core/talk_tts.dart';
 import '../games/bingo_game/manager/bingo_cubit.dart';
 import '../games/bingo_game/pages/bingo_game.dart';
@@ -26,6 +27,8 @@ import '../games/click_the_sound/pages/click_the_sound_game.dart';
 import '../games/drag_out/manager/drag_out_cubit.dart';
 import '../games/drag_out/pages/drag_out_game.dart';
 import '../games/x_out_game/pages/x_out_game.dart';
+import '../games/spelling_game/manager/spelling_cubit.dart';
+import '../games/spelling_game/pages/spelling_game.dart';
 import '../manager/bloc/contact_lesson_bloc.dart';
 import '../manager/main_cubit/current_game_phonetics_cubit.dart';
 
@@ -48,8 +51,6 @@ class BasedOfGameConnect extends StatelessWidget {
       child: Stack(
         alignment: Alignment.topRight,
         children: [
-
-
           /////////////////////game title//////////////////
           Positioned(
             top: 0,
@@ -130,57 +131,108 @@ class BasedOfGameConnect extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: (75.h+55.h),
-                    width: (80.w),
-                    child: Stack(
-                      // crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Positioned(
-                          top:0,
-
-                          child:GestureDetector(
-                            onTap: () async{
-                              await TalkTts.startTalk(text:  stateOfGameData.data[stateOfGame.index].inst ?? '');
-                            },
-                            child: Container(
-                              alignment: Alignment.center,
-                                child: stateOfGame.avatarArtboard == null
-                                    ? Image.asset(
-                                  stateOfGame.currentAvatar ?? '',
-                                  // height:
-                                  // MediaQuery.of(context).size.height - (70.h),
+                  stateOfGame.basicData is SpellTheWord
+                      ? Padding(
+                          padding: EdgeInsets.only(left: 10.w),
+                          child: Container(
+                            width: 0.8.sw,
+                            child: Row(
+                              // crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Image.asset(
+                                  stateOfGame.basicData?.gameData?.titleImage ??
+                                      '',
                                   height: 75.h,
-                                  width: 80.w,
-                                )
-                                    : Container(
-                                  margin: EdgeInsets.only(left: 7.w),
-                                      child: SizedBox(
-                                      height: 90.h,
-                                      width: 65.w,
-                                      child: Rive(
-                                        artboard: stateOfGame.avatarArtboard!,
-                                        fit: BoxFit.fill,
-                                        useArtboardSize: true,
-                                        alignment: Alignment.center,
-                                      )),
-                                    )),
+                                  width: 90.w,
+                                  fit: BoxFit.fill,
+                                ),
+                                GestureDetector(
+                                  onTap: () async {
+                                    await TalkTts.startTalk(
+                                        text: stateOfGameData
+                                                .data[stateOfGame.index].inst ??
+                                            '');
+                                  },
+                                  child: Container(
+                                      alignment: Alignment.center,
+                                      child: stateOfGame.avatarArtboard == null
+                                          ? Image.asset(
+                                              stateOfGame.currentAvatar ?? '',
+                                              // height:
+                                              // MediaQuery.of(context).size.height - (70.h),
+                                              height: 85.h,
+                                              width: 80.w,
+                                            )
+                                          : SizedBox(
+                                              height: 110.h,
+                                              width: 70.w,
+                                              child: Rive(
+                                                artboard:
+                                                    stateOfGame.avatarArtboard!,
+                                                fit: BoxFit.fill,
+                                                useArtboardSize: true,
+                                                alignment: Alignment.center,
+                                              ))),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      : Container(
+                          width: 0.8.sw,
+                          height: 0.32.sh,
+                          padding: EdgeInsets.only(left: 10),
+                          child: Stack(
+                            // crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Positioned(
+                                top: 0,
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    await TalkTts.startTalk(
+                                        text: stateOfGameData
+                                                .data[stateOfGame.index].inst ??
+                                            '');
+                                  },
+                                  child: Container(
+                                      alignment: Alignment.center,
+                                      child: stateOfGame.avatarArtboard == null
+                                          ? Image.asset(
+                                              stateOfGame.currentAvatar ?? '',
+                                              // height:
+                                              // MediaQuery.of(context).size.height - (70.h),
+                                              height: 75.h,
+                                              width: 80.w,
+                                            )
+                                          : Container(
+                                              margin:
+                                                  EdgeInsets.only(left: 7.w),
+                                              child: SizedBox(
+                                                  height: 90.h,
+                                                  width: 65.w,
+                                                  child: Rive(
+                                                    artboard: stateOfGame
+                                                        .avatarArtboard!,
+                                                    fit: BoxFit.fill,
+                                                    useArtboardSize: true,
+                                                    alignment: Alignment.center,
+                                                  )),
+                                            )),
+                                ),
+                              ),
+                              Positioned(
+                                bottom: 0,
+                                child: Image.asset(
+                                  stateOfGame.basicData?.gameData?.titleImage ??
+                                      '',
+                                  height: 75.h,
+                                  width: 75.w,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        Positioned(
-                          bottom: 0,
-                          child: Image.asset(
-                            stateOfGame.basicData?.gameData?.titleImage ??
-                                '',
-                            height: 75.h,
-                            width: 75.w,
-
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -208,6 +260,36 @@ class BasedOfGameConnect extends StatelessWidget {
                       }
                     ],
                   ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              60.ph,
+              if ((stateOfGame.basicData?.gameData is BingoGame)) ...{
+                BlocProvider<BingoCubit>(
+                    create: (_) => BingoCubit(
+                          gameData: stateOfGameData.data[stateOfGame.index],
+                        ),
+                    child: BingoGameScreen())
+              } else if ((stateOfGame.basicData?.gameData is XOutGame)) ...{
+                BlocProvider<XOutCubit>(
+                    create: (_) => XOutCubit(
+                          gameData: stateOfGameData.data[stateOfGame.index],
+                        ),
+                    child: XOutGameScreen())
+              } else if ((stateOfGame.basicData?.gameData is SpellingGame)) ...{
+                BlocProvider<SpellingCubit>(
+                    create: (_) => SpellingCubit(
+                        gameData: stateOfGameData.data[stateOfGame.index],
+                        index: stateOfGame.index,
+                        background:
+                            (stateOfGame.basicData?.gameData as SpellingGame)
+                                .woodenBackground,
+                        allGames: stateOfGameData.data),
+                    child: SpellingGameScreen())
+              }
+            ],
+          ),
         ],
       ),
     );

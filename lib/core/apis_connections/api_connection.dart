@@ -49,6 +49,7 @@ class MainApiConnection {
   String getStudentReportsTestEndPoint = "student_progress";
   String getLessonsOfProgramsEndPoint = "lessons";
   String getLessonQuestionsEndPoint = "game";
+  String getGameById = "gamebyId";
 
 ////////////////////////////////////////////////////////////////////////////
 

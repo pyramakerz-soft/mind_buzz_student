@@ -70,6 +70,8 @@ class AppColor {
   static const Color resetText = Color(0xff008D4B);
   static const Color textFieldColor = Color(0xffF9F9FA);
   static const Color selectedColor = Color(0xff5AE2C8);
+  static const Color strokeColor = Color(0xff7E3116);
+  static const Color dragContainerColor = Color(0xffF0D2AA);
   Color hexToColor(String code) {
     return Color(int.parse("0xff${code.toString().split("#").last}"));
   }

@@ -7,6 +7,7 @@ import '../../domain/entities/game_model.dart';
 abstract class DataSourceRemotelyOfContactLesson {
   Future<List<GameModel>> getContactLessonDataRemotely(
       {required int programId});
+  Future<List<GameModel>> getGameById({required int gameId});
 }
 
 class DataSourceRemotelyOfContactLessonImpl
@@ -15,13 +16,27 @@ class DataSourceRemotelyOfContactLessonImpl
 
   DataSourceRemotelyOfContactLessonImpl({required this.dio});
 
+
   @override
-  Future<List<GameModel>> getContactLessonDataRemotely(
-      {required int programId}) async {
+  Future<List<GameModel>> getContactLessonDataRemotely({required int programId}) async {
     final response = await dio.post(
         url: '${Connection.baseURL}${dio.getLessonQuestionsEndPoint}',
-      //  queryParameters: {'lesson_id': programId});
-        queryParameters: {'lesson_id': 70});
+        queryParameters: {'lesson_id': programId});
+    if (dio.validResponse(response)) {
+      final List<GameModel> l = [];
+      response.data['data']['games']
+          .forEach((e) => l.add(GameModel.fromJson(e)));
+      return l;
+    } else {
+      throw response.data['msg'];
+    }
+  }
+  @override
+  Future<List<GameModel>> getGameById(
+      {required int gameId}) async {
+    final response = await dio.post(
+        url: '${Connection.baseURL}${dio.getGameById}',
+        queryParameters: {'game_id': gameId});
     if (dio.validResponse(response)) {
       final List<GameModel> l = [];
       response.data['data']['games']

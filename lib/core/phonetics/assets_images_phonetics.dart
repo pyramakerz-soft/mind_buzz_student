@@ -15,6 +15,7 @@ abstract class AppImagesPhonetics {
   static const String backGroundOfG = "${mainPathOfImages}backGroundOfG.png";
   static const String backGroundOfConnect = "${mainPathOfImages}backGroundOfConnect.png";
   static const String bingoNameGame = "${mainPathOfImages}bingoNameGame.png";
+  static const String spellingNameGame = "${mainPathOfImages}spellingNameGame.png";
   static const String xOutGameName = "${mainPathOfImages}xOutGameName.png";
   static const String backGroundOfF = "${mainPathOfImages}backGroundOfF.png";
   static const String backGroundOfM = "${mainPathOfImages}backGroundOfM.png";
@@ -53,4 +54,5 @@ abstract class AppImagesPhonetics {
   static const String barTwoStar = "${mainPathOfImages}barTwoStar.png";
   static const String barZeroStar = "${mainPathOfImages}barZeroStar.png";
   static const String barThreeStar = "${mainPathOfImages}barThreeStar.png";
+  static const String woodBackground = "${mainPathOfImages}wood.png";
 }

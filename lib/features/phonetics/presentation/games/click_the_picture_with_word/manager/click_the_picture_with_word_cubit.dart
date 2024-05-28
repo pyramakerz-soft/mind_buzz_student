@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../core/assets_sound.dart';
+import '../../../../../../core/audio_player.dart';
 import '../../../../../../core/talk_tts.dart';
 import '../../../../domain/entities/game_images_model.dart';
 import '../../../../domain/entities/game_letters_model.dart';
@@ -69,6 +71,7 @@ class ClickThePictureWithWordCubit
     wrongAnimation();
     reStateOfAvatar();
   }
+
 
   sayTheCorrectAnswer() async {
     await TalkTts.startTalk(text: state.chooseWord?.word ?? '');

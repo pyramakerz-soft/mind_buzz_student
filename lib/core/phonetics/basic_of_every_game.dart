@@ -294,7 +294,9 @@ class SpellingGame implements BasicOfEveryGame {
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.bingoNameGame;
+  String titleImage = AppImagesPhonetics.spellingNameGame;
+
+  String woodenBackground = AppImagesPhonetics.woodBackground;
 
 
   @override

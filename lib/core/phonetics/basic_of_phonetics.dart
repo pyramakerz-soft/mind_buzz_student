@@ -62,6 +62,10 @@ abstract class MainDataOfPhonetics {
         return ConnectionSortingCups(
             mineGameData: SortingCupsGame());
       }
+     else if(subGame.toLowerCase() == GameTypes.spelling.text()){
+        return SpellTheWord(
+            mineGameData: SpellingGame());
+      }
       else {
         return ConnectionWithoutSortingCups(
             mineGameData: BasicOfEveryGame.getTheGameType(
@@ -648,6 +652,34 @@ class ConnectionSortingCups implements MainDataOfPhonetics {
   String winAvatar = AppImagesPhonetics.beeSuccess;
 
   ConnectionSortingCups({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
+}
+
+class SpellTheWord implements MainDataOfPhonetics {
+  final BasicOfEveryGame mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesPhonetics.backGroundOfConnect;
+
+  @override
+  String basicAvatar = AppImagesPhonetics.basicBess;
+
+  @override
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
+
+  @override
+  BasicOfEveryGame? gameData;
+
+  @override
+  String winAvatar = AppImagesPhonetics.beeSuccess;
+
+  SpellTheWord({required this.mineGameData}) {
     gameData = mineGameData;
   }
 

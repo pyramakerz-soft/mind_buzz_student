@@ -31,7 +31,7 @@ class ClickThePictureWithWord extends StatelessWidget {
                 border: Border.all(
                     color: AppColorPhonetics.boarderColor, width: 5)),
             child: BlocConsumer<ClickThePictureWithWordCubit,
-                    ClickThePictureWithWordInitial>(
+                ClickThePictureWithWordInitial>(
                 listener: (context, state) {},
                 builder: (context, gameState) {
                   return Wrap(
@@ -40,8 +40,8 @@ class ClickThePictureWithWord extends StatelessWidget {
                       alignment: WrapAlignment.center,
                       children: List.generate(
                           (gameData.gameImages?.length ?? 0),
-                          (index) => SingleElement(
-                            width: (MediaQuery.of(context).size.width - (130 + 40) )/5,
+                              (index) => SingleElement(
+                              width: (MediaQuery.of(context).size.width - (130 + 40) )/5,
                               height: (MediaQuery.of(context).size.height - (50.h + 90+20))/2,
                               index: index,
                               background: gameState.backGround[index],
@@ -57,31 +57,31 @@ class ClickThePictureWithWord extends StatelessWidget {
                                   context
                                       .read<ClickThePictureWithWordCubit>()
                                       .submitCorrectTheAnswer(
-                                          winAnimation: () => context
-                                              .read<CurrentGamePhoneticsCubit>()
-                                              .animationOfCorrectAnswer(),
-                                          reStateOfAvatar: () => context
-                                              .read<CurrentGamePhoneticsCubit>()
-                                              .backToMainAvatar(),
-                                          idOfUserAnswer:
-                                              (gameData.gameImages?[index].id ??
-                                                  0),
-                                          increaseCountOfCorrectAnswer:
-                                              (correctAnswer) {
-                                            context
-                                                .read<
-                                                    CurrentGamePhoneticsCubit>()
-                                                .addStarToStudent(
-                                                    stateOfCountOfCorrectAnswer:
-                                                        correctAnswer,
-                                                    mainCountOfQuestion:
-                                                        gameData.gameImages
-                                                                ?.length ??
-                                                            0);
-                                          },
-                                          actionWhenComplete: () {
-                                            Navigator.of(context).pop();
-                                          });
+                                      winAnimation: () => context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .animationOfCorrectAnswer(),
+                                      reStateOfAvatar: () => context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .backToMainAvatar(),
+                                      idOfUserAnswer:
+                                      (gameData.gameImages?[index].id ??
+                                          0),
+                                      increaseCountOfCorrectAnswer:
+                                          (correctAnswer) {
+                                        context
+                                            .read<
+                                            CurrentGamePhoneticsCubit>()
+                                            .addStarToStudent(
+                                            stateOfCountOfCorrectAnswer:
+                                            correctAnswer,
+                                            mainCountOfQuestion:
+                                            gameData.gameImages
+                                                ?.length ??
+                                                0);
+                                      },
+                                      actionWhenComplete: () {
+                                        Navigator.of(context).pop();
+                                      });
                                 } else {
                                   await context
                                       .read<CurrentGamePhoneticsCubit>()

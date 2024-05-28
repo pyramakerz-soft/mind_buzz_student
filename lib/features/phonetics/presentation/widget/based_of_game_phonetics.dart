@@ -10,6 +10,8 @@ import 'package:mind_buzz_refactor/features/phonetics/presentation/games/click_t
 import 'package:mind_buzz_refactor/features/phonetics/presentation/games/click_the_sound/manager/click_the_sound_cubit.dart';
 import 'package:mind_buzz_refactor/features/phonetics/presentation/widget/star_widget.dart';
 
+import '../../../../core/assets_sound.dart';
+import '../../../../core/audio_player.dart';
 import '../../../../core/phonetics/assets_images_phonetics.dart';
 import '../../../../core/phonetics/basic_of_every_game.dart';
 import '../../../../core/talk_tts.dart';
@@ -60,7 +62,8 @@ class BasedOfGamePhonetics extends StatelessWidget {
                             child: DragOutGame(
                               // gameData: stateOfGameData.data,
                             ))
-                      } else if ((stateOfGame.basicData?.gameData
+                      }
+                      else if ((stateOfGame.basicData?.gameData
                           is ClickPictureS)) ...{
                         BlocProvider<ClickPictureCubit>(
                             create: (_) => ClickPictureCubit(
@@ -91,7 +94,7 @@ class BasedOfGamePhonetics extends StatelessWidget {
                         BlocProvider<ClickTheSoundCubit>(
                             create: (_) => ClickTheSoundCubit(
                                 gameData: stateOfGameData.data[stateOfGame.index],),
-                            child: ClickTheSoundGame())
+                            child: ClickTheSoundGame()),
                       }
                     ],
                   ))),
@@ -206,6 +209,7 @@ class BasedOfGamePhonetics extends StatelessWidget {
                     GestureDetector(
                       onTap: () async{
                         await TalkTts.startTalk(text:  stateOfGameData.data[stateOfGame.index].inst ?? '');
+                        await AudioPlayerClass.startPlaySound(soundPath: AppSound.getSoundOfLetter(mainGameLetter: stateOfGameData.data[stateOfGame.index].mainLetter ?? ''));
                       },
                       child: Container(
                           child: stateOfGame.avatarArtboard == null
@@ -222,6 +226,7 @@ class BasedOfGamePhonetics extends StatelessWidget {
                               child: Rive(
                                 artboard: stateOfGame.avatarArtboard!,
                                 fit: BoxFit.cover,
+
                               ))),
                     ),
                     // SizedBox(),

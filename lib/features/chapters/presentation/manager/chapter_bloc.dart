@@ -51,6 +51,7 @@ List<ChapterModel> handlingDataOfChapters({required List<LessonModel> lessons}){
     dataOfChapters.add(
         ChapterModel(
           id: lesson.id,
+          lessonId: lesson.id,
           name: lesson.name,
           number: lesson.number,
           star: lesson.stars,
@@ -63,6 +64,7 @@ List<ChapterModel> handlingDataOfChapters({required List<LessonModel> lessons}){
       dataOfChapters.add(
         ChapterModel(
             id: game.id,
+            lessonId: game.lessonId,
             name: 'Lesson ${i + 1}',
             number: i + 1,
             star: game.stars,
