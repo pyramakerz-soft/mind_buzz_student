@@ -41,7 +41,6 @@ class UnitScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     //final width = (MediaQuery.of(context).size.width / 2) + 50;
     final width = (MediaQuery.of(context).size.width / 2) - 10;
-    print('MediaQuery.of(context).size.width: ${MediaQuery.of(context).size.width}');
     return Scaffold(
         backgroundColor: Colors.white,
         body: Stack(

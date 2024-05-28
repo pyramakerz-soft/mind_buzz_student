@@ -20,9 +20,17 @@ class XOutGameScreen extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width - 120.w;
     final gridItemHeight = (screenHeight - 4 - 40 - 2 * 15) / 2; // 4 for padding, 40 for text height, 2 * 15 for border radius
     final gridItemWidth = (screenWidth - 4 - 3 * 2) / 2; // 4 for padding, 3 * 2 for border width
-
+bool _isInteracting = false;
     return BlocConsumer<XOutCubit, XOutInitial>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        print('state.isInteracting : ${state.isInteracting}');
+              if (state.isInteracting) {
+          _isInteracting = true;
+        }
+        if (state.isInteracting == false) {
+          _isInteracting = false;
+        }
+      },
       builder: (context, state) {
         return Container(
           alignment: Alignment.center,
@@ -49,48 +57,55 @@ class XOutGameScreen extends StatelessWidget {
                     ),
               ),
               if (state.gameData?[state.currentGameIndex ?? 0].gameImages?.isNotEmpty ?? false)
-              Expanded(
-                child: GridView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // Number of columns in the grid
-                    childAspectRatio: gridItemWidth / gridItemHeight, // Aspect ratio of each item
+                Expanded(
+                  child: GridView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, // Number of columns in the grid
+                      childAspectRatio: gridItemWidth / gridItemHeight, // Aspect ratio of each item
+                    ),
+                    itemCount: 4,
+                    itemBuilder: (context, index) {
+                      final isSelected = state.selectedItems?.contains(index) == true;
+                      final isCorrect = state.gameData?[state.currentGameIndex ?? 0].gameImages?[index].correct == 0;
+                      final bool gameHasData = state.gameData?[state.currentGameIndex ?? 0].gameImages?.isNotEmpty ?? false;
+                      return !gameHasData
+                          ? SizedBox()
+                          : XOutItemWidget(
+                              imageName: state.gameData?[state.currentGameIndex ?? 0].gameImages?[index].image ?? "",
+                              isSelected: isSelected,
+                              isCorrect: isCorrect,
+                              onTap: state.isInteracting
+                                  ? null
+                                  : () {
+                                      context.read<XOutCubit>().startInteraction();
+                                      context.read<XOutCubit>().selectItem(index).then((_) {
+                                        if (isCorrect) {
+                                          context.read<XOutCubit>().increaseCountOfCorrectAnswers().then((countOfCorrect) async {
+                                            context.read<CurrentGamePhoneticsCubit>().addStarToStudent(stateOfCountOfCorrectAnswer: countOfCorrect, mainCountOfQuestion: state.gameData?[state.currentGameIndex ?? 0].numOfLetters ?? 0);
+                                            bool isLastLesson = context.read<XOutCubit>().isLastGame();
+                                            if (isLastLesson == true) {
+                                              await Future.delayed(const Duration(seconds: 2));
+                                              Navigator.of(context).pop();
+                                            } else {
+                                              await context.read<CurrentGamePhoneticsCubit>().backToMainAvatar();
+                                              context.read<XOutCubit>().updateGameIndex();
+                                            }
+                                          });
+                                        } else {
+                                          context.read<CurrentGamePhoneticsCubit>().addWrongAnswer();
+                                        }
+                                        
+                                      });
+                                        Future.delayed(const Duration(seconds: 2), () {
+                                        context.read<XOutCubit>().stopInteraction();
+                                       });
+                                    
+                                    },
+                            );
+                    },
                   ),
-                  itemCount: 4,
-                  itemBuilder: (context, index) {
-                  
-                    final isSelected = state.selectedItems?.contains(index) == true;
-                    final isCorrect = state.gameData?[state.currentGameIndex ?? 0].gameImages?[index].correct == 0;
-                    final bool gameHasData = state.gameData?[state.currentGameIndex ?? 0].gameImages?.isNotEmpty ?? false;
-                    return !gameHasData ? SizedBox(): XOutItemWidget(
-                      imageName: state.gameData?[state.currentGameIndex ?? 0].gameImages?[index].image ?? "",
-                      isSelected: isSelected,
-                      isCorrect: isCorrect,
-                      onTap: () {
-                        context.read<XOutCubit>().selectItem(index).then((_) {
-                          if (isCorrect) {
-                            context.read<XOutCubit>().increaseCountOfCorrectAnswers().then((countOfCorrect) async {
-                              context.read<CurrentGamePhoneticsCubit>().addStarToStudent(stateOfCountOfCorrectAnswer: countOfCorrect, mainCountOfQuestion: state.gameData?[state.currentGameIndex ?? 0].numOfLetters ?? 0);
-                              bool isLastLesson = context.read<XOutCubit>().isLastGame();
-                              print('isLastLesson: $isLastLesson');
-                              if (isLastLesson == true) {
-                                await Future.delayed(const Duration(seconds: 2));
-                                Navigator.of(context).pop();
-                              } else {
-                                await context.read<CurrentGamePhoneticsCubit>().backToMainAvatar();
-                                context.read<XOutCubit>().updateGameIndex();
-                              }
-                            });
-                          } else {
-                            context.read<CurrentGamePhoneticsCubit>().addWrongAnswer();
-                          }
-                        });
-                      },
-                    );
-                  },
                 ),
-              ),
-              
             ],
           ),
         );
@@ -111,7 +126,7 @@ class XOutItemWidget extends StatelessWidget {
   final String imageName;
   final bool isSelected;
   final bool isCorrect;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +144,7 @@ class XOutItemWidget extends StatelessWidget {
             CachedNetworkImage(
               imageUrl: imageName,
               fit: BoxFit.fill,
-              height: 80.h,
+              height: 70.h,
               width: 50.w,
             ),
           ],

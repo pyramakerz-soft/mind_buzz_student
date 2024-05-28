@@ -36,22 +36,29 @@ class XOutCubit extends Cubit<XOutInitial> {
   void resetSelectedItems() {
     emit(state.copyWith(selectedItems: []));
   }
-  
-    updateGameIndex() {
-    int currentIndex = state.currentGameIndex??0;
+
+  updateGameIndex() {
+    int currentIndex = state.currentGameIndex ?? 0;
     currentIndex = currentIndex + 1;
     emit(state.copyWith(currentGameIndex: currentIndex));
   }
 
-    bool isLastGame() {
-    int currentIndex = state.currentGameIndex??0;
+  bool isLastGame() {
+    int currentIndex = state.currentGameIndex ?? 0;
     currentIndex = currentIndex + 1;
     print('state.gameData?.length : ${state.gameData?.length}');
-    if ((state.gameData?.length ?? 0 ) > currentIndex) {
+    if ((state.gameData?.length ?? 0) > currentIndex) {
       return false;
     } else {
       return true;
     }
   }
 
+  void startInteraction() {
+    emit(state.copyWith(isInteracting: true));
+  }
+
+  void stopInteraction() {
+    emit(state.copyWith(isInteracting: false));
+  }
 }
