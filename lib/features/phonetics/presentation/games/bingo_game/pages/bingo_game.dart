@@ -17,8 +17,8 @@ import '../widget/item_card_widget.dart';
 class BingoGameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final stateOfAvatar =
-        context.watch<CurrentGamePhoneticsCubit>().state.stateOfAvatar;
+    // final stateOfAvatar =
+    //     context.watch<CurrentGamePhoneticsCubit>().state.stateOfAvatar;
     return Container(
         alignment: Alignment.center,
         // height: MediaQuery.of(context).size.height - (70.h),
@@ -32,31 +32,36 @@ class BingoGameScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             border:
                 Border.all(color: AppColorPhonetics.DarkBorderColor, width: 5)),
-        child: BlocConsumer<BingoCubit, BingoInitial>(
-            listener: (context, state) {},
-            builder: (context, gameState) {
-              return Center(
-                  child: Wrap(
-                children: List.generate(
-                    (gameState.cardsLetters)?.length ?? 0,
-                    (rowIndex) => (gameState.cardsLetters)?[rowIndex].id == null
-                        ? Container(
-                            alignment: Alignment.center,
-                            color: AppColorPhonetics.DarkBorderColor,
-                            width:
-                                (MediaQuery.of(context).size.width - (106.w)) /
-                                    3,
-                            height:
-                                (MediaQuery.of(context).size.height - 162.h) /
-                                    3,
-                            child: Text(
-                              'Bingo',
-                              style: TextStyle(
-                                  fontSize: 39,
-                                  fontFamily: AppTheme.getFontFamily5(),
-                                  color: Colors.white),
-                            ))
-                        : ItemCardWidget(
+        child:
+            BlocConsumer<BingoCubit, BingoInitial>(listener: (context, state) {
+          context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
+              stateOfStringIsWord: false,
+              stateOfStringWillSay: state.chooseWord?.letter ?? '');
+        }, builder: (context, gameState) {
+          return Center(
+              child: Wrap(
+            children: List.generate(
+                (gameState.cardsLetters)?.length ?? 0,
+                (rowIndex) => (gameState.cardsLetters)?[rowIndex].id == null
+                    ? Container(
+                        alignment: Alignment.center,
+                        color: AppColorPhonetics.DarkBorderColor,
+                        width:
+                            (MediaQuery.of(context).size.width - (106.w)) / 3,
+                        height:
+                            (MediaQuery.of(context).size.height - 162.h) / 3,
+                        child: Text(
+                          'Bingo',
+                          style: TextStyle(
+                              fontSize: 39,
+                              fontFamily: AppTheme.getFontFamily5(),
+                              color: Colors.white),
+                        ))
+                    : BlocConsumer<CurrentGamePhoneticsCubit,
+                            CurrentGamePhoneticsState>(
+                        listener: (context, state) {},
+                        builder: (context, generalStateOfGame) {
+                          return ItemCardWidget(
                             body: (gameState.cardsLetters)?[rowIndex].letter ??
                                 '',
                             maxHeight:
@@ -74,9 +79,10 @@ class BingoGameScreen extends StatelessWidget {
                                       (gameState.correctIndexes == null) ||
                                       (gameState.correctIndexes?.isEmpty ??
                                           false)) &&
-                                  (stateOfAvatar ==
+                                  (generalStateOfGame.stateOfAvatar ==
                                           BasicOfEveryGame.stateOIdle ||
-                                      stateOfAvatar == null) &&
+                                      generalStateOfGame.stateOfAvatar ==
+                                          null) &&
                                   gameState.stopAction != true) {
                                 if ((gameState.cardsLetters)?[rowIndex]
                                         .letter
@@ -131,8 +137,9 @@ class BingoGameScreen extends StatelessWidget {
                                 }
                               }
                             },
-                          )),
-              ));
-            }));
+                          );
+                        })),
+          ));
+        }));
   }
 }
