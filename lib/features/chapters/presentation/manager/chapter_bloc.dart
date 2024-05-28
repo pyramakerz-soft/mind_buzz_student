@@ -62,12 +62,14 @@ List<ChapterModel> handlingDataOfChapters({required List<LessonModel> lessons}){
         ),
     );
     lesson.games?.asMap().forEach((i,game) {
-      if(game.isEdited == 0) {
+      if(game.isEdited == 0
+          // && game.previousGameId == null
+      ) {
         dataOfChapters.add(
           ChapterModel(
             id: game.id,
             lessonId: game.lessonId,
-            name: 'Lesson ${i + 1}',
+            name: 'Game ${i + 1}',
             number: i + 1,
             star: game.stars,
             levelImg: AppImages.imageCloseLesson,
