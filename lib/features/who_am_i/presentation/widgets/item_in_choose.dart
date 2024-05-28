@@ -22,7 +22,7 @@ class ItemInChoose extends StatelessWidget {
         context.read<WhoAmICubit>().addToSelected(newIndex: id);
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 10),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: AppColor.lightBlueColor3,
@@ -37,11 +37,10 @@ class ItemInChoose extends StatelessWidget {
                 ? AppColor.gradientColor1
                 : null),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const SizedBox(),
             Padding(
-              padding: const EdgeInsets.only(left:55),
+              padding: const EdgeInsets.only(left:0),
               child: Text(
                 text,
                 style: currentIndex == id
@@ -60,8 +59,7 @@ class ItemInChoose extends StatelessWidget {
             Spacer(),
             Image.asset(
               image,
-              height: 145,
-              
+              height: 140,
             ),
           ],
         ),

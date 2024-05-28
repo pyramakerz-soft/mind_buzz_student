@@ -16,10 +16,13 @@ class ClickTheSoundCubit extends Cubit<ClickTheSoundInitial> {
   List<int>? correctIndexes = [];
   int? correctAnswers = 0;
 
+
   ClickTheSoundCubit({required this.gameData, this.letters, this.correctAnswers, this.correctIndexes}) : super(ClickTheSoundInitial(gameData: gameData, letters: letters, correctAnswers: correctAnswers, correctIndexes: correctIndexes)) {
     generateRandomLetters();
     TalkTts.startTalk(text: gameData.inst ?? '');
-    sayTheLetter();
+    Future.delayed(Duration(seconds: 2), () {
+          sayTheLetter();
+    });
   }
 
   sayTheLetter() async {
@@ -50,4 +53,26 @@ class ClickTheSoundCubit extends Cubit<ClickTheSoundInitial> {
     correctIndexes?.add(index);
     emit(state.copyWith(correctAnswers: correctAnswers, correctIndexes: correctIndexes));
   }
+  
+  void startInteraction() {
+   emit(state.copyWith(isInteracting: true));
+  }
+
+  void stopInteraction() {
+    emit(state.copyWith(isInteracting: false));
+
+  }
+  
+    Future<void> selectItem(int index) async {
+      emit(state.copyWith(
+        selectedItem: index,
+      ));
+  }
+  
+    void resetSelectedItems() {
+     Future.delayed(Duration(seconds: 2), () {
+    emit(state.copyWith(selectedItem: null));
+      });
+  }
+
 }

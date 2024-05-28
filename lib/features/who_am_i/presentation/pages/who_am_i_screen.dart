@@ -36,128 +36,221 @@ class WhoAmIScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         body: Column(
           children: [
-            Stack(
-              fit: StackFit.passthrough,
-              children: [
-                BlocProvider<GetProgramsHomeBloc>(
-                    create: (_) => di.sl<GetProgramsHomeBloc>(),
-                    child: Container(
-                      padding: const EdgeInsets.only(bottom: 30),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width - 70,
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                SvgPicture.asset(
-                                  AppSvgImages.bgChooseWhoAmI,
-                                  color: AppColor.skyBlueColor,
-                                  width: MediaQuery.of(context).size.width - 70,
-                                ),
-                                 Positioned(
-                    bottom: -20,
-                    left: -50,
-                    child: Transform.rotate(
-                      angle: 0.25,
-                      child: SizedBox(
-                        height: 150,
-                        width: 150,
-                        child: RiveAnimation.asset(
-                          AppAnimation.beeRive,
-                        ),
-                      ),
-                    )
-                    // Image.asset(
-                    //   AppImages.halfBee,
-                    //   height: 150,
-                    // ),
-                    ),
-                                const Positioned(
-                                  top: -30,
-                                  left: 0,
-                                  child: SizedBox(
-                                    height: 120,
-                                    width: 120,
-                                    child: RiveAnimation.asset(
-                                      AppAnimation.cloudRive,
+            // Stack(
+            //   fit: StackFit.passthrough,
+            //   children: [
+            //     BlocProvider<GetProgramsHomeBloc>(
+            //         create: (_) => di.sl<GetProgramsHomeBloc>(),
+            //         child: Container(
+            //           padding: const EdgeInsets.only(bottom: 30),
+            //           child: Row(
+            //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //             mainAxisSize: MainAxisSize.max,
+            //             children: [
+            //               Container(
+            //                 width: MediaQuery.of(context).size.width - 70,
+            //                 child: Stack(
+            //                   alignment: Alignment.center,
+            //                   children: [
+            //                     SvgPicture.asset(
+            //                       AppSvgImages.bgChooseWhoAmI,
+            //                       color: AppColor.skyBlueColor,
+            //                       width: MediaQuery.of(context).size.width - 70,
+            //                     ),
+            //                     Positioned(
+            //                         bottom: -10,
+            //                         left: -50,
+            //                         child: Transform.rotate(
+            //                           angle: 0.25,
+            //                           child: SizedBox(
+            //                             height: 120,
+            //                             width: 130,
+            //                             child: RiveAnimation.asset(
+            //                               AppAnimation.beeRive,
+            //                             ),
+            //                           ),
+            //                         )
+            //                         // Image.asset(
+            //                         //   AppImages.halfBee,
+            //                         //   height: 150,
+            //                         // ),
+            //                         ),
+            //                     const Positioned(
+            //                       top: -30,
+            //                       left: 0,
+            //                       child: SizedBox(
+            //                         height: 110,
+            //                         width: 110,
+            //                         child: RiveAnimation.asset(
+            //                           AppAnimation.cloudRive,
+            //                         ),
+            //                       ),
+            //                     ),
+            //                     const Positioned(
+            //                       top: 0,
+            //                       right: 0,
+            //                       child: SizedBox(
+            //                         height: 160,
+            //                         width: 160,
+            //                         child: RiveAnimation.asset(
+            //                           AppAnimation.cloudRive,
+            //                         ),
+            //                       ),
+            //                     ),
+            //                     Positioned(
+            //                       top: 50,
+            //                       left: 25,
+            //                       child: Row(
+            //                         children: [
+            //                           GestureDetector(
+            //                               onTap: () {
+            //                                 di.sl<GetProgramsHomeBloc>()..add(LogOutRequest());
+            //                                 context.read<WhoAmICubit>().clearIndex();
+            //                                 Utils.navigateAndRemoveUntilTo(BlocProvider(create: (_) => LoadingCubit(), child: LoginScreen()), context);
+            //                               },
+            //                               child: Container(
+            //                                   padding: const EdgeInsets.all(9),
+            //                                   alignment: Alignment.center,
+            //                                   height: 42,
+            //                                   width: 42,
+            //                                   decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: AppColor.darkBlueColor),
+            //                                   child: SvgPicture.asset(
+            //                                     AppSvgImages.iconLogout,
+            //                                     fit: BoxFit.fill,
+            //                                   ))),
+            //                           20.pw,
+            //                           Text(
+            //                             'Sign In',
+            //                             style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            //                                   color: AppColor.darkBlueColor,
+            //                                   fontSize: 40,
+            //                                   fontWeight: FontWeight.w700,
+            //                                   fontFamily: AppTheme.getFontFamily5(),
+            //                                 ),
+            //                           ),
+            //                         ],
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //         )),
+            //     // Positioned(
+            //     //     bottom: -20,
+            //     //     left: -50,
+            //     //     child: Transform.rotate(
+            //     //       angle: 0.25,
+            //     //       child: SizedBox(
+            //     //         height: 150,
+            //     //         width: 150,
+            //     //         child: RiveAnimation.asset(
+            //     //           AppAnimation.beeRive,
+            //     //         ),
+            //     //       ),
+            //     //     )
+            //     //     // Image.asset(
+            //     //     //   AppImages.halfBee,
+            //     //     //   height: 150,
+            //     //     // ),
+            //     //     )
+            //   ],
+            // ),
+             Row(
+               children: [
+                 Container(
+                   height: MediaQuery.of(context).size.height*0.3,
+                                child: Stack(
+                                  alignment: Alignment.topLeft,
+                                  children: [
+                                    SvgPicture.asset(
+                                      AppSvgImages.bgChooseWhoAmI,
+                                      color: AppColor.skyBlueColor,
+                                      width: MediaQuery.of(context).size.width - 70,
+                                       // height: 200,
+                                      height: MediaQuery.of(context).size.height*0.26,
+
                                     ),
-                                  ),
-                                ),
-                                     const Positioned(
-                                  top: 0,
-                                  right: 0,
-                                  child: SizedBox(
-                                    height: 170,
-                                    width: 170,
-                                    child: RiveAnimation.asset(
-                                      AppAnimation.cloudRive,
-                                    ),
-                                  ),
-                                ),
-                                  Positioned(
-                                  top: 50,
-                                  left: 25,
-                                  child: Row(
-                                    children: [
-                                      GestureDetector(
-                                          onTap: () {
-                                            di.sl<GetProgramsHomeBloc>()..add(LogOutRequest());
-                                            context.read<WhoAmICubit>().clearIndex();
-                                            Utils.navigateAndRemoveUntilTo(BlocProvider(create: (_) => LoadingCubit(), child: LoginScreen()), context);
-                                          },
-                                          child: Container(
-                                              padding: const EdgeInsets.all(9),
-                                              alignment: Alignment.center,
-                                              height: 42,
-                                              width: 42,
-                                              decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: AppColor.darkBlueColor),
-                                              child: SvgPicture.asset(
-                                                AppSvgImages.iconLogout,
-                                                fit: BoxFit.fill,
-                                              ))),
-                                      20.pw,
-                         
-                                      Text(
-                                        'Sign In',
-                                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                              color: AppColor.darkBlueColor,
-                                              fontSize: 40,
-                                              fontWeight: FontWeight.w700,
-                                              fontFamily: AppTheme.getFontFamily5(),
+                                    Positioned(
+                                        bottom: -10,
+                                        left: -40,
+                                        child: Transform.rotate(
+                                          angle: 0.25,
+                                          child: SizedBox(
+                                            height: 120,
+                                            width: 130,
+                                            child: RiveAnimation.asset(
+                                              AppAnimation.beeRive,
                                             ),
+                                          ),
+                                        )
+                                        // Image.asset(
+                                        //   AppImages.halfBee,
+                                        //   height: 150,
+                                        // ),
+                                        ),
+                                    const Positioned(
+                                      top: -30,
+                                      left: 0,
+                                      child: SizedBox(
+                                        height: 110,
+                                        width: 110,
+                                        child: RiveAnimation.asset(
+                                          AppAnimation.cloudRive,
+                                        ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    const Positioned(
+                                      top: 0,
+                                      right: 0,
+                                      child: SizedBox(
+                                        height: 160,
+                                        width: 160,
+                                        child: RiveAnimation.asset(
+                                          AppAnimation.cloudRive,
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 50,
+                                      left: 25,
+                                      child: Row(
+                                        children: [
+                                          GestureDetector(
+                                              onTap: () {
+                                                di.sl<GetProgramsHomeBloc>()..add(LogOutRequest());
+                                                context.read<WhoAmICubit>().clearIndex();
+                                                Utils.navigateAndRemoveUntilTo(BlocProvider(create: (_) => LoadingCubit(), child: LoginScreen()), context);
+                                              },
+                                              child: Container(
+                                                  padding: const EdgeInsets.all(9),
+                                                  alignment: Alignment.center,
+                                                  height: 42,
+                                                  width: 42,
+                                                  decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: AppColor.darkBlueColor),
+                                                  child: SvgPicture.asset(
+                                                    AppSvgImages.iconLogout,
+                                                    fit: BoxFit.fill,
+                                                  ))),
+                                          20.pw,
+                                          Text(
+                                            'Sign In',
+                                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                                  color: AppColor.darkBlueColor,
+                                                  fontSize: 40,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontFamily: AppTheme.getFontFamily5(),
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                 
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-                // Positioned(
-                //     bottom: -20,
-                //     left: -50,
-                //     child: Transform.rotate(
-                //       angle: 0.25,
-                //       child: SizedBox(
-                //         height: 150,
-                //         width: 150,
-                //         child: RiveAnimation.asset(
-                //           AppAnimation.beeRive,
-                //         ),
-                //       ),
-                //     )
-                //     // Image.asset(
-                //     //   AppImages.halfBee,
-                //     //   height: 150,
-                //     // ),
-                //     )
-              ],
-            ),
+                              ),
+               ],
+             ),
             20.ph,
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 24),

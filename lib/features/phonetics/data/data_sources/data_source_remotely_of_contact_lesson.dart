@@ -20,7 +20,8 @@ class DataSourceRemotelyOfContactLessonImpl
       {required int programId}) async {
     final response = await dio.post(
         url: '${Connection.baseURL}${dio.getLessonQuestionsEndPoint}',
-        queryParameters: {'lesson_id': programId});
+      //  queryParameters: {'lesson_id': programId});
+        queryParameters: {'lesson_id': 70});
     if (dio.validResponse(response)) {
       final List<GameModel> l = [];
       response.data['data']['games']

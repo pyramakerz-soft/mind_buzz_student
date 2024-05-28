@@ -54,17 +54,18 @@ class UnitScreen extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.only(bottom: 30),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
                         children: [
                           Container(
-                            width: MediaQuery.of(context).size.width - 70,
+                            width: MediaQuery.of(context).size.width,
                             child: Stack(
-                              alignment: Alignment.center,
+                             // alignment: Alignment.center,
                               children: [
                                 SvgPicture.asset(
                                   AppSvgImages.bgChooseWhoAmI,
                                   color: AppColor.skyBlueColor,
-                                  width: MediaQuery.of(context).size.width - 70,
+                                  width: MediaQuery.of(context).size.width -70,
                                 ),
                                 const Positioned(
                                   top: -30,
@@ -107,12 +108,12 @@ class UnitScreen extends StatelessWidget {
                                                 AppSvgImages.iconHome,
                                                 fit: BoxFit.fill,
                                               ))),
-                                      20.pw,
+                                      16.pw,
                                       Text(
                                         programName,
                                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                               color: AppColor.darkBlueColor,
-                                              fontSize: 40,
+                                              fontSize: 35,
                                               fontWeight: FontWeight.w700,
                                               fontFamily: AppTheme.getFontFamily5(),
                                             ),
@@ -127,13 +128,13 @@ class UnitScreen extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                        bottom: -20,
+                        bottom: -15,
                         left: -50,
                         child: Transform.rotate(
                           angle: 0.25,
                           child: SizedBox(
-                             height: 150,
-                             width: 150,
+                             height: 130,
+                             width: 140,
                             child: RiveAnimation.asset(
                               AppAnimation.beeRive,
                             ),
@@ -205,7 +206,7 @@ class UnitScreen extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: 210,
+              top: 200,
               child: BlocProvider<GetUnitBloc>(
                   create: (_) => di.sl<GetUnitBloc>()..add(GetUnitRequest(programId: int.parse(programId))),
                   child: BlocConsumer<GetUnitBloc, GetUnitState>(listener: (context, state) {
@@ -320,18 +321,18 @@ class UnitScreen extends StatelessWidget {
                           //   ],
                           // ),
                           // 20.ph,
-                          32.ph,
+                          24.ph,
                           Container(
                             margin: const EdgeInsets.symmetric(horizontal: 15),
                             width: MediaQuery.of(context).size.width - 5,
                             //height: MediaQuery.of(context).size.height-(20+100+(MediaQuery.of(context).size.height / 6)+160),
-                            height: MediaQuery.of(context).size.height - (150 + (MediaQuery.of(context).size.height / 6) + 160),
+                            height: MediaQuery.of(context).size.height - (120 + (MediaQuery.of(context).size.height / 6) + 140),
                             child: ListView(
                               children: List.generate(state.data.length, (index) {
                                 return Column(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                                      padding: const EdgeInsets.symmetric(horizontal: 10),
                                       child: GestureDetector(
                                         onTap: () {
                                           Utils.navigateTo(
@@ -362,13 +363,15 @@ class UnitScreen extends StatelessWidget {
                                                     child: Center(
                                                       child: Container(
                                                         width: width,
+                                                        //newly added
+                                                        height: 32,
                                                         // alignment: Alignment.center,
                                                         padding: EdgeInsets.only(top: 10, left: (index == 0) || index % 2 == 0 ? 0 : 30, right: (index == 0) || index % 2 == 0 ? 30 : 0),
                                                         child: Text(
                                                           state.data[index].name ?? '',
                                                           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                                                 color: AppColor.white,
-                                                                fontSize: 18,
+                                                                fontSize: 17,
                                                                 fontWeight: FontWeight.w700,
                                                               ),
                                                           textAlign: TextAlign.center,

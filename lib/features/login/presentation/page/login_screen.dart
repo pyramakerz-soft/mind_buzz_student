@@ -383,12 +383,12 @@ class LoginAnimatedVectors extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(bottom: 200, child: Image.asset(AppImages.mindBuzzLogo)),
+          Positioned(bottom: screenHeight*0.2, child: Image.asset(AppImages.mindBuzzLogo)),
           const Positioned(
-            bottom: 10,
+            bottom: 0,
             child: SizedBox(
-              height: 220,
-              width: 220,
+              height: 190,
+              width: 190,
               child: RiveAnimation.asset(
                 AppAnimation.beeRive,
               ),
