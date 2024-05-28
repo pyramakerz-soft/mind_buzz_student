@@ -41,6 +41,7 @@ class UnitScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     //final width = (MediaQuery.of(context).size.width / 2) + 50;
     final width = (MediaQuery.of(context).size.width / 2) - 10;
+    print('MediaQuery.of(context).size.width: ${MediaQuery.of(context).size.width}');
     return Scaffold(
         backgroundColor: Colors.white,
         body: Stack(
@@ -66,6 +67,8 @@ class UnitScreen extends StatelessWidget {
                                   AppSvgImages.bgChooseWhoAmI,
                                   color: AppColor.skyBlueColor,
                                   width: MediaQuery.of(context).size.width -70,
+                                  height: MediaQuery.of(context).size.width < 370 ? MediaQuery.of(context).size.height*0.24 : MediaQuery.of(context).size.height*0.21,
+
                                 ),
                                 const Positioned(
                                   top: -30,
@@ -78,13 +81,13 @@ class UnitScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                const Positioned(
-                                  top: 0,
-                                  right: 0,
+                                 Positioned(
+                                  top: -10,
+                                  right: 30,
                                   child: SizedBox(
-                                    height: 160,
-                                    width: 160,
-                                    child: RiveAnimation.asset(
+                                    height: MediaQuery.of(context).size.width < 370 ? 120 : 160,
+                                    width: MediaQuery.of(context).size.width < 370 ? 120 : 160,
+                                    child:const  RiveAnimation.asset(
                                       AppAnimation.cloudRive,
                                     ),
                                   ),
@@ -133,17 +136,13 @@ class UnitScreen extends StatelessWidget {
                         child: Transform.rotate(
                           angle: 0.25,
                           child: SizedBox(
-                             height: 130,
-                             width: 140,
-                            child: RiveAnimation.asset(
+                             height:MediaQuery.of(context).size.width < 370 ? 120 : 150,
+                             width: MediaQuery.of(context).size.width < 370 ? 130 : 150,
+                            child:const  RiveAnimation.asset(
                               AppAnimation.beeRive,
                             ),
                           ),
                         )
-                        // Image.asset(
-                        //   AppImages.halfBee,
-                        //   height: 150,
-                        // ),
                         )
                   ],
                 ),

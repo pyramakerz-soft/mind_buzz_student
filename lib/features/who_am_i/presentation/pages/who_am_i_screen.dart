@@ -31,6 +31,7 @@ class WhoAmIScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentIndex = context.watch<WhoAmICubit>().state;
+    print('MediaQuery.of(context).size.width : ${MediaQuery.of(context).size.width }');
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -169,7 +170,7 @@ class WhoAmIScreen extends StatelessWidget {
                                       color: AppColor.skyBlueColor,
                                       width: MediaQuery.of(context).size.width - 70,
                                        // height: 200,
-                                      height: MediaQuery.of(context).size.height*0.26,
+                                      height: MediaQuery.of(context).size.width < 370 ? MediaQuery.of(context).size.height*0.26 : MediaQuery.of(context).size.height*0.23,
 
                                     ),
                                     Positioned(
@@ -178,8 +179,8 @@ class WhoAmIScreen extends StatelessWidget {
                                         child: Transform.rotate(
                                           angle: 0.25,
                                           child: SizedBox(
-                                            height: 120,
-                                            width: 130,
+                                            height: MediaQuery.of(context).size.width < 370 ? 120 : 150,
+                                            width: MediaQuery.of(context).size.width < 370 ? 130 : 150,
                                             child: RiveAnimation.asset(
                                               AppAnimation.beeRive,
                                             ),

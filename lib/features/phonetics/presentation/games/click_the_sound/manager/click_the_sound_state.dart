@@ -36,5 +36,5 @@ class ClickTheSoundInitial extends Equatable {
   }
 
   @override
-  List<Object?> get props => [gameData, letters, correctAnswers, correctIndexes, isInteracting];
+  List<Object?> get props => [gameData, letters, correctAnswers, correctIndexes, isInteracting, selectedItem];
 }

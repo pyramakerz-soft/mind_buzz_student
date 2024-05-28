@@ -55,4 +55,5 @@ abstract class AppImagesPhonetics {
   static const String barZeroStar = "${mainPathOfImages}barZeroStar.png";
   static const String barThreeStar = "${mainPathOfImages}barThreeStar.png";
   static const String woodBackground = "${mainPathOfImages}wood.png";
+  static const String bubbleSelected = '${mainPathOfImages}bubbleSelected.png';
 }

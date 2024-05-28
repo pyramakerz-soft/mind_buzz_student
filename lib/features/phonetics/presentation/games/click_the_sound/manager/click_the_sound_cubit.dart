@@ -18,7 +18,7 @@ class ClickTheSoundCubit extends Cubit<ClickTheSoundInitial> {
 
 
   ClickTheSoundCubit({required this.gameData, this.letters, this.correctAnswers, this.correctIndexes}) : super(ClickTheSoundInitial(gameData: gameData, letters: letters, correctAnswers: correctAnswers, correctIndexes: correctIndexes)) {
-    generateRandomLetters();
+    generateRandomLetters2();
     TalkTts.startTalk(text: gameData.inst ?? '');
     Future.delayed(Duration(seconds: 2), () {
           sayTheLetter();
@@ -30,7 +30,6 @@ class ClickTheSoundCubit extends Cubit<ClickTheSoundInitial> {
   }
 
   Future<void> generateRandomLetters() async {
-    //List<String> gameLetters = 'smatd'.split('');
     List<String> gameLetters = state.gameData.gameLetters?.map((e) => e.letter.toString()).toList() ?? [];
 
     String mainLetter = state.gameData.mainLetter ?? '';
@@ -45,6 +44,25 @@ class ClickTheSoundCubit extends Cubit<ClickTheSoundInitial> {
     }
     emit(state.copyWith(letters: randomLetters));
   }
+
+Future<void> generateRandomLetters2() async {
+  List<String> gameLetters = state.gameData.gameLetters?.map((e) => e.letter.toString()).toList() ?? [];
+  String mainLetter = state.gameData.mainLetter ?? '';
+  int numOfLetterRepeat = state.gameData.numOfLetterRepeat ?? 4;
+  gameLetters.remove(mainLetter);
+  gameLetters.shuffle();
+  List<String> randomLetters = List.filled(numOfLetterRepeat, mainLetter, growable: true);
+  // calc remaining bubbles to fill
+  int remainingSlots = 8 - numOfLetterRepeat;
+  if (gameLetters.length < remainingSlots) {
+    throw Exception('Issue with the number of letters');
+  }
+  // addd other letters to the list until --> 8 letters
+  randomLetters.addAll(gameLetters.sublist(0, remainingSlots));
+  randomLetters.shuffle();
+  emit(state.copyWith(letters: randomLetters));
+}
+
 
   Future<void> incrementCorrectAnswerCount(int index) async {
     if (correctAnswers == null) correctAnswers = 0;
@@ -70,7 +88,8 @@ class ClickTheSoundCubit extends Cubit<ClickTheSoundInitial> {
   }
   
     void resetSelectedItems() {
-     Future.delayed(Duration(seconds: 2), () {
+      print('here in resetSelectedItems cubit');
+    Future.delayed(Duration(seconds: 2), () {
     emit(state.copyWith(selectedItem: null));
       });
   }

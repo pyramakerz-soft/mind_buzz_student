@@ -40,7 +40,7 @@ class ItemInChoose extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left:0),
+              padding: EdgeInsets.only(left:MediaQuery.of(context).size.width < 370 ? 0 : 40),
               child: Text(
                 text,
                 style: currentIndex == id
