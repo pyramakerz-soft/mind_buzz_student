@@ -10,6 +10,7 @@
     <application
         android:label="mind_buzz_refactor"
         android:name="${applicationName}"
+        android:resizeableActivity="false"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

@@ -46,24 +46,11 @@ class ClickThePictureWithWordCubit
     state.copyWith(correctIndexes: correctAnswer);
   }
 
-  submitCorrectTheAnswer(
-      {required Function() winAnimation,
-      required Function() reStateOfAvatar,
-      required Function() actionWhenComplete,
-      required Function(int correctAnswer) increaseCountOfCorrectAnswer,
-      required int idOfUserAnswer}) async {
-    await winAnimation();
+  submitCorrectTheAnswer() async {
     int sub = state.correctAnswer??0;
     sub = sub +1;
     emit(state.copyWith(correctAnswer: sub));
-    increaseCountOfCorrectAnswer(sub);
-    addTheCorrectAnswer(idOfUserAnswer: idOfUserAnswer);
-    if((state.gameData.gameImages?.length??0) == sub){
-      actionWhenComplete();
-    }else {
-      await reStateOfAvatar();
-      await getTheRandomWord();
-    }
+
   }
   submitWrongTheAnswer(
       {required Function() wrongAnimation,

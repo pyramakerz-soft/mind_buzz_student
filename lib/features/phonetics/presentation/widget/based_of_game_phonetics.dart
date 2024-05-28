@@ -158,16 +158,25 @@ class BasedOfGamePhonetics extends StatelessWidget {
                           children: [
                             Image.asset(
                               AppImagesPhonetics.stayOfStarBar,
-                              width: 50.w,
+                              width: 65.w,
+                              fit: BoxFit.contain,
                             ),
-                            ((stateOfGame.countOfStar ?? 0) ==0)?
-                            Image.asset(AppImagesPhonetics.barZeroStar,
-                                width: 40.w):((stateOfGame.countOfStar ?? 0) ==1)?
-                            Image.asset(AppImagesPhonetics.barOneStar,
-                                width: 40.w):((stateOfGame.countOfStar ?? 0) ==2)?
-                            Image.asset(AppImagesPhonetics.barTwoStar,
-                                width: 40.w):Image.asset(AppImagesPhonetics.barThreeStar,
-                                width: 40.w)
+                           Container(
+                             padding: EdgeInsets.symmetric(horizontal: 10),
+                             child:
+                             Column(
+                               children: [
+                                 ((stateOfGame.countOfStar ?? 0) ==0)?
+                                 Image.asset(AppImagesPhonetics.barZeroStar,width: 40.w,
+                                      fit: BoxFit.contain,):((stateOfGame.countOfStar ?? 0) ==1)?
+                                 Image.asset(AppImagesPhonetics.barOneStar,
+                                     width: 40.w):((stateOfGame.countOfStar ?? 0) ==2)?
+                                 Image.asset(AppImagesPhonetics.barTwoStar,
+                                     width: 40.w):Image.asset(AppImagesPhonetics.barThreeStar,
+                                     width: 40.w)
+                               ],
+                             ),
+                           )
                           ],
                         )),
                       ],
@@ -208,6 +217,7 @@ class BasedOfGamePhonetics extends StatelessWidget {
                     const SizedBox(),
                     GestureDetector(
                       onTap: () async{
+                        print('%%:${MediaQuery.of(context).size.height}');
                         await TalkTts.startTalk(text:  stateOfGameData.data[stateOfGame.index].inst ?? '');
                         await AudioPlayerClass.startPlaySound(soundPath: AppSound.getSoundOfLetter(mainGameLetter: stateOfGameData.data[stateOfGame.index].mainLetter ?? ''));
                       },
@@ -215,17 +225,16 @@ class BasedOfGamePhonetics extends StatelessWidget {
                           child: stateOfGame.avatarArtboard == null
                               ? Image.asset(
                             stateOfGame.currentAvatar ?? '',
-                            height:
-                            MediaQuery.of(context).size.height - (70.h),
-                            width: 130,
+                            height:MediaQuery.of(context).size.height>450?250.h:200.h,
+                            width: 100.w,
                           )
                               : SizedBox(
-                              height:
-                              MediaQuery.of(context).size.height - (70.h),
-                              width: 170,
+                              height:MediaQuery.of(context).size.height>450?250.h:200.h,
+                              width: 100.w,
                               child: Rive(
                                 artboard: stateOfGame.avatarArtboard!,
-                                fit: BoxFit.cover,
+                                fit: BoxFit.fill,
+                                // useArtboardSize: true,
 
                               ))),
                     ),

@@ -123,6 +123,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
       {required MainDataOfPhonetics basicData,
       required List<GameModel> gameData,
       required int gameIndex}) {
+    emit(state.clearAllData());
     emit(state.copyWith(
         basicData: basicData,
         currentAvatar: basicData.basicAvatar,
@@ -135,7 +136,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   saveCountOfTries(){
-    int countOfTries = 3;//state.gameData?[state.index].numOfTrials??0;
+    int countOfTries = 50;//state.gameData?[state.index].numOfTrials??0;
     emit(state.copyWith(countOfTries:countOfTries, countOfStar: 0));
   }
 
@@ -197,7 +198,8 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
 
   addSuccessAnswer({required void Function() actionInEndOfLesson,int? nextGameId}) async {
     await animationOfCorrectAnswer();
-
+    await AudioPlayerClass.startPlaySound(
+        soundPath: AppSound.getRandomSoundOfCorrect());
     bool isLastLesson = nextGameId == null;
     // checkIfIsTheLastGameOfLesson();
 
@@ -232,10 +234,13 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     decreaseCountOfTries();
   }
 
-  animationOfCorrectAnswer() {
+  Future<void> animationOfCorrectAnswer() async {
     emit(state.copyWith(
         avatarArtboard: state.avatarArtboardSuccess,
         stateOfAvatar: BasicOfEveryGame.stateOfWin));
+
+    await AudioPlayerClass.startPlaySound(
+        soundPath: AppSound.getRandomSoundOfCorrect());
   }
 
   increaseCountOfCorrectAnswer() {

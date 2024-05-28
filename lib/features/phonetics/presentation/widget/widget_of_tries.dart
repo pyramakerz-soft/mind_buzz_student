@@ -10,7 +10,10 @@ widgetOfTries({required BuildContext context,required int nextGameIndex}){
       onTap: (){
         final basicData = context.read<CurrentGamePhoneticsCubit>().state.basicData;
         final gameData = context.read<CurrentGamePhoneticsCubit>().state.gameData;
-        context.read<CurrentGamePhoneticsCubit>().updateDataOfCurrentGame(basicData: basicData!, gameData: gameData??[],
+        gameData?.first.gameLetters?.forEach((element) {
+          print('%%:${element.id}');
+        });
+        context.read<CurrentGamePhoneticsCubit>().updateDataOfCurrentGame(basicData: basicData!, gameData: (gameData??[]),
             gameIndex: nextGameIndex);
       },
       child: Center(

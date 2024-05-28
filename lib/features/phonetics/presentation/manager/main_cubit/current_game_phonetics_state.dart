@@ -88,6 +88,13 @@ class CurrentGamePhoneticsState extends Equatable {
         avatarArtboard: avatarArtboard ?? avatarArtboard);
   }
 
+
+  CurrentGamePhoneticsState clearAllData() {
+    return CurrentGamePhoneticsState(
+      index: index ?? index,
+    );
+  }
+
   @override
   List<Object?> get props => [
         basicData,
