@@ -15,13 +15,13 @@ LessonModel _$LessonModelFromJson(Map<String, dynamic> json) => LessonModel(
       warmupId: (json['warmup_id'] as num?)?.toInt(),
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
-    games: (json['games'] as List<dynamic>?)
-        ?.map((e) => GameModel.fromJson(e as Map<String, dynamic>))
-        .toList(),
       chapter: json['chapter'] == null
           ? null
           : SubChapterModel.fromJson(json['chapter'] as Map<String, dynamic>),
       type: json['type'] as String?,
+      games: (json['games'] as List<dynamic>?)
+          ?.map((e) => GameModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$LessonModelToJson(LessonModel instance) =>
@@ -36,4 +36,5 @@ Map<String, dynamic> _$LessonModelToJson(LessonModel instance) =>
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
       'chapter': instance.chapter?.toJson(),
+      'games': instance.games?.map((e) => e.toJson()).toList(),
     };

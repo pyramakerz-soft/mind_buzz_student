@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:mind_buzz_refactor/core/singleton.dart';
+import 'package:mind_buzz_refactor/features/login/domain/entities/student_assignment_model.dart';
 import 'package:mind_buzz_refactor/features/login/domain/entities/user_details_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -48,6 +50,9 @@ class UserData extends Equatable {
     if(token!=null) {
       saveToken(token: token);
     }
+    //save student assignments
+    List <StudentAssignmentModel> studentAssignments = (json['assignments'] as List<dynamic>?)?.map((e) => StudentAssignmentModel.fromJson(e as Map<String, dynamic>)).toList()??[];
+    Singleton().studentAssignments = studentAssignments;
     return _$UserDataFromJson(json['user']);
   }
 

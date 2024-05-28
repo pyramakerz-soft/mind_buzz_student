@@ -13,6 +13,7 @@ import 'package:intl_phone_field/phone_number.dart';
 import 'package:mind_buzz_refactor/core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/error/failures_messages.dart';
+import '../../../../core/singleton.dart';
 import '../../domain/entities/user_data_model.dart';
 import '../../domain/usecases/auto_user_use_cases.dart';
 import '../../domain/usecases/update_user_data_use_case.dart';

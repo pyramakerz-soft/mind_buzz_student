@@ -13,6 +13,10 @@ BasedLoginModel _$BasedLoginModelFromJson(Map<String, dynamic> json) =>
           ? null
           : UserData.fromJson(json['user'] as Map<String, dynamic>),
       token: json['token'] as String?,
+      assignments: (json['assignments'] as List<dynamic>?)
+          ?.map(
+              (e) => StudentAssignmentModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$BasedLoginModelToJson(BasedLoginModel instance) =>
@@ -20,4 +24,5 @@ Map<String, dynamic> _$BasedLoginModelToJson(BasedLoginModel instance) =>
       'status': instance.status,
       'user': instance.user?.toJson(),
       'token': instance.token,
+      'assignments': instance.assignments?.map((e) => e.toJson()).toList(),
     };
