@@ -24,7 +24,10 @@ class SpellingGameScreen extends StatelessWidget {
         listener: (context, state) {
       if (state.countOfWrong == 3) {
         context.read<SpellingCubit>().increaseCountOfWrongAnswers(count: 0);
-        context.read<SpellingCubit>().navigateToNextIndex();
+        Future.delayed(Duration(seconds: 2),(){
+          context.read<SpellingCubit>().navigateToNextIndex();
+        });
+
       }
     }, builder: (context, gameState) {
       return Padding(
@@ -128,6 +131,9 @@ class SpellingGameScreen extends StatelessWidget {
                                                       () async {
                                             // TalkTts.startTalk(text: gameData.mainLetter ?? '');
                                           });
+                                          if(!context
+                                              .read<SpellingCubit>()
+                                              .checkIfIsTheLastGameOfLesson())
                                           context
                                               .read<CurrentGamePhoneticsCubit>()
                                               .increaseCountOfTries();

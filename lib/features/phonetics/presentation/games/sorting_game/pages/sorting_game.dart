@@ -1,7 +1,9 @@
 import 'dart:developer';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -23,10 +25,14 @@ class SortingGameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<sortingCubit, sortingInitial>(
         listener: (context, state) {
-      // if (state.countOfWrong == 3) {
-      //   context.read<sortingCubit>().increaseCountOfWrongAnswers(count: 0);
-      //   context.read<sortingCubit>().navigateToNextIndex();
-      // }
+      if (state.countOfWrong == 3) {
+        context.read<sortingCubit>().increaseCountOfWrongAnswers(count: 0);
+        context.read<sortingCubit>().addWrongAnswer();
+        Future.delayed(Duration(seconds: 1),(){
+          context.read<sortingCubit>().changeImages();
+        });
+
+      }
     }, builder: (context, gameState) {
       return Padding(
         padding: const EdgeInsets.only(top: 0, left: 30),
@@ -78,8 +84,7 @@ class SortingGameScreen extends StatelessWidget {
                     Image.asset(
                       gameState.woodenBackground!,
                       height: 0.8.sh,
-                      width: 0.6.sw,
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                     ),
                     ListView.separated(
                         shrinkWrap: true,
@@ -97,7 +102,8 @@ class SortingGameScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return Container(
                             width: 0.14.sw,
-                            padding: EdgeInsets.only(top: 30, right: 20,left: 25),
+                            height: 0.8.sw,
+                            padding: EdgeInsets.only(top: 30, right: 30,left: 10),
                             child: Column(
                               children: [
                                 StrokeText(
@@ -107,17 +113,15 @@ class SortingGameScreen extends StatelessWidget {
                                   isDisabled: false,
                                   fontSize: 0.04.sw,
                                 ),
-                                // 7.ph,
-                                DragTarget<int>(
-                                  builder: (
-                                    BuildContext context,
-                                    List<dynamic> accepted,
-                                    List<dynamic> rejected,
-                                  ) {
-                                    return Container(
-                                      width: 0.14.sw,
-                                      height: 0.5.sh,
-                                      child: GridView.builder(
+                                7.ph,
+                                Expanded(
+                                  child: DragTarget<int>(
+                                    builder: (
+                                      BuildContext context,
+                                      List<dynamic> accepted,
+                                      List<dynamic> rejected,
+                                    ) {
+                                      return GridView.builder(
                                           shrinkWrap: true,
                                           itemCount: gameState.correctAnswers
                                               .where((element) =>
@@ -141,71 +145,86 @@ class SortingGameScreen extends StatelessWidget {
                                                     .toList()[i]
                                                     .image ??
                                                 '';
-                                            return Image.network(image);
-                                          }),
-                                    );
-                                  },
-                                  onAcceptWithDetails:
-                                      (DragTargetDetails<int> details) async {
-                                    GameImagesModel image = gameState
-                                        .gameData!.gameImages!
-                                        .firstWhere((element) =>
-                                            element.id == details.data);
-                                    context
-                                        .read<sortingCubit>()
-                                        .addTheCorrectAnswer(answer: image);
-
-                                    if (gameState.gameData!.gameLetters?[index].id == image.gameLetterId) {
+                                            return CachedNetworkImage(
+                                              imageUrl: image,
+                                              placeholder: (context, url) => const Center(
+                                                child: CupertinoActivityIndicator(),
+                                              ),
+                                              errorWidget: (context, url, error) =>
+                                              const Icon(
+                                                Icons.error,
+                                                color: Colors.red,
+                                              ),
+                                              // height: ,
+                                            );
+                                          });
+                                    },
+                                    onAcceptWithDetails:
+                                        (DragTargetDetails<int> details) async {
+                                  
+                                      GameImagesModel image = gameState
+                                          .gameData!.gameImages!
+                                          .firstWhere((element) =>
+                                              element.id == details.data);
                                       context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .animationOfCorrectAnswer();
-                                      int countOfCorrect = await context
                                           .read<sortingCubit>()
-                                          .increaseCountOfCorrectAnswers();
-
-                                      context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .addStarToStudent(
-                                            stateOfCountOfCorrectAnswer:
-                                                countOfCorrect,
-                                            mainCountOfQuestion: gameState
-                                                    .gameData
-                                                    ?.gameImages
-                                                    ?.length ??
-                                                0,
-                                          );
-                                      bool isLastLesson = context
-                                          .read<sortingCubit>()
-                                          .checkIfIsTheLastGameOfLesson();
-                                      if (isLastLesson == true) {
-                                        await Future.delayed(
-                                            const Duration(seconds: 2));
-                                        Navigator.of(context).pop();
-                                      } else {
+                                          .addTheCorrectAnswer(answer: image);
+                                  
+                                      if (gameState.gameData!.gameLetters?[index].id == image.gameLetterId) {
                                         context
                                             .read<CurrentGamePhoneticsCubit>()
-                                            .backToMainAvatar();
+                                            .animationOfCorrectAnswer();
+                                        int countOfCorrect = await context
+                                            .read<sortingCubit>()
+                                            .increaseCountOfCorrectAnswers();
+                                  
+                                        context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .addStarToStudent(
+                                              stateOfCountOfCorrectAnswer:
+                                                  countOfCorrect,
+                                              mainCountOfQuestion: gameState
+                                                      .gameData
+                                                      ?.gameImages
+                                                      ?.length ??
+                                                  0,
+                                            );
+                                        bool isLastLesson = context
+                                            .read<sortingCubit>()
+                                            .checkIfIsTheLastGameOfLesson();
+                                        if (isLastLesson == true) {
+                                          await Future.delayed(
+                                              const Duration(seconds: 2));
+                                          Navigator.of(context).pop();
+                                        } else {
+                                          context
+                                              .read<CurrentGamePhoneticsCubit>()
+                                              .backToMainAvatar();
+                                          context
+                                              .read<sortingCubit>()
+                                              .changeImages();
+                                        }
+                                      }
+                                      else {
+                                        context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .addWrongAnswer(
+                                                actionOfWrongAnswer: () async {
+                                          // TalkTts.startTalk(text: gameData.mainLetter ?? '');
+                                        });
+                                           context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .increaseCountOfTries();
+                                  
                                         context
                                             .read<sortingCubit>()
-                                            .changeImages();
+                                            .increaseCountOfWrongAnswers();
+                                        context
+                                            .read<sortingCubit>()
+                                            .removeTheWrongAnswer();
                                       }
-                                    }
-                                    else {
-                                      context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .addWrongAnswer(
-                                              actionOfWrongAnswer: () async {
-                                        // TalkTts.startTalk(text: gameData.mainLetter ?? '');
-                                      });
-
-                                      context
-                                          .read<sortingCubit>()
-                                          .increaseCountOfWrongAnswers();
-                                      context
-                                          .read<sortingCubit>()
-                                          .removeTheWrongAnswer();
-                                    }
-                                  },
+                                    },
+                                  ),
                                 ),
                                 20.ph,
                               ],

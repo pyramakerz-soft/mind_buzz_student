@@ -4,6 +4,7 @@ part of 'sorting_cubit.dart';
 class sortingInitial extends Equatable {
   GameModel? gameData;
   List<GameImagesModel> correctAnswers;
+  List<GameImagesModel>? wrongAnswers;
   int? correctAnswer;
   String? woodenBackground;
   int countOfWrong;
@@ -13,6 +14,7 @@ class sortingInitial extends Equatable {
   sortingInitial(
       {this.gameData,
      required this.correctAnswers,
+      this.wrongAnswers,
       this.correctAnswer,
       this.woodenBackground,
         this.countOfWrong = 0,
@@ -29,12 +31,14 @@ class sortingInitial extends Equatable {
       List<String>? indexOfCorrectAnswers,
       List<GameImagesModel>? correctAnswers,
       List<GameImagesModel>? currentImages,
+      List<GameImagesModel>? wrongAnswers,
         int? step,
       String? woodenBackground}) {
     return sortingInitial(
         gameData: gameData ?? this.gameData,
         correctAnswer: correctAnswer ?? this.correctAnswer,
       correctAnswers: correctAnswers ?? this.correctAnswers,
+      wrongAnswers: wrongAnswers ?? this.wrongAnswers,
       woodenBackground: woodenBackground ?? this.woodenBackground,
       countOfWrong: countOfWrong ?? this.countOfWrong,
       currentImages: currentImages ?? this.currentImages,
@@ -44,5 +48,5 @@ class sortingInitial extends Equatable {
 
   @override
   List<Object?> get props =>
-      [gameData, correctAnswers, correctAnswer,woodenBackground,countOfWrong,currentImages];
+      [gameData, correctAnswers, correctAnswer,woodenBackground,countOfWrong,currentImages,wrongAnswers];
 }
