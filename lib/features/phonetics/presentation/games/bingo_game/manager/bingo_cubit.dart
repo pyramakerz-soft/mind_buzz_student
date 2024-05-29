@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 
 import '../../../../../../core/assets_sound.dart';
 import '../../../../../../core/audio_player.dart';
+import '../../../../../../core/talk_tts.dart';
 import '../../../../domain/entities/game_letters_model.dart';
 import '../../../../domain/entities/game_model.dart';
 
@@ -18,7 +19,9 @@ class BingoCubit extends Cubit<BingoInitial> {
       : super(BingoInitial(gameData: gameData)) {
     // bool haveNullId  =  (gameData.gameLetters ?? []).where((element) => element.id == null).toList().isNotEmpty;
     // if(haveNullId == false) {
-      List<GameLettersModel> supList = (gameData.gameLetters ?? []).where((element) => element.id != null).toList();
+    TalkTts.startTalk(text: gameData.inst ?? '');
+
+    List<GameLettersModel> supList = (gameData.gameLetters ?? []).where((element) => element.id != null).toList();
       // supList.addAll(List.from(supList));
       supList.insert(4, GameLettersModel());
       emit(state.copyWith(cardsLetters: supList.toList()));

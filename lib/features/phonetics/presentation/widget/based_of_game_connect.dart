@@ -169,11 +169,6 @@ class BasedOfGameConnect extends StatelessWidget {
                                                   .stateOfStringWillSay ??
                                               '');
 
-                                      await AudioPlayerClass.startPlaySound(
-                                          soundPath: AppSound.getSoundOfLetter(
-                                              mainGameLetter: stateOfGame
-                                                      .stateOfStringWillSay ??
-                                                  ''));
                                     } else {
                                       await AudioPlayerClass.startPlaySound(
                                           soundPath: AppSound.getSoundOfLetter(
@@ -235,11 +230,6 @@ class BasedOfGameConnect extends StatelessWidget {
                                                   .stateOfStringWillSay ??
                                               '');
 
-                                      await AudioPlayerClass.startPlaySound(
-                                          soundPath: AppSound.getSoundOfLetter(
-                                              mainGameLetter: stateOfGame
-                                                      .stateOfStringWillSay ??
-                                                  ''));
                                     } else {
                                       await AudioPlayerClass.startPlaySound(
                                           soundPath: AppSound.getSoundOfLetter(

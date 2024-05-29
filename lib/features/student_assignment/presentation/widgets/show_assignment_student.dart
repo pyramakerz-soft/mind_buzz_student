@@ -78,7 +78,7 @@ class ShowAssignmentStudent extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: List.generate(
-                    courseData.program?.tests?.length ?? 0,
+                    courseData.program?.studentTests?.length ?? 0,
                     (index) => Column(
                           children: [
                             Container(
@@ -122,7 +122,7 @@ class ShowAssignmentStudent extends StatelessWidget {
                                                 ),
                                           ),
                                           Text(
-                                            courseData.program?.tests?[index]
+                                            courseData.program?.studentTests?[index]
                                                     .name ??
                                                 '',
                                             style: Theme.of(context)
