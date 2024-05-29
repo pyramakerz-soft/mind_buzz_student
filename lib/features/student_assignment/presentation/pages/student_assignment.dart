@@ -75,7 +75,7 @@ class StudentAssignmentScreen extends StatelessWidget {
                 ...List.generate(
                   assignmentProgrammes
                           ?.where((element) =>
-                              element.program?.tests?.isNotEmpty == true)
+                              element.program?.studentTests?.isNotEmpty == true)
                           .length ??
                       0,
                   (index) => CardOfAssignment(

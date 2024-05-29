@@ -94,7 +94,7 @@ class CardOfProgramParent extends StatelessWidget {
                           ?.copyWith(fontSize: 12.sp, fontWeight: FontWeight.w400),
                     ),
                     // 5.pw,
-                    if ((dataOfProgram.program?.tests?.length ?? 0) > 0) ...{
+                    if ((dataOfProgram.program?.studentTests?.length ?? 0) > 0) ...{
                       2.pw,
                       Container(
                         width: 20,
@@ -106,7 +106,7 @@ class CardOfProgramParent extends StatelessWidget {
                         alignment: Alignment.center,
                         // padding: E/dgeInsets.all(5),
                         child: Text(
-                          "${dataOfProgram.program?.tests?.length ?? 0}",
+                          "${dataOfProgram.program?.studentTests?.length ?? 0}",
                           style: Theme.of(context)
                               .textTheme
                               .displayLarge
