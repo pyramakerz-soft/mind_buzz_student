@@ -25,6 +25,7 @@ abstract class AppImagesPhonetics {
   static const String winAvatar = "${mainPathOfImages}winAvatar.png";
   static const String dragOut = "${mainPathOfImages}dragOut.png";
   static const String clickPicture = "${mainPathOfImages}click_picture.png";
+  static const String tracingWithFinger = "${mainPathOfImages}tracing_with_finger.png";
   static const String clickTheSound = "${mainPathOfImages}click_the_sound.png";
   static const String imageCompleteStar =
       "${mainPathOfImages}complete_star.png";

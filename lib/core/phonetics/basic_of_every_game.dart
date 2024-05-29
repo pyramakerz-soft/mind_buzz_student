@@ -12,7 +12,8 @@ enum GameTypes {
   sortingPictures,
   dice,
   xOut,
-  spelling
+  spelling,
+  tracing
 }
 
 extension TypeExtension on GameTypes {
@@ -36,6 +37,8 @@ extension TypeExtension on GameTypes {
         return 'X-Out'.toLowerCase();
       case GameTypes.spelling:
         return 'Spelling'.toLowerCase();
+      case GameTypes.tracing:
+        return 'trace'.toLowerCase();
     }
   }
 }
@@ -51,6 +54,7 @@ abstract class BasicOfEveryGame {
   bool isConnect = false;
 
   static getTheGameType({required String gameType, required int audioFlag}){
+    print("gameType:$gameType");
     gameType.toLowerCase();
     if (gameType == GameTypes.dragOut.text()) {
       return BasicDragOutGame();
@@ -81,6 +85,9 @@ abstract class BasicOfEveryGame {
     }
     else if (gameType == GameTypes.dice.text()) {
       return DiceGame();
+    }
+    else if (gameType == GameTypes.tracing.text()) {
+      return Tracking();
     }
   }
   static List<int> getTheStarsAddState(int number) {
@@ -179,6 +186,22 @@ class ClickPictureS implements BasicOfEveryGame {
       return newList;
     }
   }
+
+  @override
+  bool isConnect = false;
+}
+class Tracking implements BasicOfEveryGame {
+  @override
+  bool isRound = false;
+
+  @override
+  String titleImage = AppImagesPhonetics.tracingWithFinger;
+
+  // @override
+  // String keyGame = 'Click the picture';
+
+  @override
+  String? completeBasket;
 
   @override
   bool isConnect = false;

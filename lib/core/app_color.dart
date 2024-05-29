@@ -72,6 +72,8 @@ class AppColor {
   static const Color selectedColor = Color(0xff5AE2C8);
   static const Color strokeColor = Color(0xff7E3116);
   static const Color dragContainerColor = Color(0xffF0D2AA);
+  static const Color lightBlueColor2 = Color(0xffBEDDEC);
+  static const Color lightBlueColor4 = Color(0xff4D7F97);
   Color hexToColor(String code) {
     return Color(int.parse("0xff${code.toString().split("#").last}"));
   }
