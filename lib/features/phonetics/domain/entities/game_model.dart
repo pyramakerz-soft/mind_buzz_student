@@ -30,6 +30,7 @@ class GameModel extends Equatable {
   int? isEdited;
   int? nextGameId;
   int? previousGameId;
+  bool isHidden = false;
   // String? sectionInBook;
 
   GameModel(
@@ -52,6 +53,7 @@ class GameModel extends Equatable {
       this.correctAns,
       this.previousGameId,
       this.isEdited,
+      this.isHidden = false,
       this.gameImages});
   factory GameModel.fromJson(Map<String, dynamic> json) {
     return _$GameModelFromJson(json);

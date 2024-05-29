@@ -16,6 +16,7 @@ import '../../../../core/error/failures_messages.dart';
 import '../../../../core/singleton.dart';
 import '../../domain/entities/user_data_model.dart';
 import '../../domain/usecases/auto_user_use_cases.dart';
+import '../../domain/usecases/update_pin_code_use_cases.dart';
 import '../../domain/usecases/update_user_data_use_case.dart';
 import '../../domain/usecases/user_use_cases.dart';
 
@@ -26,6 +27,7 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
   final UserUseCases requestLoginData;
   final AutoUserUseCases requestAutoUserUseCases;
   final UpdateUserDataUseCases updateUserDataUseCases;
+  final CreatePassCodeUseCases createPassCodeUseCases;
   TextEditingController fullNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -34,7 +36,7 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
   UserData? userData;
 
   LoginDataBloc(
-      {required this.requestLoginData, required this.requestAutoUserUseCases, required this.updateUserDataUseCases})
+      {required this.requestLoginData, required this.requestAutoUserUseCases, required this.updateUserDataUseCases, required this.createPassCodeUseCases})
       : super(LoginDataInitial()) {
     on<LoginDataEvent>((event, emit) async {
       if (event is LoginRequest) {
@@ -48,6 +50,12 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
         await Future.delayed(const Duration(milliseconds: 500));
         final failureOrDoneMessage = await requestAutoUserUseCases();
         emit(_eitherLoadedOrErrorState(failureOrDoneMessage));
+      }
+      else if (event is CreatePinCodeEvent) {
+        emit(LoadingLoginState());
+        await Future.delayed(const Duration(milliseconds: 500));
+        final failureOrDoneMessage = await createPassCodeUseCases(event.pinCode);
+        emit(_eitherCreatedOrErrorState(failureOrDoneMessage,event.pinCode));
       }
     });
     on<UpdateUserDataEvent>((event, emit) async {
@@ -84,6 +92,18 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
           (data) {
         userData = data;
         return CompleteLogin(userData: data);
+      },
+    );
+  }
+  LoginDataState _eitherCreatedOrErrorState(
+      Either<Failure, bool> failureOrTrivia,
+      String pinCode
+      ) {
+    return failureOrTrivia.fold(
+          (failure) => ErrorLogin(message: _mapFailureToMessage(failure)),
+          (data) {
+        userData?.parentPassword = pinCode;
+        return CreatePinCodeSuccessfully();
       },
     );
   }

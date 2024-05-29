@@ -35,24 +35,27 @@ class ChapterBloc extends Bloc<ChapterEvent, ChapterState> {
   }
 }
 
-
 ChapterState _eitherLoadedOrErrorState(
-    Either<Failure, List<LessonModel>> failureOrTrivia,
-    ) {
+  Either<Failure, List<LessonModel>> failureOrTrivia,
+) {
   return failureOrTrivia.fold(
-        (failure) => GetProgramsErrorInitial(message: _mapFailureToMessage(failure)),
-        (data) =>data.isNotEmpty? GetProgramsCompleteInitial(
-        data: handlingDataOfChapters(lessons:data)):EmptyState(),
+    (failure) =>
+        GetProgramsErrorInitial(message: _mapFailureToMessage(failure)),
+    (data) => data.isNotEmpty
+        ? GetProgramsCompleteInitial(
+            data: handlingDataOfChapters(lessons: data))
+        : EmptyState(),
   );
 }
 
-List<ChapterModel> handlingDataOfChapters({required List<LessonModel> lessons}){
-  Map<int, List<LessonModel>>listOfData =  groupBy(lessons, (LessonModel obj) => (obj.chapter?.id??0));
+List<ChapterModel> handlingDataOfChapters(
+    {required List<LessonModel> lessons}) {
+  Map<int, List<LessonModel>> listOfData =
+      groupBy(lessons, (LessonModel obj) => (obj.chapter?.id ?? 0));
   List<ChapterModel> dataOfChapters = [];
   lessons.forEach((lesson) {
-
     dataOfChapters.add(
-        ChapterModel(
+      ChapterModel(
           id: lesson.id,
           lessonId: lesson.id,
           name: lesson.name,
@@ -60,35 +63,54 @@ List<ChapterModel> handlingDataOfChapters({required List<LessonModel> lessons}){
           star: lesson.stars,
           levelImg: AppImages.lessonImg,
           isGame: false,
-          isLetter: true
-        ),
+          isLetter: true),
     );
-
-    lesson.games?.asMap().forEach((i,game) {
-      if(game.isEdited == 0
-//           &&
-// ((game.gameTypes?.name == GameTypes.dragOut.text() ||
-//     game.gameTypes?.name == GameTypes.spelling.text() ||
-//     game.gameTypes?.name == GameTypes.xOut.text()) &&
-//          game.previousGameId == null &&
-//       game.lessonId == lesson.id)
-          // && game.previousGameId == null
-      ) {
+    lesson.games?.sort(
+        (a, b) => (a.previousGameId ?? 0).compareTo(b.previousGameId ?? 0));
+    lesson.games?.forEach((element) {
+      if (element.gameTypeId == 8 &&
+          element.previousGameId !=
+              lesson.games?.where((element) => element.gameTypeId == 8).toList().map((e) => e.previousGameId ?? 0).toList()
+                  .min) // x_out id = 8
+      {
+        element.isHidden = true;
+      }
+      if (element.gameTypeId == 9 &&
+          element.previousGameId !=
+              lesson.games?.where((element) => element.gameTypeId == 9).toList().map((e) => e.previousGameId ?? 0).toList()
+                  .min) // spelling id = 9
+      {
+        element.isHidden = true;
+      }
+      if (element.gameTypeId == 1 &&
+          element.previousGameId !=
+              lesson.games?.where((element) => element.gameTypeId == 1).toList().map((e) => e.previousGameId ?? 0).toList()
+                  .min) // drag out id = 1
+      {
+        element.isHidden = true;
+      }
+    });
+    int index = 0;
+    lesson.games!.asMap().forEach((i, game) {
+      if(!game.isHidden && game.isEdited == 0) {
+        index++;
+      }
+      if (game.isEdited == 0) {
         dataOfChapters.add(
           ChapterModel(
             id: game.id,
             lessonId: game.lessonId,
-            name: 'Game ${i + 1}',
-            number: i + 1,
+            name: 'Game $index',
+            number: index,
             star: game.stars,
             levelImg: AppImages.imageCloseLesson,
             isGame: true,
             isLetter: false,
+            isHidden: game.isHidden
           ),
         );
       }
     });
-
   });
 
   // listOfData.forEach((key, value) {
@@ -120,9 +142,7 @@ List<ChapterModel> handlingDataOfChapters({required List<LessonModel> lessons}){
   return dataOfChapters;
 }
 
-
 String _mapFailureToMessage(Failure failure) {
-
   switch (failure.runtimeType) {
     case ServerFailure:
       return SERVER_FAILURE_MESSAGE;

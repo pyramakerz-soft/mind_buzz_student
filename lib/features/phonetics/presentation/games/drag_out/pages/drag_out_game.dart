@@ -60,7 +60,8 @@ class DragOutGame extends StatelessWidget {
                                 (MediaQuery.of(context).size.height / 2.8).h,
                             width: 130,
                           );
-                  }, onAcceptWithDetails: (item) async {
+                  },
+                      onAcceptWithDetails: (item) async {
                     if (item.data.word
                             .toString()
                             .split('')

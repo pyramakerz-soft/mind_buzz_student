@@ -41,6 +41,7 @@ class MainApiConnection {
   ////////////////////////////// END POINTS ///////////////////////////////////
   String getGameInfoDataEndPoint = "game/game_info";
   String postLoginEndPoint = "auth/login";
+  String makeParentPin = "auth/makeParentPin";
   String updateUserEndPoint = "auth/updateProfile";
   String getUserEndPoint = "getuserdata";
   String getStudentProgramsEndPoint = "student_programs";

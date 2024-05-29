@@ -67,6 +67,27 @@ class LoginRepositoryImpl implements LoginRepository {
   }
 
   @override
+  Future<Either<Failure, bool>> createPassCode( String passCode) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final res = await remoteDataSource.updateUserPinCode(pinCode: passCode);
+        log('res:$res');
+        return const Right(true);
+      } catch (e, s) {
+        try {
+          return Left(
+              ServerFailure(message: "${jsonDecode(e.toString())['message']}"));
+        } catch (e) {
+          log('error:$e');
+          return Left(CacheFailure());
+        }
+      }
+    } else {
+      return Left(CheckYourNetwork());
+    }
+  }
+
+  @override
   Future<Either<Failure, UserData>> updateUserDataRepository(
       {String? name, String? email, String? phone, File? filepath}) async {
     if (await networkInfo.isConnected) {

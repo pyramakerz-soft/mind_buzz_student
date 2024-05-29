@@ -13,6 +13,7 @@ abstract class DataSourceRemotelyOfLogin {
   Future<UserData> getAutoLogin();
   Future<UserData> updateUserData(
       {String? name, String? email, String? phone, File? filepath});
+  Future<bool> updateUserPinCode({required String pinCode});
 }
 
 class DataSourceRemotelyOfLoginImpl implements DataSourceRemotelyOfLogin {
@@ -53,10 +54,7 @@ class DataSourceRemotelyOfLoginImpl implements DataSourceRemotelyOfLogin {
 
   @override
   Future<UserData> updateUserData(
-      {String? name,
-      String? email,
-      String? phone,
-       File? filepath}) async {
+      {String? name, String? email, String? phone, File? filepath}) async {
     final response = await dio.uploadImage(
         url: '${Connection.baseURL}${dio.updateUserEndPoint}',
         filePath: filepath,
@@ -69,4 +67,15 @@ class DataSourceRemotelyOfLoginImpl implements DataSourceRemotelyOfLogin {
     }
   }
 
+  @override
+  Future<bool> updateUserPinCode({required String pinCode}) async {
+    final response = await dio.post(
+        url: '${Connection.baseURL}${dio.makeParentPin}',
+        data: {'parent_pin': pinCode});
+    if (dio.validResponse(response)) {
+      return true;
+    } else {
+      throw response.data['msg'];
+    }
+  }
 }

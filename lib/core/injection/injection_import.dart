@@ -7,7 +7,8 @@ Future<void> init() async {
   sl.registerFactory(() => LoginDataBloc(
       requestLoginData: sl(),
       requestAutoUserUseCases: sl(),
-      updateUserDataUseCases: sl()));
+      updateUserDataUseCases: sl(),
+  createPassCodeUseCases: sl()));
   sl.registerFactory(() => GetUnitBloc(programUserUseCases: sl()));
   sl.registerFactory(() => CurrentGamePhoneticsCubit());
   sl.registerFactory(() => ChapterBloc(programUserUseCases: sl()));
@@ -33,6 +34,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => ParentReportsUseCases(sl()));
   sl.registerLazySingleton(() => UpdateUserDataUseCases(sl()));
   sl.registerLazySingleton(() => GetGameUseCases(sl()));
+  sl.registerLazySingleton(() => CreatePassCodeUseCases(sl()));
 
   //Repository
   sl.registerLazySingleton<LoginRepository>(

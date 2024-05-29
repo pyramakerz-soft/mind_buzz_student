@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:mind_buzz_refactor/core/phonetics/basic_of_every_game.dart';
 
 import '../../../../../../core/assets_sound.dart';
 import '../../../../../../core/audio_player.dart';
@@ -51,7 +52,7 @@ class SpellingCubit extends Cubit<SpellingInitial> {
   }
 
   bool checkIfIsTheLastGameOfLesson() {
-      if (state.gameData?.nextGameId == null) {
+      if (state.gameData?.nextGameId == null || state.gameData?.gameTypes?.name?.toLowerCase() == GameTypes.spelling.text().toLowerCase()) {
         return true;
       } else {
         return false;

@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mind_buzz_refactor/features/home/presentation/page/pass_code.dart';
 import '../../../../core/talk_tts.dart';
 import '../../../../core/vars.dart';
 import '../../../botom_navigation_bar/bottom_navigation_bar.dart';
@@ -20,7 +21,7 @@ class BasedHomeScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: currentPage == 1 ?switchBar(context: context) : null,
       body: Container(
-        child: currentPage == 1 ? const HomeScreen() : const BottomNavBar(),
+        child: currentPage == 1 ? const HomeScreen() : const PassCode(),
       ),
     );
     // }, listener: (BuildContext context, int state) {  },);

@@ -57,3 +57,4 @@ class UpdatingDataError extends LoginDataState {
 }
 
 class UpdatingDataChanged extends LoginDataState {}
+class CreatePinCodeSuccessfully extends LoginDataState {}

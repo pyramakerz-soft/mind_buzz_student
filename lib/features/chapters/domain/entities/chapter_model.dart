@@ -6,7 +6,7 @@ class ChapterModel {
   // final bool? isOpen;
   final bool? isLetter;
   final bool? isGame;
-  final bool? isAssessment;
+   bool isHidden = false;
   // final bool? isChapter;
   final String? levelImg;
   final String? name;
@@ -18,7 +18,7 @@ class ChapterModel {
         this.name,
         this.star,
         this.number,
-        this.isAssessment,
+        this.isHidden = false,
       this.isLetter,
       this.isGame,
       // this.isChapter,

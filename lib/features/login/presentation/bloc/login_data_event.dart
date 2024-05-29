@@ -31,6 +31,10 @@ class ChangeInUpdateUserDataEvent extends LoginDataEvent {
 }
 class UpdateUserDataEvent extends LoginDataEvent {}
 class PickImageEvent extends LoginDataEvent {}
+class CreatePinCodeEvent extends LoginDataEvent {
+ final String pinCode;
+ CreatePinCodeEvent({required this.pinCode});
+}
 class ChangePhoneCodeEvent extends LoginDataEvent {
   final Country country;
   ChangePhoneCodeEvent({required this.country});

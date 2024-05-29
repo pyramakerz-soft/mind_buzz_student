@@ -133,6 +133,7 @@ class ChaptersScreen extends StatelessWidget {
                     BlocConsumer<ChapterBloc, ChapterState>(
                         listener: (context, state) {
 
+
                       if (state is GetProgramsErrorInitial) {
                         if (state.message == RELOGIN_FAILURE_MESSAGE) {
                           Utils.navigateAndRemoveUntilTo(LoginScreen(), context);
@@ -156,7 +157,7 @@ class ChaptersScreen extends StatelessWidget {
                       }
                     }, builder: (context, state) {
                       if (state is GetProgramsCompleteInitial) {
-
+                        List<ChapterModel> games = state.data.reversed.where((element) => !element.isHidden).toList();
                         return SizedBox(
                           height: MediaQuery.of(context).size.height - 50.h,
                           child: Column(
@@ -198,11 +199,11 @@ class ChaptersScreen extends StatelessWidget {
                                 child: LevelMap(
                                   backgroundColor: Colors.transparent,
                                   onTapLevel: (index) {
-                                    if (state.data.reversed.toList()[index].isGame == true) {
+                                    if (games[index].isGame == true) {
                                     Utils.navigateTo(
                                          PhoneticsBook(
-                                          lessonId: state.data.reversed.toList()[index].lessonId!,
-                                           gameId: state.data.reversed.toList()[index].id!,
+                                          lessonId: games[index].lessonId!,
+                                           gameId: games[index].id!,
                                            firstTry: true,
                                         ),
                                         context);
@@ -210,18 +211,14 @@ class ChaptersScreen extends StatelessWidget {
                                   },
                                   levelMapParams: LevelMapParams(
                                     showPathShadow: false,
-                                    levelCount: state.data.length,
+                                    levelCount: games.length,
                                     pathStrokeWidth: 1,
-                                    currentLevel: state.data.reversed
-                                            .toList()
-                                            .isEmpty
+                                    currentLevel: games.isEmpty
                                         ? 1
-                                        : state.data.reversed
-                                            .toList()
-                                            .length
+                                        : games.length
                                             .toDouble(),
                                     pathColor: Colors.grey,
-                                    levelsImages: state.data.reversed
+                                    levelsImages: games
                                         .map((e) => ImageParams(
                                             path: e.levelImg!,
                                             size:  Size(100,
