@@ -80,7 +80,7 @@ bool _isInteracting = false;
                                       context.read<XOutCubit>().startInteraction();
                                       context.read<XOutCubit>().selectItem(index).then((_) {
                                         if (isCorrect) {
-                                          
+                                          //call animation of right
                                           context.read<XOutCubit>().increaseCountOfCorrectAnswers().then((countOfCorrect) async {
                                             context.read<CurrentGamePhoneticsCubit>().addStarToStudent(stateOfCountOfCorrectAnswer: countOfCorrect, mainCountOfQuestion: state.gameData?[state.currentGameIndex ?? 0].numOfLetters ?? 0);
                                             bool isLastLesson = context.read<XOutCubit>().isLastGame();
