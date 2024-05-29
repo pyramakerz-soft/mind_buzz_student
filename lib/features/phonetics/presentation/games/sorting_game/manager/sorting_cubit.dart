@@ -36,6 +36,9 @@ class sortingCubit extends Cubit<sortingInitial> {
         .where((element) => !state.correctAnswers
         .map((e) => e.id)
         .toList()
+        .contains(element.id) && !(state.wrongAnswers??[])
+        .map((e) => e.id)
+        .toList()
         .contains(element.id))
         .toList()
       ..shuffle();
@@ -64,6 +67,14 @@ class sortingCubit extends Cubit<sortingInitial> {
     emit(state.copyWith(
         correctAnswers: correctAnswer, currentImages: newImagesList));
   }
+  addWrongAnswer()  {
+    List<GameImagesModel> currentImages = state.currentImages ?? [];
+    List<GameImagesModel> wrongAnswers = state.wrongAnswers ?? [];
+    wrongAnswers.addAll(currentImages);
+    currentImages.clear();
+    emit(state.copyWith(
+        wrongAnswers: wrongAnswers, currentImages: currentImages));
+  }
 
   increaseCountOfCorrectAnswers() async {
     int sub = state.correctAnswer ?? 0;
@@ -81,7 +92,7 @@ class sortingCubit extends Cubit<sortingInitial> {
   }
 
   bool checkIfIsTheLastGameOfLesson() {
-    if (state.correctAnswers.length == (state.gameData?.gameImages?.length ?? 0)) {
+    if ((state.correctAnswers.length + (state.wrongAnswers??[]).length )== (state.gameData?.gameImages?.length ?? 0)) {
       return true;
     } else {
       return false;

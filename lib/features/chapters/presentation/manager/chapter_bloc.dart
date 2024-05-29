@@ -5,10 +5,12 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:collection/collection.dart';
+import 'package:mind_buzz_refactor/core/phonetics/basic_of_every_game.dart';
 
 import '../../../../core/assets_images.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/error/failures_messages.dart';
+import '../../../phonetics/domain/entities/game_model.dart';
 import '../../domain/entities/chapter_model.dart';
 import '../../domain/entities/lesson_model.dart';
 import '../../domain/entities/sub_chapter_model.dart';
@@ -61,8 +63,15 @@ List<ChapterModel> handlingDataOfChapters({required List<LessonModel> lessons}){
           isLetter: true
         ),
     );
+
     lesson.games?.asMap().forEach((i,game) {
       if(game.isEdited == 0
+//           &&
+// ((game.gameTypes?.name == GameTypes.dragOut.text() ||
+//     game.gameTypes?.name == GameTypes.spelling.text() ||
+//     game.gameTypes?.name == GameTypes.xOut.text()) &&
+//          game.previousGameId == null &&
+//       game.lessonId == lesson.id)
           // && game.previousGameId == null
       ) {
         dataOfChapters.add(
