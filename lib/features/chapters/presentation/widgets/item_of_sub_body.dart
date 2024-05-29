@@ -17,7 +17,7 @@ class ItemOfSubBody extends StatelessWidget {
   Widget build(BuildContext context) {
     if (chapterData.isLetter == true) {
         return  StrokeText(
-          text: (chapterData.name??'').length < 9? chapterData.name!  : chapterData.name!.substring(0,7),
+          text: (chapterData.name??'').length < 9? chapterData.name!  : chapterData.name!.substring(0,9),
           isDisabled: false,
           fontSize: 0.03.sh,
           strokeWidth: 1.5,

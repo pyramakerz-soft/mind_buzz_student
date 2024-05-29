@@ -15,7 +15,7 @@ ProgramModel _$ProgramModelFromJson(Map<String, dynamic> json) => ProgramModel(
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
       image: json['image'] as String?,
-      tests: (json['tests'] as List<dynamic>?)
+      studentTests: (json['student_tests'] as List<dynamic>?)
           ?.map((e) => TestModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       course: json['course'] == null
@@ -34,5 +34,5 @@ Map<String, dynamic> _$ProgramModelToJson(ProgramModel instance) =>
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
       'course': instance.course?.toJson(),
-      'tests': instance.tests?.map((e) => e.toJson()).toList(),
+      'student_tests': instance.studentTests?.map((e) => e.toJson()).toList(),
     };

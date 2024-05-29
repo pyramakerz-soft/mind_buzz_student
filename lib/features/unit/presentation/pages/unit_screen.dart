@@ -314,9 +314,10 @@ class UnitScreen extends StatelessWidget {
                           32.ph,
                           Container(
                             margin: const EdgeInsets.symmetric(horizontal: 15),
+                            padding: const EdgeInsets.only(top: 20),
                             width: MediaQuery.of(context).size.width - 30,
                             //height: MediaQuery.of(context).size.height-(20+100+(MediaQuery.of(context).size.height / 6)+160),
-                            height: MediaQuery.of(context).size.height - (150 + (MediaQuery.of(context).size.height / 6) + 160),
+                            height: MediaQuery.of(context).size.height * 0.446,
                             child: ListView(
                               children: List.generate(state.data.length, (index) {
                                 return Column(
@@ -327,11 +328,13 @@ class UnitScreen extends StatelessWidget {
                                         onTap: () {
                                           Utils.navigateTo(
                                               BlocProvider(
-                                                  create: (_) => JourneyBarCubit(),
+                                                  create: (_) => JourneyBarCubit(unitId: state.data[index].id!),
                                                   child: ChaptersScreen(
                                                     programId: state.data[index].id.toString(),
                                                     unitsCount: state.data.length,
                                                     unitsIndex: index + 1,
+                                                    allUnits: state.data.map((e) => e.id!).toList(),
+
                                                     // programName:
                                                     //     state.data[index].name ?? '',
                                                   )),
@@ -395,7 +398,7 @@ class UnitScreen extends StatelessWidget {
             ),
 
             Positioned(
-              top: 0.15.sh,
+              top: 0.14.sh,
               left: 0,
               child: Transform.rotate(
                 angle: 0.25,

@@ -7,24 +7,30 @@ import 'package:flutter/animation.dart';
 class JourneyBarInitial extends Equatable {
   double? totalOfBar = 0;
   Artboard? beeWinningArtboard;
+  int currentUnitId;
 
   JourneyBarInitial(
       {
       this.totalOfBar,
-      this.beeWinningArtboard,});
+      this.beeWinningArtboard,
+      required this.currentUnitId});
   JourneyBarInitial copyWith({
     double? totalOfBar,
-    Artboard? beeWinningArtboard
+    Artboard? beeWinningArtboard,
+    int? currentUnitId
   }) {
     return JourneyBarInitial(
         beeWinningArtboard: beeWinningArtboard ?? this.beeWinningArtboard,
-        totalOfBar: totalOfBar ?? this.totalOfBar);
+        totalOfBar: totalOfBar ?? this.totalOfBar,
+      currentUnitId: currentUnitId ?? this.currentUnitId,
+    );
   }
 
 
   @override
   List<Object?> get props => [
     totalOfBar,
-    beeWinningArtboard
+    beeWinningArtboard,
+    currentUnitId
       ];
 }

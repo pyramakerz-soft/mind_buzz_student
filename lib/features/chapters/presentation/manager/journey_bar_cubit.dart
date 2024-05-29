@@ -10,7 +10,8 @@ import 'journey_bar_state.dart';
 
 
 class JourneyBarCubit extends Cubit<JourneyBarInitial> {
-  JourneyBarCubit() : super(JourneyBarInitial()){
+  int unitId;
+  JourneyBarCubit({required this.unitId}) : super(JourneyBarInitial(currentUnitId: unitId)){
     getTheBackGround();
   }
   updateTheBar({required int completed, required int countOfLessons, required double width}){
@@ -38,6 +39,13 @@ class JourneyBarCubit extends Cubit<JourneyBarInitial> {
       },
     );
     // });
+  }
+
+  changeUnit(List<int> allUnits,{bool next = true}){
+    int index = allUnits.indexOf(state.currentUnitId) ;
+    int nextId = next? allUnits[index + 1] : allUnits[index - 1];
+    unitId = nextId;
+    emit(state.copyWith(currentUnitId: nextId ));
   }
 
 }

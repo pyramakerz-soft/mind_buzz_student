@@ -239,11 +239,6 @@ class BasedOfGamePhonetics extends StatelessWidget {
                         if (stateOfGame.stateOfStringIsWord == true) {
                           await TalkTts.startTalk(
                               text: stateOfGame.stateOfStringWillSay ?? '');
-
-                          await AudioPlayerClass.startPlaySound(
-                              soundPath: AppSound.getSoundOfLetter(
-                                  mainGameLetter:
-                                      stateOfGame.stateOfStringWillSay ?? ''));
                         } else {
                           await AudioPlayerClass.startPlaySound(
                               soundPath: AppSound.getSoundOfLetter(

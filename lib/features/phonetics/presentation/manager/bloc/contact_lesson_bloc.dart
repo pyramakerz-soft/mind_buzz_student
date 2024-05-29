@@ -54,13 +54,13 @@ Future<ContactLessonState> _eitherLoadedOrErrorState(
     (failure) => GetContactErrorInitial(message: _mapFailureToMessage(failure)),
     (data) => GetContactInitial(data: data),
   );
-  if (tempState is GetContactInitial) {
+  /*if (tempState is GetContactInitial) {
     if (tempState.data.isNotEmpty) {
       int index = tempState.data.indexWhere((element) => element.id == gameId);
       TalkTts.startTalk(text: tempState.data[index].inst ?? '');
       //   TalkTts.startTalk(text: tempState.data[index].mainLetter ?? '');
     }
-  }
+  }*/
   return tempState;
 }
 
