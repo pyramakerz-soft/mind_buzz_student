@@ -18,6 +18,8 @@ class TracingCubit extends Cubit<TracingInitial> {
 
   TracingCubit({required this.gameData})
       : super(TracingInitial(offsets: [], finalOffset: [])) {
+    emit(state.clearData());
+
     TalkTts.startTalk(text: gameData.inst ?? '');
     emit(state.copyWith(gameData: gameData));
   }
@@ -52,4 +54,8 @@ class TracingCubit extends Cubit<TracingInitial> {
       emit(state.copyWith(offsets: tempOffset));
     }
   }
+  saveCounter({required int count1, required int count2, required int count3}) {
+    emit(state.copyWith(count1: count1,count2:count2, count3:count3));
+  }
+
 }

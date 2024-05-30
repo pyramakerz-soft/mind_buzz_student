@@ -176,7 +176,8 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                       .add(ThisTypeNotSupportedRequest());
                                 }
                               }
-                            }, builder: (context, stateOfGameData) {
+                            },
+                                builder: (context, stateOfGameData) {
                               if (stateOfGameData is GetContactInitial) {
                                 return Stack(
                                   children: [

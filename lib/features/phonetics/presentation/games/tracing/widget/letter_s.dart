@@ -30,6 +30,8 @@ class FlipBookPainterLetterS extends CustomPainter {
 }
 
 class RPSCustomPainterLetterS extends CustomPainter {
+  void Function()? whenDone;
+  RPSCustomPainterLetterS({this.whenDone});
   static Path path0(Size size) {
     Path path_0 = Path();
     path_0.moveTo(size.width * 0.5224068, size.height * 0.7956818);
@@ -209,6 +211,7 @@ class RPSCustomPainterLetterS extends CustomPainter {
     Paint paint2Fill = Paint()..style = PaintingStyle.fill;
     paint2Fill.color = AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_2, paint2Fill);
+    whenDone?.call();
   }
 
   @override
@@ -229,7 +232,7 @@ class RPSCustomPainterLetterS extends CustomPainter {
   static bool mostPointsInPath1 = false;
   static bool mostPointsInPath2 = false;
   static bool mostPointsInPath3 = false;
-  static isCompleted({required List<Offset> points, required Size size}) {
+  static getCountOfPints({required List<Offset> points, required Size size}){
     Path path_0 = path0(size);
     Path path_1 = path1(size);
     Path path_2 = path2(size);
@@ -237,22 +240,22 @@ class RPSCustomPainterLetterS extends CustomPainter {
     int count1 = countPointsInPath(path_0, points);
     int count2 = countPointsInPath(path_1, points);
     int count3 = countPointsInPath(path_2, points);
+    return [count1, count2, count3];
+  }
+  static isCompleted({required int count1, required int count2, required int count3,   required void Function() onComplete}) {
+
     if (count1 > count2 && count1 > count3) {
-      log('Most points from path1 are in the list');
       mostPointsInPath1 = true;
     } else if (count2 > count1 && count2 > count3) {
-      log('Most points from path2 are in the list');
       mostPointsInPath2 = true;
     } else if (count3 > count1 && count3 > count2) {
-      log('Most points from path3 are in the list');
       mostPointsInPath3 = true;
     }
     if (mostPointsInPath1 == true &&
         mostPointsInPath2 == true &&
         mostPointsInPath3 == true) {
-      return true;
+      onComplete.call();
     }
-    return false;
   }
 
   static int countPointsInPath(Path path, List<Offset> pointList) {
