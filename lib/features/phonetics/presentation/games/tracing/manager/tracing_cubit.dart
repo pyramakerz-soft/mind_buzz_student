@@ -16,7 +16,8 @@ part 'tracing_state.dart';
 class TracingCubit extends Cubit<TracingInitial> {
   final GameModel gameData;
 
-  TracingCubit({required this.gameData}) : super(TracingInitial(offsets: [])) {
+  TracingCubit({required this.gameData})
+      : super(TracingInitial(offsets: [], finalOffset: [])) {
     TalkTts.startTalk(text: gameData.inst ?? '');
     emit(state.copyWith(gameData: gameData));
   }
@@ -28,40 +29,27 @@ class TracingCubit extends Cubit<TracingInitial> {
     return distance;
   }
 
+  saveFinalOffset({required List<Offset> finalOffset}) {
+    emit(state.copyWith(finalOffset: finalOffset));
+  }
 
   checkAndAddPoints(
       {required RenderBox renderBox,
-        required Offset localPosition,
-        required Offset details}) {
-    // try {
-    //   log('e:${RPSCustomPainterLetterS()
-    //       .isPointInside(localPosition, renderBox.size)}');
-    //   log('${calculateDistance(details, state.offsets.last)}:${calculateDistance(details, state.offsets.last) <= 40}');
-    //
-    // }catch(e){
-    //   print("***");
-    // }
-    log('##:${state.offsets.length}');
+      required Offset localPosition,
+      required Offset details}) {
     List<Offset> tempOffset = state.offsets;
-    bool x = RPSCustomPainterLetterS()
-        .isPointInside(localPosition, renderBox.size);
-    log('====:$x');
-    // if (state.offsets.isEmpty &&
-    //     RPSCustomPainterLetterS()
-    //         .isPointInside(localPosition, renderBox.size)) {
-    //     tempOffset.add(details);
-    //
-    //   emit(state.copyWith(offsets: tempOffset));
-    //   emit(state.copyWith(offsets: RPSCustomPainterLetterS().getPointsWithSameDx(localPosition, renderBox.size)));
-    //
-    // } else if (RPSCustomPainterLetterS()
-    //     .isPointInside(localPosition, renderBox.size) &&
-    //     calculateDistance(details, state.offsets.last) <= 40) {
+    if (state.offsets.isEmpty &&
+        RPSCustomPainterLetterS()
+            .isPointInside(localPosition, renderBox.size)) {
+      if (calculateDistance(details, state.finalOffset.last) <= 150) {
+        tempOffset.add(details);
+        emit(state.copyWith(offsets: tempOffset));
+      }
+    } else if (RPSCustomPainterLetterS()
+            .isPointInside(localPosition, renderBox.size) &&
+        calculateDistance(details, state.offsets.last) <= 40) {
       tempOffset.add(details);
       emit(state.copyWith(offsets: tempOffset));
-      emit(state.copyWith(offsets: RPSCustomPainterLetterS().getPointsWithSameDx(localPosition, renderBox.size)));
-
-    // }
-    log('---:${state.offsets.length}');
+    }
   }
 }

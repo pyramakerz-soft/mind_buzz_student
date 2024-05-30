@@ -4,9 +4,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 
-
-
-
 class FlipBookPainterLetterS extends CustomPainter {
   final List<Offset> offsets;
   FlipBookPainterLetterS(this.offsets) : super();
@@ -219,36 +216,13 @@ class RPSCustomPainterLetterS extends CustomPainter {
     return true;
   }
 
-  List<Offset> _samplePath(Path path, double step) {
-    PathMetrics pathMetrics = path.computeMetrics();
-    List<Offset> points = [];
-    for (PathMetric pathMetric in pathMetrics) {
-      for (double i = 0; i < pathMetric.length; i += step) {
-        Tangent? tangent = pathMetric.getTangentForOffset(i);
-        if (tangent != null) {
-          points.add(tangent.position);
-        }
-      }
-    }
-    return points;
-  }
-  List<Offset> getPointsWithSameDx( Offset target, Size size) {
-    Path path_2 = path2(size);
-    List<Offset> sampledPoints = _samplePath(path_2, 1.0);
-    List<Offset> sampledPoints2 = sampledPoints.where((point) {
-      log('point:$point');
-      return (point - target).distance <= 20;
-    }).toList();
-    List<Offset> finalList = [];
-    log('target:$target');
-
-    log('sampledPoints:${sampledPoints2.length}');
-    finalList.addAll(sampledPoints2);
-    return finalList;
-  }
   bool isPointInside(Offset point, Size size) {
+    Path path_0 = path0(size);
+    Path path_1 = path1(size);
     Path path_2 = path2(size);
-    return
+
+    return path_0.contains(point) ||
+        path_1.contains(point) ||
         path_2.contains(point);
   }
 
@@ -289,5 +263,31 @@ class RPSCustomPainterLetterS extends CustomPainter {
       }
     }
     return count;
+  }
+
+  static List<Offset> getOffsetOfPath(Size size) {
+    List<Offset> sampledPoints = _samplePath(path0(size), 1.0);
+    List<Offset> sampledPoints1 = _samplePath(path1(size), 1.0);
+    List<Offset> sampledPoints2 = _samplePath(path2(size), 1.0);
+    List<Offset> finalSampledPoints2 = [];
+    finalSampledPoints2.addAll(sampledPoints);
+    finalSampledPoints2.addAll(sampledPoints1);
+    finalSampledPoints2.addAll(sampledPoints2);
+    return finalSampledPoints2;
+  }
+
+  static List<Offset> _samplePath(Path path, double step) {
+    PathMetrics pathMetrics = path.computeMetrics();
+    List<Offset> points = [];
+
+    for (PathMetric pathMetric in pathMetrics) {
+      for (double i = 0; i < pathMetric.length; i += step) {
+        Tangent? tangent = pathMetric.getTangentForOffset(i);
+        if (tangent != null) {
+          points.add(tangent.position);
+        }
+      }
+    }
+    return points;
   }
 }
