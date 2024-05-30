@@ -26,6 +26,8 @@ import '../games/click_the_picture_with_word/page/click_the_picture_with_word.da
 import '../games/click_the_picture_with_word/manager/click_the_picture_with_word_cubit.dart';
 import '../games/click_the_picture_with_word/page/click_the_picture_with_word.dart';
 import '../games/click_the_sound/pages/click_the_sound_game.dart';
+import '../games/dice/manager/dice_cubit.dart';
+import '../games/dice/page/dice_game.dart';
 import '../games/drag_out/manager/drag_out_cubit.dart';
 import '../games/drag_out/pages/drag_out_game.dart';
 import '../games/sorting_game/manager/sorting_cubit.dart';
@@ -168,7 +170,6 @@ class BasedOfGameConnect extends StatelessWidget {
                                           text: stateOfGame
                                                   .stateOfStringWillSay ??
                                               '');
-
                                     } else {
                                       await AudioPlayerClass.startPlaySound(
                                           soundPath: AppSound.getSoundOfLetter(
@@ -229,7 +230,6 @@ class BasedOfGameConnect extends StatelessWidget {
                                           text: stateOfGame
                                                   .stateOfStringWillSay ??
                                               '');
-
                                     } else {
                                       await AudioPlayerClass.startPlaySound(
                                           soundPath: AppSound.getSoundOfLetter(
@@ -372,6 +372,12 @@ class BasedOfGameConnect extends StatelessWidget {
                             .woodenBackground,
                         allGames: stateOfGameData.data),
                     child: SortingGameScreen())
+              } else if ((stateOfGame.basicData?.gameData is DiceGame)) ...{
+                BlocProvider<DiceCubit>(
+                    create: (_) => DiceCubit(
+                          gameData: stateOfGameData.data[stateOfGame.index],
+                        ),
+                    child: DiceGamePage())
               }
             ],
           ),

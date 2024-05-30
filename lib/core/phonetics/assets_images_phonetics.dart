@@ -13,19 +13,24 @@ abstract class AppImagesPhonetics {
   static const String backGroundOfB = "${mainPathOfImages}backGroundOfB.png";
   static const String backGroundOfO = "${mainPathOfImages}backGroundOfO.png";
   static const String backGroundOfG = "${mainPathOfImages}backGroundOfG.png";
-  static const String backGroundOfConnect = "${mainPathOfImages}backGroundOfConnect.png";
+  static const String backGroundOfConnect =
+      "${mainPathOfImages}backGroundOfConnect.png";
   static const String bingoNameGame = "${mainPathOfImages}bingoNameGame.png";
-  static const String spellingNameGame = "${mainPathOfImages}spellingNameGame.png";
+  static const String diceNameGame = "${mainPathOfImages}diceNameGame.png";
+  static const String spellingNameGame =
+      "${mainPathOfImages}spellingNameGame.png";
   static const String xOutGameName = "${mainPathOfImages}xOutGameName.png";
   static const String backGroundOfF = "${mainPathOfImages}backGroundOfF.png";
   static const String backGroundOfM = "${mainPathOfImages}backGroundOfM.png";
   static const String backGroundOfT = "${mainPathOfImages}backGroundOfT.png";
-  static const String basicAvatarNormal = "${mainPathOfImages}basicAvatarNormal.png";
+  static const String basicAvatarNormal =
+      "${mainPathOfImages}basicAvatarNormal.png";
   static const String sadAvatarSad = "${mainPathOfImages}sadAvatarSad.png";
   static const String winAvatar = "${mainPathOfImages}winAvatar.png";
   static const String dragOut = "${mainPathOfImages}dragOut.png";
   static const String clickPicture = "${mainPathOfImages}click_picture.png";
-  static const String tracingWithFinger = "${mainPathOfImages}tracing_with_finger.png";
+  static const String tracingWithFinger =
+      "${mainPathOfImages}tracing_with_finger.png";
   static const String clickTheSound = "${mainPathOfImages}click_the_sound.png";
   static const String imageCompleteStar =
       "${mainPathOfImages}complete_star.png";
