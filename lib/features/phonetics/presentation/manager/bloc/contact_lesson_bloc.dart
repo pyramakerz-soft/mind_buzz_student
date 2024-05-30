@@ -33,12 +33,6 @@ class ContactLessonBloc extends Bloc<ContactLessonEvent, ContactLessonState> {
         emit(await _eitherLoadedOrErrorState(
             failureOrDoneMessage, event.gameId));
       }
-      // if (event is GetGameRequest) {
-      //   emit(GetContactLoadingInitial());
-      //   final failureOrDoneMessage =
-      //   await getGameUseCases(gameId: event.gameId);
-      //   emit(await _eitherLoadedOrErrorState(failureOrDoneMessage));
-      // }
       else if (event is CompleteLessonRequest) {
         emit(CompleteGameState());
       } else if (event is ThisTypeNotSupportedRequest) {
@@ -54,29 +48,9 @@ Future<ContactLessonState> _eitherLoadedOrErrorState(
     (failure) => GetContactErrorInitial(message: _mapFailureToMessage(failure)),
     (data) => GetContactInitial(data: data),
   );
-  /*if (tempState is GetContactInitial) {
-    if (tempState.data.isNotEmpty) {
-      int index = tempState.data.indexWhere((element) => element.id == gameId);
-      TalkTts.startTalk(text: tempState.data[index].inst ?? '');
-      //   TalkTts.startTalk(text: tempState.data[index].mainLetter ?? '');
-    }
-  }*/
   return tempState;
 }
 
-// Future<ContactLessonState> _eitherLoadedOrErrorGameState(
-//     Either<Failure, List<GameModel>> failureOrTrivia
-//     ) async {
-//   ContactLessonState tempState = failureOrTrivia.fold(
-//         (failure) => GetContactErrorInitial(message: _mapFailureToMessage(failure)),
-//         (data) => GetContactInitial(data: data.first),
-//   );
-//   if (tempState is GetContactInitial) {
-//       TalkTts.startTalk(text: tempState.data.inst ?? '');
-//       TalkTts.startTalk(text: tempState.data.mainLetter ?? '');
-//   }
-//   return tempState;
-// }
 
 String _mapFailureToMessage(Failure failure) {
   switch (failure.runtimeType) {

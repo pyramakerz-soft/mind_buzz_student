@@ -270,7 +270,7 @@ class SortingCupsGame implements BasicOfEveryGame {
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.bingoNameGame;
+  String titleImage = AppImagesPhonetics.sortingCupsNameGame;
 
   @override
   String? completeBasket;

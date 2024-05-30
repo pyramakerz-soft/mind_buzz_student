@@ -13,15 +13,15 @@ import '../../../../domain/entities/game_model.dart';
 part 'bingo_state.dart';
 
 class BingoCubit extends Cubit<BingoInitial> {
-  final GameModel gameData;
+  final GameModel _gameData;
 
-  BingoCubit({required this.gameData})
-      : super(BingoInitial(gameData: gameData)) {
+  BingoCubit({required GameModel gameData})
+      : _gameData = gameData, super(BingoInitial(gameData: gameData)) {
     // bool haveNullId  =  (gameData.gameLetters ?? []).where((element) => element.id == null).toList().isNotEmpty;
     // if(haveNullId == false) {
-    TalkTts.startTalk(text: gameData.inst ?? '');
+    TalkTts.startTalk(text: _gameData.inst ?? '');
 
-    List<GameLettersModel> supList = (gameData.gameLetters ?? []).where((element) => element.id != null).toList();
+    List<GameLettersModel> supList = (_gameData.gameLetters ?? []).where((element) => element.id != null).toList();
       // supList.addAll(List.from(supList));
       supList.insert(4, GameLettersModel());
       emit(state.copyWith(cardsLetters: supList.toList()));

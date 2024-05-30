@@ -48,6 +48,7 @@ class AppSound {
   }
   
     static getSoundOfLetter({required String mainGameLetter}) {
+    print('mainGameLetter:$mainGameLetter');
       if(mainGameLetter.toLowerCase()== 'a') {
             return AppSound.letterA;
       }
