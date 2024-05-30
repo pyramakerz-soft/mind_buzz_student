@@ -28,6 +28,7 @@ import '../games/click_the_picture_with_word/page/click_the_picture_with_word.da
 import '../games/click_the_sound/pages/click_the_sound_game.dart';
 import '../games/dice/manager/dice_cubit.dart';
 import '../games/dice/page/dice_game.dart';
+import '../games/dice/widget/wave_dice.dart';
 import '../games/drag_out/manager/drag_out_cubit.dart';
 import '../games/drag_out/pages/drag_out_game.dart';
 import '../games/sorting_game/manager/sorting_cubit.dart';
@@ -307,6 +308,16 @@ class BasedOfGameConnect extends StatelessWidget {
                             ],
                           ),
                         ),
+                  if(stateOfGame.currentStringOfDice!=null)...{
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 20.w),
+                      child: WaveDice(
+                        currentAlphabet: '${stateOfGame.currentStringOfDice}',
+                        width: 90,
+                        height: 90,
+                      ),
+                    )
+                  }
                 ],
               ),
             ),

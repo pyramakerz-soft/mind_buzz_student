@@ -276,4 +276,11 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     touchPositions.remove(index);
     emit(state.copyWith(touchPositions: !(state.touchPositions ?? false)));
   }
+  saveCurrentStringOfDice({required String letter}){
+    emit(state.copyWith(currentStringOfDice:letter));
+  }
+
+  clearCurrentStringOfDice(){
+    emit(state.clearCurrentStringOfDice());
+  }
 }

@@ -18,6 +18,7 @@ class CurrentGamePhoneticsState extends Equatable {
   int? countOfStar = 0;
   int? countOfCorrectAnswer = 0;
   MainDataOfPhonetics? basicData;
+  String? currentStringOfDice;
   CurrentGamePhoneticsState(
       {this.basicData,
       this.avatarArtboard,
@@ -26,6 +27,7 @@ class CurrentGamePhoneticsState extends Equatable {
       this.stateOfStringIsWord,
       this.stateOfStringWillSay,
       this.stateOfAvatar,
+      this.currentStringOfDice,
       this.avatarArtboardIdle,
       this.avatarArtboardSad,
       this.touchPositions,
@@ -47,6 +49,7 @@ class CurrentGamePhoneticsState extends Equatable {
       bool? stateOfStringIsWord,
       Artboard? avatarArtboardLoading,
       String? stateOfStringWillSay,
+      String? currentStringOfDice,
       String? currentAvatar,
       String? stateOfAvatar,
       List<GameModel>? gameData,
@@ -60,6 +63,7 @@ class CurrentGamePhoneticsState extends Equatable {
         index: index ?? this.index,
         touchPositions: touchPositions ?? this.touchPositions,
         stateOfStringWillSay: stateOfStringWillSay ?? this.stateOfStringWillSay,
+        currentStringOfDice: currentStringOfDice ?? this.currentStringOfDice,
         avatarArtboardLoading:
             avatarArtboardLoading ?? this.avatarArtboardLoading,
         gameData: gameData ?? this.gameData,
@@ -85,7 +89,29 @@ class CurrentGamePhoneticsState extends Equatable {
         gameData: gameData ?? gameData,
         statesOfAddStars: statesOfAddStars ?? statesOfAddStars,
         stateOfStringWillSay: stateOfStringWillSay ?? stateOfStringWillSay,
+        currentStringOfDice: currentStringOfDice ?? currentStringOfDice,
         stateOfAvatar: null,
+        touchPositions: touchPositions,
+        currentAvatar: currentAvatar ?? currentAvatar,
+        stateOfStringIsWord: stateOfStringIsWord ?? stateOfStringIsWord,
+        countOfTries: countOfTries ?? countOfTries,
+        avatarArtboardSad: avatarArtboardSad ?? avatarArtboardSad,
+        avatarArtboardSuccess: avatarArtboardSuccess ?? avatarArtboardSuccess,
+        avatarArtboardIdle: avatarArtboardIdle ?? avatarArtboardIdle,
+        countOfCorrectAnswer: countOfCorrectAnswer ?? countOfCorrectAnswer,
+        countOfStar: countOfStar ?? countOfStar,
+        avatarArtboard: avatarArtboard ?? avatarArtboard);
+  }
+  clearCurrentStringOfDice() {
+    return CurrentGamePhoneticsState(
+        basicData: basicData ?? basicData,
+        index: index ?? index,
+        avatarArtboardLoading: avatarArtboardLoading ?? avatarArtboardLoading,
+        gameData: gameData ?? gameData,
+        statesOfAddStars: statesOfAddStars ?? statesOfAddStars,
+        stateOfStringWillSay: stateOfStringWillSay ?? stateOfStringWillSay,
+        currentStringOfDice: null,
+        stateOfAvatar: stateOfAvatar ?? this.stateOfAvatar,
         touchPositions: touchPositions,
         currentAvatar: currentAvatar ?? currentAvatar,
         stateOfStringIsWord: stateOfStringIsWord ?? stateOfStringIsWord,
@@ -115,6 +141,7 @@ class CurrentGamePhoneticsState extends Equatable {
         avatarArtboardSuccess,
         gameData,
         avatarArtboardLoading,
+    currentStringOfDice,
         touchPositions,
         countOfTries,
         countOfCorrectAnswer,

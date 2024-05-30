@@ -12,7 +12,6 @@ import '../widget/item_card_of_image_widget.dart';
 class DiceGamePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _DiceGamePage();
   }
 }
@@ -27,6 +26,11 @@ class _DiceGamePage extends State<DiceGamePage> {
             context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
                 stateOfStringIsWord: false,
                 stateOfStringWillSay: currentAlphabet);
+            context
+                .read<CurrentGamePhoneticsCubit>()
+                .saveCurrentStringOfDice(
+                letter:
+                currentAlphabet);
           });
     });
     super.initState();
@@ -35,8 +39,6 @@ class _DiceGamePage extends State<DiceGamePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        // alignment: Alignment.center,
-        // height: MediaQuery.of(context).size.height - (70.h),
 
         margin: EdgeInsets.only(right: 15.w, bottom: 9),
         width: MediaQuery.of(context).size.width - (100.w),
@@ -110,6 +112,8 @@ class _DiceGamePage extends State<DiceGamePage> {
                                 if (isLastLesson == true) {
                                   await Future.delayed(
                                       const Duration(seconds: 2));
+                                  context
+                                      .read<CurrentGamePhoneticsCubit>().clearCurrentStringOfDice();
                                   Navigator.of(context).pop();
                                 } else {
                                   await context
@@ -125,6 +129,11 @@ class _DiceGamePage extends State<DiceGamePage> {
                                                 stateOfStringIsWord: false,
                                                 stateOfStringWillSay:
                                                     currentAlphabet);
+                                        context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .saveCurrentStringOfDice(
+                                            letter:
+                                            currentAlphabet);
                                       });
                                   // await context
                                   //     .read<BingoCubit>()
