@@ -17,36 +17,31 @@ class DragOutCubit extends Cubit<DragOutInitial> {
   DragOutCubit({required this.gameData})
       : super(DragOutInitial(gameData: gameData)) {
     // TalkTts.startTalk(text: gameData.mainLetter ?? '');
-    getTheFirstDragOut();
-  }
-  getTheFirstDragOut(){
-    log('getTheFirstDragOut');
-    int tempIndex= state.index??0 ;
-    gameData.forEach((element) {
-      log("(element.gameTypes?.name == GameTypes.dragOut.text()):${(element.gameTypes?.name)}");
-      log("(element.gameTypes?.name == GameTypes.dragOut.text()):${(GameTypes.dragOut.text())}");
-      if(element.gameTypes?.name?.toLowerCase() == GameTypes.dragOut.text().toLowerCase()){
-        emit(state.copyWith(index: tempIndex));
-        return ;
-      }else{
-        tempIndex++;
-      }
-    });
+    // getTheFirstDragOut();
 
+    List<GameModel> supGameData = gameData
+        .where((element) =>
+            element.gameTypes?.name?.toLowerCase() ==
+            GameTypes.dragOut.text().toLowerCase())
+        .toList();
+    emit(state.copyWith(gameData: supGameData));
+    TalkTts.startTalk(text: state.gameData.first.inst ?? '');
   }
 
-  Future<int>increaseCountOfCorrectAnswers()async{
-    int sub = state.correctAnswer??0;
-    sub = sub +1;
+  Future<int> increaseCountOfCorrectAnswers() async {
+    int sub = state.correctAnswer ?? 0;
+    sub = sub + 1;
     emit(state.copyWith(correctAnswer: sub));
     return Future.value(state.correctAnswer);
   }
 
   bool checkIfIsTheLastGameOfLesson() {
-    int currentIndex = state.index??0;
+    int currentIndex = state.index ?? 0;
     currentIndex = currentIndex + 1;
 
-    if ((state.gameData.length ) > currentIndex && (state.gameData[currentIndex].gameTypes?.name?.toLowerCase() == GameTypes.dragOut.text().toLowerCase())) {
+    if ((state.gameData.length) > currentIndex &&
+        (state.gameData[currentIndex].gameTypes?.name?.toLowerCase() ==
+            GameTypes.dragOut.text().toLowerCase())) {
       return false;
     } else {
       return true;
@@ -54,7 +49,7 @@ class DragOutCubit extends Cubit<DragOutInitial> {
   }
 
   updateIndexOfCurrentGame() {
-    int currentIndex = state.index??0;
+    int currentIndex = state.index ?? 0;
     currentIndex = currentIndex + 1;
     emit(state.copyWith(index: currentIndex));
   }
