@@ -50,8 +50,6 @@ ChapterState _eitherLoadedOrErrorState(
 
 List<ChapterModel> handlingDataOfChapters(
     {required List<LessonModel> lessons}) {
-  Map<int, List<LessonModel>> listOfData =
-      groupBy(lessons, (LessonModel obj) => (obj.chapter?.id ?? 0));
   List<ChapterModel> dataOfChapters = [];
   lessons.forEach((lesson) {
     dataOfChapters.add(
@@ -65,80 +63,23 @@ List<ChapterModel> handlingDataOfChapters(
           isGame: false,
           isLetter: true),
     );
-    lesson.games?.sort(
-        (a, b) => (a.previousGameId ?? 0).compareTo(b.previousGameId ?? 0));
-    lesson.games?.forEach((element) {
-      if (element.gameTypeId == 8 &&
-          element.previousGameId !=
-              lesson.games?.where((element) => element.gameTypeId == 8).toList().map((e) => e.previousGameId ?? 0).toList()
-                  .min) // x_out id = 8
-      {
-        element.isHidden = true;
-      }
-      if (element.gameTypeId == 9 &&
-          element.previousGameId !=
-              lesson.games?.where((element) => element.gameTypeId == 9).toList().map((e) => e.previousGameId ?? 0).toList()
-                  .min) // spelling id = 9
-      {
-        element.isHidden = true;
-      }
-      if (element.gameTypeId == 1 &&
-          element.previousGameId !=
-              lesson.games?.where((element) => element.gameTypeId == 1).toList().map((e) => e.previousGameId ?? 0).toList()
-                  .min) // drag out id = 1
-      {
-        element.isHidden = true;
-      }
-    });
+    Map<String, List<dynamic>>? mapGames = groupBy(
+        lesson.games ?? [], (obj) => '${obj.gameTypeId}_${obj.audioFlag}');
     int index = 0;
-    lesson.games!.asMap().forEach((i, game) {
-      if(!game.isHidden && game.isEdited == 0) {
-        index++;
-      }
-      if (game.isEdited == 0) {
-        dataOfChapters.add(
-          ChapterModel(
-            id: game.id,
-            lessonId: game.lessonId,
-            name: 'Game $index',
-            number: index,
-            star: game.stars,
-            levelImg: AppImages.imageCloseLesson,
-            isGame: true,
-            isLetter: false,
-            isHidden: game.isHidden
-          ),
-        );
-      }
+    mapGames.forEach((key, value) {
+      index++;
+      dataOfChapters.add(ChapterModel(
+          id: value.first.id,
+          lessonId: value.first.lessonId,
+          name: 'Game $index',
+          number: index,
+          star: value.first.stars,
+          levelImg: AppImages.imageCloseLesson,
+          isGame: true,
+          isLetter: false,
+          isHidden: value.first.isHidden));
     });
   });
-
-  // listOfData.forEach((key, value) {
-  //   List<LessonModel> lessonsData= lessons.where((element) => (element.chapter?.id??0) == key ).toList();
-  //   dataOfChapters.add(ChapterModel(
-  //     id: lessonsData.first.chapter?.id,
-  //     name: lessonsData.first.chapter?.name,
-  //     number: lessonsData.first.chapter?.number,
-  //     isChapter:true,
-  //     isOpen: true,
-  //     levelImg: AppImages.imageChapter,
-  //   ));
-  //   lessonsData.sort((a, b) => a.number?.compareTo(b.number??0)??0);
-  //   for(LessonModel x in lessonsData){
-  //     dataOfChapters.add(ChapterModel(
-  //       id: x.id,
-  //       name: x.name,
-  //       number: x.number,
-  //       isLesson:(x.type == null||x.type == 'Review'),
-  //       isCheckPoint:x.type == 'Checkpoint',
-  //       isOpen: x.stars!=null || x.stars!=0,
-  //       isAssessment:x.type == 'Assessment',
-  //       star: x.stars,
-  //       levelImg: (x.type == null||x.type == 'Review')?AppImages.imageCloseLesson:x.type == 'Checkpoint'?AppImages.imageCheckpointPart:AppImages.imageAssessmentPart,
-  //     ));
-  //   }
-  // });
-
   return dataOfChapters;
 }
 

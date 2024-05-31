@@ -49,6 +49,65 @@ class BasedOfGamePhonetics extends StatelessWidget {
         children: [
           /////////////////////game//////////////////
 
+          Positioned(
+              left: 0,
+              bottom: 0,
+              child: SizedBox(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  if ((stateOfGame.basicData?.gameData
+                      is BasicDragOutGame)) ...{
+                    BlocProvider<DragOutCubit>(
+                        create: (_) =>
+                            DragOutCubit(gameData: stateOfGameData.data),
+                        child: DragOutGame(
+                            // gameData: stateOfGameData.data,
+                            ))
+                  } else if ((stateOfGame.basicData?.gameData
+                      is ClickPictureS)) ...{
+                    BlocProvider<ClickPictureCubit>(
+                        create: (_) => ClickPictureCubit(
+                            gameData: stateOfGameData.data[stateOfGame.index],
+                            background: (stateOfGame.basicData?.gameData
+                                    as ClickPictureS)
+                                .getBackGround(stateOfGameData
+                                        .data[stateOfGame.index]
+                                        .gameImages
+                                        ?.length ??
+                                    0)),
+                        child: ClickPictureGame())
+                  } else if ((stateOfGame.basicData?.gameData
+                      is ClickPictureOfWord)) ...{
+                    BlocProvider<ClickThePictureWithWordCubit>(
+                        create: (_) => ClickThePictureWithWordCubit(
+                            gameData: stateOfGameData.data[stateOfGame.index],
+                            backGround: (stateOfGame.basicData?.gameData
+                                    as ClickPictureOfWord)
+                                .getBackGround(stateOfGameData
+                                        .data[stateOfGame.index]
+                                        .gameImages
+                                        ?.length ??
+                                    0)),
+                        child: ClickThePictureWithWord(
+                          gameData: stateOfGameData.data[stateOfGame.index],
+                        ))
+                  } else if ((stateOfGame.basicData?.gameData
+                      is BasicClickTheSoundGame)) ...{
+                    BlocProvider<ClickTheSoundCubit>(
+                        create: (_) => ClickTheSoundCubit(
+                              gameData: stateOfGameData.data[stateOfGame.index],
+                            ),
+                        child: ClickTheSoundGame()),
+                  } else if (stateOfGame.basicData?.gameData is Tracking) ...{
+                    BlocProvider<TracingCubit>(
+                        create: (_) => TracingCubit(
+                              gameData: stateOfGameData.data[stateOfGame.index],
+                            ),
+                        child: TracingGame()),
+                  }
+                ],
+              ))),
 
           /////////////////////game title//////////////////
           Positioned(
@@ -224,65 +283,6 @@ class BasedOfGamePhonetics extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-              left: 0,
-              bottom: 0,
-              child: SizedBox(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      if ((stateOfGame.basicData?.gameData
-                      is BasicDragOutGame)) ...{
-                        BlocProvider<DragOutCubit>(
-                            create: (_) =>
-                                DragOutCubit(gameData: stateOfGameData.data),
-                            child: DragOutGame(
-                              // gameData: stateOfGameData.data,
-                            ))
-                      } else if ((stateOfGame.basicData?.gameData
-                      is ClickPictureS)) ...{
-                        BlocProvider<ClickPictureCubit>(
-                            create: (_) => ClickPictureCubit(
-                                gameData: stateOfGameData.data[stateOfGame.index],
-                                background: (stateOfGame.basicData?.gameData
-                                as ClickPictureS)
-                                    .getBackGround(stateOfGameData
-                                    .data[stateOfGame.index]
-                                    .gameImages
-                                    ?.length ??
-                                    0)),
-                            child: ClickPictureGame())
-                      } else if ((stateOfGame.basicData?.gameData
-                      is ClickPictureOfWord)) ...{
-                        BlocProvider<ClickThePictureWithWordCubit>(
-                            create: (_) => ClickThePictureWithWordCubit(
-                                gameData: stateOfGameData.data[stateOfGame.index],
-                                backGround: (stateOfGame.basicData?.gameData
-                                as ClickPictureOfWord)
-                                    .getBackGround(stateOfGameData
-                                    .data[stateOfGame.index]
-                                    .gameImages
-                                    ?.length ??
-                                    0)),
-                            child: ClickThePictureWithWord(
-                              gameData: stateOfGameData.data[stateOfGame.index],
-                            ))
-                      } else if ((stateOfGame.basicData?.gameData
-                      is BasicClickTheSoundGame)) ...{
-                        BlocProvider<ClickTheSoundCubit>(
-                            create: (_) => ClickTheSoundCubit(
-                              gameData: stateOfGameData.data[stateOfGame.index],
-                            ),
-                            child: ClickTheSoundGame()),
-                      } else if (stateOfGame.basicData?.gameData is Tracking) ...{
-                        BlocProvider<TracingCubit>(
-                            create: (_) => TracingCubit(
-                              gameData: stateOfGameData.data[stateOfGame.index],
-                            ),
-                            child: TracingGame()),
-                      }
-                    ],
-                  ))),
         ],
       ),
     );
