@@ -35,13 +35,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreen extends State<HomeScreen> {
   @override
   void initState() {
-    TalkTts.startTalk(text: DefaultHomeData.haveAnAssignment);
+    if (Singleton().studentAssignments != null &&
+        Singleton().studentAssignments!.isNotEmpty) {
+      TalkTts.startTalk(text: DefaultHomeData.haveAnAssignment);
+    }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final userData = context.read<LoginCubit>().userData;
     return Column(
       children: [
         20.ph,
@@ -51,8 +53,10 @@ class _HomeScreen extends State<HomeScreen> {
             child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 18),
           child: BlocProvider<GetProgramsHomeBloc>(
-              create: (_) => di.sl<GetProgramsHomeBloc>()..add(GetProgramsRequest()),
-              child: BlocConsumer<GetProgramsHomeBloc, GetProgramsHomeState>(listener: (context, state) {
+              create: (_) =>
+                  di.sl<GetProgramsHomeBloc>()..add(GetProgramsRequest()),
+              child: BlocConsumer<GetProgramsHomeBloc, GetProgramsHomeState>(
+                  listener: (context, state) {
                 if (state is GetProgramsErrorInitial) {
                   if (state.message == RELOGIN_FAILURE_MESSAGE) {
                     Utils.navigateAndRemoveUntilTo(LoginScreen(), context);
@@ -72,33 +76,73 @@ class _HomeScreen extends State<HomeScreen> {
                   return SingleChildScrollView(
                     child: Column(
                       children: [
-                        if (Singleton().studentAssignments != null && Singleton().studentAssignments!.isNotEmpty) ...{
+                        if (Singleton().studentAssignments != null &&
+                            Singleton().studentAssignments!.isNotEmpty) ...{
                           SizedBox(
                             height: 50.h,
                             child: Stack(
                               fit: StackFit.passthrough,
                               children: [
                                 Container(
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: AppColor.redColor),
-                                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: AppColor.redColor),
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 12),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         DefaultHomeData.haveAnAssignment,
-                                        style: TextStyle(fontSize: MediaQuery.of(context).size.reDeginSize(16, context) > 16 ? 16 : MediaQuery.of(context).size.reDeginSize(16, context), fontWeight: FontWeight.w600, color: AppColor.white),
+                                        style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .reDeginSize(
+                                                            16, context) >
+                                                    16
+                                                ? 16
+                                                : MediaQuery.of(context)
+                                                    .size
+                                                    .reDeginSize(16, context),
+                                            fontWeight: FontWeight.w600,
+                                            color: AppColor.white),
                                       ),
                                       GestureDetector(
                                         onTap: () {
-                                          Utils.navigateTo(BlocProvider(create: (_) => CheckAssignmentCubit(assignmentProgrammes: state.data), child: StudentAssignmentScreen()), context);
+                                          Utils.navigateTo(
+                                              BlocProvider(
+                                                  create: (_) =>
+                                                      CheckAssignmentCubit(
+                                                          assignmentProgrammes:
+                                                              state.data),
+                                                  child:
+                                                      StudentAssignmentScreen()),
+                                              context);
                                         },
                                         child: Container(
-                                          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.white),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 8, horizontal: 10),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                              color: Colors.white),
                                           child: Text(
                                             'Start Now?',
                                             //style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColor.redColor4, fontSize: MediaQuery.of(context).size.reDeginSize(13, context) > 35 ? 35 : MediaQuery.of(context).size.reDeginSize(13, context), fontWeight: FontWeight.w700),
-                                            style: TextStyle(color: AppColor.redColor4, fontSize: MediaQuery.of(context).size.reDeginSize(13, context) > 14 ? 14 : MediaQuery.of(context).size.reDeginSize(13, context), fontWeight: FontWeight.w700),
+                                            style: TextStyle(
+                                                color: AppColor.redColor4,
+                                                fontSize: MediaQuery.of(context)
+                                                            .size
+                                                            .reDeginSize(
+                                                                13, context) >
+                                                        14
+                                                    ? 14
+                                                    : MediaQuery.of(context)
+                                                        .size
+                                                        .reDeginSize(
+                                                            13, context),
+                                                fontWeight: FontWeight.w700),
                                           ),
                                         ),
                                       )
@@ -113,7 +157,8 @@ class _HomeScreen extends State<HomeScreen> {
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       shape: BoxShape.circle,
-                                      border: Border.all(color: AppColor.redColor, width: 2),
+                                      border: Border.all(
+                                          color: AppColor.redColor, width: 2),
                                     ),
                                     constraints: const BoxConstraints(
                                       minWidth: 24,
@@ -121,7 +166,7 @@ class _HomeScreen extends State<HomeScreen> {
                                     ),
                                     child: Center(
                                       child: Text(
-                                        Singleton().studentAssignments!.length.toString(),
+                                        "${state.data.fold(0, (previousValue, element) => (element.program?.studentTests?.length ?? 0) + (int.parse('$previousValue')))}",
                                         style: const TextStyle(
                                           color: AppColor.redColor,
                                           fontSize: 14,
@@ -146,10 +191,15 @@ class _HomeScreen extends State<HomeScreen> {
                                 (index) => Column(
                                       children: [
                                         CardOfProgram(
-                                          programId: "${state.data[index].programId ?? ''}",
-                                          colors: DefaultHomeData.getColor(index: (index + 1)),
-                                          mainImage: state.data[index].program?.image,
-                                          title: state.data[index].program?.course?.name ?? '',
+                                          programId:
+                                              "${state.data[index].programId ?? ''}",
+                                          colors: DefaultHomeData.getColor(
+                                              index: (index + 1)),
+                                          mainImage:
+                                              state.data[index].program?.image,
+                                          title: state.data[index].program
+                                                  ?.course?.name ??
+                                              '',
                                         ),
                                         24.ph,
                                       ],

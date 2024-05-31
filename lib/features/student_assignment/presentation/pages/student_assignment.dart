@@ -69,20 +69,27 @@ class StudentAssignmentScreen extends StatelessWidget {
             )),
         body: Container(
             margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: Column(
+            child: ListView(
               children: [
                 10.ph,
                 ...List.generate(
-                  assignmentProgrammes
-                          ?.where((element) =>
-                              element.program?.studentTests?.isNotEmpty == true)
-                          .length ??
-                      0,
-                  (index) => CardOfAssignment(
-                    assignmentTask:
-                        assignmentProgrammes?[index] ?? UserCourseModel(),
-                  ),
-                )
+                    assignmentProgrammes?.length ?? 0,
+                    (index) => (assignmentProgrammes?[index]
+                                    .program
+                                    ?.studentTests
+                                    ?.length ??
+                                0) >
+                            0
+                        ? Column(
+                            children: [
+                              CardOfAssignment(
+                                assignmentTask: assignmentProgrammes?[index] ??
+                                    UserCourseModel(),
+                              ),
+                              10.ph
+                            ],
+                          )
+                        : SizedBox())
               ],
             )));
   }
