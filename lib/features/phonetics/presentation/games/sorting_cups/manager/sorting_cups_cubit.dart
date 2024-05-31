@@ -15,17 +15,18 @@ part 'sorting_cups_state.dart';
 class SortingCupsCubit extends Cubit<SortingCupsInitial> {
   final GameModel gameData;
 
-  SortingCupsCubit({required this.gameData}) : super(SortingCupsInitial(gameData: gameData)){
-   emit(state.copyWith(gameData: gameData));
-   initStart();
+  SortingCupsCubit({required this.gameData})
+      : super(SortingCupsInitial(gameData: gameData)) {
+    List<GameLettersModel> cardsLetters = gameData.gameLetters ?? [];
+    cardsLetters.shuffle();
+    emit(state.copyWith(gameData: gameData, cardsLetters: cardsLetters));
+    initStart();
   }
 
-
-  initStart()async{
+  initStart() async {
     await TalkTts.startTalk(text: state.gameData.inst ?? '');
 
     getTheRandomWord();
-
   }
 
   addTheCorrectAnswer({required int idOfUserAnswer}) async {
@@ -36,10 +37,11 @@ class SortingCupsCubit extends Cubit<SortingCupsInitial> {
 
     print('correctAnswer:${correctAnswer.length}');
   }
+
   bool checkIfIsTheLastGameOfLesson() {
     int currentIndexOfAnswers = state.correctIndexes?.length ?? 0;
-    int currentIndexOfLetters = state.gameData.gameLetters?.length ?? 0;
-    if (currentIndexOfAnswers != (currentIndexOfLetters - 1)) {
+    int currentIndexOfLetters = state.cardsLetters?.length ?? 0;
+    if (currentIndexOfAnswers != (currentIndexOfLetters)) {
       return false;
     } else {
       return true;
@@ -50,11 +52,11 @@ class SortingCupsCubit extends Cubit<SortingCupsInitial> {
     print("getTheRandomWord");
     List<GameLettersModel> checkImages = [];
 
-
     state.gameData.gameLetters?.forEach((element) {
       print('element.id${element.id}');
       print('${state.correctIndexes}');
-      if (state.correctIndexes==null||(state.correctIndexes?.contains(element.id) == false)) {
+      if (state.correctIndexes == null ||
+          (state.correctIndexes?.contains(element.id) == false)) {
         checkImages.add(element);
       }
     });
@@ -70,11 +72,11 @@ class SortingCupsCubit extends Cubit<SortingCupsInitial> {
       // if(awaitTime==true) {
       //   await Future.delayed(Duration(seconds: 1, milliseconds: 200));
       // }
-      await AudioPlayerClass.startPlaySound(soundPath:  AppSound.getSoundOfLetter(
-          mainGameLetter: chooseWord.letter?.toLowerCase() ?? ''));
+      await AudioPlayerClass.startPlaySound(
+          soundPath: AppSound.getSoundOfLetter(
+              mainGameLetter: chooseWord.letter?.toLowerCase() ?? ''));
       // await TalkTts.startTalk(text: chooseWord. ?? '');
       emit(state.copyWith(chooseWord: chooseWord));
     }
   }
-
 }

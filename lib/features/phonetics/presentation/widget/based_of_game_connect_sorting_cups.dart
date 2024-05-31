@@ -69,8 +69,8 @@ class BasedOfGameConnectSortingCups extends StatelessWidget {
               if ((stateOfGame.basicData?.gameData is SortingCupsGame)) ...{
                 BlocProvider<SortingCupsCubit>(
                     create: (_) => SortingCupsCubit(
-                      gameData: stateOfGameData.data[stateOfGame.index],
-                    ),
+                          gameData: stateOfGameData.data[stateOfGame.index],
+                        ),
                     child: GamesSortingCups())
               }
             ],
@@ -155,46 +155,37 @@ class BasedOfGameConnectSortingCups extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    width:120.w,
-                    padding: EdgeInsets.only(left: 10.w),
-
-                    child:
-                    GestureDetector(
-                      onTap: () async {
-                        print(
-                            '%%:${MediaQuery.of(context).size.height}');
-                        await TalkTts.startTalk(
-                            text: stateOfGameData
-                                .data[stateOfGame.index].inst ??
-                                '');
-                        print(
-                            'stateOfGame.stateOfStringIsWord:${stateOfGame.stateOfStringIsWord}');
-                        print(
-                            'stateOfGame.stateOfStringIsWord:${stateOfGame.stateOfStringWillSay}');
-                        if (stateOfGame.stateOfStringIsWord ==
-                            true) {
+                      width: 120.w,
+                      padding: EdgeInsets.only(left: 10.w),
+                      child: GestureDetector(
+                        onTap: () async {
+                          print('%%:${MediaQuery.of(context).size.height}');
                           await TalkTts.startTalk(
-                              text: stateOfGame
-                                  .stateOfStringWillSay ??
+                              text: stateOfGameData
+                                      .data[stateOfGame.index].inst ??
                                   '');
-                        } else {
-                          await AudioPlayerClass.startPlaySound(
-                              soundPath: AppSound.getSoundOfLetter(
-                                  mainGameLetter: stateOfGame
-                                      .stateOfStringWillSay ??
-                                      ''));
-                        }
-                      },
-                      child: Image.asset(
-                          stateOfGame.basicData?.gameData?.titleImage ??
-                              '',
+                          print(
+                              'stateOfGame.stateOfStringIsWord:${stateOfGame.stateOfStringIsWord}');
+                          print(
+                              'stateOfGame.stateOfStringIsWord:${stateOfGame.stateOfStringWillSay}');
+                          if (stateOfGame.stateOfStringIsWord == true) {
+                            await TalkTts.startTalk(
+                                text: stateOfGame.stateOfStringWillSay ?? '');
+                          } else {
+                            await AudioPlayerClass.startPlaySound(
+                                soundPath: AppSound.getSoundOfLetter(
+                                    mainGameLetter:
+                                        stateOfGame.stateOfStringWillSay ??
+                                            ''));
+                          }
+                        },
+                        child: Image.asset(
+                          stateOfGame.basicData?.gameData?.titleImage ?? '',
                           height: 50.h,
                           width: 120.w,
                           fit: BoxFit.fill,
-                        ),)
-
-
-                  ),
+                        ),
+                      )),
                 ],
               ),
             ),
@@ -205,50 +196,42 @@ class BasedOfGameConnectSortingCups extends StatelessWidget {
             left: 20,
             child: GestureDetector(
               onTap: () async {
-                print(
-                    '%%:${MediaQuery.of(context).size.height}');
+                print('%%:${MediaQuery.of(context).size.height}');
                 await TalkTts.startTalk(
-                    text: stateOfGameData
-                        .data[stateOfGame.index].inst ??
-                        '');
+                    text: stateOfGameData.data[stateOfGame.index].inst ?? '');
                 print(
                     'stateOfGame.stateOfStringIsWord:${stateOfGame.stateOfStringIsWord}');
                 print(
                     'stateOfGame.stateOfStringIsWord:${stateOfGame.stateOfStringWillSay}');
-                if (stateOfGame.stateOfStringIsWord ==
-                    true) {
+                if (stateOfGame.stateOfStringIsWord == true) {
                   await TalkTts.startTalk(
-                      text: stateOfGame
-                          .stateOfStringWillSay ??
-                          '');
+                      text: stateOfGame.stateOfStringWillSay ?? '');
                 } else {
                   await AudioPlayerClass.startPlaySound(
                       soundPath: AppSound.getSoundOfLetter(
-                          mainGameLetter: stateOfGame
-                              .stateOfStringWillSay ??
-                              ''));
+                          mainGameLetter:
+                              stateOfGame.stateOfStringWillSay ?? ''));
                 }
               },
               child: Container(
                   alignment: Alignment.center,
                   child: stateOfGame.avatarArtboard == null
                       ? Image.asset(
-                    stateOfGame.currentAvatar ?? '',
-                    // height:
-                    // MediaQuery.of(context).size.height - (70.h),
-                    height: 85.h,
-                    width: 80.w,
-                  )
+                          stateOfGame.currentAvatar ?? '',
+                          // height:
+                          // MediaQuery.of(context).size.height - (70.h),
+                          height: 85.h,
+                          width: 80.w,
+                        )
                       : SizedBox(
-                      height: 110.h,
-                      width: 70.w,
-                      child: Rive(
-                        artboard:
-                        stateOfGame.avatarArtboard!,
-                        fit: BoxFit.fill,
-                        useArtboardSize: true,
-                        alignment: Alignment.center,
-                      ))),
+                          height: 110.h,
+                          width: 70.w,
+                          child: Rive(
+                            artboard: stateOfGame.avatarArtboard!,
+                            fit: BoxFit.fill,
+                            useArtboardSize: true,
+                            alignment: Alignment.center,
+                          ))),
             ),
           ),
         ],

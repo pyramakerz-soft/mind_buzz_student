@@ -36,18 +36,16 @@ class GamesSortingCups extends StatelessWidget {
           return Column(
             children: [
               ...List.generate(
-                  ((gameState.gameData.gameLetters?.length ?? 0) / 10).ceil(),
+                  ((gameState.cardsLetters?.length ?? 0) / 10).ceil(),
                   (rowIndex) {
                 int startIndex = rowIndex * 10;
                 int endIndex = (rowIndex + 1) * 10;
-                endIndex =
-                    endIndex > (gameState.gameData.gameLetters?.length ?? 0)
-                        ? (gameState.gameData.gameLetters?.length ?? 0)
-                        : endIndex;
+                endIndex = endIndex > (gameState.cardsLetters?.length ?? 0)
+                    ? (gameState.cardsLetters?.length ?? 0)
+                    : endIndex;
 
                 List<GameLettersModel> rowItems =
-                    (gameState.gameData.gameLetters)
-                            ?.sublist(startIndex, endIndex) ??
+                    (gameState.cardsLetters)?.sublist(startIndex, endIndex) ??
                         [];
 
                 return Row(
@@ -195,14 +193,14 @@ class GamesSortingCups extends StatelessWidget {
                                     context
                                         .read<SortingCupsCubit>()
                                         .getTheRandomWord();
+                                    print('item:${item.data}');
+                                    await context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .backToMainAvatar();
                                     // await context
                                     //     .read<BingoCubit>()
                                     //     .getTheRandomWord(awaitTime: false);
                                   }
-                                  print('item:${item.data}');
-                                  await context
-                                      .read<CurrentGamePhoneticsCubit>()
-                                      .backToMainAvatar();
                                 } else {
                                   context
                                       .read<CurrentGamePhoneticsCubit>()
@@ -210,7 +208,6 @@ class GamesSortingCups extends StatelessWidget {
                                     // TalkTts.startTalk(text: gameData.mainLetter ?? '');
                                   });
                                 }
-
                               }
                             },
                           );
