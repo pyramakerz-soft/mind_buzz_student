@@ -6,14 +6,14 @@ class BingoInitial extends Equatable {
   GameModel? gameData;
   List<int>? correctIndexes;
   int? correctAnswer;
-  bool? stopAction;
+  bool stopAction = false;
   GameLettersModel? chooseWord;
 
   BingoInitial(
       {this.gameData,
       this.correctIndexes,
       this.cardsLetters,
-      this.stopAction,
+      required this.stopAction,
       this.correctAnswer,
       this.chooseWord});
 
@@ -34,12 +34,17 @@ class BingoInitial extends Equatable {
         correctIndexes: correctIndexes ?? this.correctIndexes);
   }
 
-
   BingoInitial clearAllData() {
-    return BingoInitial();
+    return BingoInitial(stopAction: stopAction);
   }
 
   @override
-  List<Object?> get props =>
-      [gameData, correctIndexes, cardsLetters, correctAnswer, chooseWord, stopAction];
+  List<Object?> get props => [
+        gameData,
+        correctIndexes,
+        cardsLetters,
+        correctAnswer,
+        chooseWord,
+        stopAction
+      ];
 }

@@ -23,7 +23,6 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   getTheBackGround() {
-    print('state.basicData?.idelAvatar:${state.basicData?.idelAvatar}');
     rootBundle.load(state.basicData?.idelAvatar ?? '').then(
       (data) async {
         try {
@@ -196,7 +195,6 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         }
       }
     }
-    print('countOfStar:$countOfStar');
   }
 
   increaseDirectlyCountOfStar() {
@@ -221,7 +219,6 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         updateIndexOfCurrentGame(
             nextIndex: state.gameData!
                 .indexWhere((element) => element.id == nextGameId));
-      print('${state.stateOfAvatar}');
     }
   }
 
@@ -276,11 +273,12 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     touchPositions.remove(index);
     emit(state.copyWith(touchPositions: !(state.touchPositions ?? false)));
   }
-  saveCurrentStringOfDice({required String letter}){
-    emit(state.copyWith(currentStringOfDice:letter));
+
+  saveCurrentStringOfDice({required String letter}) {
+    emit(state.copyWith(currentStringOfDice: letter));
   }
 
-  clearCurrentStringOfDice(){
+  clearCurrentStringOfDice() {
     emit(state.clearCurrentStringOfDice());
   }
 }

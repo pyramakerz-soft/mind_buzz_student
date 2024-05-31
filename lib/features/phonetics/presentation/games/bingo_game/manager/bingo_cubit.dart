@@ -16,31 +16,35 @@ class BingoCubit extends Cubit<BingoInitial> {
   final GameModel _gameData;
 
   BingoCubit({required GameModel gameData})
-      : _gameData = gameData, super(BingoInitial(gameData: gameData)) {
+      : _gameData = gameData,
+        super(BingoInitial(gameData: gameData, stopAction: false)) {
     // bool haveNullId  =  (gameData.gameLetters ?? []).where((element) => element.id == null).toList().isNotEmpty;
     // if(haveNullId == false) {
     TalkTts.startTalk(text: _gameData.inst ?? '');
 
-    List<GameLettersModel> supList = (_gameData.gameLetters ?? []).where((element) => element.id != null).toList();
-      // supList.addAll(List.from(supList));
-      supList.insert(4, GameLettersModel());
-      emit(state.copyWith(cardsLetters: supList.toList()));
+    List<GameLettersModel> supList = (_gameData.gameLetters ?? [])
+        .where((element) => element.id != null)
+        .toList();
+    // supList.addAll(List.from(supList));
+    supList.insert(4, GameLettersModel());
+    emit(state.copyWith(cardsLetters: supList.toList()));
     // }
-    print("supList:${state.cardsLetters?.length}");
-    getTheRandomWord(awaitTime:true);
+    getTheRandomWord(awaitTime: true);
   }
 
-  updateStopAction(){
-    emit(state.copyWith(stopAction: !(state.stopAction??false)));
+  Future<void> updateStopAction() async {
+    print("-${state.stopAction}");
+    emit(state.copyWith(stopAction: !state.stopAction));
+    print("--${state.stopAction}");
   }
+
   getTheRandomWord({required bool awaitTime}) async {
     List<GameLettersModel> checkImages = [];
 
-
     state.cardsLetters?.forEach((element) {
-      print('element.id${element.id}');
       print('${state.correctIndexes}');
-      if (state.correctIndexes==null||(state.correctIndexes?.contains(element.id) == false)) {
+      if (state.correctIndexes == null ||
+          (state.correctIndexes?.contains(element.id) == false)) {
         checkImages.add(element);
       }
     });
@@ -49,15 +53,16 @@ class BingoCubit extends Cubit<BingoInitial> {
       Random random = Random();
       int randomNumber = random.nextInt(countOfTheImage);
       GameLettersModel chooseWord = checkImages[randomNumber];
-      if(chooseWord.id == null){
-        getTheRandomWord(awaitTime:awaitTime);
-        return ;
+      if (chooseWord.id == null) {
+        getTheRandomWord(awaitTime: awaitTime);
+        return;
       }
-      if(awaitTime==true) {
+      if (awaitTime == true) {
         await Future.delayed(Duration(seconds: 1, milliseconds: 200));
       }
-      await AudioPlayerClass.startPlaySound(soundPath:  AppSound.getSoundOfLetter(
-          mainGameLetter: chooseWord.letter?.toLowerCase() ?? ''));
+      await AudioPlayerClass.startPlaySound(
+          soundPath: AppSound.getSoundOfLetter(
+              mainGameLetter: chooseWord.letter?.toLowerCase() ?? ''));
       // await TalkTts.startTalk(text: chooseWord. ?? '');
       emit(state.copyWith(chooseWord: chooseWord));
     }
@@ -65,11 +70,8 @@ class BingoCubit extends Cubit<BingoInitial> {
 
   addTheCorrectAnswer({required int idOfUserAnswer}) async {
     List<int> correctAnswer = state.correctIndexes ?? [];
-    print('correctAnswer:${correctAnswer.length}');
     correctAnswer.add(idOfUserAnswer);
     emit(state.copyWith(correctIndexes: correctAnswer));
-
-    print('correctAnswer:${correctAnswer.length}');
   }
 
   Future<int> increaseCountOfCorrectAnswers() async {
@@ -82,7 +84,7 @@ class BingoCubit extends Cubit<BingoInitial> {
   bool checkIfIsTheLastGameOfLesson() {
     int currentIndexOfAnswers = state.correctIndexes?.length ?? 0;
     int currentIndexOfLetters = state.cardsLetters?.length ?? 0;
-    if (currentIndexOfAnswers != (currentIndexOfLetters-1)) {
+    if (currentIndexOfAnswers != (currentIndexOfLetters - 1)) {
       return false;
     } else {
       return true;

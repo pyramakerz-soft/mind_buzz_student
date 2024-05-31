@@ -72,70 +72,83 @@ class BingoGameScreen extends StatelessWidget {
                                 (gameState.cardsLetters)?[rowIndex].id),
                             index: rowIndex,
                             onTap: () async {
-                              if ((gameState.correctIndexes?.contains((gameState
-                                                  .cardsLetters)?[rowIndex]
-                                              .id) ==
-                                          false ||
-                                      (gameState.correctIndexes == null) ||
-                                      (gameState.correctIndexes?.isEmpty ??
-                                          false)) &&
-                                  (generalStateOfGame.stateOfAvatar ==
-                                          BasicOfEveryGame.stateOIdle ||
-                                      generalStateOfGame.stateOfAvatar ==
-                                          null) &&
-                                  gameState.stopAction != true) {
-                                if ((gameState.cardsLetters)?[rowIndex]
-                                        .letter
-                                        ?.toLowerCase() ==
-                                    (gameState.chooseWord?.letter
-                                            ?.toLowerCase() ??
-                                        '')) {
-                                  await context
-                                      .read<CurrentGamePhoneticsCubit>()
-                                      .animationOfCorrectAnswer();
-                                  int countOfCorrect = await context
-                                      .read<BingoCubit>()
-                                      .increaseCountOfCorrectAnswers();
-                                  await context
-                                      .read<BingoCubit>()
-                                      .addTheCorrectAnswer(
-                                          idOfUserAnswer: (gameState
-                                                      .cardsLetters)?[rowIndex]
-                                                  .id ??
-                                              0);
-                                  context
-                                      .read<CurrentGamePhoneticsCubit>()
-                                      .addStarToStudent(
-                                        stateOfCountOfCorrectAnswer:
-                                            countOfCorrect,
-                                        mainCountOfQuestion: gameState.gameData
-                                                ?.gameLetters?.length ??
-                                            0,
-                                      );
-
-                                  bool isLastLesson = context
-                                      .read<BingoCubit>()
-                                      .checkIfIsTheLastGameOfLesson();
-                                  if (isLastLesson == true) {
-                                    await Future.delayed(
-                                        const Duration(seconds: 2));
-                                    Navigator.of(context).pop();
-                                  } else {
+                              await context
+                                  .read<BingoCubit>()
+                                  .updateStopAction()
+                                  .whenComplete(() async {
+                                if ((gameState.correctIndexes?.contains(
+                                                (gameState.cardsLetters)?[
+                                                        rowIndex]
+                                                    .id) ==
+                                            false ||
+                                        (gameState.correctIndexes == null) ||
+                                        (gameState.correctIndexes?.isEmpty ??
+                                            false)) &&
+                                    (generalStateOfGame.stateOfAvatar ==
+                                            BasicOfEveryGame.stateOIdle ||
+                                        generalStateOfGame.stateOfAvatar ==
+                                            null) &&
+                                    gameState.stopAction != true) {
+                                  if ((gameState.cardsLetters)?[rowIndex]
+                                          .letter
+                                          ?.toLowerCase() ==
+                                      (gameState.chooseWord?.letter
+                                              ?.toLowerCase() ??
+                                          '')) {
                                     await context
                                         .read<CurrentGamePhoneticsCubit>()
-                                        .backToMainAvatar();
+                                        .animationOfCorrectAnswer();
+                                    int countOfCorrect = await context
+                                        .read<BingoCubit>()
+                                        .increaseCountOfCorrectAnswers();
                                     await context
                                         .read<BingoCubit>()
-                                        .getTheRandomWord(awaitTime: false);
+                                        .addTheCorrectAnswer(
+                                            idOfUserAnswer:
+                                                (gameState.cardsLetters)?[
+                                                            rowIndex]
+                                                        .id ??
+                                                    0);
+                                    context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .addStarToStudent(
+                                          stateOfCountOfCorrectAnswer:
+                                              countOfCorrect,
+                                          mainCountOfQuestion: gameState
+                                                  .gameData
+                                                  ?.gameLetters
+                                                  ?.length ??
+                                              0,
+                                        );
+
+                                    bool isLastLesson = context
+                                        .read<BingoCubit>()
+                                        .checkIfIsTheLastGameOfLesson();
+                                    if (isLastLesson == true) {
+                                      await Future.delayed(
+                                          const Duration(seconds: 2));
+                                      Navigator.of(context).pop();
+                                    } else {
+                                      await context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .backToMainAvatar();
+                                      await context
+                                          .read<BingoCubit>()
+                                          .getTheRandomWord(awaitTime: false);
+                                    }
+                                  } else {
+                                    context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .addWrongAnswer(
+                                            actionOfWrongAnswer: () {
+                                      // TalkTts.startTalk(text: gameData.mainLetter ?? '');
+                                    });
                                   }
-                                } else {
-                                  context
-                                      .read<CurrentGamePhoneticsCubit>()
-                                      .addWrongAnswer(actionOfWrongAnswer: () {
-                                    // TalkTts.startTalk(text: gameData.mainLetter ?? '');
-                                  });
                                 }
-                              }
+                                await context
+                                    .read<BingoCubit>()
+                                    .updateStopAction();
+                              });
                             },
                           );
                         })),
