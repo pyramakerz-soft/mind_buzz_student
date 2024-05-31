@@ -15,15 +15,16 @@ class BasedHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentPage = context.watch<WhoAmICubit>().state;
-    // return BlocConsumer<WhoAmICubit, int>(builder: (context, state) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: currentPage == 1 ?switchBar(context: context) : null,
-      body: Container(
-        child: currentPage == 1 ? const HomeScreen() : const PassCode(),
-      ),
+    // final currentPage = context.watch<WhoAmICubit>().state;
+    return BlocConsumer<WhoAmICubit, int?>(
+      builder: (context, state) {
+        return Scaffold(
+          backgroundColor: Colors.white,
+          appBar: state == 1 ? switchBar(context: context) : null,
+          body: state == 1 ? const HomeScreen() : const PassCode(),
+        );
+      },
+      listener: (BuildContext context, int? state) {},
     );
-    // }, listener: (BuildContext context, int state) {  },);
   }
 }

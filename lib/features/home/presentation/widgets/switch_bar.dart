@@ -6,12 +6,14 @@ import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 import '../../../../core/shadow_manager.dart';
+import '../page/based_home_screen.dart';
 import '../page/home_parent_screen.dart';
 import '../page/home_screen.dart';
 import '../../../who_am_i/presentation/manager/who_am_i_cubit.dart';
 import '../../../../core/app_color.dart';
 import '../../../../core/assets_svg_images.dart';
 import '../../../../core/utils.dart';
+import '../page/pass_code.dart';
 
 PreferredSizeWidget switchBar({required BuildContext context, String? title}) {
   return PreferredSize(
@@ -65,6 +67,13 @@ PreferredSizeWidget switchBar({required BuildContext context, String? title}) {
                       context
                           .read<WhoAmICubit>()
                           .addToSelected(newIndex: index ?? 0);
+                      if (index == 0) {
+                        Utils.navigateAndRemoveUntilTo(
+                            const PassCode(), context);
+                      } else if (index == 1) {
+                        Utils.navigateAndRemoveUntilTo(
+                            const BasedHomeScreen(), context);
+                      }
                     },
                     customWidgets: [
                       SvgPicture.asset(context.watch<WhoAmICubit>().state == 0
