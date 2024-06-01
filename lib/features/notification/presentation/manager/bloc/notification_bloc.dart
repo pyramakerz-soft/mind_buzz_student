@@ -4,8 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../core/error/failures.dart';
-import '../../../../core/error/failures_messages.dart';
+import '../../../../../core/error/failures.dart';
+import '../../../../../core/error/failures_messages.dart';
 
 part 'notification_event.dart';
 part 'notification_state.dart';
