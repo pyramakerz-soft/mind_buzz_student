@@ -242,9 +242,11 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   Future<void> animationOfCorrectAnswer() async {
+    print('animationOfCorrectAnswer');
     emit(state.copyWith(
         avatarArtboard: state.avatarArtboardSuccess,
         stateOfAvatar: BasicOfEveryGame.stateOfWin));
+    print('animationOfCorrectAnswer:${state.stateOfAvatar}');
 
     await AudioPlayerClass.startPlaySound(
         soundPath: AppSound.getRandomSoundOfCorrect());

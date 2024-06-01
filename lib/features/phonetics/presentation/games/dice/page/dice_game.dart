@@ -28,9 +28,7 @@ class _DiceGamePage extends State<DiceGamePage> {
                 stateOfStringWillSay: currentAlphabet);
             context
                 .read<CurrentGamePhoneticsCubit>()
-                .saveCurrentStringOfDice(
-                letter:
-                currentAlphabet);
+                .saveCurrentStringOfDice(letter: currentAlphabet);
           });
     });
     super.initState();
@@ -39,7 +37,6 @@ class _DiceGamePage extends State<DiceGamePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-
         margin: EdgeInsets.only(right: 15.w, bottom: 9),
         width: MediaQuery.of(context).size.width - (100.w),
         height: MediaQuery.of(context).size.height - 69.h,
@@ -61,17 +58,29 @@ class _DiceGamePage extends State<DiceGamePage> {
                   (index) => BlocConsumer<CurrentGamePhoneticsCubit,
                           CurrentGamePhoneticsState>(
                       listener: (context, state) {},
-                      builder: (context, generalStateOfGame) {
+                      builder: (context0, generalStateOfGame) {
                         return GestureDetector(
                           onTap: () async {
                             print(
-                                '###:${gameState.correctIndexes?.contains(gameState.gameData?.gameImages?[index].id) == false}');
-                            print('###:${generalStateOfGame.stateOfAvatar}');
+                                "stateOfAvatar:${context.read<CurrentGamePhoneticsCubit>().state.stateOfAvatar}");
                             print(
-                                '###:${((generalStateOfGame.stateOfAvatar == BasicOfEveryGame.stateOIdle || generalStateOfGame.stateOfAvatar == null) && gameState.correctIndexes?.contains(gameState.gameData?.gameImages?[index].id) == false)}');
-                            if ((generalStateOfGame.stateOfAvatar ==
+                                "stateOfAvatar:${context0.read<CurrentGamePhoneticsCubit>().state.stateOfAvatar}");
+                            print("stopAction:${gameState.stopAction}");
+                            // print(
+                            //     '###:${gameState.correctIndexes?.contains(gameState.gameData?.gameImages?[index].id) == false}');
+                            // print('###:${generalStateOfGame.stateOfAvatar}');
+                            // print(
+                            //     '###:${((generalStateOfGame.stateOfAvatar == BasicOfEveryGame.stateOIdle || generalStateOfGame.stateOfAvatar == null) && gameState.correctIndexes?.contains(gameState.gameData?.gameImages?[index].id) == false)}');
+                            if ((context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .state
+                                            .stateOfAvatar ==
                                         BasicOfEveryGame.stateOIdle ||
-                                    generalStateOfGame.stateOfAvatar == null) &&
+                                    context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .state
+                                            .stateOfAvatar ==
+                                        null) &&
                                 (gameState.correctIndexes?.contains(gameState
                                             .gameData?.gameImages?[index].id) ==
                                         false ||
@@ -79,9 +88,9 @@ class _DiceGamePage extends State<DiceGamePage> {
                                             gameState.gameData
                                                 ?.gameImages?[index].id) ==
                                         null))) {
-                              print(
-                                  '###:${gameState.gameData?.gameImages?[index].word?.split('').first}');
-                              print("###:${gameState.chooseWord}");
+                              // print(
+                              //     '###:${gameState.gameData?.gameImages?[index].word?.split('').first}');
+                              // print("###:${gameState.chooseWord}");
                               if (gameState.gameData?.gameImages?[index].word
                                       ?.split('')
                                       .first ==
@@ -113,7 +122,8 @@ class _DiceGamePage extends State<DiceGamePage> {
                                   await Future.delayed(
                                       const Duration(seconds: 2));
                                   context
-                                      .read<CurrentGamePhoneticsCubit>().clearCurrentStringOfDice();
+                                      .read<CurrentGamePhoneticsCubit>()
+                                      .clearCurrentStringOfDice();
                                   Navigator.of(context).pop();
                                 } else {
                                   await context
@@ -132,8 +142,7 @@ class _DiceGamePage extends State<DiceGamePage> {
                                         context
                                             .read<CurrentGamePhoneticsCubit>()
                                             .saveCurrentStringOfDice(
-                                            letter:
-                                            currentAlphabet);
+                                                letter: currentAlphabet);
                                       });
                                   // await context
                                   //     .read<BingoCubit>()

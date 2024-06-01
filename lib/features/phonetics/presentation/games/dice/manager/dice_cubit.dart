@@ -19,7 +19,7 @@ part 'dice_state.dart';
 class DiceCubit extends Cubit<DiceInitial> with ChangeNotifier {
   final GameModel gameData;
 
-  DiceCubit({required this.gameData}) : super(DiceInitial()) {
+  DiceCubit({required this.gameData}) : super(DiceInitial(stopAction: false)) {
     TalkTts.startTalk(text: gameData.inst ?? '');
     List<String> letterDices = [];
 
@@ -36,6 +36,7 @@ class DiceCubit extends Cubit<DiceInitial> with ChangeNotifier {
     List<int> correctAnswer = state.correctIndexes ?? [];
     print('correctAnswer:${correctAnswer.length}');
     correctAnswer.add(idOfUserAnswer);
+    emit(state.clearCurrentAnswer());
     emit(state.copyWith(correctIndexes: correctAnswer));
 
     print('correctAnswer:${correctAnswer.length}');
@@ -63,7 +64,7 @@ class DiceCubit extends Cubit<DiceInitial> with ChangeNotifier {
   bool checkIfIsTheLastGameOfLesson() {
     int currentIndexOfAnswers = state.correctIndexes?.length ?? 0;
     int currentIndexOfLetters = state.gameData?.gameImages?.length ?? 0;
-    if (currentIndexOfAnswers != (currentIndexOfLetters - 1)) {
+    if (currentIndexOfAnswers != (currentIndexOfLetters)) {
       return false;
     } else {
       return true;
@@ -93,6 +94,12 @@ class DiceCubit extends Cubit<DiceInitial> with ChangeNotifier {
     }
     print('tempLetterDices:${tempLetterDices}');
     emit(state.copyWith(letterDices: tempLetterDices));
+  }
+
+  Future<void> updateStopAction() async {
+    print("-${state.stopAction}");
+    emit(state.copyWith(stopAction: !state.stopAction));
+    print("--${state.stopAction}");
   }
 
   updateSelectedLetter({required String newSelectedLetter}) async {

@@ -60,7 +60,7 @@ class BingoGameScreen extends StatelessWidget {
                     : BlocConsumer<CurrentGamePhoneticsCubit,
                             CurrentGamePhoneticsState>(
                         listener: (context, state) {},
-                        builder: (context, generalStateOfGame) {
+                        builder: (context0, generalStateOfGame) {
                           return ItemCardWidget(
                             body: (gameState.cardsLetters)?[rowIndex].letter ??
                                 '',
@@ -84,9 +84,17 @@ class BingoGameScreen extends StatelessWidget {
                                         (gameState.correctIndexes == null) ||
                                         (gameState.correctIndexes?.isEmpty ??
                                             false)) &&
-                                    (generalStateOfGame.stateOfAvatar ==
+                                    (context
+                                                .read<
+                                                    CurrentGamePhoneticsCubit>()
+                                                .state
+                                                .stateOfAvatar ==
                                             BasicOfEveryGame.stateOIdle ||
-                                        generalStateOfGame.stateOfAvatar ==
+                                        context
+                                                .read<
+                                                    CurrentGamePhoneticsCubit>()
+                                                .state
+                                                .stateOfAvatar ==
                                             null) &&
                                     gameState.stopAction != true) {
                                   if ((gameState.cardsLetters)?[rowIndex]

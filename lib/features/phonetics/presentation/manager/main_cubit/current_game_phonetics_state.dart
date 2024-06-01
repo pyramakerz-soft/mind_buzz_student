@@ -102,6 +102,7 @@ class CurrentGamePhoneticsState extends Equatable {
         countOfStar: countOfStar ?? countOfStar,
         avatarArtboard: avatarArtboard ?? avatarArtboard);
   }
+
   clearCurrentStringOfDice() {
     return CurrentGamePhoneticsState(
         basicData: basicData ?? basicData,
@@ -141,7 +142,7 @@ class CurrentGamePhoneticsState extends Equatable {
         avatarArtboardSuccess,
         gameData,
         avatarArtboardLoading,
-    currentStringOfDice,
+        currentStringOfDice,
         touchPositions,
         countOfTries,
         countOfCorrectAnswer,
