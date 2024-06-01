@@ -4,12 +4,22 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:mind_buzz_refactor/features/phonetics/domain/entities/game_model.dart';
 
+import '../../../../../../core/phonetics/basic_of_every_game.dart';
+
 part 'x_out_state.dart';
 
 class XOutCubit extends Cubit<XOutInitial> {
   final List<GameModel> gameData;
 
-  XOutCubit({required this.gameData}) : super(XOutInitial(gameData: gameData));
+  XOutCubit({required this.gameData}) : super(XOutInitial(gameData: gameData)){
+    List<GameModel> tempGameData = gameData.where((element){
+      print( element.isEdited ==0);
+      print('element.isEdited:${element.isEdited}, ${element.gameTypes?.name}');
+      return element.isEdited ==0  && element.gameTypes?.name?.toLowerCase() == GameTypes.xOut.text().toLowerCase();
+    }).toList();
+    print('tempGameData:${tempGameData.length}');
+    emit(state.copyWith(gameData: tempGameData));
+  }
 
   Future<int> increaseCountOfCorrectAnswers() async {
     int sub = state.correctAnswers ?? 0;

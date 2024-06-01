@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'assets_images_phonetics.dart';
 import 'basic_of_every_game.dart';
 
-enum MainDataOfPhoneticsTypes { s, a, f, m, t, c, i, r, p, h, j, u, l, b, o, g }
+enum MainDataOfPhoneticsTypes { s, a, f, m, t, c, i, r, p, h, j, u, l, b, o, g, d, w,e, n  }
 
 extension TypeExtension on MainDataOfPhoneticsTypes {
   String text() {
@@ -41,6 +41,14 @@ extension TypeExtension on MainDataOfPhoneticsTypes {
         return 'r'.toLowerCase();
       case MainDataOfPhoneticsTypes.s:
         return 's'.toLowerCase();
+      case MainDataOfPhoneticsTypes.d:
+        return 'd'.toLowerCase();
+      case MainDataOfPhoneticsTypes.w:
+        return 'w'.toLowerCase();
+      case MainDataOfPhoneticsTypes.e:
+        return 'e'.toLowerCase();
+      case MainDataOfPhoneticsTypes.n:
+        return 'n'.toLowerCase();
     }
   }
 }
@@ -150,6 +158,26 @@ abstract class MainDataOfPhonetics {
     }
     else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.g.text()) {
       return GPhonetics(
+          mineGameData: BasicOfEveryGame.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.d.text()) {
+      return DPhonetics(
+          mineGameData: BasicOfEveryGame.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.n.text()) {
+      return NPhonetics(
+          mineGameData: BasicOfEveryGame.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.w.text()) {
+      return WPhonetics(
+          mineGameData: BasicOfEveryGame.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    }
+    else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.e.text()) {
+      return EPhonetics(
           mineGameData: BasicOfEveryGame.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
     }
@@ -598,6 +626,114 @@ class GPhonetics implements MainDataOfPhonetics {
   String winAvatar = AppImagesPhonetics.beeSuccess;
 
   GPhonetics({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
+}
+class DPhonetics implements MainDataOfPhonetics {
+  final BasicOfEveryGame mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesPhonetics.backGroundOfD;
+
+  @override
+  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
+
+  @override
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
+
+  @override
+  BasicOfEveryGame? gameData;
+
+  @override
+  String winAvatar = AppImagesPhonetics.beeSuccess;
+
+  DPhonetics({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
+}
+class WPhonetics implements MainDataOfPhonetics {
+  final BasicOfEveryGame mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesPhonetics.backGroundOfW;
+
+  @override
+  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
+
+  @override
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
+
+  @override
+  BasicOfEveryGame? gameData;
+
+  @override
+  String winAvatar = AppImagesPhonetics.beeSuccess;
+
+  WPhonetics({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
+}
+class EPhonetics implements MainDataOfPhonetics {
+  final BasicOfEveryGame mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesPhonetics.backGroundOfE;
+
+  @override
+  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
+
+  @override
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
+
+  @override
+  BasicOfEveryGame? gameData;
+
+  @override
+  String winAvatar = AppImagesPhonetics.beeSuccess;
+
+  EPhonetics({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
+}
+class NPhonetics implements MainDataOfPhonetics {
+  final BasicOfEveryGame mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesPhonetics.backGroundOfN;
+
+  @override
+  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
+
+  @override
+  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
+
+  @override
+  BasicOfEveryGame? gameData;
+
+  @override
+  String winAvatar = AppImagesPhonetics.beeSuccess;
+
+  NPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 

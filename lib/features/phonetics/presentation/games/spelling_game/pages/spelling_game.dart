@@ -24,9 +24,15 @@ class SpellingGameScreen extends StatelessWidget {
         listener: (context, state) {
       if (state.countOfWrong == 3) {
         context.read<SpellingCubit>().increaseCountOfWrongAnswers(count: 0);
-        Future.delayed(Duration(seconds: 2),(){
-          context.read<SpellingCubit>().navigateToNextIndex();
-        });
+        bool isLast = context.read<SpellingCubit>().checkIfIsTheLastGameOfLesson();
+        print('isLast:$isLast');
+        if(isLast ==true) {
+          Future.delayed(Duration(seconds: 2), () {
+            // context.read<SpellingCubit>().navigateToNextIndex();
+          });
+        }else{
+          context.read<SpellingCubit>().increaseIndexOfCorrectAnswers();
+        }
 
       }
     }, builder: (context, gameState) {
@@ -47,7 +53,7 @@ class SpellingGameScreen extends StatelessWidget {
                   Column(
                     children: [
                       CachedNetworkImage(
-                        imageUrl:gameState.gameData!.gameImages![0].image!,
+                        imageUrl:gameState.gameData![gameState.index].gameImages!.first.image!,
                         height: 0.35.sh,
                         placeholder: (context, url) => const Center(
                           child: CupertinoActivityIndicator(),
@@ -65,7 +71,7 @@ class SpellingGameScreen extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: List.generate(
-                              gameState.gameData?.correctAns
+                              gameState.gameData?[gameState.index].correctAns
                                       ?.split('')
                                       .length ??
                                   0,
@@ -107,21 +113,19 @@ class SpellingGameScreen extends StatelessWidget {
                                                     countOfCorrect,
                                                 mainCountOfQuestion: 3,
                                               );
-                                          bool isLastLesson = context
-                                              .read<SpellingCubit>()
-                                              .checkIfIsTheLastGameOfLesson();
-                                          if (isLastLesson == true) {
-                                           await Future.delayed(
-                                                const Duration(seconds: 2));
-                                            Navigator.of(context).pop();
-                                          } else {
+                                          bool isLast = context.read<SpellingCubit>().checkIfIsTheLastGameOfLesson();
+                                          print('isLast:$isLast');
+                                          if(isLast ==true) {
+                                            Future.delayed(Duration(seconds: 2), () {
+                                              // context.read<SpellingCubit>().navigateToNextIndex();
+                                              Navigator.of(context).pop();
+                                            });
+                                          }else{
                                             context
                                                 .read<
-                                                    CurrentGamePhoneticsCubit>()
+                                                CurrentGamePhoneticsCubit>()
                                                 .backToMainAvatar();
-                                            context
-                                                .read<SpellingCubit>()
-                                                .navigateToNextIndex();
+                                            context.read<SpellingCubit>().increaseIndexOfCorrectAnswers();
                                           }
                                         } else {
                                           context
@@ -179,7 +183,7 @@ class SpellingGameScreen extends StatelessWidget {
                     GridView.builder(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
-                        itemCount: ((gameState.cardsLetters)
+                        itemCount: ((gameState.gameData?[gameState.index])?.gameLetters
                                 ?.map((e) => e.letter)
                                 .toSet()
                                 .toList()
@@ -189,12 +193,12 @@ class SpellingGameScreen extends StatelessWidget {
                             crossAxisCount: 4, childAspectRatio: 1.3),
                         itemBuilder: (context, index) {
                           return ItemCardWidget(
-                            id: ((gameState.cardsLetters)!
+                            id: ((gameState.gameData?[gameState.index].gameLetters)!
                                     .map((e) => e.id)
                                     .toSet()
                                     .toList()[index]) ??
                                 0,
-                            body: (gameState.cardsLetters)
+                            body: (gameState.gameData?[gameState.index].gameLetters)
                                     ?.map((e) => e.letter)
                                     .toSet()
                                     .toList()[index] ??

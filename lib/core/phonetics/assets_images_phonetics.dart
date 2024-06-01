@@ -13,6 +13,10 @@ abstract class AppImagesPhonetics {
   static const String backGroundOfB = "${mainPathOfImages}backGroundOfB.png";
   static const String backGroundOfO = "${mainPathOfImages}backGroundOfO.png";
   static const String backGroundOfG = "${mainPathOfImages}backGroundOfG.png";
+  static const String backGroundOfD = "${mainPathOfImages}backGroundOfD.png";
+  static const String backGroundOfW = "${mainPathOfImages}backGroundOfw.png";
+  static const String backGroundOfE = "${mainPathOfImages}backGroundOfE.png";
+  static const String backGroundOfN = "${mainPathOfImages}backGroundOfN.png";
   static const String backGroundOfConnect =
       "${mainPathOfImages}backGroundOfConnect.png";
   static const String bingoNameGame = "${mainPathOfImages}bingoNameGame.png";

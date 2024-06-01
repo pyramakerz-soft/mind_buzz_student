@@ -365,7 +365,7 @@ class BasedOfGameConnect extends StatelessWidget {
               } else if ((stateOfGame.basicData?.gameData is SpellingGame)) ...{
                 BlocProvider<SpellingCubit>(
                     create: (_) => SpellingCubit(
-                        gameData: stateOfGameData.data[stateOfGame.index],
+                        // gameData: stateOfGameData.data[stateOfGame.index],
                         index: stateOfGame.index,
                         background:
                             (stateOfGame.basicData?.gameData as SpellingGame)
