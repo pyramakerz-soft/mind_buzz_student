@@ -103,24 +103,22 @@ class NotificationsScreen extends StatelessWidget {
                                           children: [
                                             Text(
                                               'Check your child’s progress',
-                                              style: TextStyle(
-                                                color: Color(0xFF1E1E1E),
+                                              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                                                 fontSize: 16,
-                                                fontFamily: 'Poppins',
                                                 fontWeight: FontWeight.w500,
-                                                height: 0.09,
+
                                               ),
                                             ),
                                             SizedBox(
                                               child: Text(
                                                 'See the last report of the assignment taken on 1 August 2024.',
-                                                style: TextStyle(
-                                                  color: Color(0xFF707070),
+                                                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                                                   fontSize: 12,
-                                                  fontFamily: 'Poppins',
                                                   fontWeight: FontWeight.w400,
-                                                  height: 0.14,
+
                                                 ),
+
+
                                               ),
                                             ),
                                           ],
