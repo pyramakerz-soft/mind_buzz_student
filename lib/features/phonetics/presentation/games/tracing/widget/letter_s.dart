@@ -577,79 +577,91 @@ class FlipBookPainterLetterS extends CustomPainter {
     return (path_13, keyPosition);
   }
 
-  final List<Color>? colorsOfPaths;
+  final List<Color?>? colorsOfPaths;
   @override
   void paint(Canvas canvas, Size size) {
-    // canvas.save();
-
     Path path_1 = path0(size).$1;
     Paint paint_2_fill = Paint()..style = PaintingStyle.fill;
-    paint_2_fill.color = Colors.red;//colorsOfPaths?[0]??AppColor.lightBlueColor2.withOpacity(1.0);
+    paint_2_fill.color =
+        colorsOfPaths?[0] ?? AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_1, paint_2_fill);
 
     Path path_2 = path3(size).$1;
     Paint paint_3_fill = Paint()..style = PaintingStyle.fill;
-    paint_3_fill.color = colorsOfPaths?[1]??AppColor.lightBlueColor2.withOpacity(1.0);
+    paint_3_fill.color =
+        colorsOfPaths?[1] ?? AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_2, paint_3_fill);
 
     Path path_3 = path12(size).$1;
     Paint paint_12_fill = Paint()..style = PaintingStyle.fill;
-    paint_12_fill.color = colorsOfPaths?[2]??AppColor.lightBlueColor2.withOpacity(1.0);
+    paint_12_fill.color =
+        colorsOfPaths?[2] ?? AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_3, paint_12_fill);
 
     Path path_4 = path13(size).$1;
     Paint paint_13_fill = Paint()..style = PaintingStyle.fill;
-    paint_13_fill.color = colorsOfPaths?[3]??AppColor.lightBlueColor2.withOpacity(1.0);
+    paint_13_fill.color =
+        colorsOfPaths?[3] ?? AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_4, paint_13_fill);
 
     Path path_5 = path4(size).$1;
     Paint paint_4_fill = Paint()..style = PaintingStyle.fill;
-    paint_4_fill.color = colorsOfPaths?[4]??AppColor.lightBlueColor2.withOpacity(1.0);
+    paint_4_fill.color =
+        colorsOfPaths?[4] ?? AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_5, paint_4_fill);
 
     Path path_6 = path2(size).$1;
     Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
-    paint_0_fill.color = colorsOfPaths?[5]??AppColor.lightBlueColor2.withOpacity(1.0);
+    paint_0_fill.color =
+        colorsOfPaths?[5] ?? AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_6, paint_0_fill);
 
     Path path_7 = path5(size).$1;
     Paint paint_5_fill = Paint()..style = PaintingStyle.fill;
-    paint_5_fill.color = colorsOfPaths?[6]??AppColor.lightBlueColor2.withOpacity(1.0);
+    paint_5_fill.color =
+        colorsOfPaths?[6] ?? AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_7, paint_5_fill);
 
     Path path_8 = path6(size).$1;
     Paint paint_6_fill = Paint()..style = PaintingStyle.fill;
-    paint_6_fill.color = colorsOfPaths?[7]??AppColor.lightBlueColor2.withOpacity(1.0);
+    paint_6_fill.color =
+        colorsOfPaths?[7] ?? AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_8, paint_6_fill);
 
     Path path_9 = path7(size).$1;
     Paint paint_7_fill = Paint()..style = PaintingStyle.fill;
-    paint_7_fill.color = colorsOfPaths?[8]??AppColor.lightBlueColor2.withOpacity(1.0);
+    paint_7_fill.color =
+        colorsOfPaths?[8] ?? AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_9, paint_7_fill);
 
     Path path_10 = path8(size).$1;
     Paint paint_8_fill = Paint()..style = PaintingStyle.fill;
-    paint_8_fill.color = colorsOfPaths?[9]??AppColor.lightBlueColor2.withOpacity(1.0);
+    paint_8_fill.color =
+        colorsOfPaths?[9] ?? AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_10, paint_8_fill);
 
     Path path_11 = path9(size).$1;
     Paint paint_9_fill = Paint()..style = PaintingStyle.fill;
-    paint_9_fill.color = colorsOfPaths?[10]??AppColor.lightBlueColor2.withOpacity(1.0);
+    paint_9_fill.color =
+        colorsOfPaths?[10] ?? AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_11, paint_9_fill);
 
     Path path_12 = path10(size).$1;
     Paint paint_10_fill = Paint()..style = PaintingStyle.fill;
-    paint_10_fill.color = colorsOfPaths?[11]??AppColor.lightBlueColor2.withOpacity(1.0);
+    paint_10_fill.color =
+        colorsOfPaths?[11] ?? AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_12, paint_10_fill);
 
     Path path_13 = path11(size).$1;
     Paint paint_11_fill = Paint()..style = PaintingStyle.fill;
-    paint_11_fill.color = colorsOfPaths?[12]??AppColor.lightBlueColor2.withOpacity(1.0);
+    paint_11_fill.color =
+        colorsOfPaths?[12] ?? AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_13, paint_11_fill);
 
     Path path_14 = path1(size).$1;
     Paint paint_1_fill = Paint()..style = PaintingStyle.fill;
-    paint_1_fill.color = colorsOfPaths?[13]??AppColor.lightBlueColor2.withOpacity(1.0);
+    paint_1_fill.color =
+        colorsOfPaths?[13] ?? AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_14, paint_1_fill);
 
     // canvas.restore();
@@ -661,49 +673,35 @@ class FlipBookPainterLetterS extends CustomPainter {
   }
 
   static int? indexOfPointInside(Offset point, Size size) {
-    if  (path0(size).$1.contains(point)) {
+    if (path0(size).$1.contains(point)) {
       return path0(size).$2;
-    }
-    else if (path1(size).$1.contains(point)) {
+    } else if (path1(size).$1.contains(point)) {
       return path1(size).$2;
-    }
-    else if (path2(size).$1.contains(point)) {
+    } else if (path2(size).$1.contains(point)) {
       return path2(size).$2;
-    }
-    else if (path3(size).$1.contains(point)) {
+    } else if (path3(size).$1.contains(point)) {
       return path3(size).$2;
-    }
-    else if (path4(size).$1.contains(point)) {
+    } else if (path4(size).$1.contains(point)) {
       return path4(size).$2;
-    }
-    else if (path5(size).$1.contains(point)) {
+    } else if (path5(size).$1.contains(point)) {
       return path5(size).$2;
-    }
-    else if (path6(size).$1.contains(point)) {
+    } else if (path6(size).$1.contains(point)) {
       return path6(size).$2;
-    }
-    else if (path7(size).$1.contains(point)) {
+    } else if (path7(size).$1.contains(point)) {
       return path7(size).$2;
-    }
-    else if (path8(size).$1.contains(point)) {
+    } else if (path8(size).$1.contains(point)) {
       return path8(size).$2;
-    }
-    else if (path9(size).$1.contains(point)) {
+    } else if (path9(size).$1.contains(point)) {
       return path9(size).$2;
-    }
-    else if (path10(size).$1.contains(point)) {
+    } else if (path10(size).$1.contains(point)) {
       return path10(size).$2;
-    }
-    else if (path11(size).$1.contains(point)) {
+    } else if (path11(size).$1.contains(point)) {
       return path11(size).$2;
-    }
-    else if (path12(size).$1.contains(point)) {
+    } else if (path12(size).$1.contains(point)) {
       return path12(size).$2;
-    }
-    else if (path13(size).$1.contains(point)) {
+    } else if (path13(size).$1.contains(point)) {
       return path13(size).$2;
-    }
-    else{
+    } else {
       return null;
     }
   }

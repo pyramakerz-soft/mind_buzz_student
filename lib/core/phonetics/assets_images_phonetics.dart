@@ -17,12 +17,16 @@ abstract class AppImagesPhonetics {
   static const String backGroundOfW = "${mainPathOfImages}backGroundOfw.png";
   static const String backGroundOfE = "${mainPathOfImages}backGroundOfE.png";
   static const String backGroundOfN = "${mainPathOfImages}backGroundOfN.png";
+  static const String position2Finger =
+      "${mainPathOfImages}position_2_finger.png";
   static const String backGroundOfConnect =
       "${mainPathOfImages}backGroundOfConnect.png";
   static const String bingoNameGame = "${mainPathOfImages}bingoNameGame.png";
-  static const String sortingCupsNameGame = "${mainPathOfImages}sortingCupsNameGame.png";
+  static const String sortingCupsNameGame =
+      "${mainPathOfImages}sortingCupsNameGame.png";
   static const String sortingCup = "${mainPathOfImages}sortingCup.svg";
-  static const String iconBoarderOfChar = "${mainPathOfImages}iconBoarderOfChar.svg";
+  static const String iconBoarderOfChar =
+      "${mainPathOfImages}iconBoarderOfChar.svg";
   static const String diceNameGame = "${mainPathOfImages}diceNameGame.png";
   static const String spellingNameGame =
       "${mainPathOfImages}spellingNameGame.png";

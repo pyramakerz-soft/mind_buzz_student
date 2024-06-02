@@ -169,6 +169,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   addStarToStudent(
       {required int stateOfCountOfCorrectAnswer,
       required int mainCountOfQuestion}) {
+    print('addStarToStudent');
     int countOfStar = state.countOfStar ?? 0;
     List<int> stateOfStarsAdd =
         BasicOfEveryGame.getTheStarsAddState(mainCountOfQuestion);
@@ -185,9 +186,9 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         emit(state.copyWith(countOfStar: (countOfStar + 1)));
       }
     } else {
-      if (state.gameData?.length == 1) {
+      if (mainCountOfQuestion == 1) {
         emit(state.copyWith(countOfStar: 3));
-      } else if (state.gameData?.length == 2) {
+      } else if (mainCountOfQuestion == 2) {
         if (stateOfCountOfCorrectAnswer == 1) {
           emit(state.copyWith(countOfStar: 1));
         } else if (stateOfCountOfCorrectAnswer == 2) {

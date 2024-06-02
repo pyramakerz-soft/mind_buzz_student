@@ -46,11 +46,12 @@ class BasedOfGamePhonetics extends StatelessWidget {
               image: AssetImage(stateOfGame.basicData?.background ?? ''),
               fit: BoxFit.fill)),
       child: Stack(
+        alignment: Alignment.center,
         children: [
           ///////////////////game//////////////////
 
           Positioned(
-              left: 0,
+              // left: 0,
               bottom: 0,
               child: SizedBox(
                   child: Column(
@@ -113,94 +114,89 @@ class BasedOfGamePhonetics extends StatelessWidget {
           ///////////////////game title//////////////////
           Positioned(
             top: 0,
-            child:
-                  Container(
-                    height: 50.h + 5,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      color: stateOfGame.basicData?.backGroundOfStarBar,
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Color(0x19000000),
-                          blurRadius: 24,
-                          offset: Offset(0, 4),
-                          spreadRadius: 0,
-                        )
-                      ],
-                    ),
-                    width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.symmetric(vertical: 5),
-                    child: Row(
-                      children: [
-                        Expanded(
-                            flex: 4,
-                            child: Container(
-                              height: 40,
-                              child: Row(
-                                children: [
-                                  30.pw,
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Image.asset(
-                                      AppImagesPhonetics.backButtonIcon,
-                                      height: 40.h,
-                                      // width: 40.w,
-                                    ),
-                                  ),
-                                  10.pw,
-                                  GestureDetector(
-                                    child: Image.asset(
-                                      AppImagesPhonetics.settingButtonIcon,
-                                      height: 45.h,
-                                      // width: 40.w,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )),
-                        Expanded(
-                            child: Stack(
-                          alignment: Alignment.center,
+            child: Container(
+              height: 50.h + 5,
+              clipBehavior: Clip.antiAlias,
+              decoration: BoxDecoration(
+                color: stateOfGame.basicData?.backGroundOfStarBar,
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0x19000000),
+                    blurRadius: 24,
+                    offset: Offset(0, 4),
+                    spreadRadius: 0,
+                  )
+                ],
+              ),
+              width: MediaQuery.of(context).size.width,
+              padding: EdgeInsets.symmetric(vertical: 5),
+              child: Row(
+                children: [
+                  Expanded(
+                      flex: 4,
+                      child: Container(
+                        height: 40,
+                        child: Row(
                           children: [
-                            Image.asset(
-                              AppImagesPhonetics.stayOfStarBar,
-                              width: 65.w,
-                              fit: BoxFit.contain,
+                            30.pw,
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Image.asset(
+                                AppImagesPhonetics.backButtonIcon,
+                                height: 40.h,
+                                // width: 40.w,
+                              ),
                             ),
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-                              child: Column(
-                                children: [
-                                  ((stateOfGame.countOfStar ?? 0) == 0)
-                                      ? Image.asset(
-                                          AppImagesPhonetics.barZeroStar,
-                                          width: 40.w,
-                                          fit: BoxFit.contain,
-                                        )
-                                      : ((stateOfGame.countOfStar ?? 0) == 1)
-                                          ? Image.asset(
-                                              AppImagesPhonetics.barOneStar,
-                                              width: 40.w)
-                                          : ((stateOfGame.countOfStar ?? 0) ==
-                                                  2)
-                                              ? Image.asset(
-                                                  AppImagesPhonetics.barTwoStar,
-                                                  width: 40.w)
-                                              : Image.asset(
-                                                  AppImagesPhonetics
-                                                      .barThreeStar,
-                                                  width: 40.w)
-                                ],
+                            10.pw,
+                            GestureDetector(
+                              child: Image.asset(
+                                AppImagesPhonetics.settingButtonIcon,
+                                height: 45.h,
+                                // width: 40.w,
                               ),
                             )
                           ],
-                        )),
-                      ],
-                    ),
-                  ),
-
+                        ),
+                      )),
+                  Expanded(
+                      child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Image.asset(
+                        AppImagesPhonetics.stayOfStarBar,
+                        width: 65.w,
+                        fit: BoxFit.contain,
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Column(
+                          children: [
+                            ((stateOfGame.countOfStar ?? 0) == 0)
+                                ? Image.asset(
+                                    AppImagesPhonetics.barZeroStar,
+                                    width: 40.w,
+                                    fit: BoxFit.contain,
+                                  )
+                                : ((stateOfGame.countOfStar ?? 0) == 1)
+                                    ? Image.asset(AppImagesPhonetics.barOneStar,
+                                        width: 40.w)
+                                    : ((stateOfGame.countOfStar ?? 0) == 2)
+                                        ? Image.asset(
+                                            AppImagesPhonetics.barTwoStar,
+                                            width: 40.w)
+                                        : Image.asset(
+                                            AppImagesPhonetics.barThreeStar,
+                                            width: 40.w)
+                          ],
+                        ),
+                      )
+                    ],
+                  )),
+                ],
+              ),
+            ),
           ),
           Positioned(
               top: 50.h + 5,
