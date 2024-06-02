@@ -1,61 +1,36 @@
-import 'dart:developer';
-import 'dart:math' hide log;
 import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:meta/meta.dart';
 
+import '../../../../../../core/app_color.dart';
 import '../../../../../../core/talk_tts.dart';
 import '../../../../domain/entities/game_model.dart';
+import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
 import '../widget/letter_s.dart';
 
 part 'tracing_state.dart';
 
 class TracingCubit extends Cubit<TracingInitial> {
-  final GameModel gameData;
-
-  TracingCubit({required this.gameData})
-      : super(TracingInitial(offsets: [], finalOffset: [])) {
+  final GameModel _gameData;
+  final CurrentGamePhoneticsState _stateOfGame;
+  TracingCubit(
+      {required GameModel gameData,
+      required CurrentGamePhoneticsState stateOfGame})
+      : _stateOfGame = stateOfGame,
+        _gameData = gameData,
+        super(TracingInitial(offsets: [], finalOffset: [], colorsOfPaths: [])) {
+    List<Color> bgOfPaths = List.generate(_stateOfGame.basicData?.countOfPartsOfLettersForTracing??0, (index) => AppColor.lightBlueColor2);
+    print("bgOfPaths:${bgOfPaths.length}");
     emit(state.clearData());
 
-    TalkTts.startTalk(text: gameData.inst ?? '');
-    emit(state.copyWith(gameData: gameData));
+    TalkTts.startTalk(text: _gameData.inst ?? '');
+    emit(state.copyWith(gameData: _gameData,colorsOfPaths: bgOfPaths));
   }
 
-  double calculateDistance(Offset point1, Offset point2) {
-    num deltaX = point2.dx - point1.dx;
-    num deltaY = point2.dy - point1.dy;
-    double distance = sqrt(deltaX * deltaX + deltaY * deltaY);
-    return distance;
+  checkTheLocationOfPoint({required Offset point,required Size size}) {
+    int? indexOfPoint = FlipBookPainterLetterS.indexOfPointInside(point, Size(400, 200));
+    print('indexOfPoint:$indexOfPoint');
   }
-
-  saveFinalOffset({required List<Offset> finalOffset}) {
-    emit(state.copyWith(finalOffset: finalOffset));
-  }
-
-  checkAndAddPoints(
-      {required RenderBox renderBox,
-      required Offset localPosition,
-      required Offset details}) {
-    List<Offset> tempOffset = state.offsets;
-    if (state.offsets.isEmpty &&
-        RPSCustomPainterLetterS()
-            .isPointInside(localPosition, renderBox.size)) {
-      if (calculateDistance(details, state.finalOffset.last) <= 150) {
-        tempOffset.add(details);
-        emit(state.copyWith(offsets: tempOffset));
-      }
-    } else if (RPSCustomPainterLetterS()
-            .isPointInside(localPosition, renderBox.size) &&
-        calculateDistance(details, state.offsets.last) <= 40) {
-      tempOffset.add(details);
-      emit(state.copyWith(offsets: tempOffset));
-    }
-  }
-  saveCounter({required int count1, required int count2, required int count3}) {
-    emit(state.copyWith(count1: count1,count2:count2, count3:count3));
-  }
-
 }

@@ -6,7 +6,9 @@ import 'package:mind_buzz_refactor/core/app_color.dart';
 
 class FlipBookPainterLetterS extends CustomPainter {
   FlipBookPainterLetterS({this.colorsOfPaths});
-  static Path path0(Size size) {
+  static (Path, int) path0(Size size) {
+    int keyPosition = 1;
+
     Path path_2 = Path();
     path_2.moveTo(size.width * 0.7943775, size.height * 0.3075161);
     path_2.cubicTo(
@@ -46,10 +48,12 @@ class FlipBookPainterLetterS extends CustomPainter {
         size.width * 0.7943775,
         size.height * 0.3075161);
     path_2.close();
-    return path_2;
+    return (path_2 as Path, keyPosition as int);
   }
 
-  static Path path2(Size size) {
+  static (Path, int) path2(Size size) {
+    int keyPosition = 6;
+
     Path path_0 = Path();
     path_0.moveTo(size.width * 0.8432129, size.height * 0.4330645);
     path_0.cubicTo(
@@ -83,10 +87,12 @@ class FlipBookPainterLetterS extends CustomPainter {
         size.width * 0.8432129,
         size.height * 0.4330645);
     path_0.close();
-    return path_0;
+    return (path_0, keyPosition);
   }
 
-  static Path path1(Size size) {
+  static (Path, int) path1(Size size) {
+    int keyPosition = 14;
+
     Path path_1 = Path();
     path_1.moveTo(size.width * 0.08658635, size.height * 0.6835806);
     path_1.cubicTo(size.width * 0.02863454, size.height * 0.7484194, 0,
@@ -114,10 +120,12 @@ class FlipBookPainterLetterS extends CustomPainter {
         size.width * 0.08658635,
         size.height * 0.6835806);
     path_1.close();
-    return path_1;
+    return (path_1, keyPosition);
   }
 
-  static Path path3(Size size) {
+  static (Path, int) path3(Size size) {
+    int keyPosition = 2;
+
     Path path_3 = Path();
     path_3.moveTo(size.width * 0.5319679, size.height * 0.2526129);
     path_3.cubicTo(
@@ -154,10 +162,12 @@ class FlipBookPainterLetterS extends CustomPainter {
         size.height * 0.2526129);
     path_3.lineTo(size.width * 0.5319679, size.height * 0.2526129);
     path_3.close();
-    return path_3;
+    return (path_3, keyPosition);
   }
 
-  static Path path4(Size size) {
+  static (Path, int) path4(Size size) {
+    int keyPosition = 5;
+
     Path path_4 = Path();
     path_4.moveTo(size.width * 0.6986747, size.height * 0.3880645);
     path_4.cubicTo(
@@ -212,10 +222,12 @@ class FlipBookPainterLetterS extends CustomPainter {
         size.width * 0.6986747,
         size.height * 0.3880645);
     path_4.close();
-    return path_4;
+    return (path_4, keyPosition);
   }
 
-  static Path path5(Size size) {
+  static (Path, int) path5(Size size) {
+    int keyPosition = 7;
+
     Path path_5 = Path();
     path_5.moveTo(size.width * 0.9267871, size.height * 0.4886129);
     path_5.lineTo(size.width * 0.1078317, size.height * 0.4886129);
@@ -250,10 +262,12 @@ class FlipBookPainterLetterS extends CustomPainter {
         size.width * 0.9267871,
         size.height * 0.4886129);
     path_5.close();
-    return path_5;
+    return (path_5, keyPosition);
   }
 
-  static Path path6(Size size) {
+  static (Path, int) path6(Size size) {
+    int keyPosition = 8;
+
     Path path_6 = Path();
     path_6.moveTo(size.width * 0.2567867, size.height * 0.5886129);
     path_6.lineTo(size.width * 0.2567867, size.height * 0.5887097);
@@ -289,10 +303,12 @@ class FlipBookPainterLetterS extends CustomPainter {
     path_6.lineTo(size.width * 0.2567867, size.height * 0.5885806);
     path_6.lineTo(size.width * 0.2567867, size.height * 0.5886129);
     path_6.close();
-    return path_6;
+    return (path_6, keyPosition);
   }
 
-  static Path path7(Size size) {
+  static (Path, int) path7(Size size) {
+    int keyPosition = 9;
+
     Path path_7 = Path();
     path_7.moveTo(size.width * 0.9990361, size.height * 0.6595806);
     path_7.lineTo(size.width * 0.5585542, size.height * 0.6595806);
@@ -333,10 +349,12 @@ class FlipBookPainterLetterS extends CustomPainter {
         size.width * 0.9990361,
         size.height * 0.6595806);
     path_7.close();
-    return path_7;
+    return (path_7, keyPosition);
   }
 
-  static Path path8(Size size) {
+  static (Path, int) path8(Size size) {
+    int keyPosition = 10;
+
     Path path_8 = Path();
     path_8.moveTo(size.width * 0.5981124, size.height * 0.7305484);
     path_8.cubicTo(
@@ -357,10 +375,12 @@ class FlipBookPainterLetterS extends CustomPainter {
         size.height * 0.7305484);
     path_8.lineTo(size.width * 0.5981124, size.height * 0.7305484);
     path_8.close();
-    return path_8;
+    return (path_8, keyPosition);
   }
 
-  static Path path9(Size size) {
+  static (Path, int) path9(Size size) {
+    int keyPosition = 11;
+
     Path path_9 = Path();
     path_9.moveTo(size.width * 0.5255020, size.height * 0.8273226);
     path_9.lineTo(size.width * 0.5255020, size.height * 0.7414194);
@@ -431,10 +451,12 @@ class FlipBookPainterLetterS extends CustomPainter {
     path_9.lineTo(size.width * 0.5255422, size.height * 0.8272903);
     path_9.lineTo(size.width * 0.5255020, size.height * 0.8273226);
     path_9.close();
-    return path_9;
+    return (path_9, keyPosition);
   }
 
-  static Path path10(Size size) {
+  static (Path, int) path10(Size size) {
+    int keyPosition = 12;
+
     Path path_10 = Path();
     path_10.moveTo(size.width * 0.3027715, size.height * 0.6909032);
     path_10.cubicTo(
@@ -461,10 +483,12 @@ class FlipBookPainterLetterS extends CustomPainter {
         size.width * 0.3027715,
         size.height * 0.6909032);
     path_10.close();
-    return path_10;
+    return (path_10, keyPosition);
   }
 
-  static Path path11(Size size) {
+  static (Path, int) path11(Size size) {
+    int keyPosition = 13;
+
     Path path_11 = Path();
     path_11.moveTo(size.width * 0.1640960, size.height * 0.6527097);
     path_11.cubicTo(
@@ -491,10 +515,12 @@ class FlipBookPainterLetterS extends CustomPainter {
         size.width * 0.1640960,
         size.height * 0.6527097);
     path_11.close();
-    return path_11;
+    return (path_11, keyPosition);
   }
 
-  static Path path12(Size size) {
+  static (Path, int) path12(Size size) {
+    int keyPosition = 3;
+
     Path path_12 = Path();
     path_12.moveTo(size.width * 0.4010044, size.height * 0.006129000);
     path_12.lineTo(size.width * 0.4010044, size.height * 0.2815484);
@@ -515,10 +541,12 @@ class FlipBookPainterLetterS extends CustomPainter {
         size.height * 0.006161258);
     path_12.lineTo(size.width * 0.4010044, size.height * 0.006129000);
     path_12.close();
-    return path_12;
+    return (path_12, keyPosition);
   }
 
-  static Path path13(Size size) {
+  static (Path, int) path13(Size size) {
+    int keyPosition = 4;
+
     Path path_13 = Path();
     path_13.moveTo(size.width * 0.2684743, size.height * 0.02958052);
     path_13.cubicTo(
@@ -546,85 +574,85 @@ class FlipBookPainterLetterS extends CustomPainter {
         size.height * 0.02958052);
     path_13.lineTo(size.width * 0.2684743, size.height * 0.02958052);
     path_13.close();
-    return path_13;
+    return (path_13, keyPosition);
   }
 
   final List<Color>? colorsOfPaths;
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.save();
+    // canvas.save();
 
-    Path path_1 = path0(size);
+    Path path_1 = path0(size).$1;
     Paint paint_2_fill = Paint()..style = PaintingStyle.fill;
-    paint_2_fill.color = colorsOfPaths?[0]??AppColor.lightBlueColor2.withOpacity(1.0);
+    paint_2_fill.color = Colors.red;//colorsOfPaths?[0]??AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_1, paint_2_fill);
 
-    Path path_2 = path3(size);
+    Path path_2 = path3(size).$1;
     Paint paint_3_fill = Paint()..style = PaintingStyle.fill;
     paint_3_fill.color = colorsOfPaths?[1]??AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_2, paint_3_fill);
 
-    Path path_3 = path12(size);
+    Path path_3 = path12(size).$1;
     Paint paint_12_fill = Paint()..style = PaintingStyle.fill;
     paint_12_fill.color = colorsOfPaths?[2]??AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_3, paint_12_fill);
 
-    Path path_4 = path13(size);
+    Path path_4 = path13(size).$1;
     Paint paint_13_fill = Paint()..style = PaintingStyle.fill;
     paint_13_fill.color = colorsOfPaths?[3]??AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_4, paint_13_fill);
 
-    Path path_5 = path4(size);
+    Path path_5 = path4(size).$1;
     Paint paint_4_fill = Paint()..style = PaintingStyle.fill;
     paint_4_fill.color = colorsOfPaths?[4]??AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_5, paint_4_fill);
 
-    Path path_6 = path2(size);
+    Path path_6 = path2(size).$1;
     Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
     paint_0_fill.color = colorsOfPaths?[5]??AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_6, paint_0_fill);
 
-    Path path_7 = path5(size);
+    Path path_7 = path5(size).$1;
     Paint paint_5_fill = Paint()..style = PaintingStyle.fill;
     paint_5_fill.color = colorsOfPaths?[6]??AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_7, paint_5_fill);
 
-    Path path_8 = path6(size);
+    Path path_8 = path6(size).$1;
     Paint paint_6_fill = Paint()..style = PaintingStyle.fill;
     paint_6_fill.color = colorsOfPaths?[7]??AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_8, paint_6_fill);
 
-    Path path_9 = path7(size);
+    Path path_9 = path7(size).$1;
     Paint paint_7_fill = Paint()..style = PaintingStyle.fill;
     paint_7_fill.color = colorsOfPaths?[8]??AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_9, paint_7_fill);
 
-    Path path_10 = path8(size);
+    Path path_10 = path8(size).$1;
     Paint paint_8_fill = Paint()..style = PaintingStyle.fill;
     paint_8_fill.color = colorsOfPaths?[9]??AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_10, paint_8_fill);
 
-    Path path_11 = path9(size);
+    Path path_11 = path9(size).$1;
     Paint paint_9_fill = Paint()..style = PaintingStyle.fill;
     paint_9_fill.color = colorsOfPaths?[10]??AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_11, paint_9_fill);
 
-    Path path_12 = path10(size);
+    Path path_12 = path10(size).$1;
     Paint paint_10_fill = Paint()..style = PaintingStyle.fill;
     paint_10_fill.color = colorsOfPaths?[11]??AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_12, paint_10_fill);
 
-    Path path_13 = path11(size);
+    Path path_13 = path11(size).$1;
     Paint paint_11_fill = Paint()..style = PaintingStyle.fill;
     paint_11_fill.color = colorsOfPaths?[12]??AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_13, paint_11_fill);
 
-    Path path_14 = path1(size);
+    Path path_14 = path1(size).$1;
     Paint paint_1_fill = Paint()..style = PaintingStyle.fill;
     paint_1_fill.color = colorsOfPaths?[13]??AppColor.lightBlueColor2.withOpacity(1.0);
     canvas.drawPath(path_14, paint_1_fill);
 
-    canvas.restore();
+    // canvas.restore();
   }
 
   @override
@@ -632,37 +660,51 @@ class FlipBookPainterLetterS extends CustomPainter {
     return true;
   }
 
-  static int indexOfPointInside(Offset point, Size size) {
-    if  (path0(size).contains(point)) {
-      return 1;
-    } else if (path1(size).contains(point)) {
-      return 2;
-    } else if (path2(size).contains(point)) {
-      return 1;
-    } else if (path3(size).contains(point)) {
-      return 4;
-    } else if (path4(size).contains(point)) {
-      return 5;
-    } else if (path5(size).contains(point)) {
-      return 6;
-    } else if (path6(size).contains(point)) {
-      return 7;
-    } else if (path7(size).contains(point)) {
-      return 8;
-    } else if (path8(size).contains(point)) {
-      return 9;
-    } else if (path9(size).contains(point)) {
-      return 10;
-    } else if (path10(size).contains(point)) {
-      return 11;
-    } else if (path11(size).contains(point)) {
-      return 12;
-    } else if (path12(size).contains(point)) {
-      return 13;
-    } else if (path13(size).contains(point)) {
-      return 14;
-    }else{
-      return 0;
+  static int? indexOfPointInside(Offset point, Size size) {
+    if  (path0(size).$1.contains(point)) {
+      return path0(size).$2;
+    }
+    else if (path1(size).$1.contains(point)) {
+      return path1(size).$2;
+    }
+    else if (path2(size).$1.contains(point)) {
+      return path2(size).$2;
+    }
+    else if (path3(size).$1.contains(point)) {
+      return path3(size).$2;
+    }
+    else if (path4(size).$1.contains(point)) {
+      return path4(size).$2;
+    }
+    else if (path5(size).$1.contains(point)) {
+      return path5(size).$2;
+    }
+    else if (path6(size).$1.contains(point)) {
+      return path6(size).$2;
+    }
+    else if (path7(size).$1.contains(point)) {
+      return path7(size).$2;
+    }
+    else if (path8(size).$1.contains(point)) {
+      return path8(size).$2;
+    }
+    else if (path9(size).$1.contains(point)) {
+      return path9(size).$2;
+    }
+    else if (path10(size).$1.contains(point)) {
+      return path10(size).$2;
+    }
+    else if (path11(size).$1.contains(point)) {
+      return path11(size).$2;
+    }
+    else if (path12(size).$1.contains(point)) {
+      return path12(size).$2;
+    }
+    else if (path13(size).$1.contains(point)) {
+      return path13(size).$2;
+    }
+    else{
+      return null;
     }
   }
 }

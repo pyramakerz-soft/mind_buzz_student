@@ -24,8 +24,8 @@ class StudentAssignmentScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
-            preferredSize: Size.fromHeight(
-                kToolbarHeight), // Adjust the height to accommodate the shadow            child: Container(
+            preferredSize: const Size.fromHeight(
+                kToolbarHeight),
             child: Container(
               decoration: BoxDecoration(
                 boxShadow: [

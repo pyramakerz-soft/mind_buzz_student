@@ -47,7 +47,7 @@ class BasedOfGamePhonetics extends StatelessWidget {
               fit: BoxFit.fill)),
       child: Stack(
         children: [
-          /////////////////////game//////////////////
+          ///////////////////game//////////////////
 
           Positioned(
               left: 0,
@@ -103,18 +103,17 @@ class BasedOfGamePhonetics extends StatelessWidget {
                     BlocProvider<TracingCubit>(
                         create: (_) => TracingCubit(
                               gameData: stateOfGameData.data[stateOfGame.index],
+                              stateOfGame: stateOfGame,
                             ),
                         child: TracingGame()),
                   }
                 ],
               ))),
 
-          /////////////////////game title//////////////////
+          ///////////////////game title//////////////////
           Positioned(
             top: 0,
-            child: Center(
-              child: Column(
-                children: [
+            child:
                   Container(
                     height: 50.h + 5,
                     clipBehavior: Clip.antiAlias,
@@ -201,35 +200,22 @@ class BasedOfGamePhonetics extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 75.h,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            20.pw,
-                            Image.asset(
-                              stateOfGame.basicData?.gameData?.titleImage ?? '',
-                              height: 75.h,
-                            ),
-                            SizedBox()
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+
           ),
           Positioned(
+              top: 50.h + 5,
+              left: 20,
+              child: Image.asset(
+                stateOfGame.basicData?.gameData?.titleImage ?? '',
+                height: 75.h,
+              )),
+          Positioned(
             bottom: 15,
+            right: 0,
             child: Padding(
               padding: const EdgeInsets.only(left: 5.0),
               child: SizedBox(
-                width: MediaQuery.of(context).size.width,
+                // width: MediaQuery.of(context).size.width,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
