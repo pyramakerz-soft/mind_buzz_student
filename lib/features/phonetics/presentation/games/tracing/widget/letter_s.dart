@@ -3,294 +3,615 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
-
 class FlipBookPainterLetterS extends CustomPainter {
-  final List<Offset> offsets;
-  FlipBookPainterLetterS(this.offsets) : super();
-  @override
-  void paint(Canvas canvas, Size size) {
-    var paint = Paint()
-      ..color = AppColor.lightBlueColor4
-      ..isAntiAlias = true
-      ..strokeWidth = 60
-      ..strokeJoin = StrokeJoin.round
-      ..strokeCap = StrokeCap.round;
-
-    for (var i = 0; i < offsets.length; i++) {
-      if (offsets[i] != null &&
-          i + 1 < offsets.length &&
-          offsets[i + 1] != null) {
-        canvas.drawLine(offsets[i], offsets[i + 1], paint);
-      }
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
-}
-
-class RPSCustomPainterLetterS extends CustomPainter {
-  void Function()? whenDone;
-  RPSCustomPainterLetterS({this.whenDone});
   static Path path0(Size size) {
     Path path_0 = Path();
-    path_0.moveTo(size.width * 0.5224068, size.height * 0.7956818);
+    path_0.moveTo(size.width * 0.8432129, size.height * 0.4330645);
     path_0.cubicTo(
-        size.width * 0.3974576,
-        size.height * 0.7938068,
-        size.width * 0.2157966,
-        size.height * 0.7386080,
-        size.width * 0.1363051,
-        size.height * 0.6643750);
-    path_0.lineTo(0, size.height * 0.8300284);
+        size.width * 0.7989558,
+        size.height * 0.4155484,
+        size.width * 0.7514859,
+        size.height * 0.4005806,
+        size.width * 0.7008835,
+        size.height * 0.3886129);
+    path_0.lineTo(size.width * 0.05337349, size.height * 0.3886129);
     path_0.cubicTo(
-        size.width * 0.1635593,
-        size.height * 0.9727557,
-        size.width * 0.3407119,
-        size.height * 0.9974716,
-        size.width * 0.5178983,
-        size.height * 0.9974716);
+        size.width * 0.06060241,
+        size.height * 0.4130000,
+        size.width * 0.07060241,
+        size.height * 0.4356774,
+        size.width * 0.08333333,
+        size.height * 0.4565806);
     path_0.cubicTo(
-        size.width * 0.8381356,
-        size.height * 0.9974716,
-        size.width * 0.9992542,
-        size.height * 0.8547443,
-        size.width * 0.9992542,
-        size.height * 0.6891761);
+        size.width * 0.09028112,
+        size.height * 0.4680000,
+        size.width * 0.09771084,
+        size.height * 0.4786774,
+        size.width * 0.1055823,
+        size.height * 0.4886129);
+    path_0.lineTo(size.width * 0.9267871, size.height * 0.4886129);
     path_0.cubicTo(
-        size.width * 0.9992542,
-        size.height * 0.6326705,
-        size.width * 0.9856949,
-        size.height * 0.5869034,
-        size.width * 0.9617627,
-        size.height * 0.5499716);
-    path_0.cubicTo(
-        size.width * 0.9021017,
-        size.height * 0.6752557,
-        size.width * 0.7731186,
-        size.height * 0.7753409,
-        size.width * 0.6106780,
-        size.height * 0.7857670);
-    path_0.cubicTo(
-        size.width * 0.5820644,
-        size.height * 0.7930625,
-        size.width * 0.5522407,
-        size.height * 0.7964688,
-        size.width * 0.5223390,
-        size.height * 0.7958523);
-    path_0.lineTo(size.width * 0.5224068, size.height * 0.7956818);
+        size.width * 0.9026506,
+        size.height * 0.4641290,
+        size.width * 0.8748996,
+        size.height * 0.4455806,
+        size.width * 0.8432129,
+        size.height * 0.4330645);
     path_0.close();
     return path_0;
   }
-
   static Path path1(Size size) {
     Path path_1 = Path();
-    path_1.moveTo(size.width * 0.03864407, size.height * 0.2932670);
+    path_1.moveTo(size.width * 0.08658635, size.height * 0.6835806);
+    path_1.cubicTo(size.width * 0.02863454, size.height * 0.7484194, 0,
+        size.height * 0.7981290, 0, size.height * 0.8336774);
     path_1.cubicTo(
-        size.width * 0.03864407,
-        size.height * 0.5063352,
-        size.width * 0.2907797,
-        size.height * 0.5710795,
-        size.width * 0.5019322,
-        size.height * 0.5844886);
+        0,
+        size.height * 0.8613871,
+        size.width * 0.01433735,
+        size.height * 0.8828387,
+        size.width * 0.04297189,
+        size.height * 0.8974839);
     path_1.cubicTo(
-        size.width * 0.6609831,
-        size.height * 0.5920170,
-        size.width * 0.7245763,
-        size.height * 0.6187216,
-        size.width * 0.7245763,
-        size.height * 0.6834375);
+        size.width * 0.07871486,
+        size.height * 0.9155806,
+        size.width * 0.1150602,
+        size.height * 0.9312258,
+        size.width * 0.1520080,
+        size.height * 0.9445161);
+    path_1.lineTo(size.width * 0.1520080, size.height * 0.6531613);
     path_1.cubicTo(
-        size.width * 0.7245763,
-        size.height * 0.7317330,
-        size.width * 0.6760678,
-        size.height * 0.7686648,
-        size.width * 0.6107797,
-        size.height * 0.7857102);
-    path_1.cubicTo(
-        size.width * 0.7732203,
-        size.height * 0.7753409,
-        size.width * 0.9023051,
-        size.height * 0.6752557,
-        size.width * 0.9618644,
-        size.height * 0.5499148);
-    path_1.cubicTo(
-        size.width * 0.8809153,
-        size.height * 0.4232386,
-        size.width * 0.6834915,
-        size.height * 0.3972727,
-        size.width * 0.5201695,
-        size.height * 0.3884091);
-    path_1.cubicTo(
-        size.width * 0.4546780,
-        size.height * 0.3849148,
-        size.width * 0.4053559,
-        size.height * 0.3758807,
-        size.width * 0.3710169,
-        size.height * 0.3612500);
-    path_1.cubicTo(
-        size.width * 0.2574576,
-        size.height * 0.3315341,
-        size.width * 0.1480339,
-        size.height * 0.2726719,
-        size.width * 0.07677966,
-        size.height * 0.1654276);
-    path_1.cubicTo(
-        size.width * 0.05257627,
-        size.height * 0.2011662,
-        size.width * 0.03850847,
-        size.height * 0.2435241,
-        size.width * 0.03850847,
-        size.height * 0.2932670);
-    path_1.lineTo(size.width * 0.03864407, size.height * 0.2932670);
+        size.width * 0.1230120,
+        size.height * 0.6552581,
+        size.width * 0.1015261,
+        size.height * 0.6651290,
+        size.width * 0.08658635,
+        size.height * 0.6835806);
     path_1.close();
     return path_1;
   }
-
   static Path path2(Size size) {
     Path path_2 = Path();
-    path_2.moveTo(size.width * 0.3111183, size.height * 0.2857102);
+    path_2.moveTo(size.width * 0.7943775, size.height * 0.3075161);
     path_2.cubicTo(
-        size.width * 0.3111183,
-        size.height * 0.2266761,
-        size.width * 0.3838305,
-        size.height * 0.1924148,
-        size.width * 0.5155254,
-        size.height * 0.1924148);
+        size.width * 0.8295582,
+        size.height * 0.3075161,
+        size.width * 0.8640562,
+        size.height * 0.2855484,
+        size.width * 0.8991968,
+        size.height * 0.2416129);
     path_2.cubicTo(
-        size.width * 0.6223390,
-        size.height * 0.1924148,
-        size.width * 0.7131864,
-        size.height * 0.2133807,
-        size.width * 0.7926441,
-        size.height * 0.2761932);
-    path_2.lineTo(size.width * 0.9471186, size.height * 0.1237784);
-    path_2.cubicTo(size.width * 0.8176610, size.height * 0.02857955,
-        size.width * 0.6861017, 0, size.width * 0.5110508, 0);
+        size.width * 0.9304418,
+        size.height * 0.2002903,
+        size.width * 0.9467470,
+        size.height * 0.1673548,
+        size.width * 0.9467470,
+        size.height * 0.1427742);
     path_2.cubicTo(
-        size.width * 0.3535932,
-        0,
-        size.width * 0.1582031,
-        size.height * 0.04528409,
-        size.width * 0.07691492,
-        size.height * 0.1652841);
+        size.width * 0.9467470,
+        size.height * 0.1087742,
+        size.width * 0.9206827,
+        size.height * 0.08158065,
+        size.width * 0.8673092,
+        size.height * 0.06222581);
     path_2.cubicTo(
-        size.width * 0.1481014,
-        size.height * 0.2725284,
-        size.width * 0.2575929,
-        size.height * 0.3313920,
-        size.width * 0.3711525,
-        size.height * 0.3611080);
+        size.width * 0.8211245,
+        size.height * 0.04548387,
+        size.width * 0.7755020,
+        size.height * 0.03216126,
+        size.width * 0.7303213,
+        size.height * 0.02212900);
+    path_2.lineTo(size.width * 0.7303213, size.height * 0.2938710);
     path_2.cubicTo(
-        size.width * 0.3306437,
-        size.height * 0.3437500,
-        size.width * 0.3111522,
-        size.height * 0.3184943,
-        size.width * 0.3111522,
-        size.height * 0.2855398);
-    path_2.lineTo(size.width * 0.3111183, size.height * 0.2857102);
+        size.width * 0.7571888,
+        size.height * 0.3028387,
+        size.width * 0.7786747,
+        size.height * 0.3075161,
+        size.width * 0.7943775,
+        size.height * 0.3075161);
     path_2.close();
     return path_2;
+  }
+  static Path path3(Size size) {
+    Path path_3 = Path();
+    path_3.moveTo(size.width * 0.5319679, size.height * 0.2526129);
+    path_3.cubicTo(
+        size.width * 0.5899197,
+        size.height * 0.2526129,
+        size.width * 0.6517671,
+        size.height * 0.2646452,
+        size.width * 0.7169076,
+        size.height * 0.2892258);
+    path_3.cubicTo(
+        size.width * 0.7215261,
+        size.height * 0.2909032,
+        size.width * 0.7259839,
+        size.height * 0.2924516,
+        size.width * 0.7303614,
+        size.height * 0.2939032);
+    path_3.lineTo(size.width * 0.7303614, size.height * 0.02216129);
+    path_3.cubicTo(size.width * 0.6640964, size.height * 0.007483871,
+        size.width * 0.5988755, 0, size.width * 0.5346185, 0);
+    path_3.cubicTo(
+        size.width * 0.5233735,
+        0,
+        size.width * 0.5123293,
+        size.height * 0.0001290323,
+        size.width * 0.5014458,
+        size.height * 0.0003548387);
+    path_3.lineTo(size.width * 0.5014458, size.height * 0.2532258);
+    path_3.cubicTo(
+        size.width * 0.5109639,
+        size.height * 0.2528387,
+        size.width * 0.5211647,
+        size.height * 0.2526129,
+        size.width * 0.5320080,
+        size.height * 0.2526129);
+    path_3.lineTo(size.width * 0.5319679, size.height * 0.2526129);
+    path_3.close();
+    return path_3;
+  }
+  static Path path4(Size size) {
+    Path path_4 = Path();
+    path_4.moveTo(size.width * 0.6986747, size.height * 0.3880645);
+    path_4.cubicTo(
+        size.width * 0.6472289,
+        size.height * 0.3760323,
+        size.width * 0.5990361,
+        size.height * 0.3676774,
+        size.width * 0.5541365,
+        size.height * 0.3634839);
+    path_4.cubicTo(
+        size.width * 0.5091968,
+        size.height * 0.3587742,
+        size.width * 0.4720884,
+        size.height * 0.3509355,
+        size.width * 0.4421285,
+        size.height * 0.3394194);
+    path_4.cubicTo(
+        size.width * 0.4128112,
+        size.height * 0.3279032,
+        size.width * 0.3978317,
+        size.height * 0.3122258,
+        size.width * 0.3978317,
+        size.height * 0.2928710);
+    path_4.cubicTo(
+        size.width * 0.3978317,
+        size.height * 0.2914194,
+        size.width * 0.3979924,
+        size.height * 0.2900000,
+        size.width * 0.3982735,
+        size.height * 0.2886129);
+    path_4.lineTo(size.width * 0.03971944, size.height * 0.2886129);
+    path_4.cubicTo(
+        size.width * 0.03971944,
+        size.height * 0.2888065,
+        size.width * 0.03971944,
+        size.height * 0.2890323,
+        size.width * 0.03971944,
+        size.height * 0.2892258);
+    path_4.cubicTo(
+        size.width * 0.03971944,
+        size.height * 0.3249677,
+        size.width * 0.04437791,
+        size.height * 0.3581290,
+        size.width * 0.05337390,
+        size.height * 0.3886129);
+    path_4.lineTo(size.width * 0.7008835, size.height * 0.3886129);
+    path_4.cubicTo(
+        size.width * 0.7001205,
+        size.height * 0.3884516,
+        size.width * 0.6993976,
+        size.height * 0.3882581,
+        size.width * 0.6986747,
+        size.height * 0.3880645);
+    path_4.close();
+    return path_4;
+  }
+  static Path path5(Size size) {
+    Path path_5 = Path();
+    path_5.moveTo(size.width * 0.9267871, size.height * 0.4886129);
+    path_5.lineTo(size.width * 0.1078317, size.height * 0.4886129);
+    path_5.lineTo(size.width * 0.1078317, size.height * 0.4914194);
+    path_5.cubicTo(
+        size.width * 0.1319281,
+        size.height * 0.5210968,
+        size.width * 0.1602012,
+        size.height * 0.5440000,
+        size.width * 0.1927313,
+        size.height * 0.5601290);
+    path_5.cubicTo(
+        size.width * 0.2132936,
+        size.height * 0.5703226,
+        size.width * 0.2345386,
+        size.height * 0.5798065,
+        size.width * 0.2565064,
+        size.height * 0.5886129);
+    path_5.lineTo(size.width * 0.9873092, size.height * 0.5886129);
+    path_5.cubicTo(
+        size.width * 0.9800000,
+        size.height * 0.5645161,
+        size.width * 0.9693976,
+        size.height * 0.5425161,
+        size.width * 0.9552209,
+        size.height * 0.5224839);
+    path_5.cubicTo(
+        size.width * 0.9463855,
+        size.height * 0.5101290,
+        size.width * 0.9369076,
+        size.height * 0.4988710,
+        size.width * 0.9267871,
+        size.height * 0.4886129);
+    path_5.close();
+    return path_5;
+  }
+  static Path path6(Size size) {
+    Path path_6 = Path();
+    path_6.moveTo(size.width * 0.2567867, size.height * 0.5886129);
+    path_6.lineTo(size.width * 0.2567867, size.height * 0.5887097);
+    path_6.cubicTo(
+        size.width * 0.2820478,
+        size.height * 0.5988065,
+        size.width * 0.3082325,
+        size.height * 0.6080000,
+        size.width * 0.3353410,
+        size.height * 0.6160968);
+    path_6.cubicTo(
+        size.width * 0.3861442,
+        size.height * 0.6312581,
+        size.width * 0.4336546,
+        size.height * 0.6417097,
+        size.width * 0.4779518,
+        size.height * 0.6464194);
+    path_6.cubicTo(
+        size.width * 0.5085944,
+        size.height * 0.6500323,
+        size.width * 0.5354217,
+        size.height * 0.6544194,
+        size.width * 0.5585944,
+        size.height * 0.6595484);
+    path_6.lineTo(size.width * 0.9990763, size.height * 0.6595484);
+    path_6.cubicTo(
+        size.width * 0.9978715,
+        size.height * 0.6340968,
+        size.width * 0.9939759,
+        size.height * 0.6104839,
+        size.width * 0.9873494,
+        size.height * 0.5885806);
+    path_6.lineTo(size.width * 0.2567867, size.height * 0.5885806);
+    path_6.lineTo(size.width * 0.2567867, size.height * 0.5886129);
+    path_6.close();
+    return path_6;
+  }
+  static Path path7(Size size) {
+    Path path_7 = Path();
+    path_7.moveTo(size.width * 0.9990361, size.height * 0.6595806);
+    path_7.lineTo(size.width * 0.5585542, size.height * 0.6595806);
+    path_7.cubicTo(
+        size.width * 0.5688353,
+        size.height * 0.6618710,
+        size.width * 0.5784739,
+        size.height * 0.6642581,
+        size.width * 0.5873092,
+        size.height * 0.6668387);
+    path_7.cubicTo(
+        size.width * 0.6166265,
+        size.height * 0.6757419,
+        size.width * 0.6309237,
+        size.height * 0.6861935,
+        size.width * 0.6309237,
+        size.height * 0.6982258);
+    path_7.cubicTo(
+        size.width * 0.6309237,
+        size.height * 0.7124516,
+        size.width * 0.6199598,
+        size.height * 0.7232258,
+        size.width * 0.5981124,
+        size.height * 0.7305484);
+    path_7.lineTo(size.width * 0.9958635, size.height * 0.7305484);
+    path_7.cubicTo(
+        size.width * 0.9982329,
+        size.height * 0.7136452,
+        size.width * 0.9994779,
+        size.height * 0.6959032,
+        size.width * 0.9994779,
+        size.height * 0.6772903);
+    path_7.cubicTo(
+        size.width * 0.9994779,
+        size.height * 0.6712903,
+        size.width * 0.9993173,
+        size.height * 0.6653871,
+        size.width * 0.9990361,
+        size.height * 0.6595806);
+    path_7.close();
+    return path_7;
+  }
+  static Path path8(Size size) {
+    Path path_8 = Path();
+    path_8.moveTo(size.width * 0.5981124, size.height * 0.7305484);
+    path_8.cubicTo(
+        size.width * 0.5807631,
+        size.height * 0.7363548,
+        size.width * 0.5565863,
+        size.height * 0.7399677,
+        size.width * 0.5255020,
+        size.height * 0.7414194);
+    path_8.lineTo(size.width * 0.5255020, size.height * 0.8273226);
+    path_8.lineTo(size.width * 0.9646988, size.height * 0.8273226);
+    path_8.cubicTo(
+        size.width * 0.9803614,
+        size.height * 0.7990000,
+        size.width * 0.9908032,
+        size.height * 0.7667097,
+        size.width * 0.9958635,
+        size.height * 0.7305484);
+    path_8.lineTo(size.width * 0.5981124, size.height * 0.7305484);
+    path_8.close();
+    return path_8;
+  }
+  static Path path9(Size size) {
+    Path path_9 = Path();
+    path_9.moveTo(size.width * 0.5255020, size.height * 0.8273226);
+    path_9.lineTo(size.width * 0.5255020, size.height * 0.7414194);
+    path_9.cubicTo(
+        size.width * 0.5151807,
+        size.height * 0.7419032,
+        size.width * 0.5040964,
+        size.height * 0.7421290,
+        size.width * 0.4922490,
+        size.height * 0.7421290);
+    path_9.cubicTo(
+        size.width * 0.4648996,
+        size.height * 0.7421290,
+        size.width * 0.4344578,
+        size.height * 0.7373226,
+        size.width * 0.4010044,
+        size.height * 0.7278710);
+    path_9.lineTo(size.width * 0.4010044, size.height * 0.9971935);
+    path_9.cubicTo(
+        size.width * 0.4257430,
+        size.height * 0.9990323,
+        size.width * 0.4507229,
+        size.height * 0.9999677,
+        size.width * 0.4759839,
+        size.height * 0.9999677);
+    path_9.cubicTo(
+        size.width * 0.4929719,
+        size.height * 0.9999677,
+        size.width * 0.5094378,
+        size.height * 0.9997097,
+        size.width * 0.5255020,
+        size.height * 0.9992258);
+    path_9.cubicTo(
+        size.width * 0.5772691,
+        size.height * 0.9976774,
+        size.width * 0.6243775,
+        size.height * 0.9936774,
+        size.width * 0.6661044,
+        size.height * 0.9868710);
+    path_9.cubicTo(
+        size.width * 0.7214458,
+        size.height * 0.9779677,
+        size.width * 0.7761446,
+        size.height * 0.9633226,
+        size.width * 0.8302008,
+        size.height * 0.9419032);
+    path_9.cubicTo(
+        size.width * 0.8432932,
+        size.height * 0.9366452,
+        size.width * 0.8557028,
+        size.height * 0.9306774,
+        size.width * 0.8674297,
+        size.height * 0.9240645);
+    path_9.cubicTo(
+        size.width * 0.9035341,
+        size.height * 0.9036129,
+        size.width * 0.9330924,
+        size.height * 0.8766129,
+        size.width * 0.9552209,
+        size.height * 0.8430645);
+    path_9.cubicTo(
+        size.width * 0.9585944,
+        size.height * 0.8379677,
+        size.width * 0.9617269,
+        size.height * 0.8326774,
+        size.width * 0.9647390,
+        size.height * 0.8272903);
+    path_9.lineTo(size.width * 0.5255422, size.height * 0.8272903);
+    path_9.lineTo(size.width * 0.5255020, size.height * 0.8273226);
+    path_9.close();
+    return path_9;
+  }
+  static Path path10(Size size) {
+    Path path_10 = Path();
+    path_10.moveTo(size.width * 0.3027715, size.height * 0.6909032);
+    path_10.cubicTo(
+        size.width * 0.2938157,
+        size.height * 0.6865484,
+        size.width * 0.2851008,
+        size.height * 0.6826129,
+        size.width * 0.2765064,
+        size.height * 0.6790323);
+    path_10.lineTo(size.width * 0.2765064, size.height * 0.9797419);
+    path_10.cubicTo(
+        size.width * 0.3172695,
+        size.height * 0.9882581,
+        size.width * 0.3587554,
+        size.height * 0.9940968,
+        size.width * 0.4010044,
+        size.height * 0.9972258);
+    path_10.lineTo(size.width * 0.4010044, size.height * 0.7279032);
+    path_10.cubicTo(
+        size.width * 0.3707635,
+        size.height * 0.7193548,
+        size.width * 0.3380325,
+        size.height * 0.7070323,
+        size.width * 0.3027715,
+        size.height * 0.6909032);
+    path_10.close();
+    return path_10;
+  }
+  static Path path11(Size size) {
+    Path path_11 = Path();
+    path_11.moveTo(size.width * 0.1640960, size.height * 0.6527097);
+    path_11.cubicTo(
+        size.width * 0.1599193,
+        size.height * 0.6527097,
+        size.width * 0.1559434,
+        size.height * 0.6528710,
+        size.width * 0.1520478,
+        size.height * 0.6531290);
+    path_11.lineTo(size.width * 0.1520478, size.height * 0.9444839);
+    path_11.cubicTo(
+        size.width * 0.1928108,
+        size.height * 0.9591290,
+        size.width * 0.2342968,
+        size.height * 0.9708710,
+        size.width * 0.2765458,
+        size.height * 0.9797097);
+    path_11.lineTo(size.width * 0.2765458, size.height * 0.6790000);
+    path_11.cubicTo(
+        size.width * 0.2345779,
+        size.height * 0.6613871,
+        size.width * 0.1971080,
+        size.height * 0.6527097,
+        size.width * 0.1640960,
+        size.height * 0.6527097);
+    path_11.close();
+    return path_11;
+  }
+  static Path path12(Size size) {
+    Path path_12 = Path();
+    path_12.moveTo(size.width * 0.4010044, size.height * 0.006129000);
+    path_12.lineTo(size.width * 0.4010044, size.height * 0.2815484);
+    path_12.cubicTo(
+        size.width * 0.4108835,
+        size.height * 0.2650968,
+        size.width * 0.4441365,
+        size.height * 0.2555806,
+        size.width * 0.5014056,
+        size.height * 0.2531935);
+    path_12.lineTo(size.width * 0.5014056, size.height * 0.0003547903);
+    path_12.cubicTo(
+        size.width * 0.4658635,
+        size.height * 0.001096726,
+        size.width * 0.4324096,
+        size.height * 0.003032210,
+        size.width * 0.4010044,
+        size.height * 0.006161258);
+    path_12.lineTo(size.width * 0.4010044, size.height * 0.006129000);
+    path_12.close();
+    return path_12;
+  }
+  static Path path13(Size size) {
+    Path path_13 = Path();
+    path_13.moveTo(size.width * 0.2684743, size.height * 0.02958052);
+    path_13.cubicTo(
+        size.width * 0.1161851,
+        size.height * 0.07145161,
+        size.width * 0.03996040,
+        size.height * 0.1577097,
+        size.width * 0.03971944,
+        size.height * 0.2886129);
+    path_13.lineTo(size.width * 0.3982735, size.height * 0.2886129);
+    path_13.cubicTo(
+        size.width * 0.3987554,
+        size.height * 0.2861290,
+        size.width * 0.3996791,
+        size.height * 0.2837742,
+        size.width * 0.4010446,
+        size.height * 0.2815484);
+    path_13.lineTo(size.width * 0.4010446, size.height * 0.006128903);
+    path_13.cubicTo(
+        size.width * 0.3518478,
+        size.height * 0.01103213,
+        size.width * 0.3076711,
+        size.height * 0.01883858,
+        size.width * 0.2685145,
+        size.height * 0.02958052);
+    path_13.lineTo(size.width * 0.2684743, size.height * 0.02958052);
+    path_13.close();
+    return path_13;
   }
 
   @override
   void paint(Canvas canvas, Size size) {
+    canvas.save();
+
     Path path_0 = path0(size);
-    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
-    paint0Fill.color = AppColor.lightBlueColor2.withOpacity(1.0);
-    canvas.drawPath(path_0, paint0Fill);
+    Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
+    paint_0_fill.color = Colors.red.withOpacity(1.0);
+    canvas.drawPath(path_0, paint_0_fill);
 
     Path path_1 = path1(size);
-
-    Paint paint1Fill = Paint()..style = PaintingStyle.fill;
-    paint1Fill.color = AppColor.lightBlueColor2.withOpacity(1.0);
-    canvas.drawPath(path_1, paint1Fill);
+    Paint paint_1_fill = Paint()..style = PaintingStyle.fill;
+    paint_1_fill.color = Colors.green.withOpacity(1.0);
+    canvas.drawPath(path_1, paint_1_fill);
 
     Path path_2 = path2(size);
+    Paint paint_2_fill = Paint()..style = PaintingStyle.fill;
+    paint_2_fill.color = Colors.white.withOpacity(1.0);
+    canvas.drawPath(path_2, paint_2_fill);
 
-    Paint paint2Fill = Paint()..style = PaintingStyle.fill;
-    paint2Fill.color = AppColor.lightBlueColor2.withOpacity(1.0);
-    canvas.drawPath(path_2, paint2Fill);
-    whenDone?.call();
+    Path path_3 = path3(size);
+    Paint paint_3_fill = Paint()..style = PaintingStyle.fill;
+    paint_3_fill.color = Colors.black.withOpacity(1.0);
+    canvas.drawPath(path_3, paint_3_fill);
+
+    Path path_4 = path4(size);
+    Paint paint_4_fill = Paint()..style = PaintingStyle.fill;
+    paint_4_fill.color = Colors.white.withOpacity(1.0);
+    canvas.drawPath(path_4, paint_4_fill);
+
+    Path path_5 = path5(size);
+    Paint paint_5_fill = Paint()..style = PaintingStyle.fill;
+    paint_5_fill.color = Colors.white.withOpacity(1.0);
+    canvas.drawPath(path_5, paint_5_fill);
+
+    Path path_6 = path6(size);
+    Paint paint_6_fill = Paint()..style = PaintingStyle.fill;
+    paint_6_fill.color = Colors.brown.withOpacity(1.0);
+    canvas.drawPath(path_6, paint_6_fill);
+
+    Path path_7 = path7(size);
+    Paint paint_7_fill = Paint()..style = PaintingStyle.fill;
+    paint_7_fill.color = Colors.white.withOpacity(1.0);
+    canvas.drawPath(path_7, paint_7_fill);
+
+    Path path_8 = path8(size);
+    Paint paint_8_fill = Paint()..style = PaintingStyle.fill;
+    paint_8_fill.color = Colors.black.withOpacity(1.0);
+    canvas.drawPath(path_8, paint_8_fill);
+
+    Path path_9 = path9(size);
+    Paint paint_9_fill = Paint()..style = PaintingStyle.fill;
+    paint_9_fill.color = Colors.white.withOpacity(1.0);
+    canvas.drawPath(path_9, paint_9_fill);
+
+    Path path_10 = path10(size);
+    Paint paint_10_fill = Paint()..style = PaintingStyle.fill;
+    paint_10_fill.color = Colors.black.withOpacity(1.0);
+    canvas.drawPath(path_10, paint_10_fill);
+
+    Path path_11 = path11(size);
+    Paint paint_11_fill = Paint()..style = PaintingStyle.fill;
+    paint_11_fill.color = Colors.white.withOpacity(1.0);
+    canvas.drawPath(path_11, paint_11_fill);
+
+    Path path_12 = path12(size);
+    Paint paint_12_fill = Paint()..style = PaintingStyle.fill;
+    paint_12_fill.color = Colors.white.withOpacity(1.0);
+    canvas.drawPath(path_12, paint_12_fill);
+
+    Path path_13 = path13(size);
+    Paint paint_13_fill = Paint()..style = PaintingStyle.fill;
+    paint_13_fill.color = Colors.red.withOpacity(1.0);
+    canvas.drawPath(path_13, paint_13_fill);
+    canvas.restore();
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return true;
-  }
-
-  bool isPointInside(Offset point, Size size) {
-    Path path_0 = path0(size);
-    Path path_1 = path1(size);
-    Path path_2 = path2(size);
-
-    return path_0.contains(point) ||
-        path_1.contains(point) ||
-        path_2.contains(point);
-  }
-
-  static bool mostPointsInPath1 = false;
-  static bool mostPointsInPath2 = false;
-  static bool mostPointsInPath3 = false;
-  static getCountOfPints({required List<Offset> points, required Size size}){
-    Path path_0 = path0(size);
-    Path path_1 = path1(size);
-    Path path_2 = path2(size);
-
-    int count1 = countPointsInPath(path_0, points);
-    int count2 = countPointsInPath(path_1, points);
-    int count3 = countPointsInPath(path_2, points);
-    return [count1, count2, count3];
-  }
-  static isCompleted({required int count1, required int count2, required int count3,   required void Function() onComplete}) {
-
-    if (count1 > count2 && count1 > count3) {
-      mostPointsInPath1 = true;
-    } else if (count2 > count1 && count2 > count3) {
-      mostPointsInPath2 = true;
-    } else if (count3 > count1 && count3 > count2) {
-      mostPointsInPath3 = true;
-    }
-    if (mostPointsInPath1 == true &&
-        mostPointsInPath2 == true &&
-        mostPointsInPath3 == true) {
-      onComplete.call();
-    }
-  }
-
-  static int countPointsInPath(Path path, List<Offset> pointList) {
-    int count = 0;
-    for (Offset point in pointList) {
-      if (path.contains(point)) {
-        count++;
-      }
-    }
-    return count;
-  }
-
-  static List<Offset> getOffsetOfPath(Size size) {
-    List<Offset> sampledPoints = _samplePath(path0(size), 1.0);
-    List<Offset> sampledPoints1 = _samplePath(path1(size), 1.0);
-    List<Offset> sampledPoints2 = _samplePath(path2(size), 1.0);
-    List<Offset> finalSampledPoints2 = [];
-    finalSampledPoints2.addAll(sampledPoints);
-    finalSampledPoints2.addAll(sampledPoints1);
-    finalSampledPoints2.addAll(sampledPoints2);
-    return finalSampledPoints2;
-  }
-
-  static List<Offset> _samplePath(Path path, double step) {
-    PathMetrics pathMetrics = path.computeMetrics();
-    List<Offset> points = [];
-
-    for (PathMetric pathMetric in pathMetrics) {
-      for (double i = 0; i < pathMetric.length; i += step) {
-        Tangent? tangent = pathMetric.getTangentForOffset(i);
-        if (tangent != null) {
-          points.add(tangent.position);
-        }
-      }
-    }
-    return points;
   }
 }
