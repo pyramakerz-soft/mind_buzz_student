@@ -16,82 +16,37 @@ class TracingGame extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 150),
-      width: MediaQuery.of(context).size.width / 3,
-      height: MediaQuery.of(context).size.height - (60.h),
+      width: Size(400, 200).width,
+      height: Size(400, 200).height,
       alignment: Alignment.center,
       child: BlocConsumer<TracingCubit, TracingInitial>(
           listener: (context, state) {},
           builder: (contextOfGame, stateOfGame) {
             return GestureDetector(
                 onPanDown: (details) {
-                  context.read<TracingCubit>().saveFinalOffset(
-                      finalOffset: RPSCustomPainterLetterS.getOffsetOfPath(Size(
-                          MediaQuery.of(context).size.width / 3,
-                          MediaQuery.of(context).size.height - (60.h))));
-                  final renderBox = context.findRenderObject() as RenderBox;
-                  final localPosition =
-                      renderBox.globalToLocal(details.globalPosition);
-                  context.read<TracingCubit>().checkAndAddPoints(
-                      renderBox: renderBox,
-                      localPosition: localPosition,
-                      details: details.localPosition);
-                  // log("check the state of complete :${RPSCustomPainterLetterS.isCompleted(count1: stateOfGame.count1??0, count2: stateOfGame.count2??0,count3:stateOfGame.count3??0 , onComplete: () {
-                  //       Navigator.of(context).pop();
-                  //     })}");
+                  // final renderBox = context.findRenderObject() as RenderBox;
+                  // final localPosition =
+                  //     renderBox.globalToLocal(details.globalPosition);
+                  context.read<TracingCubit>().checkTheLocationOfPoint(
+                      point: details.localPosition,
+                      size: Size(MediaQuery.of(context).size.width / 3,
+                          MediaQuery.of(context).size.height - (60.h)));
                 },
                 onPanUpdate: (details) {
-                  final renderBox = context.findRenderObject() as RenderBox;
-                  final localPosition =
-                      renderBox.globalToLocal(details.globalPosition);
-                  context.read<TracingCubit>().checkAndAddPoints(
-                      renderBox: renderBox,
-                      localPosition: localPosition,
-                      details: details.localPosition);
-
-
-                },
-                onPanEnd: (details) {
-                  RPSCustomPainterLetterS.isCompleted(count1: stateOfGame.count1 ?? 0, count2: stateOfGame.count2 ?? 0, count3: stateOfGame.count3 ?? 0, onComplete: () async {
-                    await context
-                        .read<CurrentGamePhoneticsCubit>()
-                        .animationOfCorrectAnswer().whenComplete(() async {
-                      context
-                          .read<CurrentGamePhoneticsCubit>()
-                          .addStarToStudent(
-                        stateOfCountOfCorrectAnswer:
-                        1,
-                        mainCountOfQuestion: 1 ??
-                            0,
-                      );
-                      await Future.delayed(Duration(seconds: 2));
-                      Navigator.of(contextOfGame).pop();
-                    });
-                  });
-                  // setState(() {
-                  // //  _offsets.add(Offset.zero);
-                  // });
-                },
-                child: CustomPaint(
-                    size: Size(
-                        MediaQuery.of(context).size.width / 3,
-                        MediaQuery.of(context).size.height -
-                            (60.h)), //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
-                    painter: RPSCustomPainterLetterS(whenDone: () {
-                      List<int> counters =
-                          RPSCustomPainterLetterS.getCountOfPints(
-                              points: stateOfGame.offsets,
-                              size: Size(MediaQuery.of(context).size.width / 3,
-                                  MediaQuery.of(context).size.height - (60.h)));
-                      context.read<TracingCubit>().saveCounter(
-                          count1: counters.first,
-                          count2: counters[1],
-                          count3: counters.last);
-                    }),
-                    child: CustomPaint(
+                  // final renderBox = context.findRenderObject() as RenderBox;
+                  // final localPosition =
+                      // renderBox.globalToLocal(details.localPosition);
+                  context.read<TracingCubit>().checkTheLocationOfPoint(
+                      point: details.localPosition,
                       size: Size(MediaQuery.of(context).size.width / 3,
-                          MediaQuery.of(context).size.height - (60.h)),
-                      painter: FlipBookPainterLetterS(stateOfGame.offsets),
-                    )));
+                          MediaQuery.of(context).size.height - (60.h)));
+                },
+                onPanEnd: (details) {},
+                child: CustomPaint(
+                  size: Size(400, 200),
+                  painter: FlipBookPainterLetterS(
+                      colorsOfPaths: stateOfGame.colorsOfPaths),
+                ));
           }),
     );
   }
