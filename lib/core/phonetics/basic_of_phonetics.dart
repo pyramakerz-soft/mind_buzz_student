@@ -83,8 +83,8 @@ abstract class MainDataOfPhonetics {
   late String background;
   BasicOfEveryGame? gameData;
   late Color backGroundOfStarBar;
-  late CustomPainter? tracingOfLetter;
-  late int? countOfPartsOfLettersForTracing =0;
+  CustomPainter? Function(List<Color?>? colorsOfPaths)? get tracingOfLetter;
+  late int? countOfPartsOfLettersForTracing = 0;
 
   static getGameDataType(
       {required String subLetter,
@@ -211,10 +211,14 @@ class SPhonetics implements MainDataOfPhonetics {
   @override
   String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
-  CustomPainter? tracingOfLetter = FlipBookPainterLetterS();
+  @override
+  int? countOfPartsOfLettersForTracing = 14;
 
   @override
-  int? countOfPartsOfLettersForTracing =14;
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return FlipBookPainterLetterS(colorsOfPaths: colorsOfPaths);
+      };
 }
 
 class APhonetics implements MainDataOfPhonetics {
@@ -226,7 +230,10 @@ class APhonetics implements MainDataOfPhonetics {
   String background = AppImagesPhonetics.backGroundOfA;
 
   @override
-  CustomPainter? tracingOfLetter = FlipBookPainterLetterS();
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
   @override
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
@@ -246,7 +253,7 @@ class APhonetics implements MainDataOfPhonetics {
   @override
   String idelAvatar = AppImagesPhonetics.beeIdleRiv;
   @override
-  int? countOfPartsOfLettersForTracing =0;
+  int? countOfPartsOfLettersForTracing = 0;
 }
 
 class FPhonetics implements MainDataOfPhonetics {
@@ -255,7 +262,10 @@ class FPhonetics implements MainDataOfPhonetics {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? tracingOfLetter = FlipBookPainterLetterS();
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
   @override
   String background = AppImagesPhonetics.backGroundOfA;
 
@@ -291,7 +301,11 @@ class MPhonetics implements MainDataOfPhonetics {
   String background = AppImagesPhonetics.backGroundOfM;
 
   @override
-  CustomPainter? tracingOfLetter = FlipBookPainterLetterS();
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
+
   @override
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
@@ -321,7 +335,11 @@ class TPhonetics implements MainDataOfPhonetics {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? tracingOfLetter = FlipBookPainterLetterS();
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
+
   @override
   String background = AppImagesPhonetics.backGroundOfT;
 
@@ -354,7 +372,11 @@ class CPhonetics implements MainDataOfPhonetics {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? tracingOfLetter = FlipBookPainterLetterS();
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
+
   @override
   String background = AppImagesPhonetics.backGroundOfC;
 
@@ -387,7 +409,11 @@ class RPhonetics implements MainDataOfPhonetics {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? tracingOfLetter = FlipBookPainterLetterS();
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
+
   @override
   String background = AppImagesPhonetics.backGroundOfR;
 
@@ -411,11 +437,7 @@ class RPhonetics implements MainDataOfPhonetics {
   String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
-  var late;
-
-  @override
   int? countOfPartsOfLettersForTracing;
-
 }
 
 class IPhonetics implements MainDataOfPhonetics {
@@ -424,7 +446,11 @@ class IPhonetics implements MainDataOfPhonetics {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? tracingOfLetter = FlipBookPainterLetterS();
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
+
   @override
   String background = AppImagesPhonetics.backGroundOfI;
 
@@ -460,7 +486,11 @@ class PPhonetics implements MainDataOfPhonetics {
   String background = AppImagesPhonetics.backGroundOfP;
 
   @override
-  CustomPainter? tracingOfLetter = FlipBookPainterLetterS();
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
+
   @override
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
@@ -496,7 +526,11 @@ class HPhonetics implements MainDataOfPhonetics {
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  CustomPainter? tracingOfLetter = FlipBookPainterLetterS();
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
+
   @override
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
@@ -523,7 +557,11 @@ class JPhonetics implements MainDataOfPhonetics {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? tracingOfLetter = FlipBookPainterLetterS();
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
+
   @override
   String background = AppImagesPhonetics.backGroundOfJ;
 
@@ -556,7 +594,11 @@ class UPhonetics implements MainDataOfPhonetics {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? tracingOfLetter = FlipBookPainterLetterS();
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
+
   @override
   String background = AppImagesPhonetics.backGroundOfJ;
 
@@ -589,7 +631,11 @@ class LPhonetics implements MainDataOfPhonetics {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? tracingOfLetter = FlipBookPainterLetterS();
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
+
   @override
   String background = AppImagesPhonetics.backGroundOfL;
 
@@ -622,13 +668,17 @@ class BPhonetics implements MainDataOfPhonetics {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  String background = AppImagesPhonetics.backGroundOfL;
+  String background = AppImagesPhonetics.backGroundOfB;
 
   @override
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  CustomPainter? tracingOfLetter = FlipBookPainterLetterS();
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
+
   @override
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
@@ -655,7 +705,11 @@ class OPhonetics implements MainDataOfPhonetics {
   Color backGroundOfStarBar = Colors.white.withOpacity(.1);
 
   @override
-  CustomPainter? tracingOfLetter = FlipBookPainterLetterS();
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
+
   @override
   String background = AppImagesPhonetics.backGroundOfO;
 
@@ -688,7 +742,11 @@ class GPhonetics implements MainDataOfPhonetics {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? tracingOfLetter = FlipBookPainterLetterS();
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
+
   @override
   String background = AppImagesPhonetics.backGroundOfG;
 
@@ -721,7 +779,11 @@ class DPhonetics implements MainDataOfPhonetics {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? tracingOfLetter = FlipBookPainterLetterS();
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
+
   @override
   String background = AppImagesPhonetics.backGroundOfD;
 
@@ -754,7 +816,11 @@ class WPhonetics implements MainDataOfPhonetics {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? tracingOfLetter = FlipBookPainterLetterS();
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
+
   @override
   String background = AppImagesPhonetics.backGroundOfW;
 
@@ -787,7 +853,11 @@ class EPhonetics implements MainDataOfPhonetics {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? tracingOfLetter = FlipBookPainterLetterS();
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
+
   @override
   String background = AppImagesPhonetics.backGroundOfE;
 
@@ -826,7 +896,11 @@ class NPhonetics implements MainDataOfPhonetics {
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
   @override
-  CustomPainter? tracingOfLetter = FlipBookPainterLetterS();
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
+
   @override
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
@@ -873,7 +947,10 @@ class ConnectionWithoutSortingCups implements MainDataOfPhonetics {
   }
 
   @override
-  CustomPainter? tracingOfLetter;
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -907,7 +984,10 @@ class ConnectionSortingCups implements MainDataOfPhonetics {
   String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
-  CustomPainter? tracingOfLetter;
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -940,7 +1020,10 @@ class SpellTheWord implements MainDataOfPhonetics {
   String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
-  CustomPainter? tracingOfLetter;
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return null;
+      };
 
   @override
   int? countOfPartsOfLettersForTracing;

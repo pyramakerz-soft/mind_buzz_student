@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 
 class FlipBookPainterLetterS extends CustomPainter {
-  FlipBookPainterLetterS({this.colorsOfPaths});
+  FlipBookPainterLetterS({required this.colorsOfPaths});
   static (Path, int) path0(Size size) {
     int keyPosition = 1;
 

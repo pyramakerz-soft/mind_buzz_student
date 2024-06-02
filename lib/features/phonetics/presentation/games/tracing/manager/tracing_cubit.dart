@@ -28,7 +28,10 @@ class TracingCubit extends Cubit<TracingInitial> {
     emit(state.clearData());
 
     TalkTts.startTalk(text: _gameData.inst ?? '');
-    emit(state.copyWith(gameData: _gameData, colorsOfPaths: bgOfPaths));
+    emit(state.copyWith(
+        gameData: _gameData,
+        colorsOfPaths: bgOfPaths,
+        stateOfGame: _stateOfGame));
   }
 
   checkTheLocationOfPoint({required Offset point, required Size size}) async {
