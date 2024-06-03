@@ -51,7 +51,7 @@ class BasedOfGamePhonetics extends StatelessWidget {
           ///////////////////game//////////////////
 
           Positioned(
-              // left: 0,
+              left: (stateOfGame.basicData?.gameData is Tracking)?null:0,
               bottom: 0,
               child: SizedBox(
                   child: Column(

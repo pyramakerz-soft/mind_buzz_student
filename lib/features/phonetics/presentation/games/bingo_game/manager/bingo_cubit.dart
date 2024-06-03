@@ -39,20 +39,20 @@ class BingoCubit extends Cubit<BingoInitial> {
   }
 
   getTheRandomWord({required bool awaitTime}) async {
-    List<GameLettersModel> checkImages = [];
+    List<GameLettersModel> checkLetters = [];
 
     state.cardsLetters?.forEach((element) {
       print('${state.correctIndexes}');
       if (state.correctIndexes == null ||
           (state.correctIndexes?.contains(element.id) == false)) {
-        checkImages.add(element);
+        checkLetters.add(element);
       }
     });
-    int countOfTheImage = checkImages.length;
+    int countOfTheImage = checkLetters.length;
     if (countOfTheImage != 0) {
       Random random = Random();
       int randomNumber = random.nextInt(countOfTheImage);
-      GameLettersModel chooseWord = checkImages[randomNumber];
+      GameLettersModel chooseWord = checkLetters[randomNumber];
       if (chooseWord.id == null) {
         getTheRandomWord(awaitTime: awaitTime);
         return;

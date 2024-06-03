@@ -46,6 +46,7 @@ abstract class BasicOfEveryGame {
   late String titleImage;
   late String? completeBasket;
   static String phonics = 'Phonics';
+  static String connect = 'Connect';
   static String stateOIdle = 'idle';
   static String stateOfWin = 'win';
   static String stateOfSad = 'sad';
@@ -118,6 +119,23 @@ abstract class BasicOfEveryGame {
       return false;
     }
   }
+
+  static List<String> customOrderOfGamesPhonetics = [
+    "${GameTypes.tracing.text().toLowerCase()}_1",
+    "${GameTypes.clickTheSound.text().toLowerCase()}_1",
+    "${GameTypes.clickPicture.text().toLowerCase()}_1",
+    "${GameTypes.dragOut.text().toLowerCase()}_1",
+    "${GameTypes.clickPicture.text().toLowerCase()}_0",
+  ];
+
+  static List<String> customOrderOfGamesConnect = [
+    "${GameTypes.sortingCups.text().toLowerCase()}_1",
+    "${GameTypes.bingo.text().toLowerCase()}_1",
+    "${GameTypes.sortingPictures.text().toLowerCase()}_1",
+    "${GameTypes.dice.text().toLowerCase()}_1",
+    "${GameTypes.xOut.text().toLowerCase()}_1",
+    "${GameTypes.spelling.text().toLowerCase()}_1",
+  ];
 }
 
 class BasicDragOutGame implements BasicOfEveryGame {

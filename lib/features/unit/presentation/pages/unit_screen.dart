@@ -196,7 +196,7 @@ class UnitScreen extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: 210,
+              top: 180,
               child: BlocProvider<GetUnitBloc>(
                   create: (_) => di.sl<GetUnitBloc>()..add(GetUnitRequest(programId: int.parse(programId))),
                   child: BlocConsumer<GetUnitBloc, GetUnitState>(listener: (context, state) {
