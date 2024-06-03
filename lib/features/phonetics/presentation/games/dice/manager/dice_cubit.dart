@@ -24,10 +24,12 @@ class DiceCubit extends Cubit<DiceInitial> with ChangeNotifier {
     List<String> letterDices = [];
 
     gameData.gameLetters?.forEach((element) {
-      letterDices.add(element.letter?.toUpperCase() ?? '');
+      letterDices.add(element.letter?.toLowerCase() ?? '');
     });
-    letterDices.add('');
-    letterDices.add('');
+    for (int i = (gameData.gameLetters?.length ?? 0); i < 6; i++) {
+      letterDices.add('');
+    }
+    print('letterDices:$letterDices');
     emit(state.copyWith(gameData: gameData, letterDices: letterDices));
     // playTheDice(context: context);
   }

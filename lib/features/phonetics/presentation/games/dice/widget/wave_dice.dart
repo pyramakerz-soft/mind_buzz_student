@@ -29,7 +29,7 @@ class WaveDice extends StatelessWidget {
       height: height ?? widthAndHeight,
       child: body ??
           Text(
-            currentAlphabet!,
+            (currentAlphabet?.toLowerCase() ?? ''),
             style: const TextStyle(fontSize: 40, color: Colors.white),
           ),
     );
