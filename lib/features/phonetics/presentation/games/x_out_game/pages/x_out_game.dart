@@ -7,6 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/features/phonetics/presentation/games/x_out_game/manager/x_out_cubit.dart';
 
+import '../../../../../../core/assets_sound.dart';
+import '../../../../../../core/audio_player.dart';
 import '../../../../../../core/phonetics/phonetics_color.dart';
 import '../../../../../../core/theme_text.dart';
 import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
@@ -18,17 +20,23 @@ class XOutGameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height - 90.h;
     final screenWidth = MediaQuery.of(context).size.width - 120.w;
-    final gridItemHeight = (screenHeight - 4 - 40 - 2 * 15) / 2; // 4 for padding, 40 for text height, 2 * 15 for border radius
-    final gridItemWidth = (screenWidth - 4 - 3 * 2) / 2; // 4 for padding, 3 * 2 for border width
-bool _isInteracting = false;
+    final gridItemHeight = (screenHeight - 4 - 40 - 2 * 15) /
+        2; // 4 for padding, 40 for text height, 2 * 15 for border radius
+    final gridItemWidth =
+        (screenWidth - 4 - 3 * 2) / 2; // 4 for padding, 3 * 2 for border width
+    bool _isInteracting = false;
     return BlocConsumer<XOutCubit, XOutInitial>(
       listener: (context, state) {
-              if (state.isInteracting) {
+        if (state.isInteracting) {
           _isInteracting = true;
         }
         if (state.isInteracting == false) {
           _isInteracting = false;
         }
+        context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
+            stateOfStringIsWord: false,
+            stateOfStringWillSay:
+                state.gameData?[state.currentGameIndex ?? 0].mainLetter ?? '');
       },
       builder: (context, state) {
         return Container(
@@ -40,7 +48,8 @@ bool _isInteracting = false;
           decoration: BoxDecoration(
             color: AppColorPhonetics.DarkBorderColor,
             borderRadius: BorderRadius.circular(15),
-            border: Border.all(color: AppColorPhonetics.DarkBorderColor, width: 5),
+            border:
+                Border.all(color: AppColorPhonetics.DarkBorderColor, width: 5),
           ),
           child: Column(
             children: [
@@ -55,52 +64,101 @@ bool _isInteracting = false;
                       letterSpacing: 0.50,
                     ),
               ),
-              if (state.gameData?[state.currentGameIndex ?? 0].gameImages?.isNotEmpty ?? false)
+              if (state.gameData?[state.currentGameIndex ?? 0].gameImages
+                      ?.isNotEmpty ??
+                  false)
                 Expanded(
                   child: GridView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2, // Number of columns in the grid
-                      childAspectRatio: gridItemWidth / gridItemHeight, // Aspect ratio of each item
+                      childAspectRatio: gridItemWidth /
+                          gridItemHeight, // Aspect ratio of each item
                     ),
                     itemCount: 4,
                     itemBuilder: (context, index) {
-                      final isSelected = state.selectedItems?.contains(index) == true;
-                      final isCorrect = state.gameData?[state.currentGameIndex ?? 0].gameImages?[index].correct == 0;
-                      final bool gameHasData = state.gameData?[state.currentGameIndex ?? 0].gameImages?.isNotEmpty ?? false;
+                      final isSelected =
+                          state.selectedItems?.contains(index) == true;
+                      final isCorrect = state
+                              .gameData?[state.currentGameIndex ?? 0]
+                              .gameImages?[index]
+                              .correct ==
+                          0;
+                      final bool gameHasData = state
+                              .gameData?[state.currentGameIndex ?? 0]
+                              .gameImages
+                              ?.isNotEmpty ??
+                          false;
                       return !gameHasData
                           ? SizedBox()
                           : XOutItemWidget(
-                              imageName: state.gameData?[state.currentGameIndex ?? 0].gameImages?[index].image ?? "",
+                              imageName: state
+                                      .gameData?[state.currentGameIndex ?? 0]
+                                      .gameImages?[index]
+                                      .image ??
+                                  "",
                               isSelected: isSelected,
                               isCorrect: isCorrect,
                               onTap: state.isInteracting
                                   ? null
                                   : () {
-                                      context.read<XOutCubit>().startInteraction();
-                                      context.read<XOutCubit>().selectItem(index).then((_) {
+                                      context
+                                          .read<XOutCubit>()
+                                          .startInteraction();
+                                      context
+                                          .read<XOutCubit>()
+                                          .selectItem(index)
+                                          .then((_) async {
                                         if (isCorrect) {
                                           //call animation of right
-                                          context.read<XOutCubit>().increaseCountOfCorrectAnswers().then((countOfCorrect) async {
-                                            context.read<CurrentGamePhoneticsCubit>().addStarToStudent(stateOfCountOfCorrectAnswer: countOfCorrect, mainCountOfQuestion: state.gameData?[state.currentGameIndex ?? 0].numOfLetters ?? 0);
-                                            bool isLastLesson = context.read<XOutCubit>().isLastGame();
+                                          await context
+                                              .read<CurrentGamePhoneticsCubit>()
+                                              .animationOfCorrectAnswer();
+                                          context
+                                              .read<XOutCubit>()
+                                              .increaseCountOfCorrectAnswers()
+                                              .then((countOfCorrect) async {
+                                            context
+                                                .read<
+                                                    CurrentGamePhoneticsCubit>()
+                                                .addStarToStudent(
+                                                    stateOfCountOfCorrectAnswer:
+                                                        countOfCorrect,
+                                                    mainCountOfQuestion: state
+                                                            .gameData?[state
+                                                                    .currentGameIndex ??
+                                                                0]
+                                                            .numOfLetters ??
+                                                        0);
+                                            bool isLastLesson = context
+                                                .read<XOutCubit>()
+                                                .isLastGame();
                                             if (isLastLesson == true) {
-                                              await Future.delayed(const Duration(seconds: 2));
+                                              await Future.delayed(
+                                                  const Duration(seconds: 2));
                                               Navigator.of(context).pop();
                                             } else {
-                                              await context.read<CurrentGamePhoneticsCubit>().backToMainAvatar();
-                                              context.read<XOutCubit>().updateGameIndex();
+                                              await context
+                                                  .read<
+                                                      CurrentGamePhoneticsCubit>()
+                                                  .backToMainAvatar();
+                                              context
+                                                  .read<XOutCubit>()
+                                                  .updateGameIndex();
                                             }
                                           });
                                         } else {
-                                          context.read<CurrentGamePhoneticsCubit>().addWrongAnswer();
+                                          context
+                                              .read<CurrentGamePhoneticsCubit>()
+                                              .addWrongAnswer();
                                         }
-                                        
                                       });
-                                        Future.delayed(const Duration(seconds: 2), () {
-                                        context.read<XOutCubit>().stopInteraction();
-                                       });
-                                    
+                                      Future.delayed(const Duration(seconds: 2),
+                                          () {
+                                        context
+                                            .read<XOutCubit>()
+                                            .stopInteraction();
+                                      });
                                     },
                             );
                     },
@@ -134,7 +192,9 @@ class XOutItemWidget extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: isSelected ? (isCorrect ? AppColor.greenColor3 : AppColor.incorrect) : AppColor.white,
+          color: isSelected
+              ? (isCorrect ? AppColor.greenColor3 : AppColor.incorrect)
+              : AppColor.white,
           border: Border.all(color: AppColor.skyBlueColor, width: 3),
         ),
         child: Column(

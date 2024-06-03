@@ -64,15 +64,12 @@ List<ChapterModel> handlingDataOfChapters(
           isLetter: true),
     );
     Map<String, List<GameModel>>? mapGames = groupBy(
-        lesson.games ?? [], (obj) => '${obj.gameTypes?.name}_${obj
-        .audioFlag}');
-    List<String> sortedKeys =[];
-    if(lesson.name.toString().split(' ').first == BasicOfEveryGame.connect){
-      sortedKeys = mapGames.keys.toList()
-        ..sort(customCompareConnect);
-    }else {
-      sortedKeys = mapGames.keys.toList()
-        ..sort(customComparePhonetics);
+        lesson.games ?? [], (obj) => '${obj.gameTypes?.name}_${obj.audioFlag}');
+    List<String> sortedKeys = [];
+    if (lesson.name.toString().split(' ').first == BasicOfEveryGame.connect) {
+      sortedKeys = mapGames.keys.toList()..sort(customCompareConnect);
+    } else {
+      sortedKeys = mapGames.keys.toList()..sort(customComparePhonetics);
     }
     Map<String, dynamic> sortedMap = {
       for (var key in sortedKeys) key: mapGames[key]
@@ -96,13 +93,18 @@ List<ChapterModel> handlingDataOfChapters(
 }
 
 int customComparePhonetics(String key1, String key2) {
-  int index1 = BasicOfEveryGame.customOrderOfGamesPhonetics.indexOf(key1.toLowerCase());
-  int index2 = BasicOfEveryGame.customOrderOfGamesPhonetics.indexOf(key2.toLowerCase());
+  int index1 =
+      BasicOfEveryGame.customOrderOfGamesPhonetics.indexOf(key1.toLowerCase());
+  int index2 =
+      BasicOfEveryGame.customOrderOfGamesPhonetics.indexOf(key2.toLowerCase());
   return index1.compareTo(index2);
 }
+
 int customCompareConnect(String key1, String key2) {
-  int index1 = BasicOfEveryGame.customOrderOfGamesConnect.indexOf(key1.toLowerCase());
-  int index2 = BasicOfEveryGame.customOrderOfGamesConnect.indexOf(key2.toLowerCase());
+  int index1 =
+      BasicOfEveryGame.customOrderOfGamesConnect.indexOf(key1.toLowerCase());
+  int index2 =
+      BasicOfEveryGame.customOrderOfGamesConnect.indexOf(key2.toLowerCase());
   return index1.compareTo(index2);
 }
 

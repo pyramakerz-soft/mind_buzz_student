@@ -57,6 +57,6 @@ class AppSound {
 
   static getSoundOfLetter({required String mainGameLetter}) {
     print('mainGameLetter:$mainGameLetter');
-    return getPathOfLetter(letter: mainGameLetter);
+    return getPathOfLetter(letter: mainGameLetter.toLowerCase());
   }
 }

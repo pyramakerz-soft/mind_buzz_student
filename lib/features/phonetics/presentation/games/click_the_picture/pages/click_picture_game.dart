@@ -33,6 +33,10 @@ class ClickPictureGame extends StatelessWidget {
       // }
     }, builder: (context, stateOfGameData) {
       ClickPictureCubit clickPictureCubit = context.watch<ClickPictureCubit>();
+
+      context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
+          stateOfStringIsWord: false,
+          stateOfStringWillSay: stateOfGameData.gameData.mainLetter ?? '');
       return Container(
         alignment: Alignment.center,
         // height: MediaQuery.of(context).size.height - (70.h),
@@ -45,10 +49,10 @@ class ClickPictureGame extends StatelessWidget {
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(15),
-              border: Border.all(
-                  color: AppColorPhonetics.boarderColor, width: 5)),
+              border:
+                  Border.all(color: AppColorPhonetics.boarderColor, width: 5)),
           child: Padding(
-            padding: const EdgeInsets.only(left: 15.0,top: 15),
+            padding: const EdgeInsets.only(left: 15.0, top: 15),
             child: Wrap(
               spacing: 25,
               // runSpacing: 10,
@@ -56,8 +60,7 @@ class ClickPictureGame extends StatelessWidget {
               children: List.generate(
                   gameData.gameImages?.length ?? 0,
                   (index) => SingleElement(
-                    index: index,
-
+                        index: index,
                         background: backgroundImages[index],
                         image: gameData.gameImages?[index].image ?? '',
                         selected: context
@@ -66,7 +69,8 @@ class ClickPictureGame extends StatelessWidget {
                             .correctIndexes
                             .contains(index),
                         onTap: () async {
-                          if (clickPictureCubit.checkCurrentClickTime(current: DateTime.now())) {
+                          if (clickPictureCubit.checkCurrentClickTime(
+                              current: DateTime.now())) {
                             if (!stateOfGameData.correctIndexes
                                 .contains(index)) {
                               if (clickPictureCubit.addAnswer(index)) {
@@ -76,8 +80,16 @@ class ClickPictureGame extends StatelessWidget {
                                 print(stateOfGameData.correctIndexes.length);
                                 context
                                     .read<CurrentGamePhoneticsCubit>()
-                                    .addStarToStudent(stateOfCountOfCorrectAnswer: stateOfGameData.correctIndexes.length + 1,
-                                    mainCountOfQuestion: stateOfGameData.gameData.gameImages!.where((element) => element.correct == 1).length);
+                                    .addStarToStudent(
+                                        stateOfCountOfCorrectAnswer:
+                                            stateOfGameData
+                                                    .correctIndexes.length +
+                                                1,
+                                        mainCountOfQuestion: stateOfGameData
+                                            .gameData.gameImages!
+                                            .where((element) =>
+                                                element.correct == 1)
+                                            .length);
                                 context
                                     .read<CurrentGamePhoneticsCubit>()
                                     .animationOfCorrectAnswer();
@@ -92,7 +104,8 @@ class ClickPictureGame extends StatelessWidget {
                                     .read<CurrentGamePhoneticsCubit>()
                                     .addWrongAnswer();
                                 await context
-                                    .read<ClickPictureCubit>().sayTheOnlyLetter();
+                                    .read<ClickPictureCubit>()
+                                    .sayTheOnlyLetter();
                               }
                             }
                           }

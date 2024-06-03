@@ -1,5 +1,3 @@
-
-
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
@@ -9,6 +7,7 @@ import 'package:mind_buzz_refactor/core/phonetics/basic_of_every_game.dart';
 
 import '../../../../../../core/assets_sound.dart';
 import '../../../../../../core/audio_player.dart';
+import '../../../../../../core/talk_tts.dart';
 import '../../../../domain/entities/game_letters_model.dart';
 import '../../../../domain/entities/game_model.dart';
 
@@ -19,21 +18,25 @@ class SpellingCubit extends Cubit<SpellingInitial> {
   final List<GameModel> allGames;
   final String background;
   final int index;
-  SpellingCubit({required this.background, required this.index, required this.allGames})
-      : super(SpellingInitial(woodenBackground: background,correctAnswers: const ['','',''])) {
-    // gameData.gameLetters
-    List<GameModel> tempAllGames = allGames.where((element) => element.isEdited == 0 && element.gameTypes?.name?.toLowerCase() == GameTypes.spelling.text()).toList();
-    // gameData.ga
+  SpellingCubit(
+      {required this.background, required this.index, required this.allGames})
+      : super(SpellingInitial(
+            woodenBackground: background, correctAnswers: const ['', '', ''])) {
+    List<GameModel> tempAllGames = allGames
+        .where((element) =>
+            element.isEdited == 0 &&
+            element.gameTypes?.name?.toLowerCase() == GameTypes.spelling.text())
+        .toList();
     print('tempAllGames:${tempAllGames.length}');
-    emit(state.copyWith(gameData: tempAllGames,correctAnswers: ['','','']));
+    emit(state.copyWith(gameData: tempAllGames, correctAnswers: ['', '', '']));
+    TalkTts.startTalk(text: state.gameData?[state.index].inst ?? '');
   }
 
-  addTheCorrectAnswer({required String answer,required int index}) async {
+  addTheCorrectAnswer({required String answer, required int index}) async {
     List<String> correctAnswer = state.correctAnswers;
     correctAnswer.removeAt(index);
-    correctAnswer.insert(index , answer);
+    correctAnswer.insert(index, answer);
     emit(state.copyWith(correctAnswers: correctAnswer));
-
   }
 
   increaseCountOfCorrectAnswers() async {
@@ -42,6 +45,7 @@ class SpellingCubit extends Cubit<SpellingInitial> {
     emit(state.copyWith(correctAnswer: sub));
     return state.correctAnswer;
   }
+
   increaseIndexOfCorrectAnswers() async {
     int sub = state.index ?? 0;
     sub = sub + 1;
@@ -49,12 +53,13 @@ class SpellingCubit extends Cubit<SpellingInitial> {
     clearAnswers();
     return state.correctAnswer;
   }
-   increaseCountOfWrongAnswers({int? count}) async {
-    emit(state.copyWith(countOfWrong: count?? state.countOfWrong + 1));
+
+  increaseCountOfWrongAnswers({int? count}) async {
+    emit(state.copyWith(countOfWrong: count ?? state.countOfWrong + 1));
   }
 
-  clearAnswers(){
-    emit(state.copyWith(correctAnswers: ['','','']));
+  clearAnswers() {
+    emit(state.copyWith(correctAnswers: ['', '', '']));
   }
 
   bool checkIfIsTheLastGameOfLesson() {
@@ -62,7 +67,7 @@ class SpellingCubit extends Cubit<SpellingInitial> {
     currentIndex = currentIndex + 1;
     print('currentIndex:${currentIndex}');
 
-    if ((state.gameData?.length??0) > currentIndex &&
+    if ((state.gameData?.length ?? 0) > currentIndex &&
         (state.gameData?[currentIndex].gameTypes?.name?.toLowerCase() ==
             GameTypes.spelling.text().toLowerCase())) {
       return false;
@@ -71,10 +76,13 @@ class SpellingCubit extends Cubit<SpellingInitial> {
     }
   }
 
-  bool checkIsCorrectAnswer(){
-   return state.gameData?[state.index].correctAns?.toLowerCase() == state.correctAnswers.join().toLowerCase();
+  bool checkIsCorrectAnswer() {
+    return state.gameData?[state.index].correctAns?.toLowerCase() ==
+        state.correctAnswers.join().toLowerCase();
   }
+
   bool checkCurrentFinished() {
-    return state.gameData?[state.index].correctAns?.length == state.correctAnswers.join('').length;
+    return state.gameData?[state.index].correctAns?.length ==
+        state.correctAnswers.join('').length;
   }
 }

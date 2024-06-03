@@ -20,16 +20,17 @@ class BingoCubit extends Cubit<BingoInitial> {
         super(BingoInitial(gameData: gameData, stopAction: false)) {
     // bool haveNullId  =  (gameData.gameLetters ?? []).where((element) => element.id == null).toList().isNotEmpty;
     // if(haveNullId == false) {
-    TalkTts.startTalk(text: _gameData.inst ?? '');
 
     List<GameLettersModel> supList = (_gameData.gameLetters ?? [])
         .where((element) => element.id != null)
         .toList();
-    // supList.addAll(List.from(supList));
     supList.insert(4, GameLettersModel());
     emit(state.copyWith(cardsLetters: supList.toList()));
-    // }
-    getTheRandomWord(awaitTime: true);
+    startSyaDataOfGame();
+  }
+  startSyaDataOfGame() async {
+    await TalkTts.startTalk(text: _gameData.inst ?? '');
+    await getTheRandomWord(awaitTime: true);
   }
 
   Future<void> updateStopAction() async {

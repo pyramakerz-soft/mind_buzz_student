@@ -169,16 +169,15 @@ class _DiceGamePage extends State<DiceGamePage> {
                                             0) /
                                         4 ==
                                     4
-                                ? (MediaQuery.of(context).size.width - 256.w)
-                                : (MediaQuery.of(context).size.width - 260.w)),
+                                ? (MediaQuery.of(context).size.width - 261.w)
+                                : (MediaQuery.of(context).size.width - 262.w)),
                             maxWidth: (((gameState.gameData?.gameImages)
                                                 ?.length ??
-
                                             0) /
                                         4 ==
                                     4
-                                ? (MediaQuery.of(context).size.width - 372.h)
-                                : (MediaQuery.of(context).size.width - 455.h)),
+                                ? (MediaQuery.of(context).size.width - 392.h)
+                                : (MediaQuery.of(context).size.width - 480.h)),
                             hide: gameState.correctIndexes?.contains(
                                 (gameState.gameData?.gameImages)?[index].id),
                             index: index,
