@@ -317,7 +317,7 @@ class UnitScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 20),
                             width: MediaQuery.of(context).size.width - 30,
                             //height: MediaQuery.of(context).size.height-(20+100+(MediaQuery.of(context).size.height / 6)+160),
-                            height: MediaQuery.of(context).size.height * 0.446,
+                            height: MediaQuery.of(context).size.height * 0.5,
                             child: ListView(
                               children: List.generate(state.data.length, (index) {
                                 return Column(

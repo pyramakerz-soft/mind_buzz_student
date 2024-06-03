@@ -6,6 +6,8 @@ import 'package:dartz/dartz_unsafe.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../../../core/assets_sound.dart';
+import '../../../../../../core/audio_player.dart';
 import '../../../../../../core/phonetics/basic_of_every_game.dart';
 import '../../../../../../core/talk_tts.dart';
 import '../../../../domain/entities/game_model.dart';
@@ -19,13 +21,13 @@ class DragOutCubit extends Cubit<DragOutInitial> {
     // TalkTts.startTalk(text: gameData.mainLetter ?? '');
     // getTheFirstDragOut();
 
-    List<GameModel> supGameData = gameData
-        .where((element) =>
-            element.gameTypes?.name?.toLowerCase() ==
-            GameTypes.dragOut.text().toLowerCase())
-        .toList();
-    emit(state.copyWith(gameData: supGameData));
-    TalkTts.startTalk(text: state.gameData.first.inst ?? '');
+    // List<GameModel> supGameData = gameData
+    //     .where((element) =>
+    //         element.gameTypes?.name?.toLowerCase() ==
+    //         GameTypes.dragOut.text().toLowerCase())
+    //     .toList();
+    emit(state.copyWith(gameData: gameData));
+    sayLetter();
   }
 
   Future<int> increaseCountOfCorrectAnswers() async {
@@ -52,5 +54,11 @@ class DragOutCubit extends Cubit<DragOutInitial> {
     int currentIndex = state.index ?? 0;
     currentIndex = currentIndex + 1;
     emit(state.copyWith(index: currentIndex));
+  }
+  sayLetter() async {
+    await TalkTts.startTalk(text: state.gameData.first.inst ?? '');
+
+    await AudioPlayerClass.startPlaySound(soundPath: AppSound.getSoundOfLetter(mainGameLetter: state.gameData?.first.mainLetter ?? ''));
+
   }
 }

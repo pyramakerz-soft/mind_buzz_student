@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/phonetics/phonetics_color.dart';
 import '../../../../../../core/widgets/stroke_text.dart';
@@ -12,16 +13,20 @@ class ItemCardOfImageWidget extends StatelessWidget {
   final String body;
   final bool? hide;
   final int index;
+  final int countOfImages;
 
-  const ItemCardOfImageWidget(
+   ItemCardOfImageWidget(
       {Key? key,
       required this.maxWidth,
       this.hide,
       required this.maxHeight,
       required this.body,
+      required this.countOfImages,
       this.onTap,
       required this.index})
-      : super(key: key);
+      : super(key: key){
+
+  }
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -41,7 +46,8 @@ class ItemCardOfImageWidget extends StatelessWidget {
                 // shape: RoundedRectangleBorder(
                 //   side: BorderSide(width: 2, Color(0xFF91D4F0)),
                 // ),
-                border: Border(
+                border: countOfImages/4==4?
+                Border(
                   right:
                       (index != 3 && index != 7 && index != 11 && index != 15)
                           ? const BorderSide(width: 2, color: Color(0xFF91D4F0))
@@ -56,6 +62,22 @@ class ItemCardOfImageWidget extends StatelessWidget {
                       (index != 15 && index != 14 && index != 13 && index != 12)
                           ? const BorderSide(width: 2, color: Color(0xFF91D4F0))
                           : const BorderSide(color: Colors.white),
+                )
+                    :Border(
+                  right:
+                  (index != 4 && index != 9 && index != 14 && index != 19)
+                      ? const BorderSide(width: 2, color: Color(0xFF91D4F0))
+                      : const BorderSide(color: Colors.white),
+                  left: (index != 0 && index != 5 && index != 10 && index != 15)
+                      ? const BorderSide(width: 2, color: Color(0xFF91D4F0))
+                      : const BorderSide(color: Colors.white),
+                  top: (index != 0 && index != 1 && index != 2 && index != 3&& index != 4)
+                      ? const BorderSide(width: 2, color: Color(0xFF91D4F0))
+                      : const BorderSide(color: Colors.white),
+                  bottom:
+                  (index != 15 && index != 16 && index != 17 && index != 18&& index != 19)
+                      ? const BorderSide(width: 2, color: Color(0xFF91D4F0))
+                      : const BorderSide(color: Colors.white),
                 ),
               ),
               alignment: Alignment.center,

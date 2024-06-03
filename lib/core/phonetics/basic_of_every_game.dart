@@ -58,6 +58,7 @@ abstract class BasicOfEveryGame {
     if (gameType == GameTypes.dragOut.text()) {
       return BasicDragOutGame();
     } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 1) {
+      ///audio flag == 1 say the word
       return ClickPictureS();
     } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 0) {
       return ClickPictureOfWord();

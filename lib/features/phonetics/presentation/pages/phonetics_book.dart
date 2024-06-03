@@ -121,23 +121,9 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                               } else if (state is GetContactInitial) {
                                 try {
                                   MainDataOfPhonetics? dataType =
-                                      state.getMainContactData(
-                                          index: widget.firstTry ||
-                                                  state.data
-                                                          .firstWhere(
-                                                              (element) =>
-                                                                  element.id ==
-                                                                  widget.gameId)
-                                                          .nextGameId ==
-                                                      null
-                                              ? state.data.indexWhere((element) =>
-                                                  element.id == widget.gameId)
-                                              : state.data.indexWhere((element) =>
-                                                  element.id ==
-                                                  state.data
-                                                      .firstWhere((element) =>
-                                                          element.id == widget.gameId)
-                                                      .nextGameId));
+                                  state.getMainContactData(
+                                      index: stateOfGame.index);
+
                                   print('dataType:$dataType');
                                   if (dataType != null) {
                                     context

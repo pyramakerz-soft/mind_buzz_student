@@ -18,6 +18,8 @@ class GetContactInitial extends ContactLessonState {
     log( data[index].toJson().toString());
     print( 'data[index].toJson()');
     String subProgram = data[index].lesson?.unit?.program?.course?.name ?? '';
+    print("subProgram:$data");
+
     if (subProgram == BasicOfEveryGame.phonics) {
       String subLetter = data[index].mainLetter ?? '';
       String subGame = data[index].gameTypes?.name ?? '';

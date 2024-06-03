@@ -49,6 +49,11 @@ class ClickPictureCubit extends Cubit<ClickPictureInitial> {
     await AudioPlayerClass.startPlaySound(soundPath: AppSound.getSoundOfLetter(mainGameLetter: state.gameData.mainLetter ?? ''));
   }
 
+  sayTheOnlyLetter() async {
+    print('sayTheOnlyLetter');
+    await AudioPlayerClass.startPlaySound(soundPath: AppSound.getSoundOfLetter(mainGameLetter: state.gameData.mainLetter ?? ''));
+
+  }
   checkCurrentClickTime({required DateTime current}){
     if (current.difference(state.currentPressTime ?? current) >  Duration(seconds: 1)) {
       emit(state.copyWith(currentPressTime: current));

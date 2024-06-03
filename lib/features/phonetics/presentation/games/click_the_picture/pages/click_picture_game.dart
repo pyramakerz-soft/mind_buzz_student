@@ -65,7 +65,7 @@ class ClickPictureGame extends StatelessWidget {
                             .state
                             .correctIndexes
                             .contains(index),
-                        onTap: () {
+                        onTap: () async {
                           if (clickPictureCubit.checkCurrentClickTime(current: DateTime.now())) {
                             if (!stateOfGameData.correctIndexes
                                 .contains(index)) {
@@ -90,10 +90,9 @@ class ClickPictureGame extends StatelessWidget {
                                 //     .addWrongAnswer();
                                 context
                                     .read<CurrentGamePhoneticsCubit>()
-                                    .addWrongAnswer(
-                                        actionOfWrongAnswer: () async {
-                                  // TalkTts.startTalk(text: gameData.mainLetter ?? '');
-                                });
+                                    .addWrongAnswer();
+                                await context
+                                    .read<ClickPictureCubit>().sayTheOnlyLetter();
                               }
                             }
                           }

@@ -69,10 +69,6 @@ class TracingGame extends StatelessWidget {
                               );
                           await Future.delayed(const Duration(seconds: 3));
                           Navigator.pop(context);
-                        } else {
-                          context
-                              .read<TracingCubit>()
-                              .saveCurrentPosition(position: null);
                         }
                       },
                       child: CustomPaint(

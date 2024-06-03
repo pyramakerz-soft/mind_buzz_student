@@ -9,7 +9,7 @@ class ContactLessonUseCases {
   ContactLessonUseCases(this.repository);
 
   Future<Either<Failure, List<GameModel>>> call(
-      {required int programId}) async {
-    return await repository.lessonContactDataRepository(programId: programId);
+      {required int lessonId, required int gameId}) async {
+    return await repository.lessonContactDataRepository(lessonId: lessonId, gameId:gameId);
   }
 }

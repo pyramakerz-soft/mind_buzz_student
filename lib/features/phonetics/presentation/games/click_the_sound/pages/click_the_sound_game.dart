@@ -82,15 +82,22 @@ class ClickTheSoundGame extends StatelessWidget {
                                   context.read<CurrentGamePhoneticsCubit>().backToMainAvatar();
                                   await _viewModel.incrementCorrectAnswerCount(index);
                                   context.read<CurrentGamePhoneticsCubit>().addStarToStudent(stateOfCountOfCorrectAnswer: _viewModel.state.correctAnswers ?? 0, mainCountOfQuestion: stateOfCurrentGamePhoneticsState.gameData?.first.numOfLetterRepeat ?? 0);
+                                  print('_viewModel.state.correctAnswers:${_viewModel.state.correctAnswers}');
+                                  print('_viewModel.state.correctAnswers:${(_viewModel.state.correctAnswers == stateOfCurrentGamePhoneticsState.gameData?.first.numOfLetterRepeat)}');
                                   if (_viewModel.state.correctAnswers == stateOfCurrentGamePhoneticsState.gameData?.first.numOfLetterRepeat) {
-                                    context.read<CurrentGamePhoneticsCubit>().addSuccessAnswer(
-                                        nextGameId: state.gameData.nextGameId,
-                                        actionInEndOfLesson: () {
+                                    // context.read<CurrentGamePhoneticsCubit>().addSuccessAnswer(
+                                    //     nextGameId: state.gameData.nextGameId,
+                                    //     actionInEndOfLesson: () {
                                           Navigator.of(context).pop();
-                                        });
+                                        // });
                                   }
                                 } else {
                                   context.read<CurrentGamePhoneticsCubit>().addWrongAnswer();
+                                  // sayTheLetter();
+                                  Future.delayed(Duration(seconds: 2), () async {
+                                    await context.read<ClickTheSoundCubit>().sayTheLetter();
+                                  });
+
                                 }
                                 Future.delayed(const Duration(seconds: 2), () {
                                   _viewModel.stopInteraction();

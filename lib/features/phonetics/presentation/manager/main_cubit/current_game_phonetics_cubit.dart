@@ -50,6 +50,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     emit(state.copyWith(
         stateOfStringIsWord: stateOfStringIsWord,
         stateOfStringWillSay: stateOfStringWillSay));
+
   }
 
   getTheBackGroundSuccess() {

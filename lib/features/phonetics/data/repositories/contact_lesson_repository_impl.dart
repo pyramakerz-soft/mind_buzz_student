@@ -19,11 +19,11 @@ class ContactLessonRepositoryImpl implements ProgramContactLessonRepository {
 
   @override
   Future<Either<Failure, List<GameModel>>>
-      lessonContactDataRepository({required int programId}) async {
+      lessonContactDataRepository({required int lessonId, required int gameId}) async {
     if (await networkInfo.isConnected) {
       try {
         final res = await remoteDataSource.getContactLessonDataRemotely(
-            programId: programId);
+            lessonId: lessonId, gameId:gameId);
         // final res = await localRemoteDataSource.getContactLessonDataRemotely(programId: programId);
         log('res:$res');
         return Right(res);

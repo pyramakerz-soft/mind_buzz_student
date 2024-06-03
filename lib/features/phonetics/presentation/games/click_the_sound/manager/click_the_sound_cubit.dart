@@ -54,9 +54,9 @@ Future<void> generateRandomLetters2() async {
   List<String> randomLetters = List.filled(numOfLetterRepeat, mainLetter, growable: true);
   // calc remaining bubbles to fill
   int remainingSlots = 8 - numOfLetterRepeat;
-  if (gameLetters.length < remainingSlots) {
-    throw Exception('Issue with the number of letters');
-  }
+  // if (gameLetters.length < remainingSlots) {
+  //   throw Exception('Issue with the number of letters');
+  // }
   // addd other letters to the list until --> 8 letters
   randomLetters.addAll(gameLetters.sublist(0, remainingSlots));
   randomLetters.shuffle();

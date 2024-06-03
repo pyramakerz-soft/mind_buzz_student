@@ -29,7 +29,7 @@ class ContactLessonBloc extends Bloc<ContactLessonEvent, ContactLessonState> {
       if (event is GetContactLessonRequest) {
         emit(GetContactLoadingInitial());
         final failureOrDoneMessage =
-            await programContactUserUseCases(programId: event.lessonId);
+            await programContactUserUseCases(lessonId: event.lessonId, gameId: event.gameId);
         emit(await _eitherLoadedOrErrorState(
             failureOrDoneMessage, event.gameId));
       }
