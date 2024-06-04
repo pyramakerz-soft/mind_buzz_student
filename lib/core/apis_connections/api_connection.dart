@@ -51,6 +51,7 @@ class MainApiConnection {
   String getLessonsOfProgramsEndPoint = "lessons";
   String getLessonQuestionsEndPoint = "game";
   String getGameById = "gamebyId";
+  String sendSolveData = "solveData";
   String getStudentAssignments = "studentAssignments";
 
 ////////////////////////////////////////////////////////////////////////////

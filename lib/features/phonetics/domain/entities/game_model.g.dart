@@ -26,7 +26,7 @@ GameModel _$GameModelFromJson(Map<String, dynamic> json) => GameModel(
       gameLetters: (json['game_letters'] as List<dynamic>?)
           ?.map((e) => GameLettersModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      stars: (json['stars'] as num?)?.toInt(),
+      stars: json['stars'],
       nextGameId: (json['next_game_id'] as num?)?.toInt(),
       correctAns: json['correct_ans'] as String?,
       previousGameId: (json['previous_game_id'] as num?)?.toInt(),

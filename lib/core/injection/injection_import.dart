@@ -10,7 +10,7 @@ Future<void> init() async {
       updateUserDataUseCases: sl(),
   createPassCodeUseCases: sl()));
   sl.registerFactory(() => GetUnitBloc(programUserUseCases: sl()));
-  sl.registerFactory(() => CurrentGamePhoneticsCubit());
+  sl.registerFactory(() => CurrentGamePhoneticsCubit(gamesStarsUseCases: sl()));
   sl.registerFactory(() => ChapterBloc(programUserUseCases: sl()));
   sl.registerFactory(() => ContactLessonBloc(programContactUserUseCases: sl(),getGameUseCases: sl()));
   sl.registerFactory(() =>
@@ -25,6 +25,7 @@ Future<void> init() async {
   //UseCase
   sl.registerLazySingleton(() => UnitUseCases(sl()));
   sl.registerLazySingleton(() => LessonUseCases(sl()));
+  sl.registerLazySingleton(() => GameStarsUseCases(sl()));
   sl.registerLazySingleton(() => LogOutUserUseCases(sl()));
   sl.registerLazySingleton(() => UserUseCases(sl()));
   sl.registerLazySingleton(() => AutoUserUseCases(sl()));
@@ -50,7 +51,7 @@ Future<void> init() async {
           remoteDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<ProgramContactLessonRepository>(
       () => ContactLessonRepositoryImpl(
-          // localRemoteDataSource: sl(),
+          localRemoteDataSource: sl(),
           remoteDataSource: sl(),
           networkInfo: sl()));
 
@@ -74,8 +75,8 @@ Future<void> init() async {
       () => DataSourceRemotelyOfLessonImpl(dio: sl()));
   sl.registerLazySingleton<DataSourceRemotelyOfContactLesson>(
       () => DataSourceRemotelyOfContactLessonImpl(dio: sl()));
-  // sl.registerLazySingleton<LocalDataSourceRemotelyOfContactLesson>(
-  //     () => LocalDataSourceRemotelyOfContactLessonImpl(dio: sl()));
+  sl.registerLazySingleton<DataSourceLocalOfContactLesson>(
+      () => DataSourceLocalOfGameStar());
   sl.registerLazySingleton<DataSourceRemotelyOfNotification>(
       () => DataSourceRemotelyOfNotificationImpl(dio: sl()));
   sl.registerLazySingleton<DataSourceRemotelyOfCalender>(

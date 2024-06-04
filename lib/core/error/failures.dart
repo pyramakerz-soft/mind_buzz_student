@@ -17,3 +17,4 @@ class CheckYourNetwork extends Failure{}
 class CacheFailure extends Failure {}
 class LoginFailure extends Failure {}
 class ReLoginFailure extends Failure {}
+class SendDataFailure extends Failure {}

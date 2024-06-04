@@ -2,7 +2,7 @@ class ChapterModel {
   final int? id;
   final int? lessonId;
   final int? number;
-  final int? star;
+  final num? star;
   // final bool? isOpen;
   final bool? isLetter;
   final bool? isGame;

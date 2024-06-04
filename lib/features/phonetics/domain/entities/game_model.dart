@@ -26,7 +26,7 @@ class GameModel extends Equatable {
   List<GameLettersModel>? gameLetters;
   List<GameImagesModel>? gameImages;
   int? lessonId;
-  int? stars;
+  dynamic stars;
   int? isEdited;
   int? nextGameId;
   int? previousGameId;

@@ -22,7 +22,7 @@ class NotificationsScreen extends StatelessWidget {
         body: Column(
           children: [
             Container(
-              height: 50,
+              height: 20,
               width: 1.sw,
               color: Colors.white,
             ),
@@ -72,7 +72,7 @@ class NotificationsScreen extends StatelessWidget {
                                   onTap: () {
                                     context
                                         .read<SwitchNotificationCubit>()
-                                        .updateSwitch(index: 0);
+                                        .updateSwitch(index: 1);
                                   },
                                 ),
                               ]),

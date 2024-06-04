@@ -16,16 +16,16 @@ class LessonRepositoryImpl implements ProgramLessonRepository {
   @override
   Future<Either<Failure, List<LessonModel>>> lessonDataRepository({required int programId}) async {
     if (await networkInfo.isConnected) {
-      try {
+      // try {
         final res = await remoteDataSource.getUnitDataRemotely(programId: programId);
         log('res:$res');
         return Right(res);
-      } catch (e, s) {
-
-        log('error:${e.toString()}');
-        log('error:${e.runtimeType}');
-        return Left(LoginFailure());
-      }
+      // } catch (e, s) {
+      //
+      //   log('error:${e.toString()}');
+      //   log('error:${e.runtimeType}');
+      //   return Left(LoginFailure());
+      // }
     } else {
       return Left(CacheFailure());
     }

@@ -8,6 +8,7 @@ abstract class DataSourceRemotelyOfContactLesson {
   Future<List<GameModel>> getContactLessonDataRemotely(
       {required int lessonId, required int gameId});
   Future<List<GameModel>> getGameById({required int gameId});
+  Future<bool> sendStarToGame({required List<int> gameId, required int countOfStars});
 }
 
 class DataSourceRemotelyOfContactLessonImpl
@@ -46,4 +47,17 @@ class DataSourceRemotelyOfContactLessonImpl
       throw response.data['msg'];
     }
   }
+
+  @override
+  Future<bool> sendStarToGame({required List<int> gameId, required int countOfStars}) async {
+    final response = await dio.post(
+        url: '${Connection.baseURL}${dio.sendSolveData}',
+        queryParameters: {'game_id[]': gameId, 'stars':countOfStars});
+    if (dio.validResponse(response)) {
+      return true;
+    } else {
+      throw false;
+    }
+  }
+
 }

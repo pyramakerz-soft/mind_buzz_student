@@ -173,7 +173,8 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                           nextGameIndex: stateOfGameData.data
                                               .indexWhere((element) =>
                                                   element.id == widget.gameId))
-                                    } else ...{
+                                    }
+                                    else ...{
                                       if (stateOfGame
                                               .basicData?.gameData?.isConnect ==
                                           true) ...{
@@ -189,7 +190,8 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                             stateOfGameData: stateOfGameData,
                                           ),
                                         }
-                                      } else ...{
+                                      }
+                                      else ...{
                                         BasedOfGamePhonetics(
                                           stateOfGame: stateOfGame,
                                           stateOfGameData: stateOfGameData,
