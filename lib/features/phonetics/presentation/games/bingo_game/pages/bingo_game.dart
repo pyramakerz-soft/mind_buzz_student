@@ -9,6 +9,7 @@ import 'package:mind_buzz_refactor/core/app_color.dart';
 import '../../../../../../core/phonetics/basic_of_every_game.dart';
 import '../../../../../../core/phonetics/phonetics_color.dart';
 import '../../../../../../core/theme_text.dart';
+import '../../../../../chapters/presentation/manager/journey_bar_cubit.dart';
 import '../../../../domain/entities/game_letters_model.dart';
 import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
 import '../manager/bingo_cubit.dart';
@@ -137,9 +138,19 @@ class BingoGameScreen extends StatelessWidget {
                                           const Duration(seconds: 2));
                                       context
                                           .read<CurrentGamePhoneticsCubit>()
-                                          .sendStars(gamesId: [
-                                        gameState.gameData?.id ?? 0
-                                      ]);
+                                          .sendStars(
+                                              gamesId: [
+                                            gameState.gameData?.id ?? 0
+                                          ],
+                                              actionOfStars: (int countOfStars,
+                                                  List<int> listOfIds) {
+                                                context
+                                                    .read<JourneyBarCubit>()
+                                                    .sendStars(
+                                                      gamesId: listOfIds,
+                                                      countOfStar: countOfStars,
+                                                    );
+                                              });
                                       Navigator.of(context).pop();
                                     } else {
                                       await context

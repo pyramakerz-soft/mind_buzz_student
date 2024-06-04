@@ -22,6 +22,9 @@ LessonModel _$LessonModelFromJson(Map<String, dynamic> json) => LessonModel(
       games: (json['games'] as List<dynamic>?)
           ?.map((e) => GameModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      unit: json['unit'] == null
+          ? null
+          : UserCourseModel.fromJson(json['unit'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$LessonModelToJson(LessonModel instance) =>
@@ -37,4 +40,5 @@ Map<String, dynamic> _$LessonModelToJson(LessonModel instance) =>
       'updated_at': instance.updatedAt,
       'chapter': instance.chapter?.toJson(),
       'games': instance.games?.map((e) => e.toJson()).toList(),
+      'unit': instance.unit?.toJson(),
     };

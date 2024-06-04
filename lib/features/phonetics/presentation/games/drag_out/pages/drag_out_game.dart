@@ -8,6 +8,7 @@ import '../../../../../../core/phonetics/assets_images_phonetics.dart';
 import '../../../../../../core/phonetics/basic_of_every_game.dart';
 import '../../../../../../core/phonetics/phonetics_color.dart';
 import '../../../../../../core/talk_tts.dart';
+import '../../../../../chapters/presentation/manager/journey_bar_cubit.dart';
 import '../../../../domain/entities/game_images_model.dart';
 import '../../../../domain/entities/game_model.dart';
 import '../../../manager/bloc/contact_lesson_bloc.dart';
@@ -89,7 +90,13 @@ class DragOutGame extends StatelessWidget {
                         context.read<CurrentGamePhoneticsCubit>().sendStars(
                             gamesId: gameState.gameData
                                 .map((obj) => obj.id ?? 0)
-                                .toList());
+                                .toList(),
+                            actionOfStars:
+                                (int countOfStars, List<int> listOfIds) {
+                              context.read<JourneyBarCubit>().sendStars(
+                                  gamesId: listOfIds,
+                                  countOfStar: countOfStars);
+                            });
 
                         Navigator.of(context).pop();
                       } else {

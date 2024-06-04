@@ -21,7 +21,8 @@ part 'current_game_phonetics_state.dart';
 class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   final GameStarsUseCases gamesStarsUseCases;
 
-  CurrentGamePhoneticsCubit({required this.gamesStarsUseCases}) : super(CurrentGamePhoneticsState(index: 0)) {
+  CurrentGamePhoneticsCubit({required this.gamesStarsUseCases})
+      : super(CurrentGamePhoneticsState(index: 0)) {
     getTheBackGroundLoading();
   }
 
@@ -53,7 +54,6 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     emit(state.copyWith(
         stateOfStringIsWord: stateOfStringIsWord,
         stateOfStringWillSay: stateOfStringWillSay));
-
   }
 
   getTheBackGroundSuccess() {
@@ -289,7 +289,11 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     emit(state.clearCurrentStringOfDice());
   }
 
-  sendStars({required List<int> gamesId}){
-    gamesStarsUseCases(gameId:gamesId, countOfStars:state.countOfStar??0);
+  sendStars(
+      {required List<int> gamesId,
+      required void Function(int countOfStars, List<int> listOfIds)
+          actionOfStars}) {
+    actionOfStars.call((state.countOfStar ?? 0), gamesId);
+    gamesStarsUseCases(gameId: gamesId, countOfStars: state.countOfStar ?? 0);
   }
 }

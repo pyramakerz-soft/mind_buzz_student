@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../chapters/domain/entities/lesson_model.dart';
 import '../../../home/domain/entities/user_courses.dart';
 import '../../../phonetics/domain/entities/game_images_model.dart';
 import 'game_letters_model.dart';
-import 'lesson_model.dart';
 import 'game_types_model.dart';
 part 'game_model.g.dart';
 
@@ -79,9 +79,9 @@ class GameModel extends Equatable {
         gameLetters,
         stars,
         gameImages,
-    nextGameId,
-    correctAns,
-    isEdited,
-    previousGameId
+        nextGameId,
+        correctAns,
+        isEdited,
+        previousGameId
       ];
 }

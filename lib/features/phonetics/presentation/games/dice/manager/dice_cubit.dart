@@ -2,16 +2,12 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
-import 'package:mind_buzz_refactor/features/phonetics/domain/entities/game_images_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../core/assets_sound.dart';
 import '../../../../../../core/audio_player.dart';
 import '../../../../../../core/talk_tts.dart';
-import '../../../../domain/entities/game_letters_model.dart';
 import '../../../../domain/entities/game_model.dart';
-import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
 import '../widget/dice_pop_up.dart';
 
 part 'dice_state.dart';

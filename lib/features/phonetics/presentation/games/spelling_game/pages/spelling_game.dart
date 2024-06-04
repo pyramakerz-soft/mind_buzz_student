@@ -12,6 +12,7 @@ import 'package:mind_buzz_refactor/features/phonetics/presentation/games/spellin
 
 import '../../../../../../core/phonetics/phonetics_color.dart';
 import '../../../../../../core/theme_text.dart';
+import '../../../../../chapters/presentation/manager/journey_bar_cubit.dart';
 import '../../../../domain/entities/game_letters_model.dart';
 import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
 import '../manager/spelling_cubit.dart';
@@ -131,7 +132,19 @@ class SpellingGameScreen extends StatelessWidget {
                                                               ?.map((obj) =>
                                                                   obj.id ?? 0)
                                                               .toList() ??
-                                                          []);
+                                                          [],
+                                                      actionOfStars: (int
+                                                              countOfStars,
+                                                          List<int> listOfIds) {
+                                                        context
+                                                            .read<
+                                                                JourneyBarCubit>()
+                                                            .sendStars(
+                                                                gamesId:
+                                                                    listOfIds,
+                                                                countOfStar:
+                                                                    countOfStars);
+                                                      });
                                               Navigator.of(context).pop();
                                             });
                                           } else {

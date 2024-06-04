@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/phonetics/basic_of_every_game.dart';
 import '../../../../../../core/phonetics/phonetics_color.dart';
+import '../../../../../chapters/presentation/manager/journey_bar_cubit.dart';
 import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
 import '../manager/dice_cubit.dart';
 import '../widget/item_card_of_image_widget.dart';
@@ -126,9 +127,18 @@ class _DiceGamePage extends State<DiceGamePage> {
                                       .clearCurrentStringOfDice();
                                   context
                                       .read<CurrentGamePhoneticsCubit>()
-                                      .sendStars(gamesId: [
-                                    gameState.gameData?.id ?? 0
-                                  ]);
+                                      .sendStars(
+                                          gamesId: [
+                                        gameState.gameData?.id ?? 0
+                                      ],
+                                          actionOfStars: (int countOfStars,
+                                              List<int> listOfIds) {
+                                            context
+                                                .read<JourneyBarCubit>()
+                                                .sendStars(
+                                                    gamesId: listOfIds,
+                                                    countOfStar: countOfStars);
+                                          });
 
                                   Navigator.of(context).pop();
                                 } else {

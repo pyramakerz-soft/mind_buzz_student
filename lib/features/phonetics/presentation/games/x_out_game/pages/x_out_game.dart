@@ -11,6 +11,7 @@ import '../../../../../../core/assets_sound.dart';
 import '../../../../../../core/audio_player.dart';
 import '../../../../../../core/phonetics/phonetics_color.dart';
 import '../../../../../../core/theme_text.dart';
+import '../../../../../chapters/presentation/manager/journey_bar_cubit.dart';
 import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
 
 class XOutGameScreen extends StatelessWidget {
@@ -144,7 +145,19 @@ class XOutGameScreen extends StatelessWidget {
                                                               ?.map((obj) =>
                                                                   obj.id ?? 0)
                                                               .toList() ??
-                                                          []);
+                                                          [],
+                                                      actionOfStars: (int
+                                                              countOfStars,
+                                                          List<int> listOfIds) {
+                                                        context
+                                                            .read<
+                                                                JourneyBarCubit>()
+                                                            .sendStars(
+                                                                gamesId:
+                                                                    listOfIds,
+                                                                countOfStar:
+                                                                    countOfStars);
+                                                      });
                                               Navigator.of(context).pop();
                                             } else {
                                               await context

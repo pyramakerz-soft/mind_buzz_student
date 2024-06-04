@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/phonetics/assets_images_phonetics.dart';
+import '../../../../../chapters/presentation/manager/journey_bar_cubit.dart';
 import '../../../manager/bloc/contact_lesson_bloc.dart';
 import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
 import '../manager/tracing_cubit.dart';
@@ -70,7 +71,14 @@ class TracingGame extends StatelessWidget {
                               );
                           await Future.delayed(const Duration(seconds: 3));
                           Navigator.pop(context);
-                          context.read<CurrentGamePhoneticsCubit>().sendStars(gamesId: [stateOfGame.gameData?.id??0]);
+                          context.read<CurrentGamePhoneticsCubit>().sendStars(
+                              gamesId: [stateOfGame.gameData?.id ?? 0],
+                              actionOfStars:
+                                  (int countOfStars, List<int> listOfIds) {
+                                context.read<JourneyBarCubit>().sendStars(
+                                    gamesId: listOfIds,
+                                    countOfStar: countOfStars);
+                              });
                         }
                       },
                       child: CustomPaint(
