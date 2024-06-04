@@ -123,6 +123,12 @@ class ClickThePictureWithWord extends StatelessWidget {
                                               sub) {
                                             await Future.delayed(
                                                 Duration(seconds: 1));
+                                            context
+                                                .read<
+                                                    CurrentGamePhoneticsCubit>()
+                                                .sendStars(gamesId: [
+                                              gameState.gameData.id ?? 0
+                                            ]);
                                             Navigator.of(context).pop();
                                           } else {
                                             AudioPlayerClass

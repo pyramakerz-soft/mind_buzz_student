@@ -119,6 +119,11 @@ class ClickTheSoundGame extends StatelessWidget {
                                     // context.read<CurrentGamePhoneticsCubit>().addSuccessAnswer(
                                     //     nextGameId: state.gameData.nextGameId,
                                     //     actionInEndOfLesson: () {
+                                    context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .sendStars(
+                                            gamesId: [state.gameData.id ?? 0]);
+
                                     Navigator.of(context).pop();
                                     // });
                                   }

@@ -185,6 +185,11 @@ class GamesSortingCups extends StatelessWidget {
                                     context
                                         .read<CurrentGamePhoneticsCubit>()
                                         .clearCurrentStringOfDice();
+                                    context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .sendStars(gamesId: [
+                                      gameState.gameData.id ?? 0
+                                    ]);
                                     Navigator.of(context).pop();
                                   } else {
                                     await context

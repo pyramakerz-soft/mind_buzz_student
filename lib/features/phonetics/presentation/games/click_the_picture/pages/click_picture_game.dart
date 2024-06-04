@@ -25,6 +25,10 @@ class ClickPictureGame extends StatelessWidget {
           (gameData.gameImages?.where((e) => e.correct == 1).toList().length ??
               1)) {
         Future.delayed(Duration(seconds: 2), () {
+          context
+              .read<CurrentGamePhoneticsCubit>()
+              .sendStars(gamesId: [state.gameData.id ?? 0]);
+
           Navigator.pop(context);
         });
       }

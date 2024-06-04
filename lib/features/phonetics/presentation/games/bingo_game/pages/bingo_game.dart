@@ -135,6 +135,11 @@ class BingoGameScreen extends StatelessWidget {
                                     if (isLastLesson == true) {
                                       await Future.delayed(
                                           const Duration(seconds: 2));
+                                      context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .sendStars(gamesId: [
+                                        gameState.gameData?.id ?? 0
+                                      ]);
                                       Navigator.of(context).pop();
                                     } else {
                                       await context

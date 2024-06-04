@@ -136,6 +136,15 @@ class XOutGameScreen extends StatelessWidget {
                                             if (isLastLesson == true) {
                                               await Future.delayed(
                                                   const Duration(seconds: 2));
+                                              context
+                                                  .read<
+                                                      CurrentGamePhoneticsCubit>()
+                                                  .sendStars(
+                                                      gamesId: state.gameData
+                                                              ?.map((obj) =>
+                                                                  obj.id ?? 0)
+                                                              .toList() ??
+                                                          []);
                                               Navigator.of(context).pop();
                                             } else {
                                               await context

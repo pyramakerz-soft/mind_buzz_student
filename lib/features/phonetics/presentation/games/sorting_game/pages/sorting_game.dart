@@ -28,10 +28,9 @@ class SortingGameScreen extends StatelessWidget {
       if (state.countOfWrong == 3) {
         context.read<sortingCubit>().increaseCountOfWrongAnswers(count: 0);
         context.read<sortingCubit>().addWrongAnswer();
-        Future.delayed(Duration(seconds: 1),(){
+        Future.delayed(Duration(seconds: 1), () {
           context.read<sortingCubit>().changeImages();
         });
-
       }
     }, builder: (context, gameState) {
       return Padding(
@@ -103,7 +102,8 @@ class SortingGameScreen extends StatelessWidget {
                           return Container(
                             width: 0.14.sw,
                             height: 0.8.sw,
-                            padding: EdgeInsets.only(top: 30, right: 30,left: 10),
+                            padding:
+                                EdgeInsets.only(top: 30, right: 30, left: 10),
                             child: Column(
                               children: [
                                 StrokeText(
@@ -133,25 +133,30 @@ class SortingGameScreen extends StatelessWidget {
                                           gridDelegate:
                                               SliverGridDelegateWithFixedCrossAxisCount(
                                                   crossAxisCount: 2,
-                                              crossAxisSpacing: 2,
-                                              mainAxisSpacing: 5),
+                                                  crossAxisSpacing: 2,
+                                                  mainAxisSpacing: 5),
                                           itemBuilder: (context, i) {
                                             String image = gameState
                                                     .correctAnswers
                                                     .where((element) =>
                                                         element.gameLetterId ==
-                                                            gameState.gameData!
-                                                                .gameLetters![index].id)
+                                                        gameState
+                                                            .gameData!
+                                                            .gameLetters![index]
+                                                            .id)
                                                     .toList()[i]
                                                     .image ??
                                                 '';
                                             return CachedNetworkImage(
                                               imageUrl: image,
-                                              placeholder: (context, url) => const Center(
-                                                child: CupertinoActivityIndicator(),
+                                              placeholder: (context, url) =>
+                                                  const Center(
+                                                child:
+                                                    CupertinoActivityIndicator(),
                                               ),
-                                              errorWidget: (context, url, error) =>
-                                              const Icon(
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      const Icon(
                                                 Icons.error,
                                                 color: Colors.red,
                                               ),
@@ -161,7 +166,6 @@ class SortingGameScreen extends StatelessWidget {
                                     },
                                     onAcceptWithDetails:
                                         (DragTargetDetails<int> details) async {
-                                  
                                       GameImagesModel image = gameState
                                           .gameData!.gameImages!
                                           .firstWhere((element) =>
@@ -169,15 +173,17 @@ class SortingGameScreen extends StatelessWidget {
                                       context
                                           .read<sortingCubit>()
                                           .addTheCorrectAnswer(answer: image);
-                                  
-                                      if (gameState.gameData!.gameLetters?[index].id == image.gameLetterId) {
+
+                                      if (gameState.gameData!
+                                              .gameLetters?[index].id ==
+                                          image.gameLetterId) {
                                         context
                                             .read<CurrentGamePhoneticsCubit>()
                                             .animationOfCorrectAnswer();
                                         int countOfCorrect = await context
                                             .read<sortingCubit>()
                                             .increaseCountOfCorrectAnswers();
-                                  
+
                                         context
                                             .read<CurrentGamePhoneticsCubit>()
                                             .addStarToStudent(
@@ -195,6 +201,11 @@ class SortingGameScreen extends StatelessWidget {
                                         if (isLastLesson == true) {
                                           await Future.delayed(
                                               const Duration(seconds: 2));
+                                          context
+                                              .read<CurrentGamePhoneticsCubit>()
+                                              .sendStars(gamesId: [
+                                            gameState.gameData?.id ?? 0
+                                          ]);
                                           Navigator.of(context).pop();
                                         } else {
                                           context
@@ -204,18 +215,17 @@ class SortingGameScreen extends StatelessWidget {
                                               .read<sortingCubit>()
                                               .changeImages();
                                         }
-                                      }
-                                      else {
+                                      } else {
                                         context
                                             .read<CurrentGamePhoneticsCubit>()
                                             .addWrongAnswer(
                                                 actionOfWrongAnswer: () async {
                                           // TalkTts.startTalk(text: gameData.mainLetter ?? '');
                                         });
-                                           context
+                                        context
                                             .read<CurrentGamePhoneticsCubit>()
                                             .increaseCountOfTries();
-                                  
+
                                         context
                                             .read<sortingCubit>()
                                             .increaseCountOfWrongAnswers();
