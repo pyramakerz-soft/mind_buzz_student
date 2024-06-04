@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../../core/phonetics/assets_images_phonetics.dart';
@@ -11,7 +12,12 @@ class ItemCardWidgetOFSortingCups extends StatelessWidget {
   final String body;
 
   const ItemCardWidgetOFSortingCups(
-      {Key? key, this.width, this.height, required this.body, this.onTap, required this.hide})
+      {Key? key,
+      this.width,
+      this.height,
+      required this.body,
+      this.onTap,
+      required this.hide})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -27,15 +33,14 @@ class ItemCardWidgetOFSortingCups extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            SvgPicture.asset(AppImagesPhonetics.iconBoarderOfChar, fit: BoxFit.fitWidth, width: width,height:height),
+            SvgPicture.asset(AppImagesPhonetics.iconBoarderOfChar,
+                fit: BoxFit.fitWidth, width: width, height: height),
             Text(
               body,
               style: Theme.of(context)
                   .textTheme
                   .displayLarge
-                  ?.copyWith(
-                  fontSize: 50,
-                  fontWeight: FontWeight.w700),
+                  ?.copyWith(fontSize: 20.sp, fontWeight: FontWeight.w700),
             )
           ],
         ),

@@ -4,21 +4,27 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:mind_buzz_refactor/features/phonetics/domain/entities/game_model.dart';
 
+import '../../../../../../core/assets_sound.dart';
+import '../../../../../../core/audio_player.dart';
 import '../../../../../../core/phonetics/basic_of_every_game.dart';
+import '../../../../../../core/talk_tts.dart';
 
 part 'x_out_state.dart';
 
 class XOutCubit extends Cubit<XOutInitial> {
   final List<GameModel> gameData;
 
-  XOutCubit({required this.gameData}) : super(XOutInitial(gameData: gameData)){
-    List<GameModel> tempGameData = gameData.where((element){
-      print( element.isEdited ==0);
+  XOutCubit({required this.gameData}) : super(XOutInitial(gameData: gameData)) {
+    List<GameModel> tempGameData = gameData.where((element) {
+      print(element.isEdited == 0);
       print('element.isEdited:${element.isEdited}, ${element.gameTypes?.name}');
-      return element.isEdited ==0  && element.gameTypes?.name?.toLowerCase() == GameTypes.xOut.text().toLowerCase();
+      return element.isEdited == 0 &&
+          element.gameTypes?.name?.toLowerCase() ==
+              GameTypes.xOut.text().toLowerCase();
     }).toList();
     print('tempGameData:${tempGameData.length}');
     emit(state.copyWith(gameData: tempGameData));
+    startSayGame();
   }
 
   Future<int> increaseCountOfCorrectAnswers() async {
@@ -51,6 +57,7 @@ class XOutCubit extends Cubit<XOutInitial> {
     int currentIndex = state.currentGameIndex ?? 0;
     currentIndex = currentIndex + 1;
     emit(state.copyWith(currentGameIndex: currentIndex));
+    sayTheLetter();
   }
 
   bool isLastGame() {
@@ -70,5 +77,28 @@ class XOutCubit extends Cubit<XOutInitial> {
 
   void stopInteraction() {
     emit(state.copyWith(isInteracting: false));
+  }
+
+  startSayGame() async {
+    await TalkTts.startTalk(
+        text: state.gameData?[state.currentGameIndex ?? 0].inst ?? '');
+    await AudioPlayerClass.startPlaySound(
+        soundPath: AppSound.getSoundOfLetter(
+            mainGameLetter:
+                (state.gameData?[state.currentGameIndex ?? 0].mainLetter ??
+                    '')));
+  }
+
+  Future sayTheInstruction() async {
+    await TalkTts.startTalk(
+        text: state.gameData?[state.currentGameIndex ?? 0].inst ?? '');
+  }
+
+  sayTheLetter() async {
+    await AudioPlayerClass.startPlaySound(
+        soundPath: AppSound.getSoundOfLetter(
+            mainGameLetter:
+                (state.gameData?[state.currentGameIndex ?? 0].mainLetter ??
+                    '')));
   }
 }

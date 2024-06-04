@@ -42,7 +42,6 @@ class ClickThePictureWithWord extends StatelessWidget {
               return Container(
                 height: MediaQuery.of(context).size.height - (50.h + 90),
                 width: MediaQuery.of(context).size.width - (130 + 40),
-
                 child: Wrap(
                     spacing: 25,
                     // runSpacing: 10,
@@ -54,9 +53,20 @@ class ClickThePictureWithWord extends StatelessWidget {
                             listener: (context, state) {},
                             builder: (context, generalStateOfGame) {
                               return SingleElement(
+                                  width: (MediaQuery.of(context).size.width -
+                                          (130 + 40)) /
+                                      (((gameData.gameImages?.length ?? 0) /
+                                                  2) +
+                                              1)
+                                          .round(),
+                                  height: (MediaQuery.of(context).size.height -
+                                          (50.h + 90)) /
+                                      2.2,
+                                  //     (gameData.gameImages?.length ?? 0),
                                   index: index,
                                   background: gameState.backGround[index],
-                                  image: gameData.gameImages?[index].image ?? '',
+                                  image:
+                                      gameData.gameImages?[index].image ?? '',
                                   selected: gameState.correctIndexes
                                       .contains(gameData.gameImages?[index].id),
                                   onTap: () async {
@@ -66,7 +76,8 @@ class ClickThePictureWithWord extends StatelessWidget {
                                             generalStateOfGame.stateOfAvatar ==
                                                 null) &&
                                         gameState.correctIndexes.contains(
-                                                gameData.gameImages?[index].id) ==
+                                                gameData
+                                                    .gameImages?[index].id) ==
                                             false) {
                                       print(
                                           "###:${(gameState.chooseWord?.word ?? '')}, ${(gameData.gameImages?[index].word)}, ${generalStateOfGame.stateOfAvatar}");
@@ -142,7 +153,6 @@ class ClickThePictureWithWord extends StatelessWidget {
                                   });
                             }))),
               );
-            }))
-    );
+            })));
   }
 }

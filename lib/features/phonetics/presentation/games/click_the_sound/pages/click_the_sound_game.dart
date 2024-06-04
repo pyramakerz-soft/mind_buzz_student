@@ -16,10 +16,12 @@ class ClickTheSoundGame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final stateOfCurrentGamePhoneticsState = context.watch<CurrentGamePhoneticsCubit>().state;
+    final stateOfCurrentGamePhoneticsState =
+        context.watch<CurrentGamePhoneticsCubit>().state;
     final clickTheSoundState = context.watch<ClickTheSoundCubit>().state;
     final _viewModel = context.watch<ClickTheSoundCubit>();
-    String mainGameLetter = stateOfCurrentGamePhoneticsState.gameData?.first.mainLetter ?? 'a';
+    String mainGameLetter =
+        stateOfCurrentGamePhoneticsState.gameData?.first.mainLetter ?? 'a';
     letters = clickTheSoundState.letters ?? [];
     return BlocConsumer<ClickTheSoundCubit, ClickTheSoundInitial>(
       listener: (context, state) {
@@ -31,16 +33,22 @@ class ClickTheSoundGame extends StatelessWidget {
         }
       },
       builder: (context, state) {
+        context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
+            stateOfStringIsWord: false,
+            stateOfStringWillSay: state.gameData.mainLetter ?? '');
         return Container(
           margin: const EdgeInsets.only(bottom: 30, top: 50, left: 70),
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
           width: MediaQuery.of(context).size.width - 265,
-          height: MediaQuery.of(context).size.width < 760 ? MediaQuery.of(context).size.height * 0.7 : MediaQuery.of(context).size.height * 0.65,
+          height: MediaQuery.of(context).size.width < 760
+              ? MediaQuery.of(context).size.height * 0.7
+              : MediaQuery.of(context).size.height * 0.65,
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
-            border: Border.all(color: AppColorPhonetics.DarkBorderColor, width: 8),
+            border:
+                Border.all(color: AppColorPhonetics.DarkBorderColor, width: 8),
           ),
           child: letters.isEmpty
               ? const Center(
@@ -50,11 +58,14 @@ class ClickTheSoundGame extends StatelessWidget {
                   ),
                 )
               : StaggeredGridView.count(
-                  crossAxisCount: MediaQuery.of(context).size.width < 760 ? 11 : 12,
+                  crossAxisCount:
+                      MediaQuery.of(context).size.width < 760 ? 11 : 12,
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  mainAxisSpacing: MediaQuery.of(context).size.width < 760 ? 5 : 3,
-                  crossAxisSpacing:MediaQuery.of(context).size.width < 760 ? 8 : 11,
+                  mainAxisSpacing:
+                      MediaQuery.of(context).size.width < 760 ? 5 : 3,
+                  crossAxisSpacing:
+                      MediaQuery.of(context).size.width < 760 ? 8 : 11,
                   staggeredTiles: const [
                     StaggeredTile.count(3, 2), //0
                     StaggeredTile.count(2, 2), //1
@@ -78,26 +89,50 @@ class ClickTheSoundGame extends StatelessWidget {
                                 _viewModel.selectItem(index);
                                 _viewModel.startInteraction();
                                 if (letters[index] == mainGameLetter) {
-                                  context.read<CurrentGamePhoneticsCubit>().animationOfCorrectAnswer();
-                                  context.read<CurrentGamePhoneticsCubit>().backToMainAvatar();
-                                  await _viewModel.incrementCorrectAnswerCount(index);
-                                  context.read<CurrentGamePhoneticsCubit>().addStarToStudent(stateOfCountOfCorrectAnswer: _viewModel.state.correctAnswers ?? 0, mainCountOfQuestion: stateOfCurrentGamePhoneticsState.gameData?.first.numOfLetterRepeat ?? 0);
-                                  print('_viewModel.state.correctAnswers:${_viewModel.state.correctAnswers}');
-                                  print('_viewModel.state.correctAnswers:${(_viewModel.state.correctAnswers == stateOfCurrentGamePhoneticsState.gameData?.first.numOfLetterRepeat)}');
-                                  if (_viewModel.state.correctAnswers == stateOfCurrentGamePhoneticsState.gameData?.first.numOfLetterRepeat) {
+                                  context
+                                      .read<CurrentGamePhoneticsCubit>()
+                                      .animationOfCorrectAnswer();
+                                  context
+                                      .read<CurrentGamePhoneticsCubit>()
+                                      .backToMainAvatar();
+                                  await _viewModel
+                                      .incrementCorrectAnswerCount(index);
+                                  context
+                                      .read<CurrentGamePhoneticsCubit>()
+                                      .addStarToStudent(
+                                          stateOfCountOfCorrectAnswer:
+                                              _viewModel.state.correctAnswers ??
+                                                  0,
+                                          mainCountOfQuestion:
+                                              stateOfCurrentGamePhoneticsState
+                                                      .gameData
+                                                      ?.first
+                                                      .numOfLetterRepeat ??
+                                                  0);
+                                  print(
+                                      '_viewModel.state.correctAnswers:${_viewModel.state.correctAnswers}');
+                                  print(
+                                      '_viewModel.state.correctAnswers:${(_viewModel.state.correctAnswers == stateOfCurrentGamePhoneticsState.gameData?.first.numOfLetterRepeat)}');
+                                  if (_viewModel.state.correctAnswers ==
+                                      stateOfCurrentGamePhoneticsState
+                                          .gameData?.first.numOfLetterRepeat) {
                                     // context.read<CurrentGamePhoneticsCubit>().addSuccessAnswer(
                                     //     nextGameId: state.gameData.nextGameId,
                                     //     actionInEndOfLesson: () {
-                                          Navigator.of(context).pop();
-                                        // });
+                                    Navigator.of(context).pop();
+                                    // });
                                   }
                                 } else {
-                                  context.read<CurrentGamePhoneticsCubit>().addWrongAnswer();
+                                  context
+                                      .read<CurrentGamePhoneticsCubit>()
+                                      .addWrongAnswer();
                                   // sayTheLetter();
-                                  Future.delayed(Duration(seconds: 2), () async {
-                                    await context.read<ClickTheSoundCubit>().sayTheLetter();
+                                  Future.delayed(Duration(seconds: 2),
+                                      () async {
+                                    await context
+                                        .read<ClickTheSoundCubit>()
+                                        .sayTheLetter();
                                   });
-
                                 }
                                 Future.delayed(const Duration(seconds: 2), () {
                                   _viewModel.stopInteraction();
@@ -123,12 +158,16 @@ class ClickTheSoundGame extends StatelessWidget {
       width: 64,
       height: 64,
       child: InkWell(
-        onTap: viewModel.state.correctIndexes?.contains(index) ?? false ? null : onPress,
+        onTap: viewModel.state.correctIndexes?.contains(index) ?? false
+            ? null
+            : onPress,
         child: Stack(
           alignment: Alignment.center,
           children: [
             SvgPicture.asset(
-              viewModel.state.correctIndexes?.contains(index) ?? false ? AppSvgImages.bubbleDisabled : AppSvgImages.bubble,
+              viewModel.state.correctIndexes?.contains(index) ?? false
+                  ? AppSvgImages.bubbleDisabled
+                  : AppSvgImages.bubble,
               width: 64,
               height: 64,
             ),
@@ -140,7 +179,8 @@ class ClickTheSoundGame extends StatelessWidget {
             StrokedText(
               fontSize: 37,
               text: letter,
-              isDisabled: viewModel.state.correctIndexes?.contains(index) ?? false,
+              isDisabled:
+                  viewModel.state.correctIndexes?.contains(index) ?? false,
             ),
           ],
         ),
