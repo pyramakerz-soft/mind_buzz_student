@@ -67,13 +67,15 @@ class JourneyBarCubit extends Cubit<JourneyBarInitial> with ChangeNotifier {
     gamesStarsUseCases(gameId: gamesId, countOfStars: countOfStar);
 
     List<ChapterModel> tempGamesModels = state.dataOfLessons ?? [];
-    gamesId.forEach((gameIdData) {
-      int index2 = tempGamesModels.indexWhere((obj) => obj.id == gameIdData);
-      ChapterModel data = tempGamesModels[index2];
-      data.star = (countOfStar ?? 0);
-      tempGamesModels.removeAt(index2);
-      tempGamesModels.insert(index2, data);
-    });
+    try {
+      gamesId.forEach((gameIdData) {
+        int index2 = tempGamesModels.indexWhere((obj) => obj.id == gameIdData);
+        ChapterModel data = tempGamesModels[index2];
+        data.star = (countOfStar ?? 0);
+        tempGamesModels.removeAt(index2);
+        tempGamesModels.insert(index2, data);
+      });
+    }catch(e){}
     emit(state.copyWith(dataOfLessons: tempGamesModels));
   }
 }

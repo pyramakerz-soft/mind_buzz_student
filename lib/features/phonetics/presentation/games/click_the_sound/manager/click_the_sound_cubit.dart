@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../../../../../core/assets_sound.dart';
 import '../../../../../../core/audio_player.dart';
@@ -27,6 +28,7 @@ class ClickTheSoundCubit extends Cubit<ClickTheSoundInitial> {
             correctAnswers: correctAnswers,
             correctIndexes: correctIndexes)) {
     generateRandomLetters2();
+    getRandomPosition();
     TalkTts.startTalk(text: gameData.inst ?? '');
     Future.delayed(Duration(seconds: 2), () {
       sayTheLetter();
@@ -106,5 +108,21 @@ class ClickTheSoundCubit extends Cubit<ClickTheSoundInitial> {
     Future.delayed(Duration(seconds: 2), () {
       emit(state.copyWith(selectedItem: null));
     });
+  }
+
+  getRandomPosition(){
+    List<StaggeredTile> data = [
+      StaggeredTile.count(3, 2),
+      StaggeredTile.count(2, 2),
+      StaggeredTile.count(2, 3)
+    ];
+
+    List<StaggeredTile> finalList = [];
+    (state.gameData.gameLetters)?.forEach((element) {
+      Random random = Random();
+      int randomIndex = random.nextInt(data.length);
+      finalList.add( data[randomIndex]);
+    });
+    emit(state.copyWith(finalListOfPosition:finalList));
   }
 }

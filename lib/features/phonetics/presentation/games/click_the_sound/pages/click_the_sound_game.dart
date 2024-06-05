@@ -58,18 +58,10 @@ class ClickTheSoundGame extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             mainAxisSpacing: MediaQuery.of(context).size.width < 760 ? 5 : 3,
             crossAxisSpacing: MediaQuery.of(context).size.width < 760 ? 8 : 11,
-            staggeredTiles: const [
-              StaggeredTile.count(3, 2), //0
-              StaggeredTile.count(2, 2), //1
-              StaggeredTile.count(3, 3), //2
-              StaggeredTile.count(2, 2), //3
-              StaggeredTile.count(2, 3), //4
-              StaggeredTile.count(3, 2), //5
-              StaggeredTile.count(3, 3), //6
-              StaggeredTile.count(2, 3), //7
-            ],
-            children: List.generate(
-              stateOfGame.gameData.gameLetters?.length ?? 0,
+            staggeredTiles:stateOfGame.finalListOfPosition??[],
+            children:
+            List.generate(
+              (stateOfGame.gameData.gameLetters?.length ?? 0),
               (index) => Center(
                 child: _buildBubbleWidget(
                   letter: stateOfGame.gameData.gameLetters?[index].letter ?? '',

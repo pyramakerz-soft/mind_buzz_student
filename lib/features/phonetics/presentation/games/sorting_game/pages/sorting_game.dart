@@ -175,8 +175,7 @@ class SortingGameScreen extends StatelessWidget {
                                           .read<sortingCubit>()
                                           .addTheCorrectAnswer(answer: image);
 
-                                      if (gameState.gameData!
-                                              .gameLetters?[index].id ==
+                                      if (gameState.correctAnswer ==
                                           image.gameLetterId) {
                                         context
                                             .read<CurrentGamePhoneticsCubit>()

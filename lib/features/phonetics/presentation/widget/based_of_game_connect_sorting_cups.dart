@@ -83,7 +83,7 @@ class BasedOfGameConnectSortingCups extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    height: 50.h + 5,
+                    height: 50.h,
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
                       color: stateOfGame.basicData?.backGroundOfStarBar,

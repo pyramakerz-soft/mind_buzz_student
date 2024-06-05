@@ -104,6 +104,7 @@ class DragOutGame extends StatelessWidget {
                             .read<CurrentGamePhoneticsCubit>()
                             .backToMainAvatar();
                         context.read<DragOutCubit>().updateIndexOfCurrentGame();
+                        context.read<CurrentGamePhoneticsCubit>().increaseCountOfTries();
                       }
                     } else {
                       context.read<CurrentGamePhoneticsCubit>().addWrongAnswer(
@@ -149,10 +150,8 @@ class DragOutGame extends StatelessWidget {
                             placeholder: (context, url) => const Center(
                               child: CupertinoActivityIndicator(),
                             ),
-                            errorWidget: (context, url, error) => const Icon(
-                              Icons.error,
-                              color: Colors.red,
-                            ),
+                            errorWidget: (context, url, error) => Text('${gameState.gameData[gameState.index ?? 0]
+                                .gameImages?[index].word}'),
                             // height: ,
                           ),
                           child: ((stateOfCurrentGamePhoneticsCubit
@@ -197,9 +196,9 @@ class DragOutGame extends StatelessWidget {
                                     placeholder: (context, url) => Center(
                                       child: CircularProgressIndicator(),
                                     ),
-                                    errorWidget: (context, url, error) => Icon(
-                                      Icons.error,
-                                      color: Colors.red,
+                                    errorWidget: (context, url, error) => Center(
+                                      child: Text('${gameState.gameData[gameState.index ?? 0]
+                                          .gameImages?[index].word}'),
                                     ),
                                     // height: ,
                                   ),

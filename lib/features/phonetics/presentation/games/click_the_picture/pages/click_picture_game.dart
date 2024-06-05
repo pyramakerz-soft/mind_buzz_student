@@ -63,7 +63,7 @@ class ClickPictureGame extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 15.0, top: 15),
             child: Wrap(
-              spacing: 25,
+              spacing: 15,
               // runSpacing: 10,
               alignment: WrapAlignment.center,
               children: List.generate(

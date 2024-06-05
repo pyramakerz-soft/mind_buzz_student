@@ -182,6 +182,9 @@ class XOutGameScreen extends StatelessWidget {
                                             .stopInteraction();
                                       });
                                     },
+                        word: state
+                            .gameData?[state.currentGameIndex ?? 0]
+                            .gameImages?[index].word??'',
                             );
                     },
                   ),
@@ -200,10 +203,12 @@ class XOutItemWidget extends StatelessWidget {
     required this.imageName,
     required this.isSelected,
     required this.isCorrect,
+    required this.word,
     required this.onTap,
   }) : super(key: key);
 
   final String imageName;
+  final String word;
   final bool isSelected;
   final bool isCorrect;
   final VoidCallback? onTap;
@@ -228,6 +233,11 @@ class XOutItemWidget extends StatelessWidget {
               fit: BoxFit.fill,
               height: 70.h,
               width: 50.w,
+              errorWidget: (context, url, error){
+                return Center(
+                  child: Text('${word}'),
+                );
+              },
             ),
           ],
         ),

@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mind_buzz_refactor/core/vars.dart';
 
 import '../../../../../../core/phonetics/basic_of_every_game.dart';
 import '../../../../../../core/phonetics/phonetics_color.dart';
@@ -36,6 +37,7 @@ class GamesSortingCups extends StatelessWidget {
         }, builder: (context, gameState) {
           return Column(
             children: [
+              20.ph,
               ...List.generate(
                   ((gameState.cardsLetters?.length ?? 0) / 10).ceil(),
                   (rowIndex) {
@@ -115,7 +117,7 @@ class GamesSortingCups extends StatelessWidget {
                                                     .size
                                                     .height -
                                                 (50)) /
-                                            4,
+                                            5,
                                         body: item.value.letter ?? '',
                                       ),
                               )),
@@ -155,9 +157,8 @@ class GamesSortingCups extends StatelessWidget {
                                     "##:${gameState.gameData.mainLetter?.split('')[index].toLowerCase()}");
                                 print(
                                     "##:${(item.data.letter?.toLowerCase() ?? '')}");
-                                if (gameState.gameData.mainLetter
-                                        ?.split('')[index]
-                                        .toLowerCase() ==
+                                if (gameState.chooseWord?.letter
+                                        ?.toLowerCase() ==
                                     (item.data.letter?.toLowerCase() ?? '')) {
                                   await context
                                       .read<CurrentGamePhoneticsCubit>()

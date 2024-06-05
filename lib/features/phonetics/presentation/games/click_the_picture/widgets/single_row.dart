@@ -30,14 +30,14 @@ class SingleElement extends StatelessWidget {
       onDoubleTap: (){
       },
       child: Container(
-        width: width??(MediaQuery.of(context).size.width - (130 + 50 + 130)) / 6,
+        width: width??(MediaQuery.of(context).size.width - (130 + 50 + 130)) / 5,
         height: height??120.h,
         padding: EdgeInsets.only(bottom: index%2 == 0 ? 30:0),
         child: Stack(
           children: [
             Image.asset(
               background,
-              width: width==null?(MediaQuery.of(context).size.width - (130 + 50 + 130)) / 6:((width??1)+20),
+              width: width==null?(MediaQuery.of(context).size.width - (130 + 50 + 130)) / 5:((width??1)+20),
               height: height == null?120.h:((height??1)+20),
               color: selected ? AppColor.selectedColor : null,
             ),
@@ -45,7 +45,7 @@ class SingleElement extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               child: CachedNetworkImage(
                 imageUrl: image,
-                width: width??(MediaQuery.of(context).size.width - (130 + 50 + 130)) / 7,
+                width: width??(MediaQuery.of(context).size.width - (130 + 50 + 130)) / 6,
                 height: height??100.h,
                 // height: ,
               ),

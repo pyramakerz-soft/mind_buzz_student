@@ -33,7 +33,10 @@ class TracingGame extends StatelessWidget {
                             renderBox.globalToLocal(details.globalPosition);
                         context
                             .read<TracingCubit>()
-                            .saveCurrentPosition(position: localPosition);
+                            .saveCurrentPosition(position: localPosition,
+                          point: localPosition,
+                          size: Size(MediaQuery.of(context).size.width / 3,
+                              MediaQuery.of(context).size.height - (70.h)),);
 
                         context.read<TracingCubit>().checkTheLocationOfPoint(
                               point: localPosition,
@@ -49,7 +52,9 @@ class TracingGame extends StatelessWidget {
 
                         context
                             .read<TracingCubit>()
-                            .saveCurrentPosition(position: localPosition);
+                            .saveCurrentPosition(position: localPosition, point: localPosition,
+                          size: Size(MediaQuery.of(context).size.width / 3,
+                              MediaQuery.of(context).size.height - (70.h)),);
                         context.read<TracingCubit>().checkTheLocationOfPoint(
                               point: localPosition,
                               size: Size(MediaQuery.of(context).size.width / 3,

@@ -4,6 +4,7 @@ class ClickTheSoundInitial extends Equatable {
   final GameModel gameData;
   List<String>? letters;
   int? correctAnswers = 0;
+  List<StaggeredTile>? finalListOfPosition;
   List<int>? correctIndexes = [];
   final bool isInteracting;
   int? selectedItem;
@@ -15,6 +16,7 @@ class ClickTheSoundInitial extends Equatable {
     this.correctIndexes,
     this.isInteracting = false,
     this.selectedItem,
+    this.finalListOfPosition,
   });
 
   ClickTheSoundInitial copyWith({
@@ -22,12 +24,14 @@ class ClickTheSoundInitial extends Equatable {
     List<String>? letters,
     int? correctAnswers,
     List<int>? correctIndexes,
+    List<StaggeredTile>? finalListOfPosition,
     bool? isInteracting,
     int? selectedItem,
   }) {
     return ClickTheSoundInitial(
       gameData: gameData ?? this.gameData,
       letters: letters ?? this.letters,
+      finalListOfPosition: finalListOfPosition ?? this.finalListOfPosition,
       correctAnswers: correctAnswers ?? this.correctAnswers,
       correctIndexes: correctIndexes ?? this.correctIndexes,
       isInteracting: isInteracting ?? this.isInteracting,
@@ -36,5 +40,5 @@ class ClickTheSoundInitial extends Equatable {
   }
 
   @override
-  List<Object?> get props => [gameData, letters, correctAnswers, correctIndexes, isInteracting, selectedItem];
+  List<Object?> get props => [finalListOfPosition, gameData, letters, correctAnswers, correctIndexes, isInteracting, selectedItem];
 }

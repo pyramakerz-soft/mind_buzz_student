@@ -64,9 +64,21 @@ class TracingCubit extends Cubit<TracingInitial> {
         }
   }
 
-  saveCurrentPosition({required Offset? position}) {
+  saveCurrentPosition({required Offset? position, required Offset point, required Size size}) {
     if (position != null) {
+      int? indexOfPoint = state.stateOfGame?.basicData?.checkTheIndexOfPath!(point, size) ?? 0;
+      indexOfPoint = indexOfPoint - 1;
+      List<Color?> tempColors = state.colorsOfPaths;
+      // Color? lastColor;
+      // try {
+      //   lastColor = state.colorsOfPaths.firstWhere((
+      //       element) => element == null);
+      // }catch(e){
+      //
+      // }
+      if(tempColors[indexOfPoint]==null ){
       emit(state.copyWith(currentPosition: position));
+      }
     } else {
       emit(state.clearPosition());
     }

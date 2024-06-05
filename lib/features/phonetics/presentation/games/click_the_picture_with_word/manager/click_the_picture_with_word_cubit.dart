@@ -20,7 +20,8 @@ class ClickThePictureWithWordCubit
       : super(ClickThePictureWithWordInitial(
             gameData: gameData, backGround: backGround, correctIndexes: [])) {
     startGame();
-    emit(state.copyWith(gameDataPartOne: gameData.gameImages?.sublist(0, ((gameData.gameImages?.length??0)/2).ceil()), gameDataPartTwo:gameData.gameImages?.sublist(((gameData.gameImages?.length??0)/2).ceil(), gameData.gameImages?.length??0) ));
+    emit(state.copyWith(gameDataPartOne: gameData.gameImages?.sublist(0, ((gameData.gameImages?.length??0)/2).ceil()),
+        gameDataPartTwo:gameData.gameImages?.sublist(((gameData.gameImages?.length??0)/2).ceil(), gameData.gameImages?.length??0) ));
   }
 
   startGame() async {

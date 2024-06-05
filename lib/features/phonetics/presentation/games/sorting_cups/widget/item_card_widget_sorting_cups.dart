@@ -40,7 +40,7 @@ class ItemCardWidgetOFSortingCups extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .displayLarge
-                  ?.copyWith(fontSize: 20.sp, fontWeight: FontWeight.w700),
+                  ?.copyWith(fontSize: 18.sp, fontWeight: FontWeight.w700),
             )
           ],
         ),
