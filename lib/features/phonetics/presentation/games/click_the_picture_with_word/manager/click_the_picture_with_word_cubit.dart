@@ -26,7 +26,6 @@ class ClickThePictureWithWordCubit
 
   startGame() async {
     await TalkTts.startTalk(text: gameData.inst ?? '');
-    await Future.delayed(Duration(seconds: 2));
       await getTheRandomWord();
 
   }
