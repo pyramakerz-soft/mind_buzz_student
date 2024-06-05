@@ -14,15 +14,12 @@ import '../../../../../core/phonetics/assets_images_phonetics.dart';
 import '../../../../../core/phonetics/basic_of_every_game.dart';
 import '../../../../../core/phonetics/basic_of_phonetics.dart';
 import '../../../domain/entities/game_model.dart';
-import '../../../domain/use_cases/game_stars_use_cases.dart';
+import '../../../../chapters/domain/use_cases/game_stars_use_cases.dart';
 
 part 'current_game_phonetics_state.dart';
 
 class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
-  final GameStarsUseCases gamesStarsUseCases;
-
-  CurrentGamePhoneticsCubit({required this.gamesStarsUseCases})
-      : super(CurrentGamePhoneticsState(index: 0)) {
+  CurrentGamePhoneticsCubit() : super(CurrentGamePhoneticsState(index: 0)) {
     getTheBackGroundLoading();
   }
 
@@ -294,6 +291,5 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
       required void Function(int countOfStars, List<int> listOfIds)
           actionOfStars}) {
     actionOfStars.call((state.countOfStar ?? 0), gamesId);
-    gamesStarsUseCases(gameId: gamesId, countOfStars: state.countOfStar ?? 0);
   }
 }

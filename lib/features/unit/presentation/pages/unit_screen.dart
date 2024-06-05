@@ -16,6 +16,7 @@ import '../../../../core/assets_svg_images.dart';
 import '../../../../core/error/failures_messages.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 
+import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme_text.dart';
 import '../../../../core/utils.dart';
 import '../../../../core/vars.dart';
@@ -35,7 +36,9 @@ class UnitScreen extends StatelessWidget {
   final String programId;
   final String programName;
 
-  const UnitScreen({Key? key, required this.programId, required this.programName}) : super(key: key);
+  const UnitScreen(
+      {Key? key, required this.programId, required this.programName})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -89,23 +92,32 @@ class UnitScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Positioned(
-                                  top:50,
+                                  top: 50,
                                   left: 25,
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(top: 10.0),
+                                        padding:
+                                            const EdgeInsets.only(top: 10.0),
                                         child: GestureDetector(
                                             onTap: () {
                                               Navigator.of(context).pop();
                                             },
                                             child: Container(
-                                                padding: const EdgeInsets.all(9),
+                                                padding:
+                                                    const EdgeInsets.all(9),
                                                 alignment: Alignment.center,
                                                 height: 42,
                                                 width: 42,
-                                                decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: AppColor.darkBlueColor),
+                                                decoration: const BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10)),
+                                                    color:
+                                                        AppColor.darkBlueColor),
                                                 child: SvgPicture.asset(
                                                   AppSvgImages.iconHome,
                                                   fit: BoxFit.fill,
@@ -116,11 +128,15 @@ class UnitScreen extends StatelessWidget {
                                         width: 0.65.sw,
                                         child: Text(
                                           programName,
-                                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleMedium
+                                              ?.copyWith(
                                                 color: AppColor.darkBlueColor,
                                                 fontSize: 40,
                                                 fontWeight: FontWeight.w700,
-                                                fontFamily: AppTheme.getFontFamily5(),
+                                                fontFamily:
+                                                    AppTheme.getFontFamily5(),
                                               ),
                                         ),
                                       ),
@@ -133,10 +149,9 @@ class UnitScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-
                   ],
                 ),
-              
+
                 //     Container(
                 //       height: 160,
                 //       width: MediaQuery.of(context).size.width,
@@ -184,7 +199,6 @@ class UnitScreen extends StatelessWidget {
               ],
             ),
 
-
             20.ph,
             Positioned(
               bottom: 0,
@@ -198,8 +212,10 @@ class UnitScreen extends StatelessWidget {
             Positioned(
               top: 180,
               child: BlocProvider<GetUnitBloc>(
-                  create: (_) => di.sl<GetUnitBloc>()..add(GetUnitRequest(programId: int.parse(programId))),
-                  child: BlocConsumer<GetUnitBloc, GetUnitState>(listener: (context, state) {
+                  create: (_) => di.sl<GetUnitBloc>()
+                    ..add(GetUnitRequest(programId: int.parse(programId))),
+                  child: BlocConsumer<GetUnitBloc, GetUnitState>(
+                      listener: (context, state) {
                     if (state is GetProgramsErrorInitial) {
                       if (state.message == RELOGIN_FAILURE_MESSAGE) {
                         Utils.navigateAndRemoveUntilTo(LoginScreen(), context);
@@ -319,21 +335,33 @@ class UnitScreen extends StatelessWidget {
                             //height: MediaQuery.of(context).size.height-(20+100+(MediaQuery.of(context).size.height / 6)+160),
                             height: MediaQuery.of(context).size.height * 0.5,
                             child: ListView(
-                              children: List.generate(state.data.length, (index) {
+                              children:
+                                  List.generate(state.data.length, (index) {
                                 return Column(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20),
                                       child: GestureDetector(
                                         onTap: () {
                                           Utils.navigateTo(
                                               BlocProvider(
-                                                  create: (_) => JourneyBarCubit(unitId: state.data[index].id!),
+                                                  create: (_) =>
+                                                      JourneyBarCubit(
+                                                          unitId: state
+                                                              .data[index].id!,
+                                                          gamesStarsUseCases:
+                                                              sl()),
                                                   child: ChaptersScreen(
-                                                    programId: state.data[index].id.toString(),
-                                                    unitsCount: state.data.length,
+                                                    programId: state
+                                                        .data[index].id
+                                                        .toString(),
+                                                    unitsCount:
+                                                        state.data.length,
                                                     unitsIndex: index + 1,
-                                                    allUnits: state.data.map((e) => e.id!).toList(),
+                                                    allUnits: state.data
+                                                        .map((e) => e.id!)
+                                                        .toList(),
 
                                                     // programName:
                                                     //     state.data[index].name ?? '',
@@ -341,33 +369,76 @@ class UnitScreen extends StatelessWidget {
                                               context);
                                         },
                                         child: Align(
-                                          alignment: (index == 0) || index % 2 == 0 ? Alignment.topLeft : Alignment.topRight,
+                                          alignment:
+                                              (index == 0) || index % 2 == 0
+                                                  ? Alignment.topLeft
+                                                  : Alignment.topRight,
                                           child: Transform.flip(
-                                            flipX: (index == 0) || index % 2 == 0 ? false : true,
+                                            flipX:
+                                                (index == 0) || index % 2 == 0
+                                                    ? false
+                                                    : true,
                                             child: SizedBox(
-                                              height: (width * 0.2692307692307692),
+                                              height:
+                                                  (width * 0.2692307692307692),
                                               width: width,
                                               child: CustomPaint(
-                                                  size: Size(width, (width * 0.2692307692307692).toDouble()),
+                                                  size: Size(
+                                                      width,
+                                                      (width *
+                                                              0.2692307692307692)
+                                                          .toDouble()),
                                                   //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
-                                                  painter: RPSCustomPainter(currentColor: DefaultUnitData.fullDataOfCardColor.random()),
+                                                  painter: RPSCustomPainter(
+                                                      currentColor:
+                                                          DefaultUnitData
+                                                              .fullDataOfCardColor
+                                                              .random()),
                                                   child: Transform.flip(
-                                                    flipX: (index == 0) || index % 2 == 0 ? false : true,
+                                                    flipX: (index == 0) ||
+                                                            index % 2 == 0
+                                                        ? false
+                                                        : true,
                                                     child: Center(
                                                       child: Container(
                                                         width: width,
                                                         // alignment: Alignment.center,
-                                                        padding: EdgeInsets.only(top: 10, left: (index == 0) || index % 2 == 0 ? 0 : 30, right: (index == 0) || index % 2 == 0 ? 30 : 0),
+                                                        padding: EdgeInsets.only(
+                                                            top: 10,
+                                                            left: (index ==
+                                                                        0) ||
+                                                                    index % 2 ==
+                                                                        0
+                                                                ? 0
+                                                                : 30,
+                                                            right: (index ==
+                                                                        0) ||
+                                                                    index % 2 ==
+                                                                        0
+                                                                ? 30
+                                                                : 0),
                                                         child: Text(
-                                                          state.data[index].name ?? '',
-                                                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                                                color: AppColor.white,
-                                                                fontSize: 18,
-                                                                fontWeight: FontWeight.w700,
-                                                              ),
-                                                          textAlign: TextAlign.center,
+                                                          state.data[index]
+                                                                  .name ??
+                                                              '',
+                                                          style:
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .titleMedium
+                                                                  ?.copyWith(
+                                                                    color: AppColor
+                                                                        .white,
+                                                                    fontSize:
+                                                                        18,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w700,
+                                                                  ),
+                                                          textAlign:
+                                                              TextAlign.center,
                                                           maxLines: 1,
-                                                          overflow: TextOverflow.ellipsis,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                         ),
                                                       ),
                                                     ),

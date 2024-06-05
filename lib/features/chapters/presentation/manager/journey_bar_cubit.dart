@@ -7,13 +7,16 @@ import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../core/assets_animation.dart';
+import '../../domain/use_cases/game_stars_use_cases.dart';
 import '../../domain/entities/chapter_model.dart';
 import 'package:provider/provider.dart';
 import 'journey_bar_state.dart';
 
 class JourneyBarCubit extends Cubit<JourneyBarInitial> with ChangeNotifier {
+  final GameStarsUseCases gamesStarsUseCases;
+
   int unitId;
-  JourneyBarCubit({required this.unitId})
+  JourneyBarCubit({required this.gamesStarsUseCases, required this.unitId})
       : super(JourneyBarInitial(currentUnitId: unitId)) {
     getTheBackGround();
   }
@@ -61,6 +64,8 @@ class JourneyBarCubit extends Cubit<JourneyBarInitial> with ChangeNotifier {
   }
 
   sendStars({required List<int> gamesId, required int countOfStar}) {
+    gamesStarsUseCases(gameId: gamesId, countOfStars: countOfStar);
+
     List<ChapterModel> tempGamesModels = state.dataOfLessons ?? [];
     gamesId.forEach((gameIdData) {
       int index2 = tempGamesModels.indexWhere((obj) => obj.id == gameIdData);

@@ -4,20 +4,17 @@ import '../../../../../core/error/failures.dart';
 import '../../../../../core/network/network_info.dart';
 import '../../domain/entities/game_model.dart';
 import '../../domain/repositories/repositories_contact_lesson.dart';
-import '../data_sources/data_source_local_of_game_star.dart';
+import '../../../chapters/data/data_sources/data_source_local_of_game_star.dart';
 import '../data_sources/data_source_remotely_of_contact_lesson.dart';
 import '../../../math_book1/data/data_sources/local_data_source_remotely_of_contact_lesson.dart';
 
 class ContactLessonRepositoryImpl implements ProgramContactLessonRepository {
   final DataSourceRemotelyOfContactLesson remoteDataSource;
-  final DataSourceLocalOfContactLesson localRemoteDataSource;
 
   final NetworkInfo networkInfo;
 
   ContactLessonRepositoryImpl(
-      {required this.localRemoteDataSource,
-      required this.remoteDataSource,
-      required this.networkInfo});
+      {required this.remoteDataSource, required this.networkInfo});
 
   @override
   Future<Either<Failure, List<GameModel>>> lessonContactDataRepository(
@@ -56,32 +53,5 @@ class ContactLessonRepositoryImpl implements ProgramContactLessonRepository {
     } else {
       return Left(CacheFailure());
     }
-  }
-
-  @override
-  Future<bool> sendStarToGame(
-      {required List<int> gameId, required int countOfStars}) async {
-    if (await networkInfo.isConnected) {
-      try {
-        await remoteDataSource.sendStarToGame(
-            gameId: gameId, countOfStars: countOfStars);
-        cleatStarInLocal();
-        return true;
-      } catch (e, s) {}
-    }
-    saveStarInLocal(gameId: gameId, countOfStars: countOfStars);
-    return false;
-  }
-
-  @override
-  Future<void> saveStarInLocal(
-      {required List<int> gameId, required int countOfStars}) async {
-    await localRemoteDataSource.sendStarToGame(
-        gameId: gameId, countOfStars: countOfStars);
-  }
-
-  @override
-  Future<void> cleatStarInLocal() async {
-    await localRemoteDataSource.clearStarInLocal();
   }
 }

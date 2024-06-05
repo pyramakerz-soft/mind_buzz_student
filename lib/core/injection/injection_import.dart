@@ -8,11 +8,12 @@ Future<void> init() async {
       requestLoginData: sl(),
       requestAutoUserUseCases: sl(),
       updateUserDataUseCases: sl(),
-  createPassCodeUseCases: sl()));
+      createPassCodeUseCases: sl()));
   sl.registerFactory(() => GetUnitBloc(programUserUseCases: sl()));
-  sl.registerFactory(() => CurrentGamePhoneticsCubit(gamesStarsUseCases: sl()));
+  sl.registerFactory(() => CurrentGamePhoneticsCubit());
   sl.registerFactory(() => ChapterBloc(programUserUseCases: sl()));
-  sl.registerFactory(() => ContactLessonBloc(programContactUserUseCases: sl(),getGameUseCases: sl()));
+  sl.registerFactory(() => ContactLessonBloc(
+      programContactUserUseCases: sl(), getGameUseCases: sl()));
   sl.registerFactory(() =>
       GetProgramsHomeBloc(programUserUseCases: sl(), logOutUserUseCases: sl()));
   sl.registerFactory(() => NotificationsBloc());
@@ -44,16 +45,16 @@ Future<void> init() async {
       () => HomeRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<ProgramUnitRepository>(
       () => UnitRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
-  sl.registerLazySingleton<ProgramLessonRepository>(
-      () => LessonRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<ProgramLessonRepository>(() => LessonRepositoryImpl(
+        remoteDataSource: sl(),
+        networkInfo: sl(),
+        localRemoteDataSource: sl(),
+      ));
   sl.registerLazySingleton<ParentAssignmentRepository>(() =>
       ParentAssignmentRepositoryImpl(
           remoteDataSource: sl(), networkInfo: sl()));
-  sl.registerLazySingleton<ProgramContactLessonRepository>(
-      () => ContactLessonRepositoryImpl(
-          localRemoteDataSource: sl(),
-          remoteDataSource: sl(),
-          networkInfo: sl()));
+  sl.registerLazySingleton<ProgramContactLessonRepository>(() =>
+      ContactLessonRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
 
   sl.registerLazySingleton<NotificationRepository>(() =>
       NotificationRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
