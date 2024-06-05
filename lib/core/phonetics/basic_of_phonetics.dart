@@ -1,6 +1,7 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/phonetics/presentation/games/tracing/widget/letter_m.dart';
 import '../../features/phonetics/presentation/games/tracing/widget/letter_s.dart';
 import 'assets_images_phonetics.dart';
 import 'basic_of_every_game.dart';
@@ -84,6 +85,7 @@ abstract class MainDataOfPhonetics {
   BasicOfEveryGame? gameData;
   late Color backGroundOfStarBar;
   CustomPainter? Function(List<Color?>? colorsOfPaths)? get tracingOfLetter;
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath;
   late int? countOfPartsOfLettersForTracing = 0;
 
   static getGameDataType(
@@ -219,9 +221,20 @@ class SPhonetics implements MainDataOfPhonetics {
       (List<Color?>? colorsOfPaths) {
         return FlipBookPainterLetterS(colorsOfPaths: colorsOfPaths);
       };
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+      (Offset point, Size size) {
+        return FlipBookPainterLetterS.indexOfPointInside(point, size);
+      };
 }
 
 class APhonetics implements MainDataOfPhonetics {
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return null;
+      };
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -257,6 +270,12 @@ class APhonetics implements MainDataOfPhonetics {
 }
 
 class FPhonetics implements MainDataOfPhonetics {
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return null;
+      };
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -293,18 +312,13 @@ class FPhonetics implements MainDataOfPhonetics {
 }
 
 class MPhonetics implements MainDataOfPhonetics {
+
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
   String background = AppImagesPhonetics.backGroundOfM;
-
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
-      (List<Color?>? colorsOfPaths) {
-        return null;
-      };
 
   @override
   String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
@@ -326,10 +340,29 @@ class MPhonetics implements MainDataOfPhonetics {
   String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
-  int? countOfPartsOfLettersForTracing;
+  int? countOfPartsOfLettersForTracing = 16;
+
+  @override
+  CustomPainter? Function(List<Color?>? colorsOfPaths) get tracingOfLetter =>
+      (List<Color?>? colorsOfPaths) {
+        return FlipBookPainterLetterM(colorsOfPaths: colorsOfPaths);
+      };
+
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return FlipBookPainterLetterM.indexOfPointInside(point, size);
+          };
 }
 
 class TPhonetics implements MainDataOfPhonetics {
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return null;
+      };
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -367,6 +400,12 @@ class TPhonetics implements MainDataOfPhonetics {
 }
 
 class CPhonetics implements MainDataOfPhonetics {
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return null;
+      };
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -404,6 +443,12 @@ class CPhonetics implements MainDataOfPhonetics {
 }
 
 class RPhonetics implements MainDataOfPhonetics {
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return null;
+      };
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -441,6 +486,12 @@ class RPhonetics implements MainDataOfPhonetics {
 }
 
 class IPhonetics implements MainDataOfPhonetics {
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return null;
+      };
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -478,6 +529,12 @@ class IPhonetics implements MainDataOfPhonetics {
 }
 
 class PPhonetics implements MainDataOfPhonetics {
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return null;
+      };
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -515,6 +572,12 @@ class PPhonetics implements MainDataOfPhonetics {
 }
 
 class HPhonetics implements MainDataOfPhonetics {
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return null;
+      };
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -552,6 +615,12 @@ class HPhonetics implements MainDataOfPhonetics {
 }
 
 class JPhonetics implements MainDataOfPhonetics {
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return null;
+      };
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -589,6 +658,12 @@ class JPhonetics implements MainDataOfPhonetics {
 }
 
 class UPhonetics implements MainDataOfPhonetics {
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return null;
+      };
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -626,6 +701,12 @@ class UPhonetics implements MainDataOfPhonetics {
 }
 
 class LPhonetics implements MainDataOfPhonetics {
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return null;
+      };
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -663,6 +744,12 @@ class LPhonetics implements MainDataOfPhonetics {
 }
 
 class BPhonetics implements MainDataOfPhonetics {
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return null;
+      };
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -700,6 +787,12 @@ class BPhonetics implements MainDataOfPhonetics {
 }
 
 class OPhonetics implements MainDataOfPhonetics {
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return null;
+      };
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = Colors.white.withOpacity(.1);
@@ -737,6 +830,12 @@ class OPhonetics implements MainDataOfPhonetics {
 }
 
 class GPhonetics implements MainDataOfPhonetics {
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return null;
+      };
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -774,6 +873,12 @@ class GPhonetics implements MainDataOfPhonetics {
 }
 
 class DPhonetics implements MainDataOfPhonetics {
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return null;
+      };
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -811,6 +916,12 @@ class DPhonetics implements MainDataOfPhonetics {
 }
 
 class WPhonetics implements MainDataOfPhonetics {
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return null;
+      };
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -848,6 +959,12 @@ class WPhonetics implements MainDataOfPhonetics {
 }
 
 class EPhonetics implements MainDataOfPhonetics {
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return null;
+      };
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -885,6 +1002,12 @@ class EPhonetics implements MainDataOfPhonetics {
 }
 
 class NPhonetics implements MainDataOfPhonetics {
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return null;
+      };
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -922,6 +1045,12 @@ class NPhonetics implements MainDataOfPhonetics {
 }
 
 class ConnectionWithoutSortingCups implements MainDataOfPhonetics {
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return null;
+      };
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -957,6 +1086,12 @@ class ConnectionWithoutSortingCups implements MainDataOfPhonetics {
 }
 
 class ConnectionSortingCups implements MainDataOfPhonetics {
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return null;
+      };
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -994,6 +1129,12 @@ class ConnectionSortingCups implements MainDataOfPhonetics {
 }
 
 class SpellTheWord implements MainDataOfPhonetics {
+
+  @override
+  int? Function(Offset point, Size size)? get checkTheIndexOfPath =>
+          (Offset point, Size size) {
+        return null;
+      };
   final BasicOfEveryGame mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);

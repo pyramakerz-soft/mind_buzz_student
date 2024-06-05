@@ -9,6 +9,7 @@ import '../../../../../../core/app_color.dart';
 import '../../../../../../core/talk_tts.dart';
 import '../../../../domain/entities/game_model.dart';
 import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
+import '../widget/letter_m.dart';
 import '../widget/letter_s.dart';
 
 part 'tracing_state.dart';
@@ -35,19 +36,32 @@ class TracingCubit extends Cubit<TracingInitial> {
   }
 
   checkTheLocationOfPoint({required Offset point, required Size size}) async {
-    int? indexOfPoint = FlipBookPainterLetterS.indexOfPointInside(point, size);
-    if (indexOfPoint != null) {
+    if(state.stateOfGame?.basicData?.checkTheIndexOfPath != null) {
+      int? indexOfPoint = state.stateOfGame?.basicData?.checkTheIndexOfPath!(point, size) ?? 0;
+      print('indexOfPoint:$indexOfPoint');
+      print('##:${state.colorsOfPaths
+          .where((element) => element == null)
+          .isNotEmpty}');
+      print('before:${state.colorsOfPaths}');
+
       if (indexOfPoint == 1 &&
-          state.colorsOfPaths.where((element) => element == null).isNotEmpty) {
+          state.colorsOfPaths
+              .where((element) => element == null)
+              .isNotEmpty) {
         indexOfPoint = indexOfPoint - 1;
         List<Color?> tempColors = state.colorsOfPaths;
         tempColors[indexOfPoint] = AppColor.lightBlueColor4;
+        emit(state.copyWith(
+            colorsOfPaths: tempColors));
       } else if (state.colorsOfPaths[indexOfPoint - 2] != null) {
         indexOfPoint = indexOfPoint - 1;
         List<Color?> tempColors = state.colorsOfPaths;
         tempColors[indexOfPoint] = AppColor.lightBlueColor4;
+        emit(state.copyWith(
+            colorsOfPaths: tempColors));
       }
-    }
+      print('after:${state.colorsOfPaths}');
+        }
   }
 
   saveCurrentPosition({required Offset? position}) {
