@@ -54,6 +54,7 @@ class _DiceGamePage extends State<DiceGamePage> {
             width: MediaQuery.of(context).size.width - (100.w),
             height: MediaQuery.of(context).size.height - 60.h,
             child: Wrap(
+              alignment: WrapAlignment.center,
               children: List.generate(
                   (gameState.gameData?.gameImages)?.length ?? 0,
                   (index) => BlocConsumer<CurrentGamePhoneticsCubit,
@@ -172,7 +173,17 @@ class _DiceGamePage extends State<DiceGamePage> {
                                     .read<CurrentGamePhoneticsCubit>()
                                     .addWrongAnswer(actionOfWrongAnswer: () {
                                   // TalkTts.startTalk(text: gameData.mainLetter ?? '');
-                                });
+                                },
+                                    actionWhenTriesBeZero: () {
+
+                                      context.read<CurrentGamePhoneticsCubit>().sendStars(
+                                          gamesId: [gameState.gameData?.id ?? 0],
+                                          actionOfStars: (int countOfStars, List<int> listOfIds) {
+                                            context
+                                                .read<JourneyBarCubit>()
+                                                .sendStars(gamesId: listOfIds, countOfStar: countOfStars);
+                                          });
+                                    });
                               }
                             }
                           },
@@ -185,15 +196,15 @@ class _DiceGamePage extends State<DiceGamePage> {
                                             0) /
                                         4 ==
                                     4
-                                ? (MediaQuery.of(context).size.width - 261.w)
-                                : (MediaQuery.of(context).size.width - 262.w)),
+                                ? (MediaQuery.of(context).size.height - (85.h))/4
+                                : (MediaQuery.of(context).size.height - (85.h))/4),
                             maxWidth: (((gameState.gameData?.gameImages)
                                                 ?.length ??
                                             0) /
                                         4 ==
                                     4
-                                ? (MediaQuery.of(context).size.width - 392.h)
-                                : (MediaQuery.of(context).size.width - 480.h)),
+                                ? (MediaQuery.of(context).size.width - (115.w))/4
+                                : (MediaQuery.of(context).size.width - (115.w))/5),
                             hide: gameState.correctIndexes?.contains(
                                 (gameState.gameData?.gameImages)?[index].id),
                             index: index,

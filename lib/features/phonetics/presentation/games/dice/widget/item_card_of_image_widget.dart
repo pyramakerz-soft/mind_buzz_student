@@ -30,16 +30,16 @@ class ItemCardOfImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: maxWidth / 3,
-      height: maxHeight / 3,
+      width: maxWidth ,
+      height: maxHeight,
       child: Stack(
         alignment: Alignment.center,
         children: [
           GestureDetector(
             onTap: onTap,
             child: Container(
-              width: maxWidth / 3,
-              height: maxHeight / 3,
+              width: maxWidth ,
+              height: maxHeight,
               // padding: const EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 36),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -83,12 +83,13 @@ class ItemCardOfImageWidget extends StatelessWidget {
               alignment: Alignment.center,
               child: (hide == true)
                   ? Container(
-                      width: maxWidth / 3,
-                      height: maxHeight / 3,
+                      width: maxWidth ,
+                      height: maxHeight,
                       color: Colors.white,
                     )
                   : CachedNetworkImage(
                       imageUrl: body,
+
                       // isDisabled: false,
                     ),
             ),

@@ -60,8 +60,8 @@ class ClickPictureGame extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
               border:
                   Border.all(color: AppColorPhonetics.boarderColor, width: 5)),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 15.0, top: 15),
+          child: SizedBox(
+            // padding: const EdgeInsets.only(left: 15.0, top: 15),
             child: Wrap(
               spacing: 15,
               // runSpacing: 10,
@@ -111,7 +111,19 @@ class ClickPictureGame extends StatelessWidget {
                                 //     .addWrongAnswer();
                                 context
                                     .read<CurrentGamePhoneticsCubit>()
-                                    .addWrongAnswer();
+                                    .addWrongAnswer(
+                                    actionWhenTriesBeZero: () {
+
+                                      context.read<CurrentGamePhoneticsCubit>().sendStars(
+                                          gamesId: [stateOfGameData.gameData.id ?? 0],
+                                          actionOfStars: (int countOfStars, List<int> listOfIds) {
+                                            context
+                                                .read<JourneyBarCubit>()
+                                                .sendStars(gamesId: listOfIds, countOfStar: countOfStars);
+                                          });
+                                    }
+
+                                );
                                 await context
                                     .read<ClickPictureCubit>()
                                     .sayTheOnlyLetter();

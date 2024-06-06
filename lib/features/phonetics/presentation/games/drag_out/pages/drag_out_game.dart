@@ -110,6 +110,17 @@ class DragOutGame extends StatelessWidget {
                       context.read<CurrentGamePhoneticsCubit>().addWrongAnswer(
                           actionOfWrongAnswer: () {
                         // TalkTts.startTalk(text: gameData.mainLetter ?? '');
+                      }, actionWhenTriesBeZero: () {
+                        context.read<CurrentGamePhoneticsCubit>().sendStars(
+                            gamesId: gameState.gameData
+                                .map((obj) => obj.id ?? 0)
+                                .toList(),
+                            actionOfStars:
+                                (int countOfStars, List<int> listOfIds) {
+                              context.read<JourneyBarCubit>().sendStars(
+                                  gamesId: listOfIds,
+                                  countOfStar: countOfStars);
+                            });
                       });
                     }
                   })),

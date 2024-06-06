@@ -120,7 +120,19 @@ class ClickTheSoundGame extends StatelessWidget {
                           } else {
                             context
                                 .read<CurrentGamePhoneticsCubit>()
-                                .addWrongAnswer();
+                                .addWrongAnswer(
+
+                                actionWhenTriesBeZero: () {
+
+                                  context.read<CurrentGamePhoneticsCubit>().sendStars(
+                                      gamesId: [stateOfGame.gameData.id ?? 0],
+                                      actionOfStars: (int countOfStars, List<int> listOfIds) {
+                                        context
+                                            .read<JourneyBarCubit>()
+                                            .sendStars(gamesId: listOfIds, countOfStar: countOfStars);
+                                      });
+                                }
+                            );
                             // sayTheLetter();
                             Future.delayed(Duration(seconds: 2), () async {
                               await context

@@ -29,10 +29,10 @@ class SingleElement extends StatelessWidget {
       onTap: onTap,
       onDoubleTap: (){
       },
-      child: Container(
+      child: SizedBox(
         width: width??(MediaQuery.of(context).size.width - (130 + 50 + 130)) / 5,
         height: height??120.h,
-        padding: EdgeInsets.only(bottom: index%2 == 0 ? 30:0),
+        // padding: EdgeInsets.only(bottom: index%2 == 0 ? 30:0),
         child: Stack(
           children: [
             Image.asset(

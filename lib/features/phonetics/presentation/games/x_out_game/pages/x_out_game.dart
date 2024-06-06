@@ -172,7 +172,34 @@ class XOutGameScreen extends StatelessWidget {
                                         } else {
                                           context
                                               .read<CurrentGamePhoneticsCubit>()
-                                              .addWrongAnswer();
+                                              .addWrongAnswer(
+
+                                              actionWhenTriesBeZero: () {
+
+
+                                                context
+                                                    .read<
+                                                    CurrentGamePhoneticsCubit>()
+                                                    .sendStars(
+                                                    gamesId: state.gameData
+                                                        ?.map((obj) =>
+                                                    obj.id ?? 0)
+                                                        .toList() ??
+                                                        [],
+                                                    actionOfStars: (int
+                                                    countOfStars,
+                                                        List<int> listOfIds) {
+                                                      context
+                                                          .read<
+                                                          JourneyBarCubit>()
+                                                          .sendStars(
+                                                          gamesId:
+                                                          listOfIds,
+                                                          countOfStar:
+                                                          countOfStars);
+                                                    });
+                                              }
+                                          );
                                         }
                                       });
                                       Future.delayed(const Duration(seconds: 2),

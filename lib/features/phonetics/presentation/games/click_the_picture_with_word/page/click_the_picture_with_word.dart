@@ -164,7 +164,20 @@ class ClickThePictureWithWord extends StatelessWidget {
                                               .read<
                                                   ClickThePictureWithWordCubit>()
                                               .sayTheCorrectAnswer();
-                                        });
+                                        },
+
+                                            actionWhenTriesBeZero: () {
+
+                                              context.read<CurrentGamePhoneticsCubit>().sendStars(
+                                                  gamesId: [gameState.gameData.id ?? 0],
+                                                  actionOfStars: (int countOfStars, List<int> listOfIds) {
+                                                    context
+                                                        .read<JourneyBarCubit>()
+                                                        .sendStars(gamesId: listOfIds, countOfStar: countOfStars);
+                                                  });
+                                            }
+
+                                        );
                                       }
                                       context
                                           .read<CurrentGamePhoneticsCubit>()
