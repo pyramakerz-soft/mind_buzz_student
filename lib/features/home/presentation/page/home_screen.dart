@@ -8,6 +8,7 @@ import 'package:mind_buzz_refactor/core/assets_images.dart';
 import 'package:mind_buzz_refactor/core/extensions.dart';
 import 'package:mind_buzz_refactor/core/singleton.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import 'package:mind_buzz_refactor/core/widgets/custom_pop_up.dart';
 import '../../../../core/assets_svg_images.dart';
 import '../../../../core/error/failures_messages.dart';
 import '../../../../core/injection/injection_container.dart' as di;
@@ -33,6 +34,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreen extends State<HomeScreen> {
+  bool _isFirstTime = true;
   @override
   void initState() {
     if (Singleton().studentAssignments != null &&
@@ -57,6 +59,12 @@ class _HomeScreen extends State<HomeScreen> {
                   di.sl<GetProgramsHomeBloc>()..add(GetProgramsRequest()),
               child: BlocConsumer<GetProgramsHomeBloc, GetProgramsHomeState>(
                   listener: (context, state) {
+                if (state is GetProgramsCompleteInitial &&
+                    _isFirstTime &&
+                    Singleton().studentAssignments != null &&
+                    Singleton().studentAssignments!.isNotEmpty) {
+                  _buildCustomPopUp(context, state);
+                }
                 if (state is GetProgramsErrorInitial) {
                   if (state.message == RELOGIN_FAILURE_MESSAGE) {
                     Utils.navigateAndRemoveUntilTo(LoginScreen(), context);
@@ -217,5 +225,23 @@ class _HomeScreen extends State<HomeScreen> {
         ))
       ],
     );
+  }
+
+  _buildCustomPopUp(BuildContext context, GetProgramsCompleteInitial state) {
+    return showCustomDialog(
+        context: context,
+        firstContent: 'you have ',
+        numberOfAssignments:
+            "${state.data.fold(0, (previousValue, element) => (element.program?.studentTests?.length ?? 0) + (int.parse('$previousValue')))}",
+        remainingContent: ' Assignments',
+        buttonTitle: 'Start Now',
+        onButtonPressed: () {
+          Utils.navigateTo(
+              BlocProvider(
+                  create: (_) =>
+                      CheckAssignmentCubit(assignmentProgrammes: state.data),
+                  child: StudentAssignmentScreen()),
+              context);
+        });
   }
 }
