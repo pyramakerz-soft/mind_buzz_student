@@ -20,13 +20,14 @@ class ParentAssignmentRepositoryImpl implements ParentAssignmentRepository {
       String? fromDate,
       String? toDate,
       String? status,
-      List<String>? listOfTypes}) async {
+      List<String>? listOfTypes, required bool isFuture}) async {
     if (await networkInfo.isConnected) {
       try {
         final res = await remoteDataSource.getParentAssignmentDataAssignment(
             programId: idProgram,
             fromDate: fromDate,
             toDate: toDate,
+            isFuture: isFuture,
             status: status,
             listOfTypes: listOfTypes);
         return Right(res);

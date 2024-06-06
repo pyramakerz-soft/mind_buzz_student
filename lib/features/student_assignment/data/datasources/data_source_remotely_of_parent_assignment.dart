@@ -6,7 +6,7 @@ import '../../domain/entities/main_data_test.dart';
 
 abstract class DataSourceRemotelyOfParentAssignment {
   Future<MainDataTestsModel> getParentAssignmentDataAssignment(
-      { int? programId, String? fromDate, String? toDate, String? status, List<String>? listOfTypes});
+      { int? programId, String? fromDate, String? toDate, String? status, List<String>? listOfTypes, required bool isFuture});
 }
 
 class DataSourceRemotelyOfParentAssignmentImpl implements DataSourceRemotelyOfParentAssignment {
@@ -16,7 +16,7 @@ class DataSourceRemotelyOfParentAssignmentImpl implements DataSourceRemotelyOfPa
 
   @override
   Future<MainDataTestsModel> getParentAssignmentDataAssignment(
-      { int? programId, String? fromDate, String? toDate, String? status, List<String>? listOfTypes}) async {
+      { int? programId, String? fromDate, String? toDate, String? status, List<String>? listOfTypes, required bool isFuture}) async {
     Map<String, String> subListOfTypes = {};
     if (listOfTypes!=null && listOfTypes.isNotEmpty)
       for (int i = 0; i < listOfTypes.length; i++) {
@@ -27,6 +27,7 @@ class DataSourceRemotelyOfParentAssignmentImpl implements DataSourceRemotelyOfPa
       if(fromDate!=null)'from_date':fromDate,
       if(toDate!=null)'to_date':toDate,
       if(status!=null)'status':status,
+      'future':isFuture
     };
     formData.addAll(subListOfTypes);
     final response = await dio.post(

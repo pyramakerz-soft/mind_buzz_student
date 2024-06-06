@@ -47,7 +47,7 @@ class CalenderBloc extends Bloc<CalenderEvent, CalenderState> {
   getAssignments(emit) async {
     emit(GetCalenderLoadingInitial());
     try {
-      var res = await programUserUseCases();
+      var res = await programUserUseCases(isFuture:true);
       res.fold((l) {
         log('getUserData fold $l');
         emit(GetCalenderErrorInitial(message: _mapFailureToMessage(l)));
