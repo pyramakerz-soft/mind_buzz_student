@@ -13,23 +13,25 @@ class ItemCardWidget extends StatelessWidget {
   final void Function()? onTap;
   final GameImagesModel body;
   final int index;
-  final int id;
+  final GameImagesModel data;
 
   const ItemCardWidget(
       {Key? key,
       required this.body,
       this.onTap,
       required this.index,
-      required this.id})
+      required this.data})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Draggable<int>(
+    return Draggable<GameImagesModel>(
       // Data is the value this Draggable stores.
-      data: id,
+      data: data,
 
-      feedback: Padding(
-        padding: const EdgeInsets.all(8.0),
+      feedback: Transform.translate(
+          offset: Offset(30, 0), // Adjust the offset to center the feedback
+          child:Material(
+        color: Colors.transparent,
         child: Container(
           height: 70.0,
           width: 60.0,
@@ -49,7 +51,7 @@ class ItemCardWidget extends StatelessWidget {
             // height: ,
           ),
         ),
-      ),
+      )),
       child: Padding(
         padding: const EdgeInsets.all(5),
         child: Container(
@@ -63,15 +65,13 @@ class ItemCardWidget extends StatelessWidget {
                 child: CupertinoActivityIndicator(),
               ),
               errorWidget: (context, url, error) =>
-              const Icon(
-                Icons.error,
-                color: Colors.red,
-              ),
+              Center(child:  Text('${body.word}'),),
               // height: ,
             ),
           ),
         ),
       ),
+        childWhenDragging: SizedBox(),
     );
   }
 }

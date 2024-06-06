@@ -142,8 +142,9 @@ class BasedOfGameConnect extends StatelessWidget {
                       ? Padding(
                           padding: EdgeInsets.only(left: 10.w),
                           child: Container(
-                            width: 0.8.sw,
+                            // width: 0.8.sw,
                             child: Row(
+                              mainAxisSize: MainAxisSize.min,
                               // crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Image.asset(

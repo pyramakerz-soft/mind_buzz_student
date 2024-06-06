@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 
 import '../../../../../../core/assets_sound.dart';
 import '../../../../../../core/audio_player.dart';
+import '../../../../../../core/talk_tts.dart';
 import '../../../../domain/entities/game_images_model.dart';
 import '../../../../domain/entities/game_letters_model.dart';
 import '../../../../domain/entities/game_model.dart';
@@ -25,49 +26,37 @@ class sortingCubit extends Cubit<sortingInitial> {
       : super(sortingInitial(
             gameData: gameData,
             woodenBackground: background,
+            currentImages: [],
+            correctAnswersData: [],
             correctAnswers: [])) {
-    changeImages();
     emit(
         state.copyWith(cardsLetters: gameData.gameLetters, correctAnswers: []));
+    changeImages();
+    TalkTts.startTalk(text: state.gameData?.inst ?? '');
   }
 
   changeImages() {
     List<GameImagesModel> newList = (state.gameData?.gameImages ?? [])
-        .where((element) => !state.correctAnswers
-        .map((e) => e.id)
-        .toList()
-        .contains(element.id) && !(state.wrongAnswers??[])
-        .map((e) => e.id)
-        .toList()
-        .contains(element.id))
-        .toList()
-      ..shuffle();
-    if(newList.isNotEmpty) {
-      if (state.currentImages?.isEmpty ?? true) {
-        int currentStep = state.step;
-        newList = newList.sublist(0, 4);
-        emit(state.copyWith(step: currentStep + 1, currentImages: newList));
-      }
-    }
+        .where((element) => state.correctAnswers.contains(element.id) == false)
+        .toList();
+    newList.shuffle();
+    emit(state.copyWith(currentImages: newList));
   }
 
   addTheCorrectAnswer({required GameImagesModel answer}) async {
-    List<GameImagesModel> correctAnswer = state.correctAnswers;
-    correctAnswer.add(answer);
+    List<GameImagesModel> correctAnswersData = state.correctAnswersData;
+    List<int> correctAnswers = state.correctAnswers;
+    correctAnswersData.add(answer);
     List<GameImagesModel> newImagesList = state.currentImages ?? [];
-    newImagesList.remove(answer);
+    newImagesList.removeWhere((element) => element.id == answer.id);
+    correctAnswers.add(answer.id ?? 0);
     emit(state.copyWith(
-        correctAnswers: correctAnswer, currentImages: newImagesList));
+        correctAnswersData: correctAnswersData,
+        currentImages: newImagesList,
+        correctAnswers: correctAnswers));
   }
-  removeTheWrongAnswer() async {
-    List<GameImagesModel> newImagesList = state.currentImages ?? [];
-    List<GameImagesModel> correctAnswer = state.correctAnswers;
-    newImagesList.add(correctAnswer.last);
-    correctAnswer.removeLast();
-    emit(state.copyWith(
-        correctAnswers: correctAnswer, currentImages: newImagesList));
-  }
-  addWrongAnswer()  {
+
+  addWrongAnswer() {
     List<GameImagesModel> currentImages = state.currentImages ?? [];
     List<GameImagesModel> wrongAnswers = state.wrongAnswers ?? [];
     wrongAnswers.addAll(currentImages);
@@ -76,23 +65,13 @@ class sortingCubit extends Cubit<sortingInitial> {
         wrongAnswers: wrongAnswers, currentImages: currentImages));
   }
 
-  increaseCountOfCorrectAnswers() async {
-    int sub = state.correctAnswer ?? 0;
-    sub = sub + 1;
-    emit(state.copyWith(correctAnswer: sub));
-    return state.correctAnswer;
-  }
-
-  increaseCountOfWrongAnswers({int? count}) async {
-    emit(state.copyWith(countOfWrong: count ?? state.countOfWrong + 1));
-  }
-
   clearAnswers() {
     emit(state.copyWith(correctAnswers: []));
   }
 
   bool checkIfIsTheLastGameOfLesson() {
-    if ((state.correctAnswers.length + (state.wrongAnswers??[]).length )== (state.gameData?.gameImages?.length ?? 0)) {
+    if ((state.correctAnswers.length + (state.wrongAnswers ?? []).length) ==
+        (state.gameData?.gameImages?.length ?? 0)) {
       return true;
     } else {
       return false;

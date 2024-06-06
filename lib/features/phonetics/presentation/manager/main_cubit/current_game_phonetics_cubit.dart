@@ -143,7 +143,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   saveCountOfTries() {
-    int countOfTries = 3; //state.gameData?[state.index].numOfTrials??0;
+    int countOfTries = state.gameData?[state.index].numOfTrials??0;
     emit(state.copyWith(countOfTries: countOfTries, countOfStar: 0));
   }
 
@@ -157,7 +157,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   increaseCountOfTries() {
-    int countOfTries = 3;
+    int countOfTries = state.gameData?[state.index].numOfTrials??0;
     emit(state.copyWith(countOfTries: countOfTries));
   }
 

@@ -26,13 +26,7 @@ class SortingGameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<sortingCubit, sortingInitial>(
         listener: (context, state) {
-      if (state.countOfWrong == 3) {
-        context.read<sortingCubit>().increaseCountOfWrongAnswers(count: 0);
-        context.read<sortingCubit>().addWrongAnswer();
-        Future.delayed(Duration(seconds: 1), () {
-          context.read<sortingCubit>().changeImages();
-        });
-      }
+
     }, builder: (context, gameState) {
       return Padding(
         padding: const EdgeInsets.only(top: 0, left: 30),
@@ -63,16 +57,21 @@ class SortingGameScreen extends StatelessWidget {
                         GridView.builder(
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
-                            itemCount: gameState.currentImages?.length ?? 1,
+                            itemCount: 4,
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 2, childAspectRatio: 1.5),
                             itemBuilder: (context, index) {
-                              return ItemCardWidget(
-                                id: gameState.currentImages?[index].id ?? 0,
-                                body: gameState.currentImages![index],
-                                index: index,
-                              );
+                              try {
+                                return ItemCardWidget(
+                                  data: gameState.currentImages[index] ??
+                                      GameImagesModel(),
+                                  body: gameState.currentImages[index],
+                                  index: gameState.currentImages[index].id ?? 0,
+                                );
+                              } catch (e) {
+                                return SizedBox();
+                              }
                             }),
                       ],
                     ))),
@@ -84,7 +83,8 @@ class SortingGameScreen extends StatelessWidget {
                     Image.asset(
                       gameState.woodenBackground!,
                       height: 0.8.sh,
-                      fit: BoxFit.cover,
+                      // width: MediaQuery.of(context).size.width,
+                      fit: BoxFit.fill,
                     ),
                     ListView.separated(
                         shrinkWrap: true,
@@ -101,174 +101,172 @@ class SortingGameScreen extends StatelessWidget {
                             ),
                         itemBuilder: (context, index) {
                           return Container(
-                            width: 0.14.sw,
-                            height: 0.8.sw,
-                            padding:
-                                EdgeInsets.only(top: 30, right: 30, left: 10),
-                            child: Column(
-                              children: [
-                                StrokeText(
-                                  text: gameState.gameData!.gameLetters![index]
-                                          .letter ??
-                                      '',
-                                  isDisabled: false,
-                                  fontSize: 0.04.sw,
-                                ),
-                                7.ph,
-                                Expanded(
-                                  child: DragTarget<int>(
-                                    builder: (
-                                      BuildContext context,
-                                      List<dynamic> accepted,
-                                      List<dynamic> rejected,
-                                    ) {
-                                      return GridView.builder(
-                                          shrinkWrap: true,
-                                          itemCount: gameState.correctAnswers
-                                              .where((element) =>
-                                                  element.gameLetterId ==
-                                                  gameState.gameData!
-                                                      .gameLetters![index].id)
-                                              .toList()
-                                              .length,
-                                          gridDelegate:
-                                              SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 2,
-                                                  crossAxisSpacing: 2,
-                                                  mainAxisSpacing: 5),
-                                          itemBuilder: (context, i) {
-                                            String image = gameState
-                                                    .correctAnswers
-                                                    .where((element) =>
-                                                        element.gameLetterId ==
-                                                        gameState
-                                                            .gameData!
-                                                            .gameLetters![index]
-                                                            .id)
-                                                    .toList()[i]
-                                                    .image ??
-                                                '';
-                                            return CachedNetworkImage(
-                                              imageUrl: image,
-                                              placeholder: (context, url) =>
-                                                  const Center(
-                                                child:
-                                                    CupertinoActivityIndicator(),
-                                              ),
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                                      const Icon(
-                                                Icons.error,
-                                                color: Colors.red,
-                                              ),
-                                              // height: ,
-                                            );
-                                          });
-                                    },
-                                    onAcceptWithDetails:
-                                        (DragTargetDetails<int> details) async {
-                                      GameImagesModel image = gameState
-                                          .gameData!.gameImages!
-                                          .firstWhere((element) =>
-                                              element.id == details.data);
+                              width: 0.14.sw,
+                              height: 0.8.sw,
+                              padding: EdgeInsets.only(top: 30),
+                              child: DragTarget<GameImagesModel>(
+                                builder: (
+                                  BuildContext context,
+                                  List<dynamic> accepted,
+                                  List<dynamic> rejected,
+                                ) {
+                                  return Column(
+                                    children: [
+                                      StrokeText(
+                                        text: gameState.gameData!
+                                                .gameLetters![index].letter ??
+                                            '',
+                                        isDisabled: false,
+                                        fontSize: 0.04.sw,
+                                      ),
+                                      7.ph,
+                                      Expanded(
+                                          child: GridView.builder(
+                                              shrinkWrap: true,
+                                              itemCount: gameState
+                                                  .correctAnswersData.length,
+                                              gridDelegate:
+                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                      crossAxisCount: 2,
+                                                      crossAxisSpacing: 2,
+                                                      mainAxisSpacing: 5),
+                                              itemBuilder: (context, i) {
+                                                try {
+                                                  String image = gameState
+                                                          .correctAnswersData
+                                                          .where((element) =>
+                                                              element
+                                                                  .gameLetterId ==
+                                                              gameState
+                                                                  .gameData!
+                                                                  .gameLetters![
+                                                                      index]
+                                                                  .id)
+                                                          .toList()[i]
+                                                          .image ??
+                                                      '';
+
+                                                  return CachedNetworkImage(
+                                                    imageUrl: image,
+                                                    placeholder:
+                                                        (context, url) =>
+                                                            const Center(
+                                                      child:
+                                                          CupertinoActivityIndicator(),
+                                                    ),
+                                                    errorWidget:
+                                                        (context, url, error) =>
+                                                            const Icon(
+                                                      Icons.error,
+                                                      color: Colors.red,
+                                                    ),
+                                                    // height: ,
+                                                  );
+                                                } catch (e) {
+                                                  return SizedBox();
+                                                }
+                                              })),
+                                      20.ph,
+                                    ],
+                                  );
+                                },
+                                onAcceptWithDetails:
+                                    (DragTargetDetails<GameImagesModel>
+                                        details) async {
+                                  print('details:${details.data.word}');
+                                  print(
+                                      'details:${gameState.gameData!.gameLetters![index].letter}');
+
+                                  GameImagesModel image = details.data;
+
+                                  if ((gameState.gameData!.gameLetters![index]
+                                              .letter)
+                                          ?.toLowerCase() ==
+                                      image.word
+                                          ?.split('')
+                                          .first
+                                          .toLowerCase()) {
+                                    context
+                                        .read<sortingCubit>()
+                                        .addTheCorrectAnswer(answer: image);
+                                    context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .animationOfCorrectAnswer();
+                                    // int countOfCorrect = await context
+                                    //     .read<sortingCubit>()
+                                    //     .increaseCountOfCorrectAnswers();
+
+                                    context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .addStarToStudent(
+                                          stateOfCountOfCorrectAnswer:
+                                              gameState.correctAnswersData.length,
+                                          mainCountOfQuestion: gameState
+                                                  .gameData
+                                                  ?.gameImages
+                                                  ?.length ??
+                                              0,
+                                        );
+                                    bool isLastLesson = context
+                                        .read<sortingCubit>()
+                                        .checkIfIsTheLastGameOfLesson();
+                                    if (isLastLesson == true) {
+                                      await Future.delayed(
+                                          const Duration(seconds: 2));
                                       context
-                                          .read<sortingCubit>()
-                                          .addTheCorrectAnswer(answer: image);
-
-                                      if (gameState.correctAnswer ==
-                                          image.gameLetterId) {
-                                        context
-                                            .read<CurrentGamePhoneticsCubit>()
-                                            .animationOfCorrectAnswer();
-                                        int countOfCorrect = await context
-                                            .read<sortingCubit>()
-                                            .increaseCountOfCorrectAnswers();
-
-                                        context
-                                            .read<CurrentGamePhoneticsCubit>()
-                                            .addStarToStudent(
-                                              stateOfCountOfCorrectAnswer:
-                                                  countOfCorrect,
-                                              mainCountOfQuestion: gameState
-                                                      .gameData
-                                                      ?.gameImages
-                                                      ?.length ??
-                                                  0,
-                                            );
-                                        bool isLastLesson = context
-                                            .read<sortingCubit>()
-                                            .checkIfIsTheLastGameOfLesson();
-                                        if (isLastLesson == true) {
-                                          await Future.delayed(
-                                              const Duration(seconds: 2));
-                                          context
-                                              .read<CurrentGamePhoneticsCubit>()
-                                              .sendStars(
-                                                  gamesId: [
-                                                gameState.gameData?.id ?? 0
-                                              ],
-                                                  actionOfStars:
-                                                      (int countOfStars,
-                                                          List<int> listOfIds) {
-                                                    context
-                                                        .read<JourneyBarCubit>()
-                                                        .sendStars(
-                                                            gamesId: listOfIds,
-                                                            countOfStar:
-                                                                countOfStars);
-                                                  });
-                                          Navigator.of(context).pop();
-                                        } else {
-                                          context
-                                              .read<CurrentGamePhoneticsCubit>()
-                                              .backToMainAvatar();
-                                          context
-                                              .read<sortingCubit>()
-                                              .changeImages();
-                                        }
-                                      } else {
-                                        context
-                                            .read<CurrentGamePhoneticsCubit>()
-                                            .addWrongAnswer(
-                                                actionOfWrongAnswer: () async {
-                                          // TalkTts.startTalk(text: gameData.mainLetter ?? '');
-                                        },
-                                            actionWhenTriesBeZero: () {
-                                              context
-                                                  .read<CurrentGamePhoneticsCubit>()
-                                                  .sendStars(
-                                                  gamesId: [
-                                                    gameState.gameData?.id ?? 0
-                                                  ],
-                                                  actionOfStars:
-                                                      (int countOfStars,
-                                                      List<int> listOfIds) {
-                                                    context
-                                                        .read<JourneyBarCubit>()
-                                                        .sendStars(
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .sendStars(
+                                              gamesId: [
+                                            gameState.gameData?.id ?? 0
+                                          ],
+                                              actionOfStars: (int countOfStars,
+                                                  List<int> listOfIds) {
+                                                context
+                                                    .read<JourneyBarCubit>()
+                                                    .sendStars(
                                                         gamesId: listOfIds,
                                                         countOfStar:
-                                                        countOfStars);
-                                                  });
-                                            });
-                                        context
-                                            .read<CurrentGamePhoneticsCubit>()
-                                            .increaseCountOfTries();
+                                                            countOfStars);
+                                              });
+                                      Navigator.of(context).pop();
+                                    } else {
+                                      context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .backToMainAvatar();
 
-                                        context
-                                            .read<sortingCubit>()
-                                            .increaseCountOfWrongAnswers();
-                                        context
-                                            .read<sortingCubit>()
-                                            .removeTheWrongAnswer();
-                                      }
+                                    }
+                                  } else {
+                                    context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .addWrongAnswer(
+                                            actionOfWrongAnswer: () async {
+                                      // TalkTts.startTalk(text: gameData.mainLetter ?? '');
                                     },
-                                  ),
-                                ),
-                                20.ph,
-                              ],
-                            ),
-                          );
+                                        actionWhenTriesBeZero: () {
+                                      context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .sendStars(
+                                              gamesId: [
+                                            gameState.gameData?.id ?? 0
+                                          ],
+                                              actionOfStars: (int countOfStars,
+                                                  List<int> listOfIds) {
+                                                context
+                                                    .read<JourneyBarCubit>()
+                                                    .sendStars(
+                                                        gamesId: listOfIds,
+                                                        countOfStar:
+                                                            countOfStars);
+                                              });
+                                    });
+
+
+                                    // context
+                                    //     .read<sortingCubit>()
+                                    //     .removeTheWrongAnswer();
+                                  }
+                                },
+                              ));
                         }),
                   ],
                 ),
