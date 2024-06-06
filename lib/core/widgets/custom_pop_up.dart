@@ -5,6 +5,8 @@ import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/theme_text.dart';
 import 'package:mind_buzz_refactor/core/widgets/button_start_game.dart';
 
+import '../assets_svg_images.dart';
+
 showCustomDialog(
     {required BuildContext context,
     required String firstContent,
@@ -51,7 +53,7 @@ class _CustomDialog extends StatelessWidget {
               top: 20,
               end: 0,
               child: SvgPicture.asset(
-                'assets/svg/bee.svg',
+                AppSvgImages.beeAlert,
                 width: 80,
                 height: 80,
                 fit: BoxFit.contain,
@@ -59,7 +61,7 @@ class _CustomDialog extends StatelessWidget {
             ),
             Positioned.fill(
               child: SvgPicture.asset(
-                'assets/svg/pop_up_background.svg',
+                AppSvgImages.popUpBackground,
                 width: 300,
                 height: 300,
                 fit: BoxFit.contain,
@@ -71,7 +73,7 @@ class _CustomDialog extends StatelessWidget {
               child: GestureDetector(
                 onTap: Navigator.of(context).pop,
                 child: SvgPicture.asset(
-                  'assets/svg/exit_button.svg',
+                  AppSvgImages.exitButton,
                   width: 50,
                   height: 50,
                   fit: BoxFit.contain,

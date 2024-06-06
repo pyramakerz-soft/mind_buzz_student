@@ -37,6 +37,10 @@ abstract class AppSvgImages {
   static const String bubbleSelected = '${mainPathOfSvg}bubbleSelected.svg';
   static const String buttonBackground = '${mainPathOfSvg}buttonBackground.svg';
   static const String buttonBackgroundDisabled = '${mainPathOfSvg}buttonBackgroundDisabled.svg';
+  static const String beeAlert = '${mainPathOfSvg}beeAlert.svg';
+  static const String popUpBackground = '${mainPathOfSvg}pop_up_background.svg';
+  static const String exitButton = '${mainPathOfSvg}exit_button.svg';
+  static const String reloading = '${mainPathOfSvg}reloading.svg';
 
   static const String iconCurrentChapter1 =
       '${mainPathOfSvg}current_chapter1.svg';

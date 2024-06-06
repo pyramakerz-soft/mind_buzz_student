@@ -216,6 +216,7 @@ class Assets {
   static const String svgAnalysisIcon = 'assets/svg/analysis_icon.svg';
   static const String svgArrowToNext = 'assets/svg/arrow_to_next.svg';
   static const String svgAssign = 'assets/svg/assign.svg';
+  static const String svgBeeAlert = 'assets/svg/beeAlert.svg';
   static const String svgBgChooseWhoAmI = 'assets/svg/bg_choose_who_am_i.svg';
   static const String svgBlimp = 'assets/svg/blimp.svg';
   static const String svgBubble = 'assets/svg/bubble.svg';
@@ -230,6 +231,7 @@ class Assets {
   static const String svgCurrentChapter1 = 'assets/svg/current_chapter1.svg';
   static const String svgCurrentChapter2 = 'assets/svg/current_chapter2.svg';
   static const String svgEmptyStar = 'assets/svg/empty_star.svg';
+  static const String svgExitButton = 'assets/svg/exit_button.svg';
   static const String svgFlowers = 'assets/svg/flowers.svg';
   static const String svgGetInstruction = 'assets/svg/get_instruction.svg';
   static const String svgGiftBox = 'assets/svg/gift_box.svg';
@@ -240,6 +242,8 @@ class Assets {
   static const String svgOpenLesson = 'assets/svg/open_lesson.svg';
   static const String svgPartLesson1 = 'assets/svg/part_lesson1.svg';
   static const String svgPartLesson2 = 'assets/svg/part_lesson2.svg';
+  static const String svgPopUpBackground = 'assets/svg/pop_up_background.svg';
+  static const String svgReloading = 'assets/svg/reloading.svg';
   static const String svgReport = 'assets/svg/report.svg';
   static const String svgSelectedParent = 'assets/svg/selected_parent.svg';
   static const String svgSelectedStudent = 'assets/svg/selected_student.svg';
