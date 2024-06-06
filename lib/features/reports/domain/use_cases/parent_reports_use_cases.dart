@@ -10,8 +10,8 @@ class ParentReportsUseCases {
   ParentReportsUseCases(this.repository);
 
   Future<Either<Failure, MainDataTestsModel>> call(
-      {String? date, String? selectedType}) async {
+      {String? fromDate, String? toDate, String? selectedType}) async {
     return await repository.reportsDataRepository(
-        date: date, selectedType: selectedType);
+        fromDate: fromDate, toDate: toDate, selectedType: selectedType);
   }
 }

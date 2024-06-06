@@ -6,7 +6,7 @@ import '../../../student_assignment/domain/entities/main_data_test.dart';
 
 abstract class DataSourceRemotelyOfParentReports {
   Future<MainDataTestsModel> getParentReportsDataReports(
-      {String? date, String? selectedType});
+      {String? fromDate, String? toDate, String? selectedType});
 }
 
 class DataSourceRemotelyOfParentReportsImpl
@@ -17,11 +17,12 @@ class DataSourceRemotelyOfParentReportsImpl
 
   @override
   Future<MainDataTestsModel> getParentReportsDataReports(
-      {String? date, String? selectedType}) async {
+      {String? fromDate, String? toDate, String? selectedType}) async {
     final response = await dio.post(
         url: '${Connection.baseURL}${dio.getStudentReportsTestEndPoint}',
         queryParameters: {
-          if (date != null) 'month': date,
+          if (fromDate != null) 'from_date': fromDate,
+          if (fromDate != null) 'toDate': toDate,
           if (selectedType != null) 'type': selectedType
         });
     if (dio.validResponse(response)) {
