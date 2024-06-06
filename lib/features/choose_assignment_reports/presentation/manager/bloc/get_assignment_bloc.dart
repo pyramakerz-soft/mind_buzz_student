@@ -36,7 +36,9 @@ class GetAssignmentBloc extends Bloc<GetAssignmentEvent, GetAssignmentState> {
       } else if (event is GetReportsRequest) {
         emit(GetProgramsLoadingInitial());
         final failureOrDoneMessage = await programReportsUserUseCases(
-            date: event.date, selectedType: event.selectedType);
+            fromDate: event.fromDate,
+            toDate: event.toDate,
+            selectedType: event.selectedType);
         emit(_eitherLoadedOrErrorState(failureOrDoneMessage));
       }
     });

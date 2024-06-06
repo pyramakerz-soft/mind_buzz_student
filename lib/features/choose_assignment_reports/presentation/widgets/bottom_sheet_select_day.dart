@@ -48,14 +48,17 @@ class _BottomSheetSelectDay extends State<BottomSheetSelectDay> {
               (widget.currentDate.month <= 12 && widget.currentDate.month > 8
                   ? DateTime(DateTime.now().year + 1, 8, 31)
                   : DateTime(DateTime.now().year + 1, 8, 31)),
-          focusedDay: widget.checkStartDate??widget.checkEndDate??widget.currentDate,
+          focusedDay: widget.checkStartDate ??
+              widget.checkEndDate ??
+              widget.currentDate,
           currentDay: tempDate != null
               ? DateTime.parse(tempDate ?? '')
-              : widget.checkStartDate!=null?
-                (widget.checkStartDate??DateTime.now()).isAfter(widget.currentDate)
-                    ?null
-                    :widget.currentDate
-                :widget.currentDate,
+              : widget.checkStartDate != null
+                  ? (widget.checkStartDate ?? DateTime.now())
+                          .isAfter(widget.currentDate)
+                      ? null
+                      : widget.currentDate
+                  : widget.currentDate,
           headerVisible: true,
           rangeSelectionMode: RangeSelectionMode.toggledOn,
           onDaySelected: (day, focused) {
@@ -69,10 +72,13 @@ class _BottomSheetSelectDay extends State<BottomSheetSelectDay> {
               }
               Navigator.pop(context);
             } else {
-              setState(() {
-                tempDate = day.toString().split(' ').first;
-              });
+              widget.isReport!(day.toString().split(' ').first);
             }
+            Navigator.pop(context, day.toString().substring(0, 10));
+            // setState(() {
+            //   tempDate = day.toString().split(' ').first;
+            // });
+            // }
           },
           headerStyle: HeaderStyle(
             formatButtonVisible: false,

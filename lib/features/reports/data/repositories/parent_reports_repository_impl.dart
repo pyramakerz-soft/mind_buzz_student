@@ -16,11 +16,11 @@ class ParentReportsRepositoryImpl implements ParentReportsRepository {
 
   @override
   Future<Either<Failure, MainDataTestsModel>> reportsDataRepository(
-      {String? date, String? selectedType}) async {
+      {String? fromDate, String? toDate, String? selectedType}) async {
     if (await networkInfo.isConnected) {
       try {
         final res = await remoteDataSource.getParentReportsDataReports(
-            date: date, selectedType: selectedType);
+            fromDate: fromDate, toDate: toDate, selectedType: selectedType);
         return Right(res);
       } on DioException catch (e, s) {
         log('e.response:${e.response?.statusMessage}');

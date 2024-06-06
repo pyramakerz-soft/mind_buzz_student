@@ -24,10 +24,11 @@ class GetAssignmentRequest extends GetAssignmentEvent {
 }
 
 class GetReportsRequest extends GetAssignmentEvent {
-  final String? date;
+  final String? fromDate;
+  final String? toDate;
   final String? selectedType;
-  GetReportsRequest({this.date, this.selectedType});
+  GetReportsRequest({this.fromDate, this.toDate, this.selectedType});
 
   @override
-  List<Object?> get props => [date, selectedType];
+  List<Object?> get props => [fromDate, selectedType];
 }

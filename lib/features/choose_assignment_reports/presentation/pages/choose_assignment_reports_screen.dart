@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import 'package:mind_buzz_refactor/core/widgets/select_date_bottom_sheet.dart';
 
 import '../../../../core/app_color.dart';
 import '../../../../core/error/failures_messages.dart';
@@ -146,20 +147,36 @@ class ChooseAssignmentReportsScreen extends StatelessWidget {
                                         backgroundColor: Colors.white,
                                         context: context,
                                         builder: (BuildContext context0) {
-                                          return BottomSheetSelectDayOfReport(
-                                            isFrom: true,
-                                            isReport: (String? date) {
-                                              context
-                                                  .read<GetAssignmentBloc>()
-                                                  .add(GetReportsRequest(
-                                                      date: date,
-                                                      selectedType:
-                                                          selectedType));
-                                            },
-                                            currentDate: selectedDate != null
-                                                ? DateTime.parse(selectedDate)
-                                                : DateTime.now(),
-                                          );
+                                          return Utils.popUpLayout(
+                                              context,
+                                              SelectDateWidget(
+                                                isReport: (String? date,
+                                                    bool isFrom) {},
+                                                onTapDone: (startDay, endDay) {
+                                                  context
+                                                      .read<GetAssignmentBloc>()
+                                                      .add(GetReportsRequest(
+                                                          fromDate: startDay,
+                                                          toDate: endDay,
+                                                          selectedType:
+                                                              selectedType));
+                                                },
+                                              ),
+                                              'Assignment Date');
+                                          // return BottomSheetSelectDayOfReport(
+                                          //   isFrom: true,
+                                          //   isReport: (String? date) {
+                                          //     context
+                                          //         .read<GetAssignmentBloc>()
+                                          //         .add(GetReportsRequest(
+                                          //             date: date,
+                                          //             selectedType:
+                                          //                 selectedType));
+                                          //   },
+                                          //   currentDate: selectedDate != null
+                                          //       ? DateTime.parse(selectedDate)
+                                          //       : DateTime.now(),
+                                          // );
                                         });
                                   }
                                 },
@@ -170,9 +187,7 @@ class ChooseAssignmentReportsScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(8.42),
                                       color: AppColor.whiteRed),
                                   child: Image.asset(
-                                    (indexOfSwitchCubit == 0)
-                                        ? ParentImages.imageFilter
-                                        : ParentImages.imageDate,
+                                    ParentImages.imageFilter,
                                     height: 16,
                                     width: 16,
                                   ),
