@@ -129,8 +129,9 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   updateDataOfCurrentGame(
       {required MainDataOfPhonetics basicData,
       required List<GameModel> gameData,
-      required int gameIndex}) {
+      required int gameIndex}) async {
     emit(state.clearAllData());
+    await Future.delayed(Duration(microseconds: 500));
     emit(state.copyWith(
         basicData: basicData,
         currentAvatar: basicData.basicAvatar,
@@ -143,7 +144,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   saveCountOfTries() {
-    int countOfTries = state.gameData?[state.index].numOfTrials??0;
+    int countOfTries = state.gameData?[state.index].numOfTrials ?? 0;
     emit(state.copyWith(countOfTries: countOfTries, countOfStar: 0));
   }
 
@@ -151,13 +152,13 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     int countOfTries = (state.countOfTries ?? 1) - 1;
     emit(state.copyWith(countOfTries: countOfTries));
     print('state.countOfTries:${state.countOfTries}');
-    if(state.countOfTries ==0){
+    if (state.countOfTries == 0) {
       actionWhenTriesBeZero.call();
     }
   }
 
   increaseCountOfTries() {
-    int countOfTries = state.gameData?[state.index].numOfTrials??0;
+    int countOfTries = state.gameData?[state.index].numOfTrials ?? 0;
     emit(state.copyWith(countOfTries: countOfTries));
   }
 
@@ -228,10 +229,12 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     }
   }
 
-  Future<void> addWrongAnswer({void Function()? actionOfWrongAnswer, required void Function() actionWhenTriesBeZero}) async {
+  Future<void> addWrongAnswer(
+      {void Function()? actionOfWrongAnswer,
+      required void Function() actionWhenTriesBeZero}) async {
     await AudioPlayerClass.startPlaySound(
         soundPath: AppSound.getRandomSoundOfWrong());
-    await animationOfWrongAnswer(actionWhenTriesBeZero:actionWhenTriesBeZero);
+    await animationOfWrongAnswer(actionWhenTriesBeZero: actionWhenTriesBeZero);
     if (actionOfWrongAnswer != null) {
       AudioPlayerClass.player.onPlayerComplete.listen((event) {
         actionOfWrongAnswer.call();
@@ -244,7 +247,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     emit(state.copyWith(
         avatarArtboard: state.avatarArtboardSad,
         stateOfAvatar: BasicOfEveryGame.stateOfSad));
-    decreaseCountOfTries(actionWhenTriesBeZero:actionWhenTriesBeZero);
+    decreaseCountOfTries(actionWhenTriesBeZero: actionWhenTriesBeZero);
   }
 
   Future<void> animationOfCorrectAnswer() async {

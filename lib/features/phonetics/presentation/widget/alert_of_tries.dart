@@ -9,7 +9,7 @@ import '../../../../core/assets_svg_images.dart';
 import '../../../../core/theme_text.dart';
 import '../../../../core/widgets/button_start_game.dart';
 
-showCustomDialogOfTries(
+Future showCustomDialogOfTries(
     {required BuildContext context,
     required int countOfStars,
     required Function() actionOfRetry,
@@ -18,7 +18,6 @@ showCustomDialogOfTries(
   return showDialog(
     context: context,
     barrierDismissible: false,
-
     builder: (BuildContext context) {
       return _CustomDialogOfTries(
           countOfStars: countOfStars,
@@ -82,8 +81,8 @@ class _CustomDialogOfTries extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: 100,
-              child: Container(
+              top: 80,
+              child: SizedBox(
                 // height: 200,
                 width: 200,
                 child: Column(
@@ -92,7 +91,6 @@ class _CustomDialogOfTries extends StatelessWidget {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-
                       children: List.generate(
                           3,
                           (index) => (double.parse("$countOfStars") > (index))
@@ -124,23 +122,18 @@ class _CustomDialogOfTries extends StatelessWidget {
                           title: 'Retry',
                           playButton: true,
                           width: 150)
-                    }
-                    else
-                      ...{
-
-                      if(countOfStars == 1)...{
+                    } else ...{
+                      if (countOfStars == 1) ...{
                         Text(
                           '"Excellent! Keep going?"',
                           style: TextStyle(
                             fontSize: 18.0,
                             color: AppColor.darkBlueColor,
                             fontFamily: AppTheme.getFontFamily5(),
-
                           ),
                           textAlign: TextAlign.center,
                         ),
-                      }
-                      else if(countOfStars == 2)...{
+                      } else if (countOfStars == 2) ...{
                         Text(
                           '"Very Good! Keep going?"',
                           style: TextStyle(
@@ -148,9 +141,9 @@ class _CustomDialogOfTries extends StatelessWidget {
                             color: AppColor.darkBlueColor,
                             fontFamily: AppTheme.getFontFamily5(),
                           ),
+                          textAlign: TextAlign.center,
                         ),
-                      }
-                      else if(countOfStars == 3)...{
+                      } else if (countOfStars == 3) ...{
                         Text(
                           '"Good! Keep going?"',
                           style: TextStyle(
@@ -158,62 +151,74 @@ class _CustomDialogOfTries extends StatelessWidget {
                             color: AppColor.darkBlueColor,
                             fontFamily: AppTheme.getFontFamily5(),
                           ),
+                          textAlign: TextAlign.center,
                         ),
                       },
-                         const SizedBox(height: 10),
-                        Container(
-                          // width: 310,
-                          // height: 40,
-                          child:                         Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
+                      const SizedBox(height: 10),
+                      Container(
+                        // width: 310,
+                        // height: 40,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            GestureDetector(
+                              onTap: actionOfRetry,
+                              child: SizedBox(
                                 // height: 20,
-                      width: 50,
+                                width: 50,
                                 child: Container(
-                                  height: 40,
-                                  width: 50,
-                                  padding:
-                                  const EdgeInsets.symmetric(vertical: 10, ),
-                                  decoration: BoxDecoration(
-                                    color: AppColor.darkBlueColor,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: SvgPicture.asset( AppSvgImages.reloading, height: 20,)
-                                ),
+                                    height: 40,
+                                    width: 50,
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 10,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: AppColor.darkBlueColor,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: SvgPicture.asset(
+                                      AppSvgImages.reloading,
+                                      height: 20,
+                                    )),
                               ),
-                              const SizedBox(width: 10),
-
-                              Container(
+                            ),
+                            const SizedBox(width: 10),
+                            GestureDetector(
+                              onTap: actionOfDone,
+                              child: SizedBox(
                                 height: 40,
                                 width: 50,
                                 child: Container(
-                                  alignment: Alignment.center,
+                                    alignment: Alignment.center,
                                     height: 50,
                                     width: 50,
-                                    padding:
-                                    const EdgeInsets.symmetric(vertical: 10, ),
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 10,
+                                    ),
                                     decoration: BoxDecoration(
                                       color: AppColor.darkBlueColor,
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: Text(
                                       'Done',
-                                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                        fontSize:12,
-                                        fontWeight: FontWeight.w600,
-                                        fontFamily:AppTheme.getFontFamily5() ,
-                                        height: 0,
-                                        letterSpacing: 0.50,
-                                      ),
-                                    )
-                                ),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.copyWith(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600,
+                                            fontFamily:
+                                                AppTheme.getFontFamily5(),
+                                            height: 0,
+                                            letterSpacing: 0.50,
+                                          ),
+                                    )),
                               ),
-                            ],
-                          )
-                          ,
-                        )
-                      }
+                            ),
+                          ],
+                        ),
+                      )
+                    }
                   ],
                 ),
               ),

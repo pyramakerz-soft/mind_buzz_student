@@ -21,21 +21,22 @@ class ClickThePictureWithWordCubit
             gameData: gameData, backGround: backGround, correctIndexes: [])) {
     startGame();
 
-    List<GameImagesModel> tempGameImages = gameData.gameImages??[];
+    List<GameImagesModel> tempGameImages = gameData.gameImages ?? [];
     tempGameImages.shuffle();
     emit(state.copyWith(
-        gameDataPartOne: tempGameImages.sublist(0, ((gameData.gameImages?.length??0)/2).ceil()),
-        gameDataPartTwo:tempGameImages.sublist(((gameData.gameImages?.length??0)/2).ceil(),
-            tempGameImages.length??0) ));
+        gameDataPartOne: tempGameImages.sublist(
+            0, ((gameData.gameImages?.length ?? 0) / 2).ceil()),
+        gameDataPartTwo: tempGameImages.sublist(
+            ((gameData.gameImages?.length ?? 0) / 2).ceil(),
+            tempGameImages.length ?? 0)));
   }
 
   startGame() async {
     await TalkTts.startTalk(text: gameData.inst ?? '');
-      await getTheRandomWord();
-
+    await getTheRandomWord();
   }
+
   getTheRandomWord() async {
-    print('getTheRandomWord:');
     List<GameImagesModel> checkImages = [];
     state.gameData.gameImages?.forEach((element) {
       if (state.correctIndexes.contains(element.id) == false) {
@@ -49,6 +50,7 @@ class ClickThePictureWithWordCubit
       GameImagesModel chooseWord = checkImages[randomNumber];
       await TalkTts.startTalk(text: chooseWord.word ?? '');
       emit(state.copyWith(chooseWord: chooseWord));
+      print('getTheRandomWord:${chooseWord.word}');
     }
   }
 
@@ -59,11 +61,11 @@ class ClickThePictureWithWordCubit
   }
 
   submitCorrectTheAnswer() async {
-    int sub = state.correctAnswer??0;
-    sub = sub +1;
+    int sub = state.correctAnswer ?? 0;
+    sub = sub + 1;
     emit(state.copyWith(correctAnswer: sub));
-
   }
+
   submitWrongTheAnswer(
       {required Function() wrongAnimation,
       required Function() reStateOfAvatar}) {
@@ -71,8 +73,8 @@ class ClickThePictureWithWordCubit
     reStateOfAvatar();
   }
 
-
   sayTheCorrectAnswer() async {
+    print('sayTheCorrectAnswer:${state.chooseWord?.word}');
     await TalkTts.startTalk(text: state.chooseWord?.word ?? '');
   }
 }

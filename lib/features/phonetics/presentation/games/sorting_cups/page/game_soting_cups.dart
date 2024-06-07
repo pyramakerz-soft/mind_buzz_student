@@ -72,7 +72,7 @@ class GamesSortingCups extends StatelessWidget {
                                         13,
                                 height: (MediaQuery.of(context).size.height -
                                         (50)) /
-                                    4,
+                                    5,
                               ),
                               feedback: ItemCardWidgetOFSortingCups(
                                 width:
@@ -102,7 +102,7 @@ class GamesSortingCups extends StatelessWidget {
                                                     .size
                                                     .height -
                                                 (50)) /
-                                            4,
+                                            5,
                                       )
                                     : ItemCardWidgetOFSortingCups(
                                         hide: gameState.correctIndexes
@@ -155,11 +155,19 @@ class GamesSortingCups extends StatelessWidget {
                                   generalStateOfGame.stateOfAvatar == null)) {
                                 print(
                                     "##:${gameState.gameData.mainLetter?.split('')[index].toLowerCase()}");
+
+                                print(
+                                    "##:${gameState.chooseWord?.letter?.toLowerCase().toLowerCase()}");
                                 print(
                                     "##:${(item.data.letter?.toLowerCase() ?? '')}");
                                 if (gameState.chooseWord?.letter
-                                        ?.toLowerCase() ==
-                                    (item.data.letter?.toLowerCase() ?? '')) {
+                                            ?.toLowerCase() ==
+                                        (item.data.letter?.toLowerCase() ??
+                                            '') &&
+                                    (item.data.letter?.toLowerCase() ?? '') ==
+                                        (gameState.gameData.mainLetter
+                                            ?.split('')[index]
+                                            .toLowerCase())) {
                                   await context
                                       .read<CurrentGamePhoneticsCubit>()
                                       .animationOfCorrectAnswer();
@@ -227,18 +235,18 @@ class GamesSortingCups extends StatelessWidget {
                                     context
                                         .read<CurrentGamePhoneticsCubit>()
                                         .sendStars(
-                                        gamesId: [
+                                            gamesId: [
                                           gameState.gameData.id ?? 0
                                         ],
-                                        actionOfStars: (int countOfStars,
-                                            List<int> listOfIds) {
-                                          context
-                                              .read<JourneyBarCubit>()
-                                              .sendStars(
-                                              gamesId: listOfIds,
-                                              countOfStar:
-                                              countOfStars);
-                                        });
+                                            actionOfStars: (int countOfStars,
+                                                List<int> listOfIds) {
+                                              // context
+                                              //     .read<JourneyBarCubit>()
+                                              //     .sendStars(
+                                              //         gamesId: listOfIds,
+                                              //         countOfStar:
+                                              //             countOfStars);
+                                            });
                                   });
                                 }
                               }

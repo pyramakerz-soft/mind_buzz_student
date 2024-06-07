@@ -62,30 +62,37 @@ class _PhoneticsBook extends State<PhoneticsBook> {
     ]);
     super.dispose();
   }
+
+  int countOfTies = 0;
   _buildCustomPopUp(BuildContext context, int countOfStars, int gameIndex) {
     return showCustomDialogOfTries(
-        context: context,
+      context: context,
       countOfStars: countOfStars,
       actionOfRetry: () {
-        final basicData = context.read<CurrentGamePhoneticsCubit>().state.basicData;
-        final gameData = context.read<CurrentGamePhoneticsCubit>().state.gameData;
+        final basicData =
+            context.read<CurrentGamePhoneticsCubit>().state.basicData;
+        final gameData =
+            context.read<CurrentGamePhoneticsCubit>().state.gameData;
         gameData?.first.gameLetters?.forEach((element) {
           print('%%:${element.id}');
         });
-        context.read<CurrentGamePhoneticsCubit>().updateDataOfCurrentGame(basicData: basicData!, gameData: (gameData??[]),
+        context.read<CurrentGamePhoneticsCubit>().updateDataOfCurrentGame(
+            basicData: basicData!,
+            gameData: (gameData ?? []),
             gameIndex: gameIndex);
+        Navigator.of(context).pop();
       },
       actionOfDone: () {
-        // Navigator.of(context).pop();
         Navigator.of(context).pop();
-
+        Navigator.of(context).pop();
       },
       backButton: () {
-        // Navigator.of(context).pop();
+        Navigator.of(context).pop();
         Navigator.of(context).pop();
       },
-        );
+    );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,10 +106,15 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                     CurrentGamePhoneticsState>(
                   listener:
                       (BuildContext context, CurrentGamePhoneticsState state) {
-                    if (state.countOfTries == 0) {
-                      print('state.countOfStar:${state.countOfStar}');
-                      _buildCustomPopUp(context, (state.countOfStar??0), state.index);
+                    if (state.countOfTries != countOfTies &&
+                        state.countOfTries == 0) {
+                      // print('state.countOfStar:${state.countOfStar}');
+                      _buildCustomPopUp(
+                          context, (state.countOfStar ?? 0), state.index);
                     }
+                    setState(() {
+                      countOfTies = state.countOfTries ?? 0;
+                    });
                   },
                   builder: (contextOfGame, stateOfGame) {
                     final countOfFingers = contextOfGame

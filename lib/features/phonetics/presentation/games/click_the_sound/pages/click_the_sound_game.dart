@@ -34,6 +34,8 @@ class ClickTheSoundGame extends StatelessWidget {
       },
       builder: (context, stateOfGame) {
         // final _viewModel = context.read<ClickTheSoundCubit>();
+        print('##########:${context.read<JourneyBarCubit>()}');
+        print('##########:${context.read<JourneyBarCubit>().runtimeType}');
 
         context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
             stateOfStringIsWord: false,
@@ -58,9 +60,8 @@ class ClickTheSoundGame extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             mainAxisSpacing: MediaQuery.of(context).size.width < 760 ? 5 : 3,
             crossAxisSpacing: MediaQuery.of(context).size.width < 760 ? 8 : 11,
-            staggeredTiles:stateOfGame.finalListOfPosition??[],
-            children:
-            List.generate(
+            staggeredTiles: stateOfGame.finalListOfPosition ?? [],
+            children: List.generate(
               (stateOfGame.gameData.gameLetters?.length ?? 0),
               (index) => Center(
                 child: _buildBubbleWidget(
@@ -120,19 +121,20 @@ class ClickTheSoundGame extends StatelessWidget {
                           } else {
                             context
                                 .read<CurrentGamePhoneticsCubit>()
-                                .addWrongAnswer(
-
-                                actionWhenTriesBeZero: () {
-
-                                  context.read<CurrentGamePhoneticsCubit>().sendStars(
+                                .addWrongAnswer(actionWhenTriesBeZero: () {
+                              context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .sendStars(
                                       gamesId: [stateOfGame.gameData.id ?? 0],
-                                      actionOfStars: (int countOfStars, List<int> listOfIds) {
+                                      actionOfStars: (int countOfStars,
+                                          List<int> listOfIds) {
                                         context
                                             .read<JourneyBarCubit>()
-                                            .sendStars(gamesId: listOfIds, countOfStar: countOfStars);
+                                            .sendStars(
+                                                gamesId: listOfIds,
+                                                countOfStar: countOfStars);
                                       });
-                                }
-                            );
+                            });
                             // sayTheLetter();
                             Future.delayed(Duration(seconds: 2), () async {
                               await context

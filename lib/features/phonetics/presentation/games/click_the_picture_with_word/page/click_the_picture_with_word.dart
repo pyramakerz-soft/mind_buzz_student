@@ -44,7 +44,7 @@ class ClickThePictureWithWord extends StatelessWidget {
                 height: MediaQuery.of(context).size.height - (50.h + 90),
                 width: MediaQuery.of(context).size.width - (130 + 40),
                 child: Wrap(
-                    spacing: 25,
+                    spacing: 10,
                     // runSpacing: 10,
                     alignment: WrapAlignment.center,
                     children: List.generate(
@@ -145,43 +145,63 @@ class ClickThePictureWithWord extends StatelessWidget {
                                                     });
                                             Navigator.of(context).pop();
                                           } else {
-                                            AudioPlayerClass
-                                                .player.onPlayerComplete
-                                                .listen((finished) async {
+                                            // AudioPlayerClass
+                                            //     .player.onPlayerComplete
+                                            //     .listen((finished) async {
+                                            await Future.delayed(
+                                                    Duration(seconds: 1))
+                                                .whenComplete(() async {
                                               await context
                                                   .read<
                                                       ClickThePictureWithWordCubit>()
                                                   .getTheRandomWord();
+                                              context
+                                                  .read<
+                                                      CurrentGamePhoneticsCubit>()
+                                                  .backToMainAvatar();
                                             });
+
+                                            // });
                                           }
                                         });
                                       } else {
                                         await context
                                             .read<CurrentGamePhoneticsCubit>()
                                             .addWrongAnswer(
-                                                actionOfWrongAnswer: () {
+                                                actionOfWrongAnswer: () {},
+                                                actionWhenTriesBeZero: () {
+                                                  context
+                                                      .read<
+                                                          CurrentGamePhoneticsCubit>()
+                                                      .sendStars(
+                                                          gamesId: [
+                                                        gameState.gameData.id ??
+                                                            0
+                                                      ],
+                                                          actionOfStars: (int
+                                                                  countOfStars,
+                                                              List<int>
+                                                                  listOfIds) {
+                                                            context
+                                                                .read<
+                                                                    JourneyBarCubit>()
+                                                                .sendStars(
+                                                                    gamesId:
+                                                                        listOfIds,
+                                                                    countOfStar:
+                                                                        countOfStars);
+                                                          });
+                                                })
+                                            .whenComplete(() {
                                           context
                                               .read<
                                                   ClickThePictureWithWordCubit>()
                                               .sayTheCorrectAnswer();
-                                        },
-
-                                            actionWhenTriesBeZero: () {
-
-                                              context.read<CurrentGamePhoneticsCubit>().sendStars(
-                                                  gamesId: [gameState.gameData.id ?? 0],
-                                                  actionOfStars: (int countOfStars, List<int> listOfIds) {
-                                                    context
-                                                        .read<JourneyBarCubit>()
-                                                        .sendStars(gamesId: listOfIds, countOfStar: countOfStars);
-                                                  });
-                                            }
-
-                                        );
+                                        });
+                                        context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .backToMainAvatar();
                                       }
-                                      context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .backToMainAvatar();
                                     }
                                   });
                             }))),
