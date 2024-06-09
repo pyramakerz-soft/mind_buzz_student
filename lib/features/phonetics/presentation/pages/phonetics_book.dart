@@ -14,13 +14,11 @@ import '../../../../core/phonetics/assets_images_phonetics.dart';
 import '../../../../core/phonetics/basic_of_every_game.dart';
 import '../../../../core/phonetics/basic_of_phonetics.dart';
 import '../../../../core/utils.dart';
-import '../../../../core/widgets/custom_pop_up.dart';
 import '../../../login/presentation/page/login_screen.dart';
 import '../games/drag_out/manager/drag_out_cubit.dart';
 import '../games/drag_out/pages/drag_out_game.dart';
 import '../manager/bloc/contact_lesson_bloc.dart';
 import '../manager/main_cubit/current_game_phonetics_cubit.dart';
-import '../widget/alert_of_tries.dart';
 import '../widget/based_of_game_connect.dart';
 import '../widget/based_of_game_connect_sorting_cups.dart';
 import '../widget/based_of_game_phonetics.dart';
@@ -63,36 +61,6 @@ class _PhoneticsBook extends State<PhoneticsBook> {
     super.dispose();
   }
 
-  int countOfTies = 0;
-  _buildCustomPopUp(BuildContext context, int countOfStars, int gameIndex) {
-    return showCustomDialogOfTries(
-      context: context,
-      countOfStars: countOfStars,
-      actionOfRetry: () {
-        final basicData =
-            context.read<CurrentGamePhoneticsCubit>().state.basicData;
-        final gameData =
-            context.read<CurrentGamePhoneticsCubit>().state.gameData;
-        gameData?.first.gameLetters?.forEach((element) {
-          print('%%:${element.id}');
-        });
-        context.read<CurrentGamePhoneticsCubit>().updateDataOfCurrentGame(
-            basicData: basicData!,
-            gameData: (gameData ?? []),
-            gameIndex: gameIndex);
-        Navigator.of(context).pop();
-      },
-      actionOfDone: () {
-        Navigator.of(context).pop();
-        Navigator.of(context).pop();
-      },
-      backButton: () {
-        Navigator.of(context).pop();
-        Navigator.of(context).pop();
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,18 +72,8 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                 create: (_) => di.sl<CurrentGamePhoneticsCubit>(),
                 child: BlocConsumer<CurrentGamePhoneticsCubit,
                     CurrentGamePhoneticsState>(
-                  listener:
-                      (BuildContext context, CurrentGamePhoneticsState state) {
-                    if (state.countOfTries != countOfTies &&
-                        state.countOfTries == 0) {
-                      // print('state.countOfStar:${state.countOfStar}');
-                      _buildCustomPopUp(
-                          context, (state.countOfStar ?? 0), state.index);
-                    }
-                    setState(() {
-                      countOfTies = state.countOfTries ?? 0;
-                    });
-                  },
+                  listener: (BuildContext context,
+                      CurrentGamePhoneticsState state) {},
                   builder: (contextOfGame, stateOfGame) {
                     final countOfFingers = contextOfGame
                         .watch<CurrentGamePhoneticsCubit>()
@@ -209,27 +167,47 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                               if (stateOfGameData is GetContactInitial) {
                                 return Stack(
                                   children: [
-                                    if (stateOfGame
-                                            .basicData?.gameData?.isConnect ==
-                                        true) ...{
-                                      if (stateOfGame.basicData
-                                          is ConnectionSortingCups) ...{
-                                        BasedOfGameConnectSortingCups(
-                                          stateOfGame: stateOfGame,
-                                          stateOfGameData: stateOfGameData,
-                                        ),
+                                    if (stateOfGame.countOfTries != 0) ...{
+                                      if (stateOfGame
+                                              .basicData?.gameData?.isConnect ==
+                                          true) ...{
+                                        if (stateOfGame.basicData
+                                            is ConnectionSortingCups) ...{
+                                          BasedOfGameConnectSortingCups(
+                                            stateOfGame: stateOfGame,
+                                            stateOfGameData: stateOfGameData,
+                                          ),
+                                        } else ...{
+                                          BasedOfGameConnect(
+                                            stateOfGame: stateOfGame,
+                                            stateOfGameData: stateOfGameData,
+                                          ),
+                                        }
                                       } else ...{
-                                        BasedOfGameConnect(
+                                        BasedOfGamePhonetics(
                                           stateOfGame: stateOfGame,
                                           stateOfGameData: stateOfGameData,
                                         ),
-                                      }
-                                    } else ...{
-                                      BasedOfGamePhonetics(
-                                        stateOfGame: stateOfGame,
-                                        stateOfGameData: stateOfGameData,
-                                      ),
-                                    },
+                                      },
+                                    } else if (stateOfGame.countOfTries ==
+                                        0) ...{
+                                      widgetOfTries(
+                                          context: context,
+                                          nextGameIndex: stateOfGameData.data
+                                              .indexWhere((element) =>
+                                                  element.id == widget.gameId), stateOfGame: stateOfGame,
+
+                                        actionOfDone: () {
+                                          Navigator.of(context).pop();
+                                          Navigator.of(context).pop();
+                                        },
+                                        backButton: () {
+                                          Navigator.of(context).pop();
+                                          Navigator.of(context).pop();
+                                        },
+                                      )
+                                    }
+                                    // },
                                   ],
                                 );
                               } else if (stateOfGameData
