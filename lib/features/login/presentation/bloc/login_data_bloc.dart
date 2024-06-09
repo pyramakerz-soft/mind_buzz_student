@@ -102,7 +102,7 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
     return failureOrTrivia.fold(
           (failure) => ErrorLogin(message: _mapFailureToMessage(failure)),
           (data) {
-        userData?.parentPassword = pinCode;
+        userData?.parentPin = pinCode;
         return CreatePinCodeSuccessfully();
       },
     );

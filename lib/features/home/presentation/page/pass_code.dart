@@ -78,14 +78,14 @@ class _PassCodeState extends State<PassCode> {
                           )
                         : GridView.builder(
                             gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
+                                const SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 3, childAspectRatio: 1.2),
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             itemCount: 12,
                             itemBuilder: (context, i) {
                               return i == 9
-                                  ? SizedBox.shrink()
+                                  ? const SizedBox.shrink()
                                   : Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: InkWell(
@@ -103,7 +103,7 @@ class _PassCodeState extends State<PassCode> {
                                             if (context
                                                     .read<LoginDataBloc>()
                                                     .userData
-                                                    ?.parentPassword ==
+                                                    ?.parentPin ==
                                                 null) {
                                               bloc.add(CreatePinCodeEvent(
                                                   pinCode: passCode
@@ -112,13 +112,13 @@ class _PassCodeState extends State<PassCode> {
                                             } else if (context
                                                     .read<LoginDataBloc>()
                                                     .userData
-                                                    ?.parentPassword
+                                                    ?.parentPin
                                                     .toString() ==
                                                 passCode.join().toString()) {
                                               Utils.navigateAndRemoveUntilTo(
-                                                  BottomNavBar(), context);
+                                                  const BottomNavBar(), context);
                                             } else {
-                                              final snackBar = SnackBar(
+                                              final snackBar = const SnackBar(
                                                 content: Text('Wrong Pin Code'),
                                               );
                                               ScaffoldMessenger.of(context)
@@ -138,7 +138,7 @@ class _PassCodeState extends State<PassCode> {
                                                   BorderRadius.circular(20.r)),
                                           child: Center(
                                               child: i == 11
-                                                  ? Icon(
+                                                  ? const Icon(
                                                       Icons.close,
                                                       color: AppColor
                                                           .darkBlueColor,
