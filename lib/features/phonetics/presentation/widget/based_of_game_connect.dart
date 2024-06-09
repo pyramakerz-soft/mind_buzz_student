@@ -282,12 +282,6 @@ class BasedOfGameConnect extends StatelessWidget {
                                           text: stateOfGame
                                                   .stateOfStringWillSay ??
                                               '');
-
-                                      await AudioPlayerClass.startPlaySound(
-                                          soundPath: AppSound.getSoundOfLetter(
-                                              mainGameLetter: stateOfGame
-                                                      .stateOfStringWillSay ??
-                                                  ''));
                                     } else {
                                       await AudioPlayerClass.startPlaySound(
                                           soundPath: AppSound.getSoundOfLetter(
@@ -309,7 +303,7 @@ class BasedOfGameConnect extends StatelessWidget {
                             ],
                           ),
                         ),
-                  if(stateOfGame.currentStringOfDice!=null)...{
+                  if (stateOfGame.currentStringOfDice != null) ...{
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 20.w),
                       child: WaveDice(
