@@ -16,42 +16,46 @@ import '../../domain/usecases/program_use_cases.dart';
 part 'get_programs_home_event.dart';
 part 'get_programs_home_state.dart';
 
-class GetProgramsHomeBloc extends Bloc<GetProgramsHomeEvent, GetProgramsHomeState> {
-
+class GetProgramsHomeBloc
+    extends Bloc<GetProgramsHomeEvent, GetProgramsHomeState> {
   final ProgramUserUseCases programUserUseCases;
   final LogOutUserUseCases logOutUserUseCases;
 
-  GetProgramsHomeBloc({required this.logOutUserUseCases, required this.programUserUseCases}) : super(GetProgramsHomeInitial()) {
+  GetProgramsHomeBloc(
+      {required this.logOutUserUseCases, required this.programUserUseCases})
+      : super(GetProgramsHomeInitial()) {
     on<GetProgramsHomeEvent>((event, emit) async {
       log('event##:$event');
-      if(event is GetProgramsRequest){
+      if (event is GetProgramsRequest) {
         emit(GetProgramsLoadingInitial());
-        final failureOrDoneMessage =
-            await programUserUseCases();
+        final failureOrDoneMessage = await programUserUseCases();
         emit(_eitherLoadedOrErrorState(failureOrDoneMessage));
-      }
-      else if (event is LogOutRequest){
+      } else if (event is LogOutRequest) {
         await logOutUserUseCases();
         emit(LogOutLoadingState());
-
       }
     });
   }
 }
 
-
 GetProgramsHomeState _eitherLoadedOrErrorState(
-    Either<Failure, List<UserCourseModel>> failureOrTrivia,
-    ) {
+  Either<Failure, List<UserCourseModel>> failureOrTrivia,
+) {
   return failureOrTrivia.fold(
-        (failure) => GetProgramsErrorInitial(message: _mapFailureToMessage(failure)),
-        (data) => GetProgramsCompleteInitial(
-        data: data),
+    (failure) =>
+        GetProgramsErrorInitial(message: _mapFailureToMessage(failure)),
+    (data) => GetProgramsCompleteInitial(
+        data: data,
+        isHaveAssignments: data.fold(
+                0,
+                (previousValue, element) =>
+                    (element.program?.studentTests?.length ?? 0) +
+                    (int.parse('$previousValue'))) >
+            0),
   );
 }
 
 String _mapFailureToMessage(Failure failure) {
-
   switch (failure.runtimeType) {
     case ServerFailure:
       return SERVER_FAILURE_MESSAGE;

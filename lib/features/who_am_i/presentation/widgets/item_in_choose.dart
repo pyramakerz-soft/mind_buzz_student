@@ -26,33 +26,33 @@ class ItemInChoose extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: AppColor.lightBlueColor3,
-             boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.15), // Shadow color with opacity
-            offset: Offset(0, 4), // Shadow position
-            blurRadius: 14, // Shadow blur radius
-          ),
-        ],
-            gradient: currentIndex == id
-                ? AppColor.gradientColor1
-                : null),
+            boxShadow: [
+              BoxShadow(
+                color:
+                    Colors.black.withOpacity(0.15), // Shadow color with opacity
+                offset: Offset(0, 4), // Shadow position
+                blurRadius: 14, // Shadow blur radius
+              ),
+            ],
+            gradient:
+                currentIndex.index == id ? AppColor.gradientColor1 : null),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const SizedBox(),
             Padding(
-              padding: const EdgeInsets.only(left:20),
+              padding: const EdgeInsets.only(left: 20),
               child: Text(
                 text,
-                style: currentIndex == id
+                style: currentIndex.index == id
                     ? Theme.of(context).textTheme.bodySmall?.copyWith(
                           fontSize: 30,
-                         // fontWeight: FontWeight.w700,
+                          // fontWeight: FontWeight.w700,
                           fontFamily: AppTheme.getFontFamily5(),
                         )
                     : Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontSize: 30,
-                         // fontWeight: FontWeight.w700,
+                          // fontWeight: FontWeight.w700,
                           fontFamily: AppTheme.getFontFamily5(),
                         ),
               ),
@@ -61,7 +61,6 @@ class ItemInChoose extends StatelessWidget {
             Image.asset(
               image,
               height: 135,
-
             ),
           ],
         ),

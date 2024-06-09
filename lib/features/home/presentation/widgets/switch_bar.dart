@@ -38,7 +38,7 @@ PreferredSizeWidget switchBar({required BuildContext context, String? title}) {
               title: Padding(
                 padding: const EdgeInsets.only(left: 8),
                 child: Text(
-                  context.watch<WhoAmICubit>().state == 1
+                  context.watch<WhoAmICubit>().state.index == 1
                       ? 'Student Account'
                       : title ?? 'Parent Account',
                   style: Theme.of(context).textTheme.headlineLarge?.copyWith(
@@ -60,7 +60,7 @@ PreferredSizeWidget switchBar({required BuildContext context, String? title}) {
                     ],
                     inactiveBgColor: AppColor.lightGreyColor,
                     // inactiveFgColor: Colors.white,
-                    initialLabelIndex: context.watch<WhoAmICubit>().state,
+                    initialLabelIndex: context.watch<WhoAmICubit>().state.index,
                     totalSwitches: 2,
                     radiusStyle: true,
                     onToggle: (index) {
@@ -76,12 +76,14 @@ PreferredSizeWidget switchBar({required BuildContext context, String? title}) {
                       }
                     },
                     customWidgets: [
-                      SvgPicture.asset(context.watch<WhoAmICubit>().state == 0
-                          ? AppSvgImages.iconSelectedParent
-                          : AppSvgImages.iconUnSelectedParent),
-                      SvgPicture.asset(context.watch<WhoAmICubit>().state == 1
-                          ? AppSvgImages.iconSelectedStudent
-                          : AppSvgImages.iconUnSelectedStudent),
+                      SvgPicture.asset(
+                          context.watch<WhoAmICubit>().state.index == 0
+                              ? AppSvgImages.iconSelectedParent
+                              : AppSvgImages.iconUnSelectedParent),
+                      SvgPicture.asset(
+                          context.watch<WhoAmICubit>().state.index == 1
+                              ? AppSvgImages.iconSelectedStudent
+                              : AppSvgImages.iconUnSelectedStudent),
                     ]),
                 24.pw,
               ],
