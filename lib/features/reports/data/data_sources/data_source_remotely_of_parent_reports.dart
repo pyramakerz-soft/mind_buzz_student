@@ -22,7 +22,7 @@ class DataSourceRemotelyOfParentReportsImpl
         url: '${Connection.baseURL}${dio.getStudentReportsTestEndPoint}',
         queryParameters: {
           if (fromDate != null) 'from_date': fromDate,
-          if (fromDate != null) 'toDate': toDate,
+          if (toDate != null) 'to_date': toDate,
           if (selectedType != null) 'type': selectedType
         });
     if (dio.validResponse(response)) {
