@@ -21,6 +21,7 @@ enum MainDataOfPhoneticsTypes {
   u,
   l,
   b,
+  video,
   o,
   g,
   d,
@@ -72,6 +73,8 @@ extension TypeExtension on MainDataOfPhoneticsTypes {
         return 'e'.toLowerCase();
       case MainDataOfPhoneticsTypes.n:
         return 'n'.toLowerCase();
+      case MainDataOfPhoneticsTypes.video:
+        return 'video'.toLowerCase();
     }
   }
 }
@@ -102,7 +105,8 @@ abstract class MainDataOfPhonetics {
             mineGameData: BasicOfEveryGame.getTheGameType(
                 gameType: subGame.toLowerCase(), audioFlag: audioFlag));
       }
-    } else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.s.text()) {
+    }
+    else if (subLetter.toLowerCase() == MainDataOfPhoneticsTypes.s.text()) {
       return SPhonetics(
           mineGameData: BasicOfEveryGame.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));

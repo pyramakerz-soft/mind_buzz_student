@@ -26,6 +26,7 @@ import '../games/drag_out/manager/drag_out_cubit.dart';
 import '../games/drag_out/pages/drag_out_game.dart';
 import '../games/tracing/manager/tracing_cubit.dart';
 import '../games/tracing/page/tracing_game.dart';
+import '../games/videos/screen/game_video.dart';
 import '../manager/bloc/contact_lesson_bloc.dart';
 import '../manager/main_cubit/current_game_phonetics_cubit.dart';
 
@@ -103,13 +104,18 @@ class BasedOfGamePhonetics extends StatelessWidget {
                             ),
                         child: ClickTheSoundGame()),
                   } else if (stateOfGame.basicData?.gameData is Tracking) ...{
-                    BlocProvider<TracingCubit>(
-                        create: (_) => TracingCubit(
-                              gameData: stateOfGameData.data[stateOfGame.index],
-                              stateOfGame: stateOfGame,
-                            ),
-                        child: TracingGame()),
-                  }
+                      BlocProvider<TracingCubit>(
+                          create: (_) => TracingCubit(
+                            gameData: stateOfGameData.data[stateOfGame.index],
+                            stateOfGame: stateOfGame,
+                          ),
+                          child: TracingGame()),
+                    } else if (stateOfGame.basicData?.gameData is Video) ...{
+                      gameVideo(
+                        currentDataGame: stateOfGameData.data[stateOfGame.index],
+
+                          ),
+                    }
                 ],
               ))),
 
@@ -200,13 +206,15 @@ class BasedOfGamePhonetics extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-              top: 50.h + 5,
-              left: 20,
-              child: Image.asset(
-                stateOfGame.basicData?.gameData?.titleImage ?? '',
-                height: 75.h,
-              )),
+          if (stateOfGame.basicData?.gameData is! Video)...{
+            Positioned(
+                top: 50.h + 5,
+                left: 20,
+                child: Image.asset(
+                  stateOfGame.basicData?.gameData?.titleImage ?? '',
+                  height: 75.h,
+                )),
+
           Positioned(
             bottom: 15,
             right: 0,
@@ -267,6 +275,8 @@ class BasedOfGamePhonetics extends StatelessWidget {
               ),
             ),
           ),
+          },
+
         ],
       ),
     );
