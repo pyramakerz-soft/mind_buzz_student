@@ -223,7 +223,7 @@ class ChooseAssignmentReportsScreen extends StatelessWidget {
                               .clearReportFilter();
 
                           context
-                              .watch<GetAssignmentBloc>()
+                              .read<GetAssignmentBloc>()
                               .add(GetReportsRequest());
                         },
                       )),
