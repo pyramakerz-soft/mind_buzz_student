@@ -160,6 +160,7 @@ class ChooseAssignmentReportsScreen extends StatelessWidget {
                                                           toDate: endDay,
                                                           selectedType:
                                                               selectedType));
+                                                  Navigator.of(context).pop();
                                                 },
                                               ),
                                               'Assignment Date');
@@ -222,7 +223,7 @@ class ChooseAssignmentReportsScreen extends StatelessWidget {
                               .clearReportFilter();
 
                           context
-                              .read<GetAssignmentBloc>()
+                              .watch<GetAssignmentBloc>()
                               .add(GetReportsRequest());
                         },
                       )),
