@@ -3,7 +3,7 @@ class WhoAmIState {
   final int? index;
   final bool isFirst;
   WhoAmIState({
-    this.index = 0,
+    this.index,
     this.isFirst = true,
   });
 
