@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../../../../core/phonetics/assets_images_phonetics.dart';
 import '../../../../domain/entities/game_model.dart';
 import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
 
@@ -62,6 +64,9 @@ class _gameVideo extends State<gameVideo> {
               stateOfCountOfCorrectAnswer:currentStateOfGame,
               mainCountOfQuestion: 3,
             );
+            if(currentStateOfGame==3){
+              Navigator.of(context).pop();
+            }
 
           });
         });
@@ -92,9 +97,13 @@ class _gameVideo extends State<gameVideo> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            SizedBox(
+            Container(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(AppImagesPhonetics.loadingVideo),
+                      fit: BoxFit.fill)),
               child: AspectRatio(
                 aspectRatio: _controller.value.aspectRatio,
                 child: VideoPlayer(_controller, ),

@@ -17,6 +17,7 @@ abstract class AppImagesPhonetics {
   static const String backGroundOfW = "${mainPathOfImages}backGroundOfw.png";
   static const String backGroundOfE = "${mainPathOfImages}backGroundOfE.png";
   static const String backGroundOfN = "${mainPathOfImages}backGroundOfN.png";
+  static const String loadingVideo = "${mainPathOfImages}loading_video.png";
   static const String position2Finger =
       "${mainPathOfImages}position_2_finger.png";
   static const String backGroundOfConnect =
