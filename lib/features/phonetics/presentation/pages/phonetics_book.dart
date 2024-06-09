@@ -198,7 +198,7 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                                   element.id == widget.gameId), stateOfGame: stateOfGame,
 
                                         actionOfDone: () {
-                                          Navigator.of(context).pop();
+                                          // Navigator.of(context).pop();
                                           Navigator.of(context).pop();
                                         },
                                         backButton: () {
