@@ -40,7 +40,6 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
           ),
         ),
       ),
-
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -183,7 +182,8 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                                         currentDate: selectedToDate != null
                                             ? DateTime.parse(selectedToDate)
                                             : DateTime.now(),
-                                        checkStartDate: (selectedFromDate != null)
+                                        checkStartDate: (selectedFromDate !=
+                                                null)
                                             ? DateTime.parse(selectedFromDate)
                                             : null,
                                       );
@@ -272,12 +272,10 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                               false)),
                 ),
                 20.ph,
-
               ],
             ),
           ),
           Container(
-
             // clipBehavior: Clip.antiAlias,
             decoration: const ShapeDecoration(
               color: Colors.white,
@@ -308,7 +306,6 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                           context
                               .read<FilterAssignmentCubit>()
                               .clearAssignmentFilter();
-                          Navigator.of(context).pop();
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 12),
@@ -324,7 +321,7 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                                 .textTheme
                                 .displayLarge
                                 ?.copyWith(
-                                fontSize: 16, fontWeight: FontWeight.w500),
+                                    fontSize: 16, fontWeight: FontWeight.w500),
                           ),
                         ),
                       ),
@@ -346,8 +343,11 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                               color: AppColor.darkBlueColor),
                           child: Text(
                             'Done',
-                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                fontSize: 16, fontWeight: FontWeight.w500),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(
+                                    fontSize: 16, fontWeight: FontWeight.w500),
                           ),
                         ),
                       ),
@@ -356,7 +356,6 @@ class FilterBottomSheetGetAssignment extends StatelessWidget {
                   ],
                 ),
                 20.ph
-
               ],
             ),
           ),
