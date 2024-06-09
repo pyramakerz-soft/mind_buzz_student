@@ -200,7 +200,7 @@ class _DiceWidget extends State<DiceWidget3> with TickerProviderStateMixin {
               child: const Text(
                 'Try again',
                 style: TextStyle(
-                    fontSize: 30, color: AppColorPhonetics.DarkBorderColor),
+                    fontSize: 30, color: Colors.white),
               ),
             )
           },

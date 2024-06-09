@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart' hide FontWeight;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../manager/dice_cubit.dart';
 import 'dice_widget3.dart';
@@ -19,10 +20,14 @@ class DicePopUp extends StatelessWidget {
     return AlertDialog(
       backgroundColor: Colors.transparent,
       elevation: 0,
-      content: DiceWidget3(
-          diceLetters: diceLetters ?? [],
-          countOfPlayed: countOfPlayed,
-          functionOfSaveWords: functionOfSaveWords),
+
+      content: Container(
+        margin: EdgeInsets.only(left: (40.w), top: 69.h),
+        child: DiceWidget3(
+            diceLetters: diceLetters ?? [],
+            countOfPlayed: countOfPlayed,
+            functionOfSaveWords: functionOfSaveWords),
+      ),
     );
   }
 }
