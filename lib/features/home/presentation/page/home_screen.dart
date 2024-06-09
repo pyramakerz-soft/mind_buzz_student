@@ -84,7 +84,7 @@ class _HomeScreen extends State<HomeScreen> {
                     child: Column(
                       children: [
                         if (Singleton().studentAssignments != null &&
-                            Singleton().studentAssignments!.isNotEmpty) ...{
+                            state.isHaveAssignments) ...{
                           SizedBox(
                             height: 50.h,
                             child: Stack(
