@@ -49,7 +49,7 @@ LineChartData mainData(
         spots: tprogress.values.first,
         isCurved: true,
         gradient: const LinearGradient(
-          colors: [AppColor.darkBlueColor, AppColor.darkBlueColor],
+          colors: [AppColor.white, AppColor.darkBlueColor],
         ),
         barWidth: 2,
         isStrokeCapRound: false,

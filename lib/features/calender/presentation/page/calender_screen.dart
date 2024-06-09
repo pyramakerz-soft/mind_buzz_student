@@ -50,10 +50,10 @@ class CalenderScreen extends StatelessWidget {
           return Column(
             children: [
               if (state is GetCalenderLoadingInitial)
-            SizedBox(
-                height: 0.8.sh,
-                width: 1.sw,
-                child: const Center(child:  CupertinoActivityIndicator())),
+                SizedBox(
+                    height: 0.8.sh,
+                    width: 1.sw,
+                    child: const Center(child: CupertinoActivityIndicator())),
 
               // if (state is GetCalenderCompleteInitial)
               //   Padding(
@@ -70,7 +70,7 @@ class CalenderScreen extends StatelessWidget {
               //   ),
               if (state is GetCalenderCompleteInitial)
                 Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 12.h),
+                  padding: EdgeInsets.symmetric(horizontal: 12.h),
                   child: TableCalendar(
                     firstDay: DateTime.now().month <= 7
                         ? DateTime(DateTime.now().year - 1, 9, 1)
@@ -84,10 +84,8 @@ class CalenderScreen extends StatelessWidget {
                     headerVisible: true,
                     rangeSelectionMode: RangeSelectionMode.toggledOn,
                     onDaySelected: (day, focused) {
-
-                      if(day.month == state.currentDate.month)
-                      bloc.add(SelectDayEvent(day: day.day));
-
+                      if (day.month == state.currentDate.month)
+                        bloc.add(SelectDayEvent(day: day.day));
                     },
                     onCalendarCreated: (controller) =>
                         bloc.pageController = controller,
@@ -95,95 +93,115 @@ class CalenderScreen extends StatelessWidget {
                       bloc.add(SelectMonthEvent(currentTime: focusedDay));
                     },
                     rowHeight: 40.h,
-                    headerStyle: HeaderStyle(
-                      formatButtonVisible: false
-                    ),
+                    headerStyle: HeaderStyle(formatButtonVisible: false),
                     calendarBuilders: CalendarBuilders(
-                      markerBuilder: (context, day, events) {
-                        if (bloc.tests.map((e) => Utils.parseStringToDate(e.createdAt!)).toList().contains(Utils.formatDate(day))) {
-                          return Align(
-                            alignment: Alignment.topRight,
-                            child: Container(
-                              padding: EdgeInsets.all(5.h),
-                              decoration: BoxDecoration(
-                                  color: Utils.formatDate(state.currentDate)== Utils.formatDate(day) ? Colors.white : AppColor.darkBlueColor,
-                                  shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black12,
-                                  blurRadius: 1,
-                                  spreadRadius: 1
-                                )
-                              ]
-                              ),
+                        markerBuilder: (context, day, events) {
+                          if (bloc.tests
+                              .map((e) => Utils.parseStringToDate(e.createdAt!))
+                              .toList()
+                              .contains(Utils.formatDate(day))) {
+                            DateTime currentDate = state.currentDate;
+                            DateTime testDate = day;
+
+                            // Check if the day is in the same month and year as the current date
+                            if (currentDate.month == testDate.month &&
+                                currentDate.year == testDate.year)
+                              return Align(
+                                alignment: Alignment.topRight,
+                                child: Container(
+                                  padding: EdgeInsets.all(5.h),
+                                  decoration: BoxDecoration(
+                                      color:
+                                          Utils.formatDate(state.currentDate) ==
+                                                  Utils.formatDate(day)
+                                              ? Colors.white
+                                              : AppColor.darkBlueColor,
+                                      shape: BoxShape.circle,
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.black12,
+                                            blurRadius: 1,
+                                            spreadRadius: 1)
+                                      ]),
+                                  child: Text(
+                                    bloc.tests
+                                        .where((element) =>
+                                            Utils.parseStringToDate(
+                                                element.createdAt!) ==
+                                            Utils.formatDate(day))
+                                        .toList()
+                                        .length
+                                        .toString(),
+                                    style: TextStyle(
+                                        color: Utils.formatDate(
+                                                    state.currentDate) ==
+                                                Utils.formatDate(day)
+                                            ? AppColor.darkBlueColor
+                                            : Colors.white),
+                                  ),
+                                ),
+                              );
+                          }
+                        },
+                        outsideBuilder: (context, day, date) =>
+                            const SizedBox(),
+                        dowBuilder: (context, day) {
+                          final text = DateFormat.E().format(day);
+                          return Center(
+                            child: Text(
+                              text,
+                              style: TextStyle(
+                                  color: AppColor.calenderDayText
+                                      .withOpacity(0.3)),
+                            ),
+                          );
+                        },
+                        todayBuilder: (context, day, date) {
+                          return Container(
+                            height: 40.h,
+                            decoration: BoxDecoration(
+                                color: AppColor.darkBlueColor,
+                                shape: BoxShape.circle),
+                            child: Center(
                               child: Text(
-                                bloc.tests.where((element) =>
-                                Utils.parseStringToDate(element.createdAt!) ==
-                                    Utils.formatDate(day)    )
-                                    .toList()
-                                    .length
-                                    .toString(),
-                                style: TextStyle(color: Utils.formatDate(state.currentDate)== Utils.formatDate(day) ? AppColor.darkBlueColor: Colors.white),
+                                day.day.toString(),
+                                style: TextStyle(color: Colors.white),
                               ),
                             ),
                           );
-                        }
-                      },
-                      outsideBuilder: (context, day, date) => const SizedBox(),
-                      dowBuilder: (context, day) {
-                        final text = DateFormat.E().format(day);
-                        return Center(
-                          child: Text(
-                            text,
-                            style: TextStyle(
-                                color: AppColor.calenderDayText.withOpacity(0.3)),
-                          ),
-                        );
-                      },
-                      todayBuilder: (context, day, date) {
-                        return Container(
-                          height: 40.h,
-                          decoration: BoxDecoration(
-                              color: AppColor.darkBlueColor,
-                              shape: BoxShape.circle),
-                          child: Center(
+                        },
+                        headerTitleBuilder: (context, day) {
+                          return Center(
                             child: Text(
-                              day.day.toString(),
-                              style: TextStyle(color: Colors.white),
+                              DateFormat.yMMM().format(day),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge
+                                  ?.copyWith(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
                             ),
-                          ),
-                        );
-                      },
-                      headerTitleBuilder: (context , day){
-                        return Center(
-                          child: Text(
-                            DateFormat.yMMM().format(day),
-                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold
-                            ),
-                          ),
-                        );
-                      }
-
-                    ),
+                          );
+                        }),
                   ),
                 ),
               10.ph,
               if (state is GetCalenderCompleteInitial)
-                state.tests.isNotEmpty?
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: state.tests.length,
-                    itemBuilder: (context, index) {
-                      return AssignmentWidget(
-                        singleTest: state.tests[index],
-                      );
-                    },
-                  ),
-                ):
-                const EmptyTestsWidget(),
-              SizedBox(height: 0.1.sh,)
+                state.tests.isNotEmpty
+                    ? Expanded(
+                        child: ListView.builder(
+                          itemCount: state.tests.length,
+                          itemBuilder: (context, index) {
+                            return AssignmentWidget(
+                              singleTest: state.tests[index],
+                            );
+                          },
+                        ),
+                      )
+                    : const EmptyTestsWidget(),
+              SizedBox(
+                height: 0.1.sh,
+              )
             ],
           );
         }),

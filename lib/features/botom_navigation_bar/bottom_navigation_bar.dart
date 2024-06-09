@@ -49,7 +49,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               circleWidth: 55,
               circleColor: AppColor.darkBlueColor,
               elevation: 5,
-              circleShadowColor:Colors.grey[300]!,
+              circleShadowColor: Colors.grey[300]!,
               cornerRadius: BorderRadius.only(
                 topLeft: Radius.circular(20.0),
                 topRight: Radius.circular(20.0),
@@ -124,7 +124,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       height: 5,
                     ),
                     Text(
-                      "Notification",
+                      "Notifications",
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge

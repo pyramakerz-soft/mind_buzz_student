@@ -34,7 +34,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreen extends State<HomeScreen> {
-  bool _isFirstTime = true;
   @override
   void initState() {
     if (Singleton().studentAssignments != null &&
@@ -60,9 +59,9 @@ class _HomeScreen extends State<HomeScreen> {
               child: BlocConsumer<GetProgramsHomeBloc, GetProgramsHomeState>(
                   listener: (context, state) {
                 if (state is GetProgramsCompleteInitial &&
-                    _isFirstTime &&
+                    context.read<WhoAmICubit>().state.isFirst &&
                     Singleton().studentAssignments != null &&
-                    Singleton().studentAssignments!.isNotEmpty) {
+                    state.isHaveAssignments) {
                   _buildCustomPopUp(context, state);
                 }
                 if (state is GetProgramsErrorInitial) {
@@ -85,7 +84,7 @@ class _HomeScreen extends State<HomeScreen> {
                     child: Column(
                       children: [
                         if (Singleton().studentAssignments != null &&
-                            Singleton().studentAssignments!.isNotEmpty) ...{
+                            state.isHaveAssignments) ...{
                           SizedBox(
                             height: 50.h,
                             child: Stack(
@@ -228,6 +227,8 @@ class _HomeScreen extends State<HomeScreen> {
   }
 
   _buildCustomPopUp(BuildContext context, GetProgramsCompleteInitial state) {
+    final whoAmICubit = context.read<WhoAmICubit>();
+    whoAmICubit.openFirstTime();
     return showCustomDialog(
         context: context,
         firstContent: 'you have ',
@@ -236,6 +237,7 @@ class _HomeScreen extends State<HomeScreen> {
         remainingContent: ' Assignments',
         buttonTitle: 'Start Now',
         onButtonPressed: () {
+          Navigator.of(context).pop();
           Utils.navigateTo(
               BlocProvider(
                   create: (_) =>
