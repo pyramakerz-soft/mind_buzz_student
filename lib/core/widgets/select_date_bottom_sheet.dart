@@ -53,9 +53,6 @@ class _SelectDateWidgetState extends State<SelectDateWidget> {
                     context: context,
                     builder: (BuildContext context0) {
                       return BottomSheetSelectDay(
-                        isReport: (date) {
-                          widget.isReport?.call(date, true);
-                        },
                         isFrom: true,
                         currentDate: from.text.isEmpty
                             ? DateTime.now()
@@ -95,9 +92,6 @@ class _SelectDateWidgetState extends State<SelectDateWidget> {
                     context: context,
                     builder: (BuildContext context0) {
                       return BottomSheetSelectDay(
-                        isReport: (date) {
-                          widget.isReport?.call(date, false);
-                        },
                         isFrom: false,
                         currentDate: to.text.isEmpty
                             ? DateTime.now()

@@ -43,7 +43,7 @@ abstract class DefaultHomeData {
     thirdCardColor,
     fourCardColor
   ];
-  static String haveAnAssignment = 'You have an assignment';
+  static String haveAnAssignment = 'Your assignments are ready';
   static List<Color> getColor({required int index}) {
     if (index % 4 == 1) {
       print('1');
@@ -110,11 +110,16 @@ abstract class DefaultChapterData {
   }
 }
 
-abstract class TestTypes{
+abstract class TestTypes {
   static String finished = 'Finished';
   static String dueSoon = 'Due Soon';
   static String notStarted = 'Not Started';
   static String overdue = 'Overdue';
   static List listOfTestTypes = [finished, dueSoon, notStarted, overdue];
-  static List listOfTestColors = [AppColor.resetText, AppColor.redColor4, AppColor.lightGreyColor5, Colors.black];
+  static List listOfTestColors = [
+    AppColor.resetText,
+    AppColor.redColor4,
+    AppColor.lightGreyColor5,
+    Colors.black
+  ];
 }

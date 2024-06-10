@@ -24,6 +24,7 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       parentPin: json['parent_pin'] as String?,
       parentPassword: json['parent_password'] as String?,
       role: json['role'] as String?,
+      countryCode: json['country_code'] as String?,
       schoolId: (json['school_id'] as num?)?.toInt(),
       details: (json['details'] as List<dynamic>?)
           ?.map((e) => UserDetails.fromJson(e as Map<String, dynamic>))
@@ -45,6 +46,7 @@ Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'parent_image': instance.parentImage,
       'parent_password': instance.parentPassword,
       'parent_pin': instance.parentPin,
+      'country_code': instance.countryCode,
       'school_id': instance.schoolId,
       'school': instance.school?.toJson(),
       'details': instance.details?.map((e) => e.toJson()).toList(),

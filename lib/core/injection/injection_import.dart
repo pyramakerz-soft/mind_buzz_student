@@ -37,6 +37,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => UpdateUserDataUseCases(sl()));
   sl.registerLazySingleton(() => GetGameUseCases(sl()));
   sl.registerLazySingleton(() => CreatePassCodeUseCases(sl()));
+  sl.registerFactory(() => EditProfileCubit(sl()));
 
   //Repository
   sl.registerLazySingleton<LoginRepository>(
@@ -64,6 +65,8 @@ Future<void> init() async {
       () => SettingsRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<ParentReportsRepository>(() =>
       ParentReportsRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<EditProfileRepository>(
+      () => EditProfileRepositoryImpl(sl()));
 
   //Datasources
   sl.registerLazySingleton<DataSourceRemotelyOfProgram>(
@@ -88,6 +91,8 @@ Future<void> init() async {
       () => DataSourceRemotelyOfParentAssignmentImpl(dio: sl()));
   sl.registerLazySingleton<DataSourceRemotelyOfParentReports>(
       () => DataSourceRemotelyOfParentReportsImpl(dio: sl()));
+  sl.registerLazySingleton<SettingsRemoteDataSource>(
+      () => SettingsRemoteDataSourceImpl(dio: sl()));
 
   //! Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));

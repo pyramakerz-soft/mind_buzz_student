@@ -24,6 +24,7 @@ class UserData extends Equatable {
   String? parentImage;
   String? parentPassword;
   String? parentPin;
+  String? countryCode;
   int? schoolId;
   SchoolModel? school;
   List<UserDetails>? details;
@@ -37,23 +38,28 @@ class UserData extends Equatable {
       this.school,
       this.createdAt,
       this.updatedAt,
-        this.parentName,
-        this.parentPhone,
-        this.parentEmail,
-        this.parentImage,
-        this.parentPin,
-        this.parentPassword,
+      this.parentName,
+      this.parentPhone,
+      this.parentEmail,
+      this.parentImage,
+      this.parentPin,
+      this.parentPassword,
       this.role,
+      this.countryCode,
       this.schoolId,
-        this.details
-      });
+      this.details});
   factory UserData.fromJson(Map<String, dynamic> json) {
     String? token = json['token'];
-    if(token!=null) {
+    if (token != null) {
       saveToken(token: token);
     }
     //save student assignments
-    List <StudentAssignmentModel> studentAssignments = (json['assignments'] as List<dynamic>?)?.map((e) => StudentAssignmentModel.fromJson(e as Map<String, dynamic>)).toList()??[];
+    List<StudentAssignmentModel> studentAssignments =
+        (json['assignments'] as List<dynamic>?)
+                ?.map((e) =>
+                    StudentAssignmentModel.fromJson(e as Map<String, dynamic>))
+                .toList() ??
+            [];
     Singleton().studentAssignments = studentAssignments;
     return _$UserDataFromJson(json['user']);
   }
@@ -61,8 +67,56 @@ class UserData extends Equatable {
   Map<String, dynamic> toJson() => _$UserDataToJson(this);
 
   @override
-  List<Object?> get props =>
-      [id, name, email, emailVerifiedAt, createdAt, updatedAt, role, schoolId, school,parentPhone,parentImage, parentPin];
+  List<Object?> get props => [
+        id,
+        name,
+        email,
+        emailVerifiedAt,
+        createdAt,
+        updatedAt,
+        role,
+        schoolId,
+        school,
+        countryCode,
+        parentPhone,
+        parentImage,
+        parentPin
+      ];
+  UserData copyWith({
+    int? id,
+    String? name,
+    String? email,
+    String? emailVerifiedAt,
+    String? createdAt,
+    String? updatedAt,
+    String? role,
+    String? parentName,
+    String? parentPhone,
+    String? countryCode,
+    String? parentEmail,
+    String? parentImage,
+    String? parentPassword,
+    int? schoolId,
+    SchoolModel? school,
+  }) {
+    return UserData(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      emailVerifiedAt: emailVerifiedAt ?? this.emailVerifiedAt,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      role: role ?? this.role,
+      parentName: parentName ?? this.parentName,
+      parentPhone: parentPhone ?? this.parentPhone,
+      countryCode: countryCode ?? this.countryCode,
+      parentEmail: parentEmail ?? this.parentEmail,
+      parentImage: parentImage ?? this.parentImage,
+      parentPassword: parentPassword ?? this.parentPassword,
+      schoolId: schoolId ?? this.schoolId,
+      school: school ?? this.school,
+    );
+  }
 
   static Future<void> saveToken({required String token}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

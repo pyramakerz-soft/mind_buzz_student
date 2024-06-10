@@ -11,7 +11,17 @@ class UpdateUserDataUseCases {
 
   UpdateUserDataUseCases(this.repository);
 
-  Future<Either<Failure, UserData>> call({String? name, String? email, String? phone, File? filepath}) async {
-    return await repository.updateUserDataRepository(name:name, email: email,phone:  phone , filepath: filepath);
+  Future<Either<Failure, UserData>> call(
+      {String? name,
+      String? email,
+      String? phone,
+      String? countryCode,
+      File? filepath}) async {
+    return await repository.updateUserDataRepository(
+        name: name,
+        email: email,
+        phone: phone,
+        countryCode: countryCode,
+        filepath: filepath);
   }
 }

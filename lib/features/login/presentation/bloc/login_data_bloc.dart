@@ -31,12 +31,15 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
   TextEditingController fullNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  PhoneNumber? phoneCode ;
+  PhoneNumber? phoneCode;
   File? profileImage;
   UserData? userData;
 
   LoginDataBloc(
-      {required this.requestLoginData, required this.requestAutoUserUseCases, required this.updateUserDataUseCases, required this.createPassCodeUseCases})
+      {required this.requestLoginData,
+      required this.requestAutoUserUseCases,
+      required this.updateUserDataUseCases,
+      required this.createPassCodeUseCases})
       : super(LoginDataInitial()) {
     on<LoginDataEvent>((event, emit) async {
       if (event is LoginRequest) {
@@ -50,71 +53,72 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
         await Future.delayed(const Duration(milliseconds: 500));
         final failureOrDoneMessage = await requestAutoUserUseCases();
         emit(_eitherLoadedOrErrorState(failureOrDoneMessage));
-      }
-      else if (event is CreatePinCodeEvent) {
+      } else if (event is CreatePinCodeEvent) {
         emit(LoadingLoginState());
         await Future.delayed(const Duration(milliseconds: 500));
-        final failureOrDoneMessage = await createPassCodeUseCases(event.pinCode);
-        emit(_eitherCreatedOrErrorState(failureOrDoneMessage,event.pinCode));
+        final failureOrDoneMessage =
+            await createPassCodeUseCases(event.pinCode);
+        emit(_eitherCreatedOrErrorState(failureOrDoneMessage, event.pinCode));
       }
     });
-    on<UpdateUserDataEvent>((event, emit) async {
-     await updateUserData(emit);
-    });
-    on<PickImageEvent>((event, emit) async {
-     await pickImage(emit);
-    });
-    on<ChangePhoneCodeEvent>((event, emit) async {
-      phoneCode = PhoneNumber(countryISOCode: event.country.dialCode, countryCode: event.country.code, number: phoneController.text) ;
-      emit(UpdatingDataInitial(userData: userData!, userImage: profileImage));
-    });
+
     on<InitializeUpdateUserDataEvent>((event, emit) async {
       fullNameController.text = userData?.name ?? '';
-      emailController.text =  userData?.email ?? '';
- if(userData?.parentPhone!=null && userData!.parentPhone!.isNotEmpty)
-      phoneCode = PhoneNumber.fromCompleteNumber(completeNumber: userData!.parentPhone!);
-      phoneController.text = userData?.parentPhone?.substring(phoneCode?.countryISOCode.length??0) ?? '';
-     emit(UpdatingDataInitial(userData: userData!, userImage: profileImage,phoneCode: phoneCode?.countryISOCode));
-    });
-
-    on<ChangeInUpdateUserDataEvent>((event, emit) {
-      if(fullNameController.text!= userData?.name || emailController.text!= userData?.email || phoneController.text != userData?.parentPhone)
-        emit(UpdatingDataChanged());
-      else
-        emit(UpdatingDataInitial(userData: userData!, userImage: profileImage));
+      emailController.text = userData?.email ?? '';
+      if (userData?.parentPhone != null && userData!.parentPhone!.isNotEmpty)
+        phoneCode = PhoneNumber.fromCompleteNumber(
+            completeNumber: userData!.parentPhone!);
+      phoneController.text = userData?.parentPhone
+              ?.substring(phoneCode?.countryISOCode.length ?? 0) ??
+          '';
+      emit(UpdatingDataInitial(
+          userData: userData!,
+          userImage: profileImage,
+          phoneCode: phoneCode?.countryISOCode));
     });
   }
   LoginDataState _eitherLoadedOrErrorState(
-      Either<Failure, UserData> failureOrTrivia,
-      ) {
+    Either<Failure, UserData> failureOrTrivia,
+  ) {
     return failureOrTrivia.fold(
-          (failure) => ErrorLogin(message: _mapFailureToMessage(failure)),
-          (data) {
+      (failure) => ErrorLogin(message: _mapFailureToMessage(failure)),
+      (data) {
         userData = data;
         return CompleteLogin(userData: data);
       },
     );
   }
+
   LoginDataState _eitherCreatedOrErrorState(
-      Either<Failure, bool> failureOrTrivia,
-      String pinCode
-      ) {
+      Either<Failure, bool> failureOrTrivia, String pinCode) {
     return failureOrTrivia.fold(
-          (failure) => ErrorLogin(message: _mapFailureToMessage(failure)),
-          (data) {
+      (failure) => ErrorLogin(message: _mapFailureToMessage(failure)),
+      (data) {
         userData?.parentPin = pinCode;
         return CreatePinCodeSuccessfully();
       },
     );
   }
 
-
-  updateUserData(emit,)async{
-
+  updateUserData(
+    emit,
+  ) async {
     emit(UpdatingDataLoading());
     try {
-      var res = await updateUserDataUseCases(filepath: profileImage , name: fullNameController.text ,
-          phone: (int.tryParse(phoneCode?.countryISOCode??'20')?? int.tryParse(phoneCode?.countryCode??'20')??'20').toString() + phoneController.text ,
+      var res = await updateUserDataUseCases(
+          filepath: profileImage,
+          name: fullNameController.text.trim().isNotEmpty
+              ? fullNameController.text.trim()
+              : userData?.name,
+          phone: phoneController.text.trim().isNotEmpty
+              ? (int.tryParse(phoneCode?.countryISOCode ?? '20') ??
+                          int.tryParse(phoneCode?.countryCode ?? '20') ??
+                          '20')
+                      .toString() +
+                  phoneController.text
+              : userData?.parentPhone,
+          countryCode:
+              phoneCode?.countryISOCode ?? userData?.countryCode ?? 'EG',
           email: emailController.text);
 
       res.fold((l) {
@@ -124,7 +128,8 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
         log('updateUserDataSuccessfullyState ');
         userData = data;
         // TODO Dynamic message
-        emit(CompleteUpdatingData(userData: data, message: 'Updated Successfully'));
+        emit(CompleteUpdatingData(
+            userData: data, message: 'Updated Successfully'));
         // add(AutoLoginRequest());
       });
     } catch (e) {
@@ -132,25 +137,7 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
       emit(UpdatingDataError(message: e.toString()));
     }
   }
-
-
-  pickImage(emit) async{
-    emit(UpdatingDataLoading());
-    final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-    if(image != null) {
-      profileImage = File(image.path);
-      add(ChangeInUpdateUserDataEvent());
-    }
-
-    emit(UpdatingDataInitial(userData: userData!, userImage: profileImage));
-
-  }
-
-
 }
-
-
 
 String _mapFailureToMessage(Failure failure) {
   switch (failure.runtimeType) {
