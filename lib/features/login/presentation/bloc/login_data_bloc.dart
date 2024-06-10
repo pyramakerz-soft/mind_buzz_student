@@ -61,19 +61,7 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
         emit(_eitherCreatedOrErrorState(failureOrDoneMessage, event.pinCode));
       }
     });
-    on<UpdateUserDataEvent>((event, emit) async {
-      await updateUserData(emit);
-    });
-    on<PickImageEvent>((event, emit) async {
-      await pickImage(emit);
-    });
-    on<ChangePhoneCodeEvent>((event, emit) async {
-      phoneCode = PhoneNumber(
-          countryISOCode: event.country.dialCode,
-          countryCode: event.country.code,
-          number: phoneController.text);
-      emit(UpdatingDataInitial(userData: userData!, userImage: profileImage));
-    });
+
     on<InitializeUpdateUserDataEvent>((event, emit) async {
       fullNameController.text = userData?.name ?? '';
       emailController.text = userData?.email ?? '';
@@ -87,15 +75,6 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
           userData: userData!,
           userImage: profileImage,
           phoneCode: phoneCode?.countryISOCode));
-    });
-
-    on<ChangeInUpdateUserDataEvent>((event, emit) {
-      if (fullNameController.text != userData?.name ||
-          emailController.text != userData?.email ||
-          phoneController.text != userData?.parentPhone)
-        emit(UpdatingDataChanged());
-      else
-        emit(UpdatingDataInitial(userData: userData!, userImage: profileImage));
     });
   }
   LoginDataState _eitherLoadedOrErrorState(
@@ -157,18 +136,6 @@ class LoginDataBloc extends Bloc<LoginDataEvent, LoginDataState> {
       log('updateUserData $e ');
       emit(UpdatingDataError(message: e.toString()));
     }
-  }
-
-  pickImage(emit) async {
-    emit(UpdatingDataLoading());
-    final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      profileImage = File(image.path);
-      add(ChangeInUpdateUserDataEvent());
-    }
-
-    emit(UpdatingDataInitial(userData: userData!, userImage: profileImage));
   }
 }
 

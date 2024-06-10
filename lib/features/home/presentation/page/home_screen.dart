@@ -81,6 +81,7 @@ class _HomeScreen extends State<HomeScreen> {
                   return const Center(child: CupertinoActivityIndicator());
                 } else if (state is GetProgramsCompleteInitial) {
                   return SingleChildScrollView(
+                    physics: const NeverScrollableScrollPhysics(),
                     child: Column(
                       children: [
                         if (Singleton().studentAssignments != null &&
@@ -189,31 +190,39 @@ class _HomeScreen extends State<HomeScreen> {
                           ),
                           32.ph,
                         },
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height - (240),
-                          child: ListView(
-                            shrinkWrap: true,
-                            children: List.generate(
-                                state.data.length,
-                                (index) => Column(
-                                      children: [
-                                        CardOfProgram(
-                                          programId:
-                                              "${state.data[index].programId ?? ''}",
-                                          colors: DefaultHomeData.getColor(
-                                              index: (index + 1)),
-                                          mainImage:
-                                              state.data[index].program?.image,
-                                          title: state.data[index].program
-                                                  ?.course?.name ??
-                                              '',
-                                        ),
-                                        24.ph,
-                                      ],
-                                    )),
+                        SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height - (240),
+                                child: ListView(
+                                  shrinkWrap: true,
+                                  children: List.generate(
+                                      state.data.length,
+                                      (index) => Column(
+                                            children: [
+                                              CardOfProgram(
+                                                programId:
+                                                    "${state.data[index].programId ?? ''}",
+                                                colors:
+                                                    DefaultHomeData.getColor(
+                                                        index: (index + 1)),
+                                                mainImage: state
+                                                    .data[index].program?.image,
+                                                title: state.data[index].program
+                                                        ?.course?.name ??
+                                                    '',
+                                              ),
+                                              24.ph,
+                                            ],
+                                          )),
+                                ),
+                              ),
+                              40.ph,
+                            ],
                           ),
                         ),
-                        40.ph,
                       ],
                     ),
                   );

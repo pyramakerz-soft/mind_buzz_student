@@ -104,6 +104,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 content: Text('Updated successfully'),
               );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              Navigator.pop(context);
             }
           },
           builder: (context, state) {
@@ -163,7 +164,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       PhoneTextField(
                         label: 'Phone number',
                         controller: _phoneNumberController,
-                        phoneCode: widget.userData.countryCode ?? 'EG',
+                        phoneCode: widget.userData.countryCode,
                         onChanged: (phoneNumber) =>
                             cubit.onPhoneChange(phoneNumber?.number),
                         onCountryChanged: (country) =>

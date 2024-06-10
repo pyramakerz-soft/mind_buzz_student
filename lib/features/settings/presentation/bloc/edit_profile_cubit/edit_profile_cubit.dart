@@ -11,28 +11,25 @@ class EditProfileCubit extends Cubit<EditProfileState> {
       : super(EditProfileState(status: EditProfileStateStatus.initial));
   final EditProfileRepository _repository;
   void setUserData(UserData userData) {
-    emit(state.copyWith(oldUserData: userData));
+    emit(state.copyWith(oldUserData: userData, userData: UserData()));
   }
 
   void onNameChange(String? name) {
-    final oldUserData = state.oldUserData;
-    final newUserData = oldUserData?.copyWith(name: name);
     emit(state.copyWith(
-        userData: newUserData, status: EditProfileStateStatus.changing));
+        userData: state.userData?.copyWith(name: name),
+        status: EditProfileStateStatus.changing));
   }
 
   void onPhoneChange(String? phoneNumber) {
-    final oldUserData = state.oldUserData;
-    final newUserData = oldUserData?.copyWith(parentPhone: phoneNumber);
     emit(state.copyWith(
-        userData: newUserData, status: EditProfileStateStatus.changing));
+        userData: state.userData?.copyWith(parentPhone: phoneNumber),
+        status: EditProfileStateStatus.changing));
   }
 
   void onCountryCodeChange(String countryCode) {
-    final oldUserData = state.oldUserData;
-    final newUserData = oldUserData?.copyWith(countryCode: countryCode);
     emit(state.copyWith(
-        userData: newUserData, status: EditProfileStateStatus.changing));
+        userData: state.userData?.copyWith(countryCode: countryCode),
+        status: EditProfileStateStatus.changing));
   }
 
   void setImage(XFile image) {
