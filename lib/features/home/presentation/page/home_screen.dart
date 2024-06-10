@@ -35,15 +35,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreen extends State<HomeScreen> {
   @override
-  void initState() {
-    if (Singleton().studentAssignments != null &&
-        Singleton().studentAssignments!.isNotEmpty) {
-      TalkTts.startTalk(text: DefaultHomeData.haveAnAssignment);
-    }
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -75,6 +66,10 @@ class _HomeScreen extends State<HomeScreen> {
                   }
                 } else if (state is LogOutLoadingState) {
                   Navigator.of(context).pop();
+                }else if( state is GetProgramsCompleteInitial){
+                  if(state.isHaveAssignments) {
+                    TalkTts.startTalk(text: DefaultHomeData.haveAnAssignment);
+                  }
                 }
               }, builder: (context, state) {
                 if (state is GetProgramsLoadingInitial) {
@@ -195,7 +190,7 @@ class _HomeScreen extends State<HomeScreen> {
                             children: [
                               SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.height - (240),
+                                    MediaQuery.of(context).size.height - (state.isHaveAssignments?(240):170),
                                 child: ListView(
                                   shrinkWrap: true,
                                   children: List.generate(
