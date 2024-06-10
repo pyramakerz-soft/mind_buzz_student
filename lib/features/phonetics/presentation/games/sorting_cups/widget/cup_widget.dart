@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../../core/phonetics/assets_images_phonetics.dart';
+import '../../../../../../core/games_structure/phonetics/assets_images_phonetics.dart';
 
 class CupWidget extends StatelessWidget {
   final String image;

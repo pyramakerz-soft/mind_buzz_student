@@ -9,7 +9,7 @@ import 'package:mind_buzz_refactor/features/phonetics/presentation/games/x_out_g
 
 import '../../../../../../core/assets_sound.dart';
 import '../../../../../../core/audio_player.dart';
-import '../../../../../../core/phonetics/phonetics_color.dart';
+import '../../../../../../core/games_structure/phonetics/phonetics_color.dart';
 import '../../../../../../core/theme_text.dart';
 import '../../../../../chapters/presentation/manager/journey_bar_cubit.dart';
 import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';

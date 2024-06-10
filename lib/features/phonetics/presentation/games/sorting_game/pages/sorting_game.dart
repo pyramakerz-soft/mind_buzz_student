@@ -12,7 +12,7 @@ import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:mind_buzz_refactor/core/widgets/stroke_text.dart';
 import 'package:mind_buzz_refactor/features/phonetics/presentation/games/spelling_game/widget/drag_target_card.dart';
 
-import '../../../../../../core/phonetics/phonetics_color.dart';
+import '../../../../../../core/games_structure/phonetics/phonetics_color.dart';
 import '../../../../../../core/theme_text.dart';
 import '../../../../../chapters/presentation/manager/journey_bar_cubit.dart';
 import '../../../../domain/entities/game_images_model.dart';

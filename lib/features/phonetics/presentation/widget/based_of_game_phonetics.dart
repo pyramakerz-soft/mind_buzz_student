@@ -12,8 +12,8 @@ import 'package:mind_buzz_refactor/features/phonetics/presentation/widget/star_w
 
 import '../../../../core/assets_sound.dart';
 import '../../../../core/audio_player.dart';
-import '../../../../core/phonetics/assets_images_phonetics.dart';
-import '../../../../core/phonetics/basic_of_every_game.dart';
+import '../../../../core/games_structure/phonetics/assets_images_phonetics.dart';
+import '../../../../core/games_structure/phonetics/basic_of_phonetics_game.dart';
 import '../../../../core/talk_tts.dart';
 import '../games/click_the_picture/manager/click_picture_cubit.dart';
 import '../games/click_the_picture/pages/click_picture_game.dart';

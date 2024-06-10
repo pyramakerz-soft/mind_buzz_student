@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../../core/phonetics/phonetics_color.dart';
+import '../../../../../../core/games_structure/phonetics/phonetics_color.dart';
 import '../../../../../../core/widgets/stroke_text.dart';
 import '../../click_the_sound/pages/click_the_sound_game.dart';
 

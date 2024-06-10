@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/assets_sound.dart';
 import '../../../../../../core/audio_player.dart';
-import '../../../../../../core/phonetics/basic_of_every_game.dart';
-import '../../../../../../core/phonetics/phonetics_color.dart';
+import '../../../../../../core/games_structure/phonetics/basic_of_phonetics_game.dart';
+import '../../../../../../core/games_structure/phonetics/phonetics_color.dart';
 import '../../../../../chapters/presentation/manager/journey_bar_cubit.dart';
 import '../../../../domain/entities/game_model.dart';
 import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
@@ -73,7 +73,7 @@ class ClickThePictureWithWord extends StatelessWidget {
                                   onTap: () async {
                                     print('stateOfAvatar:$generalStateOfGame');
                                     if ((generalStateOfGame.stateOfAvatar ==
-                                                BasicOfEveryGame.stateOIdle ||
+                                                BasicOfPhoneticsGame.stateOIdle ||
                                             generalStateOfGame.stateOfAvatar ==
                                                 null) &&
                                         gameState.correctIndexes.contains(

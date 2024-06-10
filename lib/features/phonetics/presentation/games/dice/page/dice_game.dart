@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../../core/phonetics/basic_of_every_game.dart';
-import '../../../../../../core/phonetics/phonetics_color.dart';
+import '../../../../../../core/games_structure/phonetics/basic_of_phonetics_game.dart';
+import '../../../../../../core/games_structure/phonetics/phonetics_color.dart';
 import '../../../../../chapters/presentation/manager/journey_bar_cubit.dart';
 import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
 import '../manager/dice_cubit.dart';
@@ -77,7 +77,7 @@ class _DiceGamePage extends State<DiceGamePage> {
                                             .read<CurrentGamePhoneticsCubit>()
                                             .state
                                             .stateOfAvatar ==
-                                        BasicOfEveryGame.stateOIdle ||
+                                        BasicOfPhoneticsGame.stateOIdle ||
                                     context
                                             .read<CurrentGamePhoneticsCubit>()
                                             .state

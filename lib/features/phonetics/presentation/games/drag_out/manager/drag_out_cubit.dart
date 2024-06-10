@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 
 import '../../../../../../core/assets_sound.dart';
 import '../../../../../../core/audio_player.dart';
-import '../../../../../../core/phonetics/basic_of_every_game.dart';
+import '../../../../../../core/games_structure/phonetics/basic_of_phonetics_game.dart';
 import '../../../../../../core/talk_tts.dart';
 import '../../../../domain/entities/game_model.dart';
 

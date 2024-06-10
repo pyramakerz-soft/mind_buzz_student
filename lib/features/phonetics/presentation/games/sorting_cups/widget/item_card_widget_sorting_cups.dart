@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../../../core/phonetics/assets_images_phonetics.dart';
+import '../../../../../../core/games_structure/phonetics/assets_images_phonetics.dart';
 
 class ItemCardWidgetOFSortingCups extends StatelessWidget {
   final double? width;

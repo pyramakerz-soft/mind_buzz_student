@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:cubixd/cubixd.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import '../../../../../../core/phonetics/phonetics_color.dart';
+import '../../../../../../core/games_structure/phonetics/phonetics_color.dart';
 import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
 import '../manager/dice_cubit.dart';
 import 'wave_dice.dart';

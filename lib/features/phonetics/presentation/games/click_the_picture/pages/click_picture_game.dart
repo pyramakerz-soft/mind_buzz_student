@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../../../../../../core/phonetics/phonetics_color.dart';
+import '../../../../../../core/games_structure/phonetics/phonetics_color.dart';
 import '../../../../../chapters/presentation/manager/journey_bar_cubit.dart';
 import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
 import '../manager/click_picture_cubit.dart';

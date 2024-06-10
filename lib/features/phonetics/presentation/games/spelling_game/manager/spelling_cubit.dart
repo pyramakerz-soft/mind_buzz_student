@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:mind_buzz_refactor/core/phonetics/basic_of_every_game.dart';
+import 'package:mind_buzz_refactor/core/games_structure/phonetics/basic_of_phonetics_game.dart';
 
 import '../../../../../../core/assets_sound.dart';
 import '../../../../../../core/audio_player.dart';
