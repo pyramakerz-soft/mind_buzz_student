@@ -18,7 +18,7 @@ abstract class ValidationTextField {
     }
   }
 
-  static textInput(String? value,{int? length}) {
+  static textInput(String? value, {int? length}) {
     if ((value?.length ?? 0) < (length ?? 3)) {
       return 'length must be more than ${length ?? 3} letters';
     } else {
@@ -26,18 +26,20 @@ abstract class ValidationTextField {
     }
   }
 
-  static textOnlyInput(String? value,{int? minLength , int? maxLength}) {
+  static textOnlyInput(String? value, {int? minLength, int? maxLength}) {
+    // Check the length constraints
     if ((value?.length ?? 0) < (minLength ?? 3)) {
       return 'length must be more than ${minLength ?? 3} letters';
-    }  if ((value?.length ?? 0) > (maxLength ?? 20)) {
-      return 'length must be less than ${maxLength??20} letters';
+    }
+    if ((value?.length ?? 0) > (maxLength ?? 20)) {
+      return 'length must be less than ${maxLength ?? 20} letters';
     }
 
-    else if (!value!.split('').map((e) => RegExp(r'[a-zA-Z]').hasMatch(e)).toList().contains(false)){
+    // Check if the string contains only letters and spaces
+    if (value != null && RegExp(r'^[a-zA-Z\s]+$').hasMatch(value)) {
       return null;
-    }
-    else{
-      return 'this field accepts letters only';
+    } else {
+      return 'this field accepts letters and spaces only';
     }
   }
 }

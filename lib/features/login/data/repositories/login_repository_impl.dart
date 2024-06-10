@@ -26,14 +26,14 @@ class LoginRepositoryImpl implements LoginRepository {
             email: email, password: password);
         return Right(res);
       } on DioException catch (e, s) {
-       if (e is MessageException) {
+        if (e is MessageException) {
           return Left(ServerFailure(message: "${e.message}"));
         }
         return Left(LoginFailure());
       } catch (e, s) {
-        if(json.decode(e.toString())['message']!=null){
-          return Left(ServerFailure(message: json.decode(e.toString())['message']));
-
+        if (json.decode(e.toString())['message'] != null) {
+          return Left(
+              ServerFailure(message: json.decode(e.toString())['message']));
         }
         if (e is MessageException) {
           return Left(ServerFailure(message: e.message));
@@ -67,7 +67,7 @@ class LoginRepositoryImpl implements LoginRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> createPassCode( String passCode) async {
+  Future<Either<Failure, bool>> createPassCode(String passCode) async {
     if (await networkInfo.isConnected) {
       try {
         final res = await remoteDataSource.updateUserPinCode(pinCode: passCode);
@@ -89,14 +89,22 @@ class LoginRepositoryImpl implements LoginRepository {
 
   @override
   Future<Either<Failure, UserData>> updateUserDataRepository(
-      {String? name, String? email, String? phone, File? filepath}) async {
+      {String? name,
+      String? email,
+      String? phone,
+      String? countryCode,
+      File? filepath}) async {
     if (await networkInfo.isConnected) {
       try {
         final res = await remoteDataSource.updateUserData(
-            email: email, name: name , phone: phone ,filepath: filepath);
+            email: email,
+            name: name,
+            phone: phone,
+            countryCode: countryCode,
+            filepath: filepath);
 
         return Right(res);
-      }catch (e, s) {
+      } catch (e, s) {
         if (e is MessageException) {
           return Left(ServerFailure(message: e.message));
         }

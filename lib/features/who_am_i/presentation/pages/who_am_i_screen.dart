@@ -32,7 +32,7 @@ class WhoAmIScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentIndex = context.watch<WhoAmICubit>().state;
+    final currentIndex = context.watch<WhoAmICubit>().state.index;
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -85,7 +85,8 @@ class WhoAmIScreen extends StatelessWidget {
                                   left: 25,
                                   height: 0.2.sh,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
                                         children: [
@@ -104,23 +105,27 @@ class WhoAmIScreen extends StatelessWidget {
                                                     context);
                                               },
                                               child: Container(
-                                                  padding: const EdgeInsets.all(9),
+                                                  padding:
+                                                      const EdgeInsets.all(9),
                                                   alignment: Alignment.center,
                                                   height: 42,
                                                   width: 42,
-                                                  decoration: const BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(10)),
-                                                      color:
-                                                          AppColor.darkBlueColor),
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10)),
+                                                          color: AppColor
+                                                              .darkBlueColor),
                                                   child: SvgPicture.asset(
                                                     AppSvgImages.iconLogout,
                                                     fit: BoxFit.fill,
                                                   ))),
                                           20.pw,
                                           Text(
-                                            'Sign In',
+                                            'Sign In as',
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .titleMedium
@@ -134,7 +139,6 @@ class WhoAmIScreen extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-
                                     ],
                                   ),
                                 ),
@@ -144,7 +148,6 @@ class WhoAmIScreen extends StatelessWidget {
                         ],
                       ),
                     )),
-
                 Positioned(
                   top: 0.11.sh,
                   child: Transform.rotate(
@@ -159,12 +162,11 @@ class WhoAmIScreen extends StatelessWidget {
                     ),
                   ),
                 )
-
               ],
             ),
             20.ph,
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 24,vertical: 30),
+              margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
               child: Column(
                 children: [
                   const ItemInChoose(

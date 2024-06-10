@@ -24,58 +24,54 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-        appBar: customAppBar( context: context,title: 'Settings'),
+        appBar: customAppBar(context: context, title: 'Settings'),
         body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 15.h),
+            padding: EdgeInsets.symmetric(horizontal: 15.h),
             child: BlocConsumer<LoginDataBloc, LoginDataState>(
               listener: (context, state) {},
               builder: (context, state) {
                 LoginDataBloc bloc = context.read<LoginDataBloc>();
                 return Padding(
-                  padding:  EdgeInsets.only(top: 12.h),
+                  padding: EdgeInsets.only(top: 12.h),
                   child: Column(
                     children: [
-                      if(state.runtimeType.toString() != 'LoadingLoginState')
-                      UserHeader(
-                        name: bloc.userData?.name ?? '',
-                        school: bloc.userData?.details?[0].stage?.name ?? '',
-                        image: bloc.userData?.parentImage,
-                      ),
-                      if(state is LoadingLoginState)
-                      const  UserHeaderLoading(),
-
+                      if (state.runtimeType.toString() != 'LoadingLoginState')
+                        UserHeader(
+                          name: bloc.userData?.name ?? '',
+                          school: bloc.userData?.details?[0].stage?.name ?? '',
+                          image: bloc.userData?.parentImage,
+                        ),
+                      if (state is LoadingLoginState) const UserHeaderLoading(),
                       30.ph,
-
                       SettingItem(
-                        title: 'Personal Info',
+                        title: 'Personal info',
                         svgPicture: ParentImages.personalInfo,
-                        onTap: (){
-                          Utils.navigateTo(ProfileDataScreen(userData: bloc.userData!,), context);
+                        onTap: () {
+                          Utils.navigateTo(
+                              ProfileDataScreen(
+                                userData: bloc.userData!,
+                              ),
+                              context);
                         },
                       ),
-
                       SettingItem(
-                        title: 'About Us',
+                        title: 'About us',
                         svgPicture: ParentImages.aboutUS,
                       ),
-
                       SettingItem(
-                        title: 'Privacy Policy',
+                        title: 'Privacy policy',
                         svgPicture: ParentImages.aboutUS,
                       ),
-
                       BlocProvider<GetProgramsHomeBloc>(
                         create: (_) => di.sl<GetProgramsHomeBloc>(),
                         child: SettingItem(
-                          title: 'Logout',
+                          title: 'Log out',
                           svgPicture: ParentImages.logout,
                           isLogout: true,
                           isLast: true,
-                          onTap: (){
-                            di.sl<GetProgramsHomeBloc>()
-                              ..add(LogOutRequest());
+                          onTap: () {
+                            di.sl<GetProgramsHomeBloc>()..add(LogOutRequest());
 
                             context.read<WhoAmICubit>().clearIndex();
                             Utils.navigateAndRemoveUntilTo(
