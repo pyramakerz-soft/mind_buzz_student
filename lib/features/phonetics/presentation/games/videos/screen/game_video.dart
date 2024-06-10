@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../../../../core/phonetics/assets_images_phonetics.dart';
+import '../../../../../chapters/presentation/manager/journey_bar_cubit.dart';
 import '../../../../domain/entities/game_model.dart';
 import '../../../manager/main_cubit/current_game_phonetics_cubit.dart';
 
@@ -58,13 +59,21 @@ class _gameVideo extends State<gameVideo> {
               });
             }
             print('addListener:$currentStateOfGame');
-            context
-                .read<CurrentGamePhoneticsCubit>()
-                .addStarToStudent(
-              stateOfCountOfCorrectAnswer:currentStateOfGame,
-              mainCountOfQuestion: 3,
-            );
+            if((context.read<CurrentGamePhoneticsCubit>().state.countOfStar??0)<currentStateOfGame) {
+              context
+                  .read<CurrentGamePhoneticsCubit>()
+                  .addStarToStudent(
+                stateOfCountOfCorrectAnswer: currentStateOfGame,
+                mainCountOfQuestion: 3,
+              );
+            }
             if(currentStateOfGame==3){
+              context
+                  .read<JourneyBarCubit>()
+                  .sendStars(
+                  gamesId: [widget.currentDataGame.id??0],
+                  countOfStar:
+                  currentStateOfGame);
               Navigator.of(context).pop();
             }
 
@@ -84,6 +93,12 @@ class _gameVideo extends State<gameVideo> {
     } else {
       print('state:$state');
     }
+  }
+
+  @override
+  void deactivate() {
+    _controller.dispose();
+
   }
 
   @override
