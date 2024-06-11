@@ -4,20 +4,26 @@ import 'package:bloc/bloc.dart';
 import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:meta/meta.dart';
+import 'package:mind_buzz_refactor/features/unit/domain/entities/unit_model.dart';
 
 import '../../../../core/assets_animation.dart';
 import '../../domain/use_cases/game_stars_use_cases.dart';
 import '../../domain/entities/chapter_model.dart';
-import 'package:provider/provider.dart';
 import 'journey_bar_state.dart';
 
-class JourneyBarCubit extends Cubit<JourneyBarInitial> with ChangeNotifier {
-  final GameStarsUseCases gamesStarsUseCases;
+class JourneyBarCubit extends Cubit<JourneyBarState> with ChangeNotifier {
+  final GameStarsUseCases _gamesStarsUseCases;
 
-  int unitId;
-  JourneyBarCubit({required this.gamesStarsUseCases, required this.unitId})
-      : super(JourneyBarInitial(currentUnitId: unitId)) {
+  JourneyBarCubit({
+    required GameStarsUseCases gamesStarsUseCases,
+    required List<UnitModel> units,
+    required int unitId,
+    required int currentUnitIndex,
+  })  : _gamesStarsUseCases = gamesStarsUseCases,
+        super(JourneyBarState(
+            currentUnitId: unitId,
+            currentUnitIndex: currentUnitIndex,
+            units: units)) {
     getTheBackGround();
   }
   updateTheBar(
@@ -52,11 +58,18 @@ class JourneyBarCubit extends Cubit<JourneyBarInitial> with ChangeNotifier {
     // });
   }
 
-  changeUnit(List<int> allUnits, {bool next = true}) {
-    int index = allUnits.indexOf(state.currentUnitId);
-    int nextId = next ? allUnits[index + 1] : allUnits[index - 1];
-    unitId = nextId;
-    emit(state.copyWith(currentUnitId: nextId));
+  int nextUnit() {
+    final index = state.currentUnitIndex + 1;
+    final nextUnitId = state.units[index].id;
+    emit(state.copyWith(currentUnitId: nextUnitId, currentUnitIndex: index));
+    return nextUnitId!;
+  }
+
+  int backUnit() {
+    final index = state.currentUnitIndex - 1;
+    final backUnitId = state.units[index].id;
+    emit(state.copyWith(currentUnitId: backUnitId, currentUnitIndex: index));
+    return backUnitId!;
   }
 
   updateTheDataOfLesson({required List<ChapterModel> newData}) {
@@ -64,7 +77,7 @@ class JourneyBarCubit extends Cubit<JourneyBarInitial> with ChangeNotifier {
   }
 
   sendStars({required List<int> gamesId, required int countOfStar}) {
-    gamesStarsUseCases(gameId: gamesId, countOfStars: countOfStar);
+    _gamesStarsUseCases(gameId: gamesId, countOfStars: countOfStar);
 
     List<ChapterModel> tempGamesModels = state.dataOfLessons ?? [];
     try {
@@ -75,7 +88,7 @@ class JourneyBarCubit extends Cubit<JourneyBarInitial> with ChangeNotifier {
         tempGamesModels.removeAt(index2);
         tempGamesModels.insert(index2, data);
       });
-    }catch(e){}
+    } catch (e) {}
     emit(state.copyWith(dataOfLessons: tempGamesModels));
   }
 }
