@@ -101,20 +101,28 @@ class _HomeScreen extends State<HomeScreen> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        DefaultHomeData.haveAnAssignment,
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
+                                      Flexible(
+                                        child: FittedBox(
+                                          child: Text(
+                                            DefaultHomeData.haveAnAssignment,
+                                            style: TextStyle(
+                                                fontSize: MediaQuery.of(context)
+                                                            .size
+                                                            .reDeginSize(
+                                                                16, context) >
+                                                        16
+                                                    ? 16
+                                                    : MediaQuery.of(context)
                                                         .size
                                                         .reDeginSize(
-                                                            16, context) >
-                                                    16
-                                                ? 16
-                                                : MediaQuery.of(context)
-                                                    .size
-                                                    .reDeginSize(16, context),
-                                            fontWeight: FontWeight.w600,
-                                            color: AppColor.white),
+                                                            16, context),
+                                                fontWeight: FontWeight.w600,
+                                                color: AppColor.white),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
                                       ),
                                       GestureDetector(
                                         onTap: () {
