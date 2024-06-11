@@ -151,51 +151,6 @@ class UnitScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-
-                //     Container(
-                //       height: 160,
-                //       width: MediaQuery.of(context).size.width,
-                //       decoration: const BoxDecoration(
-                //           image: DecorationImage(
-                //               image: AssetImage(AppImages.imageAppBarOfUnits),
-                //               fit: BoxFit.fill)),
-                //       child: Padding(
-                //         padding: const EdgeInsets.symmetric(horizontal: 22),
-                //         child: Row(
-                //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //           children: [
-                //             GestureDetector(
-                //                 onTap: () {
-                //                   Navigator.of(context).pop();
-                //                 },
-                //                 child: Container(
-                //                     padding: const EdgeInsets.all(10),
-                //                     height: 45,
-                //                     width: 45,
-                //                     alignment: Alignment.center,
-                //                     decoration: const BoxDecoration(
-                //                         shape: BoxShape.circle,
-                //                         color: AppColor.darkBlueColor3),
-                //                     child: SvgPicture.asset(
-                //                       AppSvgImages.iconHome,
-                //                       fit: BoxFit.fill,
-                //                       color: Colors.white,
-                //                     ))),
-                //             Text(
-                //               programName,
-                //               style: Theme.of(context)
-                //                   .textTheme
-                //                   .titleMedium
-                //                   ?.copyWith(
-                //                       fontSize: 20, fontWeight: FontWeight.w700),
-                //             ),
-                //             const SizedBox(
-                //               width: 45,
-                //             ),
-                //           ],
-                //         ),
-                //       ),
-                //     ),
               ],
             ),
 
@@ -232,101 +187,6 @@ class UnitScreen extends StatelessWidget {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Stack(
-                          //   alignment: Alignment.topCenter,
-                          //   clipBehavior: Clip.none,
-                          //   children: [
-                          //     SizedBox(
-                          //       // alignment: Alignment.center,
-                          //       width: MediaQuery.of(context).size.width,
-                          //       height: 100,
-                          //       child: Stack(
-                          //         alignment: Alignment.center,
-                          //         children: [
-                          //           Positioned(
-                          //             left: MediaQuery.of(context).size.width -
-                          //                 60,
-                          //             top: 21,
-                          //             child: Container(
-                          //               width: 6.39,
-                          //               height: 100,
-                          //               clipBehavior: Clip.antiAlias,
-                          //               decoration: const BoxDecoration(),
-                          //               child: Stack(
-                          //                 children: [
-                          //                   Positioned(
-                          //                     left: -9,
-                          //                     top: 0,
-                          //                     child: Container(
-                          //                       width: 15,
-                          //                       height: 58,
-                          //                       decoration: const BoxDecoration(
-                          //                           color: AppColor.redColor),
-                          //                     ),
-                          //                   ),
-                          //                   Positioned(
-                          //                     left: 0,
-                          //                     top: 26.90,
-                          //                     child: Transform(
-                          //                       transform: Matrix4.identity()
-                          //                         ..translate(0.0, 0.0)
-                          //                         ..rotateZ(-0.79),
-                          //                       child: Container(
-                          //                         width: 19.65,
-                          //                         height: 19.65,
-                          //                         decoration:
-                          //                             const BoxDecoration(
-                          //                                 color: Colors.white),
-                          //                       ),
-                          //                     ),
-                          //                   ),
-                          //                 ],
-                          //               ),
-                          //             ),
-                          //           ),
-                          //           Container(
-                          //             width: MediaQuery.of(context).size.width -
-                          //                 120,
-                          //             height: 58,
-                          //             padding: const EdgeInsets.only(
-                          //               top: 11,
-                          //               left: 20,
-                          //               right: 14,
-                          //               bottom: 11,
-                          //             ),
-                          //             decoration: const BoxDecoration(
-                          //                 color: Color(0xFFD1232A)),
-                          //             child: const Row(
-                          //               mainAxisSize: MainAxisSize.min,
-                          //               mainAxisAlignment:
-                          //                   MainAxisAlignment.center,
-                          //               crossAxisAlignment:
-                          //                   CrossAxisAlignment.center,
-                          //               children: [
-                          //                 Text(
-                          //                   'Continue from previous',
-                          //                   style: TextStyle(
-                          //                     color: Colors.white,
-                          //                     fontSize: 18,
-                          //                     fontFamily: 'Poppins',
-                          //                     fontWeight: FontWeight.w700,
-                          //                     height: 0,
-                          //                     letterSpacing: 0.36,
-                          //                   ),
-                          //                 ),
-                          //               ],
-                          //             ),
-                          //           ),
-                          //           const Positioned(
-                          //             left: -12,
-                          //             child: AnimationOfBee4(),
-                          //           )
-                          //         ],
-                          //       ),
-                          //     )
-                          //   ],
-                          // ),
-                          // 20.ph,
                           32.ph,
                           Container(
                             margin: const EdgeInsets.symmetric(horizontal: 15),
@@ -415,31 +275,29 @@ class UnitScreen extends StatelessWidget {
                                                                 top: 10,
                                                                 right: 10,
                                                                 left: 10),
-                                                        child: Flexible(
-                                                          child: FittedBox(
-                                                            child: Text(
-                                                              '${state.data[index].name ?? ''}',
-                                                              style: Theme.of(
-                                                                      context)
-                                                                  .textTheme
-                                                                  .titleMedium
-                                                                  ?.copyWith(
-                                                                    color: AppColor
-                                                                        .white,
-                                                                    fontSize:
-                                                                        18,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w700,
-                                                                  ),
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                              maxLines: 1,
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
-                                                            ),
+                                                        child: FittedBox(
+                                                          child: Text(
+                                                            state.data[index]
+                                                                    .name ??
+                                                                '',
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .titleMedium
+                                                                ?.copyWith(
+                                                                  color: AppColor
+                                                                      .white,
+                                                                  fontSize: 18,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                ),
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            maxLines: 1,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
                                                           ),
                                                         ),
                                                       ),
