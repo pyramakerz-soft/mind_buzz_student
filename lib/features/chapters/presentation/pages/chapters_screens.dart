@@ -1,7 +1,5 @@
-import 'dart:developer';
 import 'dart:math';
 
-import 'package:flame/components.dart';
 import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,30 +7,20 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:geekyants_flutter_gauges/geekyants_flutter_gauges.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
-import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/error/failures_messages.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/app_color.dart';
-import '../../../../core/assets_svg_images.dart';
-import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme_text.dart';
 import '../../../../core/utils.dart';
-import '../../../../core/widgets/stroke_text.dart';
 import '../../../login/presentation/page/login_screen.dart';
-import '../../../math_book1/presentation/manager/current_game_cubit.dart';
-import '../../../math_book1/presentation/screen/my_home_page_book1.dart';
-import '../../../phonetics/presentation/games/click_the_sound/pages/click_the_sound_game.dart';
 import '../../../phonetics/presentation/pages/phonetics_book.dart';
 import '../../domain/entities/chapter_model.dart';
 import '../../domain/entities/image_details.dart';
 import '../manager/chapter_bloc.dart';
 import '../manager/journey_bar_cubit.dart';
 import '../manager/journey_bar_state.dart';
-import '../widgets/dotted_line_painter.dart';
 import '../widgets/item_of_sub_body.dart';
 import '../widgets/item_of_title.dart';
 import '../widgets/level_map.dart';
@@ -60,9 +48,9 @@ class ChaptersScreen extends StatelessWidget {
       body: BlocProvider<ChapterBloc>(
         create: (_) => di.sl<ChapterBloc>()
           ..add(GetUnitRequest(programId: int.parse(programId))),
-        child: BlocBuilder<JourneyBarCubit, JourneyBarInitial>(
+        child: BlocBuilder<JourneyBarCubit, JourneyBarState>(
             builder: (context, stateOfJourney) {
-          int unitId = context.read<JourneyBarCubit>().unitId;
+          final unitId = stateOfJourney.currentUnitId;
           return Container(
             decoration: const BoxDecoration(
                 image: DecorationImage(
@@ -73,18 +61,17 @@ class ChaptersScreen extends StatelessWidget {
                 Column(children: [
                   Container(
                     height: 50.h,
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Row(
                       textDirection: TextDirection.ltr,
                       children: [
                         GestureDetector(
                             onTap: () {
-                              if (unitId == int.parse(programId)) {
+                              if (stateOfJourney.currentUnitIndex == 0) {
                                 Navigator.of(context).pop();
                               } else {
-                                context
-                                    .read<JourneyBarCubit>()
-                                    .changeUnit(allUnits, next: false);
+                                final unitId =
+                                    context.read<JourneyBarCubit>().backUnit();
                                 context
                                     .read<ChapterBloc>()
                                     .add(GetUnitRequest(programId: unitId));
@@ -118,9 +105,8 @@ class ChaptersScreen extends StatelessWidget {
                         if (unitId != allUnits.last)
                           GestureDetector(
                               onTap: () {
-                                context
-                                    .read<JourneyBarCubit>()
-                                    .changeUnit(allUnits, next: true);
+                                final unitId =
+                                    context.read<JourneyBarCubit>().nextUnit();
                                 context
                                     .read<ChapterBloc>()
                                     .add(GetUnitRequest(programId: unitId));

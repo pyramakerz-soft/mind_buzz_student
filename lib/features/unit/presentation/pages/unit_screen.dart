@@ -350,6 +350,9 @@ class UnitScreen extends StatelessWidget {
                                                       JourneyBarCubit(
                                                           unitId: state
                                                               .data[index].id!,
+                                                          currentUnitIndex:
+                                                              index,
+                                                          units: state.data,
                                                           gamesStarsUseCases:
                                                               sl()),
                                                   child: ChaptersScreen(
@@ -378,7 +381,8 @@ class UnitScreen extends StatelessWidget {
                                                 (index == 0) || index % 2 == 0
                                                     ? false
                                                     : true,
-                                            child: SizedBox(
+                                            child: Container(
+                                              alignment: Alignment.center,
                                               height:
                                                   (width * 0.2692307692307692),
                                               width: width,
@@ -394,35 +398,29 @@ class UnitScreen extends StatelessWidget {
                                                           DefaultUnitData
                                                               .fullDataOfCardColor
                                                               .random()),
-                                                  child: Transform.flip(
-                                                    flipX: (index == 0) ||
-                                                            index % 2 == 0
-                                                        ? false
-                                                        : true,
-                                                    child: Center(
+                                                  child: Center(
+                                                    child: Transform.flip(
+                                                      flipX: (index == 0) ||
+                                                              index % 2 == 0
+                                                          ? false
+                                                          : true,
                                                       child: Container(
+                                                        alignment:
+                                                            Alignment.center,
                                                         width: width,
                                                         // alignment: Alignment.center,
-                                                        padding: EdgeInsets.only(
-                                                            top: 10,
-                                                            left: (index ==
-                                                                        0) ||
-                                                                    index % 2 ==
-                                                                        0
-                                                                ? 0
-                                                                : 30,
-                                                            right: (index ==
-                                                                        0) ||
-                                                                    index % 2 ==
-                                                                        0
-                                                                ? 30
-                                                                : 0),
-                                                        child: Text(
-                                                          state.data[index]
-                                                                  .name ??
-                                                              '',
-                                                          style:
-                                                              Theme.of(context)
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                                top: 10,
+                                                                right: 10,
+                                                                left: 10),
+                                                        child: Flexible(
+                                                          child: FittedBox(
+                                                            child: Text(
+                                                              '${state.data[index].name ?? ''}',
+                                                              style: Theme.of(
+                                                                      context)
                                                                   .textTheme
                                                                   .titleMedium
                                                                   ?.copyWith(
@@ -434,11 +432,15 @@ class UnitScreen extends StatelessWidget {
                                                                         FontWeight
                                                                             .w700,
                                                                   ),
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          maxLines: 1,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              maxLines: 1,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                            ),
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
