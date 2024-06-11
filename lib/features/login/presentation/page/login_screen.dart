@@ -38,180 +38,189 @@ class LoginScreen extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Column(children: [
-              const LoginAnimatedVectors(),
-              Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(32),
-                        topRight: Radius.circular(32)),
-                  ),
-                  width: MediaQuery.of(context).size.width,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 30, horizontal: 25),
-                  child: SingleChildScrollView(
-                    child: Form(
-                      key: _formKey,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            // Text(
-                            //   'Welcome',
-                            //   style: Theme.of(context)
-                            //       .textTheme
-                            //       .titleMedium
-                            //       ?.copyWith(
-                            //         color: AppColor.darkBlueColor,
-                            //         fontSize: 40,
-                            //         fontWeight: FontWeight.w700,
-                            //         fontFamily: AppTheme.getFontFamily5(),
-                            //       ),
-                            // ),
-                            // StrokedText(
-                            //   text: 'Log In',
-                            //   isDisabled: false,
-                            //   fontSize: 42,
-                            //   strokeWidth: 2.5,
-                            //   hasShadows: true,
-                            // ),
-                            28.ph,
-                            TextFieldWidget(
-                                controler: _emailController,
-                                validatorTextField: (val) =>
-                                    ValidationTextField.emailInput(val),
-                                hintText: 'Email',
-                                borderSideColor: AppColor.borderGreyColor,
-                                onChanged: (val) {
-                                  if (_emailController.text.isNotEmpty &&
-                                      _passwordController.text.isNotEmpty) {
-                                    context
-                                        .read<LoginCubit>()
-                                        .updateDisableButton(supState: true);
-                                  } else {
-                                    context
-                                        .read<LoginCubit>()
-                                        .updateDisableButton(supState: false);
-                                  }
-                                }),
-                            16.ph,
-                            TextFieldWidget(
-                                controler: _passwordController,
-                                validatorTextField: (val) =>
-                                    ValidationTextField.passwordInput(val),
-                                hintText: 'Password',
-                                borderSideColor: AppColor.borderGreyColor,
-                                obscureText: showPassword,
-                                rightWidget: IconButton(
-                                  onPressed: () {
-                                    context
-                                        .read<LoginCubit>()
-                                        .updateTheShowPassword();
-                                  },
-                                  icon: Icon(
-                                    showPassword == true
-                                        ? CupertinoIcons.eye_fill
-                                        : CupertinoIcons.eye_slash_fill,
-                                    color: Colors.grey,
+              const SizedBox(height: 50),
+              const Flexible(flex: 1, child: LoginAnimatedVectors()),
+              Flexible(
+                flex: 1,
+                child: Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(32),
+                          topRight: Radius.circular(32)),
+                    ),
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 30, horizontal: 25),
+                    child: SingleChildScrollView(
+                      child: Form(
+                        key: _formKey,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              // Text(
+                              //   'Welcome',
+                              //   style: Theme.of(context)
+                              //       .textTheme
+                              //       .titleMedium
+                              //       ?.copyWith(
+                              //         color: AppColor.darkBlueColor,
+                              //         fontSize: 40,
+                              //         fontWeight: FontWeight.w700,
+                              //         fontFamily: AppTheme.getFontFamily5(),
+                              //       ),
+                              // ),
+                              // StrokedText(
+                              //   text: 'Log In',
+                              //   isDisabled: false,
+                              //   fontSize: 42,
+                              //   strokeWidth: 2.5,
+                              //   hasShadows: true,
+                              // ),
+                              28.ph,
+                              TextFieldWidget(
+                                  controler: _emailController,
+                                  validatorTextField: (val) =>
+                                      ValidationTextField.emailInput(val),
+                                  hintText: 'Email',
+                                  borderSideColor: AppColor.borderGreyColor,
+                                  onChanged: (val) {
+                                    if (_emailController.text.isNotEmpty &&
+                                        _passwordController.text.isNotEmpty) {
+                                      context
+                                          .read<LoginCubit>()
+                                          .updateDisableButton(supState: true);
+                                    } else {
+                                      context
+                                          .read<LoginCubit>()
+                                          .updateDisableButton(supState: false);
+                                    }
+                                  }),
+                              16.ph,
+                              TextFieldWidget(
+                                  controler: _passwordController,
+                                  validatorTextField: (val) =>
+                                      ValidationTextField.passwordInput(val),
+                                  hintText: 'Password',
+                                  borderSideColor: AppColor.borderGreyColor,
+                                  obscureText: showPassword,
+                                  rightWidget: IconButton(
+                                    onPressed: () {
+                                      context
+                                          .read<LoginCubit>()
+                                          .updateTheShowPassword();
+                                    },
+                                    icon: Icon(
+                                      showPassword == true
+                                          ? CupertinoIcons.eye_fill
+                                          : CupertinoIcons.eye_slash_fill,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  onChanged: (val) {
+                                    if (_emailController.text.isNotEmpty &&
+                                        _passwordController.text.isNotEmpty) {
+                                      context
+                                          .read<LoginCubit>()
+                                          .updateDisableButton(supState: true);
+                                    } else {
+                                      context
+                                          .read<LoginCubit>()
+                                          .updateDisableButton(supState: false);
+                                    }
+                                  }),
+                              16.ph,
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: GestureDetector(
+                                  child: Text(
+                                    'Forgot password?',
+                                    style:
+                                        Theme.of(context).textTheme.titleSmall,
                                   ),
                                 ),
-                                onChanged: (val) {
-                                  if (_emailController.text.isNotEmpty &&
-                                      _passwordController.text.isNotEmpty) {
-                                    context
-                                        .read<LoginCubit>()
-                                        .updateDisableButton(supState: true);
-                                  } else {
-                                    context
-                                        .read<LoginCubit>()
-                                        .updateDisableButton(supState: false);
-                                  }
-                                }),
-                            16.ph,
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: GestureDetector(
-                                child: Text(
-                                  'Forgot password?',
-                                  style: Theme.of(context).textTheme.titleSmall,
-                                ),
                               ),
-                            ),
-                            40.ph,
-                            BlocConsumer<LoginDataBloc, LoginDataState>(
-                                listener: (context, state) {
-                              log('##state:$state');
-                              if (state is ErrorLogin) {
-                                final snackBar = SnackBar(
-                                  content: Text(state.message),
-                                );
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(snackBar);
-                              } else if (state is CompleteLogin) {
-                                context
-                                    .read<LoginCubit>()
-                                    .saveUserData(userData: state.userData);
-                                Utils.navigateAndRemoveUntilTo(
-                                    const WhoAmIScreen(), context);
-                              }
-                            }, builder: (context, state) {
-                              log('--state:$state');
-                              if (state is LoadingLoginState) {
-                                return Container(
-                                  height: 60,
-                                  child: Center(
-                                      child: CupertinoActivityIndicator()),
-                                );
-                              } else {
-                                return BlocConsumer<LoginCubit,
-                                        LoginStateInitial>(
-                                    listener: (context, supLoginState) {},
-                                    builder: (context, supLoginState) {
-                                      return ButtonLogin(
-                                        applyFontFamily5: true,
-                                        fontSize: 35,
-                                        playButton:
-                                            supLoginState.disableButton == null
-                                                ? (_emailController
-                                                            .text.isEmpty ||
+                              40.ph,
+                              BlocConsumer<LoginDataBloc, LoginDataState>(
+                                  listener: (context, state) {
+                                log('##state:$state');
+                                if (state is ErrorLogin) {
+                                  final snackBar = SnackBar(
+                                    content: Text(state.message),
+                                  );
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                } else if (state is CompleteLogin) {
+                                  context
+                                      .read<LoginCubit>()
+                                      .saveUserData(userData: state.userData);
+                                  Utils.navigateAndRemoveUntilTo(
+                                      const WhoAmIScreen(), context);
+                                }
+                              }, builder: (context, state) {
+                                log('--state:$state');
+                                if (state is LoadingLoginState) {
+                                  return Container(
+                                    height: 60,
+                                    child: Center(
+                                        child: CupertinoActivityIndicator()),
+                                  );
+                                } else {
+                                  return BlocConsumer<LoginCubit,
+                                          LoginStateInitial>(
+                                      listener: (context, supLoginState) {},
+                                      builder: (context, supLoginState) {
+                                        return ButtonLogin(
+                                          applyFontFamily5: true,
+                                          fontSize: 35,
+                                          playButton: supLoginState
+                                                      .disableButton ==
+                                                  null
+                                              ? (_emailController
+                                                          .text.isEmpty ||
+                                                      _passwordController
+                                                          .text.isEmpty)
+                                                  ? false
+                                                  : true
+                                              : (supLoginState.disableButton),
+                                          disableAnimation: false,
+                                          dataFunction: () {
+                                            if (!_formKey.currentState!
+                                                .validate()) {
+                                              return;
+                                            }
+                                            _formKey.currentState!.save();
+                                            if ((supLoginState.disableButton ==
+                                                        null
+                                                    ? true
+                                                    : (supLoginState
+                                                        .disableButton)) !=
+                                                true) {
+                                              return;
+                                            }
+                                            context.read<LoginDataBloc>().add(
+                                                LoginRequest(
+                                                    email:
+                                                        _emailController.text,
+                                                    password:
                                                         _passwordController
-                                                            .text.isEmpty)
-                                                    ? false
-                                                    : true
-                                                : (supLoginState.disableButton),
-                                        disableAnimation: false,
-                                        dataFunction: () {
-                                          if (!_formKey.currentState!
-                                              .validate()) {
-                                            return;
-                                          }
-                                          _formKey.currentState!.save();
-                                          if ((supLoginState.disableButton ==
-                                                      null
-                                                  ? true
-                                                  : (supLoginState
-                                                      .disableButton)) !=
-                                              true) {
-                                            return;
-                                          }
-                                          context.read<LoginDataBloc>().add(
-                                              LoginRequest(
-                                                  email: _emailController.text,
-                                                  password: _passwordController
-                                                      .text));
-                                        },
-                                        title: "Log in",
-                                        width:
-                                            MediaQuery.of(context).size.width -
-                                                50,
-                                      );
-                                    });
-                              }
-                            }),
-                            120.ph,
-                          ]),
-                    ),
-                  )),
+                                                            .text));
+                                          },
+                                          title: "Log in",
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              50,
+                                        );
+                                      });
+                                }
+                              }),
+                              120.ph,
+                            ]),
+                      ),
+                    )),
+              ),
               // Expanded(
               //   flex: 2,
               //   child: Stack(
@@ -426,7 +435,7 @@ class LoginAnimatedVectors extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 25,
+            top: 50,
             child: Column(
               children: [
                 Image.asset(AppImages.mindBuzzLogo),
