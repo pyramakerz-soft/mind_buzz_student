@@ -46,7 +46,7 @@ class SingleElement extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: image,
                 width: width??(MediaQuery.of(context).size.width - (130 + 50 + 130)) / 6,
-                height: height??100.h,
+                height: height!=null?((height??0)-10):100.h,
                 // height: ,
               ),
             ),

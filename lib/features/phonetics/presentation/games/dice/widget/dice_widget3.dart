@@ -85,7 +85,9 @@ class _DiceWidget extends State<DiceWidget3> with TickerProviderStateMixin {
           widget.functionOfSaveWords.call(currentAlphabet ?? '');
           await Future.delayed(const Duration(seconds: 2));
           //
-          Navigator.of(context).pop();
+          if(context.mounted) {
+            Navigator.of(context).pop();
+          }
         } else {
           setState(() {
             widget.countOfPlayed = widget.countOfPlayed + 1;

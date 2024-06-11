@@ -3,23 +3,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:mind_buzz_refactor/features/phonetics/presentation/games/click_the_sound/manager/click_the_sound_cubit.dart';
-import 'package:mind_buzz_refactor/features/phonetics/presentation/games/click_the_sound/manager/click_the_sound_cubit.dart';
-import 'package:mind_buzz_refactor/features/phonetics/presentation/widget/star_widget.dart';
 
 import '../../../../core/assets_images.dart';
 import '../../../../core/assets_sound.dart';
 import '../../../../core/audio_player.dart';
-import '../../../../core/games_structure/phonetics/assets_images_phonetics.dart';
+import '../../../../core/games_structure/arabic/game_arabic_types.dart';
 import '../../../../core/games_structure/phonetics/basic_of_game.dart';
 import '../../../../core/talk_tts.dart';
 import '../games/click_the_picture/manager/click_picture_cubit.dart';
 import '../games/click_the_picture/pages/click_picture_game.dart';
-import '../games/click_the_picture_with_word/manager/click_the_picture_with_word_cubit.dart';
-import '../games/click_the_picture_with_word/page/click_the_picture_with_word.dart';
 import '../games/click_the_picture_with_word/manager/click_the_picture_with_word_cubit.dart';
 import '../games/click_the_picture_with_word/page/click_the_picture_with_word.dart';
 import '../games/click_the_sound/pages/click_the_sound_game.dart';
@@ -31,13 +26,12 @@ import '../games/videos/screen/game_video.dart';
 import '../manager/bloc/contact_lesson_bloc.dart';
 import '../manager/main_cubit/current_game_phonetics_cubit.dart';
 
-class BasedOfGamePhonetics extends StatelessWidget {
+class BasedOfGameArabic extends StatelessWidget {
   final CurrentGamePhoneticsState stateOfGame;
   final GetContactInitial stateOfGameData;
 
-  const BasedOfGamePhonetics(
-      {Key? key, required this.stateOfGame, required this.stateOfGameData})
-      : super(key: key);
+  const BasedOfGameArabic(
+      {super.key, required this.stateOfGame, required this.stateOfGameData});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,23 +47,12 @@ class BasedOfGamePhonetics extends StatelessWidget {
           ///////////////////game//////////////////
 
           Positioned(
-              left: (stateOfGame.basicData?.gameData is Tracking)?null:0,
+              right: 0,
               bottom: 0,
-              child: SizedBox(
-                  child: Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  if ((stateOfGame.basicData?.gameData
-                      is BasicDragOutGame)) ...{
-                    BlocProvider<DragOutCubit>(
-                        create: (_) =>
-                            DragOutCubit(gameData: stateOfGameData.data),
-                        child: DragOutGame(
-                            // gameData: stateOfGameData.data,
-                            ))
-                  }
-                  else if ((stateOfGame.basicData?.gameData
-                      is ClickPicture)) ...{
+                  if ((stateOfGame.basicData?.gameData is ClickPicture)) ...{
                     BlocProvider<ClickPictureCubit>(
                         create: (_) => ClickPictureCubit(
                             gameData: stateOfGameData.data[stateOfGame.index],
@@ -79,46 +62,11 @@ class BasedOfGamePhonetics extends StatelessWidget {
                                         .data[stateOfGame.index]
                                         .gameImages
                                         ?.length ??
-                                    0), isArabic: false),
-                        child: ClickPictureGame())
+                                    0), isArabic: true),
+                        child: const ClickPictureGame())
                   }
-                  else if ((stateOfGame.basicData?.gameData
-                      is ClickPictureOfWord)) ...{
-                    BlocProvider<ClickThePictureWithWordCubit>(
-                        create: (_) => ClickThePictureWithWordCubit(
-                            gameData: stateOfGameData.data[stateOfGame.index],
-                            backGround: (stateOfGame.basicData?.gameData
-                                    as ClickPictureOfWord)
-                                .getBackGround(stateOfGameData
-                                        .data[stateOfGame.index]
-                                        .gameImages
-                                        ?.length ??
-                                    0)),
-                        child: ClickThePictureWithWord(
-                          gameData: stateOfGameData.data[stateOfGame.index],
-                        ))
-                  } else if ((stateOfGame.basicData?.gameData
-                      is BasicClickTheSoundGame)) ...{
-                    BlocProvider<ClickTheSoundCubit>(
-                        create: (_) => ClickTheSoundCubit(
-                              gameData: stateOfGameData.data[stateOfGame.index],
-                            ),
-                        child: ClickTheSoundGame()),
-                  } else if (stateOfGame.basicData?.gameData is Tracking) ...{
-                      BlocProvider<TracingCubit>(
-                          create: (_) => TracingCubit(
-                            gameData: stateOfGameData.data[stateOfGame.index],
-                            stateOfGame: stateOfGame,
-                          ),
-                          child: TracingGame()),
-                    } else if (stateOfGame.basicData?.gameData is Video) ...{
-                      gameVideo(
-                        currentDataGame: stateOfGameData.data[stateOfGame.index],
-
-                          ),
-                    }
                 ],
-              ))),
+              )),
 
           ///////////////////game title//////////////////
           Positioned(
@@ -138,7 +86,7 @@ class BasedOfGamePhonetics extends StatelessWidget {
                 ],
               ),
               width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.symmetric(vertical: 5),
+              padding: const EdgeInsets.symmetric(vertical: 5),
               child: Row(
                 children: [
                   Expanded(
@@ -179,12 +127,12 @@ class BasedOfGamePhonetics extends StatelessWidget {
                         fit: BoxFit.contain,
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Column(
                           children: [
                             ((stateOfGame.countOfStar ?? 0) == 0)
                                 ? Image.asset(
-                              AppImages.barZeroStar,
+                                    AppImages.barZeroStar,
                                     width: 40.w,
                                     fit: BoxFit.contain,
                                   )
@@ -192,11 +140,9 @@ class BasedOfGamePhonetics extends StatelessWidget {
                                     ? Image.asset(AppImages.barOneStar,
                                         width: 40.w)
                                     : ((stateOfGame.countOfStar ?? 0) == 2)
-                                        ? Image.asset(
-                                            AppImages.barTwoStar,
+                                        ? Image.asset(AppImages.barTwoStar,
                                             width: 40.w)
-                                        : Image.asset(
-                                            AppImages.barThreeStar,
+                                        : Image.asset(AppImages.barThreeStar,
                                             width: 40.w)
                           ],
                         ),
@@ -207,18 +153,17 @@ class BasedOfGamePhonetics extends StatelessWidget {
               ),
             ),
           ),
-          if (stateOfGame.basicData?.gameData is! Video)...{
-            Positioned(
-                top: 50.h + 5,
-                left: 20,
-                child: Image.asset(
-                  stateOfGame.basicData?.gameData?.titleImageEn ?? '',
-                  height: 75.h,
-                )),
+          Positioned(
+              top: 50.h + 5,
+              right: 20,
+              child: Image.asset(
+                stateOfGame.basicData?.gameData?.titleImageAr ?? '',
+                height: 75.h,
+              )),
 
           Positioned(
             bottom: 15,
-            right: 0,
+            left: 0,
             child: Padding(
               padding: const EdgeInsets.only(left: 5.0),
               child: SizedBox(
@@ -231,13 +176,12 @@ class BasedOfGamePhonetics extends StatelessWidget {
                       onTap: () async {
                         print('%%:${MediaQuery.of(context).size.height}');
                         await TalkTts.startTalk(
+                            isArabic: true,
                             text:
                                 stateOfGameData.data[stateOfGame.index].inst ??
                                     '');
                         print(
-                            'stateOfGame.stateOfStringIsWord:${stateOfGame.stateOfStringIsWord}');
-                        print(
-                            'stateOfGame.stateOfStringIsWord:${stateOfGame.stateOfStringWillSay}');
+                            'stateOfGame.stateOfStringIsWord:${stateOfGame.basicData}');
                         if (stateOfGame.stateOfStringIsWord == true) {
                           await TalkTts.startTalk(
                               text: stateOfGame.stateOfStringWillSay ?? '');
@@ -276,8 +220,6 @@ class BasedOfGamePhonetics extends StatelessWidget {
               ),
             ),
           ),
-          },
-
         ],
       ),
     );

@@ -108,8 +108,8 @@ flutter:
     - assets/fonts/
     - assets/math_ball/
     - assets/phonetics/
+    - assets/arabic/
     - assets/numbers_lessons/
-    - assets/svg/parent_account/
     - assets/svg/parent_account/
 
   fonts:

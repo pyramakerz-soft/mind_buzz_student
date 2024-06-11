@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 
 import '../../../../../../core/assets_sound.dart';
 import '../../../../../../core/audio_player.dart';
-import '../../../../../../core/games_structure/phonetics/basic_of_phonetics_game.dart';
+import '../../../../../../core/games_structure/phonetics/basic_of_game.dart';
 import '../../../../../../core/talk_tts.dart';
 import '../../../../domain/entities/game_model.dart';
 
@@ -41,9 +41,7 @@ class DragOutCubit extends Cubit<DragOutInitial> {
     int currentIndex = state.index ?? 0;
     currentIndex = currentIndex + 1;
 
-    if ((state.gameData.length) > currentIndex &&
-        (state.gameData[currentIndex].gameTypes?.name?.toLowerCase() ==
-            GameTypes.dragOut.text().toLowerCase())) {
+    if ((state.gameData.length) > currentIndex) {
       return false;
     } else {
       return true;

@@ -20,49 +20,56 @@ class ClickPictureCubit extends Cubit<ClickPictureInitial> {
   final GameModel gameData;
   final List<String> background;
   List<int> correctIndexes = [];
-  ClickPictureCubit({required this.gameData, required this.background})
+  ClickPictureCubit(
+      {required this.gameData,
+      required this.background,
+      required bool isArabic})
       : super(ClickPictureInitial(
-            gameData: gameData, backGround: background, correctIndexes: [])) {
+            gameData: gameData,
+            backGround: background,
+            correctIndexes: [],
+            isArabic: isArabic)) {
     generateRandomPictures();
-      sayTheLetter();
+    sayTheLetter();
   }
 
   bool addAnswer(int index) {
-      if (gameData.gameImages?[index].correct == 1) {
-        emit(state);
-        correctIndexes.add(index);
-        emit(state.copyWith(correctIndexes: correctIndexes.toSet().toList()));
-        return true;
-      } else {
-        return false;
-      }
-
-  }
-
-  Future<void> generateRandomPictures() async {
-    state.gameData.gameImages = state.gameData.gameImages?..shuffle();
-    emit(state.copyWith(gameData: state.gameData ));
-  }
-
-  sayTheLetter() async {
-    await TalkTts.startTalk(text: state.gameData.inst ?? '');
-    await AudioPlayerClass.startPlaySound(soundPath: AppSound.getSoundOfLetter(mainGameLetter: state.gameData.mainLetter ?? ''));
-  }
-
-  sayTheOnlyLetter() async {
-    print('sayTheOnlyLetter');
-    await AudioPlayerClass.startPlaySound(soundPath: AppSound.getSoundOfLetter(mainGameLetter: state.gameData.mainLetter ?? ''));
-
-  }
-  checkCurrentClickTime({required DateTime current}){
-    if (current.difference(state.currentPressTime ?? current) >  Duration(seconds: 1)) {
-      emit(state.copyWith(currentPressTime: current));
+    if (gameData.gameImages?[index].correct == 1) {
+      emit(state);
+      correctIndexes.add(index);
+      emit(state.copyWith(correctIndexes: correctIndexes.toSet().toList()));
       return true;
-    }
-    else {
-      emit(state.copyWith(currentPressTime: current));
+    } else {
       return false;
     }
   }
 
+  Future<void> generateRandomPictures() async {
+    state.gameData.gameImages = state.gameData.gameImages?..shuffle();
+    emit(state.copyWith(gameData: state.gameData));
+  }
+
+  sayTheLetter() async {
+    await TalkTts.startTalk(text: state.gameData.inst ?? '', isArabic: state.isArabic);
+    await AudioPlayerClass.startPlaySound(
+        soundPath: AppSound.getSoundOfLetter(
+            mainGameLetter: state.gameData.mainLetter ?? ''));
+  }
+
+  sayTheOnlyLetter() async {
+    print('sayTheOnlyLetter');
+    await AudioPlayerClass.startPlaySound(
+        soundPath: AppSound.getSoundOfLetter(
+            mainGameLetter: state.gameData.mainLetter ?? ''));
+  }
+  // checkCurrentClickTime({required DateTime current}){
+  //   if (current.difference(state.currentPressTime ?? current) >  Duration(seconds: 1)) {
+  //     emit(state.copyWith(currentPressTime: current));
+  //     return true;
+  //   }
+  //   else {
+  //     emit(state.copyWith(currentPressTime: current));
+  //     return false;
+  //   }
+  // }
 }

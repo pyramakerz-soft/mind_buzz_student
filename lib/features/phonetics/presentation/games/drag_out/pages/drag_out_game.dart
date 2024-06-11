@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/games_structure/phonetics/assets_images_phonetics.dart';
-import '../../../../../../core/games_structure/phonetics/basic_of_phonetics_game.dart';
+import '../../../../../../core/games_structure/phonetics/basic_of_game.dart';
 import '../../../../../../core/games_structure/phonetics/phonetics_color.dart';
 import '../../../../../../core/talk_tts.dart';
 import '../../../../../chapters/presentation/manager/journey_bar_cubit.dart';
@@ -46,7 +46,7 @@ class DragOutGame extends StatelessWidget {
                     List<dynamic> rejected,
                   ) {
                     return (stateOfCurrentGamePhoneticsCubit.stateOfAvatar ==
-                            BasicOfPhoneticsGame.stateOfWin)
+                            BasicOfGame.stateOfWin)
                         ? Image.asset(
                             stateOfCurrentGamePhoneticsCubit
                                     .basicData?.gameData?.completeBasket ??
@@ -167,7 +167,7 @@ class DragOutGame extends StatelessWidget {
                           ),
                           child: ((stateOfCurrentGamePhoneticsCubit
                                           .stateOfAvatar ==
-                                      BasicOfPhoneticsGame.stateOfWin) &&
+                                      BasicOfGame.stateOfWin) &&
                                   (gameState.gameData[gameState.index ?? 0]
                                           .gameImages?[index].word
                                           .toString()

@@ -116,11 +116,12 @@ PreferredSizeWidget customAppBar(
             leadingWidth: 52,
             backgroundColor: Colors.white,
             surfaceTintColor: Colors.white,
-            leading: (Navigator.canPop(context))
+            leading: ((Navigator.canPop(context))==true)
                 ? Container(
                     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     child: GestureDetector(
                       onTap: () {
+                        print('(Navigator.canPop(context)):${(Navigator.canPop(context))}');
                         Navigator.of(context).pop();
                       },
                       child: Container(

@@ -11,11 +11,12 @@ import 'package:mind_buzz_refactor/features/phonetics/presentation/games/click_t
 import 'package:mind_buzz_refactor/features/phonetics/presentation/games/x_out_game/manager/x_out_cubit.dart';
 import 'package:mind_buzz_refactor/features/phonetics/presentation/widget/star_widget.dart';
 
+import '../../../../core/assets_images.dart';
 import '../../../../core/assets_sound.dart';
 import '../../../../core/audio_player.dart';
 import '../../../../core/games_structure/phonetics/assets_images_phonetics.dart';
-import '../../../../core/games_structure/phonetics/basic_of_phonetics_game.dart';
-import '../../../../core/games_structure/phonetics/basic_of_phonetics.dart';
+import '../../../../core/games_structure/phonetics/basic_of_game.dart';
+import '../../../../core/games_structure/phonetics/basic_of_chapter.dart';
 import '../../../../core/talk_tts.dart';
 import '../games/bingo_game/manager/bingo_cubit.dart';
 import '../games/bingo_game/pages/bingo_game.dart';
@@ -96,7 +97,7 @@ class BasedOfGameConnect extends StatelessWidget {
                                       Navigator.of(context).pop();
                                     },
                                     child: Image.asset(
-                                      AppImagesPhonetics.backButtonIcon,
+                                      AppImages.backButtonIcon,
                                       height: 40.h,
                                       // width: 40.w,
                                     ),
@@ -104,7 +105,7 @@ class BasedOfGameConnect extends StatelessWidget {
                                   10.pw,
                                   GestureDetector(
                                     child: Image.asset(
-                                      AppImagesPhonetics.settingButtonIcon,
+                                      AppImages.settingButtonIcon,
                                       height: 45.h,
                                       // width: 40.w,
                                     ),
@@ -117,21 +118,21 @@ class BasedOfGameConnect extends StatelessWidget {
                           alignment: Alignment.center,
                           children: [
                             Image.asset(
-                              AppImagesPhonetics.stayOfStarBar,
+                              AppImages.stayOfStarBar,
                               width: 50.w,
                             ),
                             ((stateOfGame.countOfStar ?? 0) == 0)
-                                ? Image.asset(AppImagesPhonetics.barZeroStar,
+                                ? Image.asset(AppImages.barZeroStar,
                                     width: 40.w)
                                 : ((stateOfGame.countOfStar ?? 0) == 1)
-                                    ? Image.asset(AppImagesPhonetics.barOneStar,
+                                    ? Image.asset(AppImages.barOneStar,
                                         width: 40.w)
                                     : ((stateOfGame.countOfStar ?? 0) == 2)
                                         ? Image.asset(
-                                            AppImagesPhonetics.barTwoStar,
+                                            AppImages.barTwoStar,
                                             width: 40.w)
                                         : Image.asset(
-                                            AppImagesPhonetics.barThreeStar,
+                                            AppImages.barThreeStar,
                                             width: 40.w)
                           ],
                         )),
@@ -148,7 +149,7 @@ class BasedOfGameConnect extends StatelessWidget {
                               // crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Image.asset(
-                                  stateOfGame.basicData?.gameData?.titleImage ??
+                                  stateOfGame.basicData?.gameData?.titleImageEn ??
                                       '',
                                   height: 75.h,
                                   width: 90.w,
@@ -292,7 +293,7 @@ class BasedOfGameConnect extends StatelessWidget {
                                   },
                                   child: Image.asset(
                                     stateOfGame
-                                            .basicData?.gameData?.titleImage ??
+                                            .basicData?.gameData?.titleImageEn ??
                                         '',
                                     height: 75.h,
                                     width: 75.w,

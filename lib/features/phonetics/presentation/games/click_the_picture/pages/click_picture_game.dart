@@ -50,7 +50,16 @@ class ClickPictureGame extends StatelessWidget {
         alignment: Alignment.center,
         // height: MediaQuery.of(context).size.height - (70.h),
         child: Container(
-          margin: const EdgeInsets.only(bottom: (30), left: 20),
+          margin: EdgeInsets.only(
+              bottom: (30),
+              left: stateOfGameData.isArabic ==
+                      true
+                  ? 0
+                  : 20,
+              right: stateOfGameData.isArabic ==
+                      true
+                  ? 20
+                  : 0),
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
           width: MediaQuery.of(context).size.width - (130 + 50),
           height: MediaQuery.of(context).size.height - (50.h + 75),
@@ -77,59 +86,62 @@ class ClickPictureGame extends StatelessWidget {
                             .state
                             .correctIndexes
                             .contains(index),
+                        height: (MediaQuery.of(context).size.height - (50.h + 75+20))/2,
                         onTap: () async {
-                          if (clickPictureCubit.checkCurrentClickTime(
-                              current: DateTime.now())) {
-                            if (!stateOfGameData.correctIndexes
-                                .contains(index)) {
-                              if (clickPictureCubit.addAnswer(index)) {
+                          // if (clickPictureCubit.checkCurrentClickTime(
+                          //     current: DateTime.now())) {
+                          if (!stateOfGameData.correctIndexes.contains(index)) {
+                            if (clickPictureCubit.addAnswer(index)) {
+                              context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .animationOfCorrectAnswer();
+                              print(stateOfGameData.correctIndexes.length);
+                              context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .addStarToStudent(
+                                      stateOfCountOfCorrectAnswer:
+                                          stateOfGameData
+                                                  .correctIndexes.length +
+                                              1,
+                                      mainCountOfQuestion: stateOfGameData
+                                          .gameData.gameImages!
+                                          .where(
+                                              (element) => element.correct == 1)
+                                          .length);
+                              context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .animationOfCorrectAnswer();
+                              context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .backToMainAvatar();
+                            } else {
+                              // context
+                              //     .read<CurrentGamePhoneticsCubit>()
+                              //     .addWrongAnswer();
+                              context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .addWrongAnswer(actionWhenTriesBeZero: () {
                                 context
                                     .read<CurrentGamePhoneticsCubit>()
-                                    .animationOfCorrectAnswer();
-                                print(stateOfGameData.correctIndexes.length);
-                                context
-                                    .read<CurrentGamePhoneticsCubit>()
-                                    .addStarToStudent(
-                                        stateOfCountOfCorrectAnswer:
-                                            stateOfGameData
-                                                    .correctIndexes.length +
-                                                1,
-                                        mainCountOfQuestion: stateOfGameData
-                                            .gameData.gameImages!
-                                            .where((element) =>
-                                                element.correct == 1)
-                                            .length);
-                                context
-                                    .read<CurrentGamePhoneticsCubit>()
-                                    .animationOfCorrectAnswer();
-                                context
-                                    .read<CurrentGamePhoneticsCubit>()
-                                    .backToMainAvatar();
-                              } else {
-                                // context
-                                //     .read<CurrentGamePhoneticsCubit>()
-                                //     .addWrongAnswer();
-                                context
-                                    .read<CurrentGamePhoneticsCubit>()
-                                    .addWrongAnswer(
-                                    actionWhenTriesBeZero: () {
-
-                                      context.read<CurrentGamePhoneticsCubit>().sendStars(
-                                          gamesId: [stateOfGameData.gameData.id ?? 0],
-                                          actionOfStars: (int countOfStars, List<int> listOfIds) {
-                                            context
-                                                .read<JourneyBarCubit>()
-                                                .sendStars(gamesId: listOfIds, countOfStar: countOfStars);
-                                          });
-                                    }
-
-                                );
-                                await context
-                                    .read<ClickPictureCubit>()
-                                    .sayTheOnlyLetter();
-                              }
+                                    .sendStars(
+                                        gamesId: [
+                                      stateOfGameData.gameData.id ?? 0
+                                    ],
+                                        actionOfStars: (int countOfStars,
+                                            List<int> listOfIds) {
+                                          context
+                                              .read<JourneyBarCubit>()
+                                              .sendStars(
+                                                  gamesId: listOfIds,
+                                                  countOfStar: countOfStars);
+                                        });
+                              });
+                              await context
+                                  .read<ClickPictureCubit>()
+                                  .sayTheOnlyLetter();
                             }
                           }
+                          // }
                         },
                       )),
             ),

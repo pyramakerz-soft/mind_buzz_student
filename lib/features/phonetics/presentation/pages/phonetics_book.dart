@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,12 +9,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import 'package:mind_buzz_refactor/features/phonetics/presentation/widget/basic_of_games_arabic.dart';
+import '../../../../core/games_structure/base_of_games.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 
 import '../../../../core/error/failures_messages.dart';
 import '../../../../core/games_structure/phonetics/assets_images_phonetics.dart';
-import '../../../../core/games_structure/phonetics/basic_of_phonetics_game.dart';
-import '../../../../core/games_structure/phonetics/basic_of_phonetics.dart';
+import '../../../../core/games_structure/phonetics/basic_of_game.dart';
+import '../../../../core/games_structure/phonetics/basic_of_chapter.dart';
 import '../../../../core/utils.dart';
 import '../../../login/presentation/page/login_screen.dart';
 import '../games/drag_out/manager/drag_out_cubit.dart';
@@ -120,44 +124,26 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                 Navigator.of(context).pop();
                               } else if (state is GetContactInitial) {
                                 try {
-                                  MainDataOfPhonetics? dataType =
-                                      state.getMainContactData(
-                                          index: stateOfGame.index);
+                                  final dataType = state.getMainContactData(
+                                      index: stateOfGame.index);
 
                                   print('dataType:$dataType');
+                                  log('dataType:$dataType');
                                   if (dataType != null) {
+                                    print('sadfsadf');
                                     context
                                         .read<CurrentGamePhoneticsCubit>()
                                         .updateDataOfCurrentGame(
                                             basicData: dataType,
                                             gameData: state.data,
-                                            gameIndex: widget.firstTry ||
-                                                    state.data
-                                                            .firstWhere(
-                                                                (element) =>
-                                                                    element
-                                                                        .id ==
-                                                                    widget
-                                                                        .gameId)
-                                                            .nextGameId ==
-                                                        null
-                                                ? state.data.indexWhere(
-                                                    (element) =>
-                                                        element.id ==
-                                                        widget.gameId)
-                                                : state.data.indexWhere((element) =>
-                                                    element.id ==
-                                                    state.data
-                                                        .firstWhere((element) =>
-                                                            element.id ==
-                                                            widget.gameId)
-                                                        .nextGameId));
+                                            gameIndex: 0);
                                   } else {
                                     context
                                         .read<ContactLessonBloc>()
                                         .add(ThisTypeNotSupportedRequest());
                                   }
                                 } catch (e) {
+                                  print('error:$e');
                                   context
                                       .read<ContactLessonBloc>()
                                       .add(ThisTypeNotSupportedRequest());
@@ -168,35 +154,47 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                 return Stack(
                                   children: [
                                     if (stateOfGame.countOfTries != 0) ...{
-                                      if (stateOfGame
-                                              .basicData?.gameData?.isConnect ==
-                                          true) ...{
-                                        if (stateOfGame.basicData
-                                            is ConnectionSortingCups) ...{
-                                          BasedOfGameConnectSortingCups(
+                                      if (stateOfGame.basicData
+                                          is MainDataOfChapters) ...{
+                                        if (stateOfGame.basicData?.gameData
+                                                ?.isConnect ==
+                                            true) ...{
+                                          if (stateOfGame.basicData
+                                              is ConnectionSortingCups) ...{
+                                            BasedOfGameConnectSortingCups(
+                                              stateOfGame: stateOfGame,
+                                              stateOfGameData: stateOfGameData,
+                                            ),
+                                          } else ...{
+                                            BasedOfGameConnect(
+                                              stateOfGame: stateOfGame,
+                                              stateOfGameData: stateOfGameData,
+                                            ),
+                                          }
+                                        } else if (BaseOfGames.isPhonetics(
+                                            chapter: stateOfGame
+                                                .basicData.runtimeType)) ...{
+                                          BasedOfGamePhonetics(
                                             stateOfGame: stateOfGame,
                                             stateOfGameData: stateOfGameData,
                                           ),
-                                        } else ...{
-                                          BasedOfGameConnect(
+                                        } else if (BaseOfGames.isArabic(
+                                            chapter: stateOfGame
+                                                .basicData.runtimeType)) ...{
+                                          BasedOfGameArabic(
                                             stateOfGame: stateOfGame,
                                             stateOfGameData: stateOfGameData,
                                           ),
-                                        }
-                                      } else ...{
-                                        BasedOfGamePhonetics(
-                                          stateOfGame: stateOfGame,
-                                          stateOfGameData: stateOfGameData,
-                                        ),
-                                      },
+                                        },
+                                      }
                                     } else if (stateOfGame.countOfTries ==
                                         0) ...{
                                       widgetOfTries(
-                                          context: context,
-                                          nextGameIndex: stateOfGameData.data
-                                              .indexWhere((element) =>
-                                                  element.id == widget.gameId), stateOfGame: stateOfGame,
-
+                                        context: context,
+                                        nextGameIndex: stateOfGameData.data
+                                            .indexWhere((element) =>
+                                                element.id == widget.gameId),
+                                        stateOfGame: stateOfGame,
                                         actionOfDone: () {
                                           // Navigator.of(context).pop();
                                           Navigator.of(context).pop();
@@ -237,7 +235,7 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                             .watch<CurrentGamePhoneticsCubit>()
                                             .state
                                             .stateOfAvatar !=
-                                        BasicOfPhoneticsGame.stateOIdle)) ...{
+                                        BasicOfGame.stateOIdle)) ...{
                               Container(
                                 color: Colors.transparent,
                                 width: MediaQuery.of(context).size.width,

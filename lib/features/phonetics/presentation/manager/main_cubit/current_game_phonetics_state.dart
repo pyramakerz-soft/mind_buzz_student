@@ -17,7 +17,7 @@ class CurrentGamePhoneticsState extends Equatable {
   List<int>? statesOfAddStars;
   int? countOfStar = 0;
   int? countOfCorrectAnswer = 0;
-  MainDataOfPhonetics? basicData;
+  MainDataOfChapters? basicData;
   String? currentStringOfDice;
   CurrentGamePhoneticsState(
       {this.basicData,
@@ -40,7 +40,7 @@ class CurrentGamePhoneticsState extends Equatable {
       this.countOfStar});
 
   CurrentGamePhoneticsState copyWith(
-      {MainDataOfPhonetics? basicData,
+      { basicData,
       Artboard? avatarArtboard,
       Artboard? avatarArtboardSuccess,
       Artboard? avatarArtboardIdle,

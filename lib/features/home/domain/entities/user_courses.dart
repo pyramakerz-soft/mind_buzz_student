@@ -9,6 +9,7 @@ class UserCourseModel extends Equatable{
   int? userId;
   int? programId;
   String? createdAt;
+  String? name;
   String? updatedAt;
   ProgramModel? program;
 
@@ -16,6 +17,7 @@ class UserCourseModel extends Equatable{
       {this.id,
         this.userId,
         this.programId,
+        this.name,
         this.createdAt,
         this.updatedAt,
         this.program});
@@ -27,5 +29,5 @@ class UserCourseModel extends Equatable{
   Map<String, dynamic> toJson() => _$UserCourseModelToJson(this);
 
   @override
-  List<Object?> get props => [id, userId, programId, program, createdAt, updatedAt];
+  List<Object?> get props => [name, id, userId, programId, program, createdAt, updatedAt];
 }

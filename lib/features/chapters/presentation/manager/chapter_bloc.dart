@@ -5,7 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:collection/collection.dart';
-import 'package:mind_buzz_refactor/core/games_structure/phonetics/basic_of_phonetics_game.dart';
+import 'package:mind_buzz_refactor/core/games_structure/phonetics/basic_of_game.dart';
 
 import '../../../../core/assets_images.dart';
 import '../../../../core/error/failures.dart';
@@ -66,7 +66,7 @@ List<ChapterModel> handlingDataOfChapters(
     Map<String, List<GameModel>>? mapGames = groupBy(
         lesson.games ?? [], (obj) => '${obj.gameTypes?.name}_${obj.audioFlag}');
     List<String> sortedKeys = [];
-    if (lesson.name.toString().split(' ').first == BasicOfPhoneticsGame.connect) {
+    if (lesson.name.toString().split(' ').first == BasicOfGame.connect) {
       sortedKeys = mapGames.keys.toList()..sort(customCompareConnect);
     } else {
       sortedKeys = mapGames.keys.toList()..sort(customComparePhonetics);
@@ -94,17 +94,17 @@ List<ChapterModel> handlingDataOfChapters(
 
 int customComparePhonetics(String key1, String key2) {
   int index1 =
-      BasicOfPhoneticsGame.customOrderOfGamesPhonetics.indexOf(key1.toLowerCase());
+      BasicOfGame.customOrderOfGamesPhonetics.indexOf(key1.toLowerCase());
   int index2 =
-      BasicOfPhoneticsGame.customOrderOfGamesPhonetics.indexOf(key2.toLowerCase());
+      BasicOfGame.customOrderOfGamesPhonetics.indexOf(key2.toLowerCase());
   return index1.compareTo(index2);
 }
 
 int customCompareConnect(String key1, String key2) {
   int index1 =
-      BasicOfPhoneticsGame.customOrderOfGamesConnect.indexOf(key1.toLowerCase());
+      BasicOfGame.customOrderOfGamesConnect.indexOf(key1.toLowerCase());
   int index2 =
-      BasicOfPhoneticsGame.customOrderOfGamesConnect.indexOf(key2.toLowerCase());
+      BasicOfGame.customOrderOfGamesConnect.indexOf(key2.toLowerCase());
   return index1.compareTo(index2);
 }
 

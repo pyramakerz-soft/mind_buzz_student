@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 
-import '../../../../../../core/games_structure/phonetics/basic_of_phonetics_game.dart';
+import '../../../../../../core/games_structure/phonetics/basic_of_game.dart';
 import '../../../../../../core/games_structure/phonetics/phonetics_color.dart';
 import '../../../../../chapters/presentation/manager/journey_bar_cubit.dart';
 import '../../../../domain/entities/game_letters_model.dart';
@@ -151,7 +151,7 @@ class GamesSortingCups extends StatelessWidget {
                             },
                             onAcceptWithDetails: (item) async {
                               if ((generalStateOfGame.stateOfAvatar ==
-                                      BasicOfPhoneticsGame.stateOIdle ||
+                                      BasicOfGame.stateOIdle ||
                                   generalStateOfGame.stateOfAvatar == null)) {
                                 print(
                                     "##:${gameState.gameData.mainLetter?.split('')[index].toLowerCase()}");

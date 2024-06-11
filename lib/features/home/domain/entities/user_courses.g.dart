@@ -11,6 +11,7 @@ UserCourseModel _$UserCourseModelFromJson(Map<String, dynamic> json) =>
       id: (json['id'] as num?)?.toInt(),
       userId: (json['user_id'] as num?)?.toInt(),
       programId: (json['program_id'] as num?)?.toInt(),
+      name: json['name'] as String?,
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
       program: json['program'] == null
@@ -24,6 +25,7 @@ Map<String, dynamic> _$UserCourseModelToJson(UserCourseModel instance) =>
       'user_id': instance.userId,
       'program_id': instance.programId,
       'created_at': instance.createdAt,
+      'name': instance.name,
       'updated_at': instance.updatedAt,
       'program': instance.program?.toJson(),
     };

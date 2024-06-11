@@ -64,14 +64,6 @@ abstract class AppImagesPhonetics {
   static const String diamondShape = "${mainPathOfImages}diamond_shape.png";
   static const String hexagonShape = "${mainPathOfImages}hexagon_shape.png";
 
-  static const String settingButtonIcon =
-      "${mainPathOfImages}settingButtonIcon.png";
-  static const String backButtonIcon = "${mainPathOfImages}backButtonIcon.png";
-  static const String stayOfStarBar = "${mainPathOfImages}stayOfStarBar.png";
-  static const String barOneStar = "${mainPathOfImages}barOneStar.png";
-  static const String barTwoStar = "${mainPathOfImages}barTwoStar.png";
-  static const String barZeroStar = "${mainPathOfImages}barZeroStar.png";
-  static const String barThreeStar = "${mainPathOfImages}barThreeStar.png";
   static const String woodBackground = "${mainPathOfImages}wood.png";
   static const String bubbleSelected = '${mainPathOfImages}bubbleSelected.png';
   static const String sortingGame = "${mainPathOfImages}sorting_game.png";

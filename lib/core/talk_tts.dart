@@ -10,9 +10,14 @@ abstract class TalkTts {
       {required String text,
       Function? actionOfStart,
       Function? actionPause,
+        bool? isArabic,
       Function? actionCancel,
       Function? actionComplete}) async {
-    await flutterTts.setLanguage("en-US");
+    if(isArabic==true){
+      await flutterTts.setLanguage("ar");
+    }else {
+      await flutterTts.setLanguage("en-US");
+    }
     log('start talk:$text');
     data = text;
     flutterTts.setPitch(1.0);

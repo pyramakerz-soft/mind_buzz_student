@@ -164,6 +164,11 @@ class XOutGameScreen extends StatelessWidget {
                                                   .read<
                                                       CurrentGamePhoneticsCubit>()
                                                   .backToMainAvatar();
+
+                                              await context
+                                                  .read<
+                                                  CurrentGamePhoneticsCubit>()
+                                                  .increaseCountOfTries();
                                               context
                                                   .read<XOutCubit>()
                                                   .updateGameIndex();

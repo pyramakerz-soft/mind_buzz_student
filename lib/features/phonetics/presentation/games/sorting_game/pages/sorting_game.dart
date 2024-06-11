@@ -101,7 +101,7 @@ class SortingGameScreen extends StatelessWidget {
                             ),
                         itemBuilder: (context, index) {
                           return Container(
-                              width: 0.14.sw,
+                              width: 0.12.sw,
                               height: 0.8.sw,
                               padding: EdgeInsets.only(top: 30),
                               child: DragTarget<GameImagesModel>(

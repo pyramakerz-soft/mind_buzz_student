@@ -196,10 +196,14 @@ class SpellingGameScreen extends StatelessWidget {
                                           // if (!context
                                           //     .read<SpellingCubit>()
                                           //     .checkIfIsTheLastGameOfLesson())
-                                          //   context
-                                          //       .read<
-                                          //           CurrentGamePhoneticsCubit>()
-                                          //       .increaseCountOfTries();
+                                          if (!context
+                                              .read<SpellingCubit>()
+                                              .checkIfIsTheLastGameOfLesson()) {
+                                            context
+                                                .read<
+                                                CurrentGamePhoneticsCubit>()
+                                                .increaseCountOfTries();
+                                          }
                                           //
                                           context
                                               .read<SpellingCubit>()

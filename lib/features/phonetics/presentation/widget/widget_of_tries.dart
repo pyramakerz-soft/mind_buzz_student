@@ -58,7 +58,7 @@ widgetOfTries({required BuildContext context,required int nextGameIndex,
                               Navigator.of(context).pop();
                             },
                             child: Image.asset(
-                              AppImagesPhonetics.backButtonIcon,
+                              AppImages.backButtonIcon,
                               height: 40.h,
                               // width: 40.w,
                             ),
@@ -66,7 +66,7 @@ widgetOfTries({required BuildContext context,required int nextGameIndex,
                           10.pw,
                           GestureDetector(
                             child: Image.asset(
-                              AppImagesPhonetics.settingButtonIcon,
+                              AppImages.settingButtonIcon,
                               height: 45.h,
                               // width: 40.w,
                             ),
@@ -79,7 +79,7 @@ widgetOfTries({required BuildContext context,required int nextGameIndex,
                       alignment: Alignment.center,
                       children: [
                         Image.asset(
-                          AppImagesPhonetics.stayOfStarBar,
+                          AppImages.stayOfStarBar,
                           width: 65.w,
                           fit: BoxFit.contain,
                         ),
@@ -89,19 +89,19 @@ widgetOfTries({required BuildContext context,required int nextGameIndex,
                             children: [
                               ((stateOfGame.countOfStar ?? 0) == 0)
                                   ? Image.asset(
-                                AppImagesPhonetics.barZeroStar,
+                                AppImages.barZeroStar,
                                 width: 40.w,
                                 fit: BoxFit.contain,
                               )
                                   : ((stateOfGame.countOfStar ?? 0) == 1)
-                                  ? Image.asset(AppImagesPhonetics.barOneStar,
+                                  ? Image.asset(AppImages.barOneStar,
                                   width: 40.w)
                                   : ((stateOfGame.countOfStar ?? 0) == 2)
                                   ? Image.asset(
-                                  AppImagesPhonetics.barTwoStar,
+                                  AppImages.barTwoStar,
                                   width: 40.w)
                                   : Image.asset(
-                                  AppImagesPhonetics.barThreeStar,
+                                  AppImages.barThreeStar,
                                   width: 40.w)
                             ],
                           ),

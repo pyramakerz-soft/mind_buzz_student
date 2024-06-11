@@ -10,9 +10,10 @@ import 'package:meta/meta.dart';
 import '../../../../../core/assets_animation.dart';
 import '../../../../../core/assets_sound.dart';
 import '../../../../../core/audio_player.dart';
+import '../../../../../core/games_structure/base_of_games.dart';
 import '../../../../../core/games_structure/phonetics/assets_images_phonetics.dart';
-import '../../../../../core/games_structure/phonetics/basic_of_phonetics_game.dart';
-import '../../../../../core/games_structure/phonetics/basic_of_phonetics.dart';
+import '../../../../../core/games_structure/phonetics/basic_of_game.dart';
+import '../../../../../core/games_structure/phonetics/basic_of_chapter.dart';
 import '../../../domain/entities/game_model.dart';
 import '../../../../chapters/domain/use_cases/game_stars_use_cases.dart';
 
@@ -127,7 +128,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   updateDataOfCurrentGame(
-      {required MainDataOfPhonetics basicData,
+      {required  basicData,
       required List<GameModel> gameData,
       required int gameIndex}) async {
     emit(state.clearAllData());
@@ -177,8 +178,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
       required int mainCountOfQuestion}) {
     print('addStarToStudent');
     int countOfStar = state.countOfStar ?? 0;
-    List<int> stateOfStarsAdd =
-        BasicOfPhoneticsGame.getTheStarsAddState(mainCountOfQuestion);
+    List<int> stateOfStarsAdd = BaseOfGames.getTheStarsAddState(mainCountOfQuestion);
     if ((mainCountOfQuestion) > 2) {
       if (stateOfStarsAdd[0] == stateOfCountOfCorrectAnswer) {
         emit(state.copyWith(countOfStar: (countOfStar + 1)));
@@ -246,7 +246,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   animationOfWrongAnswer({required void Function() actionWhenTriesBeZero}) {
     emit(state.copyWith(
         avatarArtboard: state.avatarArtboardSad,
-        stateOfAvatar: BasicOfPhoneticsGame.stateOfSad));
+        stateOfAvatar: BasicOfGame.stateOfSad));
     decreaseCountOfTries(actionWhenTriesBeZero: actionWhenTriesBeZero);
   }
 
@@ -254,7 +254,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     print('animationOfCorrectAnswer');
     emit(state.copyWith(
         avatarArtboard: state.avatarArtboardSuccess,
-        stateOfAvatar: BasicOfPhoneticsGame.stateOfWin));
+        stateOfAvatar: BasicOfGame.stateOfWin));
     print('animationOfCorrectAnswer:${state.stateOfAvatar}');
 
     await AudioPlayerClass.startPlaySound(
@@ -271,7 +271,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     await Future.delayed(const Duration(seconds: 2));
     emit(state.copyWith(
         avatarArtboard: state.avatarArtboardIdle,
-        stateOfAvatar: BasicOfPhoneticsGame.stateOIdle));
+        stateOfAvatar: BasicOfGame.stateOIdle));
   }
 
   Map<int, Offset> touchPositions = <int, Offset>{};

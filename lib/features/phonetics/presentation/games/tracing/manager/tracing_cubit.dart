@@ -37,7 +37,7 @@ class TracingCubit extends Cubit<TracingInitial> {
 
   checkTheLocationOfPoint({required Offset point, required Size size}) async {
     if(state.stateOfGame?.basicData?.checkTheIndexOfPath != null) {
-      int? indexOfPoint = state.stateOfGame?.basicData?.checkTheIndexOfPath!(point, size) ?? 0;
+      int indexOfPoint = state.stateOfGame?.basicData?.checkTheIndexOfPath!(point, size) ?? 0;
       print('indexOfPoint:$indexOfPoint');
       print('##:${state.colorsOfPaths
           .where((element) => element == null)
@@ -66,7 +66,7 @@ class TracingCubit extends Cubit<TracingInitial> {
 
   saveCurrentPosition({required Offset? position, required Offset point, required Size size}) {
     if (position != null) {
-      int? indexOfPoint = state.stateOfGame?.basicData?.checkTheIndexOfPath!(point, size) ?? 0;
+      int indexOfPoint = state.stateOfGame?.basicData?.checkTheIndexOfPath!(point, size) ?? 0;
       indexOfPoint = indexOfPoint - 1;
       List<Color?> tempColors = state.colorsOfPaths;
       // Color? lastColor;

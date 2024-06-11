@@ -6,7 +6,7 @@ import 'package:mind_buzz_refactor/features/phonetics/domain/entities/game_model
 
 import '../../../../../../core/assets_sound.dart';
 import '../../../../../../core/audio_player.dart';
-import '../../../../../../core/games_structure/phonetics/basic_of_phonetics_game.dart';
+import '../../../../../../core/games_structure/arabic/game_phonatics_types.dart';
 import '../../../../../../core/talk_tts.dart';
 
 part 'x_out_state.dart';

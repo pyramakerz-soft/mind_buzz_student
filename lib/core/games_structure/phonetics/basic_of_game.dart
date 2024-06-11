@@ -1,85 +1,14 @@
+import '../arabic/assets_images_arabic.dart';
+import '../arabic/game_arabic_types.dart';
+import '../arabic/game_phonatics_types.dart';
 import 'assets_images_phonetics.dart';
-import 'basic_of_phonetics.dart';
+import 'basic_of_chapter.dart';
 
-enum GameTypes {
-  dragOut,
-  clickPicture,
-  clickTheSound,
-  bingo,
-  sortingCups,
-  sortingPictures,
-  dice,
-  xOut,
-  spelling,
-  tracing,
-  tracingArabic,
-  clickPictureArabic,
-  clickTheSoundArabic,
-  dragOutArabic,
-  repeatCharArabic,
-  chooseCorrectWordArabic,
-  chooseFormationArabic,
-  matchingArabic,
-  sortingCupsArabic,
-  chooseTheCorrectCharArabic,
-  createWordArabic,
-  video,
-}
 
-extension TypeExtension on GameTypes {
-  String text() {
-    switch (this) {
-      case GameTypes.dragOut:
-        return "Drag Out".toLowerCase();
-      case GameTypes.clickPicture:
-        return 'Click the picture'.toLowerCase();
-      case GameTypes.clickTheSound:
-        return 'Click the sound'.toLowerCase();
-      case GameTypes.bingo:
-        return 'Bingo'.toLowerCase();
-      case GameTypes.sortingCups:
-        return 'Sorting Cups'.toLowerCase();
-      case GameTypes.sortingPictures:
-        return 'Sorting Pictures'.toLowerCase();
-      case GameTypes.dice:
-        return 'Dice'.toLowerCase();
-      case GameTypes.xOut:
-        return 'X-Out'.toLowerCase();
-      case GameTypes.spelling:
-        return 'Spelling'.toLowerCase();
-      case GameTypes.tracing:
-        return 'trace'.toLowerCase();
-      case GameTypes.video:
-        return 'Video'.toLowerCase();
-      case GameTypes.tracingArabic:
-        return 'تتبع بإصبعين'.toLowerCase();
-      case GameTypes.clickPictureArabic:
-        return 'اضغط علي الصورة'.toLowerCase();
-      case GameTypes.clickTheSoundArabic:
-        return 'لون الحرف'.toLowerCase();
-      case GameTypes.dragOutArabic:
-        return 'استبعد'.toLowerCase();
-      case GameTypes.repeatCharArabic:
-        return 'كرر خلفي'.toLowerCase();
-      case GameTypes.chooseCorrectWordArabic:
-        return 'اختر الكلمة الصحيحة'.toLowerCase();
-      case GameTypes.chooseFormationArabic:
-        return 'اختر التشكيل'.toLowerCase();
-      case GameTypes.matchingArabic:
-        return 'صل'.toLowerCase();
-      case GameTypes.sortingCupsArabic:
-        return 'صنف'.toLowerCase();
-      case GameTypes.chooseTheCorrectCharArabic:
-        return 'اخترالحرف الصحيح'.toLowerCase();
-      case GameTypes.createWordArabic:
-        return 'كون الكلمات'.toLowerCase();
-    }
-  }
-}
-
-abstract class BasicOfPhoneticsGame {
+abstract class BasicOfGame {
   late bool isRound;
-  late String titleImage;
+  late String titleImageEn;
+  late String? titleImageAr;
   late String? completeBasket;
   static String connect = 'Connect';
   static String stateOIdle = 'idle';
@@ -92,54 +21,43 @@ abstract class BasicOfPhoneticsGame {
     gameType.toLowerCase();
     if (gameType == GameTypes.dragOut.text()) {
       return BasicDragOutGame();
-    } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 1) {
+    }
+    else if ((gameType == GameTypes.clickPicture.text()|| gameType == GameArabicTypes.clickPictureArabic.text()) && audioFlag == 1) {
       ///audio flag == 1 say the word
-      return ClickPictureS();
-    } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 0) {
+      return ClickPicture();
+    }
+    else if (gameType == GameTypes.clickPicture.text() && audioFlag == 0) {
       return ClickPictureOfWord();
-    } else if (gameType == GameTypes.clickTheSound.text()) {
+    }
+    else if (gameType == GameTypes.clickTheSound.text()) {
       return BasicClickTheSoundGame();
-    } else if (gameType == GameTypes.bingo.text()) {
+    }
+    else if (gameType == GameTypes.bingo.text()) {
       return BingoGame();
-    } else if (gameType == GameTypes.sortingCups.text()) {
+    }
+    else if (gameType == GameTypes.sortingCups.text()) {
       return SortingCupsGame();
-    } else if (gameType == GameTypes.sortingPictures.text()) {
+    }
+    else if (gameType == GameTypes.sortingPictures.text()) {
       return SortingPicturesGame();
-    } else if (gameType == GameTypes.spelling.text()) {
+    }
+    else if (gameType == GameTypes.spelling.text()) {
       return SpellingGame();
-    } else if (gameType == GameTypes.xOut.text()) {
+    }
+    else if (gameType == GameTypes.xOut.text()) {
       return XOutGame();
-    } else if (gameType == GameTypes.dice.text()) {
+    }
+    else if (gameType == GameTypes.dice.text()) {
       return DiceGame();
-    } else if (gameType == GameTypes.tracing.text()) {
+    }
+    else if (gameType == GameTypes.tracing.text()) {
       return Tracking();
-    } else if (gameType == GameTypes.video.text()) {
+    }
+    else if (gameType == GameTypes.video.text()) {
       return Video();
     }
   }
 
-  static List<int> getTheStarsAddState(int number) {
-    if (number % 3 == 0) {
-      return List.generate(3, (index) => (number / 3).round()).toList();
-    } else {
-      int lower = (number ~/ 3) * 3;
-      int upper = lower + 3;
-      int result = (number - lower < upper - number) ? lower : upper;
-      if (result < number) {
-        return [
-          (result / 3).round(),
-          (result / 3 + 1).round(),
-          (result / 3).round()
-        ];
-      } else {
-        return [
-          (result / 3 - 1).round(),
-          (result / 3).round(),
-          (result / 3).round()
-        ];
-      }
-    }
-  }
 
   static List listOfConnectGames = [
     GameTypes.bingo.text(),
@@ -177,12 +95,12 @@ abstract class BasicOfPhoneticsGame {
   ];
 }
 
-class BasicDragOutGame implements BasicOfPhoneticsGame {
+class BasicDragOutGame implements BasicOfGame {
   @override
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.dragOut;
+  String titleImageEn = AppImagesPhonetics.dragOut;
 
   // @override
   // String keyGame = BasicOfEveryGame.;
@@ -192,14 +110,17 @@ class BasicDragOutGame implements BasicOfPhoneticsGame {
 
   @override
   bool isConnect = false;
+
+  @override
+  String? titleImageAr;
 }
 
-class ClickPictureS implements BasicOfPhoneticsGame {
+class ClickPicture implements BasicOfGame {
   @override
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.clickPicture;
+  String titleImageEn = AppImagesPhonetics.clickPicture;
 
   // @override
   // String keyGame = 'Click the picture';
@@ -235,14 +156,17 @@ class ClickPictureS implements BasicOfPhoneticsGame {
 
   @override
   bool isConnect = false;
+
+  @override
+  String? titleImageAr = AppImagesArabic.titleOfClickThePicture;
 }
 
-class Tracking implements BasicOfPhoneticsGame {
+class Tracking implements BasicOfGame {
   @override
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.tracingWithFinger;
+  String titleImageEn = AppImagesPhonetics.tracingWithFinger;
 
   // @override
   // String keyGame = 'Click the picture';
@@ -252,13 +176,16 @@ class Tracking implements BasicOfPhoneticsGame {
 
   @override
   bool isConnect = false;
+
+  @override
+  String? titleImageAr;
 }
-class Video implements BasicOfPhoneticsGame {
+class Video implements BasicOfGame {
   @override
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.tracingWithFinger;
+  String titleImageEn = AppImagesPhonetics.tracingWithFinger;
 
   // @override
   // String keyGame = 'Click the picture';
@@ -268,28 +195,34 @@ class Video implements BasicOfPhoneticsGame {
 
   @override
   bool isConnect = false;
+
+  @override
+  String? titleImageAr;
 }
 
-class BasicClickTheSoundGame implements BasicOfPhoneticsGame {
+class BasicClickTheSoundGame implements BasicOfGame {
   @override
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.clickTheSound;
+  String titleImageEn = AppImagesPhonetics.clickTheSound;
 
   @override
   String? completeBasket;
 
   @override
   bool isConnect = false;
+
+  @override
+  String? titleImageAr;
 }
 
-class ClickPictureOfWord implements BasicOfPhoneticsGame {
+class ClickPictureOfWord implements BasicOfGame {
   @override
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.clickPicture;
+  String titleImageEn = AppImagesPhonetics.clickPicture;
 
   @override
   String? completeBasket;
@@ -322,42 +255,51 @@ class ClickPictureOfWord implements BasicOfPhoneticsGame {
 
   @override
   bool isConnect = false;
+
+  @override
+  String? titleImageAr;
 }
 
-class BingoGame implements BasicOfPhoneticsGame {
+class BingoGame implements BasicOfGame {
   @override
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.bingoNameGame;
+  String titleImageEn = AppImagesPhonetics.bingoNameGame;
 
   @override
   String? completeBasket;
 
   @override
   bool isConnect = true;
+
+  @override
+  String? titleImageAr;
 }
 
-class SortingCupsGame implements BasicOfPhoneticsGame {
+class SortingCupsGame implements BasicOfGame {
   @override
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.sortingCupsNameGame;
+  String titleImageEn = AppImagesPhonetics.sortingCupsNameGame;
 
   @override
   String? completeBasket;
 
   @override
   bool isConnect = true;
+
+  @override
+  String? titleImageAr;
 }
 
-class SortingPicturesGame implements BasicOfPhoneticsGame {
+class SortingPicturesGame implements BasicOfGame {
   @override
   bool isRound = true;
 
   @override
-  String titleImage = AppImagesPhonetics.sortingGame;
+  String titleImageEn = AppImagesPhonetics.sortingGame;
   String woodenBackground = AppImagesPhonetics.woodBackground;
 
   @override
@@ -365,14 +307,17 @@ class SortingPicturesGame implements BasicOfPhoneticsGame {
 
   @override
   bool isConnect = true;
+
+  @override
+  String? titleImageAr;
 }
 
-class SpellingGame implements BasicOfPhoneticsGame {
+class SpellingGame implements BasicOfGame {
   @override
   bool isRound = true;
 
   @override
-  String titleImage = AppImagesPhonetics.spellingNameGame;
+  String titleImageEn = AppImagesPhonetics.spellingNameGame;
 
   String woodenBackground = AppImagesPhonetics.woodBackground;
 
@@ -381,32 +326,41 @@ class SpellingGame implements BasicOfPhoneticsGame {
 
   @override
   bool isConnect = true;
+
+  @override
+  String? titleImageAr;
 }
 
-class XOutGame implements BasicOfPhoneticsGame {
+class XOutGame implements BasicOfGame {
   @override
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.xOutGameName;
+  String titleImageEn = AppImagesPhonetics.xOutGameName;
 
   @override
   String? completeBasket;
 
   @override
   bool isConnect = true;
+
+  @override
+  String? titleImageAr;
 }
 
-class DiceGame implements BasicOfPhoneticsGame {
+class DiceGame implements BasicOfGame {
   @override
   bool isRound = false;
 
   @override
-  String titleImage = AppImagesPhonetics.diceNameGame;
+  String titleImageEn = AppImagesPhonetics.diceNameGame;
 
   @override
   String? completeBasket;
 
   @override
   bool isConnect = true;
+
+  @override
+  String? titleImageAr;
 }
