@@ -13,9 +13,9 @@ import 'package:mind_buzz_refactor/features/phonetics/presentation/widget/star_w
 
 import '../../../../core/assets_sound.dart';
 import '../../../../core/audio_player.dart';
-import '../../../../core/phonetics/assets_images_phonetics.dart';
-import '../../../../core/phonetics/basic_of_every_game.dart';
-import '../../../../core/phonetics/basic_of_phonetics.dart';
+import '../../../../core/games_structure/phonetics/assets_images_phonetics.dart';
+import '../../../../core/games_structure/phonetics/basic_of_phonetics_game.dart';
+import '../../../../core/games_structure/phonetics/basic_of_phonetics.dart';
 import '../../../../core/talk_tts.dart';
 import '../games/bingo_game/manager/bingo_cubit.dart';
 import '../games/bingo_game/pages/bingo_game.dart';

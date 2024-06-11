@@ -20,7 +20,7 @@ class GetContactInitial extends ContactLessonState {
     String subProgram = data[index].lesson?.unit?.program?.course?.name ?? '';
     print("subProgram:$data");
 
-    if (subProgram == BasicOfEveryGame.phonics) {
+    if (subProgram == BaseOfGames.phonics) {
       String subLetter = data[index].mainLetter ?? '';
       String subGame = data[index].gameTypes?.name ?? '';
       int audioFlag = data[index].audioFlag ?? 0;

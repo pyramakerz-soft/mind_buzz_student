@@ -17,6 +17,15 @@ class Assets {
   static const String animationUnitsBee2 = 'assets/animation/units_bee2.riv';
   static const String animationUnitsTree = 'assets/animation/units_tree.riv';
   static const String animationWateringUnitsBee = 'assets/animation/watering_units_bee.riv';
+  static const String arabicBasicAvatarNormal = 'assets/arabic/basicAvatarNormal.png';
+  static const String arabicBeeFailure = 'assets/arabic/beeFailure.riv';
+  static const String arabicBeeIdle = 'assets/arabic/beeIdle.riv';
+  static const String arabicBeeSuccess = 'assets/arabic/beeSuccess.riv';
+  static const String arabicCircleShape = 'assets/arabic/circle_shape.png';
+  static const String arabicCloudShape = 'assets/arabic/cloud_shape.png';
+  static const String arabicDiamondShape = 'assets/arabic/diamond_shape.png';
+  static const String arabicHexagonShape = 'assets/arabic/hexagon_shape.png';
+  static const String arabicTitleOfClickThePicture = 'assets/arabic/title_of_click_the_picture.png';
   static const String assetsPhoneticsSnowmanSad = 'assets/phonetics/snowman_sad.riv';
   static const String baseGoodJob = 'assets/sound/base/good_job.ogg';
   static const String baseNope = 'assets/sound/base/nope.ogg';
@@ -173,6 +182,7 @@ class Assets {
   static const String phoneticsHexagonShape = 'assets/phonetics/hexagon_shape.png';
   static const String phoneticsIconBoarderOfChar = 'assets/phonetics/iconBoarderOfChar.svg';
   static const String phoneticsLoading = 'assets/phonetics/Loading.riv';
+  static const String phoneticsLoadingVideo = 'assets/phonetics/loading_video.png';
   static const String phoneticsPosition2Finger = 'assets/phonetics/position_2_finger.png';
   static const String phoneticsSadAvatarSad = 'assets/phonetics/sadAvatarSad.png';
   static const String phoneticsSettingButtonIcon = 'assets/phonetics/settingButtonIcon.png';

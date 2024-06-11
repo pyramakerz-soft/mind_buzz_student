@@ -11,7 +11,19 @@ enum GameTypes {
   dice,
   xOut,
   spelling,
-  tracing, video
+  tracing,
+  tracingArabic,
+  clickPictureArabic,
+  clickTheSoundArabic,
+  dragOutArabic,
+  repeatCharArabic,
+  chooseCorrectWordArabic,
+  chooseFormationArabic,
+  matchingArabic,
+  sortingCupsArabic,
+  chooseTheCorrectCharArabic,
+  createWordArabic,
+  video,
 }
 
 extension TypeExtension on GameTypes {
@@ -39,15 +51,36 @@ extension TypeExtension on GameTypes {
         return 'trace'.toLowerCase();
       case GameTypes.video:
         return 'Video'.toLowerCase();
+      case GameTypes.tracingArabic:
+        return 'تتبع بإصبعين'.toLowerCase();
+      case GameTypes.clickPictureArabic:
+        return 'اضغط علي الصورة'.toLowerCase();
+      case GameTypes.clickTheSoundArabic:
+        return 'لون الحرف'.toLowerCase();
+      case GameTypes.dragOutArabic:
+        return 'استبعد'.toLowerCase();
+      case GameTypes.repeatCharArabic:
+        return 'كرر خلفي'.toLowerCase();
+      case GameTypes.chooseCorrectWordArabic:
+        return 'اختر الكلمة الصحيحة'.toLowerCase();
+      case GameTypes.chooseFormationArabic:
+        return 'اختر التشكيل'.toLowerCase();
+      case GameTypes.matchingArabic:
+        return 'صل'.toLowerCase();
+      case GameTypes.sortingCupsArabic:
+        return 'صنف'.toLowerCase();
+      case GameTypes.chooseTheCorrectCharArabic:
+        return 'اخترالحرف الصحيح'.toLowerCase();
+      case GameTypes.createWordArabic:
+        return 'كون الكلمات'.toLowerCase();
     }
   }
 }
 
-abstract class BasicOfEveryGame {
+abstract class BasicOfPhoneticsGame {
   late bool isRound;
   late String titleImage;
   late String? completeBasket;
-  static String phonics = 'Phonics';
   static String connect = 'Connect';
   static String stateOIdle = 'idle';
   static String stateOfWin = 'win';
@@ -144,7 +177,7 @@ abstract class BasicOfEveryGame {
   ];
 }
 
-class BasicDragOutGame implements BasicOfEveryGame {
+class BasicDragOutGame implements BasicOfPhoneticsGame {
   @override
   bool isRound = false;
 
@@ -161,7 +194,7 @@ class BasicDragOutGame implements BasicOfEveryGame {
   bool isConnect = false;
 }
 
-class ClickPictureS implements BasicOfEveryGame {
+class ClickPictureS implements BasicOfPhoneticsGame {
   @override
   bool isRound = false;
 
@@ -204,7 +237,7 @@ class ClickPictureS implements BasicOfEveryGame {
   bool isConnect = false;
 }
 
-class Tracking implements BasicOfEveryGame {
+class Tracking implements BasicOfPhoneticsGame {
   @override
   bool isRound = false;
 
@@ -220,7 +253,7 @@ class Tracking implements BasicOfEveryGame {
   @override
   bool isConnect = false;
 }
-class Video implements BasicOfEveryGame {
+class Video implements BasicOfPhoneticsGame {
   @override
   bool isRound = false;
 
@@ -237,7 +270,7 @@ class Video implements BasicOfEveryGame {
   bool isConnect = false;
 }
 
-class BasicClickTheSoundGame implements BasicOfEveryGame {
+class BasicClickTheSoundGame implements BasicOfPhoneticsGame {
   @override
   bool isRound = false;
 
@@ -251,7 +284,7 @@ class BasicClickTheSoundGame implements BasicOfEveryGame {
   bool isConnect = false;
 }
 
-class ClickPictureOfWord implements BasicOfEveryGame {
+class ClickPictureOfWord implements BasicOfPhoneticsGame {
   @override
   bool isRound = false;
 
@@ -291,7 +324,7 @@ class ClickPictureOfWord implements BasicOfEveryGame {
   bool isConnect = false;
 }
 
-class BingoGame implements BasicOfEveryGame {
+class BingoGame implements BasicOfPhoneticsGame {
   @override
   bool isRound = false;
 
@@ -305,7 +338,7 @@ class BingoGame implements BasicOfEveryGame {
   bool isConnect = true;
 }
 
-class SortingCupsGame implements BasicOfEveryGame {
+class SortingCupsGame implements BasicOfPhoneticsGame {
   @override
   bool isRound = false;
 
@@ -319,7 +352,7 @@ class SortingCupsGame implements BasicOfEveryGame {
   bool isConnect = true;
 }
 
-class SortingPicturesGame implements BasicOfEveryGame {
+class SortingPicturesGame implements BasicOfPhoneticsGame {
   @override
   bool isRound = true;
 
@@ -334,7 +367,7 @@ class SortingPicturesGame implements BasicOfEveryGame {
   bool isConnect = true;
 }
 
-class SpellingGame implements BasicOfEveryGame {
+class SpellingGame implements BasicOfPhoneticsGame {
   @override
   bool isRound = true;
 
@@ -350,7 +383,7 @@ class SpellingGame implements BasicOfEveryGame {
   bool isConnect = true;
 }
 
-class XOutGame implements BasicOfEveryGame {
+class XOutGame implements BasicOfPhoneticsGame {
   @override
   bool isRound = false;
 
@@ -364,7 +397,7 @@ class XOutGame implements BasicOfEveryGame {
   bool isConnect = true;
 }
 
-class DiceGame implements BasicOfEveryGame {
+class DiceGame implements BasicOfPhoneticsGame {
   @override
   bool isRound = false;
 

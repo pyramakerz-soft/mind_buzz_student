@@ -8,7 +8,7 @@ import 'package:mind_buzz_refactor/core/vars.dart';
 import '../../../../core/app_color.dart';
 import '../../../../core/assets_images.dart';
 import '../../../../core/assets_svg_images.dart';
-import '../../../../core/phonetics/assets_images_phonetics.dart';
+import '../../../../core/games_structure/phonetics/assets_images_phonetics.dart';
 import '../../../../core/theme_text.dart';
 import '../../../../core/widgets/button_start_game.dart';
 import '../manager/main_cubit/current_game_phonetics_cubit.dart';

@@ -10,7 +10,7 @@ import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:mind_buzz_refactor/features/phonetics/presentation/games/spelling_game/widget/drag_target_card.dart';
 
-import '../../../../../../core/phonetics/phonetics_color.dart';
+import '../../../../../../core/games_structure/phonetics/phonetics_color.dart';
 import '../../../../../../core/theme_text.dart';
 import '../../../../../chapters/presentation/manager/journey_bar_cubit.dart';
 import '../../../../domain/entities/game_letters_model.dart';
@@ -23,19 +23,19 @@ class SpellingGameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<SpellingCubit, SpellingInitial>(
         listener: (context, state) {
-      if (state.countOfWrong == 3) {
-        context.read<SpellingCubit>().increaseCountOfWrongAnswers(count: 0);
-        bool isLast =
-            context.read<SpellingCubit>().checkIfIsTheLastGameOfLesson();
-        print('isLast:$isLast');
-        if (isLast == true) {
-          Future.delayed(Duration(seconds: 2), () {
-            // context.read<SpellingCubit>().navigateToNextIndex();
-          });
-        } else {
-          context.read<SpellingCubit>().increaseIndexOfCorrectAnswers();
-        }
-      }
+      // if (state.countOfWrong == 3) {
+      //   context.read<SpellingCubit>().increaseCountOfWrongAnswers(count: 0);
+      //   bool isLast =
+      //       context.read<SpellingCubit>().checkIfIsTheLastGameOfLesson();
+      //   print('isLast:$isLast');
+      //   if (isLast == true) {
+      //     Future.delayed(Duration(seconds: 2), () {
+      //       // context.read<SpellingCubit>().navigateToNextIndex();
+      //     });
+      //   } else {
+      //     context.read<SpellingCubit>().increaseIndexOfCorrectAnswers();
+      //   }
+      // }
     }, builder: (context, gameState) {
       return Padding(
         padding: const EdgeInsets.only(top: 40, left: 30),
@@ -113,7 +113,9 @@ class SpellingGameScreen extends StatelessWidget {
                                               .addStarToStudent(
                                                 stateOfCountOfCorrectAnswer:
                                                     countOfCorrect,
-                                                mainCountOfQuestion: 3,
+                                                mainCountOfQuestion: gameState
+                                                    .gameData?.length??0,
+                                                    // ?.length,
                                               );
                                           bool isLast = context
                                               .read<SpellingCubit>()
@@ -157,13 +159,15 @@ class SpellingGameScreen extends StatelessWidget {
                                                 .increaseIndexOfCorrectAnswers();
                                           }
                                         } else {
+                                          print('hhhhhhhhhhhhhhhhhhhh');
                                           context
                                               .read<CurrentGamePhoneticsCubit>()
                                               .addWrongAnswer(
                                                   actionOfWrongAnswer:
                                                       () async {
                                             // TalkTts.startTalk(text: gameData.mainLetter ?? '');
-                                          }, actionWhenTriesBeZero: () {
+                                          },
+                                              actionWhenTriesBeZero: () {
                                             context
                                                 .read<
                                                 CurrentGamePhoneticsCubit>()
@@ -186,21 +190,23 @@ class SpellingGameScreen extends StatelessWidget {
                                                       countOfStar:
                                                       countOfStars);
                                                 });
-                                          });
-                                          if (!context
-                                              .read<SpellingCubit>()
-                                              .checkIfIsTheLastGameOfLesson())
-                                            context
-                                                .read<
-                                                    CurrentGamePhoneticsCubit>()
-                                                .increaseCountOfTries();
+                                            // Navigator.of(context).pop();
 
+                                          });
+                                          // if (!context
+                                          //     .read<SpellingCubit>()
+                                          //     .checkIfIsTheLastGameOfLesson())
+                                          //   context
+                                          //       .read<
+                                          //           CurrentGamePhoneticsCubit>()
+                                          //       .increaseCountOfTries();
+                                          //
                                           context
                                               .read<SpellingCubit>()
                                               .clearAnswers();
-                                          context
-                                              .read<SpellingCubit>()
-                                              .increaseCountOfWrongAnswers();
+                                          // context
+                                          //     .read<SpellingCubit>()
+                                          //     .increaseCountOfWrongAnswers();
                                         }
                                       }
 

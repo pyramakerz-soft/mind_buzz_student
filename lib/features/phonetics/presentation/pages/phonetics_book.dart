@@ -10,9 +10,9 @@ import 'package:mind_buzz_refactor/core/vars.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 
 import '../../../../core/error/failures_messages.dart';
-import '../../../../core/phonetics/assets_images_phonetics.dart';
-import '../../../../core/phonetics/basic_of_every_game.dart';
-import '../../../../core/phonetics/basic_of_phonetics.dart';
+import '../../../../core/games_structure/phonetics/assets_images_phonetics.dart';
+import '../../../../core/games_structure/phonetics/basic_of_phonetics_game.dart';
+import '../../../../core/games_structure/phonetics/basic_of_phonetics.dart';
 import '../../../../core/utils.dart';
 import '../../../login/presentation/page/login_screen.dart';
 import '../games/drag_out/manager/drag_out_cubit.dart';
@@ -202,7 +202,7 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                           Navigator.of(context).pop();
                                         },
                                         backButton: () {
-                                          Navigator.of(context).pop();
+                                          // Navigator.of(context).pop();
                                           Navigator.of(context).pop();
                                         },
                                       )
@@ -237,7 +237,7 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                                             .watch<CurrentGamePhoneticsCubit>()
                                             .state
                                             .stateOfAvatar !=
-                                        BasicOfEveryGame.stateOIdle)) ...{
+                                        BasicOfPhoneticsGame.stateOIdle)) ...{
                               Container(
                                 color: Colors.transparent,
                                 width: MediaQuery.of(context).size.width,
