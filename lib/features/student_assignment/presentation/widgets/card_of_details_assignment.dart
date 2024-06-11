@@ -61,30 +61,31 @@ class CardOfDetailsOfAssignment extends StatelessWidget {
                                 letterSpacing: 0.44,
                                 overflow: TextOverflow.ellipsis),
                       ),
-                    ), Container(
-                        // width: 50,
-                        height: 30,
-                        padding: EdgeInsets.symmetric(horizontal: 5),
+                    ),
+                    Container(
+                      // width: 50,
+                      height: 30,
+                      padding: EdgeInsets.symmetric(horizontal: 5),
 
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: AppColor()
+                              .hexToColor(dataOfTypesOfTest.bgColor ?? '')),
+                      alignment: Alignment.centerRight,
+                      // padding: EdgeInsets.symmetric(horizontal: 12 ,vertical: 4),
+                      child: Text(
+                        dataOfTypesOfTest.name ?? '',
+                        style: TextStyle(
                             color: AppColor()
-                                .hexToColor(dataOfTypesOfTest.bgColor ?? '')),
-                        alignment: Alignment.centerRight,
-                        // padding: EdgeInsets.symmetric(horizontal: 12 ,vertical: 4),
-                        child: Text(
-                          dataOfTypesOfTest.name ?? '',
-                          style: TextStyle(
-                              color: AppColor().hexToColor(
-                                  dataOfTypesOfTest.textColor ?? ''),
-                              fontSize: 13,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: AppTheme.getFontFamily4()),
-                          overflow: TextOverflow.ellipsis,
-                          // maxLines: 1,
-                          textAlign: TextAlign.center,
-                        ),
+                                .hexToColor(dataOfTypesOfTest.textColor ?? ''),
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: AppTheme.getFontFamily4()),
+                        overflow: TextOverflow.ellipsis,
+                        // maxLines: 1,
+                        textAlign: TextAlign.center,
                       ),
+                    ),
 
                     // const Expanded(
                     //   child: SizedBox(),
@@ -157,7 +158,6 @@ class CardOfDetailsOfAssignment extends StatelessWidget {
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-
                               Text(
                                 "${data.status}: ${data.daysLeft}",
                                 textAlign: TextAlign.center,
@@ -188,11 +188,13 @@ class CardOfDetailsOfAssignment extends StatelessWidget {
                                     fontFamily: AppTheme.getFontFamily3(),
                                     fontWeight: FontWeight.w400),
                               ),
-                              if(((int.tryParse(data.formattedDueDate ?? '0') ?? 0) + 1)>1)...{
+                              if (((int.tryParse(
+                                              data.formattedDueDate ?? '0') ??
+                                          0) +
+                                      1) >
+                                  1) ...{
                                 Text(
-                                  "${(int.tryParse(
-                                      data.formattedDueDate ?? '0') ?? 0) +
-                                      1} days Left",
+                                  "${(int.tryParse(data.formattedDueDate ?? '0') ?? 0) + 1} days Left",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: AppColor.redColor,
@@ -200,11 +202,9 @@ class CardOfDetailsOfAssignment extends StatelessWidget {
                                       fontFamily: AppTheme.getFontFamily3(),
                                       fontWeight: FontWeight.w400),
                                 ),
-                              }else...{
+                              } else ...{
                                 Text(
-                                  "${(int.tryParse(
-                                      data.formattedDueDate ?? '0') ?? 0) +
-                                      1} day Left",
+                                  "${(int.tryParse(data.formattedDueDate ?? '0') ?? 0) + 1} day Left",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: AppColor.redColor,
@@ -216,33 +216,36 @@ class CardOfDetailsOfAssignment extends StatelessWidget {
                             ],
                           )
                         } else ...{
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              SvgPicture.asset(
-                                ParentImages.timers,
-                                height: 13,
-                              ),
-                              5.pw,
-                              Text(
-                                'Deadline  ',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 12,
-                                    fontFamily: AppTheme.getFontFamily3(),
-                                    fontWeight: FontWeight.w400),
-                              ),
-                              Text(
-                                "${data.daysLeft}",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: AppColor.lightGreyColor4,
-                                    fontSize: 12,
-                                    fontFamily: AppTheme.getFontFamily3(),
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          )
+                          Flexible(
+                              child: FittedBox(
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SvgPicture.asset(
+                                  ParentImages.timers,
+                                  height: 13,
+                                ),
+                                5.pw,
+                                Text(
+                                  'Deadline  ',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 12,
+                                      fontFamily: AppTheme.getFontFamily3(),
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                Text(
+                                  "${data.daysLeft}",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: AppColor.lightGreyColor4,
+                                      fontSize: 12,
+                                      fontFamily: AppTheme.getFontFamily3(),
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ],
+                            ),
+                          ))
                         }
                       ],
                     ))

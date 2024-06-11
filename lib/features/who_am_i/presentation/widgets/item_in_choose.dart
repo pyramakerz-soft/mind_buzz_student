@@ -62,6 +62,9 @@ class ItemInChoose extends StatelessWidget {
               image,
               height: 135,
             ),
+            const SizedBox(
+              width: 20,
+            )
           ],
         ),
       ),

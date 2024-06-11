@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import 'package:mind_buzz_refactor/features/notification/presentation/widget/notification_item.dart';
 import '../../../../core/error/failures_messages.dart';
 import '../../../../core/utils.dart';
 import '../../../home/presentation/widgets/switch_bar.dart';
@@ -46,90 +47,64 @@ class NotificationsScreen extends StatelessWidget {
                       }
                     },
                     builder: (context, state) {
-                      return  BlocProvider<SwitchNotificationCubit>(
+                      return BlocProvider<SwitchNotificationCubit>(
                           create: (_) => SwitchNotificationCubit(),
-                          child:BlocConsumer<SwitchNotificationCubit, int>(
-                        listener: (context, state) {},
-                        builder: (BuildContext context, int state) {
-                          return Column(
-                            children: [
-                              Row(children: [
-                                SwitchTitle(
-                                  title: 'All',
-                                  index: 0,
-                                  currentIndex: state,
-                                  onTap: () {
-                                    context
-                                        .read<SwitchNotificationCubit>()
-                                        .updateSwitch(index: 0);
-                                  },
-                                ),
-                                10.pw,
-                                SwitchTitle(
-                                  title: 'Unread',
-                                  index: 1,
-                                  currentIndex: state,
-                                  onTap: () {
-                                    context
-                                        .read<SwitchNotificationCubit>()
-                                        .updateSwitch(index: 1);
-                                  },
-                                ),
-                              ]),
-                              20.ph,
-                              Container(
-                                width: 381,
-                                height: 96,
-                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                                decoration: ShapeDecoration(
-                                  color: Color(0xFFE6EDF2),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(16),
+                          child: BlocConsumer<SwitchNotificationCubit, int>(
+                            listener: (context, state) {},
+                            builder: (BuildContext context, int state) {
+                              return Column(
+                                children: [
+                                  Row(children: [
+                                    SwitchTitle(
+                                      title: 'All',
+                                      index: 0,
+                                      currentIndex: state,
+                                      onTap: () {
+                                        context
+                                            .read<SwitchNotificationCubit>()
+                                            .updateSwitch(index: 0);
+                                      },
+                                    ),
+                                    10.pw,
+                                    SwitchTitle(
+                                      title: 'Unread',
+                                      index: 1,
+                                      currentIndex: state,
+                                      onTap: () {
+                                        context
+                                            .read<SwitchNotificationCubit>()
+                                            .updateSwitch(index: 1);
+                                      },
+                                    ),
+                                  ]),
+                                  20.ph,
+                                  const NotificationItem(
+                                    title: 'Check your child’s progress',
+                                    content:
+                                        'See the last report of the assignment taken on 1 August 2024.',
                                   ),
-                                  shadows: [
-                                    BoxShadow(
-                                      color: Color(0x14000000),
-                                      blurRadius: 8,
-                                      offset: Offset(0, 1),
-                                      spreadRadius: 0,
-                                    )
-                                  ],
-                                ),
-                                child:
-                                     Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Check your child’s progress',
-                                              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              child: Text(
-                                                'See the last report of the assignment taken on 1 August 2024.',
-                                                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400,
-
-                                                ),
-
-
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-
-
-                              )
-                            ],
-                          );
-                        },
-                      ));
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  const NotificationItem(
+                                    title: 'Your password has changed',
+                                    content:
+                                        'Your password has changed 2 hours ago please, check if it isn’t you .',
+                                    isRead: true,
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  const NotificationItem(
+                                    title: 'You Receive Phonics Assignment ',
+                                    content:
+                                        'See the assignment taken on 1 August 2024 Deadline 5/5.',
+                                    isRead: true,
+                                  )
+                                ],
+                              );
+                            },
+                          ));
                     },
                   ),
                 )),
