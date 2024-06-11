@@ -259,7 +259,7 @@ class XOutItemWidget extends StatelessWidget {
               imageUrl: imageName,
               fit: BoxFit.fill,
               height: 70.h,
-              width: 50.w,
+              // width: 50.w,
               errorWidget: (context, url, error){
                 return Center(
                   child: Text('${word}'),

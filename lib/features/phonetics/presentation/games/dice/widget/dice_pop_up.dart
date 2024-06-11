@@ -22,7 +22,7 @@ class DicePopUp extends StatelessWidget {
       elevation: 0,
 
       content: Container(
-        margin: EdgeInsets.only(left: (40.w), top: 69.h),
+        margin: EdgeInsets.only(left: (70.w), top: 100.h),
         child: DiceWidget3(
             diceLetters: diceLetters ?? [],
             countOfPlayed: countOfPlayed,
