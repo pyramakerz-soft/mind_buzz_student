@@ -31,7 +31,7 @@ class GetAssignmentBloc extends Bloc<GetAssignmentEvent, GetAssignmentState> {
             status: event.status,
             fromDate: event.fromDate,
             toDate: event.toDate,
-            isFuture:false,
+            isFuture: false,
             listOfTypes: event.listOfTypes);
         emit(_eitherLoadedOrErrorState(failureOrDoneMessage));
       } else if (event is GetReportsRequest) {

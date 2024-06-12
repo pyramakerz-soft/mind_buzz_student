@@ -63,6 +63,9 @@ class FilterAssignmentCubit extends Cubit<FilterAssignmentInitial> {
   }
 
   submitNewType({required String newType}) {
+    if (state.selectedTypeReport == newType) {
+      return emit(state.clearReportFilter());
+    }
     emit(state.copyWith(selectedTypeReport: newType));
   }
 

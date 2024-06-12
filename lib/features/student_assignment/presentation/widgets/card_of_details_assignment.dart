@@ -108,93 +108,64 @@ class CardOfDetailsOfAssignment extends StatelessWidget {
                   children: [
                     Expanded(
                         child: (data.teacherName != null)
-                            ? Row(
-                                children: [
-                                  Text(
-                                    "By ",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineMedium
-                                        ?.copyWith(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400,
-                                          // height: 0,
-                                          // letterSpacing: 0.44,
-                                        ),
-                                  ),
-                                  Text(
-                                    data.teacherName ?? '',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineSmall
-                                        ?.copyWith(
+                            ? FittedBox(
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "By ",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium
+                                          ?.copyWith(
                                             fontSize: 14,
                                             fontWeight: FontWeight.w400,
-                                            color: Colors.black54
                                             // height: 0,
                                             // letterSpacing: 0.44,
-                                            ),
-                                  ),
-                                ],
+                                          ),
+                                    ),
+                                    Text(
+                                      data.teacherName ?? '',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineSmall
+                                          ?.copyWith(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.black54
+                                              // height: 0,
+                                              // letterSpacing: 0.44,
+                                              ),
+                                    ),
+                                  ],
+                                ),
                               )
                             : const SizedBox()),
+                    const SizedBox(
+                      width: 10,
+                    ),
                     Expanded(
-                        child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        if (data.status == TestTypes.finished) ...{
-                          Text(
-                            "${data.status}: ${data.daysLeft}",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: AppColor.resetText,
-                                fontSize: 12,
-                                fontFamily: AppTheme.getFontFamily3(),
-                                fontWeight: FontWeight.w400),
-                          ),
-                        } else if (data.status == TestTypes.overdue) ...{
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                "${data.status}: ${data.daysLeft}",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: AppColor.redColor,
-                                    fontSize: 12,
-                                    fontFamily: AppTheme.getFontFamily3(),
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          )
-                        } else if (data.status == TestTypes.dueSoon &&
-                            int.tryParse(data.formattedDueDate ?? '') != null &&
-                            int.parse(data.formattedDueDate ?? '') <= 7) ...{
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              SvgPicture.asset(
-                                ParentImages.timers,
-                                height: 13,
-                              ),
-                              5.pw,
-                              Text(
-                                'Deadline  ',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 12,
-                                    fontFamily: AppTheme.getFontFamily3(),
-                                    fontWeight: FontWeight.w400),
-                              ),
-                              if (((int.tryParse(
-                                              data.formattedDueDate ?? '0') ??
-                                          0) +
-                                      1) >
-                                  1) ...{
+                        child: FittedBox(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (data.status == TestTypes.finished) ...{
+                            Text(
+                              "${data.status}: ${data.daysLeft}",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: AppColor.resetText,
+                                  fontSize: 12,
+                                  fontFamily: AppTheme.getFontFamily3(),
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          } else if (data.status == TestTypes.overdue) ...{
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
                                 Text(
-                                  "${(int.tryParse(data.formattedDueDate ?? '0') ?? 0) + 1} days Left",
+                                  "${data.status}: ${data.daysLeft}",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: AppColor.redColor,
@@ -202,23 +173,13 @@ class CardOfDetailsOfAssignment extends StatelessWidget {
                                       fontFamily: AppTheme.getFontFamily3(),
                                       fontWeight: FontWeight.w400),
                                 ),
-                              } else ...{
-                                Text(
-                                  "${(int.tryParse(data.formattedDueDate ?? '0') ?? 0) + 1} day Left",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: AppColor.redColor,
-                                      fontSize: 12,
-                                      fontFamily: AppTheme.getFontFamily3(),
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              }
-                            ],
-                          )
-                        } else ...{
-                          Flexible(
-                              child: FittedBox(
-                            child: Row(
+                              ],
+                            )
+                          } else if (data.status == TestTypes.dueSoon &&
+                              int.tryParse(data.formattedDueDate ?? '') !=
+                                  null &&
+                              int.parse(data.formattedDueDate ?? '') <= 7) ...{
+                            Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 SvgPicture.asset(
@@ -234,20 +195,67 @@ class CardOfDetailsOfAssignment extends StatelessWidget {
                                       fontFamily: AppTheme.getFontFamily3(),
                                       fontWeight: FontWeight.w400),
                                 ),
-                                Text(
-                                  "${data.daysLeft}",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: AppColor.lightGreyColor4,
-                                      fontSize: 12,
-                                      fontFamily: AppTheme.getFontFamily3(),
-                                      fontWeight: FontWeight.w400),
-                                ),
+                                if (((int.tryParse(
+                                                data.formattedDueDate ?? '0') ??
+                                            0) +
+                                        1) >
+                                    1) ...{
+                                  Text(
+                                    "${(int.tryParse(data.formattedDueDate ?? '0') ?? 0) + 1} days Left",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: AppColor.redColor,
+                                        fontSize: 12,
+                                        fontFamily: AppTheme.getFontFamily3(),
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                } else ...{
+                                  Text(
+                                    "${(int.tryParse(data.formattedDueDate ?? '0') ?? 0) + 1} day Left",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: AppColor.redColor,
+                                        fontSize: 12,
+                                        fontFamily: AppTheme.getFontFamily3(),
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                }
                               ],
-                            ),
-                          ))
-                        }
-                      ],
+                            )
+                          } else ...{
+                            Flexible(
+                                child: FittedBox(
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SvgPicture.asset(
+                                    ParentImages.timers,
+                                    height: 13,
+                                  ),
+                                  5.pw,
+                                  Text(
+                                    'Deadline  ',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 12,
+                                        fontFamily: AppTheme.getFontFamily3(),
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Text(
+                                    "${data.daysLeft}",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: AppColor.lightGreyColor4,
+                                        fontSize: 12,
+                                        fontFamily: AppTheme.getFontFamily3(),
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ],
+                              ),
+                            ))
+                          }
+                        ],
+                      ),
                     ))
                   ],
                 ),

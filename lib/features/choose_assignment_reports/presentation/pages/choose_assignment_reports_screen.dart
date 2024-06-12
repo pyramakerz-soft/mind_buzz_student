@@ -54,8 +54,8 @@ class ChooseAssignmentReportsScreen extends StatelessWidget {
                 programId: programId.toString());
           }
         }, builder: (context, state) {
-          final selectedType =
-              context.watch<FilterAssignmentCubit>().state.selectedTypeReport;
+          final filterAssignmentCubit = context.read<FilterAssignmentCubit>();
+          final selectedType = filterAssignmentCubit.state.selectedTypeReport;
 
           return PopScope(
             onPopInvoked: (x) {
@@ -202,7 +202,7 @@ class ChooseAssignmentReportsScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                body: ListView(children: [
+                body: Column(children: [
                   15.ph,
                   Container(
                       height: 50,

@@ -1,4 +1,4 @@
-  import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
@@ -16,26 +16,26 @@ class GetAssignmentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (data.tests?.isNotEmpty ?? false) {
-      return Column(
-          children: List.generate(
-              data.tests?.length ?? 0,
-              (index) => Column(
-                    children: [
-                      10.ph,
-                      CardOfDetailsOfAssignment(
-                        data: data.tests?[index] ?? TestModel(),
-                        dataOfTypesOfTest: (data.tests?[index].type == null)
-                            ? TestsTypesModel()
-                            : data.testTypes
-                                    ?.where((element) =>
-                                        element.id ==
-                                        (data.tests?[index].type ?? 0))
-                                    .first ??
-                                TestsTypesModel(),
-                      ),
-                      5.ph,
-                    ],
-                  )));
+      return Expanded(
+        child: ListView.separated(
+          itemCount: data.tests?.length ?? 0,
+          itemBuilder: (context, index) {
+            return CardOfDetailsOfAssignment(
+              data: data.tests?[index] ?? TestModel(),
+              dataOfTypesOfTest: (data.tests?[index].type == null)
+                  ? TestsTypesModel()
+                  : data.testTypes
+                          ?.where((element) =>
+                              element.id == (data.tests?[index].type ?? 0))
+                          .first ??
+                      TestsTypesModel(),
+            );
+          },
+          separatorBuilder: (context, index) {
+            return SizedBox(height: 15); // Total of 10 + 5 padding
+          },
+        ),
+      );
     } else {
       return SizedBox(
         height: MediaQuery.of(context).size.height / 2,
