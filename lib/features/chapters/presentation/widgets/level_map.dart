@@ -10,8 +10,7 @@ import 'package:mind_buzz_refactor/core/vars.dart';
 
 import 'package:mind_buzz_refactor/features/chapters/presentation/widgets/level_map_painter.dart';
 import 'package:mind_buzz_refactor/features/chapters/presentation/widgets/level_map_parameters.dart';
-import '../../domain/entities/image_details.dart';
-import '../../domain/entities/images_to_paint.dart';
+import 'package:games_models/games_models.dart';
 
 enum Side {
   LEFT,

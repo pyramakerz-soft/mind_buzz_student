@@ -8,7 +8,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
-import 'package:mind_buzz_refactor/features/phonetics/presentation/games/click_the_sound/widgets/stroked_text_widget.dart';
 import '../../../../core/assets_animation.dart';
 import '../../../../core/assets_svg_images.dart';
 import '../../../../core/injection/injection_container.dart' as di;

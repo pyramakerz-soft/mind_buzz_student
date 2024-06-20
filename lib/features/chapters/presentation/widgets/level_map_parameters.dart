@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import '../../domain/entities/image_details.dart';
+import 'package:games_models/games_models.dart';
 
 
 

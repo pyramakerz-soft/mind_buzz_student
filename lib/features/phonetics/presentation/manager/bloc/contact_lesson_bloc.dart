@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:based_of_eng_game/based_of_eng_game.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,11 +9,8 @@ import 'package:mind_buzz_refactor/features/phonetics/domain/use_cases/game_use_
 
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/error/failures_messages.dart';
-import '../../../../../core/games_structure/base_of_games.dart';
-import '../../../../../core/games_structure/phonetics/basic_of_game.dart';
-import '../../../../../core/games_structure/phonetics/basic_of_chapter.dart';
 import '../../../../../core/talk_tts.dart';
-import '../../../domain/entities/game_model.dart';
+import 'package:games_models/games_models.dart';
 import '../../../../phonetics/domain/use_cases/contact_lesson_use_cases.dart';
 
 part 'contact_lesson_event.dart';

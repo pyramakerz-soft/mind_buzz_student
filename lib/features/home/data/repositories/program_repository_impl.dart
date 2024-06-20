@@ -1,9 +1,9 @@
 import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:games_models/games_models.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/network/network_info.dart';
-import '../../domain/entities/user_courses.dart';
 import '../../domain/repositories/repositories_user.dart';
 import '../datasources/data_source_remotely_of_home.dart';
 

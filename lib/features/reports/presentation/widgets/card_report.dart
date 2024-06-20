@@ -4,7 +4,7 @@ import 'package:percent_indicator/percent_indicator.dart';
 
 import '../../../../core/app_color.dart';
 import '../../../../core/theme_text.dart';
-import '../../../home/domain/entities/test_model.dart';
+import 'package:games_models/games_models.dart';
 import 'bottom_sheet_of_the_details_report.dart';
 
 class CardReport extends StatelessWidget {

@@ -15,7 +15,7 @@ import '../../../../core/parent_assets.dart';
 import '../../../../core/theme_text.dart';
 import '../../../../core/utils.dart';
 import '../../../choose_assignment_reports/presentation/manager/bloc/get_assignment_bloc.dart';
-import '../../../home/domain/entities/test_model.dart';
+import 'package:games_models/games_models.dart';
 import '../../../login/presentation/page/login_screen.dart';
 import '../../../student_assignment/domain/entities/main_data_test.dart';
 import '../../../student_assignment/presentation/manager/filter_assignment_cubit/filter_assignment_cubit.dart';

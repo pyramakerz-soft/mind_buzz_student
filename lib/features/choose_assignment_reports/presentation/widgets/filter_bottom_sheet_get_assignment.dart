@@ -8,7 +8,7 @@ import '../../../login/presentation/widgets/text_field_widget.dart';
 import '../../../student_assignment/presentation/manager/filter_assignment_cubit/filter_assignment_cubit.dart';
 import 'bottom_sheet_select_day.dart';
 import '../../../student_assignment/presentation/widgets/item_selected.dart';
-import '../../../../core/injection/injection_container.dart' as di;
+import 'package:games_models/games_models.dart';
 
 class FilterBottomSheetGetAssignment extends StatelessWidget {
   final void Function(int programId, String? status, String? fromDate,

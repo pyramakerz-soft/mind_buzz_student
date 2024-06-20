@@ -9,7 +9,7 @@ import 'package:mind_buzz_refactor/core/vars.dart';
 import '../../../../core/app_color.dart';
 import '../../../../core/enums/assignment_status.dart';
 import '../../../../core/theme_text.dart';
-import '../../../home/domain/entities/test_model.dart';
+import 'package:games_models/games_models.dart';
 
 
 class AssignmentWidget extends StatelessWidget {

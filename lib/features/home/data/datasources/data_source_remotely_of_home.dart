@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/apis_connections/api_connection.dart';
 import '../../../../core/connection.dart';
-import '../../domain/entities/user_courses.dart';
+import 'package:games_models/games_models.dart';
 
 abstract class DataSourceRemotelyOfProgram {
   Future<List<UserCourseModel>> getProgramDataRemotely();

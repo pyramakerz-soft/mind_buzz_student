@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/assets_images.dart';
 import '../../../../core/assets_svg_images.dart';
 import '../../../../core/vars.dart';
-import '../../domain/entities/chapter_model.dart';
+import 'package:games_models/games_models.dart';
 
 class ItemOfTitle extends StatelessWidget {
   final ChapterModel chapterData;

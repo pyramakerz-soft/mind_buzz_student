@@ -7,7 +7,7 @@ import 'package:mind_buzz_refactor/core/app_color.dart';
 import '../../../../core/assets_svg_images.dart';
 import '../../../../core/vars.dart';
 import '../../../../core/widgets/stroke_text.dart';
-import '../../domain/entities/chapter_model.dart';
+import 'package:games_models/games_models.dart';
 
 class ItemOfSubBody extends StatelessWidget {
   final ChapterModel chapterData;

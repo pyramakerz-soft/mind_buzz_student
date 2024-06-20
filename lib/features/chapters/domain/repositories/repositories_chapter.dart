@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import '../../../../core/error/failures.dart';
-import '../../../phonetics/domain/entities/game_model.dart';
-import '../entities/lesson_model.dart';
+import 'package:games_models/games_models.dart';
 
 abstract class ProgramLessonRepository {
   Future<Either<Failure, List<LessonModel>>> lessonDataRepository(

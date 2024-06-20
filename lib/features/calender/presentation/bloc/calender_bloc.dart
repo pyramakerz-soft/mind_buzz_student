@@ -9,7 +9,7 @@ import '../../../../core/enums/direction.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/error/failures_messages.dart';
 import '../../../../core/utils.dart';
-import '../../../home/domain/entities/test_model.dart';
+import 'package:games_models/games_models.dart';
 import '../../../student_assignment/domain/entities/main_data_test.dart';
 import '../../../student_assignment/domain/usecases/parent_assignment_use_cases.dart';
 

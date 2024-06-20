@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/network/network_info.dart';
-import '../../domain/entities/game_model.dart';
+import 'package:games_models/games_models.dart';
 import '../../domain/repositories/repositories_contact_lesson.dart';
 import '../../../chapters/data/data_sources/data_source_local_of_game_star.dart';
 import '../data_sources/data_source_remotely_of_contact_lesson.dart';

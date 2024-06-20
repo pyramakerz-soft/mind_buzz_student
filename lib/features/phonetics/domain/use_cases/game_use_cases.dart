@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import '../../../../../core/error/failures.dart';
-import '../entities/game_model.dart';
+import 'package:games_models/games_models.dart';
 import '../repositories/repositories_contact_lesson.dart';
 
 class GetGameUseCases {

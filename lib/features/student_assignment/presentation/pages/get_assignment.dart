@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:games_models/games_models.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 
-import '../../../home/domain/entities/test_model.dart';
 import '../../domain/entities/main_data_test.dart';
 import '../../domain/entities/tests_types_model.dart';
 import '../widgets/card_of_details_assignment.dart';

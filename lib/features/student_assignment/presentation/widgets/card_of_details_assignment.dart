@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/parent_assets.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import 'package:games_models/games_models.dart';
 
 import '../../../../core/app_color.dart';
 import '../../../../core/theme_text.dart';
-import '../../../home/domain/entities/test_model.dart';
+import 'package:games_models/games_models.dart';
 import '../../domain/entities/tests_types_model.dart';
 
 class CardOfDetailsOfAssignment extends StatelessWidget {

@@ -8,8 +8,7 @@ import 'package:meta/meta.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/error/failures_messages.dart';
 import '../../../login/presentation/bloc/login_data_bloc.dart';
-import '../../domain/entities/program_model.dart';
-import '../../domain/entities/user_courses.dart';
+import 'package:games_models/games_models.dart';
 import '../../domain/usecases/logout_use_cases.dart';
 import '../../domain/usecases/program_use_cases.dart';
 

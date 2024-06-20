@@ -72,54 +72,5 @@ abstract class DefaultUnitData {
   ];
 }
 
-abstract class DefaultChapterData {
-  static String convertTheNumber({required String number}) {
-    switch (number) {
-      case '1':
-        return AppImagesOfNumbers.numberOne;
-      case '2':
-        return AppImagesOfNumbers.numberTwo;
-      case '3':
-        return AppImagesOfNumbers.numberThree;
-      case '4':
-        return AppImagesOfNumbers.numberFour;
-      case '5':
-        return AppImagesOfNumbers.numberFive;
-      case '6':
-        return AppImagesOfNumbers.numberSix;
-      case '7':
-        return AppImagesOfNumbers.numberSeven;
-      case '8':
-        return AppImagesOfNumbers.numberEight;
-      case '9':
-        return AppImagesOfNumbers.numberNine;
-      case '0':
-        return AppImagesOfNumbers.numberZero;
-      default:
-        return '';
-    }
-  }
 
-  static List<String> getTheNumberOfChapter({required int number}) {
-    List<String> convertNumber = number.toString().split('');
-    List<String> result = [];
-    convertNumber.forEach((element) {
-      result.add(convertTheNumber(number: element));
-    });
-    return result;
-  }
-}
 
-abstract class TestTypes {
-  static String finished = 'Finished';
-  static String dueSoon = 'Due Soon';
-  static String notStarted = 'Not Started';
-  static String overdue = 'Overdue';
-  static List listOfTestTypes = [finished, dueSoon, notStarted, overdue];
-  static List listOfTestColors = [
-    AppColor.resetText,
-    AppColor.redColor4,
-    AppColor.lightGreyColor5,
-    Colors.black
-  ];
-}

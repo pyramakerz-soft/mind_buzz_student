@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 
 import '../../../../core/vars.dart';
-import '../../../home/domain/entities/user_courses.dart';
+import 'package:games_models/games_models.dart';
 import 'show_assignment_student.dart';
 
 class CardOfAssignment extends StatelessWidget {

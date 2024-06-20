@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failures.dart';
-import '../entities/user_courses.dart';
 import '../repositories/repositories_user.dart';
 
 class LogOutUserUseCases {

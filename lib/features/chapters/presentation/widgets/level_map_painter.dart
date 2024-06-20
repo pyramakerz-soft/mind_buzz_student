@@ -3,10 +3,9 @@ import 'dart:ui' as ui;
 import 'package:flame/extensions.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
-import 'package:mind_buzz_refactor/features/chapters/domain/entities/image_details.dart';
+import 'package:games_models/games_models.dart';
 import 'package:mind_buzz_refactor/features/chapters/presentation/widgets/level_map_parameters.dart';
 
-import '../../domain/entities/images_to_paint.dart';
 
 class LevelMapPainter extends CustomPainter {
   final LevelMapParams params;

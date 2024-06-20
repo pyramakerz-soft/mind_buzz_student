@@ -37,58 +37,67 @@ packages:
     dependency: "direct main"
     description:
       name: audioplayers
-      sha256: c05c6147124cd63e725e861335a8b4d57300b80e6e92cea7c145c739223bbaef
+      sha256: "752039d6aa752597c98ec212e9759519061759e402e7da59a511f39d43aa07d2"
       url: "https://pub.dev"
     source: hosted
-    version: "5.2.1"
+    version: "6.0.0"
   audioplayers_android:
     dependency: transitive
     description:
       name: audioplayers_android
-      sha256: b00e1a0e11365d88576320ec2d8c192bc21f1afb6c0e5995d1c57ae63156acb5
+      sha256: de576b890befe27175c2f511ba8b742bec83765fa97c3ce4282bba46212f58e4
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.3"
+    version: "5.0.0"
   audioplayers_darwin:
     dependency: transitive
     description:
       name: audioplayers_darwin
-      sha256: "3034e99a6df8d101da0f5082dcca0a2a99db62ab1d4ddb3277bed3f6f81afe08"
+      sha256: e507887f3ff18d8e5a10a668d7bedc28206b12e10b98347797257c6ae1019c3b
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.2"
+    version: "6.0.0"
   audioplayers_linux:
     dependency: transitive
     description:
       name: audioplayers_linux
-      sha256: "60787e73fefc4d2e0b9c02c69885402177e818e4e27ef087074cf27c02246c9e"
+      sha256: "3d3d244c90436115417f170426ce768856d8fe4dfc5ed66a049d2890acfa82f9"
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.0"
+    version: "4.0.0"
   audioplayers_platform_interface:
     dependency: transitive
     description:
       name: audioplayers_platform_interface
-      sha256: "365c547f1bb9e77d94dd1687903a668d8f7ac3409e48e6e6a3668a1ac2982adb"
+      sha256: "6834dd48dfb7bc6c2404998ebdd161f79cd3774a7e6779e1348d54a3bfdcfaa5"
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.0"
+    version: "7.0.0"
   audioplayers_web:
     dependency: transitive
     description:
       name: audioplayers_web
-      sha256: "22cd0173e54d92bd9b2c80b1204eb1eb159ece87475ab58c9788a70ec43c2a62"
+      sha256: db8fc420dadf80da18e2286c18e746fb4c3b2c5adbf0c963299dde046828886d
       url: "https://pub.dev"
     source: hosted
-    version: "4.1.0"
+    version: "5.0.0"
   audioplayers_windows:
     dependency: transitive
     description:
       name: audioplayers_windows
-      sha256: "9536812c9103563644ada2ef45ae523806b0745f7a78e89d1b5fb1951de90e1a"
+      sha256: "8605762dddba992138d476f6a0c3afd9df30ac5b96039929063eceed416795c2"
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.0"
+    version: "4.0.0"
+  based_of_eng_game:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: a0f6c62e49562e453ee9b224f7fb24d3c8f6dd04
+      url: "https://github.com/moataz-mohamed194/based_of_eng_game.git"
+    source: git
+    version: "0.0.5"
   bloc:
     dependency: transitive
     description:
@@ -397,25 +406,25 @@ packages:
     dependency: "direct main"
     description:
       name: flame
-      sha256: da1812e2f17a8ffd5d43ea6a83137794e7f482bcf50419bc9847b8efdb39f791
+      sha256: "79133dc46a3ff870950f41d0dc1598414e7bd7ae2c29bd9f0a9de208d9a70cb7"
       url: "https://pub.dev"
     source: hosted
-    version: "1.17.0"
+    version: "1.18.0"
   flame_rive:
     dependency: "direct main"
     description:
       name: flame_rive
-      sha256: "489bc44618788833f27f213c158ab646d5f4589511d30731e3598664a5de60b3"
+      sha256: "8cc8ab9a11371ef111390f47df8b92576aa0d0cce5eda46c9dcd2094f0eebacd"
       url: "https://pub.dev"
     source: hosted
-    version: "1.10.1"
+    version: "1.10.2"
   flutter:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
   flutter_bloc:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flutter_bloc
       sha256: f0ecf6e6eb955193ca60af2d5ca39565a86b8a142452c5b24d96fb477428f4d2
@@ -458,10 +467,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_screenutil
-      sha256: b372c35a772a1dc84142a3b9c5ee89a390834bd258e5e6a450d9b975b985d1c9
+      sha256: "8239210dd68bee6b0577aa4a090890342d04a136ce1c81f98ee513fc0ce891de"
       url: "https://pub.dev"
     source: hosted
-    version: "5.9.1"
+    version: "5.9.3"
   flutter_staggered_grid_view:
     dependency: "direct main"
     description:
@@ -495,10 +504,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_tts
-      sha256: cbb3fd43b946e62398560235469e6113e4fe26c40eab1b7cb5e7c417503fb3a8
+      sha256: aed2a00c48c43af043ed81145fd8503ddd793dafa7088ab137dbef81a703e53d
       url: "https://pub.dev"
     source: hosted
-    version: "3.8.5"
+    version: "4.0.2"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -512,6 +521,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
+  games_models:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "340f222dc126147788bb38bb99f0bb4143bfd4ae"
+      url: "https://github.com/moataz-mohamed194/games_models.git"
+    source: git
+    version: "0.0.6"
   geekyants_flutter_gauges:
     dependency: "direct main"
     description:
@@ -728,6 +746,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
+  level_map:
+    dependency: transitive
+    description:
+      name: level_map
+      sha256: a2d1066026e8b31c6bd254cfd2894067d3f41a7ec0b8a0996dd6d15fd22f291d
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
   lints:
     dependency: transitive
     description:
@@ -1056,14 +1082,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.1"
-  skeletons:
-    dependency: "direct main"
-    description:
-      name: skeletons
-      sha256: "5b2d08ae7f908ee1f7007ca99f8dcebb4bfc1d3cb2143dec8d112a5be5a45c8f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.3"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -1273,10 +1291,10 @@ packages:
     dependency: "direct main"
     description:
       name: video_player
-      sha256: db6a72d8f4fd155d0189845678f55ad2fd54b02c10dcafd11c068dbb631286c0
+      sha256: aced48e701e24c02b0b7f881a8819e4937794e46b5a5821005e2bf3b40a324cc
       url: "https://pub.dev"
     source: hosted
-    version: "2.8.6"
+    version: "2.8.7"
   video_player_android:
     dependency: transitive
     description:
@@ -1374,5 +1392,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.3.2 <4.0.0"
-  flutter: ">=3.19.0"
+  dart: ">=3.4.1 <4.0.0"
+  flutter: ">=3.22.0"

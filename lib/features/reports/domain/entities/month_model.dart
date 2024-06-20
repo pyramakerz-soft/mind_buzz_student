@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../home/domain/entities/test_model.dart';
 part 'month_model.g.dart';
 
 @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)

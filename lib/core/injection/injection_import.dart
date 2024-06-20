@@ -10,7 +10,7 @@ Future<void> init() async {
       updateUserDataUseCases: sl(),
       createPassCodeUseCases: sl()));
   sl.registerFactory(() => GetUnitBloc(programUserUseCases: sl()));
-  sl.registerFactory(() => CurrentGamePhoneticsCubit());
+  // sl.registerFactory(() => CurrentGamePhoneticsCubit());
   sl.registerFactory(() => ChapterBloc(programUserUseCases: sl()));
   sl.registerFactory(() => ContactLessonBloc(
       programContactUserUseCases: sl(), getGameUseCases: sl()));

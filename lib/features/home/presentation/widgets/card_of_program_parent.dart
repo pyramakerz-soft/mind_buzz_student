@@ -16,7 +16,7 @@ import '../../../student_assignment/presentation/pages/get_assignment.dart';
 import '../../../unit/presentation/manager/bloc/get_unit_bloc.dart';
 import '../../../unit/presentation/manager/cubit/animation_unit_cubit.dart';
 import '../../../unit/presentation/pages/unit_screen.dart';
-import '../../domain/entities/user_courses.dart';
+import 'package:games_models/games_models.dart';
 import '../bloc/get_programs_home_bloc.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 

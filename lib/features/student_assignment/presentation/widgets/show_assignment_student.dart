@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 
 import '../../../../core/app_color.dart';
-import '../../../home/domain/entities/user_courses.dart';
+import 'package:games_models/games_models.dart';
 
 class ShowAssignmentStudent extends StatelessWidget {
   final UserCourseModel courseData;

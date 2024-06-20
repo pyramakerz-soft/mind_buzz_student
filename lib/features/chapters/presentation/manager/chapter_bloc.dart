@@ -1,19 +1,16 @@
 import 'dart:developer';
 
+import 'package:based_of_eng_game/based_of_eng_game.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:collection/collection.dart';
-import 'package:mind_buzz_refactor/core/games_structure/phonetics/basic_of_game.dart';
 
 import '../../../../core/assets_images.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/error/failures_messages.dart';
-import '../../../phonetics/domain/entities/game_model.dart';
-import '../../domain/entities/chapter_model.dart';
-import '../../domain/entities/lesson_model.dart';
-import '../../domain/entities/sub_chapter_model.dart';
+import 'package:games_models/games_models.dart';
 import '../../domain/use_cases/chapter_use_cases.dart';
 
 part 'chapter_event.dart';
@@ -66,7 +63,7 @@ List<ChapterModel> handlingDataOfChapters(
     Map<String, List<GameModel>>? mapGames = groupBy(
         lesson.games ?? [], (obj) => '${obj.gameTypes?.name}_${obj.audioFlag}');
     List<String> sortedKeys = [];
-    if (lesson.name.toString().split(' ').first == BasicOfGame.connect) {
+    if (lesson.name.toString().split(' ').first == BasicOfGameData.connect) {
       sortedKeys = mapGames.keys.toList()..sort(customCompareConnect);
     } else {
       sortedKeys = mapGames.keys.toList()..sort(customComparePhonetics);
@@ -94,17 +91,17 @@ List<ChapterModel> handlingDataOfChapters(
 
 int customComparePhonetics(String key1, String key2) {
   int index1 =
-      BasicOfGame.customOrderOfGamesPhonetics.indexOf(key1.toLowerCase());
+  BasicOfGameData.customOrderOfGamesPhonetics.indexOf(key1.toLowerCase());
   int index2 =
-      BasicOfGame.customOrderOfGamesPhonetics.indexOf(key2.toLowerCase());
+  BasicOfGameData.customOrderOfGamesPhonetics.indexOf(key2.toLowerCase());
   return index1.compareTo(index2);
 }
 
 int customCompareConnect(String key1, String key2) {
   int index1 =
-      BasicOfGame.customOrderOfGamesConnect.indexOf(key1.toLowerCase());
+  BasicOfGameData.customOrderOfGamesConnect.indexOf(key1.toLowerCase());
   int index2 =
-      BasicOfGame.customOrderOfGamesConnect.indexOf(key2.toLowerCase());
+  BasicOfGameData.customOrderOfGamesConnect.indexOf(key2.toLowerCase());
   return index1.compareTo(index2);
 }
 
