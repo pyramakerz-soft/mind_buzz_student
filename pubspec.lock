@@ -92,12 +92,11 @@ packages:
   based_of_eng_game:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: a0f6c62e49562e453ee9b224f7fb24d3c8f6dd04
-      url: "https://github.com/moataz-mohamed194/based_of_eng_game.git"
-    source: git
-    version: "0.0.5"
+      name: based_of_eng_game
+      sha256: "1ab1376c16c792522774c762bb583233b260d410e1392e59b99c5a9f1fc602b2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.6"
   bloc:
     dependency: transitive
     description:
@@ -524,11 +523,10 @@ packages:
   games_models:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "340f222dc126147788bb38bb99f0bb4143bfd4ae"
-      url: "https://github.com/moataz-mohamed194/games_models.git"
-    source: git
+      name: games_models
+      sha256: d35ae81c620a5d83620e67ba65b132eed72079b8a0ec1e293bf26652eded4cc6
+      url: "https://pub.dev"
+    source: hosted
     version: "0.0.6"
   geekyants_flutter_gauges:
     dependency: "direct main"

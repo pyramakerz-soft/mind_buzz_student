@@ -1,52 +1,76 @@
 part of 'contact_lesson_bloc.dart';
 
-@immutable
-abstract class ContactLessonState extends Equatable {
-  @override
-  List<Object> get props => [];
+enum StateOfGetDataOfGame {
+  contactLessonInitial,
+  getContactLoadingInitial,
+  doneGetDataOfGame,
+  logOutLoadingState,
+  notSupportTypeState,
+  completeGameState,
+  getContactErrorInitial
 }
 
-class ContactLessonInitial extends ContactLessonState {}
+extension GetContactInitialX on GetContactInitial {
+  bool get isInitial => status == StateOfGetDataOfGame.contactLessonInitial;
+  bool get isLoading => status == StateOfGetDataOfGame.getContactLoadingInitial;
+  bool get logout => status == StateOfGetDataOfGame.logOutLoadingState;
+  bool get done => status == StateOfGetDataOfGame.doneGetDataOfGame;
+  bool get notSupport => status == StateOfGetDataOfGame.notSupportTypeState;
+  bool get isError => status == StateOfGetDataOfGame.getContactErrorInitial;
+}
 
-class GetContactInitial extends ContactLessonState {
-  final List<GameModel> data;
+@immutable
+class GetContactInitial extends Equatable {
+  final StateOfGetDataOfGame status;
+  final List<GameModel>? data;
+  final String? message;
+  final Artboard? avatarArtboardLoading;
 
-
-  GetContactInitial({required this.data});
+  const GetContactInitial(
+      {this.status = StateOfGetDataOfGame.contactLessonInitial,
+      this.data,
+      this.avatarArtboardLoading,
+      this.message});
 
   MainDataOfChapters? getMainContactData({required int index}) {
-    log( data[index].toJson().toString());
-    print( 'data[index].toJson()');
-    print("subProgram:$data");
+    if (data != null) {
+      log(data?[index].toJson().toString() ?? '');
+      print('data[index].toJson()');
+      print("subProgram:$data");
 
-      String subLetter = data[index].mainLetter ?? '';
-      String unitName =  data[index].lesson?.unit?.name ?? '';
-      String subGame = data[index].gameTypes?.name ?? '';
-      int audioFlag = data[index].audioFlag ?? 0;
-      print("subLetter:$subLetter ,subGame:$subGame, audioFlag:$audioFlag, unitName:$unitName");
-     return BaseOfGames.getGameDataType(
-         subLetter: subLetter,
-         subGame: subGame,
-         unitName: unitName,
-         audioFlag:audioFlag );
-
-    return null;
+      String subLetter = data?[index].mainLetter ?? '';
+      String unitName = data?[index].lesson?.unit?.name ?? '';
+      String subGame = data?[index].gameTypes?.name ?? '';
+      int audioFlag = data?[index].audioFlag ?? 0;
+      print(
+          "subLetter:$subLetter ,subGame:$subGame, audioFlag:$audioFlag, unitName:$unitName");
+      return BaseOfGames.getGameDataType(
+          subLetter: subLetter,
+          subGame: subGame,
+          unitName: unitName,
+          audioFlag: audioFlag);
+    } else {
+      return null;
+    }
   }
-}
-
-class GetContactLoadingInitial extends ContactLessonState {}
-
-class LogOutLoadingState extends ContactLessonState {}
-
-class NotSupportTypeState extends ContactLessonState {}
-
-class CompleteGameState extends ContactLessonState {}
-
-class GetContactErrorInitial extends ContactLessonState {
-  final String message;
-
-  GetContactErrorInitial({required this.message});
 
   @override
-  List<Object> get props => [message];
+  List<Object?> get props => [message, data, status, avatarArtboardLoading];
+
+  @override
+  bool operator ==(covariant GetContactInitial other) {
+    if (identical(this, other)) return true;
+
+    return other.status == status &&
+        other.message == message &&
+        other.avatarArtboardLoading == avatarArtboardLoading &&
+        other.data == data;
+  }
+
+  @override
+  int get hashCode =>
+      status.hashCode ^
+      message.hashCode ^
+      data.hashCode ^
+      avatarArtboardLoading.hashCode;
 }

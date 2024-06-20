@@ -13,4 +13,5 @@ abstract class AppImagesMain {
   static const String barOneStar = "${mainPathOfImages}barOneStar.png";
   static const String barTwoStar = "${mainPathOfImages}barTwoStar.png";
   static const String barThreeStar = "${mainPathOfImages}barThreeStar.png";
+  static const String loadingRiv = "${mainPathOfImages}Loading.riv";
 }
