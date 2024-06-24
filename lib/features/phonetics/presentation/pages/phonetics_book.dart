@@ -9,6 +9,7 @@ import '../../../../core/injection/injection_container.dart' as di;
 
 import '../../../../core/error/failures_messages.dart';
 import '../../../../core/utils.dart';
+import '../../../chapters/presentation/manager/journey_bar_cubit.dart';
 import '../../../login/presentation/page/login_screen.dart';
 import '../manager/bloc/contact_lesson_bloc.dart';
 
@@ -98,6 +99,9 @@ class _PhoneticsBook extends State<PhoneticsBook> {
                       [];
               debugPrint('#########################################');
               debugPrint('the stars send: $listOfIds , $countOfStars');
+              context
+                  .read<JourneyBarCubit>()
+                  .sendStars(gamesId: listOfIds, countOfStar: countOfStars);
               debugPrint('#########################################');
             },
             showTheEditedGames: false,
