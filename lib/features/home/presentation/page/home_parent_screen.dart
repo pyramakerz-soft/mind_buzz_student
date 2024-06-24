@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import 'package:mind_buzz_refactor/features/home/presentation/page/pie_chart_page.dart';
+import 'package:mind_buzz_refactor/features/home/presentation/widgets/item_in_choose_parent.dart';
+import 'package:mind_buzz_refactor/features/who_am_i/presentation/widgets/item_in_choose.dart';
 import '../../../../core/error/failures_messages.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/utils.dart';
@@ -27,52 +30,36 @@ class _HomeParentScreen extends State<HomeParentScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(
-        children: [
+      children: [
         switchBar(context: context),
-          20.ph,
-          const CardOfMyInfo(),
-          20.ph,
-          Expanded(
-              child: BlocProvider<GetProgramsHomeBloc>(
-                  create: (_) =>
-                      di.sl<GetProgramsHomeBloc>()..add(GetProgramsRequest()),
-                  child: BlocConsumer<GetProgramsHomeBloc, GetProgramsHomeState>(
-                      listener: (context, state) {
-                    if (state is GetProgramsErrorInitial) {
-                      if (state.message == RELOGIN_FAILURE_MESSAGE) {
-                        Utils.navigateAndRemoveUntilTo(LoginScreen(), context);
-                      } else {
-                        final snackBar = SnackBar(
-                          content: Text(state.message),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      }
-                    } else if (state is LogOutLoadingState) {
-                      Navigator.of(context).pop();
-                    }
-                  }, builder: (context, state) {
-                    if (state is GetProgramsLoadingInitial) {
-                      return const Center(child: CupertinoActivityIndicator());
-                    } else if (state is GetProgramsCompleteInitial) {
-                      return SizedBox(
-                          height: MediaQuery.of(context).size.height-(210),
-                    child:SingleChildScrollView(
-                        child: Wrap(
-                          spacing: 16,
-                          runSpacing: 20,
-                          children: List.generate(
-                            state.data.length,
-                            (index) => CardOfProgramParent(
-                              dataOfProgram: state.data[index],
-                            ),
-                          ),
-                        ),
-                      ));
-                    } else {
-                      return const SizedBox();
-                    }
-                  })))
-        ],
-      );
+        20.ph,
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
+          child: Column(
+            children: [
+              ItemInChooseParent(
+                onItemPressed: () {
+                  Utils.navigateTo(
+                      const PieChartPage(isAssignment: true), context);
+                },
+                text: 'Assignments',
+                image: AppImages.assignmentsHomeImage,
+                id: 0,
+              ),
+              24.ph,
+              ItemInChooseParent(
+                onItemPressed: () {
+                  Utils.navigateTo(
+                      const PieChartPage(isAssignment: false), context);
+                },
+                text: 'Reports',
+                image: AppImages.reportsHomeImage,
+                id: 1,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }
