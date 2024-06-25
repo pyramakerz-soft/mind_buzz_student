@@ -22,7 +22,7 @@ extension GetContactInitialX on GetContactInitial {
 @immutable
 class GetContactInitial extends Equatable {
   final StateOfGetDataOfGame status;
-  final List<GameModel>? data;
+  final List<GameFinalModel>? data;
   final String? message;
   final Artboard? avatarArtboardLoading;
 
