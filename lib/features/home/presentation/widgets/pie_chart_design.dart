@@ -4,7 +4,7 @@ import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/features/home/presentation/widgets/indicator.dart';
 
 class CirclePieChart extends StatefulWidget {
-  final Map<String, int> data;
+  final Map<String, num> data;
   final Function(String key) onSectionTouch;
 
   const CirclePieChart(
@@ -74,7 +74,7 @@ class _CirclePieChartState extends State<CirclePieChart> {
               child: Indicator(
                 color: colors[index % colors.length],
                 title: key,
-                percentage: widget.data[key],
+                percentage: widget.data[key]?.toInt(),
                 percentageColor: colors[index],
                 isSquare: true,
               ),
@@ -95,17 +95,20 @@ class _CirclePieChartState extends State<CirclePieChart> {
       final isTouched = index == touchedIndex;
       final isSelected = key == selectedSection;
       final isDefault = selectedSection == null;
+      final isEmpty = entry.value == 0;
       final fontSize = isTouched ? 25.0 : 16.0;
       final radius = isSelected ? 70.0 : 50.0;
       const shadows = [Shadow(color: Colors.black, blurRadius: 2)];
 
       return PieChartSectionData(
-        color: isDefault
-            ? colors[index % colors.length]
-            : isSelected
+        color: isEmpty
+            ? AppColor.greyColor
+            : isDefault
                 ? colors[index % colors.length]
-                : colors[index % colors.length].withOpacity(0.3),
-        value: entry.value.toDouble(),
+                : isSelected
+                    ? colors[index % colors.length]
+                    : colors[index % colors.length].withOpacity(0.3),
+        value: isEmpty ? 100 : entry.value.toDouble(),
         title: '',
         radius: radius,
         titleStyle: TextStyle(

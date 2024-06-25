@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
-import 'package:mind_buzz_refactor/features/home/presentation/page/pie_chart_page.dart';
+import 'package:mind_buzz_refactor/features/assignments_filter/presentation/pages/pie_chart_page.dart';
 import 'package:mind_buzz_refactor/features/home/presentation/widgets/item_in_choose_parent.dart';
 import 'package:mind_buzz_refactor/features/who_am_i/presentation/widgets/item_in_choose.dart';
 import '../../../../core/error/failures_messages.dart';
