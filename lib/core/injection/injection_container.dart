@@ -1,5 +1,10 @@
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:mind_buzz_refactor/features/assignments_filter/data/datasource/pie_chart_remote_data_source.dart';
+import 'package:mind_buzz_refactor/features/assignments_filter/data/repository/pie_chart_repository_impl.dart';
+import 'package:mind_buzz_refactor/features/assignments_filter/domain/repository/pie_chart_repository.dart';
+import 'package:mind_buzz_refactor/features/assignments_filter/domain/use_cases/pie_chart_use_cases.dart';
+import 'package:mind_buzz_refactor/features/assignments_filter/presentation/cubit/pie_chart_cubit.dart';
 import 'package:mind_buzz_refactor/features/login/domain/usecases/update_pin_code_use_cases.dart';
 import 'package:mind_buzz_refactor/features/settings/data/datasources/settings_remote_source.dart';
 import 'package:mind_buzz_refactor/features/settings/data/repositories/settings_repository.dart';

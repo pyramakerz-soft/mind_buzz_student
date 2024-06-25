@@ -79,6 +79,8 @@ dependencies:
   cubixd: ^0.1.1
   provider: ^6.1.2
   video_player: ^2.8.6
+  intl: ^0.19.0
+  dropdown_button2: ^2.3.9
 #  phone_numbers_parser: ^8.2.1
 #  level_map: ^0.2.0
 

@@ -21,6 +21,7 @@ Future<void> init() async {
   sl.registerFactory(() => SettingsBloc(autoUserUseCases: sl()));
   sl.registerFactory(() => GetAssignmentBloc(
       programUserUseCases: sl(), programReportsUserUseCases: sl()));
+  sl.registerFactory(() => PieChartCubit(sl()));
   // sl.registerFactory(() => ReportsBloc(programUserUseCases: sl()));
 
   //UseCase
@@ -37,6 +38,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => UpdateUserDataUseCases(sl()));
   sl.registerLazySingleton(() => GetGameUseCases(sl()));
   sl.registerLazySingleton(() => CreatePassCodeUseCases(sl()));
+  sl.registerLazySingleton(() => PieChartUseCases(sl()));
   sl.registerFactory(() => EditProfileCubit(sl()));
 
   //Repository
@@ -67,6 +69,8 @@ Future<void> init() async {
       ParentReportsRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<EditProfileRepository>(
       () => EditProfileRepositoryImpl(sl()));
+  sl.registerLazySingleton<PieChartRepository>(
+      () => PieChartRepositoryImpl(sl()));
 
   //Datasources
   sl.registerLazySingleton<DataSourceRemotelyOfProgram>(
@@ -93,6 +97,8 @@ Future<void> init() async {
       () => DataSourceRemotelyOfParentReportsImpl(dio: sl()));
   sl.registerLazySingleton<SettingsRemoteDataSource>(
       () => SettingsRemoteDataSourceImpl(dio: sl()));
+  sl.registerLazySingleton<PieChartRemoteDataSource>(
+      () => PieChartRemoteDataSourceImpl(dio: sl()));
 
   //! Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
