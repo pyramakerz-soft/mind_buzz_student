@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:based_of_eng_game/based_of_eng_game.dart';
 import 'package:dartz/dartz.dart';
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/network/network_info.dart';
@@ -17,7 +18,7 @@ class ContactLessonRepositoryImpl implements ProgramContactLessonRepository {
       {required this.remoteDataSource, required this.networkInfo});
 
   @override
-  Future<Either<Failure, List<GameModel>>> lessonContactDataRepository(
+  Future<Either<Failure, List<GameFinalModel>>> lessonContactDataRepository(
       {required int lessonId, required int gameId}) async {
     if (await networkInfo.isConnected) {
       try {

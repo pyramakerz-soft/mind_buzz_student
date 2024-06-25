@@ -71,7 +71,7 @@ class ContactLessonBloc extends Bloc<ContactLessonEvent, GetContactInitial> {
 }
 
 Future<GetContactInitial> _eitherLoadedOrErrorState(
-    Either<Failure, List<GameModel>> failureOrTrivia, int gameId) async {
+    Either<Failure, List<GameFinalModel>> failureOrTrivia, int gameId) async {
   GetContactInitial tempState = failureOrTrivia.fold(
     (failure) => GetContactInitial(
         message: _mapFailureToMessage(failure),
