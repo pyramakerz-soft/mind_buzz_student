@@ -158,6 +158,7 @@ class Assets {
   static const String phoneticsBackGroundOfQ = 'assets/phonetics/backGroundOfQ.png';
   static const String phoneticsBackGroundOfR = 'assets/phonetics/backGroundOfR.png';
   static const String phoneticsBackGroundOfS = 'assets/phonetics/backGroundOfS.png';
+  static const String phoneticsBackGroundOfShortVowels = 'assets/phonetics/backGroundOfShortVowels.png';
   static const String phoneticsBackGroundOfT = 'assets/phonetics/backGroundOfT.png';
   static const String phoneticsBackGroundOfU = 'assets/phonetics/backGroundOfU.png';
   static const String phoneticsBackGroundOfV = 'assets/phonetics/backGroundOfV.png';
@@ -173,6 +174,7 @@ class Assets {
   static const String phoneticsBeeIdle = 'assets/phonetics/beeIdle.riv';
   static const String phoneticsBeeSuccess = 'assets/phonetics/beeSuccess.riv';
   static const String phoneticsBingoNameGame = 'assets/phonetics/bingoNameGame.png';
+  static const String phoneticsBoarderBackground = 'assets/phonetics/boarderBackground.png';
   static const String phoneticsBubble = 'assets/phonetics/bubble.png';
   static const String phoneticsBubbleDisabled = 'assets/phonetics/bubbleDisabled.png';
   static const String phoneticsBubbleSelected = 'assets/phonetics/bubbleSelected.png';
@@ -184,6 +186,7 @@ class Assets {
   static const String phoneticsDiamondShape = 'assets/phonetics/diamond_shape.png';
   static const String phoneticsDiceNameGame = 'assets/phonetics/diceNameGame.png';
   static const String phoneticsDragOut = 'assets/phonetics/dragOut.png';
+  static const String phoneticsDragPicToWordGame = 'assets/phonetics/dragPicToWordGame.png';
   static const String phoneticsEmptyStar = 'assets/phonetics/empty_star.png';
   static const String phoneticsHexagonShape = 'assets/phonetics/hexagon_shape.png';
   static const String phoneticsIconBoarderOfChar = 'assets/phonetics/iconBoarderOfChar.svg';
@@ -200,6 +203,7 @@ class Assets {
   static const String phoneticsSortingCupsNameGame = 'assets/phonetics/sortingCupsNameGame.png';
   static const String phoneticsSortingGame = 'assets/phonetics/sorting_game.png';
   static const String phoneticsSpellingNameGame = 'assets/phonetics/spellingNameGame.png';
+  static const String phoneticsSpellingWordGame = 'assets/phonetics/spellingWordGame.png';
   static const String phoneticsTracingWithFinger = 'assets/phonetics/tracing_with_finger.png';
   static const String phoneticsWinAvatar = 'assets/phonetics/winAvatar.png';
   static const String phoneticsWood = 'assets/phonetics/wood.png';
