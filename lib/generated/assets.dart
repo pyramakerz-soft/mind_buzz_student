@@ -193,8 +193,10 @@ class Assets {
   static const String phoneticsLetterOfClickPic = 'assets/phonetics/letter_of_click_pic.png';
   static const String phoneticsListenAndClick = 'assets/phonetics/listen_and_click.png';
   static const String phoneticsLoadingVideo = 'assets/phonetics/loading_video.png';
+  static const String phoneticsMatchGame = 'assets/phonetics/matchGame.png';
   static const String phoneticsOutX = 'assets/phonetics/out_X.png';
   static const String phoneticsPosition2Finger = 'assets/phonetics/position_2_finger.png';
+  static const String phoneticsRearrangeGame = 'assets/phonetics/rearrangeGame.png';
   static const String phoneticsSadAvatarSad = 'assets/phonetics/sadAvatarSad.png';
   static const String phoneticsSnowmanHappy = 'assets/phonetics/snowman_happy.riv';
   static const String phoneticsSnowmanIdle = 'assets/phonetics/snowman_idle.riv';
@@ -207,6 +209,7 @@ class Assets {
   static const String phoneticsTracingWithFinger = 'assets/phonetics/tracing_with_finger.png';
   static const String phoneticsWinAvatar = 'assets/phonetics/winAvatar.png';
   static const String phoneticsWood = 'assets/phonetics/wood.png';
+  static const String phoneticsWordFamilyGame = 'assets/phonetics/wordFamilyGame.png';
   static const String phoneticsX = 'assets/phonetics/x.png';
   static const String phoneticsXOutGameName = 'assets/phonetics/xOutGameName.png';
   static const String soundA = 'assets/sound/a.mp3';
