@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import 'package:mind_buzz_refactor/features/assignments_filter/domain/entities/test_model.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 import '../../../../core/app_color.dart';
 import '../../../../core/theme_text.dart';
-import 'package:games_models/games_models.dart';
 import 'bottom_sheet_of_the_details_report.dart';
 
 class CardReport extends StatelessWidget {
@@ -42,7 +42,8 @@ class CardReport extends StatelessWidget {
                   lineWidth: 7,
                   animation: true,
                   circularStrokeCap: CircularStrokeCap.round,
-                  percent: double.parse("${((data.score??0)/(data.totalScore??0))}"),
+                  percent: double.parse(
+                      "${((data.score ?? 0) / (data.totalScore ?? 0))}"),
                   center: Text(
                       "${((data.score ?? 0) / (data.totalScore ?? 0)) * 100}%"),
                   progressColor:

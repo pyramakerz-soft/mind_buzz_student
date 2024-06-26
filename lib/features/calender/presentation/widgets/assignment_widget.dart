@@ -6,11 +6,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/parent_assets.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:intl/intl.dart';
+import 'package:mind_buzz_refactor/features/assignments_filter/domain/entities/test_model.dart';
 
 import '../../../../core/app_color.dart';
 import '../../../../core/enums/assignment_status.dart';
 import '../../../../core/theme_text.dart';
-import 'package:games_models/games_models.dart';
 
 class AssignmentWidget extends StatelessWidget {
   final TestModel singleTest;

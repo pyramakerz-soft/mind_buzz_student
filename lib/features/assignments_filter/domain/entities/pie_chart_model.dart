@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
-import 'package:games_models/games_models.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mind_buzz_refactor/features/assignments_filter/domain/entities/course.dart';
 import 'package:mind_buzz_refactor/features/assignments_filter/domain/entities/percentages.dart';
+import 'package:mind_buzz_refactor/features/assignments_filter/domain/entities/test_model.dart';
 import 'package:mind_buzz_refactor/features/student_assignment/domain/entities/tests_types_model.dart';
 
 part 'pie_chart_model.g.dart';
