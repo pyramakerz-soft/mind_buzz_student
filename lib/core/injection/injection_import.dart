@@ -21,7 +21,7 @@ Future<void> init() async {
   sl.registerFactory(() => SettingsBloc(autoUserUseCases: sl()));
   sl.registerFactory(() => GetAssignmentBloc(
       programUserUseCases: sl(), programReportsUserUseCases: sl()));
-  sl.registerFactory(() => PieChartCubit(sl()));
+  sl.registerFactory(() => PieChartCubit(sl(), sl()));
   // sl.registerFactory(() => ReportsBloc(programUserUseCases: sl()));
 
   //UseCase
@@ -38,7 +38,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => UpdateUserDataUseCases(sl()));
   sl.registerLazySingleton(() => GetGameUseCases(sl()));
   sl.registerLazySingleton(() => CreatePassCodeUseCases(sl()));
-  sl.registerLazySingleton(() => PieChartUseCases(sl()));
+  sl.registerLazySingleton(() => GetAssignmentsPieChartUseCase(sl()));
+  sl.registerLazySingleton(() => GetReportsPieChartUseCase(sl()));
   sl.registerFactory(() => EditProfileCubit(sl()));
 
   //Repository

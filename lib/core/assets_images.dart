@@ -55,6 +55,7 @@ abstract class AppImages {
       '${mainPathOfImages}new_unit_background.png';
   static const String assignmentsHomeImage =
       '${mainPathOfImages}assignments_home_image.png';
+  static const String star = '${mainPathOfImages}star.svg';
   static const String reportsHomeImage =
       '${mainPathOfImages}reports_home_image.png';
 }

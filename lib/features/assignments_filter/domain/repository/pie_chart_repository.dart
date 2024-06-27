@@ -4,4 +4,6 @@ import 'package:mind_buzz_refactor/features/assignments_filter/domain/entities/p
 
 abstract class PieChartRepository {
   Future<PieChartModel?> getAssignments({int? programId, String? status});
+  Future<PieChartModel?> getReports(
+      {required int programId, String? startDate, String? endDate, int? stars});
 }

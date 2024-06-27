@@ -19,4 +19,16 @@ class PieChartRepositoryImpl implements PieChartRepository {
         programId: programId,
         status: status,
       );
+
+  @override
+  Future<PieChartModel?> getReports(
+          {required int programId,
+          String? startDate,
+          String? endDate,
+          int? stars}) =>
+      _remoteDataSource.getReports(
+          programId: programId,
+          startDate: startDate,
+          endDate: endDate,
+          stars: stars);
 }

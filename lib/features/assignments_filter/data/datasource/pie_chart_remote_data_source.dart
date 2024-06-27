@@ -5,6 +5,8 @@ import 'package:mind_buzz_refactor/features/assignments_filter/domain/entities/p
 
 abstract class PieChartRemoteDataSource {
   Future<PieChartModel?> getAssignments({int? programId, String? status});
+  Future<PieChartModel?> getReports(
+      {required int programId, String? startDate, String? endDate, int? stars});
 }
 
 class PieChartRemoteDataSourceImpl implements PieChartRemoteDataSource {
@@ -22,6 +24,28 @@ class PieChartRemoteDataSourceImpl implements PieChartRemoteDataSource {
     };
     final response = await dio.post(
         url: '${Connection.baseURL}${dio.getStudentProgramsTestEndPoint}',
+        queryParameters: formData);
+    if (dio.validResponse(response)) {
+      return PieChartModel.fromJson(response.data['data']);
+    } else {
+      throw response.data['msg'];
+    }
+  }
+
+  @override
+  Future<PieChartModel?> getReports(
+      {required int programId,
+      String? startDate,
+      String? endDate,
+      int? stars}) async {
+    Map<String, dynamic>? formData = {
+      'program_id': programId,
+      'from_date': startDate,
+      'to_date': endDate,
+      'stars': stars,
+    };
+    final response = await dio.post(
+        url: '${Connection.baseURL}${dio.getStudentReportsTestEndPoint}',
         queryParameters: formData);
     if (dio.validResponse(response)) {
       return PieChartModel.fromJson(response.data['data']);

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mind_buzz_refactor/core/assets_images.dart';
+import 'package:mind_buzz_refactor/core/assets_svg_images.dart';
 import 'package:mind_buzz_refactor/core/parent_assets.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:intl/intl.dart';
@@ -28,8 +30,11 @@ class AssignmentWidget extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
           border: Border(
-            left:
-                BorderSide(width: 6, color: getStatusColor(singleTest.status)),
+            left: BorderSide(
+                width: 6,
+                color: isAssignment
+                    ? getStatusColor(singleTest.status)
+                    : getStarColor(singleTest.star)),
           ),
           boxShadow: const [
             BoxShadow(
@@ -45,19 +50,49 @@ class AssignmentWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width - 70,
-              child: Text(
-                singleTest.programName ?? '',
-                style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                    fontSize: 0.016.sh,
-                    fontWeight: FontWeight.bold,
-                    height: 0,
-                    letterSpacing: 0.44,
-                    overflow: TextOverflow.ellipsis),
-              ),
-            ),
-            const SizedBox(height: 20),
+            isAssignment
+                ? SizedBox(
+                    width: MediaQuery.of(context).size.width - 70,
+                    child: Text(
+                      isAssignment
+                          ? singleTest.programName ?? ''
+                          : singleTest.testName ?? '',
+                      style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                          fontSize: 0.016.sh,
+                          fontWeight: FontWeight.bold,
+                          height: 0,
+                          letterSpacing: 0.44,
+                          overflow: TextOverflow.ellipsis),
+                    ),
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: FittedBox(
+                          child: Text(
+                            singleTest.testName ?? '',
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayLarge
+                                ?.copyWith(
+                                    fontSize: 0.016.sh,
+                                    fontWeight: FontWeight.bold,
+                                    height: 0,
+                                    letterSpacing: 0.44,
+                                    overflow: TextOverflow.ellipsis),
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        child: FittedBox(
+                            child: _StarRow(
+                          stars: int.parse(singleTest.star ?? '1'),
+                        )),
+                      )
+                    ],
+                  ),
+
             // Padding(
             //   padding: EdgeInsets.symmetric(vertical: 7.h),
             //   child: Row(
@@ -102,71 +137,147 @@ class AssignmentWidget extends StatelessWidget {
             //   ),
             // ),
             isAssignment
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                ? Column(
                     children: [
-                      Flexible(
-                        child: FittedBox(
-                          child: Row(
-                            children: [
-                              SvgPicture.asset(
-                                ParentImages.calenderOutline,
-                                height: 13,
+                      const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: FittedBox(
+                              child: Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    ParentImages.calenderOutline,
+                                    height: 13,
+                                  ),
+                                  5.pw,
+                                  Text(
+                                    getStartDateText(singleTest),
+                                    style: TextStyle(
+                                        color: AppColor.lightGreyColor3,
+                                        fontSize: 12,
+                                        fontFamily: AppTheme.getFontFamily3(),
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ],
                               ),
-                              5.pw,
-                              Text(
-                                getStartDateText(singleTest),
-                                style: TextStyle(
-                                    color: AppColor.lightGreyColor3,
-                                    fontSize: 12,
-                                    fontFamily: AppTheme.getFontFamily3(),
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
-                      Flexible(
-                        child: FittedBox(
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              SvgPicture.asset(
-                                ParentImages.timers,
-                                height: 13,
-                              ),
-                              5.pw,
-                              Text(
-                                getEndDateText(singleTest.status),
-                                style: TextStyle(
-                                  color:
-                                      AppColor.lightGreyColor3.withOpacity(0.7),
-                                  fontSize: 12,
-                                  fontFamily: AppTheme.getFontFamily3(),
-                                ),
-                              ),
-                              Text(
-                                singleTest.status !=
-                                        AssignmentStatus.overdue.text()
-                                    ? singleTest.daysLeft ?? ''
-                                    : singleTest.daysDifference ?? '',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: singleTest.status !=
+                          Flexible(
+                            child: FittedBox(
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SvgPicture.asset(
+                                    ParentImages.timers,
+                                    height: 13,
+                                  ),
+                                  5.pw,
+                                  Text(
+                                    getEndDateText(singleTest.status),
+                                    style: TextStyle(
+                                      color: AppColor.lightGreyColor3
+                                          .withOpacity(0.7),
+                                      fontSize: 12,
+                                      fontFamily: AppTheme.getFontFamily3(),
+                                    ),
+                                  ),
+                                  Text(
+                                    singleTest.status !=
                                             AssignmentStatus.overdue.text()
-                                        ? AppColor.lightGreyColor3
-                                        : getStatusColor(singleTest.status),
-                                    fontSize: 12,
-                                    fontFamily: AppTheme.getFontFamily3(),
-                                    fontWeight: FontWeight.w700),
+                                        ? singleTest.daysLeft ?? ''
+                                        : singleTest.daysDifference ?? '',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: singleTest.status !=
+                                                AssignmentStatus.overdue.text()
+                                            ? AppColor.lightGreyColor3
+                                            : getStatusColor(singleTest.status),
+                                        fontSize: 12,
+                                        fontFamily: AppTheme.getFontFamily3(),
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
-                      )
+                            ),
+                          )
+                        ],
+                      ),
                     ],
                   )
-                : const SizedBox(),
+                : Column(
+                    children: [
+                      const SizedBox(height: 5),
+                      Divider(
+                        height: 0.3,
+                        color: AppColor.greyColor.withOpacity(0.5),
+                      ),
+                      const SizedBox(height: 5),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: FittedBox(
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Chapter : ${singleTest.chapterName ?? ''}',
+                                    style: TextStyle(
+                                        color: AppColor.lightGreyColor3,
+                                        fontSize: 12,
+                                        fontFamily: AppTheme.getFontFamily3(),
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Flexible(
+                            child: FittedBox(
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Lesson : ${singleTest.lessonName ?? ''}',
+                                    style: TextStyle(
+                                      color: AppColor.lightGreyColor3
+                                          .withOpacity(0.7),
+                                      fontSize: 12,
+                                      fontFamily: AppTheme.getFontFamily3(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 5),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: FittedBox(
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Game : ${singleTest.gameName ?? ''}',
+                                    style: TextStyle(
+                                        color: AppColor.lightGreyColor3,
+                                        fontSize: 12,
+                                        fontFamily: AppTheme.getFontFamily3(),
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(),
+                        ],
+                      ),
+                    ],
+                  ),
           ],
         ),
       ),
@@ -203,5 +314,51 @@ class AssignmentWidget extends StatelessWidget {
     } else {
       return AppColor.redColor4;
     }
+  }
+
+  Color getStarColor(String? star) {
+    if (star == '3') {
+      return AppColor.resetText;
+    } else if (star == '2') {
+      return AppColor.darkBlueColor;
+    } else {
+      return AppColor.redColor4;
+    }
+  }
+}
+
+class _StarRow extends StatelessWidget {
+  final int stars;
+
+  _StarRow({required this.stars});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(3, (index) {
+        Color color;
+        if (index + 1 <= stars) {
+          if (stars == 1) {
+            color = AppColor.redColor4;
+          } else if (stars == 2) {
+            color = AppColor.darkBlueColor;
+          } else {
+            color = AppColor.resetText;
+          }
+        } else {
+          color = AppColor.greyColor;
+        }
+        return Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: SvgPicture.asset(
+            AppSvgImages.star,
+            color: color,
+            width: 18.0,
+            height: 18.0,
+          ),
+        );
+      }),
+    );
   }
 }

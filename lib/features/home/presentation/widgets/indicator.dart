@@ -14,7 +14,7 @@ class Indicator extends StatelessWidget {
   final Color color;
   final Color? percentageColor;
   final String title;
-  final int? percentage;
+  final double? percentage;
   final bool isSquare;
   final double size;
   final Color? textColor;

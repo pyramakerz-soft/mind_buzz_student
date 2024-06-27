@@ -8,26 +8,31 @@ import 'package:mind_buzz_refactor/core/border_manager.dart';
 import 'package:mind_buzz_refactor/core/parent_assets.dart';
 import 'package:mind_buzz_refactor/core/widgets/custom_text.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mind_buzz_refactor/features/assignments_filter/domain/entities/reports_percentages.dart';
 import 'package:mind_buzz_refactor/features/assignments_filter/presentation/cubit/pie_chart_cubit.dart';
 import 'package:mind_buzz_refactor/features/assignments_filter/presentation/cubit/pie_chart_state.dart';
+import 'package:mind_buzz_refactor/features/assignments_filter/presentation/widgets/due_date_bottom_sheet.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 import 'package:mind_buzz_refactor/features/calender/presentation/widgets/assignment_widget.dart';
 import 'package:mind_buzz_refactor/features/home/presentation/widgets/pie_chart_design.dart';
 import 'package:mind_buzz_refactor/features/home/presentation/widgets/switch_bar.dart';
 
-class PieChartPage extends StatefulWidget {
+class PieChartPage extends StatelessWidget {
   final bool isAssignment;
-  const PieChartPage({super.key, required this.isAssignment});
+  final int? programId;
+  final String? programName;
+  const PieChartPage(
+      {super.key,
+      required this.isAssignment,
+      this.programId,
+      this.programName});
 
-  @override
-  State<PieChartPage> createState() => _PieChartPageState();
-}
-
-class _PieChartPageState extends State<PieChartPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => di.sl<PieChartCubit>()..getAssignments(),
+      create: isAssignment
+          ? (_) => di.sl<PieChartCubit>()..getAssignments()
+          : (_) => di.sl<PieChartCubit>()..getReports(programId: programId!),
       child: BlocListener<PieChartCubit, PieChartState>(
         listener: (context, state) {
           if (state.isError) {
@@ -37,62 +42,92 @@ class _PieChartPageState extends State<PieChartPage> {
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }
         },
-        child: Scaffold(
-          appBar: customAppBar(
-            context: context,
-            title: widget.isAssignment ? 'Assignments' : 'Reports',
-            action: widget.isAssignment
-                ? null
-                : GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      // width: 10,
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.42),
-                          color: AppColor.whiteRed),
-                      child: Image.asset(
-                        ParentImages.imageFilter,
-                        height: 16,
-                        width: 16,
+        child: Builder(builder: (context) {
+          final cubit = context.read<PieChartCubit>();
+          return Scaffold(
+            appBar: customAppBar(
+              context: context,
+              title: isAssignment ? 'Assignments' : 'Reports',
+              action: isAssignment
+                  ? null
+                  : GestureDetector(
+                      onTap: () async {
+                        var result = await showModalBottomSheet(
+                            backgroundColor: Colors.white,
+                            context: context,
+                            builder: (BuildContext context0) {
+                              return DueDateBottomSheet(
+                                isFromNow: false,
+                                onReset: () {
+                                  cubit.resetDate(programId!);
+                                  Navigator.of(context).pop();
+                                },
+                              );
+                            });
+                        if (result != null) {
+                          cubit.getReportsByDate(
+                            programId: programId!,
+                            startDate:
+                                result['startDate'].toString().substring(0, 10),
+                            endDate:
+                                result['endDate'].toString().substring(0, 10),
+                          );
+                        }
+                      },
+                      child: Container(
+                        // width: 10,
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.42),
+                            color: AppColor.whiteRed),
+                        child: Image.asset(
+                          ParentImages.imageFilter,
+                          height: 16,
+                          width: 16,
+                        ),
                       ),
                     ),
-                  ),
-          ),
-          body: BlocBuilder<PieChartCubit, PieChartState>(
-            builder: (context, state) {
+            ),
+            body: Builder(builder: (context) {
               final pieChartCubit = context.read<PieChartCubit>();
-              final selectedProgram = state.selectedProgram?.courseName;
-              final selectedSection = state.sectionName;
 
-              return Column(
-                children: [
-                  widget.isAssignment
-                      ? _buildDropDownList(
-                          selectedProgram, state, pieChartCubit)
-                      : const SizedBox(),
-                  _buildPieChartDesign(state, pieChartCubit),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  if (state.tests.isEmpty && !state.isLoading)
-                    _buildEmptyCase(),
-                  if (state.isLoading) _buildLoadingCase(),
-                  if (state.tests.isNotEmpty && !state.isLoading) ...[
-                    _buildAssignmentsCounts(selectedSection, state),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    _buildListOfAssignments(state),
-                  ],
-                  const SizedBox(
-                    height: 20,
-                  )
-                ],
+              return BlocBuilder<PieChartCubit, PieChartState>(
+                builder: (context, state) {
+                  final selectedSection = state.sectionName;
+                  return Column(
+                    children: [
+                      isAssignment
+                          ? _buildDropDownList(context)
+                          : const SizedBox(),
+                      _buildPieChartDesign(state, pieChartCubit),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      if (isAssignment
+                          ? (state.tests.isEmpty && !state.isLoading)
+                          : (state.progress.isEmpty && !state.isLoading))
+                        _buildEmptyCase(),
+                      if (state.isLoading) _buildLoadingCase(),
+                      if (isAssignment
+                          ? (state.tests.isNotEmpty && !state.isLoading)
+                          : (state.progress.isNotEmpty &&
+                              !state.isLoading)) ...[
+                        _buildAssignmentsCounts(selectedSection, state),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        _buildListOfAssignments(state),
+                      ],
+                      const SizedBox(
+                        height: 20,
+                      )
+                    ],
+                  );
+                },
               );
-            },
-          ),
-        ),
+            }),
+          );
+        }),
       ),
     );
   }
@@ -100,10 +135,12 @@ class _PieChartPageState extends State<PieChartPage> {
   Widget _buildListOfAssignments(PieChartState state) {
     return Expanded(
       child: ListView.builder(
-        itemCount: state.tests.length,
+        itemCount: isAssignment ? state.tests.length : state.progress.length,
         itemBuilder: (context, index) {
           return AssignmentWidget(
-            singleTest: state.tests[index],
+            isAssignment: isAssignment,
+            singleTest:
+                isAssignment ? state.tests[index] : state.progress[index],
           );
         },
       ),
@@ -118,16 +155,20 @@ class _PieChartPageState extends State<PieChartPage> {
           width: 20,
         ),
         CustomText(
-          text: widget.isAssignment
+          text: isAssignment
               ? selectedSection == null
                   ? 'All Assignments'
                   : '$selectedSection Assignments'
-              : 'All Reports',
+              : selectedSection == null
+                  ? 'All Reports'
+                  : '$selectedSection Assignments',
           fontWeight: FontWeight.bold,
         ),
         const Spacer(),
         CustomText(
-          text: '${state.tests.length} tasks',
+          text: isAssignment
+              ? '${state.tests.length} tasks'
+              : '${state.progress.length} tasks',
           fontWeight: FontWeight.bold,
         ),
         const SizedBox(
@@ -158,23 +199,33 @@ class _PieChartPageState extends State<PieChartPage> {
   Widget _buildPieChartDesign(
       PieChartState state, PieChartCubit pieChartCubit) {
     return CirclePieChart(
-      data: widget.isAssignment
+      data: isAssignment
           ? {
-              'Pending': state.percentages?.pending ?? 0,
-              'Overdue': state.percentages?.overdue ?? 0,
-              'Completed': state.percentages?.completed ?? 0,
+              'Overdue': state.assignmentsPercentages?.overdue ?? 0,
+              'Pending': state.assignmentsPercentages?.pending ?? 0,
+              'Completed': state.assignmentsPercentages?.completed ?? 0,
             }
           : {
-              '1 Star': 30,
-              '2 Stars': 10,
-              '3 Stars': 60,
+              '1 Star': state.reportsPercentages?.oneStar ?? 0,
+              '2 Stars': state.reportsPercentages?.twoStar ?? 0,
+              '3 Stars': state.reportsPercentages?.threeStar ?? 0,
             },
-      onSectionTouch: pieChartCubit.changeStatus,
+      onSectionTouch: (String? status) {
+        isAssignment
+            ? pieChartCubit.changeStatus(status)
+            : pieChartCubit.changeStars(programId!, status);
+      },
+      onReset: isAssignment
+          ? () => pieChartCubit.resetStatus()
+          : () => pieChartCubit.resetReports(programId!),
     );
   }
 
-  Widget _buildDropDownList(String? selectedProgram, PieChartState state,
-      PieChartCubit pieChartCubit) {
+  Widget _buildDropDownList(BuildContext context) {
+    final pieChartCubit = context.read<PieChartCubit>();
+    final state = pieChartCubit.state;
+    final selectedProgram = state.selectedProgram?.courseName;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: DropdownButtonFormField2<String>(
@@ -197,7 +248,7 @@ class _PieChartPageState extends State<PieChartPage> {
         onChanged: (String? newValue) async {
           final selectedCourse = state.courses
               .firstWhere((course) => course.courseName == newValue);
-          await pieChartCubit.changeProgram(selectedCourse.programId?.toInt());
+          pieChartCubit.changeProgram(selectedCourse.programId?.toInt());
         },
         dropdownStyleData: const DropdownStyleData(
           elevation: 4,

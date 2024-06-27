@@ -1,22 +1,22 @@
 import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
-part 'percentages.g.dart';
+part 'assignments_percentages.g.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
-class Percentages {
+class AssignmentsPercentages {
   num? completed;
   num? pending;
   num? overdue;
-  Percentages({
+  AssignmentsPercentages({
     this.completed,
     this.pending,
     this.overdue,
   });
-  factory Percentages.fromJson(Map<String, dynamic> json) {
-    return _$PercentagesFromJson(json);
+  factory AssignmentsPercentages.fromJson(Map<String, dynamic> json) {
+    return _$AssignmentsPercentagesFromJson(json);
   }
 
-  Map<String, dynamic> toJson() => _$PercentagesToJson(this);
+  Map<String, dynamic> toJson() => _$AssignmentsPercentagesToJson(this);
 }

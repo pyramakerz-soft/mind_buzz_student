@@ -23,8 +23,12 @@ class TestModel extends Equatable {
   final String? daysLeft;
   final String? duration;
   final String? createdAt;
+  final String? lessonName;
+  final String? star;
+  final String? month;
   final num? score;
   final num? totalScore;
+  final String? gameName;
   final String? completedAt;
   final String? updatedAt;
   final String? daysDifference;
@@ -34,7 +38,11 @@ class TestModel extends Equatable {
       this.name,
       this.createdAt,
       this.updatedAt,
+      this.gameName,
+      this.star,
+      this.month,
       this.duration,
+      this.lessonName,
       this.mistakeCount,
       this.programId,
       this.programName,
@@ -67,12 +75,16 @@ class TestModel extends Equatable {
         mistakeCount,
         programId,
         status,
+        month,
         testId,
         totalScore,
+        gameName,
         score,
         testName,
         teacherName,
         type,
+        lessonName,
+        star,
         formattedDueDate,
         daysLeft,
         completedAt,
