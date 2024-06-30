@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:mind_buzz_refactor/features/assignments_filter/domain/entities/test_model.dart';
 
-import 'package:games_models/games_models.dart';
 import '../../../home/domain/entities/test_model_color.dart';
 import '../../../reports/domain/entities/month_model.dart';
 import 'tests_types_model.dart';

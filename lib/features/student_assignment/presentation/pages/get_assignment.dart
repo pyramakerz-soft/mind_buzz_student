@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:games_models/games_models.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import 'package:mind_buzz_refactor/features/assignments_filter/domain/entities/test_model.dart';
 
 import '../../domain/entities/main_data_test.dart';
 import '../../domain/entities/tests_types_model.dart';

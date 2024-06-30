@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../core/app_color.dart';
 
-import '../../../student_assignment/presentation/manager/filter_assignment_cubit/filter_assignment_cubit.dart';
-
 class BottomSheetSelectDay extends StatefulWidget {
-  final bool isFrom;
   final void Function(String? date)? isReport;
   final DateTime currentDate;
   final DateTime? checkStartDate;
@@ -18,7 +14,6 @@ class BottomSheetSelectDay extends StatefulWidget {
 
   BottomSheetSelectDay(
       {Key? key,
-      required this.isFrom,
       this.isReport,
       this.checkEndDate,
       required this.currentDate,
@@ -37,7 +32,6 @@ class _BottomSheetSelectDay extends State<BottomSheetSelectDay> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      // mainAxisSize: MainAxisSize.min,
       children: [
         TableCalendar(
           firstDay: widget.checkStartDate ??
@@ -51,34 +45,14 @@ class _BottomSheetSelectDay extends State<BottomSheetSelectDay> {
           focusedDay: widget.checkStartDate ??
               widget.checkEndDate ??
               widget.currentDate,
-          currentDay: tempDate != null
-              ? DateTime.parse(tempDate ?? '')
-              : widget.checkStartDate != null
-                  ? (widget.checkStartDate ?? DateTime.now())
-                          .isAfter(widget.currentDate)
-                      ? null
-                      : widget.currentDate
-                  : widget.currentDate,
+          currentDay: widget.currentDate,
           headerVisible: true,
           rangeSelectionMode: RangeSelectionMode.toggledOn,
           onDaySelected: (day, focused) {
-            if (widget.isReport == null) {
-              if (widget.isFrom == true) {
-                context.read<FilterAssignmentCubit>().submitAssignmentFromDate(
-                    newStatus: day.toString().split(' ').first);
-              } else {
-                context.read<FilterAssignmentCubit>().submitAssignmentToDate(
-                    newStatus: day.toString().split(' ').first);
-              }
-              // Navigator.pop(context);
-            } else {
+            if (widget.isReport != null) {
               widget.isReport!(day.toString().split(' ').first);
             }
             Navigator.pop(context, day.toString().substring(0, 10));
-            // setState(() {
-            //   tempDate = day.toString().split(' ').first;
-            // });
-            // }
           },
           headerStyle: HeaderStyle(
             formatButtonVisible: false,
@@ -106,74 +80,6 @@ class _BottomSheetSelectDay extends State<BottomSheetSelectDay> {
             },
           ),
         ),
-        if (widget.isReport != null) ...{
-          10.ph,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              5.pw,
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    context.read<FilterAssignmentCubit>().clearReportFilter();
-                    Navigator.of(context).pop();
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    alignment: Alignment.center,
-                    width: (MediaQuery.of(context).size.width - 40) / 2,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: AppColor.darkBlueColor),
-                        color: Colors.white),
-                    child: Text(
-                      'Reset',
-                      style: Theme.of(context)
-                          .textTheme
-                          .displayLarge
-                          ?.copyWith(fontSize: 16, fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                ),
-              ),
-              20.pw,
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    if (tempDate != null) {
-                      if (widget.isReport != null) {
-                        widget.isReport!(tempDate);
-                      }
-                      context
-                          .read<FilterAssignmentCubit>()
-                          .submitReportDate(newStatus: tempDate ?? '');
-                    }
-                    Navigator.of(context).pop();
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    alignment: Alignment.center,
-                    width: (MediaQuery.of(context).size.width - 40) / 2,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: AppColor.darkBlueColor),
-                    child: Text(
-                      'Done',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodySmall
-                          ?.copyWith(fontSize: 16, fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                ),
-              ),
-              5.pw
-            ],
-          ),
-          35.ph
-        } else ...{
-          30.ph
-        }
       ],
     );
   }
