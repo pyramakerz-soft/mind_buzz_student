@@ -92,12 +92,11 @@ packages:
   based_of_eng_game:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "8f3442e933c6edf6726784ddcab1567a60c5fd4d"
-      url: "https://github.com/moataz-mohamed194/based_of_eng_game.git"
-    source: git
-    version: "0.1.5"
+      name: based_of_eng_game
+      sha256: cb0c08b386ae74c33b092a30d7db46c6c62adaede903a965297bde31ce04ddd9
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.7"
   bloc:
     dependency: transitive
     description:
