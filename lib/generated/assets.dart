@@ -180,6 +180,7 @@ class Assets {
   static const String phoneticsBubble = 'assets/phonetics/bubble.png';
   static const String phoneticsBubbleDisabled = 'assets/phonetics/bubbleDisabled.png';
   static const String phoneticsBubbleSelected = 'assets/phonetics/bubbleSelected.png';
+  static const String phoneticsChooseTheCorrectGame = 'assets/phonetics/chooseTheCorrectGame.png';
   static const String phoneticsChooseTheSentenceGame = 'assets/phonetics/chooseTheSentenceGame.png';
   static const String phoneticsCircleShape = 'assets/phonetics/circle_shape.png';
   static const String phoneticsClickPicture = 'assets/phonetics/click_picture.png';
