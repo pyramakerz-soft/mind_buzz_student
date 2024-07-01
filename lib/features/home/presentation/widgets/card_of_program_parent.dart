@@ -7,9 +7,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/assets_svg_images.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import 'package:mind_buzz_refactor/features/assignments_filter/presentation/pages/pie_chart_page.dart';
 
 import '../../../../core/utils.dart';
-import '../../../choose_assignment_reports/presentation/pages/choose_assignment_reports_screen.dart';
 import '../../../choose_assignment_reports/presentation/manager/index_of_switch_cubit.dart';
 import '../../../student_assignment/presentation/manager/check_assignment_cubit/check_assignment_cubit.dart';
 import '../../../student_assignment/presentation/pages/get_assignment.dart';
@@ -33,7 +33,8 @@ class CardOfProgramParent extends StatelessWidget {
         Utils.navigateTo(
             BlocProvider(
                 create: (_) => IndexOfSwitchCubit(),
-                child: ChooseAssignmentReportsScreen(
+                child: PieChartPage(
+                  isAssignment: false,
                   programName: dataOfProgram.program?.course?.name ?? '',
                   programId: int.parse("${dataOfProgram.program?.id ?? ''}"),
                 )),
@@ -88,13 +89,12 @@ class CardOfProgramParent extends StatelessWidget {
                     2.5.pw,
                     Text(
                       'Assign',
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelLarge
-                          ?.copyWith(fontSize: 12.sp, fontWeight: FontWeight.w400),
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontSize: 12.sp, fontWeight: FontWeight.w400),
                     ),
                     // 5.pw,
-                    if ((dataOfProgram.program?.studentTests?.length ?? 0) > 0) ...{
+                    if ((dataOfProgram.program?.studentTests?.length ?? 0) >
+                        0) ...{
                       2.pw,
                       Container(
                         width: 20,
@@ -123,10 +123,8 @@ class CardOfProgramParent extends StatelessWidget {
                     5.pw,
                     Text(
                       'Report',
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelLarge
-                          ?.copyWith(fontSize: 12.sp, fontWeight: FontWeight.w400),
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontSize: 12.sp, fontWeight: FontWeight.w400),
                     ),
                   ],
                 )

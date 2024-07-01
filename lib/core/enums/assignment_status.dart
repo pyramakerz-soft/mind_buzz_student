@@ -3,31 +3,27 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 
-enum AssignmentStatus{finished, notStarted , overdue, dueSoon}
+enum AssignmentStatus { completed, pending, overdue }
 
 extension TypeExtension on AssignmentStatus {
   String text() {
     switch (this) {
-      case AssignmentStatus.finished:
-        return 'Finished';
-      case AssignmentStatus.notStarted:
-        return 'Not Started';
+      case AssignmentStatus.completed:
+        return 'Completed';
+      case AssignmentStatus.pending:
+        return 'Pending';
       case AssignmentStatus.overdue:
         return 'Overdue';
-      case AssignmentStatus.dueSoon:
-        return 'Due Soon';
     }
   }
 
   Color color() {
     switch (this) {
-      case AssignmentStatus.finished:
+      case AssignmentStatus.completed:
         return AppColor.resetText;
-      case AssignmentStatus.notStarted:
-        return AppColor.lightGreyColor3;
+      case AssignmentStatus.pending:
+        return AppColor.darkBlueColor;
       case AssignmentStatus.overdue:
-        return Colors.black;
-      case AssignmentStatus.dueSoon:
         return AppColor.redColor4;
     }
   }

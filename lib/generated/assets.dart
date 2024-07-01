@@ -53,6 +53,7 @@ class Assets {
   static const String imagesAppBarOfUnits = 'assets/images/app_bar_of_units.png';
   static const String imagesAssessmentPart = 'assets/images/assessment_part.png';
   static const String imagesAssignment = 'assets/images/assignment.png';
+  static const String imagesAssignmentsHomeImage = 'assets/images/assignments_home_image.png';
   static const String imagesBackButton = 'assets/images/back_button.png';
   static const String imagesBeeLogin = 'assets/images/bee_login.png';
   static const String imagesBgChapters = 'assets/images/bg_chapters.png';
@@ -85,6 +86,7 @@ class Assets {
   static const String imagesPersonAvatar = 'assets/images/person_avatar.png';
   static const String imagesRedPen = 'assets/images/red_pen.png';
   static const String imagesReports = 'assets/images/reports.png';
+  static const String imagesReportsHomeImage = 'assets/images/reports_home_image.png';
   static const String imagesRocket = 'assets/images/rocket.png';
   static const String imagesScreen1 = 'assets/images/screen1.png';
   static const String imagesStar = 'assets/images/star.png';
@@ -178,9 +180,12 @@ class Assets {
   static const String phoneticsBubble = 'assets/phonetics/bubble.png';
   static const String phoneticsBubbleDisabled = 'assets/phonetics/bubbleDisabled.png';
   static const String phoneticsBubbleSelected = 'assets/phonetics/bubbleSelected.png';
+  static const String phoneticsChooseTheCorrectGame = 'assets/phonetics/chooseTheCorrectGame.png';
+  static const String phoneticsChooseTheSentenceGame = 'assets/phonetics/chooseTheSentenceGame.png';
   static const String phoneticsCircleShape = 'assets/phonetics/circle_shape.png';
   static const String phoneticsClickPicture = 'assets/phonetics/click_picture.png';
   static const String phoneticsClickTheSound = 'assets/phonetics/click_the_sound.png';
+  static const String phoneticsClickTheWordGame = 'assets/phonetics/clickTheWordGame.png';
   static const String phoneticsCloudShape = 'assets/phonetics/cloud_shape.png';
   static const String phoneticsCompleteStar = 'assets/phonetics/complete_star.png';
   static const String phoneticsDiamondShape = 'assets/phonetics/diamond_shape.png';
@@ -191,6 +196,7 @@ class Assets {
   static const String phoneticsHexagonShape = 'assets/phonetics/hexagon_shape.png';
   static const String phoneticsIconBoarderOfChar = 'assets/phonetics/iconBoarderOfChar.svg';
   static const String phoneticsLetterOfClickPic = 'assets/phonetics/letter_of_click_pic.png';
+  static const String phoneticsListenAndChooseGame = 'assets/phonetics/listenAndChooseGame.png';
   static const String phoneticsListenAndClick = 'assets/phonetics/listen_and_click.png';
   static const String phoneticsLoadingVideo = 'assets/phonetics/loading_video.png';
   static const String phoneticsMatchGame = 'assets/phonetics/matchGame.png';
@@ -198,6 +204,7 @@ class Assets {
   static const String phoneticsPosition2Finger = 'assets/phonetics/position_2_finger.png';
   static const String phoneticsRearrangeGame = 'assets/phonetics/rearrangeGame.png';
   static const String phoneticsSadAvatarSad = 'assets/phonetics/sadAvatarSad.png';
+  static const String phoneticsSelectedCheckBox = 'assets/phonetics/selected_check_box.png';
   static const String phoneticsSnowmanHappy = 'assets/phonetics/snowman_happy.riv';
   static const String phoneticsSnowmanIdle = 'assets/phonetics/snowman_idle.riv';
   static const String phoneticsSnowmanSad = 'assets/phonetics/snowman_sad.gif';
@@ -207,6 +214,7 @@ class Assets {
   static const String phoneticsSpellingNameGame = 'assets/phonetics/spellingNameGame.png';
   static const String phoneticsSpellingWordGame = 'assets/phonetics/spellingWordGame.png';
   static const String phoneticsTracingWithFinger = 'assets/phonetics/tracing_with_finger.png';
+  static const String phoneticsUnselectedCheckBox = 'assets/phonetics/unselected_check_box.png';
   static const String phoneticsWinAvatar = 'assets/phonetics/winAvatar.png';
   static const String phoneticsWood = 'assets/phonetics/wood.png';
   static const String phoneticsWordFamilyGame = 'assets/phonetics/wordFamilyGame.png';
@@ -248,12 +256,14 @@ class Assets {
   static const String svgBubbleSelected = 'assets/svg/bubbleSelected.svg';
   static const String svgButtonBackground = 'assets/svg/buttonBackground.svg';
   static const String svgButtonBackgroundDisabled = 'assets/svg/buttonBackgroundDisabled.svg';
+  static const String svgCalendar = 'assets/svg/calendar.svg';
   static const String svgCandy = 'assets/svg/candy.svg';
   static const String svgCloseLesson = 'assets/svg/close_lesson.svg';
   static const String svgCompleteStar = 'assets/svg/complete_star.svg';
   static const String svgCoverOfLogin = 'assets/svg/cover_of_login.svg';
   static const String svgCurrentChapter1 = 'assets/svg/current_chapter1.svg';
   static const String svgCurrentChapter2 = 'assets/svg/current_chapter2.svg';
+  static const String svgEmptyPieChart = 'assets/svg/empty_pie_chart.svg';
   static const String svgEmptyStar = 'assets/svg/empty_star.svg';
   static const String svgExitButton = 'assets/svg/exit_button.svg';
   static const String svgFlowers = 'assets/svg/flowers.svg';
@@ -269,9 +279,11 @@ class Assets {
   static const String svgPopUpBackground = 'assets/svg/pop_up_background.svg';
   static const String svgReloading = 'assets/svg/reloading.svg';
   static const String svgReport = 'assets/svg/report.svg';
+  static const String svgResetIcon = 'assets/svg/reset_icon.svg';
   static const String svgSelectedParent = 'assets/svg/selected_parent.svg';
   static const String svgSelectedStudent = 'assets/svg/selected_student.svg';
   static const String svgSkyLogin = 'assets/svg/sky_login.svg';
+  static const String svgStar = 'assets/svg/star.svg';
   static const String svgTree = 'assets/svg/tree.svg';
   static const String svgTree2 = 'assets/svg/tree2.svg';
   static const String svgUnSelectedParent = 'assets/svg/unSelected_parent.svg';

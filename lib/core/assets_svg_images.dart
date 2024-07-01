@@ -26,22 +26,30 @@ abstract class AppSvgImages {
   static const String iconCloseLesson = '${mainPathOfSvg}close_lesson.svg';
   static const String iconEmptyStar = '${mainPathOfSvg}empty_star.svg';
   static const String iconCompleteStar = '${mainPathOfSvg}complete_star.svg';
-  static const String iconSelectedParent = '${mainPathOfSvg}selected_parent.svg';
-  static const String iconSelectedStudent = '${mainPathOfSvg}selected_student.svg';
-  static const String iconUnSelectedParent = '${mainPathOfSvg}unSelected_parent.svg';
-  static const String iconUnSelectedStudent = '${mainPathOfSvg}unSelected_student.svg';
+  static const String iconSelectedParent =
+      '${mainPathOfSvg}selected_parent.svg';
+  static const String iconSelectedStudent =
+      '${mainPathOfSvg}selected_student.svg';
+  static const String iconUnSelectedParent =
+      '${mainPathOfSvg}unSelected_parent.svg';
+  static const String iconUnSelectedStudent =
+      '${mainPathOfSvg}unSelected_student.svg';
   static const String iconReport = '${mainPathOfSvg}report.svg';
   static const String iconAssign = '${mainPathOfSvg}assign.svg';
   static const String bubble = '${mainPathOfSvg}bubble.svg';
   static const String bubbleDisabled = '${mainPathOfSvg}bubbleDisabled.svg';
   static const String bubbleSelected = '${mainPathOfSvg}bubbleSelected.svg';
   static const String buttonBackground = '${mainPathOfSvg}buttonBackground.svg';
-  static const String buttonBackgroundDisabled = '${mainPathOfSvg}buttonBackgroundDisabled.svg';
+  static const String buttonBackgroundDisabled =
+      '${mainPathOfSvg}buttonBackgroundDisabled.svg';
   static const String beeAlert = '${mainPathOfSvg}beeAlert.svg';
   static const String popUpBackground = '${mainPathOfSvg}pop_up_background.svg';
   static const String exitButton = '${mainPathOfSvg}exit_button.svg';
   static const String reloading = '${mainPathOfSvg}reloading.svg';
-
+  static const String calendar = '${mainPathOfSvg}calendar.svg';
+  static const String emptyPieChart = '${mainPathOfSvg}empty_pie_chart.svg';
+  static const String star = '${mainPathOfSvg}star.svg';
+  static const String resetIcon = '${mainPathOfSvg}reset_icon.svg';
   static const String iconCurrentChapter1 =
       '${mainPathOfSvg}current_chapter1.svg';
 }
