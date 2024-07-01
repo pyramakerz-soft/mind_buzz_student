@@ -4,7 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/assets_images.dart';
 import '../../../../core/assets_svg_images.dart';
 import '../../../../core/vars.dart';
-import 'package:games_models/games_models.dart';
+
+import '../../domain/entities/chapter_model.dart';
 
 class ItemOfTitle extends StatelessWidget {
   final ChapterModel chapterData;
@@ -30,41 +31,35 @@ class ItemOfTitle extends StatelessWidget {
     //   );
     // } else
 
-
-      if (chapterData.star != null) {
-        return Row(
-          children: List.generate(
-              3,
-              (index) => (double.parse("${chapterData.star ?? 0}") > (index))
-                  ? Padding(
-                padding:  EdgeInsets.only(bottom:
-                index == 1 ?
-                10.0 : 0),
+    if (chapterData.star != null) {
+      return Row(
+        children: List.generate(
+            3,
+            (index) => (double.parse("${chapterData.star ?? 0}") > (index))
+                ? Padding(
+                    padding: EdgeInsets.only(bottom: index == 1 ? 10.0 : 0),
                     child: SvgPicture.asset(
-                        AppSvgImages.iconCompleteStar,
-                        height: (chapterData.isGame??false) ? 25 : 30,
-                      ),
+                      AppSvgImages.iconCompleteStar,
+                      height: (chapterData.isGame ?? false) ? 25 : 30,
+                    ),
                   )
-                  : Image.asset(
-                      AppImages.iconEmptyStar,
-                      height: (chapterData.isGame??false) ? 25 : 30,
-                    )),
-        );
-      } else {
-        return Row(
-          children: List.generate(
-              3,
-              (index) => Padding(
-                padding:  EdgeInsets.only(bottom:
-                index == 1 ?
-                10.0 : 0),
-                child: (SvgPicture.asset(
-                      AppSvgImages.iconEmptyStar,
-                      height: (chapterData.isGame??false) ? 25 : 30,
-                    )),
-              )),
-        );
-      }
-
+                : Image.asset(
+                    AppImages.iconEmptyStar,
+                    height: (chapterData.isGame ?? false) ? 25 : 30,
+                  )),
+      );
+    } else {
+      return Row(
+        children: List.generate(
+            3,
+            (index) => Padding(
+                  padding: EdgeInsets.only(bottom: index == 1 ? 10.0 : 0),
+                  child: (SvgPicture.asset(
+                    AppSvgImages.iconEmptyStar,
+                    height: (chapterData.isGame ?? false) ? 25 : 30,
+                  )),
+                )),
+      );
+    }
   }
 }

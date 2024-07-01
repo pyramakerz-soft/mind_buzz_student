@@ -7,8 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:mind_buzz_refactor/features/unit/domain/entities/unit_model.dart';
 
 import '../../../../core/assets_animation.dart';
+import '../../domain/entities/chapter_model.dart';
 import '../../domain/use_cases/game_stars_use_cases.dart';
-import 'package:games_models/games_models.dart';
 import 'journey_bar_state.dart';
 
 class JourneyBarCubit extends Cubit<JourneyBarState> with ChangeNotifier {

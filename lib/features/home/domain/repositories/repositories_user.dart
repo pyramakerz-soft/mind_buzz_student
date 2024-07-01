@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:games_models/games_models.dart';
 
 import '../../../../core/error/failures.dart';
+import '../entities/user_courses.dart';
 
 abstract class ProgramRepository {
   Future<Either<Failure, List<UserCourseModel>>> programDataRepository();

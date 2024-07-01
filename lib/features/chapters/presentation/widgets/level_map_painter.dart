@@ -3,16 +3,16 @@ import 'dart:ui' as ui;
 import 'package:flame/extensions.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
-import 'package:games_models/games_models.dart';
 import 'package:mind_buzz_refactor/features/chapters/presentation/widgets/level_map_parameters.dart';
 
+import '../../domain/entities/image_details.dart';
+import '../../domain/entities/images_to_paint.dart';
 
 class LevelMapPainter extends CustomPainter {
   final LevelMapParams params;
   final ImagesToPaint? imagesToPaint;
   final Paint _pathPaint;
   final Paint _shadowPaint;
-
 
   /// Describes the fraction to reach next level.
   /// If the [LevelMapParams.currentLevel] is 6.5, [_nextLevelFraction] is 0.5.
@@ -32,7 +32,6 @@ class LevelMapPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-
     canvas.save();
 
     canvas.translate(0, size.height);
@@ -50,7 +49,7 @@ class LevelMapPainter extends CustomPainter {
         params.firstCurveReferencePointOffsetFactor!.dy;
 
     for (int thisLevel = 0; thisLevel < params.levelCount; thisLevel++) {
-      List<ImageDetails> imageDetails = imagesToPaint?.bgImages??[];
+      List<ImageDetails> imageDetails = imagesToPaint?.bgImages ?? [];
       final Offset p1 = Offset(_centerWidth, -(thisLevel * params.levelHeight));
       final Offset p2 = getP2OffsetBasedOnCurveSide(thisLevel,
           _p2_dx_VariationFactor, _p2_dy_VariationFactor, _centerWidth);
@@ -68,7 +67,6 @@ class LevelMapPainter extends CustomPainter {
               p3.dx, thisLevel == imageDetails.length - 1 ? p3.dy + 45 : p3.dy),
           thisLevel + 1);
 
-
       ////////////////// paint image //////////////////////////
 
       // _paintImage(canvas, imageDetails[thisLevel],currentLevelOffset);
@@ -82,9 +80,7 @@ class LevelMapPainter extends CustomPainter {
       }
     }
 
-
     canvas.restore();
-
   }
   //
   // void _drawBGImages(Canvas canvas) {
@@ -138,8 +134,7 @@ class LevelMapPainter extends CustomPainter {
   }
 
   void _drawBezierCurve(
-      Canvas canvas, Offset p1, Offset p2, Offset p3, int thisLevel ) {
-
+      Canvas canvas, Offset p1, Offset p2, Offset p3, int thisLevel) {
     final double _dashFactor = params.dashLengthFactor;
     //TODO: Customise the empty dash length with this multiplication factor 2.
     for (double t = _dashFactor; t <= 1; t += _dashFactor * 2) {

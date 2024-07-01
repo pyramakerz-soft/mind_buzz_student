@@ -13,7 +13,6 @@ import 'package:mind_buzz_refactor/features/phonetics/domain/use_cases/game_use_
 import '../../../../../core/assets_images_main.dart';
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/error/failures_messages.dart';
-import 'package:games_models/games_models.dart';
 import '../../../../phonetics/domain/use_cases/contact_lesson_use_cases.dart';
 
 part 'contact_lesson_event.dart';
@@ -21,10 +20,9 @@ part 'contact_lesson_state.dart';
 
 class ContactLessonBloc extends Bloc<ContactLessonEvent, GetContactInitial> {
   final ContactLessonUseCases programContactUserUseCases;
-  final GetGameUseCases getGameUseCases;
+  // final GetGameUseCases getGameUseCases;
 
-  ContactLessonBloc(
-      {required this.programContactUserUseCases, required this.getGameUseCases})
+  ContactLessonBloc({required this.programContactUserUseCases})
       : super(const GetContactInitial(
             status: StateOfGetDataOfGame.contactLessonInitial)) {
     on<ContactLessonEvent>((event, emit) async {

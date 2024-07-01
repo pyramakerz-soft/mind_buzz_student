@@ -1,7 +1,7 @@
 import 'dart:developer';
-import 'package:games_models/games_models.dart';
 import '../../../../core/apis_connections/api_connection.dart';
 import '../../../../core/connection.dart';
+import '../../domain/entities/lesson_model.dart';
 
 abstract class DataSourceRemotelyOfLesson {
   Future<List<LessonModel>> getUnitDataRemotely({required int programId});
