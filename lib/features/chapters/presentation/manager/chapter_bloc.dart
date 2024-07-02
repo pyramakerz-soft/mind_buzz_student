@@ -55,7 +55,9 @@ List<ChapterModel> handlingDataOfChapters(
       ChapterModel(
           id: lesson.id,
           lessonId: lesson.id,
-          name: lesson.name,
+          name: (lesson.name?.split(' ').first ?? '').toLowerCase() == 'connect'
+              ? (lesson.name?.split(' ').first ?? '')
+              : lesson.name,
           number: lesson.number,
           star: lesson.stars,
           levelImg: AppImages.lessonImg,
@@ -79,7 +81,7 @@ List<ChapterModel> handlingDataOfChapters(
       dataOfChapters.add(ChapterModel(
           id: value.first.id,
           lessonId: value.first.lessonId,
-          name: 'Game $index',
+          name: value.first.name ?? 'Game $index',
           number: index,
           star: value.first.stars,
           levelImg: AppImages.imageCloseLesson,
