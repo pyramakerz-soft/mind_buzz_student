@@ -1,3 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +17,7 @@ import 'features/student_assignment/presentation/manager/filter_assignment_cubit
 import 'features/student_assignment/presentation/pages/get_assignment.dart';
 import 'features/who_am_i/presentation/manager/who_am_i_cubit.dart';
 import 'features/who_am_i/presentation/pages/who_am_i_screen.dart';
+import 'firebase_options.dart';
 
 Future<void> setPreferredOrientationLandscape() async {
   await SystemChrome.setPreferredOrientations([
@@ -31,10 +35,14 @@ Future<void> setPreferredOrientationPortrait() async {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await setPreferredOrientationPortrait();
   await ScreenUtil.ensureScreenSize();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   await di.init();
+  FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode);
 
   runApp(const MyApp());
 }
