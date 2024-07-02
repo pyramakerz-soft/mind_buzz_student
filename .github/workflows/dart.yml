@@ -3,8 +3,7 @@ name: Dart
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    tags:
-      - "*.*.*"
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -26,10 +25,18 @@ jobs:
       - run: flutter build apk
       - run: flutter build appbundle
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+#      - name: Release
+#        uses: softprops/action-gh-release@v1
+#        if: startsWith(github.ref, 'refs/tags/')
+#        with:
+#          files: |
+#            build/app/outputs/flutter-apk/app-release.apk
+#            build/app/outputs/bundle/release/app-release.aab
+
+      - name: upload artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
-          files: |
-            build/app/outputs/flutter-apk/app-release.apk
-            build/app/outputs/bundle/release/app-release.aab
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          groups: tester
+          file: build/app/outputs/apk/release/app-release.apk
