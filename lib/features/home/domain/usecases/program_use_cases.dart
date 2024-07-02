@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failures.dart';
-import 'package:games_models/games_models.dart';
+import '../entities/user_courses.dart';
 import '../repositories/repositories_user.dart';
 
 class ProgramUserUseCases {

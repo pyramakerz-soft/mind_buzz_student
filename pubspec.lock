@@ -93,10 +93,10 @@ packages:
     dependency: "direct main"
     description:
       name: based_of_eng_game
-      sha256: cb0c08b386ae74c33b092a30d7db46c6c62adaede903a965297bde31ce04ddd9
+      sha256: "99f1681ec5a3094cda064e0d2e886029fc34939adb3b9d20174ddac67b77eccc"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.7"
+    version: "0.1.8"
   bloc:
     dependency: transitive
     description:
@@ -536,14 +536,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
-  games_models:
-    dependency: "direct main"
-    description:
-      name: games_models
-      sha256: d35ae81c620a5d83620e67ba65b132eed72079b8a0ec1e293bf26652eded4cc6
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.6"
   geekyants_flutter_gauges:
     dependency: "direct main"
     description:
@@ -760,14 +752,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
-  level_map:
-    dependency: transitive
-    description:
-      name: level_map
-      sha256: a2d1066026e8b31c6bd254cfd2894067d3f41a7ec0b8a0996dd6d15fd22f291d
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.0"
   lints:
     dependency: transitive
     description:

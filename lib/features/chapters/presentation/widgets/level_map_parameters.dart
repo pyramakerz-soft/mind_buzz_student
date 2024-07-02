@@ -2,9 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'package:games_models/games_models.dart';
-
-
+import '../../domain/entities/image_details.dart';
 
 class LevelMapParams {
   static final _random = math.Random();
@@ -23,7 +21,6 @@ class LevelMapParams {
   final Offset minReferencePositionOffsetFactor;
   final Offset maxReferencePositionOffsetFactor;
   final List<ImageParams> levelsImages;
-
 
   // final ImageParams? startLevelImage;
   // final ImageParams completedLevelImage;
@@ -51,31 +48,29 @@ class LevelMapParams {
     // required this.lockedLevelImage,
     // this.pathEndImage,
   })  : assert(currentLevel <= levelCount,
-  "Current level should be less than total level count"),
+            "Current level should be less than total level count"),
         assert(currentLevel >= 1, "Current level should at least be 1"),
         assert(dashLengthFactor >= 0 && dashLengthFactor <= 0.5,
-        "Dash length factor should be between 0 and 0.5"),
+            "Dash length factor should be between 0 and 0.5"),
         assert(100 % (dashLengthFactor * 100) == 0,
-        "Dash length factor should be a factor of 1"),
+            "Dash length factor should be a factor of 1"),
         assert(
-        minReferencePositionOffsetFactor.dx <= 1 &&
-            minReferencePositionOffsetFactor.dx >= 0 &&
-            minReferencePositionOffsetFactor.dy <= 1 &&
-            minReferencePositionOffsetFactor.dy >= 0,
-        "dx and dy of minEndReferenceOffsetVariationFactor should be between 0 and 1"),
+            minReferencePositionOffsetFactor.dx <= 1 &&
+                minReferencePositionOffsetFactor.dx >= 0 &&
+                minReferencePositionOffsetFactor.dy <= 1 &&
+                minReferencePositionOffsetFactor.dy >= 0,
+            "dx and dy of minEndReferenceOffsetVariationFactor should be between 0 and 1"),
         assert(
-        maxReferencePositionOffsetFactor.dx <= 1 &&
-            maxReferencePositionOffsetFactor.dx >= 0 &&
-            maxReferencePositionOffsetFactor.dy <= 1 &&
-            maxReferencePositionOffsetFactor.dy >= 0,
-        "dx and dy of maxEndReferenceOffsetVariationFactor should be between 0 and 1"),
+            maxReferencePositionOffsetFactor.dx <= 1 &&
+                maxReferencePositionOffsetFactor.dx >= 0 &&
+                maxReferencePositionOffsetFactor.dy <= 1 &&
+                maxReferencePositionOffsetFactor.dy >= 0,
+            "dx and dy of maxEndReferenceOffsetVariationFactor should be between 0 and 1"),
         this.curveReferenceOffsetVariationForEachLevel = List.generate(
-            levelCount,
-                (index) => Offset(0.8,1),
+            levelCount, (index) => Offset(0.8, 1),
             growable: false) {
     this.currentLevel = currentLevel.clamp(1, levelCount).toDouble();
     this.firstCurveReferencePointOffsetFactor =
-        firstCurveReferencePointOffsetFactor ??
-            Offset(0.7,1);
+        firstCurveReferencePointOffsetFactor ?? Offset(0.7, 1);
   }
 }

@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import 'package:games_models/games_models.dart';
+import '../../../../home/domain/entities/user_courses.dart';
 
 part 'check_assignment_state.dart';
 

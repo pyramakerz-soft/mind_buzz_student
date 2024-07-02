@@ -8,7 +8,7 @@ import '../../../../core/assets_svg_images.dart';
 import '../../../../core/assets_images.dart';
 import '../../../../core/utils.dart';
 import '../../../../core/widgets/card_of_my_info.dart';
-import 'package:games_models/games_models.dart';
+import '../../../home/domain/entities/user_courses.dart';
 import '../../../home/presentation/bloc/get_programs_home_bloc.dart';
 import '../../../login/presentation/cubit/login_cubit.dart';
 import '../../../login/presentation/page/login_screen.dart';
@@ -24,8 +24,7 @@ class StudentAssignmentScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(
-                kToolbarHeight),
+            preferredSize: const Size.fromHeight(kToolbarHeight),
             child: Container(
               decoration: BoxDecoration(
                 boxShadow: [

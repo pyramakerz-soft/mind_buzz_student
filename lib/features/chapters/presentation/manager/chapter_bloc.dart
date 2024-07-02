@@ -10,7 +10,9 @@ import 'package:collection/collection.dart';
 import '../../../../core/assets_images.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/error/failures_messages.dart';
-import 'package:games_models/games_models.dart';
+import '../../../phonetics/domain/entities/game_model.dart';
+import '../../domain/entities/chapter_model.dart';
+import '../../domain/entities/lesson_model.dart';
 import '../../domain/use_cases/chapter_use_cases.dart';
 
 part 'chapter_event.dart';
@@ -91,17 +93,17 @@ List<ChapterModel> handlingDataOfChapters(
 
 int customComparePhonetics(String key1, String key2) {
   int index1 =
-  BasicOfGameData.customOrderOfGamesPhonetics.indexOf(key1.toLowerCase());
+      BasicOfGameData.customOrderOfGamesPhonetics.indexOf(key1.toLowerCase());
   int index2 =
-  BasicOfGameData.customOrderOfGamesPhonetics.indexOf(key2.toLowerCase());
+      BasicOfGameData.customOrderOfGamesPhonetics.indexOf(key2.toLowerCase());
   return index1.compareTo(index2);
 }
 
 int customCompareConnect(String key1, String key2) {
   int index1 =
-  BasicOfGameData.customOrderOfGamesConnect.indexOf(key1.toLowerCase());
+      BasicOfGameData.customOrderOfGamesConnect.indexOf(key1.toLowerCase());
   int index2 =
-  BasicOfGameData.customOrderOfGamesConnect.indexOf(key2.toLowerCase());
+      BasicOfGameData.customOrderOfGamesConnect.indexOf(key2.toLowerCase());
   return index1.compareTo(index2);
 }
 

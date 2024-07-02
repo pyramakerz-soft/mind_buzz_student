@@ -12,8 +12,7 @@ Future<void> init() async {
   sl.registerFactory(() => GetUnitBloc(programUserUseCases: sl()));
   // sl.registerFactory(() => CurrentGamePhoneticsCubit());
   sl.registerFactory(() => ChapterBloc(programUserUseCases: sl()));
-  sl.registerFactory(() => ContactLessonBloc(
-      programContactUserUseCases: sl(), getGameUseCases: sl()));
+  sl.registerFactory(() => ContactLessonBloc(programContactUserUseCases: sl()));
   sl.registerFactory(() =>
       GetProgramsHomeBloc(programUserUseCases: sl(), logOutUserUseCases: sl()));
   sl.registerFactory(() => NotificationsBloc());
@@ -36,7 +35,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => ParentAssignmentUseCases(sl()));
   sl.registerLazySingleton(() => ParentReportsUseCases(sl()));
   sl.registerLazySingleton(() => UpdateUserDataUseCases(sl()));
-  sl.registerLazySingleton(() => GetGameUseCases(sl()));
+  // sl.registerLazySingleton(() => GetGameUseCases(sl()));
   sl.registerLazySingleton(() => CreatePassCodeUseCases(sl()));
   sl.registerLazySingleton(() => GetAssignmentsPieChartUseCase(sl()));
   sl.registerLazySingleton(() => GetReportsPieChartUseCase(sl()));

@@ -36,6 +36,6 @@ Map<String, dynamic> _$PieChartModelToJson(PieChartModel instance) =>
       'progress': instance.progress?.map((e) => e.toJson()).toList(),
       'test_types': instance.testTypes?.map((e) => e.toJson()).toList(),
       'courses': instance.courses?.map((e) => e.toJson()).toList(),
-      'reports_percentages': instance.reportsPercentages?.toJson(),
       'assignments_percentages': instance.assignmentsPercentages?.toJson(),
+      'reports_percentages': instance.reportsPercentages?.toJson(),
     };

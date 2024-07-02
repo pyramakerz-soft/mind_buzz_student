@@ -6,7 +6,7 @@ import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mind_buzz_refactor/features/unit/domain/entities/unit_model.dart';
 
-import 'package:games_models/games_models.dart';
+import '../../domain/entities/chapter_model.dart';
 
 class JourneyBarState {
   double? totalOfBar = 0;

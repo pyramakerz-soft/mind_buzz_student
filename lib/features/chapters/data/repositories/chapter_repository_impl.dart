@@ -1,8 +1,9 @@
 import 'dart:developer';
 import 'package:dartz/dartz.dart';
-import 'package:games_models/games_models.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/network/network_info.dart';
+import '../../../phonetics/domain/entities/game_model.dart';
+import '../../domain/entities/lesson_model.dart';
 import '../../domain/repositories/repositories_chapter.dart';
 import '../data_sources/data_source_local_of_game_star.dart';
 import '../data_sources/data_source_remotely_of_chapter.dart';

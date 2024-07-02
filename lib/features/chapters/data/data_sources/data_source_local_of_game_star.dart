@@ -1,8 +1,8 @@
 import 'dart:core';
 import 'dart:convert';
-import 'package:games_models/games_models.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../phonetics/domain/entities/game_model.dart';
 
 abstract class DataSourceLocalOfContactLesson {
   Future<void> sendStarToGameLocal(

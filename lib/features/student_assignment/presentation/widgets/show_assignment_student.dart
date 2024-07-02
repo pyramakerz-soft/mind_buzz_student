@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 
 import '../../../../core/app_color.dart';
-import 'package:games_models/games_models.dart';
+import '../../../home/domain/entities/user_courses.dart';
 
 class ShowAssignmentStudent extends StatelessWidget {
   final UserCourseModel courseData;
@@ -122,7 +122,9 @@ class ShowAssignmentStudent extends StatelessWidget {
                                                 ),
                                           ),
                                           Text(
-                                            courseData.program?.studentTests?[index]
+                                            courseData
+                                                    .program
+                                                    ?.studentTests?[index]
                                                     .name ??
                                                 '',
                                             style: Theme.of(context)
