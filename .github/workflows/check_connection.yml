@@ -12,9 +12,11 @@ jobs:
 
       - name: Set base value based on branch
         run: |
-          if [ "${{ github.ref }}" == "refs/heads/master" ]; then
+          if [ "${{ github.ref }}" == "refs/heads/main" ]; then
             sed -i 's/static const base = .*/static const base = '\''ambernoak.co.uk\/Fillament\/public'\'';/' lib/core/connection.dart
-          elif [ "${{ github.ref }}" == "refs/heads/testing" ]; then
+          elif [ "${{ github.ref }}" == "refs/heads/release" ]; then
+            sed -i 's/static const base = .*/static const base = '\''ambernoak.co.uk\/Fillament\/public'\'';/' lib/core/connection.dart
+          elif [ "${{ github.ref }}" == "refs/heads/test_server" ]; then
             sed -i 's/static const base = .*/static const base = '\''hqsync.duckdns.org\/Fillament\/public'\'';/' lib/core/connection.dart
           fi
 
