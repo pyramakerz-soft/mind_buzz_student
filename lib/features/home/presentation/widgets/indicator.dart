@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mind_buzz_refactor/core/vars.dart';
 
 class Indicator extends StatelessWidget {
   const Indicator({
@@ -34,30 +36,38 @@ class Indicator extends StatelessWidget {
         const SizedBox(
           width: 10,
         ),
-        Row(
-          children: [
-            Text(
-              "$percentage%",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: percentageColor,
+        Expanded(
+          child: Row(
+            children: [
+              Flexible(
+                child: FittedBox(
+                  child: Text(
+                    "$percentage%",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.bold,
+                      color: percentageColor,
+                    ),
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: percentageColor,
+              5.pw,
+              Flexible(
+                child: FittedBox(
+                  child: Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.bold,
+                      color: percentageColor,
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         )
       ],
     );

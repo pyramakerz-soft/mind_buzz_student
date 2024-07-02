@@ -55,12 +55,9 @@ class PieChartPage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             context: context,
                             builder: (BuildContext context0) {
-                              return DueDateBottomSheet(
+                              return const DueDateBottomSheet(
+                                title: 'Report Date',
                                 isFromNow: false,
-                                onReset: () {
-                                  cubit.resetDate(programId!);
-                                  Navigator.of(context).pop();
-                                },
                               );
                             });
                         if (result != null) {
@@ -240,7 +237,7 @@ class PieChartPage extends StatelessWidget {
           focusedErrorBorder: getErroredBorderStyle(),
         ),
         hint: const Text(
-          'All Programs',
+          'All Subjects',
           textAlign: TextAlign.center,
         ),
         value: selectedProgram,

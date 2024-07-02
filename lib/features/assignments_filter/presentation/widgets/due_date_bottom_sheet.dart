@@ -7,7 +7,12 @@ import '../../../../core/assets_svg_images.dart';
 
 class DueDateBottomSheet extends StatefulWidget {
   const DueDateBottomSheet(
-      {super.key, this.onSave, this.onReset, this.isFromNow = true});
+      {super.key,
+      this.onSave,
+      this.onReset,
+      this.isFromNow = true,
+      this.title});
+  final String? title;
   final bool isFromNow;
   final Function(DateTime startDate, DateTime endDate)? onSave;
   final Function()? onReset;
@@ -58,7 +63,7 @@ class _DueDateBottomSheetState extends State<DueDateBottomSheet> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Assignment Date",
+                    widget.title ?? "Assignment Date",
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -255,7 +260,7 @@ class _DueDateBottomSheetState extends State<DueDateBottomSheet> {
                           _endDate = null;
                         });
                       },
-                      labelText: 'Reset',
+                      labelText: 'Clear',
                     ),
                   ),
                   const SizedBox(

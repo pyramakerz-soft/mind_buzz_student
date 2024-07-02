@@ -85,12 +85,8 @@ class PieChartCubit extends Cubit<PieChartState> {
   }
 
   void resetReports(int programId) {
-    emit(state.copyWith(numberOfStars: () => null));
-    getReports(programId: programId);
-  }
-
-  void resetDate(int programId) {
-    emit(state.copyWith(startDate: () => null, endDate: () => null));
+    emit(state.copyWith(
+        numberOfStars: () => null, startDate: () => null, endDate: () => null));
     getReports(programId: programId);
   }
 
@@ -101,7 +97,6 @@ class PieChartCubit extends Cubit<PieChartState> {
     emit(state.copyWith(
       startDate: () => startDate,
       endDate: () => endDate,
-      numberOfStars: () => null,
     ));
     getReports(programId: programId, startDate: startDate, endDate: endDate);
   }
