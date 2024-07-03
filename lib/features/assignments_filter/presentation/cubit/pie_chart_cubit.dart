@@ -27,7 +27,12 @@ class PieChartCubit extends Cubit<PieChartState> {
     } catch (e) {
       emit(state.copyWith(
           status: PieChartStateStatus.error,
-          message: e is DioException ? 'Server Error' : e.toString()));
+          message: e is DioException
+              ? e.type == DioExceptionType.connectionError ||
+                      e.type == DioExceptionType.connectionTimeout
+                  ? "Check Your network"
+                  : "Server Error"
+              : e.toString()));
     }
   }
 
@@ -62,10 +67,11 @@ class PieChartCubit extends Cubit<PieChartState> {
       final endDate = state.endDate;
 
       final pieChartModel = await _getReportsPieChartUseCase.call(
-          programId: programId,
-          startDate: startDate,
-          endDate: endDate,
-          stars: selectedStars);
+        programId: programId,
+        startDate: startDate,
+        endDate: endDate,
+        stars: selectedStars,
+      );
       emit(state.copyWith(
         status: PieChartStateStatus.loaded,
         reportsPercentages: pieChartModel?.reportsPercentages,
@@ -74,19 +80,29 @@ class PieChartCubit extends Cubit<PieChartState> {
     } catch (e) {
       emit(state.copyWith(
           status: PieChartStateStatus.error,
-          message: e is DioException ? 'Server Error' : e.toString()));
+          message: e is DioException
+              ? e.type == DioExceptionType.connectionError ||
+                      e.type == DioExceptionType.connectionTimeout
+                  ? "Check Your network"
+                  : "Server Error"
+              : e.toString()));
     }
   }
 
   void changeStars(int programId, String? starsString) async {
     final stars = getNumberOfStars(starsString);
-    emit(state.copyWith(numberOfStars: () => stars));
+    emit(state.copyWith(
+        numberOfStars: () => stars, sectionName: () => starsString));
     getReports(programId: programId, stars: stars);
   }
 
   void resetReports(int programId) {
     emit(state.copyWith(
-        numberOfStars: () => null, startDate: () => null, endDate: () => null));
+      numberOfStars: () => null,
+      startDate: () => null,
+      endDate: () => null,
+      sectionName: () => null,
+    ));
     getReports(programId: programId);
   }
 
@@ -95,9 +111,12 @@ class PieChartCubit extends Cubit<PieChartState> {
       required String startDate,
       required String endDate}) {
     emit(state.copyWith(
+      sectionName: () => null,
+      numberOfStars: () => null,
       startDate: () => startDate,
       endDate: () => endDate,
     ));
+
     getReports(programId: programId, startDate: startDate, endDate: endDate);
   }
 

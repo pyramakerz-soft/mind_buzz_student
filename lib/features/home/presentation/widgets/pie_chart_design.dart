@@ -11,6 +11,7 @@ import 'package:mind_buzz_refactor/features/home/presentation/widgets/indicator.
 
 class CirclePieChart extends StatefulWidget {
   final Map<String, num> data;
+  final String? selectedSection;
   final Function(String? key) onSectionTouch;
   final Function() onReset;
 
@@ -18,7 +19,8 @@ class CirclePieChart extends StatefulWidget {
       {Key? key,
       required this.data,
       required this.onSectionTouch,
-      required this.onReset})
+      required this.onReset,
+      this.selectedSection})
       : super(key: key);
 
   @override
@@ -26,6 +28,12 @@ class CirclePieChart extends StatefulWidget {
 }
 
 class _CirclePieChartState extends State<CirclePieChart> {
+  @override
+  void initState() {
+    super.initState();
+    _createSelectedSection();
+  }
+
   int touchedIndex = -1;
   String? selectedSection;
   final colors = const [
@@ -68,8 +76,8 @@ class _CirclePieChartState extends State<CirclePieChart> {
                               }
                               touchedIndex = pieTouchResponse
                                   .touchedSection!.touchedSectionIndex;
-                              final touchedKey =
-                                  widget.data.keys.elementAt(touchedIndex);
+                              final touchedKey = pieTouchResponse
+                                  .touchedSection!.touchedSection!.title;
 
                               if (touchedKey != selectedSection) {
                                 if (!isEmpty && !isAnyEqualsHundred) {
@@ -149,18 +157,20 @@ class _CirclePieChartState extends State<CirclePieChart> {
     );
   }
 
+  void _createSelectedSection() {
+    setState(() {
+      selectedSection = widget.selectedSection;
+    });
+  }
+
   List<PieChartSectionData> showingSections() {
     return widget.data.entries.map((entry) {
       int index = widget.data.keys.toList().indexOf(entry.key);
       String key = entry.key;
-      final isTouched = index == touchedIndex;
       final isSelected = key == selectedSection;
       final isDefault = selectedSection == null;
       final isEmpty = entry.value == 0;
-      final fontSize = isTouched ? 25.sp : 16.sp;
       final radius = isSelected ? 60.r : 40.r;
-      const shadows = [Shadow(color: Colors.black, blurRadius: 2)];
-
       return PieChartSectionData(
         color: isEmpty
             ? AppColor.greyColor
@@ -170,14 +180,9 @@ class _CirclePieChartState extends State<CirclePieChart> {
                     ? colors[index % colors.length]
                     : colors[index % colors.length].withOpacity(0.3),
         value: entry.value.toDouble(),
-        title: '',
+        title: entry.key,
         radius: radius,
-        titleStyle: TextStyle(
-          fontSize: fontSize,
-          fontWeight: FontWeight.bold,
-          color: AppColor.textFieldColor,
-          shadows: shadows,
-        ),
+        showTitle: false,
       );
     }).toList();
   }
