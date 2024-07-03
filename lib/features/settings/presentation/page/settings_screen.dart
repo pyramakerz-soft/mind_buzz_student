@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 import 'package:mind_buzz_refactor/features/settings/presentation/page/profile_data_screen.dart';
 import 'package:mind_buzz_refactor/features/settings/presentation/widgets/user_header_loading.dart';
@@ -25,7 +26,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: customAppBar(context: context, title: 'Settings'),
+        appBar: _buildAppBar(context: context, title: 'Settings'),
         body: Container(
             padding: EdgeInsets.symmetric(horizontal: 15.h),
             child: BlocConsumer<LoginDataBloc, LoginDataState>(
@@ -87,5 +88,48 @@ class SettingsScreen extends StatelessWidget {
                 );
               },
             )));
+  }
+
+  PreferredSize _buildAppBar({
+    required BuildContext context,
+    required String title,
+    Widget? action,
+  }) {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(kToolbarHeight),
+      child: Container(
+        decoration: const BoxDecoration(boxShadow: [
+          BoxShadow(
+            color: AppColor.lightGreyColor,
+            offset: Offset(1, 1.0),
+            blurRadius: 5.0,
+          )
+        ]),
+        child: Column(
+          children: [
+            AppBar(
+              leadingWidth: 52,
+              backgroundColor: Colors.white,
+              surfaceTintColor: Colors.white,
+              title: Row(
+                children: [
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          // height: 0,
+                          // letterSpacing: 0.44,
+                          fontSize: 22,
+                        ),
+                  ),
+                  const Spacer(),
+                  action ?? 0.pw,
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
