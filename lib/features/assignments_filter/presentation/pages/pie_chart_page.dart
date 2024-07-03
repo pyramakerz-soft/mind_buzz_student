@@ -84,44 +84,38 @@ class PieChartPage extends StatelessWidget {
                       ),
                     ),
             ),
-            body: Builder(builder: (context) {
-              final pieChartCubit = context.read<PieChartCubit>();
-
-              return BlocBuilder<PieChartCubit, PieChartState>(
-                builder: (context, state) {
-                  final selectedSection = state.sectionName;
-                  return Column(
-                    children: [
-                      isAssignment
-                          ? _buildDropDownList(context)
-                          : const SizedBox(),
-                      _buildPieChartDesign(state, pieChartCubit),
+            body: BlocBuilder<PieChartCubit, PieChartState>(
+              builder: (context, state) {
+                return Column(
+                  children: [
+                    isAssignment
+                        ? _buildDropDownList(context)
+                        : const SizedBox(),
+                    _buildPieChartDesign(context),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    if (isAssignment
+                        ? (state.tests.isEmpty && !state.isLoading)
+                        : (state.progress.isEmpty && !state.isLoading))
+                      _buildEmptyCase(),
+                    if (state.isLoading) _buildLoadingCase(),
+                    if (isAssignment
+                        ? (state.tests.isNotEmpty && !state.isLoading)
+                        : (state.progress.isNotEmpty && !state.isLoading)) ...[
+                      _buildAssignmentsCounts(context),
                       const SizedBox(
                         height: 10,
                       ),
-                      if (isAssignment
-                          ? (state.tests.isEmpty && !state.isLoading)
-                          : (state.progress.isEmpty && !state.isLoading))
-                        _buildEmptyCase(),
-                      if (state.isLoading) _buildLoadingCase(),
-                      if (isAssignment
-                          ? (state.tests.isNotEmpty && !state.isLoading)
-                          : (state.progress.isNotEmpty &&
-                              !state.isLoading)) ...[
-                        _buildAssignmentsCounts(selectedSection, state),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        _buildListOfAssignments(state),
-                      ],
-                      const SizedBox(
-                        height: 20,
-                      )
+                      _buildListOfAssignments(state),
                     ],
-                  );
-                },
-              );
-            }),
+                    const SizedBox(
+                      height: 20,
+                    )
+                  ],
+                );
+              },
+            ),
           );
         }),
       ),
@@ -143,7 +137,9 @@ class PieChartPage extends StatelessWidget {
     );
   }
 
-  Widget _buildAssignmentsCounts(String? selectedSection, PieChartState state) {
+  Widget _buildAssignmentsCounts(BuildContext context) {
+    final state = context.read<PieChartCubit>().state;
+    final selectedSection = state.sectionName;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -192,8 +188,9 @@ class PieChartPage extends StatelessWidget {
     );
   }
 
-  Widget _buildPieChartDesign(
-      PieChartState state, PieChartCubit pieChartCubit) {
+  Widget _buildPieChartDesign(BuildContext context) {
+    final pieChartCubit = context.read<PieChartCubit>();
+    final state = pieChartCubit.state;
     return CirclePieChart(
       data: isAssignment
           ? {
@@ -214,6 +211,7 @@ class PieChartPage extends StatelessWidget {
       onReset: isAssignment
           ? () => pieChartCubit.resetStatus()
           : () => pieChartCubit.resetReports(programId!),
+      selectedSection: state.sectionName,
     );
   }
 
