@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
 
@@ -398,23 +399,23 @@ class LoginAnimatedVectors extends StatelessWidget {
         children: [
           // SvgPicture.asset(AppSvgImages.iconSkyLogin),
           // Image.asset(AppImages.imageBeeLogin),
-          const Positioned(
+          Positioned(
             top: 0,
             left: 0,
             child: SizedBox(
-              height: 120,
-              width: 120,
+              height: 120.h,
+              width: 120.w,
               child: RiveAnimation.asset(
                 AppAnimation.cloudRive,
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
             right: 10,
             top: 0,
             child: SizedBox(
-              height: 90,
-              width: 90,
+              height: 90.h,
+              width: 90.w,
               child: Opacity(
                 opacity: 0.4,
                 child: RiveAnimation.asset(
@@ -423,12 +424,12 @@ class LoginAnimatedVectors extends StatelessWidget {
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
             left: 50,
             top: 100,
             child: SizedBox(
-              height: 100,
-              width: 200,
+              height: 100.h,
+              width: 200.w,
               child: RiveAnimation.asset(
                 AppAnimation.cloudRive,
               ),
@@ -439,9 +440,9 @@ class LoginAnimatedVectors extends StatelessWidget {
             child: Column(
               children: [
                 Image.asset(AppImages.mindBuzzLogo),
-                const SizedBox(
-                  height: 200,
-                  width: 220,
+                SizedBox(
+                  height: 200.h,
+                  width: 220.w,
                   child: RiveAnimation.asset(
                     AppAnimation.beeRive,
                   ),
