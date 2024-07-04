@@ -66,8 +66,8 @@ class _HomeScreen extends State<HomeScreen> {
                   }
                 } else if (state is LogOutLoadingState) {
                   Navigator.of(context).pop();
-                }else if( state is GetProgramsCompleteInitial){
-                  if(state.isHaveAssignments) {
+                } else if (state is GetProgramsCompleteInitial) {
+                  if (state.isHaveAssignments) {
                     TalkTts.startTalk(text: DefaultHomeData.haveAnAssignment);
                   }
                 }
@@ -81,150 +81,146 @@ class _HomeScreen extends State<HomeScreen> {
                       children: [
                         if (Singleton().studentAssignments != null &&
                             state.isHaveAssignments) ...{
-                          SizedBox(
-                            height: 50.h,
-                            child: Stack(
-                              fit: StackFit.passthrough,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      color: AppColor.redColor),
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 12),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Flexible(
-                                        child: FittedBox(
-                                          child: Text(
-                                            DefaultHomeData.haveAnAssignment,
-                                            style: TextStyle(
-                                                fontSize: MediaQuery.of(context)
-                                                            .size
-                                                            .reDeginSize(
-                                                                16, context) >
-                                                        16
-                                                    ? 16
-                                                    : MediaQuery.of(context)
-                                                        .size
-                                                        .reDeginSize(
-                                                            16, context),
-                                                fontWeight: FontWeight.w600,
-                                                color: AppColor.white),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          Utils.navigateTo(
-                                              BlocProvider(
-                                                  create: (_) =>
-                                                      CheckAssignmentCubit(
-                                                          assignmentProgrammes:
-                                                              state.data),
-                                                  child:
-                                                      StudentAssignmentScreen()),
-                                              context);
-                                        },
-                                        child: Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 8, horizontal: 10),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              color: Colors.white),
-                                          child: Text(
-                                            'Start Now?',
-                                            //style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColor.redColor4, fontSize: MediaQuery.of(context).size.reDeginSize(13, context) > 35 ? 35 : MediaQuery.of(context).size.reDeginSize(13, context), fontWeight: FontWeight.w700),
-                                            style: TextStyle(
-                                                color: AppColor.redColor4,
-                                                fontSize: MediaQuery.of(context)
-                                                            .size
-                                                            .reDeginSize(
-                                                                13, context) >
-                                                        14
-                                                    ? 14
-                                                    : MediaQuery.of(context)
-                                                        .size
-                                                        .reDeginSize(
-                                                            13, context),
-                                                fontWeight: FontWeight.w700),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Positioned(
-                                  right: 0,
-                                  top: 0,
-                                  child: Container(
-                                    padding: const EdgeInsets.all(6),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                          color: AppColor.redColor, width: 2),
-                                    ),
-                                    constraints: const BoxConstraints(
-                                      minWidth: 24,
-                                      minHeight: 24,
-                                    ),
-                                    child: Center(
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Container(
+                              height: 50.h,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: AppColor.redColor),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 12),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Flexible(
+                                    flex: 4,
+                                    child: FittedBox(
                                       child: Text(
-                                        "${state.data.fold(0, (previousValue, element) => (element.program?.studentTests?.length ?? 0) + (int.parse('$previousValue')))}",
-                                        style: const TextStyle(
-                                          color: AppColor.redColor,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                        textAlign: TextAlign.center,
+                                        DefaultHomeData.haveAnAssignment,
+                                        style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .reDeginSize(
+                                                            16, context) >
+                                                    16
+                                                ? 16
+                                                : MediaQuery.of(context)
+                                                    .size
+                                                    .reDeginSize(16, context),
+                                            fontWeight: FontWeight.w600,
+                                            color: AppColor.white),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                  10.pw,
+                                  Flexible(
+                                    flex: 2,
+                                    child: Stack(
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            Utils.navigateTo(
+                                                BlocProvider(
+                                                    create: (_) =>
+                                                        CheckAssignmentCubit(
+                                                            assignmentProgrammes:
+                                                                state.data),
+                                                    child:
+                                                        StudentAssignmentScreen()),
+                                                context);
+                                          },
+                                          child: Container(
+                                            padding: const EdgeInsets.all(10),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                                color: Colors.white),
+                                            child: Text(
+                                              'Start Now?',
+                                              //style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColor.redColor4, fontSize: MediaQuery.of(context).size.reDeginSize(13, context) > 35 ? 35 : MediaQuery.of(context).size.reDeginSize(13, context), fontWeight: FontWeight.w700),
+                                              style: TextStyle(
+                                                  color: AppColor.redColor4,
+                                                  fontSize: MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .reDeginSize(
+                                                                  13, context) >
+                                                          14
+                                                      ? 14
+                                                      : MediaQuery.of(context)
+                                                          .size
+                                                          .reDeginSize(
+                                                              13, context),
+                                                  fontWeight: FontWeight.w700),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          right: 0,
+                                          top: -3,
+                                          child: Container(
+                                            padding: const EdgeInsets.all(2),
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                  color: AppColor.redColor,
+                                                  width: 1),
+                                            ),
+                                            constraints: const BoxConstraints(
+                                              minWidth: 20,
+                                              minHeight: 20,
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                "${state.data.fold(0, (previousValue, element) => (element.program?.studentTests?.length ?? 0) + (int.parse('$previousValue')))}",
+                                                style: const TextStyle(
+                                                  color: AppColor.redColor,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
-                          32.ph,
                         },
-                        SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height - (state.isHaveAssignments?(240):170),
-                                child: ListView(
-                                  shrinkWrap: true,
-                                  children: List.generate(
-                                      state.data.length,
-                                      (index) => Column(
-                                            children: [
-                                              CardOfProgram(
-                                                programId:
-                                                    "${state.data[index].programId ?? ''}",
-                                                colors:
-                                                    DefaultHomeData.getColor(
-                                                        index: (index + 1)),
-                                                mainImage: state
-                                                    .data[index].program?.image,
-                                                title: state.data[index].program
-                                                        ?.course?.name ??
-                                                    '',
-                                              ),
-                                              24.ph,
-                                            ],
-                                          )),
+                        Column(
+                          children: [
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height -
+                                  (state.isHaveAssignments ? (240) : 170),
+                              child: ListView.separated(
+                                shrinkWrap: true,
+                                itemCount: state.data.length,
+                                itemBuilder: (context, index) => CardOfProgram(
+                                  programId:
+                                      "${state.data[index].programId ?? ''}",
+                                  colors: DefaultHomeData.getColor(
+                                      index: (index + 1)),
+                                  mainImage: state.data[index].program?.image,
+                                  title:
+                                      state.data[index].program?.course?.name ??
+                                          '',
                                 ),
+                                separatorBuilder: (context, index) =>
+                                    index == state.data.length - 1
+                                        ? 50.ph
+                                        : 12.ph,
                               ),
-                              40.ph,
-                            ],
-                          ),
+                            ),
+                            40.ph,
+                          ],
                         ),
                       ],
                     ),

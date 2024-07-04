@@ -60,33 +60,35 @@ class CardOfProgram extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              margin: const EdgeInsets.only(left: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          color: Colors.white,
-                        )),
-                    child: const Icon(
-                      Icons.play_arrow,
-                      color: Colors.white,
-                    ),
-                  ),
-                  10.ph,
-                  Text(title,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            fontSize: 25,
-                            fontWeight: FontWeight.w700,
-                            height: 0,
-                            letterSpacing: 0.50,
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.only(left: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: Colors.white,
                           )),
-                ],
+                      child: const Icon(
+                        Icons.play_arrow,
+                        color: Colors.white,
+                      ),
+                    ),
+                    10.ph,
+                    Text(title,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              fontSize: 25,
+                              fontWeight: FontWeight.w700,
+                              height: 0,
+                              letterSpacing: 0.50,
+                            )),
+                  ],
+                ),
               ),
             ),
             Expanded(

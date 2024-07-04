@@ -109,7 +109,8 @@ class CalenderScreen extends StatelessWidget {
                               return Align(
                                 alignment: Alignment.topRight,
                                 child: Container(
-                                  padding: EdgeInsets.all(5.h),
+                                  height: 20.h,
+                                  width: 20.w,
                                   decoration: BoxDecoration(
                                       color:
                                           Utils.formatDate(state.currentDate) ==
@@ -123,21 +124,25 @@ class CalenderScreen extends StatelessWidget {
                                             blurRadius: 1,
                                             spreadRadius: 1)
                                       ]),
-                                  child: Text(
-                                    bloc.tests
-                                        .where((element) =>
-                                            Utils.parseStringToDate(
-                                                element.createdAt!) ==
-                                            Utils.formatDate(day))
-                                        .toList()
-                                        .length
-                                        .toString(),
-                                    style: TextStyle(
-                                        color: Utils.formatDate(
-                                                    state.currentDate) ==
-                                                Utils.formatDate(day)
-                                            ? AppColor.darkBlueColor
-                                            : Colors.white),
+                                  child: Center(
+                                    child: Text(
+                                      bloc.tests
+                                          .where((element) =>
+                                              Utils.parseStringToDate(
+                                                  element.createdAt!) ==
+                                              Utils.formatDate(day))
+                                          .toList()
+                                          .length
+                                          .toString(),
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 12.sp,
+                                          color: Utils.formatDate(
+                                                      state.currentDate) ==
+                                                  Utils.formatDate(day)
+                                              ? AppColor.darkBlueColor
+                                              : Colors.white),
+                                    ),
                                   ),
                                 ),
                               );

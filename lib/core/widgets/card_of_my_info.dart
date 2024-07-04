@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import 'package:mind_buzz_refactor/features/login/presentation/bloc/login_data_bloc.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 
 import '../../features/home/presentation/bloc/get_programs_home_bloc.dart';
@@ -21,16 +22,15 @@ class CardOfMyInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userData = context.watch<LoginCubit>().userData;
+    final userData = context.watch<LoginDataBloc>().userData;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
-
           children: [
             15.pw,
-            if( userData?.parentImage!= null)
+            if (userData?.parentImage != null)
               CircleAvatar(
                 radius: 22.h,
                 backgroundColor: Colors.white,
@@ -39,27 +39,27 @@ class CardOfMyInfo extends StatelessWidget {
                 ),
               )
             else
-            ClipRRect(
-              borderRadius: BorderRadius.circular(100),
-              child: Image.asset(
-                AppImages.imagePersonAvatar,
-                width: 50,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: Image.asset(
+                  AppImages.imagePersonAvatar,
+                  width: 50,
+                ),
               ),
-            ),
             10.pw,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 SizedBox(
-                   width: 0.7.sw,
-                   child: Text(
-                     'Hi ${userData?.name ?? ''} !',
-                     style: Theme.of(context)
-                         .textTheme
-                         .headlineLarge
-                         ?.copyWith(fontSize: 18, fontWeight: FontWeight.w700),
-                   ),
-                 ),
+                SizedBox(
+                  width: 0.7.sw,
+                  child: Text(
+                    'Hi ${userData?.name ?? ''} !',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineLarge
+                        ?.copyWith(fontSize: 18, fontWeight: FontWeight.w700),
+                  ),
+                ),
                 Text(userData?.school?.name ?? '',
                     style: Theme.of(context)
                         .textTheme

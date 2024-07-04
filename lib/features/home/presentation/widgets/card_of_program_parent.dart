@@ -80,56 +80,56 @@ class CardOfProgramParent extends StatelessWidget {
                     );
                   }),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Row(
-                  children: [
-                    SvgPicture.asset(AppSvgImages.iconAssign),
-                    2.5.pw,
-                    Text(
-                      'Assign',
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          fontSize: 12.sp, fontWeight: FontWeight.w400),
-                    ),
-                    // 5.pw,
-                    if ((dataOfProgram.program?.studentTests?.length ?? 0) >
-                        0) ...{
-                      2.pw,
-                      Container(
-                        width: 20,
-                        height: 20,
-                        decoration: ShapeDecoration(
-                          color: AppColor.darkBlueColor10,
-                          shape: OvalBorder(),
-                        ),
-                        alignment: Alignment.center,
-                        // padding: E/dgeInsets.all(5),
-                        child: Text(
-                          "${dataOfProgram.program?.studentTests?.length ?? 0}",
-                          style: Theme.of(context)
-                              .textTheme
-                              .displayLarge
-                              ?.copyWith(
-                                  fontSize: 8.sp, fontWeight: FontWeight.w400),
-                        ),
-                      )
-                    }
-                  ],
-                ),
-                Row(
-                  children: [
-                    SvgPicture.asset(AppSvgImages.iconReport),
-                    5.pw,
-                    Text(
-                      'Report',
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          fontSize: 12.sp, fontWeight: FontWeight.w400),
-                    ),
-                  ],
-                )
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //   children: [
+            //     Row(
+            //       children: [
+            //         SvgPicture.asset(AppSvgImages.iconAssign),
+            //         2.5.pw,
+            //         Text(
+            //           'Assign',
+            //           style: Theme.of(context).textTheme.labelLarge?.copyWith(
+            //               fontSize: 12.sp, fontWeight: FontWeight.w400),
+            //         ),
+            //         // 5.pw,
+            //         if ((dataOfProgram.program?.studentTests?.length ?? 0) >
+            //             0) ...{
+            //           2.pw,
+            //           Container(
+            //             width: 20,
+            //             height: 20,
+            //             decoration: ShapeDecoration(
+            //               color: AppColor.darkBlueColor10,
+            //               shape: OvalBorder(),
+            //             ),
+            //             alignment: Alignment.center,
+            //             // padding: E/dgeInsets.all(5),
+            //             child: Text(
+            //               "${dataOfProgram.program?.studentTests?.length ?? 0}",
+            //               style: Theme.of(context)
+            //                   .textTheme
+            //                   .displayLarge
+            //                   ?.copyWith(
+            //                       fontSize: 8.sp, fontWeight: FontWeight.w400),
+            //             ),
+            //           )
+            //         }
+            //       ],
+            //     ),
+            //     Row(
+            //       children: [
+            //         SvgPicture.asset(AppSvgImages.iconReport),
+            //         5.pw,
+            //         Text(
+            //           'Report',
+            //           style: Theme.of(context).textTheme.labelLarge?.copyWith(
+            //               fontSize: 12.sp, fontWeight: FontWeight.w400),
+            //         ),
+            //       ],
+            //     )
+            //   ],
+            // ),
             10.ph
           ],
         ),

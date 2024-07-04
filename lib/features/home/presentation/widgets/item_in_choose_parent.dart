@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:mind_buzz_refactor/core/app_color.dart';
+import 'package:mind_buzz_refactor/core/vars.dart';
 
 import '../../../../core/theme_text.dart';
 
@@ -41,11 +43,9 @@ class ItemInChooseParent extends StatelessWidget {
           ],
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(
-              width: 20,
-            ),
+            20.pw,
             FittedBox(
               child: Text(
                 text,
@@ -57,21 +57,22 @@ class ItemInChooseParent extends StatelessWidget {
                     //           fontFamily: AppTheme.getFontFamily5(),
                     //         ) :
                     Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontSize: 30,
-                          // fontWeight: FontWeight.w700,
+                          fontSize: 24.sp,
+                          fontWeight: FontWeight.w700,
+                          color: AppColor.darkBlueColor,
                           fontFamily: AppTheme.getFontFamily5(),
                         ),
               ),
             ),
             const Spacer(),
-            Image.asset(
-              image,
-              height: 112,
-              width: 129,
+            FittedBox(
+              child: Image.asset(
+                image,
+                height: 112,
+                width: 120,
+              ),
             ),
-            const SizedBox(
-              width: 20,
-            ),
+            20.pw,
           ],
         ),
       ),

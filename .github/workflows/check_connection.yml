@@ -17,7 +17,7 @@ jobs:
           elif [ "${{ github.ref }}" == "refs/heads/release" ]; then
             sed -i 's/static const base = .*/static const base = '\''ambernoak.co.uk\/Fillament\/public'\'';/' lib/core/connection.dart
           elif [ "${{ github.ref }}" == "refs/heads/test_server" ]; then
-            sed -i 's/static const base = .*/static const base = '\''hqsync.duckdns.org\/Fillament\/public'\'';/' lib/core/connection.dart
+            sed -i 's/static const base = .*/static const base = '\''ambernoak.co.uk\/Fillament\/public'\'';/' lib/core/connection.dart
           fi
 
       - name: Check for changes and commit

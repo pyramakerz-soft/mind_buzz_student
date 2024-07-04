@@ -16,6 +16,7 @@ GameModel _$GameModelFromJson(Map<String, dynamic> json) => GameModel(
       video: json['video'] as String?,
       mainLetter: json['main_letter'] as String?,
       inst: json['inst'] as String?,
+      name: json['name'] as String?,
       numOfTrials: (json['num_of_trials'] as num?)?.toInt(),
       lesson: json['lesson'] == null
           ? null
@@ -48,6 +49,7 @@ Map<String, dynamic> _$GameModelToJson(GameModel instance) => <String, dynamic>{
       'num_of_trials': instance.numOfTrials,
       'created_at': instance.createdAt,
       'inst': instance.inst,
+      'name': instance.name,
       'main_letter': instance.mainLetter,
       'updated_at': instance.updatedAt,
       'correct_ans': instance.correctAns,
