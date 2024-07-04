@@ -101,10 +101,10 @@ packages:
     dependency: "direct main"
     description:
       name: based_of_eng_game
-      sha256: "99f1681ec5a3094cda064e0d2e886029fc34939adb3b9d20174ddac67b77eccc"
+      sha256: c899c561a66cc1dc06480c8a6bbce23dca3625a644b9a22be88bad3f38f1d1a2
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.8"
+    version: "0.2.0"
   bloc:
     dependency: transitive
     description:
