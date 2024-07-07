@@ -105,6 +105,13 @@ class _PhoneticsBook extends State<PhoneticsBook> {
               debugPrint('#########################################');
             },
             showTheEditedGames: false,
+              backButton:(){
+                debugPrint(
+                    'backButton#########################################');
+
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              }
           );
         } else if (stateOfGameData.isLoading) {
           return stateOfGameData.avatarArtboardLoading != null
