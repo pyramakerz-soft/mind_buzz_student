@@ -101,10 +101,10 @@ packages:
     dependency: "direct main"
     description:
       name: based_of_eng_game
-      sha256: "630d378d1920fbc3695718cdea353ba298a8a3aa2f826061c1f0f403ef6271d8"
+      sha256: "82812de3ee9a1c93da6b0bf4591dbc86c068ee7645ac8dedf8adcc14570e36b8"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.0+4"
+    version: "0.2.1"
   bloc:
     dependency: transitive
     description:
@@ -490,10 +490,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_bloc
-      sha256: f0ecf6e6eb955193ca60af2d5ca39565a86b8a142452c5b24d96fb477428f4d2
+      sha256: b594505eac31a0518bdcb4b5b79573b8d9117b193cc80cc12e17d639b10aa27a
       url: "https://pub.dev"
     source: hosted
-    version: "8.1.5"
+    version: "8.1.6"
   flutter_cache_manager:
     dependency: transitive
     description:
