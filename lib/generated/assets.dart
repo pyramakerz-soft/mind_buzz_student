@@ -233,6 +233,7 @@ class Assets {
   static const String soundH = 'assets/sound/h.mp3';
   static const String soundI = 'assets/sound/i.mp3';
   static const String soundJ = 'assets/sound/j.mp3';
+  static const String soundK = 'assets/sound/k.mp3';
   static const String soundL = 'assets/sound/l.mp3';
   static const String soundM = 'assets/sound/m.mp3';
   static const String soundN = 'assets/sound/n.mp3';
