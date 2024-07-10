@@ -81,6 +81,7 @@ class ProfileDataScreen extends StatelessWidget {
                     icon: ParentImages.phone,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       PersonalInfoItem(
                         title: 'Password',
@@ -91,12 +92,15 @@ class ProfileDataScreen extends StatelessWidget {
                         icon: ParentImages.lock,
                         isPassword: true,
                       ),
-                      Spacer(),
-                      Text('Reset',
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleSmall
-                              ?.copyWith(color: AppColor.resetText)),
+                      Flexible(
+                        child: FittedBox(
+                          child: Text('Reset',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall
+                                  ?.copyWith(color: AppColor.resetText)),
+                        ),
+                      ),
                     ],
                   ),
                 ],
