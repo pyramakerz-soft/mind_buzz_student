@@ -23,12 +23,18 @@ class ItemOfSubBody extends StatelessWidget {
         strokeWidth: 1.5,
       );
     } else if (chapterData.isGame == true) {
-      return Text(
-        '${chapterData.name ?? 0}',
-        style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            color: AppColor.darkBlueColor3),
+      return SizedBox(
+        width: 125,
+        child: Text(
+          '${chapterData.name ?? 0}',
+          textAlign: TextAlign.center,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w500,
+              color: AppColor.darkBlueColor3),
+        ),
       );
     } else {
       return const SizedBox();

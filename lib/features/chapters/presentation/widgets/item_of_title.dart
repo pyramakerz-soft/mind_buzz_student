@@ -43,9 +43,12 @@ class ItemOfTitle extends StatelessWidget {
                       height: (chapterData.isGame ?? false) ? 25 : 30,
                     ),
                   )
-                : Image.asset(
-                    AppImages.iconEmptyStar,
-                    height: (chapterData.isGame ?? false) ? 25 : 30,
+                : Padding(
+                    padding: EdgeInsets.only(bottom: index == 1 ? 10.0 : 0),
+                    child: Image.asset(
+                      AppImages.iconEmptyStar,
+                      height: (chapterData.isGame ?? false) ? 25 : 30,
+                    ),
                   )),
       );
     } else {
