@@ -9,8 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
-import 'package:mind_buzz_refactor/core/assets_images.dart';
-import 'package:mind_buzz_refactor/core/extensions.dart';
 import '../../../../core/assets_animation.dart';
 import '../../../../core/assets_svg_images.dart';
 import '../../../../core/error/failures_messages.dart';
@@ -24,12 +22,6 @@ import '../../../chapters/presentation/manager/journey_bar_cubit.dart';
 import '../../../chapters/presentation/pages/chapters_screens.dart';
 import '../../../login/presentation/page/login_screen.dart';
 import '../manager/bloc/get_unit_bloc.dart';
-import '../widgets/animation_of_bee.dart';
-import '../widgets/animation_of_bee2.dart';
-import '../widgets/animation_of_bee5.dart';
-import '../widgets/animation_of_tree.dart';
-import '../widgets/animation_of_bee3.dart';
-import '../widgets/animation_of_bee4.dart';
 import '../widgets/item_of_unit.dart';
 
 class UnitScreen extends StatelessWidget {
@@ -163,7 +155,7 @@ class UnitScreen extends StatelessWidget {
                                                       .titleMedium
                                                       ?.copyWith(
                                                         color: AppColor.white,
-                                                        fontSize: 18,
+                                                        fontSize: 18.sp,
                                                         fontWeight:
                                                             FontWeight.w700,
                                                       ),

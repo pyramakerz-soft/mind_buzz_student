@@ -16,10 +16,12 @@ class CardOfProgram extends StatelessWidget {
   final List<Color> colors;
   final String title;
   final String programId;
+  final bool isMob;
   final String? mainImage;
 
   const CardOfProgram(
       {Key? key,
+      this.isMob = true,
       required this.colors,
       required this.title,
       required this.programId,
@@ -40,8 +42,6 @@ class CardOfProgram extends StatelessWidget {
             context);
       },
       child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height / 5,
         decoration: ShapeDecoration(
             gradient: LinearGradient(
               colors: colors,
@@ -57,59 +57,105 @@ class CardOfProgram extends StatelessWidget {
                 offset: const Offset(0, 5),
               )
             ]),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: isMob
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildColumnOfPlayAndTitle(context),
+                  _buildImageOfProgram(context),
+                ],
+              )
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildImageOfProgram(context),
+                  _buildRowOfPlayAndTitle(context),
+                ],
+              ),
+      ),
+    );
+  }
+
+  Widget _buildColumnOfPlayAndTitle(BuildContext context) {
+    return Expanded(
+      child: Container(
+        margin: const EdgeInsets.only(left: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.only(left: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: Colors.white,
-                          )),
-                      child: const Icon(
-                        Icons.play_arrow,
-                        color: Colors.white,
-                      ),
-                    ),
-                    10.ph,
-                    Text(title,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w700,
-                              height: 0,
-                              letterSpacing: 0.50,
-                            )),
-                  ],
-                ),
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: Colors.white,
+                  )),
+              child: const Icon(
+                Icons.play_arrow,
+                color: Colors.white,
               ),
             ),
-            Expanded(
-              child: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                    bottomRight: Radius.circular(20),
-                    topRight: Radius.circular(20)),
-                child: CachedNetworkImage(
-                    imageUrl: mainImage ?? DefaultHomeData.image,
-                    height: MediaQuery.of(context).size.height / 5,
-                    errorWidget: (context, url, error) {
-                      return Image.network(
-                        DefaultHomeData.image,
-                        width: MediaQuery.of(context).size.width / 2,
-                        height: MediaQuery.of(context).size.height / 5,
-                      );
-                    }),
-              ),
-            ),
+            10.ph,
+            Text(title,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w700,
+                      height: 0,
+                      letterSpacing: 0.50,
+                    )),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildRowOfPlayAndTitle(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: Colors.white,
+                )),
+            child: const Icon(
+              Icons.play_arrow,
+              color: Colors.white,
+            ),
+          ),
+          10.pw,
+          Text(title,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w700,
+                    height: 0,
+                    letterSpacing: 0.50,
+                  )),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildImageOfProgram(BuildContext context) {
+    return Expanded(
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(
+            bottomRight: Radius.circular(20), topRight: Radius.circular(20)),
+        child: CachedNetworkImage(
+            imageUrl: mainImage ?? DefaultHomeData.image,
+            height: MediaQuery.of(context).size.height / 5,
+            errorWidget: (context, url, error) {
+              return Image.network(
+                DefaultHomeData.image,
+                width: MediaQuery.of(context).size.width / 2,
+                height: MediaQuery.of(context).size.height / 5,
+              );
+            }),
       ),
     );
   }
