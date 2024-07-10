@@ -19,12 +19,16 @@ class ItemOfSubBody extends StatelessWidget {
     var shortestSide = MediaQuery.of(context).size.shortestSide;
     final bool useMobileLayout = shortestSide < 600;
     if (chapterData.isLetter == true) {
-      return StrokeText(
-        text: chapterData.name ?? '',
-        isDisabled: false,
-        fontSize: 0.03.sh,
-        strokeWidth: 1.5,
-      );
+      return SizedBox(
+          width: 125,
+          child: FittedBox(
+            child: StrokeText(
+              text: chapterData.name ?? '',
+              isDisabled: false,
+              fontSize: 0.03.sh,
+              strokeWidth: 1.5,
+            ),
+          ));
     } else if (chapterData.isGame == true) {
       return SizedBox(
         width: 125,
