@@ -13,8 +13,11 @@ class ItemOfSubBody extends StatelessWidget {
   final ChapterModel chapterData;
 
   const ItemOfSubBody({Key? key, required this.chapterData}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    var shortestSide = MediaQuery.of(context).size.shortestSide;
+    final bool useMobileLayout = shortestSide < 600;
     if (chapterData.isLetter == true) {
       return StrokeText(
         text: chapterData.name ?? '',
@@ -31,7 +34,7 @@ class ItemOfSubBody extends StatelessWidget {
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-              fontSize: 14.sp,
+              fontSize: useMobileLayout ? 14.sp : 10.sp,
               fontWeight: FontWeight.w500,
               color: AppColor.darkBlueColor3),
         ),
