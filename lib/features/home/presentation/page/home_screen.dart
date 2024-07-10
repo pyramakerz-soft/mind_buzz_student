@@ -36,6 +36,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreen extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    var shortestSide = MediaQuery.of(context).size.shortestSide;
+    final bool useMobileLayout = shortestSide < 600;
     return Column(
       children: [
         20.ph,
@@ -88,24 +90,49 @@ class _HomeScreen extends State<HomeScreen> {
                             SizedBox(
                               height: MediaQuery.of(context).size.height -
                                   (state.isHaveAssignments ? (240) : 170),
-                              child: ListView.separated(
-                                shrinkWrap: true,
-                                itemCount: state.data.length,
-                                itemBuilder: (context, index) => CardOfProgram(
-                                  programId:
-                                      "${state.data[index].programId ?? ''}",
-                                  colors: DefaultHomeData.getColor(
-                                      index: (index + 1)),
-                                  mainImage: state.data[index].program?.image,
-                                  title:
-                                      state.data[index].program?.course?.name ??
-                                          '',
-                                ),
-                                separatorBuilder: (context, index) =>
-                                    index == state.data.length - 1
-                                        ? 50.ph
-                                        : 12.ph,
-                              ),
+                              child: useMobileLayout
+                                  ? ListView.separated(
+                                      shrinkWrap: true,
+                                      itemCount: state.data.length,
+                                      itemBuilder: (context, index) =>
+                                          CardOfProgram(
+                                        programId:
+                                            "${state.data[index].programId ?? ''}",
+                                        colors: DefaultHomeData.getColor(
+                                            index: (index + 1)),
+                                        mainImage:
+                                            state.data[index].program?.image,
+                                        title: state.data[index].program?.course
+                                                ?.name ??
+                                            '',
+                                      ),
+                                      separatorBuilder: (context, index) =>
+                                          index == state.data.length - 1
+                                              ? 50.ph
+                                              : 12.ph,
+                                    )
+                                  : GridView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: state.data.length,
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2),
+                                      itemBuilder: (context, index) => Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: CardOfProgram(
+                                          isMob: false,
+                                          programId:
+                                              "${state.data[index].programId ?? ''}",
+                                          colors: DefaultHomeData.getColor(
+                                              index: (index + 1)),
+                                          mainImage:
+                                              state.data[index].program?.image,
+                                          title: state.data[index].program
+                                                  ?.course?.name ??
+                                              '',
+                                        ),
+                                      ),
+                                    ),
                             ),
                             40.ph,
                           ],
