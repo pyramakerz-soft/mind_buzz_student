@@ -81,6 +81,7 @@ List<ChapterModel> handlingDataOfChapters(
       dataOfChapters.add(ChapterModel(
           id: value.first.id,
           lessonId: value.first.lessonId,
+          isActive: value.first.isActive == 0 ? false : true,
           name: value.first.name ?? 'Game $index',
           number: index,
           star: value.first.stars,

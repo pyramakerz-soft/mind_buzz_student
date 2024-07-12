@@ -179,20 +179,23 @@ class ChaptersScreen extends StatelessWidget {
                                 child: LevelMap(
                                   backgroundColor: Colors.transparent,
                                   onTapLevel: (index) {
-                                    if (games[index].isGame == true) {
-                                      final p = context.read<JourneyBarCubit>();
+                                    if (games[index].isActive == true) {
+                                      if (games[index].isGame == true) {
+                                        final p =
+                                            context.read<JourneyBarCubit>();
 
-                                      Utils.navigateTo(
-                                          ChangeNotifierProvider<
-                                                  JourneyBarCubit>.value(
-                                              value: p,
-                                              child: PhoneticsBook(
-                                                lessonId:
-                                                    games[index].lessonId!,
-                                                gameId: games[index].id!,
-                                                firstTry: true,
-                                              )),
-                                          context);
+                                        Utils.navigateTo(
+                                            ChangeNotifierProvider<
+                                                    JourneyBarCubit>.value(
+                                                value: p,
+                                                child: PhoneticsBook(
+                                                  lessonId:
+                                                      games[index].lessonId!,
+                                                  gameId: games[index].id!,
+                                                  firstTry: true,
+                                                )),
+                                            context);
+                                      }
                                     }
                                   },
                                   levelMapParams: LevelMapParams(
@@ -208,6 +211,7 @@ class ChaptersScreen extends StatelessWidget {
                                             path: e.levelImg!,
                                             size: Size(100,
                                                 (e.isGame ?? false) ? 90 : 65),
+                                            isActive: e.isActive ?? false,
                                             bodyWidget:
                                                 ItemOfSubBody(chapterData: e),
                                             title: ItemOfTitle(chapterData: e)))

@@ -26,6 +26,7 @@ abstract class AppImages {
   static const String barZeroStar = "${mainPathOfImages}barZeroStar.png";
   static const String barThreeStar = "${mainPathOfImages}barThreeStar.png";
   static const String emptyReports = "${mainPathOfImages}empty_reports.png";
+  static const String lock = "${mainPathOfImages}lock.png";
   static const String imageEmptyStar = "${mainPathOfImages}empty_star.png";
   static const String bgOfMath = "${mainPathOfImages}bg_of_math.png";
   static const String iconGetInstruction =

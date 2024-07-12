@@ -32,6 +32,7 @@ class ImageParams {
   /// 0.5 means it appear once every two levels.
   /// TIP: Try to assign a value which is a factor of [LevelMapParams.levelCount]. It helps to equally distribute the images.
   final double repeatCountPerLevel;
+  final bool isActive;
 
   /// If an image need to be painted only on left or right to the path, set this parameter.
   final Side side;
@@ -44,6 +45,7 @@ class ImageParams {
       this.side = Side.BOTH,
       this.offset,
       this.title,
+      required this.isActive,
       this.bodyWidget})
       : assert(imagePositionFactor >= 0 && imagePositionFactor <= 1,
             "Image Position factor should be between 0 and 1"),
