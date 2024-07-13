@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 
+import '../../../../core/assets_images.dart';
 import '../../../../core/assets_svg_images.dart';
 import '../../../../core/vars.dart';
 import '../../../../core/widgets/stroke_text.dart';
@@ -32,16 +33,21 @@ class ItemOfSubBody extends StatelessWidget {
     } else if (chapterData.isGame == true) {
       return SizedBox(
         width: 125,
-        child: Text(
-          '${chapterData.name ?? 0}',
-          textAlign: TextAlign.center,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-              fontSize: useMobileLayout ? 14.sp : 10.sp,
-              fontWeight: FontWeight.w500,
-              color: AppColor.darkBlueColor3),
-        ),
+        child: chapterData.isActive == true
+            ? Text(
+                '${chapterData.name ?? 0}',
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                    fontSize: useMobileLayout ? 14.sp : 10.sp,
+                    fontWeight: FontWeight.w500,
+                    color: AppColor.darkBlueColor3),
+              )
+            : Image.asset(
+                AppImages.lock,
+                height: 50,
+              ),
       );
     } else {
       return const SizedBox();

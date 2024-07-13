@@ -113,36 +113,26 @@ class LevelMap extends StatelessWidget {
                                             fit: BoxFit.fill,
                                           ),
                                         ),
-                                        if (levelMapParams
-                                                .levelsImages[index].isActive ==
-                                            true) ...{
-                                          if (levelMapParams.levelsImages[index]
-                                                  .bodyWidget !=
-                                              null) ...{
-                                            Column(
-                                              children: [
-                                                10.ph,
-                                                levelMapParams
-                                                        .levelsImages[index]
-                                                        .bodyWidget ??
-                                                    const SizedBox(),
-                                                10.ph
-                                              ],
-                                            ),
-                                            Positioned(
-                                                top: -2,
-                                                child: levelMapParams
-                                                        .levelsImages[index]
-                                                        .title ??
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    )),
-                                          }
-                                        } else ...{
-                                          Image.asset(
-                                            AppImages.lock,
-                                            width: 50,
-                                          )
+                                        if (levelMapParams.levelsImages[index]
+                                                .bodyWidget !=
+                                            null) ...{
+                                          Column(
+                                            children: [
+                                              10.ph,
+                                              levelMapParams.levelsImages[index]
+                                                      .bodyWidget ??
+                                                  const SizedBox(),
+                                              10.ph
+                                            ],
+                                          ),
+                                          Positioned(
+                                              top: -2,
+                                              child: levelMapParams
+                                                      .levelsImages[index]
+                                                      .title ??
+                                                  const SizedBox(
+                                                    height: 20,
+                                                  )),
                                         }
                                       ],
                                     ),
