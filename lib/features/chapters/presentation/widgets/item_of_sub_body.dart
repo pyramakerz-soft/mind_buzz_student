@@ -46,7 +46,7 @@ class ItemOfSubBody extends StatelessWidget {
               )
             : Image.asset(
                 AppImages.lock,
-                height: 50,
+                height: 40,
               ),
       );
     } else {
