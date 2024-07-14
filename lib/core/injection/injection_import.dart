@@ -18,6 +18,7 @@ Future<void> init() async {
   sl.registerFactory(() => NotificationsBloc());
   sl.registerFactory(() => CalenderBloc(programUserUseCases: sl()));
   sl.registerFactory(() => SettingsBloc(autoUserUseCases: sl()));
+  sl.registerFactory(() => AssignmentBloc(getContactAssignmentUseCases: sl()));
   sl.registerFactory(() => GetAssignmentBloc(
       programUserUseCases: sl(), programReportsUserUseCases: sl()));
   sl.registerFactory(() => PieChartCubit(sl(), sl()));
@@ -25,6 +26,7 @@ Future<void> init() async {
 
   //UseCase
   sl.registerLazySingleton(() => UnitUseCases(sl()));
+  sl.registerLazySingleton(() => ContactAssignmentUseCases(sl()));
   sl.registerLazySingleton(() => LessonUseCases(sl()));
   sl.registerLazySingleton(() => GameStarsUseCases(sl()));
   sl.registerLazySingleton(() => LogOutUserUseCases(sl()));
@@ -44,6 +46,9 @@ Future<void> init() async {
   //Repository
   sl.registerLazySingleton<LoginRepository>(
       () => LoginRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<ProgramContactAssignmentRepository>(() =>
+      ContactAssignmentRepositoryImpl(
+          remoteDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<ProgramRepository>(
       () => HomeRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<ProgramUnitRepository>(
@@ -75,6 +80,8 @@ Future<void> init() async {
   //Datasources
   sl.registerLazySingleton<DataSourceRemotelyOfProgram>(
       () => DataSourceRemotelyOfProgramImpl(dio: sl()));
+  sl.registerLazySingleton<DataSourceRemotelyOfContactAssignment>(
+      () => DataSourceRemotelyOfContactAssignmentImpl(dio: sl()));
   sl.registerLazySingleton<DataSourceRemotelyOfLogin>(
       () => DataSourceRemotelyOfLoginImpl(dio: sl()));
   sl.registerLazySingleton<DataSourceRemotelyOfUnit>(

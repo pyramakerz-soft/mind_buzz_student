@@ -2,9 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/injection/injection_container.dart' as di;
 
 import '../../../../core/app_color.dart';
+import '../../../../core/utils.dart';
+import '../../../display_assignment/presentation/manager/bloc/assignment_bloc.dart';
+import '../../../display_assignment/presentation/manager/cubit/total_assignment_cubit.dart';
+import '../../../display_assignment/presentation/pages/display_assignment.dart';
 import '../../../home/domain/entities/user_courses.dart';
+import '../pages/student_assignment.dart';
 
 class ShowAssignmentStudent extends StatelessWidget {
   final UserCourseModel courseData;
@@ -99,62 +106,80 @@ class ShowAssignmentStudent extends StatelessWidget {
                                   )
                                 ],
                               ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "Assignment  ${index + 1}",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .displayLarge
-                                                ?.copyWith(
-                                                  fontSize: 22,
-                                                  fontWeight: FontWeight.w700,
-                                                  height: 0,
-                                                  letterSpacing: 0.44,
-                                                ),
-                                          ),
-                                          Text(
-                                            courseData
-                                                    .program
-                                                    ?.studentTests?[index]
-                                                    .name ??
-                                                '',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headlineMedium
-                                                ?.copyWith(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w400,
-                                                  // height: 0,
-                                                  // letterSpacing: 0.44,
-                                                ),
-                                          ),
-                                        ],
-                                      ),
-                                      const Icon(
-                                        Icons.play_circle_outline_rounded,
-                                        color: AppColor.darkBlueColor,
-                                        size: 35,
-                                      )
-                                    ],
-                                  ),
-                                  ClipRRect(
-                                    child: CachedNetworkImage(
-                                      imageUrl: courseData.program?.image ?? '',
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              6,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Utils.navigateTo(
+                                      BlocProvider(
+                                          create: (_) => di.sl<AssignmentBloc>()
+                                            ..add(GetAssignmentDataEvent(
+                                                programId:
+                                                    courseData.programId ?? 0,
+                                                testId: courseData
+                                                        .program
+                                                        ?.studentTests?[index]
+                                                        .id ??
+                                                    0)),
+                                          child: DisplayAssignment()),
+                                      context);
+                                },
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Assignment  ${courseData.program?.studentTests?[index].id}",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .displayLarge
+                                                  ?.copyWith(
+                                                    fontSize: 22,
+                                                    fontWeight: FontWeight.w700,
+                                                    height: 0,
+                                                    letterSpacing: 0.44,
+                                                  ),
+                                            ),
+                                            Text(
+                                              courseData
+                                                      .program
+                                                      ?.studentTests?[index]
+                                                      .name ??
+                                                  '',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headlineMedium
+                                                  ?.copyWith(
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w400,
+                                                    // height: 0,
+                                                    // letterSpacing: 0.44,
+                                                  ),
+                                            ),
+                                          ],
+                                        ),
+                                        const Icon(
+                                          Icons.play_circle_outline_rounded,
+                                          color: AppColor.darkBlueColor,
+                                          size: 35,
+                                        )
+                                      ],
                                     ),
-                                  )
-                                ],
+                                    ClipRRect(
+                                      child: CachedNetworkImage(
+                                        imageUrl:
+                                            courseData.program?.image ?? '',
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                6,
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                             10.ph
