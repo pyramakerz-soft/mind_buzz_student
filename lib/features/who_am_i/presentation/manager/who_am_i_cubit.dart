@@ -9,10 +9,10 @@ class WhoAmICubit extends Cubit<WhoAmIState> {
   }
 
   clearIndex() {
-    emit(state.copyWith(index: null));
+    emit(state.copyWith(index: null, isFirst: true));
   }
 
   void openFirstTime() {
-    emit(state.copyWith(isFirst: false));
+    emit(state.copyWith(index: null, isFirst: false));
   }
 }

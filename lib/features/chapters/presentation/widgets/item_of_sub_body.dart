@@ -32,23 +32,17 @@ class ItemOfSubBody extends StatelessWidget {
           ));
     } else if (chapterData.isGame == true) {
       return SizedBox(
-        width: 125,
-        child: chapterData.isActive == true
-            ? Text(
-                '${chapterData.name ?? 0}',
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    fontSize: useMobileLayout ? 14.sp : 10.sp,
-                    fontWeight: FontWeight.w500,
-                    color: AppColor.darkBlueColor3),
-              )
-            : Image.asset(
-                AppImages.lock,
-                height: 40,
-              ),
-      );
+          width: 125,
+          child: Text(
+            '${chapterData.name ?? 0}',
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                fontSize: useMobileLayout ? 14.sp : 10.sp,
+                fontWeight: FontWeight.w500,
+                color: AppColor.darkBlueColor3),
+          ));
     } else {
       return const SizedBox();
     }

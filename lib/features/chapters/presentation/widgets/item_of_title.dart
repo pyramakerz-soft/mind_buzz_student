@@ -48,7 +48,13 @@ class ItemOfTitle extends StatelessWidget {
         );
       }
     } else {
-      return SizedBox();
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Image.asset(
+          AppImages.lock,
+          height: 40,
+        ),
+      );
     }
   }
 }
