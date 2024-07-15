@@ -25,7 +25,8 @@ class ShowAssignmentStudent extends StatefulWidget {
     return _ShowAssignmentStudent();
   }
 }
-class _ShowAssignmentStudent extends State<ShowAssignmentStudent>{
+
+class _ShowAssignmentStudent extends State<ShowAssignmentStudent> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -120,24 +121,44 @@ class _ShowAssignmentStudent extends State<ShowAssignmentStudent>{
                                       BlocProvider(
                                           create: (_) => di.sl<AssignmentBloc>()
                                             ..add(GetAssignmentDataEvent(
-                                                programId:
-                                                widget.courseData.programId ?? 0,
-                                                testId: widget.courseData
+                                                programId: widget
+                                                        .courseData.programId ??
+                                                    0,
+                                                testId: widget
+                                                        .courseData
                                                         .program
                                                         ?.studentTests?[index]
                                                         .id ??
                                                     0)),
-                                          child: DisplayAssignment(testId: widget.courseData
-                                              .program
-                                              ?.studentTests?[index]
-                                              .testId ??
-                                              0,
+                                          child: DisplayAssignment(
+                                            testId: widget
+                                                    .courseData
+                                                    .program
+                                                    ?.studentTests?[index]
+                                                    .testId ??
+                                                0,
                                             action: () {
-                                              UserCourseModel x=  widget.courseData;
-                                            List<TestModel>y = widget.courseData.program?.studentTests??[];
-                                            y.removeWhere((element)=> element.testId ==widget.courseData.program?.studentTests?[index].testId );
+                                              UserCourseModel x =
+                                                  widget.courseData;
+                                              List<TestModel> y = widget
+                                                      .courseData
+                                                      .program
+                                                      ?.studentTests ??
+                                                  [];
+                                              y.removeWhere((element) =>
+                                                  element.testId ==
+                                                  widget
+                                                      .courseData
+                                                      .program
+                                                      ?.studentTests?[index]
+                                                      .testId);
                                               // x.program.studentTests =
-                                            },)),
+                                            },
+                                            assignmentId: widget
+                                                .courseData
+                                                .program
+                                                ?.studentTests?[index].id??0,
+                                          )),
                                       context);
                                 },
                                 child: Row(
@@ -151,7 +172,12 @@ class _ShowAssignmentStudent extends State<ShowAssignmentStudent>{
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              widget.courseData.program?.studentTests?[index].assignmentName??'Assignment',
+                                              widget
+                                                      .courseData
+                                                      .program
+                                                      ?.studentTests?[index]
+                                                      .assignmentName ??
+                                                  'Assignment',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .displayLarge
@@ -163,7 +189,8 @@ class _ShowAssignmentStudent extends State<ShowAssignmentStudent>{
                                                   ),
                                             ),
                                             Text(
-                                              widget.courseData
+                                              widget
+                                                      .courseData
                                                       .program
                                                       ?.studentTests?[index]
                                                       .name ??
@@ -190,7 +217,8 @@ class _ShowAssignmentStudent extends State<ShowAssignmentStudent>{
                                     ClipRRect(
                                       child: CachedNetworkImage(
                                         imageUrl:
-                                        widget.courseData.program?.image ?? '',
+                                            widget.courseData.program?.image ??
+                                                '',
                                         height:
                                             MediaQuery.of(context).size.height /
                                                 6,

@@ -9,8 +9,8 @@ class SubmitContactAssignmentUseCases {
   SubmitContactAssignmentUseCases(this.repository);
 
   Future<Either<Failure, String>> call(
-      {required int testId, required int mistakeCount, required int stars}) async {
+      {required int testId, required int mistakeCount, required int stars, required int assignmentId}) async {
     return await repository.submitAssignmentContactDataRepository(
-        testId: testId, mistakeCount: mistakeCount, stars:stars);
+        testId: testId, mistakeCount: mistakeCount, stars:stars, assignmentId:assignmentId);
   }
 }

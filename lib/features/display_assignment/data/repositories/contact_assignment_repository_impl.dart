@@ -38,13 +38,13 @@ class ContactAssignmentRepositoryImpl
   @override
   Future<Either<Failure, String>> submitAssignmentContactDataRepository(
       {required int testId,
-      required int mistakeCount,
+      required int mistakeCount, required int assignmentId,
       required int stars}) async {
     if (await networkInfo.isConnected) {
       try {
         final res =
             await remoteDataSource.submitAssignmentContactDataRepository(
-                testId: testId, mistakeCount: mistakeCount, stars: stars);
+                testId: testId, mistakeCount: mistakeCount, stars: stars, assignmentId:assignmentId);
         // final res = await localRemoteDataSource.getContactLessonDataRemotely(programId: programId);
         log('res:$res');
         return Right(res);

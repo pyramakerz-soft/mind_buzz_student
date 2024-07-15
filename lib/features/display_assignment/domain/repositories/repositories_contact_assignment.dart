@@ -4,5 +4,5 @@ import '../../../../../core/error/failures.dart';
 
 abstract class ProgramContactAssignmentRepository {
   Future<Either<Failure, List<GameFinalModel>>> assignmentContactDataRepository({required int programId, required int testId});
-  Future<Either<Failure, String>> submitAssignmentContactDataRepository({required int testId, required int mistakeCount, required int stars});
+  Future<Either<Failure, String>> submitAssignmentContactDataRepository({required int testId, required int mistakeCount, required int stars, required int assignmentId});
 }

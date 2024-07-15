@@ -19,7 +19,8 @@ class PostAssignmentDataEvent extends AssignmentEvent {
   final int testId;
   final int mistakeCount;
   final int stars;
-  PostAssignmentDataEvent({required this.stars, required this.mistakeCount, required this.testId});
+  final int assignmentId;
+  PostAssignmentDataEvent({required this.stars, required this.mistakeCount, required this.testId, required this.assignmentId});
   @override
-  List<Object?> get props => [stars, mistakeCount, testId];
+  List<Object?> get props => [stars, mistakeCount, testId, assignmentId];
 }

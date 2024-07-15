@@ -27,7 +27,7 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
     });
     on<PostAssignmentDataEvent>((event, emit) async {
       // emit(AssignmentLoadingInitial());
-      final failureOrDoneMessage = await postProgramContactAssignmentRepository(testId: event.testId, mistakeCount: event.mistakeCount, stars:event.stars);
+      final failureOrDoneMessage = await postProgramContactAssignmentRepository(testId: event.testId, mistakeCount: event.mistakeCount, stars:event.stars, assignmentId:event.assignmentId);
       emit(await _eitherSubmitLoadedOrErrorState(failureOrDoneMessage));
     });
   }

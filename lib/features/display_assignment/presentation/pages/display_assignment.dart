@@ -12,9 +12,10 @@ import '../../../../core/injection/injection_container.dart' as di;
 
 class DisplayAssignment extends StatefulWidget {
   final int testId;
+  final int assignmentId;
   final Function() action;
 
-  const DisplayAssignment({super.key, required this.testId, required this.action});
+  const DisplayAssignment({super.key, required this.testId, required this.action,required this.assignmentId});
   @override
   State<StatefulWidget> createState() {
     return _DisplayAssignment();
@@ -88,6 +89,7 @@ class _DisplayAssignment extends State<DisplayAssignment> {
                         di.sl<AssignmentBloc>()
                           .add(PostAssignmentDataEvent(
                               stars: countOfStars,
+                            assignmentId: widget.assignmentId,
                               mistakeCount: mistakeCount,
                               testId: widget.testId));
                         // context.read<TotalAssignmentCubit>().reFormatData();.

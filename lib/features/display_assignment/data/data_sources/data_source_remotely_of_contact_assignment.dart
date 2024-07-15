@@ -7,7 +7,7 @@ import '../../../../../core/connection.dart';
 
 abstract class DataSourceRemotelyOfContactAssignment {
   Future<List<GameFinalModel>> assignmentContactDataRepository({required int programId, required int testId});
-  Future<String> submitAssignmentContactDataRepository({required int testId, required int mistakeCount, required int stars});
+  Future<String> submitAssignmentContactDataRepository({required int testId, required int mistakeCount, required int stars, required int assignmentId});
 }
 
 class DataSourceRemotelyOfContactAssignmentImpl
@@ -32,10 +32,10 @@ class DataSourceRemotelyOfContactAssignmentImpl
   }
 
   @override
-  Future<String> submitAssignmentContactDataRepository({required int testId, required int mistakeCount, required int stars}) async {
+  Future<String> submitAssignmentContactDataRepository({required int testId, required int mistakeCount, required int stars, required int assignmentId}) async {
     final response = await dio.post(
         url: '${Connection.baseURL}${dio.finishAssignment}',
-        queryParameters: {'stars': stars, 'test_id': testId, 'mistake_count':mistakeCount});
+        queryParameters: {'stars': stars, 'test_id': testId, 'mistake_count':mistakeCount, 'assignment_id':assignmentId});
     if (dio.validResponse(response)) {
       final List<GameFinalModel> l = [];
       response.data['data'].forEach((e) => l.add(GameFinalModel.fromJson(e)));
