@@ -52,6 +52,7 @@ class MainApiConnection {
   String getLessonQuestionsEndPoint = "game";
   String getGameById = "gamebyId";
   String studentAssignmentsGames = "studentAssignmentsGames";
+  String finishAssignment = "finishAssignment";
   String sendSolveData = "solveData";
   String getStudentAssignments = "studentAssignments";
 

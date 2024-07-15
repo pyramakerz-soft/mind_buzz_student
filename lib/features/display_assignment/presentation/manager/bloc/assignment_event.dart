@@ -14,3 +14,12 @@ class GetAssignmentDataEvent extends AssignmentEvent {
   @override
   List<Object?> get props => [programId, testId];
 }
+
+class PostAssignmentDataEvent extends AssignmentEvent {
+  final int testId;
+  final int mistakeCount;
+  final int stars;
+  PostAssignmentDataEvent({required this.stars, required this.mistakeCount, required this.testId});
+  @override
+  List<Object?> get props => [stars, mistakeCount, testId];
+}

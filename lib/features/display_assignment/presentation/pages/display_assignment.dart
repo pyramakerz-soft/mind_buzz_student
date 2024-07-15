@@ -1,16 +1,20 @@
+import 'package:based_of_eng_game/based_of_eng_game.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../core/error/failures_messages.dart';
 import '../../../../core/utils.dart';
 import '../../../login/presentation/page/login_screen.dart';
 import '../manager/bloc/assignment_bloc.dart';
 import '../manager/cubit/total_assignment_cubit.dart';
-import '../widgets/current_assignment.dart';
+import '../../../../core/injection/injection_container.dart' as di;
 
 class DisplayAssignment extends StatefulWidget {
+  final int testId;
+  final Function() action;
+
+  const DisplayAssignment({super.key, required this.testId, required this.action});
   @override
   State<StatefulWidget> createState() {
     return _DisplayAssignment();
@@ -56,9 +60,49 @@ class _DisplayAssignment extends State<DisplayAssignment> {
       if (stateOfGameData is AssignmentLoadingInitial) {
         return Center(child: CupertinoActivityIndicator());
       } else if (stateOfGameData is AssignmentDataInitial) {
-        return CurrentAssignment(
-          data: stateOfGameData.data,
-        );
+        return BlocProvider(
+            create: (_) => TotalAssignmentCubit(assignmentData: stateOfGameData.data),
+            child: BlocConsumer<TotalAssignmentCubit, TotalAssignmentInitial>(
+                listener: (context, state) {},
+                builder: (context, stateOfGameData) {
+                  return MainScreenOfGames(
+                      stateOfGameData: stateOfGameData.assignmentData ?? [],
+                      dataOfBasesGame: context
+                          .read<TotalAssignmentCubit>()
+                          .getMainContactData(index: 0),
+                      actionOfCompleteGame: (int countOfStars) {
+                        int tries =
+                            stateOfGameData.assignmentData.first.numOfTrials ?? 0;
+                        int mistakeCount = 0;
+                        if (tries == 3) {
+                          mistakeCount = tries - countOfStars;
+                        } else if (tries == 5) {
+                          if (countOfStars == 1) {
+                            mistakeCount = 4;
+                          } else if (countOfStars == 2) {
+                            mistakeCount = 2;
+                          } else if (countOfStars == 3) {
+                            mistakeCount = 0;
+                          }
+                        }
+                        di.sl<AssignmentBloc>()
+                          .add(PostAssignmentDataEvent(
+                              stars: countOfStars,
+                              mistakeCount: mistakeCount,
+                              testId: widget.testId));
+                        // context.read<TotalAssignmentCubit>().reFormatData();.
+                        widget.action();
+                        debugPrint('#########################################');
+                      },
+                      showTheEditedGames: false,
+                      backButton: () {
+                        debugPrint(
+                            'backButton#########################################');
+
+                        // Navigator.of(context).pop();
+                        // Navigator.of(context).pop();
+                      });
+                }));
       } else {
         return SizedBox();
       }

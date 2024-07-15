@@ -10,14 +10,22 @@ import '../../../../core/utils.dart';
 import '../../../display_assignment/presentation/manager/bloc/assignment_bloc.dart';
 import '../../../display_assignment/presentation/manager/cubit/total_assignment_cubit.dart';
 import '../../../display_assignment/presentation/pages/display_assignment.dart';
+import '../../../home/domain/entities/test_model.dart';
 import '../../../home/domain/entities/user_courses.dart';
 import '../pages/student_assignment.dart';
 
-class ShowAssignmentStudent extends StatelessWidget {
+class ShowAssignmentStudent extends StatefulWidget {
   final UserCourseModel courseData;
 
   const ShowAssignmentStudent({Key? key, required this.courseData})
       : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() {
+    return _ShowAssignmentStudent();
+  }
+}
+class _ShowAssignmentStudent extends State<ShowAssignmentStudent>{
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -50,7 +58,7 @@ class ShowAssignmentStudent extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  courseData.program?.course?.name ?? '',
+                  widget.courseData.program?.course?.name ?? '',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontSize: 18,
                         fontWeight: FontWeight.w400,
@@ -85,7 +93,7 @@ class ShowAssignmentStudent extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: List.generate(
-                    courseData.program?.studentTests?.length ?? 0,
+                    widget.courseData.program?.studentTests?.length ?? 0,
                     (index) => Column(
                           children: [
                             Container(
@@ -106,20 +114,30 @@ class ShowAssignmentStudent extends StatelessWidget {
                                   )
                                 ],
                               ),
-                              child: GestureDetector(
+                              child: InkWell(
                                 onTap: () {
                                   Utils.navigateTo(
                                       BlocProvider(
                                           create: (_) => di.sl<AssignmentBloc>()
                                             ..add(GetAssignmentDataEvent(
                                                 programId:
-                                                    courseData.programId ?? 0,
-                                                testId: courseData
+                                                widget.courseData.programId ?? 0,
+                                                testId: widget.courseData
                                                         .program
                                                         ?.studentTests?[index]
                                                         .id ??
                                                     0)),
-                                          child: DisplayAssignment()),
+                                          child: DisplayAssignment(testId: widget.courseData
+                                              .program
+                                              ?.studentTests?[index]
+                                              .testId ??
+                                              0,
+                                            action: () {
+                                              UserCourseModel x=  widget.courseData;
+                                            List<TestModel>y = widget.courseData.program?.studentTests??[];
+                                            y.removeWhere((element)=> element.testId ==widget.courseData.program?.studentTests?[index].testId );
+                                              // x.program.studentTests =
+                                            },)),
                                       context);
                                 },
                                 child: Row(
@@ -133,7 +151,7 @@ class ShowAssignmentStudent extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "Assignment  ${courseData.program?.studentTests?[index].id}",
+                                              widget.courseData.program?.studentTests?[index].assignmentName??'Assignment',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .displayLarge
@@ -145,7 +163,7 @@ class ShowAssignmentStudent extends StatelessWidget {
                                                   ),
                                             ),
                                             Text(
-                                              courseData
+                                              widget.courseData
                                                       .program
                                                       ?.studentTests?[index]
                                                       .name ??
@@ -172,7 +190,7 @@ class ShowAssignmentStudent extends StatelessWidget {
                                     ClipRRect(
                                       child: CachedNetworkImage(
                                         imageUrl:
-                                            courseData.program?.image ?? '',
+                                        widget.courseData.program?.image ?? '',
                                         height:
                                             MediaQuery.of(context).size.height /
                                                 6,

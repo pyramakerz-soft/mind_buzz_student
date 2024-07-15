@@ -34,4 +34,27 @@ class ContactAssignmentRepositoryImpl
       return Left(CacheFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, String>> submitAssignmentContactDataRepository(
+      {required int testId,
+      required int mistakeCount,
+      required int stars}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final res =
+            await remoteDataSource.submitAssignmentContactDataRepository(
+                testId: testId, mistakeCount: mistakeCount, stars: stars);
+        // final res = await localRemoteDataSource.getContactLessonDataRemotely(programId: programId);
+        log('res:$res');
+        return Right(res);
+      } catch (e, s) {
+        log('error:${e.toString()}');
+        log('error:${e.runtimeType}');
+        return Left(LoginFailure());
+      }
+    } else {
+      return Left(CacheFailure());
+    }
+  }
 }

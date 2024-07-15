@@ -7,14 +7,16 @@ import 'package:meta/meta.dart';
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/error/failures_messages.dart';
 import '../../../domain/use_cases/contact_assignment_use_cases.dart';
+import '../../../domain/use_cases/submit_contact_assignment_use_cases.dart';
 
 part 'assignment_event.dart';
 part 'assignment_state.dart';
 
 class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
   final ContactAssignmentUseCases getContactAssignmentUseCases;
+  final SubmitContactAssignmentUseCases postProgramContactAssignmentRepository;
 
-  AssignmentBloc({required this.getContactAssignmentUseCases})
+  AssignmentBloc({required this.getContactAssignmentUseCases, required this.postProgramContactAssignmentRepository})
       : super(AssignmentInitial()) {
     on<AssignmentEvent>((event, emit) {});
     on<GetAssignmentDataEvent>((event, emit) async {
@@ -23,14 +25,28 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
           testId: event.testId, programId: event.programId);
       emit(await _eitherLoadedOrErrorState(failureOrDoneMessage));
     });
+    on<PostAssignmentDataEvent>((event, emit) async {
+      // emit(AssignmentLoadingInitial());
+      final failureOrDoneMessage = await postProgramContactAssignmentRepository(testId: event.testId, mistakeCount: event.mistakeCount, stars:event.stars);
+      emit(await _eitherSubmitLoadedOrErrorState(failureOrDoneMessage));
+    });
   }
 }
 
 Future<AssignmentState> _eitherLoadedOrErrorState(
     Either<Failure, List<GameFinalModel>> failureOrTrivia) async {
   AssignmentState tempState = failureOrTrivia.fold(
-    (failure) => AssignmentErrorInitial(message: _mapFailureToMessage(failure)),
-    (data) => AssignmentDataInitial(data: data),
+        (failure) => AssignmentErrorInitial(message: _mapFailureToMessage(failure)),
+        (data) => AssignmentDataInitial(data: data),
+  );
+  return tempState;
+}
+
+Future<AssignmentState> _eitherSubmitLoadedOrErrorState(
+    Either<Failure, String> failureOrTrivia) async {
+  AssignmentState tempState = failureOrTrivia.fold(
+        (failure) => AssignmentErrorInitial(message: _mapFailureToMessage(failure)),
+        (data) => AssignmentInitial(),
   );
   return tempState;
 }

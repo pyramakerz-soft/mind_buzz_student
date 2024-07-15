@@ -25,6 +25,7 @@ import '../../features/display_assignment/data/data_sources/data_source_remotely
 import '../../features/display_assignment/data/repositories/contact_assignment_repository_impl.dart';
 import '../../features/display_assignment/domain/repositories/repositories_contact_assignment.dart';
 import '../../features/display_assignment/domain/use_cases/contact_assignment_use_cases.dart';
+import '../../features/display_assignment/domain/use_cases/submit_contact_assignment_use_cases.dart';
 import '../../features/display_assignment/presentation/manager/bloc/assignment_bloc.dart';
 import '../../features/home/data/datasources/data_source_remotely_of_home.dart';
 import '../../features/home/data/repositories/program_repository_impl.dart';
