@@ -7,7 +7,10 @@ abstract class AppSvgImages {
   static const String iconLogout = "${mainPathOfSvg}logout.svg";
   static const String iconPartLesson1 = "${mainPathOfSvg}part_lesson1.svg";
   static const String iconPartLesson2 = "${mainPathOfSvg}part_lesson2.svg";
-
+  static const String emptyAssignments =
+      '${mainPathOfSvg}empty_assignments.svg';
+  static const String emptyNotifications =
+      '${mainPathOfSvg}empty_notifications.svg';
   static const String iconCurrentChapter2 =
       '${mainPathOfSvg}current_chapter2.svg';
   static const String bgChooseWhoAmI = '${mainPathOfSvg}bg_choose_who_am_i.svg';

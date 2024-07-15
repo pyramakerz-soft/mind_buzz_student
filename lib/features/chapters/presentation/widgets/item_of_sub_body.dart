@@ -21,13 +21,16 @@ class ItemOfSubBody extends StatelessWidget {
     final bool useMobileLayout = shortestSide < 600;
     if (chapterData.isLetter == true) {
       return SizedBox(
-          width: 125,
+          width: 125.w,
           child: FittedBox(
-            child: StrokeText(
-              text: chapterData.name ?? '',
-              isDisabled: false,
-              fontSize: 0.03.sh,
-              strokeWidth: 1.5,
+            child: Padding(
+              padding: EdgeInsets.all(14.w),
+              child: StrokeText(
+                text: chapterData.name ?? '',
+                isDisabled: false,
+                fontSize: 28.sp,
+                strokeWidth: 1.5,
+              ),
             ),
           ));
     } else if (chapterData.isGame == true) {

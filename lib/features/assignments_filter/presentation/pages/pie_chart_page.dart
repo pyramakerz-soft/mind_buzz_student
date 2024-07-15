@@ -11,6 +11,7 @@ import 'package:mind_buzz_refactor/features/assignments_filter/domain/entities/r
 import 'package:mind_buzz_refactor/features/assignments_filter/presentation/cubit/pie_chart_cubit.dart';
 import 'package:mind_buzz_refactor/features/assignments_filter/presentation/cubit/pie_chart_state.dart';
 import 'package:mind_buzz_refactor/features/assignments_filter/presentation/widgets/due_date_bottom_sheet.dart';
+import 'package:mind_buzz_refactor/features/calender/presentation/widgets/custom_empty_widget.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 import 'package:mind_buzz_refactor/features/calender/presentation/widgets/assignment_widget.dart';
 import 'package:mind_buzz_refactor/features/home/presentation/widgets/pie_chart_design.dart';
@@ -183,7 +184,10 @@ class PieChartPage extends StatelessWidget {
   Widget _buildEmptyCase() {
     return const Expanded(
       child: Center(
-        child: CustomText(text: 'No Data'),
+        child: CustomEmptyWidget(
+          title: 'No Data',
+          emptyScreenTypes: EmptyScreenTypes.emptyAssignments,
+        ),
       ),
     );
   }
