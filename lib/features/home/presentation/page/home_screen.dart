@@ -110,6 +110,11 @@ class _HomeScreen extends State<HomeScreen> {
                                         title: state.data[index].program?.course
                                                 ?.name ??
                                             '',
+                                        isActive: state.data[index].program
+                                                    ?.isActive ==
+                                                1
+                                            ? true
+                                            : false,
                                       ),
                                       separatorBuilder: (context, index) =>
                                           index == state.data.length - 1
@@ -124,6 +129,11 @@ class _HomeScreen extends State<HomeScreen> {
                                       itemBuilder: (context, index) => Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: CardOfProgram(
+                                          isActive: state.data[index].program
+                                                      ?.isActive ==
+                                                  1
+                                              ? true
+                                              : false,
                                           isMob: false,
                                           programId:
                                               "${state.data[index].programId ?? ''}",
