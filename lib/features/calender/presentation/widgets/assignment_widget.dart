@@ -50,6 +50,21 @@ class AssignmentWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if(isAssignment==true)...{
+              Text(
+                singleTest.testName ?? '',
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .displayLarge
+                    ?.copyWith(
+                    fontSize: 0.016.sh,
+                    fontWeight: FontWeight.bold,
+                    height: 0,
+                    letterSpacing: 0.44,
+                    overflow: TextOverflow.ellipsis),
+              ),
+            },
             isAssignment
                 ? SizedBox(
                     width: MediaQuery.of(context).size.width - 70,
