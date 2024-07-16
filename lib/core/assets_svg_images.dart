@@ -47,6 +47,9 @@ abstract class AppSvgImages {
       '${mainPathOfSvg}buttonBackgroundDisabled.svg';
   static const String beeAlert = '${mainPathOfSvg}beeAlert.svg';
   static const String popUpBackground = '${mainPathOfSvg}pop_up_background.svg';
+  static const String retryIcon = '${mainPathOfSvg}retry_icon.svg';
+  static const String popUpBackgroundLandscape =
+      '${mainPathOfSvg}pop_up_background_landscape.svg';
   static const String exitButton = '${mainPathOfSvg}exit_button.svg';
   static const String reloading = '${mainPathOfSvg}reloading.svg';
   static const String calendar = '${mainPathOfSvg}calendar.svg';
