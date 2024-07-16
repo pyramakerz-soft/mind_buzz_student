@@ -79,6 +79,7 @@ class Assets {
   static const String imagesLandOfUnit = 'assets/images/land_of_unit.png';
   static const String imagesLesson = 'assets/images/lesson.png';
   static const String imagesLessonPart = 'assets/images/lesson_part.png';
+  static const String imagesLock = 'assets/images/lock.png';
   static const String imagesMindBuzz = 'assets/images/mind_buzz.png';
   static const String imagesNewUnitBackground = 'assets/images/new_unit_background.png';
   static const String imagesOpenLesson = 'assets/images/open_lesson.png';
@@ -120,6 +121,7 @@ class Assets {
   static const String mathBallBall8 = 'assets/math_ball/ball8.svg';
   static const String mathBallBall9 = 'assets/math_ball/ball9.svg';
   static const String mathBallCircle = 'assets/math_ball/circle.svg';
+  static const String mindBuzzStudent22Shorebird = 'shorebird.yaml';
   static const String parentAccountAboutUs = 'assets/svg/parent_account/about_us.svg';
   static const String parentAccountButtonEllipse = 'assets/svg/parent_account/button_ellipse.svg';
   static const String parentAccountCalender = 'assets/svg/parent_account/calender.svg';
@@ -267,6 +269,8 @@ class Assets {
   static const String svgCoverOfLogin = 'assets/svg/cover_of_login.svg';
   static const String svgCurrentChapter1 = 'assets/svg/current_chapter1.svg';
   static const String svgCurrentChapter2 = 'assets/svg/current_chapter2.svg';
+  static const String svgEmptyAssignments = 'assets/svg/empty_assignments.svg';
+  static const String svgEmptyNotifications = 'assets/svg/empty_notifications.svg';
   static const String svgEmptyPieChart = 'assets/svg/empty_pie_chart.svg';
   static const String svgEmptyStar = 'assets/svg/empty_star.svg';
   static const String svgExitButton = 'assets/svg/exit_button.svg';

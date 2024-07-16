@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rive/rive.dart';
+import 'package:shorebird_code_push/shorebird_code_push.dart';
 
 import '../../../../core/assets_images.dart';
 import '../../../../core/utils.dart';
@@ -25,8 +26,23 @@ class Screens1 extends StatefulWidget {
 class _Screens1 extends State<Screens1> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
+  final shorebirdCodePush = ShorebirdCodePush();
+  Future<void> _checkForUpdates() async {
+    // Check whether a patch is available to install.
+    final isUpdateAvailable = await shorebirdCodePush.isNewPatchAvailableForDownload();
+
+    print('isUpdateAvailable:$isUpdateAvailable');
+    if (isUpdateAvailable) {
+      // Download the new patch if it's available.
+      await shorebirdCodePush.downloadUpdateIfAvailable();
+    }
+  }
   @override
   void initState() {
+    _checkForUpdates();
+    shorebirdCodePush
+        .currentPatchNumber()
+        .then((value) => print('current patch number is $value'));
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
@@ -47,12 +63,12 @@ class _Screens1 extends State<Screens1> with SingleTickerProviderStateMixin {
     return Scaffold(
       body: Stack(
         children: [
-          Image.asset(
-            AppImages.imageScreen1,
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            fit: BoxFit.fill,
-          ),
+          // Image.asset(
+          //   AppImages.imageScreen1,
+          //   width: MediaQuery.of(context).size.width,
+          //   height: MediaQuery.of(context).size.height,
+          //   fit: BoxFit.fill,
+          // ),
           BlocConsumer<LoginDataBloc, LoginDataState>(
               listener: (context, state) {
             log('##state:$state');
