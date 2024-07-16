@@ -13,6 +13,7 @@ class ProgramModel extends Equatable {
   final int? schoolId;
   final int? courseId;
   final int? stageId;
+  final int? isActive;
   final String? createdAt;
   final String? updatedAt;
   final CourseModel? course;
@@ -28,6 +29,7 @@ class ProgramModel extends Equatable {
       this.updatedAt,
       this.image,
       this.studentTests,
+      this.isActive,
       this.course});
   factory ProgramModel.fromJson(Map<String, dynamic> json) {
     return _$ProgramModelFromJson(json);
@@ -36,6 +38,15 @@ class ProgramModel extends Equatable {
   Map<String, dynamic> toJson() => _$ProgramModelToJson(this);
 
   @override
-  List<Object?> get props =>
-      [id, name, schoolId, courseId, stageId, updatedAt, image, studentTests];
+  List<Object?> get props => [
+        id,
+        name,
+        schoolId,
+        courseId,
+        stageId,
+        updatedAt,
+        image,
+        studentTests,
+        isActive
+      ];
 }

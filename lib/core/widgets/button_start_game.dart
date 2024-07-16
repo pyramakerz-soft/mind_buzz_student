@@ -16,16 +16,18 @@ class ButtonLogin extends StatefulWidget {
   final bool? playButton;
   final double? fontSize;
   final bool? applyFontFamily5;
-  const ButtonLogin(
-      {Key? key,
-      this.disableAnimation,
-      required this.dataFunction,
-      required this.title,
-      this.playButton ,
-      this.fontSize ,
-      this.applyFontFamily5 ,
-      required this.width})
-      : super(key: key);
+  final Widget? leading;
+  const ButtonLogin({
+    Key? key,
+    this.disableAnimation,
+    required this.dataFunction,
+    required this.title,
+    this.playButton,
+    this.fontSize,
+    this.applyFontFamily5,
+    required this.width,
+    this.leading,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -98,15 +100,18 @@ class _ButtonLogin extends State<ButtonLogin>
                 padding:
                     const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                 decoration: BoxDecoration(
-                  color: (widget.playButton==true)?AppColor.darkBlueColor.withOpacity(.5):AppColor.lightGreyColor8,
+                  color: (widget.playButton == true)
+                      ? AppColor.darkBlueColor.withOpacity(.5)
+                      : AppColor.lightGreyColor8,
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
             ),
-            BlocBuilder<LoginCubit, LoginStateInitial>(builder: (context, state) {
+            BlocBuilder<LoginCubit, LoginStateInitial>(
+                builder: (context, state) {
               return AnimatedPositioned(
                 curve: Curves.easeIn,
-                bottom: double.parse("${state.position??0}"),
+                bottom: double.parse("${state.position ?? 0}"),
                 width: widget.width,
                 duration: const Duration(milliseconds: 70),
                 child: Container(
@@ -117,19 +122,32 @@ class _ButtonLogin extends State<ButtonLogin>
                     // image: DecorationImage(
                     //     image: AssetImage(AppImages.buttonImage),
                     //     fit: BoxFit.fitWidth),
-                    color: (widget.playButton==true)?AppColor.darkBlueColor:AppColor.lightGreyColor8,
+                    color: (widget.playButton == true)
+                        ? AppColor.darkBlueColor
+                        : AppColor.lightGreyColor8,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   alignment: Alignment.center,
-                  child: Text(
-                    widget.title,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontSize:widget.fontSize ?? 24,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: widget.applyFontFamily5 == true ?AppTheme.getFontFamily5() : null,
-                          height: 0,
-                          letterSpacing: 0.50,
-                        ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (widget.leading != null) ...[
+                        widget.leading!,
+                        const SizedBox(width: 8),
+                      ],
+                      Text(
+                        widget.title,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              fontSize: widget.fontSize ?? 24,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: widget.applyFontFamily5 == true
+                                  ? AppTheme.getFontFamily5()
+                                  : null,
+                              height: 0,
+                              letterSpacing: 0.50,
+                            ),
+                      ),
+                    ],
                   ),
                 ),
               );

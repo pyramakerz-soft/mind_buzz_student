@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mind_buzz_refactor/features/login/domain/entities/user_data_model.dart';
@@ -53,7 +54,13 @@ class EditProfileCubit extends Cubit<EditProfileState> {
       emit(state.copyWith(status: EditProfileStateStatus.loaded));
     } catch (e) {
       emit(state.copyWith(
-          status: EditProfileStateStatus.error, message: e.toString()));
+          status: EditProfileStateStatus.error,
+          message: e is DioException
+              ? e.type == DioExceptionType.connectionError ||
+                      e.type == DioExceptionType.connectionTimeout
+                  ? "Check Your network"
+                  : "Server Error"
+              : e.toString()));
     }
   }
 }

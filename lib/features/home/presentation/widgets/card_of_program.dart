@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_buzz_refactor/core/app_color.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import 'package:mind_buzz_refactor/core/widgets/show_snackbar.dart';
 
 import '../../../../core/utils.dart';
 import '../../../unit/presentation/manager/bloc/get_unit_bloc.dart';
@@ -17,29 +18,33 @@ class CardOfProgram extends StatelessWidget {
   final String title;
   final String programId;
   final bool isMob;
+  final bool isActive;
   final String? mainImage;
 
-  const CardOfProgram(
-      {Key? key,
-      this.isMob = true,
-      required this.colors,
-      required this.title,
-      required this.programId,
-      required this.mainImage})
-      : super(key: key);
+  const CardOfProgram({
+    Key? key,
+    this.isMob = true,
+    required this.colors,
+    required this.title,
+    required this.programId,
+    required this.mainImage,
+    required this.isActive,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Utils.navigateTo(
-            BlocProvider(
-                create: (_) => AnimationUnitCubit(),
-                child: UnitScreen(
-                  programId: programId,
-                  programName: title,
-                )),
-            context);
+        isActive
+            ? Utils.navigateTo(
+                BlocProvider(
+                    create: (_) => AnimationUnitCubit(),
+                    child: UnitScreen(
+                      programId: programId,
+                      programName: title,
+                    )),
+                context)
+            : showSnackBar(context, message: "Coming Soon");
       },
       child: Container(
         decoration: ShapeDecoration(
