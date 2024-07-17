@@ -8,6 +8,9 @@ class NotificationCubit extends Cubit<NotificationState> {
   NotificationCubit(this._getNotificationsUseCase)
       : super(NotificationState(status: NotificationStateStatus.initial));
   Future<void> getNotifications({required bool isRead}) async {
+    final stateIsRead = state.isRead;
+    final isReadInt = isRead ? 1 : 0;
+    if (stateIsRead == isReadInt) return;
     emit(state.copyWith(status: NotificationStateStatus.loading));
     try {
       emit(state.copyWith(isRead: isRead ? 1 : 0));
