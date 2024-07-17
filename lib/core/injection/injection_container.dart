@@ -7,6 +7,8 @@ import 'package:mind_buzz_refactor/features/assignments_filter/domain/use_cases/
 import 'package:mind_buzz_refactor/features/assignments_filter/domain/use_cases/get_reports_pie_chart_use_case.dart';
 import 'package:mind_buzz_refactor/features/assignments_filter/presentation/cubit/pie_chart_cubit.dart';
 import 'package:mind_buzz_refactor/features/login/domain/usecases/update_pin_code_use_cases.dart';
+import 'package:mind_buzz_refactor/features/notification/domain/usecase/get_notifications_use_case.dart';
+import 'package:mind_buzz_refactor/features/notification/presentation/manager/cubit/notification_cubit.dart';
 import 'package:mind_buzz_refactor/features/settings/data/datasources/settings_remote_source.dart';
 import 'package:mind_buzz_refactor/features/settings/data/repositories/settings_repository.dart';
 import 'package:mind_buzz_refactor/features/settings/presentation/bloc/edit_profile_cubit/edit_profile_cubit.dart';
@@ -49,10 +51,9 @@ import '../../features/phonetics/domain/use_cases/contact_lesson_use_cases.dart'
 import '../../features/chapters/domain/use_cases/game_stars_use_cases.dart';
 import '../../features/phonetics/domain/use_cases/game_use_cases.dart';
 import '../../features/phonetics/presentation/manager/bloc/contact_lesson_bloc.dart';
-import '../../features/notification/data/datasources/data_source_remotely_of_notification.dart';
+import '../../features/notification/data/datasources/notifications_remote_data_source.dart';
 import '../../features/notification/data/repositories/notification_repository_impl.dart';
 import '../../features/notification/domain/repositories/repositories_notification.dart';
-import '../../features/notification/presentation/manager/bloc/notification_bloc.dart';
 // import '../../features/phonetics/presentation/manager/main_cubit/current_game_phonetics_cubit.dart';
 import '../../features/reports/data/data_sources/data_source_remotely_of_parent_reports.dart';
 import '../../features/reports/data/repositories/parent_reports_repository_impl.dart';

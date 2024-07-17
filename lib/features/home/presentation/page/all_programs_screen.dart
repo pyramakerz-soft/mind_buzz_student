@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_buzz_refactor/core/assets_images.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import 'package:mind_buzz_refactor/features/calender/presentation/widgets/custom_empty_widget.dart';
 import '../../../../core/error/failures_messages.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/utils.dart';
@@ -55,7 +56,8 @@ class _AllProgramsScreen extends State<AllProgramsScreen> {
                 if (state is GetProgramsLoadingInitial) {
                   return const Expanded(
                       child: Center(child: CupertinoActivityIndicator()));
-                } else if (state is GetProgramsCompleteInitial) {
+                } else if (state is GetProgramsCompleteInitial &&
+                    state.data.isNotEmpty) {
                   return Align(
                     alignment: Alignment.topCenter,
                     child: SizedBox(
@@ -74,12 +76,23 @@ class _AllProgramsScreen extends State<AllProgramsScreen> {
                         )),
                   );
                 } else {
-                  return const SizedBox();
+                  return _buildEmptyCase();
                 }
               },
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildEmptyCase() {
+    return const Expanded(
+      child: Center(
+        child: CustomEmptyWidget(
+          title: 'No Programs Found.',
+          emptyScreenTypes: EmptyScreenTypes.emptyAssignments,
+        ),
       ),
     );
   }

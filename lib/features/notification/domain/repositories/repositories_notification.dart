@@ -1,8 +1,5 @@
-import 'package:dartz/dartz.dart';
-
-import '../../../../core/error/failures.dart';
-
+import 'package:mind_buzz_refactor/features/notification/domain/entities/notification_item_model.dart';
 
 abstract class NotificationRepository {
-
+  Future<List<NotificationItemModel>> getNotifications({required bool isRead});
 }
