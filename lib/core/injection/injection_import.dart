@@ -15,13 +15,15 @@ Future<void> init() async {
   sl.registerFactory(() => ContactLessonBloc(programContactUserUseCases: sl()));
   sl.registerFactory(() =>
       GetProgramsHomeBloc(programUserUseCases: sl(), logOutUserUseCases: sl()));
-  sl.registerFactory(() => NotificationsBloc());
   sl.registerFactory(() => CalenderBloc(programUserUseCases: sl()));
   sl.registerFactory(() => SettingsBloc(autoUserUseCases: sl()));
-  sl.registerFactory(() => AssignmentBloc(getContactAssignmentUseCases: sl(), postProgramContactAssignmentRepository: sl()));
+  sl.registerFactory(() => AssignmentBloc(
+      getContactAssignmentUseCases: sl(),
+      postProgramContactAssignmentRepository: sl()));
   sl.registerFactory(() => GetAssignmentBloc(
       programUserUseCases: sl(), programReportsUserUseCases: sl()));
   sl.registerFactory(() => PieChartCubit(sl(), sl()));
+  sl.registerFactory(() => NotificationCubit(sl()));
   // sl.registerFactory(() => ReportsBloc(programUserUseCases: sl()));
 
   //UseCase
@@ -42,6 +44,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => CreatePassCodeUseCases(sl()));
   sl.registerLazySingleton(() => GetAssignmentsPieChartUseCase(sl()));
   sl.registerLazySingleton(() => GetReportsPieChartUseCase(sl()));
+  sl.registerLazySingleton(() => GetNotificationsUseCase(repository: sl()));
   sl.registerFactory(() => EditProfileCubit(sl()));
 
   //Repository
@@ -93,8 +96,8 @@ Future<void> init() async {
       () => DataSourceRemotelyOfContactLessonImpl(dio: sl()));
   sl.registerLazySingleton<DataSourceLocalOfContactLesson>(
       () => DataSourceLocalOfGameStar());
-  sl.registerLazySingleton<DataSourceRemotelyOfNotification>(
-      () => DataSourceRemotelyOfNotificationImpl(dio: sl()));
+  sl.registerLazySingleton<NotificationsRemoteSource>(
+      () => NotificationsRemoteSourceImpl(dio: sl()));
   sl.registerLazySingleton<DataSourceRemotelyOfCalender>(
       () => DataSourceRemotelyOfCalenderImpl(dio: sl()));
   sl.registerLazySingleton<DataSourceRemotelyOfSettings>(
