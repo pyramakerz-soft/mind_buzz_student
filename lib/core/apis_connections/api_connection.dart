@@ -55,6 +55,7 @@ class MainApiConnection {
   String finishAssignment = "finishAssignment";
   String sendSolveData = "solveData";
   String getStudentAssignments = "studentAssignments";
+  String getNotifications = "notifications";
 
 ////////////////////////////////////////////////////////////////////////////
 
