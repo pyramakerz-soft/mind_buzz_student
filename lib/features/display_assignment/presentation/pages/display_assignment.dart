@@ -93,7 +93,9 @@ class _DisplayAssignment extends State<DisplayAssignment> {
                               mistakeCount: mistakeCount,
                               testId: widget.testId));
                         // context.read<TotalAssignmentCubit>().reFormatData();.
-                        widget.action();
+                        if(countOfStars!=0) {
+                          widget.action();
+                        }
                         debugPrint('#########################################');
                       },
                       showTheEditedGames: false,
@@ -101,8 +103,8 @@ class _DisplayAssignment extends State<DisplayAssignment> {
                         debugPrint(
                             'backButton#########################################');
 
-                        // Navigator.of(context).pop();
-                        // Navigator.of(context).pop();
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
                       });
                 }));
       } else {
