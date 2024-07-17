@@ -1,7 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mind_buzz_refactor/core/vars.dart';
+import 'package:mind_buzz_refactor/core/widgets/show_snackbar.dart';
+import 'package:mind_buzz_refactor/features/calender/presentation/widgets/custom_empty_widget.dart';
+import 'package:mind_buzz_refactor/features/notification/domain/entities/notification_item_model.dart';
+import 'package:mind_buzz_refactor/features/notification/presentation/manager/cubit/notification_state.dart';
 import 'package:mind_buzz_refactor/features/notification/presentation/widget/notification_item.dart';
 import '../../../../core/error/failures_messages.dart';
 import '../../../../core/utils.dart';
@@ -9,8 +14,7 @@ import '../../../home/presentation/widgets/switch_bar.dart';
 import '../../../login/presentation/page/login_screen.dart';
 // import '../notification_bloc.dart';
 import '../../../../core/injection/injection_container.dart' as di;
-import '../manager/bloc/notification_bloc.dart';
-import '../manager/cubit/switch_notification_cubit.dart';
+import '../manager/cubit/notification_cubit.dart';
 import '../widget/switch_title.dart';
 
 class NotificationsScreen extends StatelessWidget {
@@ -19,96 +23,87 @@ class NotificationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: customAppBar(context: context, title: 'Notifications'),
-        body: Column(
-          children: [
-            Container(
-              height: 20,
-              width: 1.sw,
-              color: Colors.white,
-            ),
-            Container(
-                margin: const EdgeInsets.only(left: 20, right: 20),
-                child: BlocProvider<NotificationsBloc>(
-                  create: (_) => di.sl<NotificationsBloc>()
-                    ..add(GetNotificationsRequest()),
-                  child: BlocConsumer<NotificationsBloc, NotificationsState>(
-                    listener: (context, state) {
-                      if (state is GetNotificationsErrorInitial) {
-                        if (state.message == RELOGIN_FAILURE_MESSAGE) {
-                          Utils.navigateAndRemoveUntilTo(
-                              LoginScreen(), context);
-                        } else {
-                          final snackBar = SnackBar(
-                            content: Text(state.message),
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        }
-                      }
-                    },
-                    builder: (context, state) {
-                      return BlocProvider<SwitchNotificationCubit>(
-                          create: (_) => SwitchNotificationCubit(),
-                          child: BlocConsumer<SwitchNotificationCubit, int>(
-                            listener: (context, state) {},
-                            builder: (BuildContext context, int state) {
-                              return Column(
-                                children: [
-                                  Row(children: [
-                                    SwitchTitle(
-                                      title: 'All',
-                                      index: 0,
-                                      currentIndex: state,
-                                      onTap: () {
-                                        context
-                                            .read<SwitchNotificationCubit>()
-                                            .updateSwitch(index: 0);
-                                      },
-                                    ),
-                                    10.pw,
-                                    SwitchTitle(
-                                      title: 'Unread',
-                                      index: 1,
-                                      currentIndex: state,
-                                      onTap: () {
-                                        context
-                                            .read<SwitchNotificationCubit>()
-                                            .updateSwitch(index: 1);
-                                      },
-                                    ),
-                                  ]),
-                                  20.ph,
-                                  const NotificationItem(
-                                    title: 'Check your child’s progress',
-                                    content:
-                                        'See the last report of the assignment taken on 1 August 2024.',
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  const NotificationItem(
-                                    title: 'Your password has changed',
-                                    content:
-                                        'Your password has changed 2 hours ago please, check if it isn’t you .',
-                                    isRead: true,
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  const NotificationItem(
-                                    title: 'You Receive Phonics Assignment ',
-                                    content:
-                                        'See the assignment taken on 1 August 2024 Deadline 5/5.',
-                                    isRead: true,
-                                  )
-                                ],
-                              );
-                            },
-                          ));
-                    },
-                  ),
-                )),
-          ],
-        ));
+      appBar: customAppBar(context: context, title: 'Notifications'),
+      body: BlocProvider<NotificationCubit>(
+        create: (_) =>
+            di.sl<NotificationCubit>()..getNotifications(isRead: false),
+        child: BlocConsumer<NotificationCubit, NotificationState>(
+          listener: (context, state) {
+            if (state.isError) {
+              showSnackBar(context, message: state.message);
+            }
+          },
+          builder: (BuildContext context, NotificationState state) {
+            final notificationCubit = context.read<NotificationCubit>();
+            final notifications = state.notifications;
+            return Padding(
+              padding: EdgeInsets.all(16.h),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  _buildChipItems(state, notificationCubit),
+                  20.ph,
+                  state.isLoading
+                      ? _buildLoadingIndicator()
+                      : notifications.isEmpty
+                          ? _buildEmptyCase()
+                          : _buildListOfNotifications(notifications)
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildChipItems(
+      NotificationState state, NotificationCubit notificationCubit) {
+    return Row(children: [
+      SwitchTitle(
+        title: 'Read',
+        index: 1,
+        currentIndex: state.isRead,
+        onTap: () => notificationCubit.getNotifications(
+          isRead: true,
+        ),
+      ),
+      10.pw,
+      SwitchTitle(
+        title: 'Unread',
+        index: 0,
+        currentIndex: state.isRead,
+        onTap: () => notificationCubit.getNotifications(
+          isRead: false,
+        ),
+      ),
+    ]);
+  }
+
+  Widget _buildEmptyCase() {
+    return const Expanded(
+      child: Center(
+        child: CustomEmptyWidget(
+          title: 'No Notifications Found.',
+          emptyScreenTypes: EmptyScreenTypes.emptyNotifications,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLoadingIndicator() => const Expanded(
+        child: CupertinoActivityIndicator(),
+      );
+
+  Widget _buildListOfNotifications(List<NotificationItemModel> notifications) {
+    return Expanded(
+      child: ListView.separated(
+        itemCount: notifications.length,
+        itemBuilder: (context, index) => NotificationItem(
+          notification: notifications[index],
+        ),
+        separatorBuilder: (context, index) => 10.ph,
+      ),
+    );
   }
 }
