@@ -104,23 +104,14 @@ class NotificationItem extends StatelessWidget {
               child: Container(
             padding: EdgeInsets.all(8.h),
             decoration: BoxDecoration(
-              color: CoursesEnum.values
-                  .firstWhere((e) =>
-                      e.name.contains(notification.courseName ?? 'unknown'))
-                  .color
-                  .withOpacity(0.2),
+              color:
+                  _getColorForCourse(notification.courseName).withOpacity(0.2),
               borderRadius: BorderRadius.circular(12.r),
             ),
             child: Text(
-              CoursesEnum.values
-                  .firstWhere((e) =>
-                      e.name.contains(notification.courseName ?? 'unknown'))
-                  .name,
+              _getStringForCourse(notification.courseName),
               style: TextStyle(
-                  color: CoursesEnum.values
-                      .firstWhere((e) =>
-                          e.name.contains(notification.courseName ?? 'unknown'))
-                      .color,
+                  color: _getColorForCourse(notification.courseName),
                   fontSize: 12.sp,
                   fontFamily: AppTheme.getFontFamily3(),
                   fontWeight: FontWeight.w500),
@@ -201,6 +192,38 @@ class NotificationItem extends StatelessWidget {
         )
       ],
     );
+  }
+
+  Color _getColorForCourse(String? courseName) {
+    // If courseName is null, return the color for Unknown
+    if (courseName == null) {
+      return CoursesEnum.unknown.color.withOpacity(0.2);
+    }
+
+    // Find the CoursesEnum value that matches the courseName, or return Unknown if not found
+    final courseEnum = CoursesEnum.values.firstWhere(
+      (e) => e.name.contains(courseName),
+      orElse: () => CoursesEnum.unknown,
+    );
+
+    // Return the color with opacity
+    return courseEnum.color;
+  }
+
+  String _getStringForCourse(String? courseName) {
+    // If courseName is null, return the color for Unknown
+    if (courseName == null) {
+      return CoursesEnum.unknown.name;
+    }
+
+    // Find the CoursesEnum value that matches the courseName, or return Unknown if not found
+    final courseEnum = CoursesEnum.values.firstWhere(
+      (e) => e.name.contains(courseName),
+      orElse: () => CoursesEnum.unknown,
+    );
+
+    // Return the color with opacity
+    return courseEnum.name;
   }
 
   String _getFormattedDate(String? date) {

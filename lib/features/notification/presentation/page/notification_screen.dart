@@ -95,14 +95,18 @@ class NotificationsScreen extends StatelessWidget {
         child: CupertinoActivityIndicator(),
       );
 
+  
   Widget _buildListOfNotifications(List<NotificationItemModel> notifications) {
     return Expanded(
-      child: ListView.separated(
-        itemCount: notifications.length,
-        itemBuilder: (context, index) => NotificationItem(
-          notification: notifications[index],
+      child: Padding(
+        padding: EdgeInsets.only(bottom: 50.h),
+        child: ListView.separated(
+          itemCount: notifications.length,
+          itemBuilder: (context, index) => NotificationItem(
+            notification: notifications[index],
+          ),
+          separatorBuilder: (context, index) => 10.ph,
         ),
-        separatorBuilder: (context, index) => 10.ph,
       ),
     );
   }
