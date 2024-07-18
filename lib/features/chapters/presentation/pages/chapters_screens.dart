@@ -63,7 +63,6 @@ class ChaptersScreen extends StatelessWidget {
                   alignment: Alignment.center,
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height - 81,
                       child: Column(mainAxisSize: MainAxisSize.min, children: [
                         Container(
                           height: 50.h,
@@ -141,106 +140,108 @@ class ChaptersScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        BlocConsumer<ChapterBloc, ChapterState>(
-                            listener: (context, state) {
-                          if (state is GetProgramsErrorInitial) {
-                            if (state.message == RELOGIN_FAILURE_MESSAGE) {
-                              Utils.navigateAndRemoveUntilTo(
-                                  LoginScreen(), context);
-                            } else {
-                              final snackBar = SnackBar(
-                                content: Text(state.message),
-                              );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height - 50.h,
+                          child: BlocConsumer<ChapterBloc, ChapterState>(
+                              listener: (context, state) {
+                            if (state is GetProgramsErrorInitial) {
+                              if (state.message == RELOGIN_FAILURE_MESSAGE) {
+                                Utils.navigateAndRemoveUntilTo(
+                                    LoginScreen(), context);
+                              } else {
+                                final snackBar = SnackBar(
+                                  content: Text(state.message),
+                                );
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
+                              }
+                            } else if (state is GetProgramsCompleteInitial) {
+                              context.read<JourneyBarCubit>().updateTheBar(
+                                  width: MediaQuery.of(context).size.width,
+                                  completed: state.data
+                                      .where((element) =>
+                                          element.isLetter != true &&
+                                          element.star != null)
+                                      .length,
+                                  countOfLessons: state.data
+                                      .where(
+                                          (element) => element.isLetter != true)
+                                      .length);
+
+                              context
+                                  .read<JourneyBarCubit>()
+                                  .updateTheDataOfLesson(newData: state.data);
                             }
-                          } else if (state is GetProgramsCompleteInitial) {
-                            context.read<JourneyBarCubit>().updateTheBar(
-                                width: MediaQuery.of(context).size.width,
-                                completed: state.data
-                                    .where((element) =>
-                                        element.isLetter != true &&
-                                        element.star != null)
-                                    .length,
-                                countOfLessons: state.data
-                                    .where(
-                                        (element) => element.isLetter != true)
-                                    .length);
+                          }, builder: (context, state) {
+                            if (state is GetProgramsCompleteInitial) {
+                              List<ChapterModel> games = stateOfJourney
+                                      .dataOfLessons?.reversed
+                                      .where((element) => !element.isHidden)
+                                      .toList() ??
+                                  [];
+                              return SizedBox(
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                      child: LevelMap(
+                                        backgroundColor: Colors.transparent,
+                                        onTapLevel: (index) {
+                                          if (games[index].isActive == true) {
+                                            if (games[index].isGame == true) {
+                                              final p = context
+                                                  .read<JourneyBarCubit>();
 
-                            context
-                                .read<JourneyBarCubit>()
-                                .updateTheDataOfLesson(newData: state.data);
-                          }
-                        }, builder: (context, state) {
-                          if (state is GetProgramsCompleteInitial) {
-                            List<ChapterModel> games = stateOfJourney
-                                    .dataOfLessons?.reversed
-                                    .where((element) => !element.isHidden)
-                                    .toList() ??
-                                [];
-                            return SizedBox(
-                              height:
-                                  MediaQuery.of(context).size.height - 120.h,
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    child: LevelMap(
-                                      backgroundColor: Colors.transparent,
-                                      onTapLevel: (index) {
-                                        if (games[index].isActive == true) {
-                                          if (games[index].isGame == true) {
-                                            final p =
-                                                context.read<JourneyBarCubit>();
-
-                                            Utils.navigateTo(
-                                                ChangeNotifierProvider<
-                                                        JourneyBarCubit>.value(
-                                                    value: p,
-                                                    child: PhoneticsBook(
-                                                      lessonId: games[index]
-                                                          .lessonId!,
-                                                      gameId: games[index].id!,
-                                                      firstTry: true,
-                                                    )),
-                                                context);
+                                              Utils.navigateTo(
+                                                  ChangeNotifierProvider<
+                                                          JourneyBarCubit>.value(
+                                                      value: p,
+                                                      child: PhoneticsBook(
+                                                        lessonId: games[index]
+                                                            .lessonId!,
+                                                        gameId:
+                                                            games[index].id!,
+                                                        firstTry: true,
+                                                      )),
+                                                  context);
+                                            }
                                           }
-                                        }
-                                      },
-                                      levelMapParams: LevelMapParams(
-                                        showPathShadow: false,
-                                        levelCount: games.length,
-                                        pathStrokeWidth: 1,
-                                        currentLevel: games.isEmpty
-                                            ? 1
-                                            : games.length.toDouble(),
-                                        pathColor: Colors.grey,
-                                        levelsImages: games
-                                            .map((e) => ImageParams(
-                                                path: e.levelImg!,
-                                                size: Size(
-                                                    100,
-                                                    (e.isGame ?? false)
-                                                        ? 90
-                                                        : 65),
-                                                isActive: e.isActive ?? false,
-                                                bodyWidget: ItemOfSubBody(
-                                                    chapterData: e),
-                                                title: ItemOfTitle(
-                                                    chapterData: e)))
-                                            .toList(),
+                                        },
+                                        levelMapParams: LevelMapParams(
+                                          showPathShadow: false,
+                                          levelCount: games.length,
+                                          pathStrokeWidth: 1,
+                                          currentLevel: games.isEmpty
+                                              ? 1
+                                              : games.length.toDouble(),
+                                          pathColor: Colors.grey,
+                                          levelsImages: games
+                                              .map((e) => ImageParams(
+                                                  path: e.levelImg!,
+                                                  size: Size(
+                                                      100,
+                                                      (e.isGame ?? false)
+                                                          ? 90
+                                                          : 65),
+                                                  isActive: e.isActive ?? false,
+                                                  bodyWidget: ItemOfSubBody(
+                                                      chapterData: e),
+                                                  title: ItemOfTitle(
+                                                      chapterData: e)))
+                                              .toList(),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          } else if (state is GetProgramsLoadingInitial) {
-                            return const Center(
-                                child: CupertinoActivityIndicator());
-                          } else {
-                            return const SizedBox();
-                          }
-                        }),
+                                  ],
+                                ),
+                              );
+                            } else if (state is GetProgramsLoadingInitial) {
+                              return const Center(
+                                  child: CupertinoActivityIndicator());
+                            } else {
+                              return const SizedBox();
+                            }
+                          }),
+                        ),
                       ]),
                     ),
                     Positioned(
