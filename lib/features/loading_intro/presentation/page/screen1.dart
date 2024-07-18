@@ -65,8 +65,9 @@ class _Screens1 extends State<Screens1> with SingleTickerProviderStateMixin {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage(AppImages.imageScreen1))),
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(AppImages.imageScreen1), fit: BoxFit.fill)),
         child: BlocConsumer<LoginDataBloc, LoginDataState>(
             listener: (context, state) {
           log('##state:$state');
