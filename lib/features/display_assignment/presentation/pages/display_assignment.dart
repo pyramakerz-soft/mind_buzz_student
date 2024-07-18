@@ -15,7 +15,11 @@ class DisplayAssignment extends StatefulWidget {
   final int assignmentId;
   final Function() action;
 
-  const DisplayAssignment({super.key, required this.testId, required this.action,required this.assignmentId});
+  const DisplayAssignment(
+      {super.key,
+      required this.testId,
+      required this.action,
+      required this.assignmentId});
   @override
   State<StatefulWidget> createState() {
     return _DisplayAssignment();
@@ -62,7 +66,8 @@ class _DisplayAssignment extends State<DisplayAssignment> {
         return Center(child: CupertinoActivityIndicator());
       } else if (stateOfGameData is AssignmentDataInitial) {
         return BlocProvider(
-            create: (_) => TotalAssignmentCubit(assignmentData: stateOfGameData.data),
+            create: (_) =>
+                TotalAssignmentCubit(assignmentData: stateOfGameData.data),
             child: BlocConsumer<TotalAssignmentCubit, TotalAssignmentInitial>(
                 listener: (context, state) {},
                 builder: (context, stateOfGameData) {
@@ -73,7 +78,8 @@ class _DisplayAssignment extends State<DisplayAssignment> {
                           .getMainContactData(index: 0),
                       actionOfCompleteGame: (int countOfStars) {
                         int tries =
-                            stateOfGameData.assignmentData.first.numOfTrials ?? 0;
+                            stateOfGameData.assignmentData.first.numOfTrials ??
+                                0;
                         int mistakeCount = 0;
                         if (tries == 3) {
                           mistakeCount = tries - countOfStars;
@@ -86,14 +92,14 @@ class _DisplayAssignment extends State<DisplayAssignment> {
                             mistakeCount = 0;
                           }
                         }
-                        di.sl<AssignmentBloc>()
-                          .add(PostAssignmentDataEvent(
-                              stars: countOfStars,
+                        di.sl<AssignmentBloc>().add(PostAssignmentDataEvent(
+                            stars: countOfStars,
                             assignmentId: widget.assignmentId,
-                              mistakeCount: mistakeCount,
-                              testId: widget.testId));
-                        // context.read<TotalAssignmentCubit>().reFormatData();.
-                        widget.action();
+                            mistakeCount: mistakeCount,
+                            testId: widget.testId));
+                        if (countOfStars != 0) {
+                          widget.action();
+                        }
                         debugPrint('#########################################');
                       },
                       showTheEditedGames: false,
@@ -101,8 +107,8 @@ class _DisplayAssignment extends State<DisplayAssignment> {
                         debugPrint(
                             'backButton#########################################');
 
-                        // Navigator.of(context).pop();
-                        // Navigator.of(context).pop();
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
                       });
                 }));
       } else {
