@@ -29,7 +29,8 @@ class _Screens1 extends State<Screens1> with SingleTickerProviderStateMixin {
   final shorebirdCodePush = ShorebirdCodePush();
   Future<void> _checkForUpdates() async {
     // Check whether a patch is available to install.
-    final isUpdateAvailable = await shorebirdCodePush.isNewPatchAvailableForDownload();
+    final isUpdateAvailable =
+        await shorebirdCodePush.isNewPatchAvailableForDownload();
 
     print('isUpdateAvailable:$isUpdateAvailable');
     if (isUpdateAvailable) {
@@ -37,6 +38,7 @@ class _Screens1 extends State<Screens1> with SingleTickerProviderStateMixin {
       await shorebirdCodePush.downloadUpdateIfAvailable();
     }
   }
+
   @override
   void initState() {
     _checkForUpdates();
@@ -57,53 +59,46 @@ class _Screens1 extends State<Screens1> with SingleTickerProviderStateMixin {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          // Image.asset(
-          //   AppImages.imageScreen1,
-          //   width: MediaQuery.of(context).size.width,
-          //   height: MediaQuery.of(context).size.height,
-          //   fit: BoxFit.fill,
-          // ),
-          BlocConsumer<LoginDataBloc, LoginDataState>(
-              listener: (context, state) {
-            log('##state:$state');
-            if (state is ErrorLogin) {
-              Utils.navigateAndRemoveUntilTo(LoginScreen(), context);
-            } else if (state is CompleteLogin) {
-              context.read<LoginCubit>().saveUserData(userData: state.userData);
-              Utils.navigateAndRemoveUntilTo(
-                  WhoAmIScreen(),
-                  context);
-            }
-          }, builder: (context, state) {
-            return Center(
-              child: AnimatedBuilder(
-                  animation: _animation,
-                  builder: (context, child) {
-                    return Transform.translate(
-                      offset: Offset(-(200 * (1 - _animation.value)), 0),
-                      child: Opacity(
-                          opacity: _animation.value,
-                          child: BlocBuilder<LoadingCubit, Artboard?>(
-                              builder: (context, state) {
-                            return state == null
-                                ? Image.asset(AppImages.introBee)
-                                : Rive(
-                                    artboard: state,
-                                    // fit: BoxFit.fitHeight,
-                                    useArtboardSize: true,
-                                  );
-                          })),
-                    );
-                  }),
-            );
-          })
-        ],
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+            image: DecorationImage(image: AssetImage(AppImages.imageScreen1))),
+        child: BlocConsumer<LoginDataBloc, LoginDataState>(
+            listener: (context, state) {
+          log('##state:$state');
+          if (state is ErrorLogin) {
+            Utils.navigateAndRemoveUntilTo(LoginScreen(), context);
+          } else if (state is CompleteLogin) {
+            context.read<LoginCubit>().saveUserData(userData: state.userData);
+            Utils.navigateAndRemoveUntilTo(WhoAmIScreen(), context);
+          }
+        }, builder: (context, state) {
+          return Center(
+            child: AnimatedBuilder(
+                animation: _animation,
+                builder: (context, child) {
+                  return Transform.translate(
+                    offset: Offset(-(200 * (1 - _animation.value)), 0),
+                    child: Opacity(
+                        opacity: _animation.value,
+                        child: BlocBuilder<LoadingCubit, Artboard?>(
+                            builder: (context, state) {
+                          return state == null
+                              ? Image.asset(AppImages.introBee)
+                              : Rive(
+                                  artboard: state,
+                                  // fit: BoxFit.fitHeight,
+                                  useArtboardSize: true,
+                                );
+                        })),
+                  );
+                }),
+          );
+        }),
       ),
     );
   }
