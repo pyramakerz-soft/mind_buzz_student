@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/assets_images.dart';
@@ -20,17 +21,17 @@ class ItemOfTitle extends StatelessWidget {
               3,
               (index) => (double.parse("${chapterData.star ?? 0}") > (index))
                   ? Padding(
-                      padding: EdgeInsets.only(bottom: index == 1 ? 10.0 : 0),
+                      padding: EdgeInsets.only(bottom: index == 1 ? 10.h : 0.h),
                       child: SvgPicture.asset(
                         AppSvgImages.iconCompleteStar,
-                        height: (chapterData.isGame ?? false) ? 25 : 30,
+                        height: (chapterData.isGame ?? false) ? 18.h : 18.h,
                       ),
                     )
                   : Padding(
-                      padding: EdgeInsets.only(bottom: index == 1 ? 10.0 : 0),
+                      padding: EdgeInsets.only(bottom: index == 1 ? 10.h : 0),
                       child: Image.asset(
                         AppImages.iconEmptyStar,
-                        height: (chapterData.isGame ?? false) ? 25 : 30,
+                        height: (chapterData.isGame ?? false) ? 18.h : 18.h,
                       ),
                     )),
         );
@@ -39,20 +40,20 @@ class ItemOfTitle extends StatelessWidget {
           children: List.generate(
               3,
               (index) => Padding(
-                    padding: EdgeInsets.only(bottom: index == 1 ? 10.0 : 0),
+                    padding: EdgeInsets.only(bottom: index == 1 ? 10.h : 0),
                     child: (SvgPicture.asset(
                       AppSvgImages.iconEmptyStar,
-                      height: (chapterData.isGame ?? false) ? 25 : 30,
+                      height: (chapterData.isGame ?? false) ? 18.h : 18.h,
                     )),
                   )),
         );
       }
     } else {
       return Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(8.w),
         child: Image.asset(
           AppImages.lock,
-          height: 40,
+          height: 25.h,
         ),
       );
     }

@@ -3,7 +3,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/rendering.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:path_drawing/path_drawing.dart';
 // class DottedLinePainter extends CustomPainter {
@@ -45,7 +45,6 @@ import 'package:path_drawing/path_drawing.dart';
 //   }
 // }
 
-
 class ZigzagPainter extends CustomPainter {
   final List<Offset> listOfPoints;
   ZigzagPainter({required this.listOfPoints});
@@ -58,9 +57,9 @@ class ZigzagPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 
-    final double width = size.width;
-    final double height = size.height;
-    final double curveHeight = 1222 * 0.33;
+    final double width = size.width.w;
+    final double height = size.height.h;
+    final double curveHeight = height * 0.33;
 
     Path path = Path();
 
@@ -81,26 +80,19 @@ class ZigzagPainter extends CustomPainter {
     // // Fourth curve
     // path.quadraticBezierTo(-50 , height / 1.1, width / 2, curveHeight * 4 );
 
-
     // First curve
-    path.quadraticBezierTo(
-        width / 1.1, 250 , width * 0.4, curveHeight);
+    path.quadraticBezierTo(width / 1.1, 250, width * 0.4, curveHeight);
 
     // Second curve
-    path.quadraticBezierTo(
-        -width / 4.4, 600 , width * 0.4, curveHeight * 2);
+    path.quadraticBezierTo(-width / 4.4, 600, width * 0.4, curveHeight * 2);
 
     // Third curve
-    path.quadraticBezierTo(
-        width / 1.1, 1000, width * 0.4, curveHeight * 3);
+    path.quadraticBezierTo(width / 1.1, 1000, width * 0.4, curveHeight * 3);
 
     // Fourth curve
-    path.quadraticBezierTo(
-        -width / 4.4, 1450, width * 0.4, curveHeight * 4.2);
+    path.quadraticBezierTo(-width / 4.4, 1450, width * 0.4, curveHeight * 4.2);
 
-    path.quadraticBezierTo(
-        width / 1.1, 1950, width * 0.4, curveHeight * 5);
-
+    path.quadraticBezierTo(width / 1.1, 1950, width * 0.4, curveHeight * 5);
 
     canvas.drawPath(
       dashPath(
@@ -110,6 +102,7 @@ class ZigzagPainter extends CustomPainter {
       paint,
     );
   }
+
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return false;

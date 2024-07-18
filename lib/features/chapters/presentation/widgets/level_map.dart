@@ -75,70 +75,144 @@ class LevelMap extends StatelessWidget {
                             params: levelMapParams,
                             imagesToPaint: snapshot.data),
                       ),
-                      ...List.generate(
-                          levelMapParams.levelsImages.length,
-                          (index) => Positioned(
-                              left: index ==
-                                          levelMapParams.levelsImages.length -
-                                              1 ||
-                                      index == 0
-                                  ? constraints.maxWidth * 0.1 + 20
-                                  : index % 2 != 0
-                                      ? constraints.maxWidth * 0.06
-                                      : constraints.maxWidth / 3.7,
-                              top: index ==
-                                      levelMapParams.levelsImages.length - 1
-                                  ? (index * (levelMapParams.levelHeight)) + 120
-                                  : index * (levelMapParams.levelHeight),
-                              child: InkWell(
-                                onTap: () {
-                                  onTapLevel.call(index);
-                                },
-                                child: Column(
-                                  children: [
-                                    Stack(
-                                      alignment: Alignment.center,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(15),
-                                          child: Image.asset(
-                                            levelMapParams
-                                                    .levelsImages[index].path ??
-                                                '',
-                                            height: levelMapParams
-                                                .levelsImages[index]
-                                                .size
-                                                .height,
-                                            width: 125,
-                                            fit: BoxFit.fill,
-                                          ),
-                                        ),
-                                        if (levelMapParams.levelsImages[index]
-                                                .bodyWidget !=
-                                            null) ...{
-                                          Column(
-                                            children: [
-                                              10.ph,
+                      if (levelMapParams.levelsImages.length % 2 == 0)
+                        ...List.generate(
+                            levelMapParams.levelsImages.length,
+                            (index) => Positioned(
+                                left: index ==
+                                            levelMapParams.levelsImages.length -
+                                                1 ||
+                                        index == 0
+                                    ? constraints.maxWidth * 0.1 + 20
+                                    : index % 2 != 0
+                                        ? constraints.maxWidth * 0.06
+                                        : constraints.maxWidth / 3.7,
+                                top: index ==
+                                        levelMapParams.levelsImages.length - 1
+                                    ? (index * (levelMapParams.levelHeight)) +
+                                        120
+                                    : index * (levelMapParams.levelHeight),
+                                child: InkWell(
+                                  onTap: () {
+                                    onTapLevel.call(index);
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Stack(
+                                        alignment: Alignment.center,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.all(7.w),
+                                            child: Image.asset(
                                               levelMapParams.levelsImages[index]
-                                                      .bodyWidget ??
-                                                  const SizedBox(),
-                                              10.ph
-                                            ],
-                                          ),
-                                          Positioned(
-                                              top: -2,
-                                              child: levelMapParams
+                                                      .path ??
+                                                  '',
+                                              height: levelMapParams
                                                       .levelsImages[index]
-                                                      .title ??
-                                                  const SizedBox(
-                                                    height: 20,
-                                                  )),
-                                        }
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ))),
+                                                      .size
+                                                      .height
+                                                      .h -
+                                                  20.h,
+                                              width: 90.w,
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ),
+                                          if (levelMapParams.levelsImages[index]
+                                                  .bodyWidget !=
+                                              null) ...{
+                                            Column(
+                                              children: [
+                                                10.ph,
+                                                levelMapParams
+                                                        .levelsImages[index]
+                                                        .bodyWidget ??
+                                                    const SizedBox(),
+                                                10.ph
+                                              ],
+                                            ),
+                                            Positioned(
+                                                top: -2,
+                                                child: levelMapParams
+                                                        .levelsImages[index]
+                                                        .title ??
+                                                    SizedBox(
+                                                      height: 20.h,
+                                                    )),
+                                          }
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )))
+                      else
+                        ...List.generate(
+                            levelMapParams.levelsImages.length,
+                            (index) => Positioned(
+                                right: index ==
+                                            levelMapParams.levelsImages.length -
+                                                1 ||
+                                        index == 0
+                                    ? constraints.maxWidth * 0.1 + 20
+                                    : index % 2 != 0
+                                        ? constraints.maxWidth * 0.06
+                                        : constraints.maxWidth / 3.7,
+                                top: index ==
+                                        levelMapParams.levelsImages.length - 1
+                                    ? (index * (levelMapParams.levelHeight)) +
+                                        120
+                                    : index * (levelMapParams.levelHeight),
+                                child: InkWell(
+                                  onTap: () {
+                                    onTapLevel.call(index);
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Stack(
+                                        alignment: Alignment.center,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.all(7.w),
+                                            child: Image.asset(
+                                              levelMapParams.levelsImages[index]
+                                                      .path ??
+                                                  '',
+                                              height: levelMapParams
+                                                      .levelsImages[index]
+                                                      .size
+                                                      .height
+                                                      .h -
+                                                  20.h,
+                                              width: 90.w,
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ),
+                                          if (levelMapParams.levelsImages[index]
+                                                  .bodyWidget !=
+                                              null) ...{
+                                            Column(
+                                              children: [
+                                                10.ph,
+                                                levelMapParams
+                                                        .levelsImages[index]
+                                                        .bodyWidget ??
+                                                    const SizedBox(),
+                                                10.ph
+                                              ],
+                                            ),
+                                            Positioned(
+                                                top: -2,
+                                                child: levelMapParams
+                                                        .levelsImages[index]
+                                                        .title ??
+                                                    SizedBox(
+                                                      height: 20.h,
+                                                    )),
+                                          }
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ))),
                     ],
                   );
                 },
