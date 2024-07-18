@@ -75,18 +75,23 @@ class AppColor {
   static const Color dragContainerColor = Color(0xffF0D2AA);
   static const Color lightBlueColor2 = Color(0xffBEDDEC);
   static const Color lightBlueColor4 = Color(0xff4D7F97);
+  static const Color mathColor = Color(0xff008D4B);
+  static const Color phonicsColor = Color(0xff1690EB);
+  static const Color arabicColor = Color(0xff6750A3);
+  static const Color cultureColor = Color(0xff85207B);
+  static const Color practicalLifeColor = Color(0xffFF303A);
   Color hexToColor(String code) {
     return Color(int.parse("0xff${code.toString().split("#").last}"));
   }
 
   static const Color calenderDayText = Color(0xff3C3C43);
-  
+
   static const gradientColor1 = LinearGradient(
-          colors: [
-            Color(0xFF114677), // Start color
-            Color(0xFF2A6294), // End color
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        );
+    colors: [
+      Color(0xFF114677), // Start color
+      Color(0xFF2A6294), // End color
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 }

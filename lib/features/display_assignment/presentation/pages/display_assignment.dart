@@ -97,7 +97,10 @@ class _DisplayAssignment extends State<DisplayAssignment> {
                             assignmentId: widget.assignmentId,
                             mistakeCount: mistakeCount,
                             testId: widget.testId));
-                        if (countOfStars != 0) {
+                              mistakeCount: mistakeCount,
+                              testId: widget.testId));
+                        // context.read<TotalAssignmentCubit>().reFormatData();.
+                        if(countOfStars!=0) {
                           widget.action();
                         }
                         debugPrint('#########################################');

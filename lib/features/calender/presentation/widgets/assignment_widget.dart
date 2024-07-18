@@ -50,14 +50,10 @@ class AssignmentWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if(isAssignment==true)...{
+            if (isAssignment == true) ...{
               Text(
                 singleTest.testName ?? '',
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .displayLarge
-                    ?.copyWith(
+                style: Theme.of(context).textTheme.displayLarge?.copyWith(
                     fontSize: 0.016.sh,
                     fontWeight: FontWeight.bold,
                     height: 0,
@@ -155,70 +151,13 @@ class AssignmentWidget extends StatelessWidget {
                 ? Column(
                     children: [
                       const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Flexible(
-                            child: FittedBox(
-                              child: Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    ParentImages.calenderOutline,
-                                    height: 13,
-                                  ),
-                                  5.pw,
-                                  Text(
-                                    getStartDateText(singleTest),
-                                    style: TextStyle(
-                                        color: AppColor.lightGreyColor3,
-                                        fontSize: 12,
-                                        fontFamily: AppTheme.getFontFamily3(),
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Flexible(
-                            child: FittedBox(
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  SvgPicture.asset(
-                                    ParentImages.timers,
-                                    height: 13,
-                                  ),
-                                  5.pw,
-                                  Text(
-                                    getEndDateText(singleTest.status),
-                                    style: TextStyle(
-                                      color: AppColor.lightGreyColor3
-                                          .withOpacity(0.7),
-                                      fontSize: 12,
-                                      fontFamily: AppTheme.getFontFamily3(),
-                                    ),
-                                  ),
-                                  Text(
-                                    singleTest.status !=
-                                            AssignmentStatus.overdue.text()
-                                        ? singleTest.daysLeft ?? ''
-                                        : singleTest.daysDifference ?? '',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: singleTest.status !=
-                                                AssignmentStatus.overdue.text()
-                                            ? AppColor.lightGreyColor3
-                                            : getStatusColor(singleTest.status),
-                                        fontSize: 12,
-                                        fontFamily: AppTheme.getFontFamily3(),
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                      _buildStartAndEndDate(),
+                      if (singleTest.status ==
+                          AssignmentStatus.completed.text())
+                        _buildDateOfCompletion()
+                      else if (singleTest.status ==
+                          AssignmentStatus.overdue.text())
+                        _buildDaysDifference()
                     ],
                   )
                 : Column(
@@ -299,25 +238,167 @@ class AssignmentWidget extends StatelessWidget {
     );
   }
 
-  String getEndDateText(String status) {
-    if (status == AssignmentStatus.pending.text()) {
-      return 'End Date ';
-    } else if (status == AssignmentStatus.overdue.text()) {
-      return 'Time Different ';
-    } else {
-      return 'Deadline ';
-    }
+  Widget _buildDaysDifference() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Flexible(
+          child: FittedBox(
+            child: Row(
+              children: [
+                SvgPicture.asset(
+                  ParentImages.calenderOutline,
+                  height: 13.h,
+                  color: AppColor.lightGreyColor3,
+                ),
+                5.pw,
+                Text(
+                  'Time Difference ',
+                  style: TextStyle(
+                      color: AppColor.lightGreyColor3,
+                      fontSize: 12.sp,
+                      fontFamily: AppTheme.getFontFamily3(),
+                      fontWeight: FontWeight.w700),
+                ),
+                Text(
+                  singleTest.daysDifference ?? '',
+                  style: TextStyle(
+                      color: getStatusColor(singleTest.status),
+                      fontSize: 10.sp,
+                      fontFamily: AppTheme.getFontFamily3(),
+                      fontWeight: FontWeight.w700),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(),
+      ],
+    );
   }
 
-  String getStartDateText(TestModel singleTest) {
-    if (singleTest.status == AssignmentStatus.pending.text()) {
-      DateTime dateTime = DateTime.parse(singleTest.createdAt ?? '');
+  Widget _buildDateOfCompletion() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Flexible(
+          child: FittedBox(
+            child: Row(
+              children: [
+                SvgPicture.asset(
+                  ParentImages.timers,
+                  height: 13.h,
+                  color: AppColor.lightGreyColor3,
+                ),
+                5.pw,
+                Text(
+                  'Date of Completion ',
+                  style: TextStyle(
+                      color: AppColor.lightGreyColor3,
+                      fontSize: 12.sp,
+                      fontFamily: AppTheme.getFontFamily3(),
+                      fontWeight: FontWeight.w700),
+                ),
+                Text(
+                  _getFormattedDate(singleTest.updatedAt),
+                  style: TextStyle(
+                      color: AppColor.lightGreyColor3.withOpacity(0.7),
+                      fontSize: 10.sp,
+                      fontFamily: AppTheme.getFontFamily3(),
+                      fontWeight: FontWeight.w700),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(),
+      ],
+    );
+  }
+
+  Widget _buildStartAndEndDate() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Flexible(
+          child: FittedBox(
+            child: Row(
+              children: [
+                SvgPicture.asset(
+                  ParentImages.calenderOutline,
+                  height: 13.h,
+                  color: AppColor.lightGreyColor3,
+                ),
+                5.pw,
+                Text(
+                  'Start Date ',
+                  style: TextStyle(
+                      color: AppColor.lightGreyColor3,
+                      fontSize: 12.sp,
+                      fontFamily: AppTheme.getFontFamily3(),
+                      fontWeight: FontWeight.w700),
+                ),
+                Text(
+                  _getFormattedDate(singleTest.createdAt),
+                  style: TextStyle(
+                      color: AppColor.lightGreyColor3.withOpacity(0.7),
+                      fontSize: 10.sp,
+                      fontFamily: AppTheme.getFontFamily3(),
+                      fontWeight: FontWeight.w700),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Flexible(
+          child: FittedBox(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SvgPicture.asset(
+                  ParentImages.timers,
+                  height: 13.h,
+                  color: AppColor.lightGreyColor3,
+                ),
+                5.pw,
+                Text(
+                  'Deadline ',
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    color: AppColor.lightGreyColor3,
+                    fontFamily: AppTheme.getFontFamily3(),
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                Text(
+                  singleTest.daysLeft ?? 'Invalid Date',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 10.sp,
+                    color: AppColor.lightGreyColor3.withOpacity(0.7),
+                    fontFamily: AppTheme.getFontFamily3(),
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  String _getFormattedDate(String? date) {
+    if (date == null || date.isEmpty) {
+      return 'Invalid Date'; // or return a default value like 'Invalid date'
+    }
+
+    try {
+      DateTime dateTime = DateTime.parse(date);
       String formattedDate = DateFormat('d MMMM').format(dateTime);
-      return 'Start Date $formattedDate';
-    } else if (singleTest.status == AssignmentStatus.overdue.text()) {
-      return 'Deadline ${singleTest.daysLeft ?? ''}';
-    } else {
-      return 'Date of Completion ${singleTest.daysLeft ?? ''}';
+      return formattedDate;
+    } catch (e) {
+      return 'Invalid Date'; // or handle the exception as needed
     }
   }
 
