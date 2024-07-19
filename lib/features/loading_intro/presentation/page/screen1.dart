@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:rive/rive.dart';
@@ -115,6 +116,9 @@ class _Screens1 extends State<Screens1> with SingleTickerProviderStateMixin {
                     }),
                 if (superIsUpdateAvailable == true) ...{
                   CircularProgressIndicator(),
+                  SizedBox(),
+                } else ...{
+                  SizedBox(),
                   SizedBox(),
                 }
               ],
