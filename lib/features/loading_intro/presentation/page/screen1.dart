@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -115,7 +116,7 @@ class _Screens1 extends State<Screens1> with SingleTickerProviderStateMixin {
                       );
                     }),
                 if (superIsUpdateAvailable == true) ...{
-                  CircularProgressIndicator(),
+                  CupertinoActivityIndicator(),
                   SizedBox(),
                 } else ...{
                   SizedBox(),

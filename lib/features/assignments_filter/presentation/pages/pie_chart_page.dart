@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -174,9 +175,7 @@ class PieChartPage extends StatelessWidget {
   Widget _buildLoadingCase() {
     return const Expanded(
       child: Center(
-        child: CircularProgressIndicator(
-          color: AppColor.darkBlueColor,
-        ),
+        child: CupertinoActivityIndicator(),
       ),
     );
   }
