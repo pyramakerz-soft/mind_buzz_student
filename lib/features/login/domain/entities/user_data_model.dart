@@ -12,6 +12,7 @@ part 'user_data_model.g.dart';
 class UserData extends Equatable {
   int? id;
   int? pwLength;
+  num? count;
   String? name;
   String? email;
   String? emailVerifiedAt;
@@ -33,6 +34,7 @@ class UserData extends Equatable {
       {this.id,
       this.pwLength,
       this.name,
+      this.count,
       this.email,
       this.emailVerifiedAt,
       this.school,
@@ -69,6 +71,7 @@ class UserData extends Equatable {
   @override
   List<Object?> get props => [
         id,
+        count,
         name,
         email,
         emailVerifiedAt,
@@ -97,6 +100,7 @@ class UserData extends Equatable {
     String? parentImage,
     String? parentPassword,
     int? schoolId,
+    num? count,
     SchoolModel? school,
   }) {
     return UserData(
@@ -108,6 +112,7 @@ class UserData extends Equatable {
       updatedAt: updatedAt ?? this.updatedAt,
       role: role ?? this.role,
       parentName: parentName ?? this.parentName,
+      count: count ?? this.count,
       parentPhone: parentPhone ?? this.parentPhone,
       countryCode: countryCode ?? this.countryCode,
       parentEmail: parentEmail ?? this.parentEmail,
