@@ -8,8 +8,11 @@ import '../../core/parent_assets.dart';
 import '../calender/presentation/page/calender_screen.dart';
 import '../home/presentation/page/home_parent_screen.dart';
 import '../login/presentation/bloc/login_data_bloc.dart';
+import '../notification/presentation/manager/cubit/notification_cubit.dart';
 import '../notification/presentation/page/notification_screen.dart';
 import '../settings/presentation/page/settings_screen.dart';
+import '../../../../core/injection/injection_container.dart' as di;
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -24,7 +27,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
     List<Widget> screens = [
       HomeParentScreen(),
       CalenderScreen(),
-      NotificationsScreen(),
+      BlocProvider<NotificationCubit>(
+          create: (_) =>
+              di.sl<NotificationCubit>()..getNotifications(isRead: true),
+          child: NotificationsScreen()),
       SettingsScreen(),
     ];
     return screens[index];

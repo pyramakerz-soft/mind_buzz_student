@@ -13,7 +13,6 @@ import '../../../../core/utils.dart';
 import '../../../home/presentation/widgets/switch_bar.dart';
 import '../../../login/presentation/page/login_screen.dart';
 // import '../notification_bloc.dart';
-import '../../../../core/injection/injection_container.dart' as di;
 import '../manager/cubit/notification_cubit.dart';
 import '../widget/switch_title.dart';
 
@@ -24,34 +23,31 @@ class NotificationsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(context: context, title: 'Notifications'),
-      body: BlocProvider<NotificationCubit>(
-        create: (_) => di.sl<NotificationCubit>(),
-        child: BlocConsumer<NotificationCubit, NotificationState>(
-          listener: (context, state) {
-            if (state.isError) {
-              showSnackBar(context, message: state.message);
-            }
-          },
-          builder: (BuildContext context, NotificationState state) {
-            final notificationCubit = context.read<NotificationCubit>();
-            final notifications = state.notifications;
-            return Padding(
-              padding: EdgeInsets.all(16.h),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  _buildChipItems(state, notificationCubit),
-                  20.ph,
-                  state.isLoading
-                      ? _buildLoadingIndicator()
-                      : notifications.isEmpty
-                          ? _buildEmptyCase()
-                          : _buildListOfNotifications(notifications)
-                ],
-              ),
-            );
-          },
-        ),
+      body: BlocConsumer<NotificationCubit, NotificationState>(
+        listener: (context, state) {
+          if (state.isError) {
+            showSnackBar(context, message: state.message);
+          }
+        },
+        builder: (BuildContext context, NotificationState state) {
+          final notificationCubit = context.read<NotificationCubit>();
+          final notifications = state.notifications;
+          return Padding(
+            padding: EdgeInsets.all(16.h),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                _buildChipItems(state, notificationCubit),
+                20.ph,
+                state.isLoading
+                    ? _buildLoadingIndicator()
+                    : notifications.isEmpty
+                        ? _buildEmptyCase()
+                        : _buildListOfNotifications(notifications)
+              ],
+            ),
+          );
+        },
       ),
     );
   }
