@@ -73,7 +73,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 Padding(
                   padding: const EdgeInsets.all(15),
                   child: SvgPicture.string(
-                    ParentImages.notificationOutlineIcon('3'),
+                    ParentImages.notificationOutlineIcon(
+                        "${context.read<LoginDataBloc>().userData?.count ?? 0}"),
                   ),
                 ),
                 Padding(
