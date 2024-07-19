@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:rive/rive.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
 
@@ -27,16 +28,26 @@ class _Screens1 extends State<Screens1> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
   final shorebirdCodePush = ShorebirdCodePush();
+  bool? superIsUpdateAvailable;
+
   Future<void> _checkForUpdates() async {
-    // Check whether a patch is available to install.
     final isUpdateAvailable =
         await shorebirdCodePush.isNewPatchAvailableForDownload();
-
-    print('isUpdateAvailable:$isUpdateAvailable');
+    setState(() {
+      superIsUpdateAvailable = isUpdateAvailable;
+    });
     if (isUpdateAvailable) {
-      // Download the new patch if it's available.
-      await shorebirdCodePush.downloadUpdateIfAvailable();
+      await shorebirdCodePush.downloadUpdateIfAvailable().whenComplete(() {
+        _restartApp();
+      });
+    } else {
+      context.read<LoginDataBloc>().add(AutoLoginRequest());
     }
+  }
+
+  void _restartApp() {
+    Phoenix.rebirth(context);
+    _checkForUpdates();
   }
 
   @override
@@ -54,7 +65,6 @@ class _Screens1 extends State<Screens1> with SingleTickerProviderStateMixin {
       setState(() {});
     });
     _controller.forward(from: 0);
-    context.read<LoginDataBloc>().add(AutoLoginRequest());
 
     super.initState();
   }
@@ -79,25 +89,36 @@ class _Screens1 extends State<Screens1> with SingleTickerProviderStateMixin {
           }
         }, builder: (context, state) {
           return Center(
-            child: AnimatedBuilder(
-                animation: _animation,
-                builder: (context, child) {
-                  return Transform.translate(
-                    offset: Offset(-(200 * (1 - _animation.value)), 0),
-                    child: Opacity(
-                        opacity: _animation.value,
-                        child: BlocBuilder<LoadingCubit, Artboard?>(
-                            builder: (context, state) {
-                          return state == null
-                              ? Image.asset(AppImages.introBee)
-                              : Rive(
-                                  artboard: state,
-                                  // fit: BoxFit.fitHeight,
-                                  useArtboardSize: true,
-                                );
-                        })),
-                  );
-                }),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(),
+                SizedBox(),
+                AnimatedBuilder(
+                    animation: _animation,
+                    builder: (context, child) {
+                      return Transform.translate(
+                        offset: Offset(-(200 * (1 - _animation.value)), 0),
+                        child: Opacity(
+                            opacity: _animation.value,
+                            child: BlocBuilder<LoadingCubit, Artboard?>(
+                                builder: (context, state) {
+                              return state == null
+                                  ? Image.asset(AppImages.introBee)
+                                  : Rive(
+                                      artboard: state,
+                                      // fit: BoxFit.fitHeight,
+                                      useArtboardSize: true,
+                                    );
+                            })),
+                      );
+                    }),
+                if (superIsUpdateAvailable == true) ...{
+                  CircularProgressIndicator(),
+                  SizedBox(),
+                }
+              ],
+            ),
           );
         }),
       ),

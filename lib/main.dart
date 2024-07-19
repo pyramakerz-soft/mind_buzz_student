@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mind_buzz_refactor/features/login/presentation/cubit/login_cubit.dart';
 import 'core/theme_text.dart';
@@ -44,7 +45,7 @@ Future<void> main() async {
   await di.init();
   FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode);
 
-  runApp(const MyApp());
+  runApp(Phoenix(child: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
