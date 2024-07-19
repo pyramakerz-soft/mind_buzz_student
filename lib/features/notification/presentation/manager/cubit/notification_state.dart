@@ -21,23 +21,27 @@ class NotificationState {
   final NotificationStateStatus status;
   final List<NotificationItemModel> notifications;
   final int isRead;
+  final num? countOfNotification;
   final String? message;
   NotificationState({
     this.status = NotificationStateStatus.initial,
     this.isRead = 0,
     this.notifications = const [],
     this.message,
+    this.countOfNotification,
   });
 
   NotificationState copyWith({
     NotificationStateStatus? status,
     int? isRead,
+    num? countOfNotification,
     List<NotificationItemModel>? notifications,
     String? message,
   }) {
     return NotificationState(
       status: status ?? this.status,
       isRead: isRead ?? this.isRead,
+      countOfNotification: countOfNotification ?? this.countOfNotification,
       notifications: notifications ?? this.notifications,
       message: message ?? this.message,
     );
@@ -49,6 +53,7 @@ class NotificationState {
 
     return other.status == status &&
         other.isRead == isRead &&
+        other.countOfNotification == countOfNotification &&
         listEquals(other.notifications, notifications) &&
         other.message == message;
   }
@@ -57,6 +62,7 @@ class NotificationState {
   int get hashCode {
     return status.hashCode ^
         isRead.hashCode ^
+        countOfNotification.hashCode ^
         Object.hashAll(notifications) ^
         message.hashCode;
   }

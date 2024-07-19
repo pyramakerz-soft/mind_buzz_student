@@ -1,4 +1,5 @@
-const String SERVER_FAILURE_MESSAGE = 'Server Failure';
+const String SERVER_FAILURE_MESSAGE =
+    'Something went wrong. Please try again later.';
 const String Login_FAILURE_MESSAGE = 'Check User Data';
 const String CACHE_FAILURE_MESSAGE = 'Check Your network';
 const String RELOGIN_FAILURE_MESSAGE = 'Re login';

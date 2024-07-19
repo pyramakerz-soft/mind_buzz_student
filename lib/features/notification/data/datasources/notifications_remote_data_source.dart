@@ -2,9 +2,10 @@ import 'package:mind_buzz_refactor/core/connection.dart';
 import 'package:mind_buzz_refactor/features/notification/domain/entities/notification_item_model.dart';
 
 import '../../../../core/apis_connections/api_connection.dart';
+import '../../domain/entities/main_of_notifications_model.dart';
 
 abstract class NotificationsRemoteSource {
-  Future<List<NotificationItemModel>> getNotifications({required bool isRead});
+  Future<MainOfNotificationsModel> getNotifications({required bool isRead});
 }
 
 class NotificationsRemoteSourceImpl implements NotificationsRemoteSource {
@@ -13,7 +14,7 @@ class NotificationsRemoteSourceImpl implements NotificationsRemoteSource {
   NotificationsRemoteSourceImpl({required this.dio});
 
   @override
-  Future<List<NotificationItemModel>> getNotifications(
+  Future<MainOfNotificationsModel> getNotifications(
       {required bool isRead}) async {
     final formData = {
       'is_read': isRead == true ? 1 : 0,
@@ -22,10 +23,7 @@ class NotificationsRemoteSourceImpl implements NotificationsRemoteSource {
         url: '${Connection.baseURL}${dio.getNotifications}',
         queryParameters: formData);
     if (dio.validResponse(response)) {
-      if (response.data['data'] == null) return [];
-      return response.data['data']
-          .map<NotificationItemModel>((x) => NotificationItemModel.fromJson(x))
-          .toList();
+      return MainOfNotificationsModel.fromJson(response.data['data']);
     } else {
       throw response.data['msg'];
     }

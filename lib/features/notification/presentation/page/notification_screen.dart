@@ -25,8 +25,7 @@ class NotificationsScreen extends StatelessWidget {
     return Scaffold(
       appBar: customAppBar(context: context, title: 'Notifications'),
       body: BlocProvider<NotificationCubit>(
-        create: (_) =>
-            di.sl<NotificationCubit>()..getNotifications(isRead: false),
+        create: (_) => di.sl<NotificationCubit>(),
         child: BlocConsumer<NotificationCubit, NotificationState>(
           listener: (context, state) {
             if (state.isError) {
@@ -95,7 +94,6 @@ class NotificationsScreen extends StatelessWidget {
         child: CupertinoActivityIndicator(),
       );
 
-  
   Widget _buildListOfNotifications(List<NotificationItemModel> notifications) {
     return Expanded(
       child: Padding(
