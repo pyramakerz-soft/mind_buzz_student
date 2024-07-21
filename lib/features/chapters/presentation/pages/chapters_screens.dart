@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flame_rive/flame_rive.dart';
@@ -141,7 +142,8 @@ class ChaptersScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height - 50.h,
+                          height: MediaQuery.of(context).size.height -
+                              ((Platform.isIOS) ? 126.h : 50.h),
                           child: BlocConsumer<ChapterBloc, ChapterState>(
                               listener: (context, state) {
                             if (state is GetProgramsErrorInitial) {
