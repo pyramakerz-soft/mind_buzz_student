@@ -41,6 +41,8 @@ class GetContactInitial extends Equatable {
       String subLetter = data?[index].mainLetter ?? '';
       String unitName = data?[index].lesson?.unit?.name ?? '';
       String subGame = data?[index].gameTypes?.name ?? '';
+      String programName =
+          data?[index].lesson?.unit?.program?.course?.name ?? '';
       int audioFlag = data?[index].audioFlag ?? 0;
       print(
           "subLetter:$subLetter ,subGame:$subGame, audioFlag:$audioFlag, unitName:$unitName");
@@ -48,6 +50,7 @@ class GetContactInitial extends Equatable {
           subLetter: subLetter,
           subGame: subGame,
           unitName: unitName,
+          programName: programName,
           audioFlag: audioFlag);
     } else {
       return null;
