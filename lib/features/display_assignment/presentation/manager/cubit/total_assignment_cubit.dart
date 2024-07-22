@@ -31,6 +31,7 @@ class TotalAssignmentCubit extends Cubit<TotalAssignmentInitial> {
     String subLetter = data[index].mainLetter ?? '';
     String unitName = data[index].lesson?.unit?.name ?? '';
     String subGame = data[index].gameTypes?.name ?? '';
+    String programName = data[index].lesson?.unit?.program?.course?.name ?? '';
     int audioFlag = data[index].audioFlag ?? 0;
     print(
         "subLetter:$subLetter ,subGame:$subGame, audioFlag:$audioFlag, unitName:$unitName");
@@ -38,6 +39,7 @@ class TotalAssignmentCubit extends Cubit<TotalAssignmentInitial> {
         subLetter: subLetter,
         subGame: subGame,
         unitName: unitName,
+        programName: programName,
         audioFlag: audioFlag);
     // } else {
     //   return null;
