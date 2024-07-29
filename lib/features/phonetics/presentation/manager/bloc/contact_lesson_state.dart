@@ -46,7 +46,7 @@ class GetContactInitial extends Equatable {
       int audioFlag = data?[index].audioFlag ?? 0;
       print(
           "subLetter:$subLetter ,subGame:$subGame, audioFlag:$audioFlag, unitName:$unitName");
-      return BaseOfGames.getGameDataType(
+      return HandlingActionsAndDataOfChapters.getTheChapterDataType(
           subLetter: subLetter,
           subGame: subGame,
           unitName: unitName,
