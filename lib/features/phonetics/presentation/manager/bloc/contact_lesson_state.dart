@@ -44,12 +44,17 @@ class GetContactInitial extends Equatable {
       String programName =
           data?[index].lesson?.unit?.program?.course?.name ?? '';
       int audioFlag = data?[index].audioFlag ?? 0;
+      String lessonName = data?[index].lesson?.name ?? '';
+      String gameName = data?[index].name ?? '';
+
       print(
           "subLetter:$subLetter ,subGame:$subGame, audioFlag:$audioFlag, unitName:$unitName");
       return HandlingActionsAndDataOfChapters.getTheChapterDataType(
           subLetter: subLetter,
           subGame: subGame,
           unitName: unitName,
+          lessonName: lessonName,
+          gameName: gameName,
           programName: programName,
           audioFlag: audioFlag);
     } else {
