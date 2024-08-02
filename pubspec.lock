@@ -102,10 +102,10 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: a3cf914412072cb1940aa3c96483f094fbe3e3d9
+      resolved-ref: "810986240e1db5ea3c75f62cb332033708aff5e6"
       url: "https://github.com/moataz-mohamed194/based_of_eng_game.git"
     source: git
-    version: "0.2.6+2"
+    version: "0.3.0"
   bloc:
     dependency: transitive
     description:
@@ -511,6 +511,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
+  flutter_phoenix:
+    dependency: "direct main"
+    description:
+      name: flutter_phoenix
+      sha256: "39589dac934ea476d0e43fb60c1ddfba58f14960743640c8250dea11c4333378"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:

@@ -10,6 +10,7 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       id: (json['id'] as num?)?.toInt(),
       pwLength: (json['pw_length'] as num?)?.toInt(),
       name: json['name'] as String?,
+      count: json['count'] as num?,
       email: json['email'] as String?,
       emailVerifiedAt: json['email_verified_at'] as String?,
       school: json['school'] == null
@@ -34,6 +35,7 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
 Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'id': instance.id,
       'pw_length': instance.pwLength,
+      'count': instance.count,
       'name': instance.name,
       'email': instance.email,
       'email_verified_at': instance.emailVerifiedAt,

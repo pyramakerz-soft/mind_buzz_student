@@ -18,6 +18,7 @@ ProgramModel _$ProgramModelFromJson(Map<String, dynamic> json) => ProgramModel(
       studentTests: (json['student_tests'] as List<dynamic>?)
           ?.map((e) => TestModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      isActive: (json['is_active'] as num?)?.toInt(),
       course: json['course'] == null
           ? null
           : CourseModel.fromJson(json['course'] as Map<String, dynamic>),
@@ -31,6 +32,7 @@ Map<String, dynamic> _$ProgramModelToJson(ProgramModel instance) =>
       'school_id': instance.schoolId,
       'course_id': instance.courseId,
       'stage_id': instance.stageId,
+      'is_active': instance.isActive,
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
       'course': instance.course?.toJson(),
