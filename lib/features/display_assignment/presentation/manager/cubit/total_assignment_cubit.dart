@@ -36,6 +36,8 @@ class TotalAssignmentCubit extends Cubit<TotalAssignmentInitial> {
     String lessonName = data[index].lesson?.name ?? '';
     String gameName = data[index].name ?? '';
     String stageName = data[index].stageName ?? '';
+    String mobLessonName = data[index].lesson?.mobLessonName ?? '';
+
     print(
         "subLetter:$subLetter ,subGame:$subGame, audioFlag:$audioFlag, unitName:$unitName");
     return HandlingActionsAndDataOfChapters.getTheChapterDataType(
@@ -46,6 +48,7 @@ class TotalAssignmentCubit extends Cubit<TotalAssignmentInitial> {
         audioFlag: audioFlag,
         lessonName: lessonName,
         gameName: gameName,
+        mobLessonName:mobLessonName,
         stageName: stageName);
     // } else {
     //   return null;
