@@ -48,7 +48,7 @@ class TotalAssignmentCubit extends Cubit<TotalAssignmentInitial> {
         audioFlag: audioFlag,
         lessonName: lessonName,
         gameName: gameName,
-        mobLessonName:mobLessonName,
+        mobLessonName: mobLessonName,
         stageName: stageName);
     // } else {
     //   return null;

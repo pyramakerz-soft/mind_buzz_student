@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/error/failures_messages.dart';
 import '../../../../core/utils.dart';
 import '../../../login/presentation/page/login_screen.dart';
+import '../../../phonetics/presentation/manager/bloc/contact_lesson_bloc.dart';
 import '../manager/bloc/assignment_bloc.dart';
 import '../manager/cubit/total_assignment_cubit.dart';
 import '../../../../core/injection/injection_container.dart' as di;
@@ -70,12 +71,14 @@ class _DisplayAssignment extends State<DisplayAssignment> {
                 TotalAssignmentCubit(assignmentData: stateOfGameData.data),
             child: BlocConsumer<TotalAssignmentCubit, TotalAssignmentInitial>(
                 listener: (context, state) {},
-                builder: (context, stateOfGameData) {
+                builder: (childContext, stateOfGameData) {
                   return MainScreenOfGames(
                       stateOfGameData: stateOfGameData.assignmentData ?? [],
                       dataOfBasesGame: context
-                          .read<TotalAssignmentCubit>()
-                          .getMainContactData(index: 0),
+                          .read<AssignmentBloc>()
+                          .getMainContactData(
+                              index: stateOfGameData.index,
+                              data: (stateOfGameData.assignmentData ?? [])),
                       actionOfCompleteGame: (int countOfStars) {
                         int tries =
                             stateOfGameData.assignmentData.first.numOfTrials ??
@@ -93,11 +96,12 @@ class _DisplayAssignment extends State<DisplayAssignment> {
                           }
                         }
                         di.sl<AssignmentBloc>().add(PostAssignmentDataEvent(
-                            stars: countOfStars,
-                            assignmentId: widget.assignmentId,
-                            mistakeCount: mistakeCount,
-                            testId: widget.testId,));
-                        if(countOfStars!=0) {
+                              stars: countOfStars,
+                              assignmentId: widget.assignmentId,
+                              mistakeCount: mistakeCount,
+                              testId: widget.testId,
+                            ));
+                        if (countOfStars != 0) {
                           widget.action();
                         }
                         debugPrint('#########################################');
