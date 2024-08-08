@@ -13,9 +13,6 @@ class NotificationCubit extends Cubit<NotificationState> {
   NotificationCubit(this._getNotificationsUseCase)
       : super(NotificationState(status: NotificationStateStatus.initial));
   Future<void> getNotifications({required bool isRead}) async {
-    final stateIsRead = state.isRead;
-    final isReadInt = isRead ? 1 : 0;
-    if (stateIsRead == isReadInt) return;
     emit(state.copyWith(status: NotificationStateStatus.loading));
     try {
       emit(state.copyWith(isRead: isRead ? 1 : 0));
@@ -29,11 +26,18 @@ class NotificationCubit extends Cubit<NotificationState> {
               ? e.type == DioExceptionType.connectionError ||
                       e.type == DioExceptionType.connectionTimeout
                   ? "Check Your network"
-                  : SERVER_FAILURE_MESSAGE
-              : SERVER_FAILURE_MESSAGE,
+                  : "Server Error"
+              : e.toString(),
         ),
       );
     }
+  }
+
+  Future<void> selectNotificationsTab({required bool isRead}) async {
+    final stateIsRead = state.isRead;
+    final isReadInt = isRead ? 1 : 0;
+    if (stateIsRead == isReadInt) return;
+    await getNotifications(isRead: isRead);
   }
 
   NotificationState _eitherLoadedOrErrorState(
