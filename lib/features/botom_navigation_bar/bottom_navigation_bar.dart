@@ -79,8 +79,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 Padding(
                   padding: const EdgeInsets.all(15),
                   child: SvgPicture.string(
-                    ParentImages.notificationOutlineIcon(
-                        "${context.read<LoginDataBloc>().userData?.count ?? 0}"),
+                    ParentImages.notificationOutlineIcon(),
                   ),
                 ),
                 Padding(
@@ -127,8 +126,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SvgPicture.string(
-                      ParentImages.notificationIcon(
-                          "${context.read<LoginDataBloc>().userData?.count ?? 0}"),
+                      ParentImages.notificationIcon(),
                     ),
                     const SizedBox(
                       height: 5,

@@ -155,9 +155,11 @@ class _ShowAssignmentStudent extends State<ShowAssignmentStudent> {
                                               // x.program.studentTests =
                                             },
                                             assignmentId: widget
-                                                .courseData
-                                                .program
-                                                ?.studentTests?[index].id??0,
+                                                    .courseData
+                                                    .program
+                                                    ?.studentTests?[index]
+                                                    .id ??
+                                                0,
                                           )),
                                       context);
                                 },
@@ -165,63 +167,74 @@ class _ShowAssignmentStudent extends State<ShowAssignmentStudent> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Column(
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              widget
-                                                      .courseData
-                                                      .program
-                                                      ?.studentTests?[index]
-                                                      .assignmentName ??
-                                                  'Assignment',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .displayLarge
-                                                  ?.copyWith(
-                                                    fontSize: 22,
-                                                    fontWeight: FontWeight.w700,
-                                                    height: 0,
-                                                    letterSpacing: 0.44,
-                                                  ),
-                                            ),
-                                            Text(
-                                              widget
-                                                      .courseData
-                                                      .program
-                                                      ?.studentTests?[index]
-                                                      .name ??
-                                                  '',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headlineMedium
-                                                  ?.copyWith(
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w400,
-                                                    // height: 0,
-                                                    // letterSpacing: 0.44,
-                                                  ),
-                                            ),
-                                          ],
-                                        ),
-                                        const Icon(
-                                          Icons.play_circle_outline_rounded,
-                                          color: AppColor.darkBlueColor,
-                                          size: 35,
-                                        )
-                                      ],
+                                    Flexible(
+                                      flex: 2,
+                                      child: Column(
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                widget
+                                                        .courseData
+                                                        .program
+                                                        ?.studentTests?[index]
+                                                        .assignmentName ??
+                                                    'Assignment',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .displayLarge
+                                                    ?.copyWith(
+                                                      fontSize: 22,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      height: 0,
+                                                      letterSpacing: 0.44,
+                                                    ),
+                                              ),
+                                              Text(
+                                                widget
+                                                        .courseData
+                                                        .program
+                                                        ?.studentTests?[index]
+                                                        .name ??
+                                                    '',
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headlineMedium
+                                                    ?.copyWith(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      // height: 0,
+                                                      // letterSpacing: 0.44,
+                                                    ),
+                                              ),
+                                            ],
+                                          ),
+                                          const Icon(
+                                            Icons.play_circle_outline_rounded,
+                                            color: AppColor.darkBlueColor,
+                                            size: 35,
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                    ClipRRect(
-                                      child: CachedNetworkImage(
-                                        imageUrl:
-                                            widget.courseData.program?.image ??
-                                                '',
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                6,
+                                    Flexible(
+                                      flex: 1,
+                                      child: ClipRRect(
+                                        child: CachedNetworkImage(
+                                          imageUrl: widget
+                                                  .courseData.program?.image ??
+                                              '',
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              6,
+                                        ),
                                       ),
                                     )
                                   ],

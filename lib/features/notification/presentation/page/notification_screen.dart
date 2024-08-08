@@ -8,10 +8,9 @@ import 'package:mind_buzz_refactor/features/calender/presentation/widgets/custom
 import 'package:mind_buzz_refactor/features/notification/domain/entities/notification_item_model.dart';
 import 'package:mind_buzz_refactor/features/notification/presentation/manager/cubit/notification_state.dart';
 import 'package:mind_buzz_refactor/features/notification/presentation/widget/notification_item.dart';
-import '../../../../core/error/failures_messages.dart';
-import '../../../../core/utils.dart';
+
 import '../../../home/presentation/widgets/switch_bar.dart';
-import '../../../login/presentation/page/login_screen.dart';
+
 // import '../notification_bloc.dart';
 import '../manager/cubit/notification_cubit.dart';
 import '../widget/switch_title.dart';
@@ -59,7 +58,7 @@ class NotificationsScreen extends StatelessWidget {
         title: 'Read',
         index: 1,
         currentIndex: state.isRead,
-        onTap: () => notificationCubit.getNotifications(
+        onTap: () => notificationCubit.selectNotificationsTab(
           isRead: true,
         ),
       ),
@@ -68,7 +67,7 @@ class NotificationsScreen extends StatelessWidget {
         title: 'Unread',
         index: 0,
         currentIndex: state.isRead,
-        onTap: () => notificationCubit.getNotifications(
+        onTap: () => notificationCubit.selectNotificationsTab(
           isRead: false,
         ),
       ),
