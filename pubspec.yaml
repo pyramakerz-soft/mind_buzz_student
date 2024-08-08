@@ -120,6 +120,7 @@ flutter:
     - assets/main_games/
     - assets/phonetics/
     - assets/arabic/
+    - assets/culture/
     - assets/svg/parent_account/
     - shorebird.yaml
 
