@@ -101,10 +101,10 @@ packages:
     dependency: "direct main"
     description:
       name: based_of_eng_game
-      sha256: "5b3eb9d54f9e983e6dbe990d9dfecd6612b83721a1a0ac5e4076351b7a2297f8"
+      sha256: bffcd4196962eea7a0fe62f48b5b79aad67023816f7dcf84bf4c1ee92df3bd94
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.2"
+    version: "0.3.3+2"
   bloc:
     dependency: transitive
     description:
@@ -321,6 +321,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.10.1"
+  dbus:
+    dependency: transitive
+    description:
+      name: dbus
+      sha256: "365c771ac3b0e58845f39ec6deebc76e3276aa9922b0cc60840712094d9047ac"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.10"
   dio:
     dependency: "direct main"
     description:
@@ -888,6 +896,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  package_info_plus:
+    dependency: transitive
+    description:
+      name: package_info_plus
+      sha256: "4de6c36df77ffbcef0a5aefe04669d33f2d18397fea228277b852a2d4e58e860"
+      url: "https://pub.dev"
+    source: hosted
+    version: "8.0.1"
+  package_info_plus_platform_interface:
+    dependency: transitive
+    description:
+      name: package_info_plus_platform_interface
+      sha256: ac1f4a4847f1ade8e6a87d1f39f5d7c67490738642e2542f559ec38c37489a66
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   path:
     dependency: transitive
     description:
@@ -1245,6 +1269,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.0.3"
+  svg_path_parser:
+    dependency: transitive
+    description:
+      name: svg_path_parser
+      sha256: adff09b1099a0c9e0dc81e1975de70999889f825c1a2e8e9139bab03464a3657
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.2"
   synchronized:
     dependency: transitive
     description:
@@ -1397,6 +1429,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "14.2.1"
+  wakelock_plus:
+    dependency: transitive
+    description:
+      name: wakelock_plus
+      sha256: "4fa83a128b4127619e385f686b4f080a5d2de46cff8e8c94eccac5fcf76550e5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.7"
+  wakelock_plus_platform_interface:
+    dependency: transitive
+    description:
+      name: wakelock_plus_platform_interface
+      sha256: "422d1cdbb448079a8a62a5a770b69baa489f8f7ca21aef47800c726d404f9d16"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.1"
   watcher:
     dependency: transitive
     description:
