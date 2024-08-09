@@ -72,13 +72,10 @@ class CalenderScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12.h),
                   child: TableCalendar(
-                    firstDay: DateTime.now().month <= 7
-                        ? DateTime(DateTime.now().year - 1, 9, 1)
-                        : DateTime(DateTime.now().year, 9, 1),
-                    lastDay:
-                        DateTime.now().month <= 12 && DateTime.now().month > 8
-                            ? DateTime(DateTime.now().year + 1, 8, 31)
-                            : DateTime(DateTime.now().year, 8, 31),
+                    firstDay: DateTime(DateTime.now().year - 1,
+                        DateTime.now().month, DateTime.now().day),
+                    lastDay: DateTime(DateTime.now().year + 1,
+                        DateTime.now().month, DateTime.now().day),
                     focusedDay: state.currentDate,
                     currentDay: state.currentDate,
                     headerVisible: true,
