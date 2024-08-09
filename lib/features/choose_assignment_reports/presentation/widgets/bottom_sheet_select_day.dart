@@ -35,13 +35,11 @@ class _BottomSheetSelectDay extends State<BottomSheetSelectDay> {
       children: [
         TableCalendar(
           firstDay: widget.checkStartDate ??
-              (DateTime.now().month <= 7
-                  ? DateTime(DateTime.now().year - 1, 9, 1)
-                  : DateTime(DateTime.now().year, 9, 1)),
+              DateTime(DateTime.now().year - 1, DateTime.now().month,
+                  DateTime.now().day),
           lastDay: widget.checkEndDate ??
-              (widget.currentDate.month <= 12 && widget.currentDate.month > 8
-                  ? DateTime(DateTime.now().year + 1, 8, 31)
-                  : DateTime(DateTime.now().year + 1, 8, 31)),
+              DateTime(DateTime.now().year + 1, DateTime.now().month,
+                  DateTime.now().day),
           focusedDay: widget.checkStartDate ??
               widget.checkEndDate ??
               widget.currentDate,
